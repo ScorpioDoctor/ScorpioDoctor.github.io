@@ -1,0 +1,625 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+    <title>使用scikit-learn进行机器学习之导论 &mdash; scikit-learn 0.17.1 文档</title>
+    <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css" />
+
+
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.17.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico" />
+    <link rel="author" title="关于此文档" href="../../about.html" />
+    <link rel="top" title="scikit-learn 0.17.1 文档" href="../../index.html" />
+    <link rel="up" title="scikit-learn 教程" href="../index.html" />
+    <link rel="next" title="A tutorial on statistical-learning for scientific data processing" href="../statistical_inference/index.html" />
+    <link rel="prev" title="scikit-learn 教程" href="../index.html" />
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+    <link rel="canonical" href="http://scikit-learn.org/stable/tutorial/basic/tutorial.html" />
+
+    <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+    </script>
+
+</head>
+<body role="document">
+
+    <div class="header-wrapper">
+        <div class="header">
+            <p class="logo">
+                <a href="../../index.html">
+                    <img src="../../_static/scikit-learn-logo-small.png" alt="Logo" />
+                </a>
+            </p><div class="navbar">
+                <ul>
+                    <li><a href="../../index.html">主页</a></li>
+                    <li><a href="../../install.html">安装</a></li>
+                    <li class="btn-li">
+                        <div class="btn-group">
+                            <a href="../../documentation.html">文档</a>
+                            <a class="btn dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="link-title">Scikit-learn 0.17 (稳定版)</li>
+                                <li><a href="../index.html">教程</a></li>
+                                <li><a href="../../user_guide.html">使用指南</a></li>
+                                <li><a href="../../modules/classes.html">API</a></li>
+                                <li><a href="../../faq.html">FAQ</a></li>
+                                <li><a href="../../developers/contributing.html">贡献</a></li>
+                                <li class="divider"></li>
+                                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (开发版)</a></li>
+                                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16(上一版)</a></li>
+                                <li><a href="../../_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="../../auto_examples/index.html">实例</a></li>
+                </ul>
+
+                <div class="search_form">
+                    <div id="cse" style="width: 100%;"></div>
+                </div>
+            </div> <!-- end navbar -->
+        </div>
+    </div>
+
+
+    <!-- Github "fork me" ribbon -->
+    <a href="https://github.com/scikit-learn/scikit-learn">
+        <img class="fork-me"
+             style="position: absolute; top: 0; right: 0; border: 0;"
+             src="../../_static/img/forkme.png"
+             alt="在GitHub上叉我吧" />
+    </a>
+
+    <div class="content-wrapper">
+        <div class="sphinxsidebar">
+            <div class="sphinxsidebarwrapper">
+                <div class="rel">
+
+
+                    <!-- rellinks[1:] is an ugly hack to avoid link to module
+                    index -->
+                    <div class="rellink">
+                        <a href="../index.html"
+                           accesskey="P">
+                            返回
+                            <br />
+                            <span class="smallrellink">
+                                scikit-learn ...
+                            </span>
+                            <span class="hiddenrellink">
+                                scikit-learn 教程
+                            </span>
+                        </a>
+                    </div>
+
+                    <!-- Ad a link to the 'up' page -->
+                    <div class="spacer">
+                        &nbsp;
+                    </div>
+                    <div class="rellink">
+                        <a href="../index.html">
+                            Up
+                            <br />
+                            <span class="smallrellink">
+                                scikit-learn ...
+                            </span>
+                            <span class="hiddenrellink">
+                                scikit-learn 教程
+                            </span>
+
+                        </a>
+                    </div>
+                </div>
+
+                <p class="doc-version">该文档适用于 scikit-learn <strong> 0.17.1 版</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">其他版本点击这里</a></p>
+                <p class="citing">如果你使用此软件，请引用我们： <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+                <ul>
+                    <li>
+                        <a class="reference internal" href="#">使用scikit-learn进行机器学习导论</a><ul>
+                            <li><a class="reference internal" href="#machine-learning-the-problem-setting">机器学习的基本问题</a></li>
+                            <li><a class="reference internal" href="#loading-an-example-dataset">加载一个样本数据集</a></li>
+                            <li><a class="reference internal" href="#learning-and-predicting">学习和预测</a></li>
+                            <li><a class="reference internal" href="#model-persistence">模型持久性(Model persistence)</a></li>
+                            <li>
+                                <a class="reference internal" href="#conventions">一些约定</a><ul>
+                                    <li><a class="reference internal" href="#type-casting">类型转换</a></li>
+                                    <li><a class="reference internal" href="#refitting-and-updating-parameters">再拟合(Refitting)与更新参数</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+        <label for="nav-trigger"></label>
+
+        <div class="content">
+
+            <div class="documentwrapper">
+                <div class="bodywrapper">
+                    <div class="body" role="main">
+
+                        <div class="section" id="an-introduction-to-machine-learning-with-scikit-learn">
+                            <span id="introduction"></span><h1>使用scikit-learn进行机器学习导论<a class="headerlink" href="#an-introduction-to-machine-learning-with-scikit-learn" title="Permalink to this headline">¶</a></h1>
+                            <div class="topic">
+                                <p class="topic-title first">内容提要：</p>
+                                <p>
+                                    在这一节, 我们介绍scikit-learn中无处不在的 <a class="reference external" href="http://en.wikipedia.org/wiki/Machine_learning">机器学习</a>
+                                    这个词汇所指向的含义，并且展示一个简单的例子来说明
+                                </p>
+                            </div>
+                            <div class="section" id="machine-learning-the-problem-setting">
+                                <h2>机器学习的基本问题<a class="headerlink" href="#machine-learning-the-problem-setting" title="Permalink to this headline">¶</a></h2>
+                                <p>
+                                    总的来说, 一个机器学习问题可以这样描述：给定n个<a class="reference external" href="http://en.wikipedia.org/wiki/Sample_(statistics)">样本</a>数据，设计某种算法使得机器能够自动的发现样本数据所隐含的某种规律或某个知识，然后利用发现的规律或知识去预测未知数据的某些属性。如果每个样本不仅仅包含1个数，而是有多个维度的入口(multi-dimensional entry)
+                                    (aka <a class="reference external" href="http://en.wikipedia.org/wiki/Multivariate_random_variable">多变量(multivariate)</a>
+                                    数据), 则我们称这样的样本数据具有多个属性(attributes)或多个特征(<strong>features</strong>).
+                                </p>
+                                <p>我们可以将<strong>学习问题</strong>划分为几个比较大的类别:</p>
+                                <blockquote>
+                                    <div>
+                                        <ul>
+                                            <li>
+                                                <p class="first">
+                                                    <a class="reference external" href="http://en.wikipedia.org/wiki/Supervised_learning">监督学习(supervised learning)</a>,
+                                                    在监督学习中，每个样本数据都有一个(对应于单标签)或几个(对应于多标签)附加的属性用于定义该样本数据的所属类别，监督学习的目的就是预测未知数据的类别属性
+                                                    (<a class="reference internal" href="../../supervised_learning.html#supervised-learning"><span>单击此处</span></a>
+                                                    转到 scikit-learn 的监督学习页面).监督学习问题又可分为两类:
+                                                </p>
+                                                <blockquote>
+                                                    <div>
+                                                        <ul class="simple">
+                                                            <li>
+                                                                <a class="reference external" href="http://en.wikipedia.org/wiki/Classification_in_machine_learning">分类(classification)</a>:
+                                                                在分类问题中，样本集合属于两个或者更多的类，我们希望从已知类别标签的样本集合中学习某个规律或知识，
+                                                                然后用学到的规律预测那些未知标签的样本到底属于那个类。分类问题的一个例子是手写字符的识别问题
+                                                                ，目标是给每个输入向量分配一个代表离散类别的数字。
+                                                                对分类的另一种认识是可以把它看作是监督学习的离散形式（连续形式在回归中更为常见），因为我们的数据属于数量有限的类别，这些类别标签往往是
+                                                                离散的数字标号或字符串表示的名称。
+                                                            </li>
+                                                            <li>
+                                                                <a class="reference external" href="http://en.wikipedia.org/wiki/Regression_analysis">回归(regression)</a>:
+                                                                如果想要的输出由一个或多个连续变量组成，那么这样的监督学习任务就叫做<em>回归</em>。回归问题的一个例子是预测鲑鱼的长度依据其年龄与体重。
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </blockquote>
+                                            </li>
+                                            <li>
+                                                <p class="first">
+                                                    <a class="reference external" href="http://en.wikipedia.org/wiki/Unsupervised_learning">无监督学习(unsupervised learning)</a>,
+                                                    训练数据由输入向量x的集合构成，而且每个输入向量x没有任何与之相关联的目标值。无监督学习的目标大致可分为三类：
+                                                    一是发现总体数据当中相似数据所构成的所有组，这被叫做<a class="reference external" href="http://en.wikipedia.org/wiki/Cluster_analysis">聚类分析</a>；
+                                                    二是确定数据集在他们的输入空间的分布规律，这被叫做<a class="reference external" href="http://en.wikipedia.org/wiki/Density_estimation">密度估计</a>；
+                                                    三是以<em>可视化</em>为目标将原始高维数据投影到二维或三维空间。
+                                                    (<a class="reference internal" href="../../unsupervised_learning.html#unsupervised-learning"><span>点击此处</span></a>
+                                                    跳转到Scikit-Learn 无监督学习页面).
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </blockquote>
+                                <div class="topic">
+                                    <p class="topic-title first">训练集 和 测试集</p>
+                                    <p>
+                                        机器学习的策略是在一些数据集上学习关于此数据集的属性或规律，然后将他们应用到新的数据集中。
+                                        这也是为什么在机器学习中我们常干的一件事是把手头的数据集分成两个集合来评估算法。用来让机器学习规律或知识
+                                        的那个集合被称做<strong>训练集</strong>，而用来测试机器的学习效果的那个数据集合被称为<strong>测试集</strong>。
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="section" id="loading-an-example-dataset">
+                                <span id="loading-example-dataset"></span><h2>加载一个样本数据集<a class="headerlink" href="#loading-an-example-dataset" title="Permalink to this headline">¶</a></h2>
+                                <p>
+                                    <cite>scikit-learn</cite> 带有若干标准数据集, 比如
+                                    <a class="reference external" href="http://en.wikipedia.org/wiki/Iris_flower_data_set">iris</a> 和 <a class="reference external" href="http://archive.ics.uci.edu/ml/datasets/Pen-Based+Recognition+of+Handwritten+Digits">digits</a>
+                                    数据集用于分类， <a class="reference external" href="http://archive.ics.uci.edu/ml/datasets/Housing">boston house prices dataset</a> 用于回归.
+                                </p>
+                                <p>
+                                    下面我们启动Python解释器来加载<code class="docutils literal"><span class="pre">iris</span></code> 和 <code class="docutils literal"><span class="pre">digits</span></code> 数据集.  
+                                    我们的标记约定是：
+                                    <code class="docutils literal"><span class="pre">$</span></code> 代表 shell 标记，而 <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> 
+                                    代表Pytnon解释器的标记:
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span>$ python
+&gt;&gt;&gt; from sklearn import datasets
+&gt;&gt;&gt; iris = datasets.load_iris()
+&gt;&gt;&gt; digits = datasets.load_digits()
+</pre>
+                                    </div>
+                                </div>
+                                <p>
+                                    一个数据集dataset是一个像字典一样的对象，其中包含了所有数据以及关于数据信息的元数据。
+                                    数据被存放在<code class="docutils literal"><span class="pre">.data</span></code> 成员中,它是一个
+                                    <code class="docutils literal"><span class="pre">n_samples,</span> <span class="pre">n_features</span></code>的数组(array).
+                                    在监督学习问题中， 一个或更多的响应变量(response variables)被存储在<code class="docutils literal"><span class="pre">.target</span></code> 成员中。
+                                    更多关于不同数据集的细节信息可以在参考这里<a class="reference internal" href="../../datasets/index.html#datasets">
+                                        <span>dedicated section</span></a>.
+                                </p>
+                                <p>
+                                    例如, 在digits数据集中, <code class="docutils literal"><span class="pre">digits.data</span></code> 
+                                    给出了可以被用于分类digits样本的特征向量集合。
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  
+<span class="go">[[  0.   0.   5. ...,   0.   0.   0.]</span>
+<span class="go"> [  0.   0.   0. ...,  10.   0.   0.]</span>
+<span class="go"> [  0.   0.   0. ...,  16.   9.   0.]</span>
+<span class="go"> ...,</span>
+<span class="go"> [  0.   0.   1. ...,   6.   0.   0.]</span>
+<span class="go"> [  0.   0.   2. ...,  12.   0.   0.]</span>
+<span class="go"> [  0.   0.  10. ...,  12.   1.   0.]]</span>
+</pre>
+                                    </div>
+                                </div>
+                                <p>
+                                    而 <code class="docutils literal"><span class="pre">digits.target</span></code> 则给出了digit 数据集的 
+                                    ground truth ：我们需要学习的关联到每一个digit图像上的数字：
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+<span class="go">array([0, 1, 2, ..., 8, 9, 8])</span>
+</pre>
+                                    </div>
+                                </div>
+                                <div class="topic">
+                                    <p class="topic-title first">Shape of the data arrays</p>
+                                    <p>
+                                        数据data通常都是一个二维数组, shape<code class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></code>, 
+                                        尽管原始数据可能有不一样的shape. 在digits数据集中，每一个原始样本是一幅图像
+                                        具有 shape<code class="docutils literal"><span class="pre">(8,</span> <span class="pre">8)</span></code> 而且
+                                        可以以如下的方式访问：
+                                    </p>
+                                    <div class="highlight-python">
+                                        <div class="highlight">
+                                            <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">array([[  0.,   0.,   5.,  13.,   9.,   1.,   0.,   0.],</span>
+<span class="go">       [  0.,   0.,  13.,  15.,  10.,  15.,   5.,   0.],</span>
+<span class="go">       [  0.,   3.,  15.,   2.,   0.,  11.,   8.,   0.],</span>
+<span class="go">       [  0.,   4.,  12.,   0.,   0.,   8.,   8.,   0.],</span>
+<span class="go">       [  0.,   5.,   8.,   0.,   0.,   9.,   8.,   0.],</span>
+<span class="go">       [  0.,   4.,  11.,   0.,   1.,  12.,   7.,   0.],</span>
+<span class="go">       [  0.,   2.,  14.,   5.,  10.,  12.,   0.,   0.],</span>
+<span class="go">       [  0.,   0.,   6.,  13.,  10.,   0.,   0.,   0.]])</span>
+</pre>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        这个<a class="reference internal" href="../../auto_examples/classification/plot_digits_classification.html#example-classification-plot-digits-classification-py"><span>
+                                        简单的digits数据集的例子</span></a> 为你展示了怎样从原始问题开始准备适用于scikit-learn计算的数据格式.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="section" id="learning-and-predicting">
+                                <h2>学习 与 预测<a class="headerlink" href="#learning-and-predicting" title="Permalink to this headline">¶</a></h2>
+                                <p>
+                                    在digits dataset的案例中, 我们的任务是预测： 给定一张图像,判断它表示的是那个数字。对于从0到9这10个数字，每个数字
+                                    代表一个类，数据集为每个类提供了一定数量的训练样本。我们将在这些训练样本上拟合 (<em>fit</em>) 一个
+                                    <a class="reference external" href="http://en.wikipedia.org/wiki/Estimator">estimator</a>使它能够预测 (<em>predict</em>)
+                                    那些未知类别标签的数字样本图像所代表的数字。
+                                </p>
+                                <p>
+                                    在 scikit-learn 中, 用于分类的 estimator 是一个Python对象，它实现了两个方法：<code class="docutils literal"><span class="pre">fit(X,</span> <span class="pre">y)</span></code> 和
+                                     <code class="docutils literal"><span class="pre">predict(T)</span></code>.
+                                </p>
+                                <p>
+                                    estimator的一个例子是类 <code class="docutils literal"><span class="pre">sklearn.svm.SVC</span></code>，该类
+                                    实现了 <a class="reference external" href="http://en.wikipedia.org/wiki/Support_vector_machine">支持向量机分类器</a>.
+                                    一个 estimator 的构造函数以该模型的参数作为构造函数参数。但是在以后的版本中，我们将把estimator看作是黑箱模型(black
+                                    box):
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
+</pre>
+                                    </div>
+                                </div>
+                                <div class="topic">
+                                    <p class="topic-title first">选择模型参数</p>
+                                    <p>
+                                        在这个例子中，我们手动设置<code class="docutils literal"><span class="pre">gamma</span></code>的值.
+                                        你可以自动寻找比较好的参数值通过使用参数优化工具，比如<a class="reference internal" href="../../modules/grid_search.html#grid-search"><span>网格搜索(grid search)</span></a> 
+                                        和 <a class="reference internal" href="../../modules/cross_validation.html#cross-validation"><span>交叉验证(cross validation)</span></a>。
+                                    </p>
+                                </div>
+                                <p>
+                                    我们把 estimator 对象的实例<code class="docutils literal"><span class="pre">clf</span></code>叫做分类器.
+                                    该分类器实例现在必须拟合到模型上或者说从模型<em>学习</em>。 这可以通过将我们的训练集传递给<code class="docutils literal"><span class="pre">拟合(fit)</span></code> 方法.
+                                    我们将数据集中除了最后一个样本图像之外的其余所有图像作为训练集。我们使用Python语法 <code class="docutils literal"><span class="pre">[:-1]</span></code>选择此训练集,
+                                    这将会产生一个新数组，包含了<code class="docutils literal"><span class="pre">digits.data</span></code>数据中除最后一个样本外的所有样本。
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  
+<span class="go">SVC(C=100.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">  decision_function_shape=None, degree=3, gamma=0.001, kernel=&#39;rbf&#39;,</span>
+<span class="go">  max_iter=-1, probability=False, random_state=None, shrinking=True,</span>
+<span class="go">  tol=0.001, verbose=False)</span>
+</pre>
+                                    </div>
+                                </div>
+                                <p>
+                                    现在你可以用训练好的分类器模型来预测一个新的样本(即分类器在训练阶段不曾见过的样本)的类别别标签。
+                                    让我们来预测<code class="docutils literal"><span class="pre">digits</span></code>数据集中最后一个图像样本代表的数字是多少吧！
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:])</span>
+<span class="go">array([8])</span>
+</pre>
+                                    </div>
+                                </div>
+                                <p>对应的最后一个样本图像如下所示:</p>
+                                <a class="reference external image-reference" href="../../auto_examples/datasets/plot_digits_last_image.html"><img alt="../../_images/plot_digits_last_image_0011.png" class="align-center" src="../../_images/plot_digits_last_image_0011.png" style="width: 150.0px; height: 150.0px;" /></a>
+                                <p>
+                                    就像你看到的那样, 这是一个非常有挑战性的任务: 图像样本的分辨率低得可怜，你是否认同分类器的判断呢?
+                                </p>
+                                <p>
+                                    关于手写数字分类识别的一个完整案例可以在此处见到，你可以运行并学习之:
+                                    <a class="reference internal" href="../../auto_examples/classification/plot_digits_classification.html#example-classification-plot-digits-classification-py"><span>手写数字识别</span></a>.
+                                </p>
+                            </div>
+                            <div class="section" id="model-persistence">
+                                <h2>模型保持<a class="headerlink" href="#model-persistence" title="Permalink to this headline">¶</a></h2>
+                                <p>
+                                    在 scikit-learn 中你可以保存一个训练好的模型通过使用Python的内建保持模型, 称之为 <a class="reference external" href="http://docs.python.org/library/pickle.html">pickle</a>:
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">  decision_function_shape=None, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,</span>
+<span class="go">  max_iter=-1, probability=False, random_state=None, shrinking=True,</span>
+<span class="go">  tol=0.001, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf2</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">array([0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">0</span>
+</pre>
+                                    </div>
+                                </div>
+                                <p>
+                                    在 scikit-learn的某些特殊情形下, 使用
+                                    <strong>joblib</strong> 代替 <strong>pickle (<code class="docutils literal"><span class="pre">joblib.dump</span></code> &amp; <code class="docutils literal"><span class="pre">joblib.load</span></code>)</strong>,
+                                    将更加有趣，<strong>joblib</strong>在大数据集上有更好的性能表现, 但是只能弄到硬盘上，无法弄成一个字符串:
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="kn">import</span> <span class="n">joblib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="s1">&#39;filename.pkl&#39;</span><span class="p">)</span> 
+</pre>
+                                    </div>
+                                </div>
+                                <p>
+                                    稍后你还可以把你的 pickled model 加载回来(有可能是另外的Python进程):
+                                </p>
+                                <div class="highlight-python">
+                                    <div class="highlight">
+                                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;filename.pkl&#39;</span><span class="p">)</span> 
+</pre>
+                                    </div>
+                                </div>
+                                <div class="admonition note">
+                                    <p class="first admonition-title">注意啦:</p>
+                                    <p class="last">
+                                        <strong>joblib.dump</strong> 的返回值是一个文件列表. 包含在<code class="docutils literal"><span class="pre">clf</span></code>
+                                        对象中的每一个单独的 <strong>numpy array</strong> 将会被序列化为一个个单独的文件保存到文件系统中。
+                                        当我们使用<strong>joblib.load</strong>重新加载模型的时候，所有文件必须在同一个文件夹下。
+                                    </p>
+                                </div>
+                                <p>
+                                    注意到 pickle 有一些安全性与可维护性的问题. 要了解关于scikit-learn的模型保持的更多详情，
+                                    请参考章节：<a class="reference internal" href="../../modules/model_persistence.html#model-persistence"><span>模型保持</span></a>
+                                </p>
+                            </div>
+                            <div class="section" id="conventions">
+                                <h2>一些约定<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
+                                <p>
+                                    scikit-learn 的 estimators 遵循着一些规则以便使其行为更具可预见性。
+                                </p>
+                                <div class="section" id="type-casting">
+                                    <h3>类型转换<a class="headerlink" href="#type-casting" title="Permalink to this headline">¶</a></h3>
+                                    <p>除非另外有特别的指出, 输入将被转换成 <code class="docutils literal"><span class="pre">float64</span></code>:</p>
+                                    <div class="highlight-python">
+                                        <div class="highlight">
+                                            <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">random_projection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&#39;float32&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">random_projection</span><span class="o">.</span><span class="n">GaussianRandomProjection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&#39;float64&#39;)</span>
+</pre>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        在上面的例子中, <code class="docutils literal"><span class="pre">X</span></code> 被定义成 <code class="docutils literal"><span class="pre">float32</span></code>类型,
+                                        但是被函数<code class="docutils literal"><span class="pre">fit_transform(X)</span></code>转换成了<code class="docutils literal"><span class="pre">float64</span></code>
+                                        类型。
+                                    </p>
+                                    <p>
+                                        回归算法的目标输出被转换为<code class="docutils literal"><span class="pre">float64</span></code>类型,
+                                        而分类器的目标输出与原来保持一致
+                                    </p>
+                                    <div class="highlight-python">
+                                        <div class="highlight">
+                                            <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>  
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">  decision_function_shape=None, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,</span>
+<span class="go">  max_iter=-1, probability=False, random_state=None, shrinking=True,</span>
+<span class="go">  tol=0.001, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">3</span><span class="p">]))</span>
+<span class="go">[0, 0, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">])</span>  
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">  decision_function_shape=None, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,</span>
+<span class="go">  max_iter=-1, probability=False, random_state=None, shrinking=True,</span>
+<span class="go">  tol=0.001, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">3</span><span class="p">]))</span>  
+<span class="go">[&#39;setosa&#39;, &#39;setosa&#39;, &#39;setosa&#39;]</span>
+</pre>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        在上面的例子中, 第一个预测函数 <code class="docutils literal"><span class="pre">predict()</span></code> 返回了整型数组,
+                                        这是因为<code class="docutils literal"><span class="pre">iris.target</span></code>
+                                        (一个整型数组)被传递给了函数 <code class="docutils literal"><span class="pre">fit</span></code>. 
+                                        第二个输出 <code class="docutils literal"><span class="pre">predict</span></code>返回的是字符串
+                                        数组，这是因为字符串数组<code class="docutils literal"><span class="pre">iris.target_names</span></code>被传递给函数
+                                        <code class="docutils literal"><span class="pre">fit</span></code>.
+                                    </p>
+                                </div>
+                                <div class="section" id="refitting-and-updating-parameters">
+                                    <h3>再拟合与参数更新<a class="headerlink" href="#refitting-and-updating-parameters" title="Permalink to this headline">¶</a></h3>
+                                    <p>
+                                        一个 estimator 的超参数(Hyper-parameters)可以被更新当它通过<a class="reference internal" href="../../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.set_params" title="sklearn.pipeline.Pipeline.set_params"><code class="xref py py-func docutils literal"><span class="pre">sklearn.pipeline.Pipeline.set_params</span></code></a> 
+                                        方法被创建的时候。 不止一次的调用 <code class="docutils literal"><span class="pre">fit()</span></code>
+                                        函数将会重写由之前的任何 <code class="docutils literal"><span class="pre">fit()</span></code>函数学习到的模型:
+                                    </p>
+                                    <div class="highlight-python">
+                                        <div class="highlight">
+                                            <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">  decision_function_shape=None, degree=3, gamma=&#39;auto&#39;, kernel=&#39;linear&#39;,</span>
+<span class="go">  max_iter=-1, probability=False, random_state=None, shrinking=True,</span>
+<span class="go">  tol=0.001, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="go">array([1, 0, 1, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">  decision_function_shape=None, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,</span>
+<span class="go">  max_iter=-1, probability=False, random_state=None, shrinking=True,</span>
+<span class="go">  tol=0.001, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="go">array([0, 0, 0, 1, 0])</span>
+</pre>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        在这里,使用默认构造函数 <code class="docutils literal"><span class="pre">SVC()</span></code> 创建 estimator 以后
+                                        ，其默认的核函数 <code class="docutils literal"><span class="pre">rbf</span></code> 被修改成了线性核函数 
+                                        <code class="docutils literal"><span class="pre">linear</span></code>进行学习预测；之后我们又将核函数
+                                        改为了默认的径向基函数<code class="docutils literal"><span class="pre">rbf</span></code> 并且再一次
+                                        拟合同一个 estimator 然后做了第二次预测.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="clearer"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+        <a href="../../_sources/tutorial/basic/tutorial.txt" rel="nofollow">Show this page source</a>
+    </div>
+    <div class="rel">
+
+        <div class="buttonPrevious">
+            <a href="../index.html">
+                Previous
+            </a>
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+ google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+</body>
+</html>
+
