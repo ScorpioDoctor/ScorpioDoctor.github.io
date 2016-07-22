@@ -57,6 +57,39 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\brand\bootstrap-outline.svg" />
+    <Content Include="assets\brand\bootstrap-punchout.svg" />
+    <Content Include="assets\brand\bootstrap-solid.svg" />
+    <Content Include="assets\css\docs.min.css" />
+    <Content Include="assets\css\ie10-viewport-bug-workaround.css" />
+    <Content Include="assets\css\src\docs.css" />
+    <Content Include="assets\css\src\pygments-manni.css" />
+    <Content Include="assets\flash\ZeroClipboard.swf" />
+    <Content Include="assets\img\components.png" />
+    <Content Include="assets\img\devices.png" />
+    <Content Include="assets\img\expo-lyft.jpg" />
+    <Content Include="assets\img\expo-newsweek.jpg" />
+    <Content Include="assets\img\expo-riot.jpg" />
+    <Content Include="assets\img\expo-vogue.jpg" />
+    <Content Include="assets\img\sass-less.png" />
+    <Content Include="assets\js\customize.min.js" />
+    <Content Include="assets\js\docs.min.js" />
+    <Content Include="assets\js\ie-emulation-modes-warning.js" />
+    <Content Include="assets\js\ie10-viewport-bug-workaround.js" />
+    <Content Include="assets\js\ie8-responsive-file-warning.js" />
+    <Content Include="assets\js\raw-files.min.js" />
+    <Content Include="assets\js\src\application.js" />
+    <Content Include="assets\js\src\customizer.js" />
+    <Content Include="assets\js\vendor\anchor.js" />
+    <Content Include="assets\js\vendor\autoprefixer.js" />
+    <Content Include="assets\js\vendor\Blob.js" />
+    <Content Include="assets\js\vendor\FileSaver.js" />
+    <Content Include="assets\js\vendor\holder.min.js" />
+    <Content Include="assets\js\vendor\jquery.min.js" />
+    <Content Include="assets\js\vendor\jszip.min.js" />
+    <Content Include="assets\js\vendor\less.min.js" />
+    <Content Include="assets\js\vendor\uglify.min.js" />
+    <Content Include="assets\js\vendor\ZeroClipboard.min.js" />
     <Content Include="dist\css\bootstrap-theme.css.map" />
     <Content Include="dist\css\bootstrap-theme.min.css.map" />
     <Content Include="dist\css\bootstrap.css.map" />
@@ -65,8 +98,9 @@
     <Content Include="dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="dist\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="asserts\css\docs.min.css.map" />
+    <Content Include="ml\index.html" />
     <Content Include="readme.md" />
+    <Content Include="assets\css\docs.min.css.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -75,39 +109,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="asserts\brand\bootstrap-outline.svg" />
-    <Content Include="asserts\brand\bootstrap-punchout.svg" />
-    <Content Include="asserts\brand\bootstrap-solid.svg" />
-    <Content Include="asserts\css\docs.min.css" />
-    <Content Include="asserts\css\ie10-viewport-bug-workaround.css" />
-    <Content Include="asserts\css\src\docs.css" />
-    <Content Include="asserts\css\src\pygments-manni.css" />
-    <Content Include="asserts\flash\ZeroClipboard.swf" />
-    <Content Include="asserts\img\components.png" />
-    <Content Include="asserts\img\devices.png" />
-    <Content Include="asserts\img\expo-lyft.jpg" />
-    <Content Include="asserts\img\expo-newsweek.jpg" />
-    <Content Include="asserts\img\expo-riot.jpg" />
-    <Content Include="asserts\img\expo-vogue.jpg" />
-    <Content Include="asserts\img\sass-less.png" />
-    <Content Include="asserts\js\customize.min.js" />
-    <Content Include="asserts\js\docs.min.js" />
-    <Content Include="asserts\js\ie-emulation-modes-warning.js" />
-    <Content Include="asserts\js\ie10-viewport-bug-workaround.js" />
-    <Content Include="asserts\js\ie8-responsive-file-warning.js" />
-    <Content Include="asserts\js\raw-files.min.js" />
-    <Content Include="asserts\js\src\application.js" />
-    <Content Include="asserts\js\src\customizer.js" />
-    <Content Include="asserts\js\vendor\anchor.js" />
-    <Content Include="asserts\js\vendor\autoprefixer.js" />
-    <Content Include="asserts\js\vendor\Blob.js" />
-    <Content Include="asserts\js\vendor\FileSaver.js" />
-    <Content Include="asserts\js\vendor\holder.min.js" />
-    <Content Include="asserts\js\vendor\jquery.min.js" />
-    <Content Include="asserts\js\vendor\jszip.min.js" />
-    <Content Include="asserts\js\vendor\less.min.js" />
-    <Content Include="asserts\js\vendor\uglify.min.js" />
-    <Content Include="asserts\js\vendor\ZeroClipboard.min.js" />
     <Content Include="dist\css\bootstrap-theme.css" />
     <Content Include="dist\css\bootstrap-theme.min.css" />
     <Content Include="dist\css\bootstrap.css" />
