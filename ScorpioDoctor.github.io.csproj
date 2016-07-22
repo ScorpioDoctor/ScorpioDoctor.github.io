@@ -105,7 +105,8 @@
     <Content Include="home\stylesheets\github-dark.css" />
     <Content Include="home\stylesheets\stylesheet.css" />
     <Content Include="ml\index.html" />
-    <Content Include="ml\scikit_learn\index.html" />
+    <Content Include="ml\scikit-learn\0.17\index.html" />
+    <Content Include="ml\scikit-learn\index.html" />
     <Content Include="ml\scikit_learn_document\about.html" />
     <Content Include="ml\scikit_learn_document\auto_examples\applications\svm_gui.html" />
     <Content Include="ml\scikit_learn_document\auto_examples\index.html" />
@@ -178,7 +179,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ml\scikit_learn\0.17\" />
     <Folder Include="ml\scikit_learn_document\auto_examples\classification\" />
     <Folder Include="ml\scikit_learn_document\auto_examples\cluster\" />
     <Folder Include="ml\scikit_learn_document\auto_examples\covariance\" />
