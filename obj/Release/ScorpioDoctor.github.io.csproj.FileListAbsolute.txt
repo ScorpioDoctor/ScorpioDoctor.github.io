@@ -1,0 +1,12 @@
+G:\apache-tomcat-9.0.0.M9\webapps\ScorpioDoctor.github.io\ScorpioDoctor.github.io\bin\ScorpioDoctor.github.io.dll.config
+G:\apache-tomcat-9.0.0.M9\webapps\ScorpioDoctor.github.io\ScorpioDoctor.github.io\bin\ScorpioDoctor.github.io.dll
+G:\apache-tomcat-9.0.0.M9\webapps\ScorpioDoctor.github.io\ScorpioDoctor.github.io\bin\ScorpioDoctor.github.io.pdb
+G:\apache-tomcat-9.0.0.M9\webapps\ScorpioDoctor.github.io\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.csprojResolveAssemblyReference.cache
+G:\apache-tomcat-9.0.0.M9\webapps\ScorpioDoctor.github.io\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.dll
+G:\apache-tomcat-9.0.0.M9\webapps\ScorpioDoctor.github.io\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.pdb
+G:\ScorpioDoctor.github.io\bin\ScorpioDoctor.github.io.dll.config
+G:\ScorpioDoctor.github.io\bin\ScorpioDoctor.github.io.dll
+G:\ScorpioDoctor.github.io\bin\ScorpioDoctor.github.io.pdb
+G:\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.csprojResolveAssemblyReference.cache
+G:\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.dll
+G:\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.pdb
