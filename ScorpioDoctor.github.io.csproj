@@ -90,6 +90,9 @@
     <Content Include="assets\js\vendor\less.min.js" />
     <Content Include="assets\js\vendor\uglify.min.js" />
     <Content Include="assets\js\vendor\ZeroClipboard.min.js" />
+    <Content Include="blc\index.html" />
+    <Content Include="contact.html" />
+    <Content Include="cv\index.html" />
     <Content Include="dist\css\bootstrap-theme.css.map" />
     <Content Include="dist\css\bootstrap-theme.min.css.map" />
     <Content Include="dist\css\bootstrap.css.map" />
@@ -3084,51 +3087,9 @@
     <Content Include="ml\scikit-learn\0.17\_static\up.png" />
     <Content Include="ml\scikit-learn\0.17\_static\websupport.js" />
     <Content Include="ml\scikit-learn\index.html" />
-    <Content Include="ml\scikit_learn_document\about.html" />
-    <Content Include="ml\scikit_learn_document\auto_examples\applications\svm_gui.html" />
-    <Content Include="ml\scikit_learn_document\auto_examples\index.html" />
-    <Content Include="ml\scikit_learn_document\auto_examples\plot_cv_predict.html" />
-    <Content Include="ml\scikit_learn_document\datasets\index.html" />
-    <Content Include="ml\scikit_learn_document\developers\contributing.html" />
-    <Content Include="ml\scikit_learn_document\developers\index.html" />
-    <Content Include="ml\scikit_learn_document\documentation.html" />
-    <Content Include="ml\scikit_learn_document\faq.html" />
-    <Content Include="ml\scikit_learn_document\index.html" />
-    <Content Include="ml\scikit_learn_document\install.html" />
-    <Content Include="ml\scikit_learn_document\model_selection.html" />
-    <Content Include="ml\scikit_learn_document\presentations.html" />
-    <Content Include="ml\scikit_learn_document\related_projects.html" />
-    <Content Include="ml\scikit_learn_document\scikit-learn.html" />
-    <Content Include="ml\scikit_learn_document\supervised_learning.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\basic\tutorial.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\index.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\machine_learning_map\index.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\statistical_inference\finding_help.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\statistical_inference\index.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\statistical_inference\model_selection.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\statistical_inference\putting_together.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\statistical_inference\settings.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\statistical_inference\supervised_learning.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\statistical_inference\unsupervised_learning.html" />
-    <Content Include="ml\scikit_learn_document\tutorial\text_analytics\working_with_text_data.html" />
-    <Content Include="ml\scikit_learn_document\unsupervised_learning.html" />
-    <Content Include="ml\scikit_learn_document\user_guide.html" />
-    <Content Include="ml\scikit_learn_document\whats_new.html" />
-    <Content Include="ml\scikit_learn_document\_static\css\bootstrap-responsive.css" />
-    <Content Include="ml\scikit_learn_document\_static\css\bootstrap.min.css" />
-    <Content Include="ml\scikit_learn_document\_static\doctools.js" />
-    <Content Include="ml\scikit_learn_document\_static\favicon.ico" />
-    <Content Include="ml\scikit_learn_document\_static\gallery.css" />
-    <Content Include="ml\scikit_learn_document\_static\jquery.js" />
-    <Content Include="ml\scikit_learn_document\_static\js\bootstrap.min.js" />
-    <Content Include="ml\scikit_learn_document\_static\js\copybutton.js" />
-    <Content Include="ml\scikit_learn_document\_static\nature.css" />
-    <Content Include="ml\scikit_learn_document\_static\pygments.css" />
-    <Content Include="ml\scikit_learn_document\_static\scikit-learn-logo-small.png" />
-    <Content Include="ml\scikit_learn_document\_static\underscore.js" />
+    <Content Include="nlp\index.html" />
     <Content Include="readme.md" />
     <Content Include="assets\css\docs.min.css.map" />
-    <Content Include="ml\scikit_learn_document\_downloads\plot_cv_predict.py" />
     <Content Include="home\params.json" />
     <Content Include="home\README.md" />
     <Content Include="ml\scikit-learn\.nojekyll" />
@@ -3334,6 +3295,7 @@
     <Content Include="ml\scikit-learn\0.17\_static\iris.pdf" />
     <Content Include="ml\scikit-learn\0.17\_static\ML_MAPS_README.rst" />
     <Content Include="ml\scikit-learn\0.17\objects.inv" />
+    <Content Include="webmaster.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3358,19 +3320,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ml\scikit_learn_document\auto_examples\classification\" />
-    <Folder Include="ml\scikit_learn_document\auto_examples\cluster\" />
-    <Folder Include="ml\scikit_learn_document\auto_examples\covariance\" />
-    <Folder Include="ml\scikit_learn_document\auto_examples\ensemble\" />
-    <Folder Include="ml\scikit_learn_document\auto_examples\gaussian_process\" />
-    <Folder Include="ml\scikit_learn_document\auto_examples\linear_model\" />
-    <Folder Include="ml\scikit_learn_document\auto_examples\manifold\" />
-    <Folder Include="ml\scikit_learn_document\auto_examples\mixture\" />
-    <Folder Include="ml\scikit_learn_document\auto_examples\neighbors\" />
-    <Folder Include="ml\scikit_learn_document\modules\" />
-    <Folder Include="ml\scikit_learn_document\_images\math\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

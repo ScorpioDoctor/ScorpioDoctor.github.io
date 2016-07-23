@@ -1,24 +1,23 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-  
-    <title>Documentation scikit-learn: machine learning in Python &mdash; scikit-learn 0.17.1 documentation</title>
-  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="_static/css/bootstrap.min.css" media="screen" />
-  <link rel="stylesheet" href="_static/css/bootstrap-responsive.css"/>
 
-    
+
+    <title>scikit-learn: Python机器学习开发包文档 &mdash; scikit-learn 0.17.1 文档</title>
+    <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="_static/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" href="_static/css/bootstrap-responsive.css" />
+
+
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
-    
+
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -32,16 +31,16 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/js/copybutton.js"></script>
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
-    <link rel="author" title="About these documents" href="about.html" />
-    <link rel="top" title="scikit-learn 0.17.1 documentation" href="index.html" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="_static/js/bootstrap.min.js" type="text/javascript"></script>
-  <link rel="canonical" href="http://scikit-learn.org/stable/documentation.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico" />
+    <link rel="author" title="关于此文档" href="about.html" />
+    <link rel="top" title="scikit-learn 0.17.1 文档" href="index.html" />
 
-  <script type="text/javascript">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="_static/js/bootstrap.min.js" type="text/javascript"></script>
+    <link rel="canonical" href="http://scikit-learn.org/stable/documentation.html" />
+
+    <script type="text/javascript">
     $("div.buttonNext, div.buttonPrevious").hover(
        function () {
            $(this).css('background-color', '#FF9C34');
@@ -50,176 +49,180 @@
            $(this).css('background-color', '#A7D6E2');
        }
     );
-  </script>
+    </script>
 
-  </head>
-  <body role="document">
+</head>
+<body role="document">
 
-<div class="header-wrapper">
-    <div class="header">
-        <p class="logo"><a href="index.html">
-            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
-        </a>
-        </p><div class="navbar">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="install.html">Installation</a></li>
-                <li class="btn-li"><div class="btn-group">
-              <a href="#">Documentation</a>
-              <a class="btn dropdown-toggle" data-toggle="dropdown">
-                 <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-            <li class="link-title">Scikit-learn 0.17 (stable)</li>
-            <li><a href="tutorial/index.html">Tutorials</a></li>
-            <li><a href="user_guide.html">User guide</a></li>
-            <li><a href="modules/classes.html">API</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="developers/contributing.html">Contributing</a></li>
-            <li class="divider"></li>
-                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
-                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
-				<li><a href="_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
-              </ul>
+    <div class="header-wrapper">
+        <div class="header">
+            <p class="logo">
+                <a href="index.html">
+                    <img src="_static/scikit-learn-logo-small.png" alt="Logo" />
+                </a>
+            </p><div class="navbar">
+                <ul>
+                    <li><a href="index.html">主页</a></li>
+                    <li><a href="install.html">安装</a></li>
+                    <li class="btn-li">
+                        <div class="btn-group">
+                            <a href="#">文档</a>
+                            <a class="btn dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="link-title">Scikit-learn 0.17 (稳定版)</li>
+                                <li><a href="tutorial/index.html">教程</a></li>
+                                <li><a href="user_guide.html">使用者指南</a></li>
+                                <li><a href="modules/classes.html">API</a></li>
+                                <li><a href="faq.html">FAQ</a></li>
+                                <li><a href="developers/contributing.html">贡献</a></li>
+                                <li class="divider"></li>
+                                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (开发版)</a></li>
+                                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+                                <li><a href="_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="auto_examples/index.html">实例</a></li>
+                </ul>
+
+                <div class="search_form">
+                    <div id="cse" style="width: 100%;"></div>
+                </div>
+            </div> <!-- end navbar -->
+        </div>
+    </div>
+
+
+    <!-- Github "fork me" ribbon -->
+    <a href="https://github.com/scikit-learn/scikit-learn">
+        <img class="fork-me"
+             style="position: absolute; top: 0; right: 0; border: 0;"
+             src="_static/img/forkme.png"
+             alt="Fork me on GitHub" />
+    </a>
+
+    <div class="content-wrapper">
+
+
+        <div class="content">
+
+            <div class="documentwrapper">
+                <div class="bodywrapper">
+                    <div class="body" role="main">
+
+                        <div class="container-index">
+                            <div class="section" id="documentation-of-scikit-learn-0-17">
+                                <h1>scikit-learn 0.17 版的文档<a class="headerlink" href="#documentation-of-scikit-learn-0-17" title="Permalink to this headline">¶</a></h1>
+                                <!-- Block section -->
+                                <!-- row -->
+                                <div class="row-fluid">
+                                    <div class="span4 box">
+                                        <h2><a href="tutorial/basic/tutorial.html">快速开始</a></h2>
+                                        <blockquote>
+                                            对机器学习的简要介绍以及如何用scikit-learn解决机器学习问题
+                                            介绍了一些基本概念以及一些约定.
+                                        </blockquote>
+                                    </div>
+                                    <div class="span4 box">
+                                        <h2><a href="user_guide.html">使用者指南</a></h2>
+                                        <blockquote>
+                                            文档的主要部分. 这里包含了所有算法的较深入的描述以及如何使用他们。
+                                        </blockquote>
+                                    </div>
+                                    <div class="span4 box">
+                                        <!-- doc versions -->
+                                        <h2>其他版本</h2>
+                                        <ul>
+                                            <li><a href="http://scikit-learn.org/dev/documentation.html">scikit-learn 0.18 (开发版)</a></li>
+                                            <li>scikit-learn 0.17 (稳定版)</li>
+                                            <li><a href="http://scikit-learn.org/0.17/documentation.html">scikit-learn 0.16</a></li>
+                                            <li><a href="http://scikit-learn.org/0.15/documentation.html">scikit-learn 0.15</a></li>
+                                        </ul>
+
+                                    </div>
+                                    <!-- row -->
+                                </div>
+
+                                <!-- row -->
+                                <div class="row-fluid">
+                                    <div class="span4 box">
+                                        <h2><a href="tutorial/index.html">教程</a></h2>
+                                        <blockquote>
+                                            在机器学习领域开发基于scikit-learn的应用的一些有用的教程。
+                                        </blockquote>
+                                    </div>
+                                    <div class="span4 box">
+                                        <h2><a href="modules/classes.html">API</a></h2>
+                                        <blockquote>
+                                            所有函数与类的确切的定义.API文档对所有函数所期望的类型
+                                            以及允许使用的特征以及算法的所有可用参数的说明。
+                                        </blockquote>
+                                    </div>
+
+                                    <div class="span4 box">
+                                        <h2><a href="presentations.html">附加的资源</a></h2>
+                                        <blockquote>
+                                            主要包含一些讨论，PPT,以及其他与scikit-learn有关的信息.
+                                        </blockquote>
+                                    </div>
+                                </div>
+                                <!-- row -->
+                                <div class="row-fluid">
+                                    <div class="span4 box">
+                                        <h2><a href="developers/index.html">贡献</a></h2>
+                                        <blockquote>
+                                            在这里你将了解如何对scikit-learn提供贡献. 
+                                            这里也并包含了一些针对高级用户的有用信息，比如如何构建你自己的算法。
+                                        </blockquote>
+                                    </div>
+
+                                    <div class="span4 box">
+                                        <h2><a href="tutorial/machine_learning_map/index.html">流程图</a></h2>
+                                        <blockquote>
+                                            对机器学习的基本领域的一个图形化概观，以及一些关于在给定的情形下如何
+                                            选择机器学习算法的指南
+                                        </blockquote>
+                                    </div>
+                                    <div class="span4 box">
+                                        <h2><a href="faq.html">FAQ</a></h2>
+                                        <blockquote>
+                                            经常被问到的一些问题以及他们的答案.
+                                        </blockquote>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span4 box">
+                                        <h2><a href="related_projects.html">其他的机器学习相关包</a></h2>
+                                        <blockquote>
+                                            另外一些基于Python的机器学习包和相关的工程. 当然了，这些包都不如scikit-learn全面和好用.
+                                        </blockquote>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clearer"></div>
             </div>
-        </li>
-            <li><a href="auto_examples/index.html">Examples</a></li>
-            </ul>
-
-            <div class="search_form">
-                <div id="cse" style="width: 100%;"></div>
-            </div>
-        </div> <!-- end navbar --></div>
-</div>
-
-
-<!-- Github "fork me" ribbon -->
-<a href="https://github.com/scikit-learn/scikit-learn">
-  <img class="fork-me"
-       style="position: absolute; top: 0; right: 0; border: 0;"
-       src="_static/img/forkme.png"
-       alt="Fork me on GitHub" />
-</a>
-
-<div class="content-wrapper">
-
-
-      <div class="content">
-            
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="container-index"><div class="section" id="documentation-of-scikit-learn-0-17">
-<h1>Documentation of scikit-learn 0.17<a class="headerlink" href="#documentation-of-scikit-learn-0-17" title="Permalink to this headline">¶</a></h1>
-<!-- Block section -->
-  <!-- row -->
-    <div class="row-fluid">
-        <div class="span4 box">
-            <h2><a href="tutorial/basic/tutorial.html">Quick Start</a></h2>
-            <blockquote>A very short introduction into machine learning
-            problems and how to solve them using scikit-learn.
-            Introduced basic concepts and conventions.
-            </blockquote>
-        </div>
-        <div class="span4 box">
-            <h2><a href="user_guide.html">User Guide</a></h2>
-            <blockquote>The main documentation. This contains an
-                in-depth description of all algorithms and how
-                to apply them.
-            </blockquote>
-        </div>
-        <div class="span4 box">
-        <!-- doc versions -->
-            <h2>Other Versions</h2>
-            <ul>
-                <li><a href="http://scikit-learn.org/dev/documentation.html">scikit-learn 0.18 (development)</a></li>
-                <li>scikit-learn 0.17 (stable)</li>
-                <li><a href="http://scikit-learn.org/0.17/documentation.html">scikit-learn 0.16</a></li>
-                <li><a href="http://scikit-learn.org/0.15/documentation.html">scikit-learn 0.15</a></li>
-            </ul>
-
-        </div>
-                <!-- row -->
-    </div>
-
-  <!-- row -->
-    <div class="row-fluid">
-        <div class="span4 box">
-            <h2><a href="tutorial/index.html">Tutorials</a></h2>
-            <blockquote>Useful tutorials for developing a feel
-            for some of scikit-learn's applications in the
-            machine learning field.
-            </blockquote>
-        </div>
-        <div class="span4 box">
-            <h2><a href="modules/classes.html">API</a></h2>
-                    <blockquote>The exact API of all functions and classes, as given by the docstrings.
-                    The API documents expected types and allowed features for all functions,
-                    and all parameters available for the algorithms.
-                    </blockquote>
         </div>
 
-        <div class="span4 box">
-            <h2><a href="presentations.html">Additional Resources</a></h2>
-                        <blockquote>Talks given, slide-sets and other information relevant to scikit-learn.
-                        </blockquote>
+        <div class="footer">
+            &copy; 2010 - 2014, scikit-learn developers (BSD License).
+            <a href="_sources/documentation.txt" rel="nofollow">Show this page source</a>
         </div>
-    </div>
-  <!-- row -->
-    <div class="row-fluid">
-        <div class="span4 box">
-            <h2><a href="developers/index.html">Contributing</a></h2>
-                    <blockquote>Information on how to contribute. This also
-                    contains useful information for advanced users, for example
-                    how to build their own estimators.
-                    </blockquote>
+        <div class="rel rellarge">
+
+
         </div>
 
-        <div class="span4 box">
-            <h2><a href="tutorial/machine_learning_map/index.html">Flow Chart</a></h2>
-            <blockquote>A graphical overview of basic areas of machine
-                learning, and guidance which kind of algorithms
-                to use in a given situation.
-            </blockquote>
-        </div>
-        <div class="span4 box">
-            <h2><a href="faq.html">FAQ</a></h2>
-            <blockquote>Frequently asked questions about the project and contributing.
-            </blockquote>
-        </div>
-    </div>
 
-    <div class="row-fluid">
-        <div class="span4 box">
-            <h2><a href="related_projects.html">Related packages</a></h2>
-            <blockquote>Other machine learning packages for Python and
-            related projects. Also algorithms that are slightly out of
-            scope or not well established enough for scikit-learn.
-            </blockquote>
-        </div>
-
-    </div></div>
-
-
-          </div>
-        </div>
-      </div>
-        <div class="clearer"></div>
-      </div>
-    </div>
-
-    <div class="footer">
-        &copy; 2010 - 2014, scikit-learn developers (BSD License).
-      <a href="_sources/documentation.txt" rel="nofollow">Show this page source</a>
-    </div>
-     <div class="rel rellarge">
-    
-    
-     </div>
-
-    
-    <script type="text/javascript">
+        <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-22606712-2']);
       _gaq.push(['_trackPageview']);
@@ -229,11 +232,12 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-    </script>
-    
+        </script>
 
-    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
-    <script type="text/javascript"> google.load('search', '1',
+
+        <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+        <script type="text/javascript">
+ google.load('search', '1',
         {language : 'en'}); google.setOnLoadCallback(function() {
             var customSearchControl = new
             google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
@@ -241,6 +245,6 @@
             var options = new google.search.DrawOptions();
             options.setAutoComplete(true);
             customSearchControl.draw('cse', options); }, true);
-    </script>
-  </body>
+        </script>
+</body>
 </html>
