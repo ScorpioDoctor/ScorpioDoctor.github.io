@@ -58,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="blc\index.html" />
+    <Content Include="css-fonts-js\css\gallery.css" />
+    <Content Include="css-fonts-js\css\nature.css" />
+    <Content Include="css-fonts-js\css\pygments.css" />
     <Content Include="css-fonts-js\js\jquery.min.js" />
     <Content Include="contact.html" />
     <Content Include="cv\index.html" />
@@ -3055,7 +3058,9 @@
     <Content Include="ml\scikit-learn\0.17\_static\up.png" />
     <Content Include="ml\scikit-learn\0.17\_static\websupport.js" />
     <Content Include="ml\scikit-learn\index.html" />
+    <Content Include="ml\scikit-learn\tutorial\basic\tutorial.html" />
     <Content Include="ml\scikit-learn\tutorial\index.html" />
+    <Content Include="ml\scikit-learn\_images\plot_digits_last_image_0011.png" />
     <Content Include="nlp\index.html" />
     <Content Include="readme.md" />
     <Content Include="home\params.json" />
@@ -3287,7 +3292,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ml\scikit-learn\tutorial\machine_learning_map\" />
+    <Folder Include="ml\scikit-learn\tutorial\statistical_inference\" />
+    <Folder Include="ml\scikit-learn\tutorial\text_analytics\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
