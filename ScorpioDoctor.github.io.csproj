@@ -78,6 +78,8 @@
     <Content Include="home\javascripts\main.js" />
     <Content Include="home\stylesheets\github-dark.css" />
     <Content Include="home\stylesheets\stylesheet.css" />
+    <Content Include="images\kenan.jpg" />
+    <Content Include="images\plot_digits_last_image_0011.png" />
     <Content Include="ml\index.html" />
     <Content Include="ml\scikit-learn\0.17\about.html" />
     <Content Include="ml\scikit-learn\0.17\auto_examples\applications\face_recognition.html" />
