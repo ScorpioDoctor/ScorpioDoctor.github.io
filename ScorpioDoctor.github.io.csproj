@@ -3077,6 +3077,7 @@
     <Content Include="ml\scikit-learn\tutorial\index.html" />
     <Content Include="ml\scikit-learn\tutorial\machine_learning_map\images\ml_map.png" />
     <Content Include="ml\scikit-learn\tutorial\machine_learning_map\index.html" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\index.html" />
     <Content Include="ml\scikit-learn\_images\kenan.jpg" />
     <Content Include="ml\scikit-learn\_images\plot_digits_last_image_0011.png" />
     <Content Include="nlp\index.html" />
@@ -3311,7 +3312,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ml\scikit-learn\tutorial\statistical_inference\" />
     <Folder Include="ml\scikit-learn\tutorial\text_analytics\" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
+
+    <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/underscore.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/doctools.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
+
+    <title>人工智能研究网/机器学习</title>
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">studyai.cn</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../../../index.html">网站主页</a></li>
+                <li><a href="../../../../webmaster.html">站长风采</a></li>
+                <li><a href="../../../../contact.html">联系我们</a></li>
+                <li><a href="../../../../sponsor.html">赞助我们</a></li>
+                <li><a href="../../../index.html">机器学习主页</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-center"> 用于科学数据处理的统计学习教程 </h1>
+        </div>
+
+        <div class="topic">
+            <p class="topic-title first"><strong>统计学习</strong></p>
+            <p>
+                <a class="reference external" href="http://en.wikipedia.org/wiki/Machine_learning">机器学习</a> 是一门重要性与日俱增的技术,
+                因为科学研究所面临的数据规模正在急速增长。 它所面临的问题相当广泛，比如建立一个连接不同观测的预测函数；
+                分类观测数据；以及在未知标签的数据中学习到某些结构。
+            </p>
+            <p>
+                本教程将要探讨 统计学习<em>(statistical learning)</em>, 以统计推断(<a class="reference external" href="http://en.wikipedia.org/wiki/Statistical_inference">statistical inference</a>)
+                为目标使用机器学习技术:从数据中得出结论。
+            </p>
+            <p>
+                Scikit-learn 是一个集成了经典机器学习算法的Python模块，与三个Python科学计算包紧密联系 (<a class="reference external" href="http://www.scipy.org">NumPy</a>, <a class="reference external" href="http://www.scipy.org">SciPy</a>, <a class="reference external" href="http://matplotlib.sourceforge.net/">matplotlib</a>).
+            </p>
+        </div>
+
+        <div>
+
+            <ul class="panel">
+                <li>
+                    <a href="basic/tutorial.html"><h2>统计学习: 环境设置与estimator对象</h2></a>
+                    <ul>
+                        <li><a href="basic/tutorial.html#base_problem"><h3 class="text-danger">准备数据集</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">Estimators 对象</h3></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="panel">
+                <li>
+                    <a href="basic/tutorial.html"><h2>监督学习: 从高维观测中预测一个输出变量</h2></a>
+                    <ul>
+                        <li><a href="basic/tutorial.html#base_problem"><h3 class="text-danger">最近邻与维数灾难</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">线性模型：从回归到稀疏</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">支持向量机(SVMs)</h3></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="panel">
+                <li>
+                    <a href="basic/tutorial.html"><h2>模型选择: 选择正确的Estimator对象及其参数</h2></a>
+                    <ul>
+                        <li><a href="basic/tutorial.html#base_problem"><h3 class="text-danger">交叉验证得分</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">交叉验证生成器</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">网格搜索与交叉验证</h3></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="panel">
+                <li>
+                    <a href="basic/tutorial.html"><h2>无监督学习：探索数据的呈现方式</h2></a>
+                    <ul>
+                        <li><a href="basic/tutorial.html#base_problem"><h3 class="text-danger">聚类：分组观测数据</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">分解：获得信号分量</h3></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="panel">
+                <li>
+                    <a href="basic/tutorial.html"><h2>将上述内容放到一起</h2></a>
+                    <ul>
+                        <li><a href="basic/tutorial.html#base_problem"><h3 class="text-danger">管道重定向(PipeLinge)</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">基于特征脸的人脸识别</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">开放问题：股票市场结构</h3></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="panel">
+                <li>
+                    <a href="basic/tutorial.html"><h2>寻求帮助</h2></a>
+                    <ul>
+                        <li><a href="basic/tutorial.html#base_problem"><h3 class="text-danger">聚类：分组观测数据</h3></a></li>
+                        <li><a href="basic/tutorial.html#load_dataset"><h3 class="text-danger">分解：获得信号分量</h3></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</html>
