@@ -58,11 +58,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="blc\index.html" />
+    <Content Include="css-fonts-js\css\bootstrap-responsive.css" />
     <Content Include="css-fonts-js\css\gallery.css" />
     <Content Include="css-fonts-js\css\nature.css" />
     <Content Include="css-fonts-js\css\pygments.css" />
+    <Content Include="css-fonts-js\js\copybutton.js" />
+    <Content Include="css-fonts-js\js\doctools.js" />
+    <Content Include="css-fonts-js\js\jquery-1.11.1.js" />
+    <Content Include="css-fonts-js\js\jquery.js" />
+    <Content Include="css-fonts-js\js\jquery.maphilight.js" />
+    <Content Include="css-fonts-js\js\jquery.maphilight.min.js" />
     <Content Include="css-fonts-js\js\jquery.min.js" />
     <Content Include="contact.html" />
+    <Content Include="css-fonts-js\js\searchtools.js" />
+    <Content Include="css-fonts-js\js\underscore-1.3.1.js" />
+    <Content Include="css-fonts-js\js\underscore.js" />
+    <Content Include="css-fonts-js\js\websupport.js" />
     <Content Include="cv\index.html" />
     <Content Include="css-fonts-js\css\bootstrap-theme.css.map" />
     <Content Include="css-fonts-js\css\bootstrap-theme.min.css.map" />
@@ -3064,6 +3075,8 @@
     <Content Include="ml\scikit-learn\tutorial\basic\images\kenan.jpg" />
     <Content Include="ml\scikit-learn\tutorial\basic\images\plot_digits_last_image_0011.png" />
     <Content Include="ml\scikit-learn\tutorial\index.html" />
+    <Content Include="ml\scikit-learn\tutorial\machine_learning_map\images\ml_map.png" />
+    <Content Include="ml\scikit-learn\tutorial\machine_learning_map\index.html" />
     <Content Include="ml\scikit-learn\_images\kenan.jpg" />
     <Content Include="ml\scikit-learn\_images\plot_digits_last_image_0011.png" />
     <Content Include="nlp\index.html" />
@@ -3298,7 +3311,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ml\scikit-learn\tutorial\machine_learning_map\" />
     <Folder Include="ml\scikit-learn\tutorial\statistical_inference\" />
     <Folder Include="ml\scikit-learn\tutorial\text_analytics\" />
   </ItemGroup>
