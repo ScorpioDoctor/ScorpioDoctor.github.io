@@ -3055,6 +3055,7 @@
     <Content Include="ml\scikit-learn\0.17\_static\up.png" />
     <Content Include="ml\scikit-learn\0.17\_static\websupport.js" />
     <Content Include="ml\scikit-learn\index.html" />
+    <Content Include="ml\scikit-learn\tutorial\index.html" />
     <Content Include="nlp\index.html" />
     <Content Include="readme.md" />
     <Content Include="home\params.json" />
@@ -3262,6 +3263,7 @@
     <Content Include="ml\scikit-learn\0.17\_static\iris.pdf" />
     <Content Include="ml\scikit-learn\0.17\_static\ML_MAPS_README.rst" />
     <Content Include="ml\scikit-learn\0.17\objects.inv" />
+    <Content Include="sponsor.html" />
     <Content Include="webmaster.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
