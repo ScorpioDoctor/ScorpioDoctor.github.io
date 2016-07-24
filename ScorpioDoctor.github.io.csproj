@@ -3060,8 +3060,7 @@
     <Content Include="ml\scikit-learn\index.html" />
     <Content Include="ml\scikit-learn\tutorial\basic\tutorial.html" />
     <Content Include="ml\scikit-learn\tutorial\index.html" />
-    <Content Include="ml\scikit-learn\tutorial\_images\plot_digits_last_image_0011.jpg" />
-    <Content Include="ml\scikit-learn\tutorial\_images\plot_digits_last_image_0011.png" />
+    <Content Include="ml\scikit-learn\_images\kenan.jpg" />
     <Content Include="ml\scikit-learn\_images\plot_digits_last_image_0011.png" />
     <Content Include="nlp\index.html" />
     <Content Include="readme.md" />
