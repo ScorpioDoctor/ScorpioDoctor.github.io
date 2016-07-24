@@ -57,50 +57,18 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\brand\bootstrap-outline.svg" />
-    <Content Include="assets\brand\bootstrap-punchout.svg" />
-    <Content Include="assets\brand\bootstrap-solid.svg" />
-    <Content Include="assets\css\docs.min.css" />
-    <Content Include="assets\css\ie10-viewport-bug-workaround.css" />
-    <Content Include="assets\css\src\docs.css" />
-    <Content Include="assets\css\src\pygments-manni.css" />
-    <Content Include="assets\flash\ZeroClipboard.swf" />
-    <Content Include="assets\img\components.png" />
-    <Content Include="assets\img\devices.png" />
-    <Content Include="assets\img\expo-lyft.jpg" />
-    <Content Include="assets\img\expo-newsweek.jpg" />
-    <Content Include="assets\img\expo-riot.jpg" />
-    <Content Include="assets\img\expo-vogue.jpg" />
-    <Content Include="assets\img\sass-less.png" />
-    <Content Include="assets\js\customize.min.js" />
-    <Content Include="assets\js\docs.min.js" />
-    <Content Include="assets\js\ie-emulation-modes-warning.js" />
-    <Content Include="assets\js\ie10-viewport-bug-workaround.js" />
-    <Content Include="assets\js\ie8-responsive-file-warning.js" />
-    <Content Include="assets\js\raw-files.min.js" />
-    <Content Include="assets\js\src\application.js" />
-    <Content Include="assets\js\src\customizer.js" />
-    <Content Include="assets\js\vendor\anchor.js" />
-    <Content Include="assets\js\vendor\autoprefixer.js" />
-    <Content Include="assets\js\vendor\Blob.js" />
-    <Content Include="assets\js\vendor\FileSaver.js" />
-    <Content Include="assets\js\vendor\holder.min.js" />
-    <Content Include="assets\js\vendor\jquery.min.js" />
-    <Content Include="assets\js\vendor\jszip.min.js" />
-    <Content Include="assets\js\vendor\less.min.js" />
-    <Content Include="assets\js\vendor\uglify.min.js" />
-    <Content Include="assets\js\vendor\ZeroClipboard.min.js" />
     <Content Include="blc\index.html" />
+    <Content Include="css-fonts-js\js\jquery.min.js" />
     <Content Include="contact.html" />
     <Content Include="cv\index.html" />
-    <Content Include="dist\css\bootstrap-theme.css.map" />
-    <Content Include="dist\css\bootstrap-theme.min.css.map" />
-    <Content Include="dist\css\bootstrap.css.map" />
-    <Content Include="dist\css\bootstrap.min.css.map" />
-    <Content Include="dist\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="dist\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="dist\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="css-fonts-js\css\bootstrap-theme.css.map" />
+    <Content Include="css-fonts-js\css\bootstrap-theme.min.css.map" />
+    <Content Include="css-fonts-js\css\bootstrap.css.map" />
+    <Content Include="css-fonts-js\css\bootstrap.min.css.map" />
+    <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="home\images\bkg.png" />
     <Content Include="home\images\blacktocat.png" />
     <Content Include="home\index.html" />
@@ -3089,7 +3057,6 @@
     <Content Include="ml\scikit-learn\index.html" />
     <Content Include="nlp\index.html" />
     <Content Include="readme.md" />
-    <Content Include="assets\css\docs.min.css.map" />
     <Content Include="home\params.json" />
     <Content Include="home\README.md" />
     <Content Include="ml\scikit-learn\.nojekyll" />
@@ -3304,17 +3271,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dist\css\bootstrap-theme.css" />
-    <Content Include="dist\css\bootstrap-theme.min.css" />
-    <Content Include="dist\css\bootstrap.css" />
-    <Content Include="dist\css\bootstrap.min.css" />
-    <Content Include="dist\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="dist\js\bootstrap.js" />
-    <Content Include="dist\js\bootstrap.min.js" />
-    <Content Include="dist\js\npm.js" />
+    <Content Include="css-fonts-js\css\bootstrap-theme.css" />
+    <Content Include="css-fonts-js\css\bootstrap-theme.min.css" />
+    <Content Include="css-fonts-js\css\bootstrap.css" />
+    <Content Include="css-fonts-js\css\bootstrap.min.css" />
+    <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="css-fonts-js\js\bootstrap.js" />
+    <Content Include="css-fonts-js\js\bootstrap.min.js" />
+    <Content Include="css-fonts-js\js\npm.js" />
     <Content Include="index.html" />
-    <Content Include="offcanvas.css" />
-    <Content Include="offcanvas.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
