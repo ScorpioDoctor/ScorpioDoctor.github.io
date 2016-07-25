@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
+
+    <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/underscore.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/doctools.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
+
+    <title>人工智能研究网/机器学习</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">studyai.cn</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../../../index.html">网站主页</a></li>
+                <li><a href="../../../../webmaster.html">站长风采</a></li>
+                <li><a href="../../../../contact.html">联系我们</a></li>
+                <li><a href="../../../../sponsor.html">赞助我们</a></li>
+                <li><a href="../../../index.html">机器学习主页</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="page-header panel panel-heading panel-primary">
+            <h1 class="text-center"> 监督学习：从高维观测中预测一个输出变量</h1>
+        </div>
+
+        <div class="topic">
+            <p class="topic-title first"><strong>监督学习想要解决的问题</strong></p>
+            <p>
+                <a class="reference internal" href="../../supervised_learning.html#supervised-learning"><span>监督学习</span></a>
+                的核心在于学习两个数据集之间的联系，这两个数据集分别是 观测数据集(<code class="docutils literal"><span class="pre">X</span></code>) 和
+                一个我们想要预测的外部变量(<code class="docutils literal"><span class="pre">y</span></code>)
+                此外部变量通常情况下被称之为 目标值(&#8220;target&#8221), 或 类标签(&#8220;labels&#8221);
+                大多数时候，<code class="docutils literal"><span class="pre">y</span></code> 是一个<code class="docutils literal"><span class="pre">n_samples</span></code>
+                长度的一维数组.
+            </p>
+            <p>
+                scikit-learn 中所有的监督学习算法<a class="reference external" href="http://en.wikipedia.org/wiki/Estimator">estimators</a>对象都实现了成员方法
+                <code class="docutils literal"><span class="pre">fit(X,</span> <span class="pre">y)</span></code> 用于拟合数据模型，
+                还实现了一个成员方法 <code class="docutils literal"><span class="pre">predict(X)</span></code> 用于预测数据集 <code class="docutils literal"><span class="pre">X</span></code>
+                中的未知标签的样本,并返回预测的标签 <code class="docutils literal"><span class="pre">y</span></code>.
+            </p>
+        </div>
+
+        <div class="topic">
+            <p class="topic-title first"><strong>词汇: 分类 与 回归</strong></p>
+            <p>
+                如果一个预测任务是在有限的标签集合中分类观测数据或者说是给每个观测对象起名，那么
+                这样的预测任务就叫<strong>分类</strong>任务；另一方面，如果我们的目标是根据数据集预测一个连续变化的目标变量
+                ，那这样的预测任务就叫<strong>回归</strong>任务。所以在我们的语境中，预测是一个包含了分类与回归的更广泛的语义。
+            </p>
+            <p>
+                使用 scikit-learn 做分类任务时, <code class="docutils literal"><span class="pre">y</span></code> 是一个整型的或字符串型的数组。
+            </p>
+            <p>
+                注意啦: 你可以在此处 <a class="reference internal" href="../basic/tutorial.html#introduction">
+                    <span>
+                        使用 scikit-learn 进行机器学习之导论
+                    </span>
+                </a> 快速查看一下机器学习的基本词汇的含义。
+            </p>
+        </div>
+
+        <div>
+            <a name="nn_cd"><h2 class="text-left bg-danger">最近邻 与 维数灾难</h2></a>
+            <div class="topic">
+                <p class="topic-title first"><strong>分类鸢尾花:</strong></p>
+                <img alt="plot_iris_dataset_0011.png" src="./images/plot_iris_dataset_0011.png" width="520" height="390" />
+                <p>
+                    鸢尾花数据集(iris dataset)是一个分类任务，目标是依据花萼与花瓣的长度和宽度辨识三种不同品种的鸢尾花 (Setosa, Versicolour, 和 Virginica):
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">iris_y</span><span class="p">)</span>
+<span class="go">array([0, 1, 2])</span>
+</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="k-nearest-neighbors-classifier">
+                <h3>KNN 分类器<a class="headerlink" href="#k-nearest-neighbors-classifier" title="Permalink to this headline">¶</a></h3>
+                <p>
+                    最简单的分类器就是
+                    <a class="reference external" href="http://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm">最近邻分类器(Nearest Neighbor)</a>:
+                    给定一个新的观测：<code class="docutils literal"><span class="pre">X_test</span></code>, 在训练集合中寻找与该观测最近的那个特征向量。
+                    (关于此分类器详情请看 scikit-learn 文档的 <a class="reference internal" href="../../modules/neighbors.html#neighbors"><span>Nearest Neighbors 章节</span></a>。)
+                </p>
+                <div class="topic">
+                    <p class="topic-title first"><strong>训练集与测试集</strong></p>
+                    <p>
+                        当我们做实验研究一个学习算法的时候，请不要用拟合estimator的时候用过的数据去测试它的预测性能
+                        ，这一点非常重要。我们必须用新的数据<strong>new data</strong>来测试其预测性能，以便知道其泛化性究竟如何.
+                        这就是为什么数据集通常都被划分成训练集和测试集的原因了。
+                    </p>
+                </div>
+                <p><strong>KNN (k nearest neighbors) 分类器例子</strong>:</p>
+                 
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Split iris data in train and test data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># A random permutation, to split the data randomly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iris_X</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_X_train</span> <span class="o">=</span> <span class="n">iris_X</span><span class="p">[</span><span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_y_train</span> <span class="o">=</span> <span class="n">iris_y</span><span class="p">[</span><span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_X_test</span>  <span class="o">=</span> <span class="n">iris_X</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_y_test</span>  <span class="o">=</span> <span class="n">iris_y</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create and fit a nearest-neighbor classifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris_X_train</span><span class="p">,</span> <span class="n">iris_y_train</span><span class="p">)</span> 
+<span class="go">KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkowski&#39;,</span>
+<span class="go">           metric_params=None, n_jobs=1, n_neighbors=5, p=2,</span>
+<span class="go">           weights=&#39;uniform&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris_X_test</span><span class="p">)</span>
+<span class="go">array([1, 2, 1, 0, 0, 0, 2, 1, 2, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_y_test</span>
+<span class="go">array([1, 1, 1, 0, 0, 0, 2, 1, 2, 0])</span>
+</pre>
+                    </div>
+                </div> 
+
+                <img alt="plot_classification_0012.png" 
+                        src="./images/plot_classification_0012.png" width="560" height="420" />
+                    
+            </div>
+            
+            <div class="section" id="the-curse-of-dimensionality">
+                <span id="curse-of-dimensionality"></span><h3>维数灾难<a class="headerlink" href="#the-curse-of-dimensionality" title="Permalink to this headline">¶</a></h3>
+                <p>
+                    For an estimator to be effective, you need the distance between neighboring
+                    points to be less than some value <img class="math" src="./images/425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" alt="d" />, which depends on the problem.
+                    In one dimension, this requires on average <img class="math" src="./images/1149cb226589a7b7d18f15d51c492e99da4fae4c.png" alt="n ~ 1/d" /> points.
+                    In the context of the above <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />-NN example, if the data is described by
+                    just one feature with values ranging from 0 to 1 and with <img class="math" src="./images/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n" /> training
+                    observations, then new data will be no further away than <img class="math" src="./images/8ed7b101148182605feefc48fac92f577d32f6f2.png" alt="1/n" />.
+                    Therefore, the nearest neighbor decision rule will be efficient as soon as
+                    <img class="math" src="./images/8ed7b101148182605feefc48fac92f577d32f6f2.png" alt="1/n" /> is small compared to the scale of between-class feature variations.
+                </p>
+                <p>
+                    If the number of features is <img class="math" src="./images/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p" />, you now require <img class="math" src="./images/1ce752cc0feafeca82a10347e47927f82d90254d.png" alt="n ~ 1/d^p" />
+                    points.  Let&#8217;s say that we require 10 points in one dimension: now <img class="math" src="./images/d6e79569893190df0327efadedba52812f6ec183.png" alt="10^p" />
+                    points are required in <img class="math" src="./images/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p" /> dimensions to pave the <img class="math" src="./images/787ef8897f85416cae83d74ef5630a9c5973d996.png" alt="[0, 1]" /> space.
+                    As <img class="math" src="./images/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p" /> becomes large, the number of training points required for a good
+                    estimator grows exponentially.
+                </p>
+                <p>
+                    For example, if each point is just a single number (8 bytes), then an
+                    effective <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />-NN estimator in a paltry <img class="math" src="./images/b0baabc767a659b7f59f2d65ba14cbeff17d9d6b.png" alt="p~20" /> dimensions would
+                    require more training data than the current estimated size of the entire
+                    internet (±1000 Exabytes or so).
+                </p>
+                <p>
+                    This is called the
+                    <a class="reference external" href="http://en.wikipedia.org/wiki/Curse_of_dimensionality">curse of dimensionality</a>
+                    and is a core problem that machine learning addresses.
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <a name="linear_model"><h2 class="text-left bg-danger">线性模型: 从回归到稀疏</h2></a>
+        </div>
+
+        <div>
+            <a name="svm"><h2 class="text-left bg-danger">支持向量机 (SVMs)</h2></a>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer">
+            &copy; 2016-2100, 版权属于张金明博士 (BSD License).
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
+
+    <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/underscore.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/doctools.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
+
+    <title>人工智能研究网/机器学习</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">studyai.cn</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../../../index.html">网站主页</a></li>
+                <li><a href="../../../../webmaster.html">站长风采</a></li>
+                <li><a href="../../../../contact.html">联系我们</a></li>
+                <li><a href="../../../../sponsor.html">赞助我们</a></li>
+                <li><a href="../../../index.html">机器学习主页</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="page-header panel panel-heading panel-primary">
+            <h1 class="text-center"> 统计学习: 环境设置与estimator对象</h1>
+        </div>
+
+        <div>
+            <a name="base_problem"><h2 class="text-left bg-danger">数据集</h2></a>
+
+            <p>
+                Scikit-learn 从一个或多个数据集中处理学习信息，这些数据集以二维数组(2D arrays)的方式呈现。
+                。 它们可以被理解为是一个多维观测的列表. 这个二维数组的第一维是样本序号索引(<strong>samples</strong> axis),
+                第二维则是特征向量维(<strong>features</strong> axis).
+            </p>
+            <div class="topic">
+                <p class="topic-title first">让我们看看scikit自带的一个简单例子: 鸢尾花数据集(iris dataset)</p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(150, 4)</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    该数据集对鸢尾花进行了150次观测(也就是有150个样本特征向量)，每个特征向量由4个特征分量构成:
+                    [sepal length, sepal width, petal length, petal width],这些信息就放在关于数据集的描述中
+                    <code class="docutils literal"><span class="pre">iris.DESCR</span></code>。.
+                </p>
+            </div>
+            <p>
+                如果我们的数据一开始不是按照 <code class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></code> 这样的格式组织存放的,
+                他必须被预处理成上述 scikit-learn能够适应的标准格式。
+            </p>
+            <div class="topic">
+                <p class="topic-title first">重组数据格式的例子可以在 digits数据集中看到</p>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <p>
+                            digits 数据集是由1798个8x8的小图像所构成，每个图像代表一个手写数字
+                        </p>
+                        <div class="highlight-python">
+                            <div class="highlight">
+                                <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 8, 8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray_r</span><span class="p">)</span> 
+<span class="go">&lt;matplotlib.image.AxesImage object at ...&gt;</span>
+</pre>
+                            </div>
+                        </div>
+                        <p>
+                            为了在 scikit 中使用此数据集, 我们将每一张8x8的二维图像矩阵转换成一个长度为64的特征向量。
+                        </p>
+                        <div class="highlight-python">
+                            <div class="highlight">
+                                <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <img alt="plot_digits_last_image_0012.png" 
+                             src="./images/plot_digits_last_image_0012.png" width="180" height="180" />
+                    </div>
+                </div>       
+            </div>
+        </div>
+
+        <div>
+            <a name="base_problem"><h2 class="text-left bg-danger">Estimators 对象</h2></a>
+
+            <p>
+                <strong>拟合数据(Fitting data)</strong>: scikit-learn 实现的主要的API是<cite>estimator</cite>的成员方法.
+                一个 estimator 可以是任意一个从数据中学习到的对象;他可能是分类算法(classification)，回归算法(regression)， 聚类算法(clustering)，或者一个变换算法
+                (<em>transformer</em>:用于从原始数据中提取或过滤特征) .
+            </p>
+            <p>
+                不管他是何种算法，所有的 estimator 对象都向外部暴露了一个 <code class="docutils literal"><span class="pre">fit</span></code> 方法
+                ，该成员方法的操作对象是一个数据集(通常是一个 2-d 数组):
+            </p>
+            <div class="highlight-python">
+                <div class="highlight">
+                    <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre>
+                </div>
+            </div>
+            <p>
+                <strong>Estimator 的参数</strong>: 一个estimator的所有参数即可以在初始化的时候设置，也可以
+                按对应属性修改:
+            </p>
+            <div class="highlight-python">
+                <div class="highlight">
+                    <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">Estimator</span><span class="p">(</span><span class="n">param1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span><span class="o">.</span><span class="n">param1</span>
+<span class="go">1</span>
+</pre>
+                </div>
+            </div>
+            <p>
+                <strong>估计出的参数：</strong>: 当我们用一个estimator拟合完数据后，estimator的某些初始参数将会根据数据集的特点被更新
+                修改。所有估计出的参数都是这个estimator对象的以下划线结尾的属性：
+            </p>
+            <div class="highlight-python">
+                <div class="highlight">
+                    <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span><span class="o">.</span><span class="n">estimated_param_</span> 
+</pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="footer">
+            &copy; 2016-2100, 版权属于张金明博士 (BSD License).
+        </div>
+    </div>
+
+   </body>
+
+</html>
