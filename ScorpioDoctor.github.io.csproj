@@ -3082,6 +3082,7 @@
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\1ce752cc0feafeca82a10347e47927f82d90254d.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\3eca8557203e86160952e1c0f735f7417f3285b1 %281%29.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\3eca8557203e86160952e1c0f735f7417f3285b1.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\3fcabd4a94b24f0fb2bd4b2bb79703cf8f5eb496.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\413f8a8e40062a9090d9d50b88bc7b551b314c26.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\425d86ba2f2979d75b7535c2bcf92c33ed6b285a.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\787ef8897f85416cae83d74ef5630a9c5973d996.png" />
@@ -3097,7 +3098,19 @@
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_classification_0012.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_digits_last_image_0012.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_iris_dataset_0011.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_iris_logistic_0011.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_logistic_0011.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_ols_0012.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_ols_3d_0011.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_ols_3d_0021.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_ols_3d_0031.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_ols_ridge_variance_0011.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_ols_ridge_variance_0021.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_svm_kernels_0011.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_svm_kernels_0021.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_svm_kernels_0031.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_svm_margin_0011.png" />
+    <Content Include="ml\scikit-learn\tutorial\statistical_inference\images\plot_svm_margin_0021.png" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\index.html" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\settings.html" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\supervised_learning.html" />
