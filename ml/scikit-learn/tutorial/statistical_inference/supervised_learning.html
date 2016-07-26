@@ -188,8 +188,48 @@
             </div>
         </div>
 
-        <div>
+        <div class="section">
             <a name="linear_model"><h2 class="text-left bg-danger">线性模型: 从回归到稀疏</h2></a>
+            <div class="topic">
+                <p class="topic-title first"><strong>糖尿病数据集(Diabetes dataset)</strong></p>
+                <p>
+                    糖尿病数据集包含了442个病人的10个生理变量(年龄,性别，体重，血压)数据,
+                    还有一年后疾病发展状况:
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes_X_train</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes_X_test</span>  <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes_y_train</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes_y_test</span>  <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    对于此数据集，我们的任务是根据生理变量指标来预测疾病进展状况。
+                </p>
+            </div>
+            <h3>线性回归</h3>
+            <p>
+                <code class="xref py py-class docutils literal"><span class="pre">LinearRegression</span></code>
+                线性回归的最简单形式是通过调节一个参数集合为数据集拟合一个线性模型,使得其残差平方和尽可能小。
+            </p>
+            <img class="img-responsive align-right" src="images/plot_ols_0012.png" width="320" height="240"/>
+            <p>线性模型：<img class="img-responsive" src="images/da6d9feb881cb1b6599ef1aee85eb1131052017b.png" alt="y = X\beta + \epsilon" /></p>
+            <blockquote>
+                <div>
+                    <ul class="simple">
+                        <li><img class="math" src="images/f026aecf11ec7f6141ab863f260d395f94b10f51.png" alt="X" />: 数据</li>
+                        <li><img class="math" src="images/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y" />: 目标变量</li>
+                        <li><img class="math" src="images/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta" />: 系数</li>
+                        <li><img class="math" src="images/19bc0073dde1bcd1a8e6a32b251e80cced668f04.png" alt="\epsilon" />: 观测噪声</li>
+                    </ul>
+                </div>
+            </blockquote>
+            <h3>Shrinkage</h3>
+            <h3>稀疏性</h3>
+            <h3>分类</h3>
         </div>
 
         <div>
