@@ -3135,6 +3135,7 @@
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\settings.html" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\supervised_learning.html" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\unsupervised_learning.html" />
+    <Content Include="ml\scikit-learn\tutorial\text_analytics\working_with_text_data.html" />
     <Content Include="ml\scikit-learn\_images\kenan.jpg" />
     <Content Include="ml\scikit-learn\_images\plot_digits_last_image_0011.png" />
     <Content Include="nlp\index.html" />
@@ -3368,9 +3369,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ml\scikit-learn\tutorial\text_analytics\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -21,7 +21,7 @@
     <title>人工智能研究网/机器学习</title>
 </head>
 
-<body role="document">
+<body >
 
     <nav class="navbar navbar-inverse">
         <div class="container">
@@ -42,27 +42,25 @@
         </div>
     </nav>
 
-    <div class="content-wrapper">
-       
-        <div class="content">
+    <div class="container">
 
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                    <div class="body" role="main">
+        <div class="page-header panel panel-heading panel-primary">
+            <h1 class="text-center"> 将它们放在一起 </h1>
+        </div>
 
-                        <div class="section" id="putting-it-all-together">
-                            <h1>将它们放在一起<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h1>
-                            <div class="section" id="pipelining">
-                                <h2>管道：流水线操作<a class="headerlink" href="#pipelining" title="Permalink to this headline">¶</a></h2>
-                                <p>
-                                    我们已经看到有些estimators对象能够转换数据，而另外一些estimators对象能够预测变量。
-                                    我们也可以用scikit-learn的管道对象PipeLine将它们放在一起创建组合estimators对象：
-                                </p>
-                                <a class="reference external image-reference" href="../../auto_examples/plot_digits_pipe.html">
-                                <img alt="../../_images/plot_digits_pipe_0011.png" class="align-right" src="./images/plot_digits_pipe_0011.png" style="width: 260.0px; height: 195.0px;" /></a>
-                                <div class="highlight-python">
-                                    <div class="highlight">
-                                        <pre><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">decomposition</span><span class="p">,</span> <span class="n">datasets</span>
+        <div class="section" id="putting-it-all-together">
+            <div class="section" id="pipelining">
+                <h2 class="text-left bg-danger">管道：流水线操作</h2>
+                <p>
+                    我们已经看到有些estimators对象能够转换数据，而另外一些estimators对象能够预测变量。
+                    我们也可以用scikit-learn的管道对象PipeLine将它们放在一起创建组合estimators对象：
+                </p>
+                <a class="reference external image-reference" href="../../auto_examples/plot_digits_pipe.html">
+                    <img alt="../../_images/plot_digits_pipe_0011.png" class="align-right" src="./images/plot_digits_pipe_0011.png" style="width: 260.0px; height: 195.0px;" />
+                </a>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">decomposition</span><span class="p">,</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 <span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 <span class="n">logistic</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">()</span>
@@ -87,28 +85,28 @@
 <span class="n">Cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="c1">#Parameters of pipelines can be set using ‘__’ separated parameter names:</span>
 <span class="n">estimator</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span>
-                                        <span class="nb">dict</span><span class="p">(</span><span class="n">pca__n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span>
-                                        <span class="n">logistic__C</span><span class="o">=</span><span class="n">Cs</span><span class="p">))</span>
+                        <span class="nb">dict</span><span class="p">(</span><span class="n">pca__n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span>
+                        <span class="n">logistic__C</span><span class="o">=</span><span class="n">Cs</span><span class="p">))</span>
 <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_digits</span><span class="p">,</span> <span class="n">y_digits</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">estimator</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;pca&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">n_components</span><span class="p">,</span>
-                                        <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;n_components chosen&#39;</span><span class="p">)</span>
+                        <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;n_components chosen&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">prop</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">))</span>
 </pre>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="section" id="face-recognition-with-eigenfaces">
-                                <h2>使用特征脸进行人脸识别<a class="headerlink" href="#face-recognition-with-eigenfaces" title="Permalink to this headline">¶</a></h2>
-                                <p>
-                                    The dataset used in this example is a preprocessed excerpt of the
-                                    &#8220;Labeled Faces in the Wild&#8221;, also known as <a class="reference external" href="http://vis-www.cs.umass.edu/lfw/">LFW</a>:
-                                </p>
-                                <blockquote>
-                                    <div><a class="reference external" href="http://vis-www.cs.umass.edu/lfw/lfw-funneled.tgz">http://vis-www.cs.umass.edu/lfw/lfw-funneled.tgz</a> (233MB)</div>
-                                </blockquote>
-                                <div class="highlight-python">
-                                    <div class="highlight">
-                                        <pre><span class="sd">&quot;&quot;&quot;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="face-recognition-with-eigenfaces">
+                <h2 class="text-left bg-danger">使用特征脸进行人脸识别</h2>
+                <p>
+                    The dataset used in this example is a preprocessed excerpt of the
+                    &#8220;Labeled Faces in the Wild&#8221;, also known as <a class="reference external" href="http://vis-www.cs.umass.edu/lfw/">LFW</a>:
+                </p>
+                <blockquote>
+                    <div><a class="reference external" href="http://vis-www.cs.umass.edu/lfw/lfw-funneled.tgz">http://vis-www.cs.umass.edu/lfw/lfw-funneled.tgz</a> (233MB)</div>
+                </blockquote>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">===================================================</span>
 <span class="sd">Faces recognition example using eigenfaces and SVMs</span>
 <span class="sd">===================================================</span>
@@ -165,13 +163,13 @@
 <span class="c1"># Split into a training set and a test set using a stratified k fold</span>
 <span class="c1"># split into a training and testing set</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-                                        <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+                        <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="c1">###############################################################################</span>
 <span class="c1"># Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled</span>
 <span class="c1"># dataset): unsupervised feature extraction / dimensionality reduction</span>
 <span class="n">n_components</span> <span class="o">=</span> <span class="mi">150</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Extracting the top </span><span class="si">%d</span><span class="s2"> eigenfaces from </span><span class="si">%d</span><span class="s2"> faces&quot;</span>
-                                        <span class="o">%</span> <span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                        <span class="o">%</span> <span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">pca</span> <span class="o">=</span> <span class="n">RandomizedPCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%0.3f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
@@ -186,7 +184,7 @@
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fitting the classifier to the training set&quot;</span><span class="p">)</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e3</span><span class="p">,</span> <span class="mf">5e3</span><span class="p">,</span> <span class="mf">1e4</span><span class="p">,</span> <span class="mf">5e4</span><span class="p">,</span> <span class="mf">1e5</span><span class="p">],</span>
-                                        <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">}</span>
+                        <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">}</span>
 <span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">),</span> <span class="n">param_grid</span><span class="p">)</span>
 <span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_pca</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;done in </span><span class="si">%0.3f</span><span class="s2">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
@@ -203,52 +201,58 @@
 <span class="c1">###############################################################################</span>
 <span class="c1"># Qualitative evaluation of the predictions using matplotlib</span>
 <span class="k">def</span> <span class="nf">plot_gallery</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">n_row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_col</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-                                        <span class="sd">&quot;&quot;&quot;Helper function to plot a gallery of portraits&quot;&quot;&quot;</span>
-                                        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">1.8</span> <span class="o">*</span> <span class="n">n_col</span><span class="p">,</span> <span class="mf">2.4</span> <span class="o">*</span> <span class="n">n_row</span><span class="p">))</span>
-                                        <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">left</span><span class="o">=.</span><span class="mo">01</span><span class="p">,</span> <span class="n">right</span><span class="o">=.</span><span class="mi">99</span><span class="p">,</span> <span class="n">top</span><span class="o">=.</span><span class="mi">90</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=.</span><span class="mi">35</span><span class="p">)</span>
-                                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_row</span> <span class="o">*</span> <span class="n">n_col</span><span class="p">):</span>
-                                        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">n_row</span><span class="p">,</span> <span class="n">n_col</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
-                                        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-                                        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(())</span>
-                                        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(())</span>
+                        <span class="sd">&quot;&quot;&quot;Helper function to plot a gallery of portraits&quot;&quot;&quot;</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">1.8</span> <span class="o">*</span> <span class="n">n_col</span><span class="p">,</span> <span class="mf">2.4</span> <span class="o">*</span> <span class="n">n_row</span><span class="p">))</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">left</span><span class="o">=.</span><span class="mo">01</span><span class="p">,</span> <span class="n">right</span><span class="o">=.</span><span class="mi">99</span><span class="p">,</span> <span class="n">top</span><span class="o">=.</span><span class="mi">90</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=.</span><span class="mi">35</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_row</span> <span class="o">*</span> <span class="n">n_col</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">n_row</span><span class="p">,</span> <span class="n">n_col</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(())</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(())</span>
 <span class="c1"># plot the result of the prediction on a portion of the test set</span>
 <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-                                        <span class="n">pred_name</span> <span class="o">=</span> <span class="n">target_names</span><span class="p">[</span><span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                                        <span class="n">true_name</span> <span class="o">=</span> <span class="n">target_names</span><span class="p">[</span><span class="n">y_test</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                                        <span class="k">return</span> <span class="s1">&#39;predicted: </span><span class="si">%s</span><span class="se">\n</span><span class="s1">true:      </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pred_name</span><span class="p">,</span> <span class="n">true_name</span><span class="p">)</span>
+                        <span class="n">pred_name</span> <span class="o">=</span> <span class="n">target_names</span><span class="p">[</span><span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="n">true_name</span> <span class="o">=</span> <span class="n">target_names</span><span class="p">[</span><span class="n">y_test</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">return</span> <span class="s1">&#39;predicted: </span><span class="si">%s</span><span class="se">\n</span><span class="s1">true:      </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pred_name</span><span class="p">,</span> <span class="n">true_name</span><span class="p">)</span>
 <span class="n">prediction_titles</span> <span class="o">=</span> <span class="p">[</span><span class="n">title</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">target_names</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-                                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
 <span class="n">plot_gallery</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">prediction_titles</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
 <span class="c1"># plot the gallery of the most significative eigenfaces</span>
 <span class="n">eigenface_titles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;eigenface </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">eigenfaces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
 <span class="n">plot_gallery</span><span class="p">(</span><span class="n">eigenfaces</span><span class="p">,</span> <span class="n">eigenface_titles</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre>
-                                    </div>
-                                </div>
-                                <table border="1" class="centered docutils">
-                                    <colgroup>
-                                        <col width="50%" />
-                                        <col width="50%" />
-                                    </colgroup>
-                                    <tbody valign="top">
-                                        <tr class="row-odd">
-                                            <td><a class="reference internal" href="../../_images/plot_face_recognition_1.png">
-                                                <img alt="prediction" src="./images/plot_face_recognition_1.png" style="width: 360.0px; height: 359.5px;" /></a></td>
-                                            <td><a class="reference internal" href="../../_images/plot_face_recognition_2.png">
-                                                <img alt="eigenfaces" src="./images/plot_face_recognition_2.png" style="width: 360.0px; height: 359.5px;" /></a></td>
-                                        </tr>
-                                        <tr class="row-even">
-                                            <td><strong>Prediction</strong></td>
-                                            <td><strong>Eigenfaces</strong></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p>Expected results for the top 5 most represented people in the dataset:</p>
-                                <div class="highlight-python">
-                                    <div class="highlight">
-                                        <pre>                   precision    recall  f1-score   support
+                    </div>
+                </div>
+                <table border="1" class="centered docutils">
+                    <colgroup>
+                        <col width="50%" />
+                        <col width="50%" />
+                    </colgroup>
+                    <tbody valign="top">
+                        <tr class="row-odd">
+                            <td>
+                                <a class="reference internal" href="../../_images/plot_face_recognition_1.png">
+                                    <img alt="prediction" src="./images/plot_face_recognition_1.png" style="width: 360.0px; height: 359.5px;" />
+                                </a>
+                            </td>
+                            <td>
+                                <a class="reference internal" href="../../_images/plot_face_recognition_2.png">
+                                    <img alt="eigenfaces" src="./images/plot_face_recognition_2.png" style="width: 360.0px; height: 359.5px;" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr class="row-even">
+                            <td><strong>Prediction</strong></td>
+                            <td><strong>Eigenfaces</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Expected results for the top 5 most represented people in the dataset:</p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre>                   precision    recall  f1-score   support
 Gerhard_Schroeder       0.91      0.75      0.82        28
   Donald_Rumsfeld       0.84      0.82      0.83        33
        Tony_Blair       0.65      0.82      0.73        34
@@ -256,24 +260,17 @@ Gerhard_Schroeder       0.91      0.75      0.82        28
     George_W_Bush       0.93      0.86      0.90       129
       avg / total       0.86      0.84      0.85       282
 </pre>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="section" id="open-problem-stock-market-structure">
-                                <h2>开放问题：股票市场结构<a class="headerlink" href="#open-problem-stock-market-structure" title="Permalink to this headline">¶</a></h2>
-                                <p>我们可以预测给定时间段内的Google公司的股票价格变化吗？</p>
-                                <p><a class="reference internal" href="../../auto_examples/applications/plot_stock_market.html#stock-market"><span>学习一个图结构</span></a></p>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
-            <div class="clearer"></div>
+            <div class="section" id="open-problem-stock-market-structure">
+                <h2 class="text-left bg-danger">开放问题：股票市场结构</h2>
+                <p>我们可以预测给定时间段内的Google公司的股票价格变化吗？</p>
+                <p><a class="reference internal" href="../../auto_examples/applications/plot_stock_market.html#stock-market"><span>学习一个图结构</span></a></p>
+            </div>
         </div>
     </div>
-
+    
     <div class="footer">
         &copy; 2016-2100, 版权属于张金明博士 (BSD License).
     </div>

@@ -21,55 +21,46 @@
     <title>人工智能研究网/机器学习</title>
 </head>
 
-<body role="document">
+<body >
 
-    <div class="header-wrapper">
-        <div class="header">
-            <nav class="navbar navbar-inverse">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">studyai.cn</a>
-                    </div>
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="../../../../index.html">网站主页</a></li>
-                        <li><a href="../../../../webmaster.html">站长风采</a></li>
-                        <li><a href="../../../../contact.html">联系我们</a></li>
-                        <li><a href="../../../../sponsor.html">赞助我们</a></li>
-                        <li><a href="../../../index.html">机器学习主页</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
-                    </ul>
+    <div class="header">
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">studyai.cn</a>
                 </div>
-            </nav>
-        </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="../../../../index.html">网站主页</a></li>
+                    <li><a href="../../../../webmaster.html">站长风采</a></li>
+                    <li><a href="../../../../contact.html">联系我们</a></li>
+                    <li><a href="../../../../sponsor.html">赞助我们</a></li>
+                    <li><a href="../../../index.html">机器学习主页</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
+                </ul>
+            </div>
+        </nav>
     </div>
 
-    <div class="content-wrapper">
-       
-        <div class="content">
-
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                    <div class="body" role="main">
-
-                        <div class="section">
-                            <div class="page-header panel panel-heading panel-primary">
-                                <h1 class="text-center"> 模型选择：选择 estimators 及其参数</h1>
-                            </div>
-                            <div class="section" id="cv_scores">
-                                <h2>得分，和 交叉验证得分</h2>
-                                <p>
-                                    正如我们所看到的那样, 每一个estimator暴露一个计算estimator在测试数据上的测试得分的方法：
-                                     <code class="docutils literal"><span class="pre">score</span></code>
-                                    <strong>
-                                        得分越大，estimator对数据的拟合模型越好。
-                                    </strong>.
-                                </p>
-                                <div class="highlight-python">
-                                    <div class="highlight">
-                                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">svm</span>
+    <div class="container">
+        <div class="section">
+            <div class="page-header panel panel-heading panel-primary">
+                <h1 class="text-center"> 模型选择：选择 estimators 及其参数</h1>
+            </div>
+            <div class="section" id="cv_scores">
+                <h2 class="text-left bg-danger">得分，和 交叉验证得分</h2>
+                <p>
+                    正如我们所看到的那样, 每一个estimator暴露一个计算estimator在测试数据上的测试得分的方法：
+                    <code class="docutils literal"><span class="pre">score</span></code>
+                    <strong>
+                        得分越大，estimator对数据的拟合模型越好。
+                    </strong>.
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
@@ -77,15 +68,15 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_digits</span><span class="p">[:</span><span class="o">-</span><span class="mi">100</span><span class="p">],</span> <span class="n">y_digits</span><span class="p">[:</span><span class="o">-</span><span class="mi">100</span><span class="p">])</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_digits</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">:],</span> <span class="n">y_digits</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">:])</span>
 <span class="go">0.97999999999999998</span>
 </pre>
-                                    </div>
-                                </div>
-                                <p>
-                                    为了更好的测量预测精度（该预测精度可被用于衡量模型拟合的好坏），我们可以连续的把数据集拆分成
-                                    <em>folds</em> 用于训练和测试：
-                                </p>
-                                <div class="highlight-python">
-                                    <div class="highlight">
-                                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+                    </div>
+                </div>
+                <p>
+                    为了更好的测量预测精度（该预测精度可被用于衡量模型拟合的好坏），我们可以连续的把数据集拆分成
+                    <em>folds</em> 用于训练和测试：
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_folds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">X_digits</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_folds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">y_digits</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -101,22 +92,24 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
 <span class="go">[0.93489148580968284, 0.95659432387312182, 0.93989983305509184]</span>
 </pre>
-                                    </div>
-                                </div>
-                                <p>这被称之为 <a class="reference internal" href="../../modules/generated/sklearn.cross_validation.KFold.html#sklearn.cross_validation.KFold"
-                                             title="sklearn.cross_validation.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a>
-                                 交叉验证</p>
-                            </div>
-                            <div class="section" id="cv_gen">
-                                <span id="cv-generators-tut"></span><h2>交叉验证生成器<a class="headerlink" href="#cross-validation-generators" title="Permalink to this headline">¶</a></h2>
-                                <p>
-                                    上面的把数据分割成训练集和测试集代码写起来是很繁琐的。
-                                    Scikit-learn 暴露了交叉验证生成器 (cross-validation generators)去产生一个
-                                    索引列表来达到数据分割的目的:
-                                </p>
-                                <div class="highlight-python">
-                                    <div class="highlight">
-                                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cross_validation</span>
+                    </div>
+                </div>
+                <p>
+                    这被称之为 <a class="reference internal" href="../../modules/generated/sklearn.cross_validation.KFold.html#sklearn.cross_validation.KFold"
+                             title="sklearn.cross_validation.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a>
+                    交叉验证
+                </p>
+            </div>
+            <div class="section" id="cv_gen">
+                <span id="cv-generators-tut"></span><h2 class="text-left bg-danger">交叉验证生成器</h2>
+                <p>
+                    上面的把数据分割成训练集和测试集代码写起来是很繁琐的。
+                    Scikit-learn 暴露了交叉验证生成器 (cross-validation generators)去产生一个
+                    索引列表来达到数据分割的目的:
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cross_validation</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">k_fold</span> <span class="o">=</span> <span class="n">cross_validation</span><span class="o">.</span><span class="n">KFold</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">train_indices</span><span class="p">,</span> <span class="n">test_indices</span> <span class="ow">in</span> <span class="n">k_fold</span><span class="p">:</span>
 <span class="gp">... </span>     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Train: </span><span class="si">%s</span><span class="s1"> | test: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">train_indices</span><span class="p">,</span> <span class="n">test_indices</span><span class="p">))</span>
@@ -124,67 +117,67 @@
 <span class="go">Train: [0 1 4 5] | test: [2 3]</span>
 <span class="go">Train: [0 1 2 3] | test: [4 5]</span>
 </pre>
-                                    </div>
-                                </div>
-                                <p>基于交叉验证生成器，交叉验证的实现将会变得非常简单轻松：</p>
-                                <div class="highlight-python">
-                                    <div class="highlight">
-                                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">kfold</span> <span class="o">=</span> <span class="n">cross_validation</span><span class="o">.</span><span class="n">KFold</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_digits</span><span class="p">),</span> <span class="n">n_folds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+                    </div>
+                </div>
+                <p>基于交叉验证生成器，交叉验证的实现将会变得非常简单轻松：</p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">kfold</span> <span class="o">=</span> <span class="n">cross_validation</span><span class="o">.</span><span class="n">KFold</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_digits</span><span class="p">),</span> <span class="n">n_folds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_digits</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y_digits</span><span class="p">[</span><span class="n">train</span><span class="p">])</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_digits</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="n">y_digits</span><span class="p">[</span><span class="n">test</span><span class="p">])</span>
 <span class="gp">... </span>         <span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">kfold</span><span class="p">]</span>
 <span class="go">[0.93489148580968284, 0.95659432387312182, 0.93989983305509184]</span>
 </pre>
-                                    </div>
-                                </div>
-                                <p>
-                                    为了计算一个estimator的<code class="docutils literal"><span class="pre">score</span></code> 方法的值，
-                                    sklearn 暴露了一个辅助性的方法:
-                                </p>
-                                <div class="highlight-python">
-                                    <div class="highlight">
-                                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cross_validation</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">svc</span><span class="p">,</span> <span class="n">X_digits</span><span class="p">,</span> <span class="n">y_digits</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                    </div>
+                </div>
+                <p>
+                    为了计算一个estimator的<code class="docutils literal"><span class="pre">score</span></code> 方法的值，
+                    sklearn 暴露了一个辅助性的方法:
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cross_validation</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">svc</span><span class="p">,</span> <span class="n">X_digits</span><span class="p">,</span> <span class="n">y_digits</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">array([ 0.93489149,  0.95659432,  0.93989983])</span>
 </pre>
-                                    </div>
-                                </div>
-                                <p>
-                                    <cite>n_jobs=-1</cite> 意味着交叉验证计算将会被分发给该计算机上的所有CPU.
-                                </p>
-                                <blockquote>
-                                    <div><strong>交叉验证生成器</strong></div>
-                                </blockquote>
-                                <table border="1" class="docutils">
-                                    <colgroup>
-                                        <col width="25%" />
-                                        <col width="25%" />
-                                        <col width="25%" />
-                                        <col width="25%" />
-                                    </colgroup>
-                                    <tbody valign="top">
-                                        <tr class="row-odd">
-                                            <td><a class="reference internal" href="../../modules/generated/sklearn.cross_validation.KFold.html#sklearn.cross_validation.KFold" title="sklearn.cross_validation.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a> <strong>(n, k)</strong></td>
-                                            <td><a class="reference internal" href="../../modules/generated/sklearn.cross_validation.StratifiedKFold.html#sklearn.cross_validation.StratifiedKFold" title="sklearn.cross_validation.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">StratifiedKFold</span></code></a> <strong>(y, k)</strong></td>
-                                            <td><a class="reference internal" href="../../modules/generated/sklearn.cross_validation.LeaveOneOut.html#sklearn.cross_validation.LeaveOneOut" title="sklearn.cross_validation.LeaveOneOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneOut</span></code></a> <strong>(n)</strong></td>
-                                            <td><a class="reference internal" href="../../modules/generated/sklearn.cross_validation.LeaveOneLabelOut.html#sklearn.cross_validation.LeaveOneLabelOut" title="sklearn.cross_validation.LeaveOneLabelOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneLabelOut</span></code></a> <strong>(labels)</strong></td>
-                                        </tr>
-                                        <tr class="row-even">
-                                            <td>Split it K folds, train on K-1 and then test on left-out</td>
-                                            <td>It preserves the class ratios / label distribution within each fold.</td>
-                                            <td>Leave one observation out</td>
-                                            <td>Takes a label array to group observations</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="green topic">
-                                    <p class="topic-title first"><strong>练习</strong></p>
-                                    <a class="reference external image-reference" href="../../auto_examples/exercises/plot_cv_digits.html"><img alt="../../_images/plot_cv_digits_0011.png" class="align-right" src="images/plot_cv_digits_0011.png" style="width: 360.0px; height: 270.0px;" /></a>
-                                    <p>
-                                        在 digits dataset 上,绘制 SVC estimator 的交叉验证得分 ，选择线性核函数，参数<code class="docutils literal"><span class="pre">C</span></code>
-                                        的值从1到10 的对数网格中选择。
-                                    </p>
-                                    <div class="highlight-python">
-                                        <div class="highlight">
-                                            <pre>
+                    </div>
+                </div>
+                <p>
+                    <cite>n_jobs=-1</cite> 意味着交叉验证计算将会被分发给该计算机上的所有CPU.
+                </p>
+                <blockquote>
+                    <div><strong>交叉验证生成器</strong></div>
+                </blockquote>
+                <table border="1" class="docutils">
+                    <colgroup>
+                        <col width="25%" />
+                        <col width="25%" />
+                        <col width="25%" />
+                        <col width="25%" />
+                    </colgroup>
+                    <tbody valign="top">
+                        <tr class="row-odd">
+                            <td><a class="reference internal" href="../../modules/generated/sklearn.cross_validation.KFold.html#sklearn.cross_validation.KFold" title="sklearn.cross_validation.KFold"><code class="xref py py-class docutils literal"><span class="pre">KFold</span></code></a> <strong>(n, k)</strong></td>
+                            <td><a class="reference internal" href="../../modules/generated/sklearn.cross_validation.StratifiedKFold.html#sklearn.cross_validation.StratifiedKFold" title="sklearn.cross_validation.StratifiedKFold"><code class="xref py py-class docutils literal"><span class="pre">StratifiedKFold</span></code></a> <strong>(y, k)</strong></td>
+                            <td><a class="reference internal" href="../../modules/generated/sklearn.cross_validation.LeaveOneOut.html#sklearn.cross_validation.LeaveOneOut" title="sklearn.cross_validation.LeaveOneOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneOut</span></code></a> <strong>(n)</strong></td>
+                            <td><a class="reference internal" href="../../modules/generated/sklearn.cross_validation.LeaveOneLabelOut.html#sklearn.cross_validation.LeaveOneLabelOut" title="sklearn.cross_validation.LeaveOneLabelOut"><code class="xref py py-class docutils literal"><span class="pre">LeaveOneLabelOut</span></code></a> <strong>(labels)</strong></td>
+                        </tr>
+                        <tr class="row-even">
+                            <td>Split it K folds, train on K-1 and then test on left-out</td>
+                            <td>It preserves the class ratios / label distribution within each fold.</td>
+                            <td>Leave one observation out</td>
+                            <td>Takes a label array to group observations</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="green topic">
+                    <p class="topic-title first"><strong>练习</strong></p>
+                    <a class="reference external image-reference" href="../../auto_examples/exercises/plot_cv_digits.html"><img alt="../../_images/plot_cv_digits_0011.png" class="align-right" src="images/plot_cv_digits_0011.png" style="width: 360.0px; height: 270.0px;" /></a>
+                    <p>
+                        在 digits dataset 上,绘制 SVC estimator 的交叉验证得分 ，选择线性核函数，参数<code class="docutils literal"><span class="pre">C</span></code>
+                        的值从1到10 的对数网格中选择。
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cross_validation</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">svm</span>
 <span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
@@ -193,23 +186,23 @@
 <span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
 <span class="n">C_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre>
-                                        </div>
-                                    </div>
-                                    <p><strong>答案:</strong> <a class="reference internal" href="../../auto_examples/exercises/plot_cv_digits.html#example-exercises-plot-cv-digits-py"><span>Cross-validation on Digits Dataset Exercise</span></a></p>
-                                </div>
-                            </div>
-                            <div class="section" id="grid-search-and-cross-validated-estimators">
-                                <h2>网格搜索 与 交叉验证estimators</h2>
-                                <div class="section" id="grid-search">
-                                    <h3>网格搜索(Grid-search)<a class="headerlink" href="#grid-search" title="Permalink to this headline">¶</a></h3>
-                                    <p>
-                                        sklearn 提供了一个对象 GridSearchCV。只要给定数据，该对象就会计算estimator在一个参数网格上拟合过程中的得分，而且会
-                                        自动选择使得交叉验证得分最大的一组参数。该对象的构造函数需要一个estimator对象的实例和一个参数网格，而且向外部暴露了
-                                        一个 estimator API.
-                                    </p>
-                                    <div class="highlight-python">
-                                        <div class="highlight">
-                                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+                        </div>
+                    </div>
+                    <p><strong>答案:</strong> <a class="reference internal" href="../../auto_examples/exercises/plot_cv_digits.html#example-exercises-plot-cv-digits-py"><span>Cross-validation on Digits Dataset Exercise</span></a></p>
+                </div>
+            </div>
+            <div class="section" id="grid-search-and-cross-validated-estimators">
+                <h2 class="text-left bg-danger">网格搜索 与 交叉验证estimators</h2>
+                <div class="section" id="grid-search">
+                    <h3>网格搜索(Grid-search)</h3>
+                    <p>
+                        sklearn 提供了一个对象 GridSearchCV。只要给定数据，该对象就会计算estimator在一个参数网格上拟合过程中的得分，而且会
+                        自动选择使得交叉验证得分最大的一组参数。该对象的构造函数需要一个estimator对象的实例和一个参数网格，而且向外部暴露了
+                        一个 estimator API.
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">svc</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">Cs</span><span class="p">),</span>
 <span class="gp">... </span>                   <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
@@ -223,45 +216,45 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_digits</span><span class="p">[</span><span class="mi">1000</span><span class="p">:],</span> <span class="n">y_digits</span><span class="p">[</span><span class="mi">1000</span><span class="p">:])</span>      
 <span class="go">0.943...</span>
 </pre>
-                                        </div>
-                                    </div>
-                                    <p>
-                                        默认情况下, <a class="reference internal" href="../../modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV对象</span></code></a>
-                                        使用3-fold交叉验证. 然而,如果它检测到传入的estimator对象实例是一个分类器而不是回归器，将会使用分层(stratified) 3-fold.
-                                    </p>
-                                    <div class="topic">
-                                        <p class="topic-title first">嵌套的交叉验证</p>
-                                        <div class="highlight-python">
-                                            <div class="highlight">
-                                                <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cross_validation</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_digits</span><span class="p">,</span> <span class="n">y_digits</span><span class="p">)</span>
+                        </div>
+                    </div>
+                    <p>
+                        默认情况下, <a class="reference internal" href="../../modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV对象</span></code></a>
+                        使用3-fold交叉验证. 然而,如果它检测到传入的estimator对象实例是一个分类器而不是回归器，将会使用分层(stratified) 3-fold.
+                    </p>
+                    <div class="topic">
+                        <p class="topic-title first">嵌套的交叉验证</p>
+                        <div class="highlight-python">
+                            <div class="highlight">
+                                <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cross_validation</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_digits</span><span class="p">,</span> <span class="n">y_digits</span><span class="p">)</span>
 <span class="gp">... </span>                                                 
 <span class="go">array([ 0.938...,  0.963...,  0.944...])</span>
 </pre>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            两个交叉验证循环将会被并行执行：一个线程由<a class="reference internal" href="../../modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a> estimator 来设置参数 <code class="docutils literal"><span class="pre">gamma</span></code>
-                                            而另一个线程由<code class="docutils literal"><span class="pre">cross_val_score</span></code>来测量estimator的预测性能
-                                            。计算所得的分数是在新数据上预测得分的无偏估计。
-                                        </p>
-                                    </div>
-                                    <div class="admonition warning">
-                                        <p class="first admonition-title">警告：</p>
-                                        <p class="last">
-                                            你不能将本身带有并行计算的对象嵌套进去(<code class="docutils literal"><span class="pre">n_jobs</span></code> 不等于 1 的对象不能嵌套).
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="section" id="cross-validated-estimators">
-                                    <span id="cv-estimators-tut"></span><h3>交叉验证的estimators对象<a class="headerlink" href="#cross-validated-estimators" title="Permalink to this headline">¶</a></h3>
-                                    <p>
-                                        使用交叉验证设置参数可以基于算法的算法有效的进行。这就是为什么对某些estimator对象， sklearn
-                                        向外部提供一个<a class="reference internal" href="../../modules/cross_validation.html#cross-validation"><span>Cross-validation: evaluating estimator performance</span></a>
-                                        后面带有“CV”字样的对象，它可以根据交叉验证自动设置参数。
-                                    </p>
-                                    <div class="highlight-python">
-                                        <div class="highlight">
-                                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">datasets</span>
+                            </div>
+                        </div>
+                        <p>
+                            两个交叉验证循环将会被并行执行：一个线程由<a class="reference internal" href="../../modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code></a> estimator 来设置参数 <code class="docutils literal"><span class="pre">gamma</span></code>
+                            而另一个线程由<code class="docutils literal"><span class="pre">cross_val_score</span></code>来测量estimator的预测性能
+                            。计算所得的分数是在新数据上预测得分的无偏估计。
+                        </p>
+                    </div>
+                    <div class="admonition warning">
+                        <p class="first admonition-title">警告：</p>
+                        <p class="last">
+                            你不能将本身带有并行计算的对象嵌套进去(<code class="docutils literal"><span class="pre">n_jobs</span></code> 不等于 1 的对象不能嵌套).
+                        </p>
+                    </div>
+                </div>
+                <div class="section" id="cross-validated-estimators">
+                    <span id="cv-estimators-tut"></span><h3>交叉验证的estimators对象</h3>
+                    <p>
+                        使用交叉验证设置参数可以基于算法的算法有效的进行。这就是为什么对某些estimator对象， sklearn
+                        向外部提供一个<a class="reference internal" href="../../modules/cross_validation.html#cross-validation"><span>Cross-validation: evaluating estimator performance</span></a>
+                        后面带有“CV”字样的对象，它可以根据交叉验证自动设置参数。
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span><span class="p">,</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lasso</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LassoCV</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_diabetes</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span>
@@ -275,42 +268,35 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lasso</span><span class="o">.</span><span class="n">alpha_</span> 
 <span class="go">0.01229...</span>
 </pre>
-                                        </div>
-                                    </div>
-                                    <p>
-                                        这些estimator对象以与他们对应的调用相似的方式被调用，不同的是他们的名字后面要加上“CV”.
-                                    </p>
-                                    <div class="green topic">
-                                        <p class="topic-title first"><strong>练习题</strong></p>
-                                        <p>
-                                            在糖尿病数据集(diabetes dataset), 找到一个最优的正则化参数 alpha.
-                                        </p>
-                                        <p><strong>Bonus</strong>: How much can you trust the selection of alpha?</p>
-                                        <div class="highlight-python">
-                                            <div class="highlight">
-                                                <pre><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cross_validation</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
+                        </div>
+                    </div>
+                    <p>
+                        这些estimator对象以与他们对应的调用相似的方式被调用，不同的是他们的名字后面要加上“CV”.
+                    </p>
+                    <div class="green topic">
+                        <p class="topic-title first"><strong>练习题</strong></p>
+                        <p>
+                            在糖尿病数据集(diabetes dataset), 找到一个最优的正则化参数 alpha.
+                        </p>
+                        <p><strong>Bonus</strong>: How much can you trust the selection of alpha?</p>
+                        <div class="highlight-python">
+                            <div class="highlight">
+                                <pre><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cross_validation</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
 <span class="n">diabetes</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">150</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="mi">150</span><span class="p">]</span>
 <span class="n">lasso</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">()</span>
 <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 </pre>
-                                            </div>
-                                        </div>
-                                        <p><strong>答案:</strong> <a class="reference internal" href="../../auto_examples/exercises/plot_cv_diabetes.html#example-exercises-plot-cv-diabetes-py"><span>Cross-validation on diabetes Dataset Exercise</span></a></p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-
-
+                        <p><strong>答案:</strong> <a class="reference internal" href="../../auto_examples/exercises/plot_cv_diabetes.html#example-exercises-plot-cv-diabetes-py"><span>Cross-validation on diabetes Dataset Exercise</span></a></p>
                     </div>
                 </div>
             </div>
-            <div class="clearer"></div>
         </div>
     </div>
-
+    
     <div class="footer">
         &copy; 2016-2100, 版权属于张金明博士 (BSD License).
     </div>
