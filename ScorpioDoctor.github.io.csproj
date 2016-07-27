@@ -3070,6 +3070,7 @@
     <Content Include="ml\scikit-learn\0.17\_static\up-pressed.png" />
     <Content Include="ml\scikit-learn\0.17\_static\up.png" />
     <Content Include="ml\scikit-learn\0.17\_static\websupport.js" />
+    <Content Include="ml\scikit-learn\examples_study\index.html" />
     <Content Include="ml\scikit-learn\index.html" />
     <Content Include="ml\scikit-learn\tutorial\basic\tutorial.html" />
     <Content Include="ml\scikit-learn\tutorial\basic\images\kenan.jpg" />
@@ -3136,6 +3137,13 @@
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\supervised_learning.html" />
     <Content Include="ml\scikit-learn\tutorial\statistical_inference\unsupervised_learning.html" />
     <Content Include="ml\scikit-learn\tutorial\text_analytics\working_with_text_data.html" />
+    <Content Include="ml\scikit-learn\user_guide\compute_efficiency\index.html" />
+    <Content Include="ml\scikit-learn\user_guide\dataset_operate\index.html" />
+    <Content Include="ml\scikit-learn\user_guide\index - 复制.html" />
+    <Content Include="ml\scikit-learn\user_guide\index.html" />
+    <Content Include="ml\scikit-learn\user_guide\model_select_evaluate\index.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\index.html" />
+    <Content Include="ml\scikit-learn\user_guide\supervised_learning\index.html" />
     <Content Include="ml\scikit-learn\_images\kenan.jpg" />
     <Content Include="ml\scikit-learn\_images\plot_digits_last_image_0011.png" />
     <Content Include="nlp\index.html" />

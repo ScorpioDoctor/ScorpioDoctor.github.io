@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
+    <script src="../../../../css-fonts-js/js/jquery.min.js"></script>
+    <script src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
+
+    <title>人工智能研究网</title>
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../../../../index.html">studyai.cn</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../../../../index.html">网站主页</a></li>
+                <li><a href="../../../../webmaster.html">站长风采</a></li>
+                <li><a href="../../../../contact.html">联系我们</a></li>
+                <li><a href="../../../../sponsor.html">赞助我们</a></li>
+                <li><a href="../../../index.html">机器学习主页</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="section" id="user-guide">
+            <span id="id1"></span><h1> 模型选择与评估(Model Selection and Evaluation) <a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+            <style type="text/css">
+                div.bodywrapper blockquote {
+                    margin: 0;
+                }
+
+                div.toctree-wrapper ul {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    padding-left: 10px;
+                }
+
+                li.toctree-l1 {
+                    padding: 0 0 0.5em 0;
+                    list-style-type: none;
+                    font-size: 150%;
+                    font-weight: bold;
+                }
+
+                    li.toctree-l1 ul {
+                        padding-left: 40px;
+                    }
+
+                li.toctree-l2 {
+                    font-size: 70%;
+                    list-style-type: square;
+                    font-weight: normal;
+                }
+
+                li.toctree-l3 {
+                    font-size: 85%;
+                    list-style-type: circle;
+                    font-weight: normal;
+                }
+            </style>
+            <script>
+                //Function to make the index toctree collapsible
+                $(function () {
+                    $('.toctree-l2')
+                    .click(function (event) {
+                        if (event.target.tagName.toLowerCase() != "a") {
+                            if ($(this).children('ul').length > 0) {
+                                $(this).attr('data-content',
+                                (!$(this).children('ul').is(':hidden')) ? '\u25ba' : '\u25bc');
+                                $(this).children('ul').toggle();
+                            }
+                            return true; //Makes links clickable
+                        }
+                    })
+                    .mousedown(function (event) { return false; }) //Firefox highlighting fix
+                    .children('ul').hide();
+                    // Initialize the values
+                    $('li.toctree-l2:not(:has(ul))').attr('data-content', '-');
+                    $('li.toctree-l2:has(ul)').attr('data-content', '\u25ba');
+                    $('li.toctree-l2:has(ul)').css('cursor', 'pointer');
+
+                    $('.toctree-l2').hover(
+                    function () {
+                        if ($(this).children('ul').length > 0) {
+                            $(this).css('background-color', '#D0D0D0').children('ul').css('background-color', '#F0F0F0');
+                            $(this).attr('data-content',
+                            (!$(this).children('ul').is(':hidden')) ? '\u25bc' : '\u25ba');
+                        }
+                        else {
+                            $(this).css('background-color', '#F9F9F9');
+                        }
+                    },
+                    function () {
+                        $(this).css('background-color', 'white').children('ul').css('background-color', 'white');
+                        if ($(this).children('ul').length > 0) {
+                            $(this).attr('data-content',
+                            (!$(this).children('ul').is(':hidden')) ? '\u25bc' : '\u25ba');
+                        }
+                    }
+                    );
+                });
+
+            </script>
+
+            <style type="text/css">
+                div.bodywrapper blockquote {
+                    margin: 0;
+                }
+
+                div.toctree-wrapper ul {
+                    margin: 0;
+                    padding-left: 0px;
+                }
+
+                li, ul {
+                    transition-duration: 0.2s;
+                }
+
+                    li.toctree-l1 {
+                        padding: 5px 0 0;
+                        list-style-type: none;
+                        font-size: 150%;
+                        font-family: Arial, sans-serif;
+                        background-color: #f2f2f2;
+                        font-weight: normal;
+                        color: #20435c;
+                        margin-left: 0;
+                        margin-bottom: 1.2em;
+                        font-weight: bold;
+                    }
+
+                        li.toctree-l1 a {
+                            padding: 0 0 0 10px;
+                            color: #314F64;
+                        }
+
+                    li.toctree-l2 {
+                        padding: 0.25em 0 0.25em 0;
+                        list-style-type: none;
+                        background-color: #FFFFFF;
+                        font-size: 85%;
+                        font-weight: normal;
+                    }
+
+                        li.toctree-l2 ul {
+                            padding-left: 40px;
+                        }
+
+
+                        li.toctree-l2:before {
+                            content: attr(data-content);
+                            font-size: 85%;
+                            color: #777;
+                            display: inline-block;
+                            width: 10px;
+                        }
+
+                    li.toctree-l3 {
+                        font-size: 88%;
+                        list-style-type: square;
+                        font-weight: normal;
+                    }
+
+                    li.toctree-l4 {
+                        font-size: 93%;
+                        list-style-type: circle;
+                        font-weight: normal;
+                    }
+
+                div.topic li.toctree-l1 {
+                    font-size: 100%;
+                    font-weight: bold;
+                    background-color: transparent;
+                    margin-bottom: 0;
+                    margin-left: 1.5em;
+                    display: inline;
+                }
+
+                div.topic p {
+                    font-size: 90%;
+                    margin: 0.4ex;
+                }
+
+                    div.topic p.topic-title {
+                        display: inline;
+                        font-size: 100%;
+                        margin-bottom: 0;
+                    }
+
+                div.sidebar {
+                    width: 25ex;
+                }
+            </style><div class="toctree-wrapper compound">
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="model_selection.html">3. 模型选择与评估</a><ul>
+                            <li class="toctree-l2">
+                                <a class="reference internal" href="modules/cross_validation.html">3.1. 交叉验证: 评估算法性能</a><ul>
+                                    <li class="toctree-l3">
+                                        <a class="reference internal" href="modules/cross_validation.html#computing-cross-validated-metrics">3.1.1. Computing cross-validated metrics</a><ul>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#obtaining-predictions-by-cross-validation">3.1.1.1. Obtaining predictions by cross-validation</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l3">
+                                        <a class="reference internal" href="modules/cross_validation.html#cross-validation-iterators">3.1.2. Cross validation iterators</a><ul>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#k-fold">3.1.2.1. K-fold</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#stratified-k-fold">3.1.2.2. Stratified k-fold</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#label-k-fold">3.1.2.3. Label k-fold</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#leave-one-out-loo">3.1.2.4. Leave-One-Out - LOO</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#leave-p-out-lpo">3.1.2.5. Leave-P-Out - LPO</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#leave-one-label-out-lolo">3.1.2.6. Leave-One-Label-Out - LOLO</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#leave-p-label-out">3.1.2.7. Leave-P-Label-Out</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#random-permutations-cross-validation-a-k-a-shuffle-split">3.1.2.8. Random permutations cross-validation a.k.a. Shuffle &amp; Split</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#label-shuffle-split">3.1.2.9. Label-Shuffle-Split</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#predefined-fold-splits-validation-sets">3.1.2.10. Predefined Fold-Splits / Validation-Sets</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/cross_validation.html#see-also">3.1.2.11. See also</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/cross_validation.html#a-note-on-shuffling">3.1.3. A note on shuffling</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/cross_validation.html#cross-validation-and-model-selection">3.1.4. Cross validation and model selection</a></li>
+                                </ul>
+                            </li>
+                            <li class="toctree-l2">
+                                <a class="reference internal" href="modules/grid_search.html">3.2. 网格搜索: 寻找最优算法参数</a><ul>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#exhaustive-grid-search">3.2.1. Exhaustive Grid Search</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#randomized-parameter-optimization">3.2.2. Randomized Parameter Optimization</a></li>
+                                    <li class="toctree-l3">
+                                        <a class="reference internal" href="modules/grid_search.html#tips-for-parameter-search">3.2.3. Tips for parameter search</a><ul>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/grid_search.html#specifying-an-objective-metric">3.2.3.1. Specifying an objective metric</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/grid_search.html#composite-estimators-and-parameter-spaces">3.2.3.2. Composite estimators and parameter spaces</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/grid_search.html#model-selection-development-and-evaluation">3.2.3.3. Model selection: development and evaluation</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/grid_search.html#parallelism">3.2.3.4. Parallelism</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/grid_search.html#robustness-to-failure">3.2.3.5. Robustness to failure</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l3">
+                                        <a class="reference internal" href="modules/grid_search.html#alternatives-to-brute-force-parameter-search">3.2.4. Alternatives to brute force parameter search</a><ul>
+                                            <li class="toctree-l4">
+                                                <a class="reference internal" href="modules/grid_search.html#model-specific-cross-validation">3.2.4.1. Model specific cross-validation</a><ul>
+                                                    <li class="toctree-l5"><a class="reference internal" href="modules/generated/sklearn.linear_model.ElasticNetCV.html">3.2.4.1.1. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.ElasticNetCV</a></li>
+                                                    <li class="toctree-l5"><a class="reference internal" href="modules/generated/sklearn.linear_model.LarsCV.html">3.2.4.1.2. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.LarsCV</a></li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.linear_model.LassoCV.html">3.2.4.1.3. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.LassoCV</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.linear_model.LassoCV.html#examples-using-sklearn-linear-model-lassocv">3.2.4.1.3.1. Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.LassoCV</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.linear_model.LassoLarsCV.html">3.2.4.1.4. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.LassoLarsCV</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.linear_model.LassoLarsCV.html#examples-using-sklearn-linear-model-lassolarscv">3.2.4.1.4.1. Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.LassoLarsCV</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5"><a class="reference internal" href="modules/generated/sklearn.linear_model.LogisticRegressionCV.html">3.2.4.1.5. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.LogisticRegressionCV</a></li>
+                                                    <li class="toctree-l5"><a class="reference internal" href="modules/generated/sklearn.linear_model.MultiTaskElasticNetCV.html">3.2.4.1.6. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.MultiTaskElasticNetCV</a></li>
+                                                    <li class="toctree-l5"><a class="reference internal" href="modules/generated/sklearn.linear_model.MultiTaskLassoCV.html">3.2.4.1.7. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.MultiTaskLassoCV</a></li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.linear_model.OrthogonalMatchingPursuitCV.html">3.2.4.1.8. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.OrthogonalMatchingPursuitCV</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.linear_model.OrthogonalMatchingPursuitCV.html#examples-using-sklearn-linear-model-orthogonalmatchingpursuitcv">3.2.4.1.8.1. Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.OrthogonalMatchingPursuitCV</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.linear_model.RidgeCV.html">3.2.4.1.9. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.RidgeCV</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.linear_model.RidgeCV.html#examples-using-sklearn-linear-model-ridgecv">3.2.4.1.9.1. Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.RidgeCV</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5"><a class="reference internal" href="modules/generated/sklearn.linear_model.RidgeClassifierCV.html">3.2.4.1.10. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.RidgeClassifierCV</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="toctree-l4">
+                                                <a class="reference internal" href="modules/grid_search.html#information-criterion">3.2.4.2. Information Criterion</a><ul>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.linear_model.LassoLarsIC.html">3.2.4.2.1. <code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.LassoLarsIC</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.linear_model.LassoLarsIC.html#examples-using-sklearn-linear-model-lassolarsic">3.2.4.2.1.1. Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.LassoLarsIC</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="toctree-l4">
+                                                <a class="reference internal" href="modules/grid_search.html#out-of-bag-estimates">3.2.4.3. Out of Bag Estimates</a><ul>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.ensemble.RandomForestClassifier.html">3.2.4.3.1. <code class="docutils literal"><span class="pre">sklearn.ensemble</span></code>.RandomForestClassifier</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.ensemble.RandomForestClassifier.html#examples-using-sklearn-ensemble-randomforestclassifier">3.2.4.3.1.1. Examples using <code class="docutils literal"><span class="pre">sklearn.ensemble.RandomForestClassifier</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.ensemble.RandomForestRegressor.html">3.2.4.3.2. <code class="docutils literal"><span class="pre">sklearn.ensemble</span></code>.RandomForestRegressor</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.ensemble.RandomForestRegressor.html#examples-using-sklearn-ensemble-randomforestregressor">3.2.4.3.2.1. Examples using <code class="docutils literal"><span class="pre">sklearn.ensemble.RandomForestRegressor</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.ensemble.ExtraTreesClassifier.html">3.2.4.3.3. <code class="docutils literal"><span class="pre">sklearn.ensemble</span></code>.ExtraTreesClassifier</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.ensemble.ExtraTreesClassifier.html#examples-using-sklearn-ensemble-extratreesclassifier">3.2.4.3.3.1. Examples using <code class="docutils literal"><span class="pre">sklearn.ensemble.ExtraTreesClassifier</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.ensemble.ExtraTreesRegressor.html">3.2.4.3.4. <code class="docutils literal"><span class="pre">sklearn.ensemble</span></code>.ExtraTreesRegressor</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.ensemble.ExtraTreesRegressor.html#examples-using-sklearn-ensemble-extratreesregressor">3.2.4.3.4.1. Examples using <code class="docutils literal"><span class="pre">sklearn.ensemble.ExtraTreesRegressor</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">3.2.4.3.5. <code class="docutils literal"><span class="pre">sklearn.ensemble</span></code>.GradientBoostingClassifier</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingClassifier.html#examples-using-sklearn-ensemble-gradientboostingclassifier">3.2.4.3.5.1. Examples using <code class="docutils literal"><span class="pre">sklearn.ensemble.GradientBoostingClassifier</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="toctree-l5">
+                                                        <a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingRegressor.html">3.2.4.3.6. <code class="docutils literal"><span class="pre">sklearn.ensemble</span></code>.GradientBoostingRegressor</a><ul>
+                                                            <li class="toctree-l6"><a class="reference internal" href="modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#examples-using-sklearn-ensemble-gradientboostingregressor">3.2.4.3.6.1. Examples using <code class="docutils literal"><span class="pre">sklearn.ensemble.GradientBoostingRegressor</span></code></a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toctree-l2">
+                                <a class="reference internal" href="modules/model_evaluation.html">3.3. 模型评估: 量化预测质量</a><ul>
+                                    <li class="toctree-l3">
+                                        <a class="reference internal" href="modules/model_evaluation.html#the-scoring-parameter-defining-model-evaluation-rules">3.3.1. The <code class="docutils literal"><span class="pre">scoring</span></code> parameter: defining model evaluation rules</a><ul>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#common-cases-predefined-values">3.3.1.1. Common cases: predefined values</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#defining-your-scoring-strategy-from-metric-functions">3.3.1.2. Defining your scoring strategy from metric functions</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#implementing-your-own-scoring-object">3.3.1.3. Implementing your own scoring object</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l3">
+                                        <a class="reference internal" href="modules/model_evaluation.html#classification-metrics">3.3.2. Classification metrics</a><ul>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#from-binary-to-multiclass-and-multilabel">3.3.2.1. From binary to multiclass and multilabel</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#accuracy-score">3.3.2.2. Accuracy score</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#cohen-s-kappa">3.3.2.3. Cohen&#8217;s kappa</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#confusion-matrix">3.3.2.4. Confusion matrix</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#classification-report">3.3.2.5. Classification report</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#hamming-loss">3.3.2.6. Hamming loss</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#jaccard-similarity-coefficient-score">3.3.2.7. Jaccard similarity coefficient score</a></li>
+                                            <li class="toctree-l4">
+                                                <a class="reference internal" href="modules/model_evaluation.html#precision-recall-and-f-measures">3.3.2.8. Precision, recall and F-measures</a><ul>
+                                                    <li class="toctree-l5"><a class="reference internal" href="modules/model_evaluation.html#binary-classification">3.3.2.8.1. Binary classification</a></li>
+                                                    <li class="toctree-l5"><a class="reference internal" href="modules/model_evaluation.html#multiclass-and-multilabel-classification">3.3.2.8.2. Multiclass and multilabel classification</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#hinge-loss">3.3.2.9. Hinge loss</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#log-loss">3.3.2.10. Log loss</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#matthews-correlation-coefficient">3.3.2.11. Matthews correlation coefficient</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#receiver-operating-characteristic-roc">3.3.2.12. Receiver operating characteristic (ROC)</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#zero-one-loss">3.3.2.13. Zero one loss</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l3">
+                                        <a class="reference internal" href="modules/model_evaluation.html#multilabel-ranking-metrics">3.3.3. Multilabel ranking metrics</a><ul>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#coverage-error">3.3.3.1. Coverage error</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#label-ranking-average-precision">3.3.3.2. Label ranking average precision</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#ranking-loss">3.3.3.3. Ranking loss</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l3">
+                                        <a class="reference internal" href="modules/model_evaluation.html#regression-metrics">3.3.4. Regression metrics</a><ul>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#explained-variance-score">3.3.4.1. Explained variance score</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#mean-absolute-error">3.3.4.2. Mean absolute error</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#mean-squared-error">3.3.4.3. Mean squared error</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#median-absolute-error">3.3.4.4. Median absolute error</a></li>
+                                            <li class="toctree-l4"><a class="reference internal" href="modules/model_evaluation.html#r2-score-the-coefficient-of-determination">3.3.4.5. R² score, the coefficient of determination</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#clustering-metrics">3.3.5. Clustering metrics</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#dummy-estimators">3.3.6. Dummy estimators</a></li>
+                                </ul>
+                            </li>
+                            <li class="toctree-l2">
+                                <a class="reference internal" href="modules/model_persistence.html">3.4. 模型保持: 模型的持久性</a><ul>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/model_persistence.html#persistence-example">3.4.1. Persistence example</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/model_persistence.html#security-maintainability-limitations">3.4.2. Security &amp; maintainability limitations</a></li>
+                                </ul>
+                            </li>
+                            <li class="toctree-l2">
+                                <a class="reference internal" href="modules/learning_curve.html">3.5. 验证曲线: 绘制得分曲线来评估模型</a><ul>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/learning_curve.html#validation-curve">3.5.1. Validation curve</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="modules/learning_curve.html#learning-curve">3.5.2. Learning curve</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="container">
+        <div class="footer">
+            &copy; 2016-2100, 版权属于张金明博士 (BSD License).
+        </div>
+    </div>
+</body>
+</html>
