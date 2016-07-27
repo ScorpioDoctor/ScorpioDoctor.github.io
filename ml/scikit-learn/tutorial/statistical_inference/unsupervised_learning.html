@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
+
+    <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/underscore.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/doctools.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
+
+    <title>人工智能研究网/机器学习</title>
+</head>
+
+
+<body role="document">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">studyai.cn</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../../../../index.html">网站主页</a></li>
+                <li><a href="../../../../webmaster.html">站长风采</a></li>
+                <li><a href="../../../../contact.html">联系我们</a></li>
+                <li><a href="../../../../sponsor.html">赞助我们</a></li>
+                <li><a href="../../../index.html">机器学习主页</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="content-wrapper">
+      
+        <div class="content">
+
+            <div class="documentwrapper">
+                <div class="bodywrapper">
+                    <div class="body" role="main">
+
+                        <div class="page-header panel panel-heading panel-primary">
+                            <h1 class="text-center"> 无监督学习：探索数据的呈现方式</h1>
+                        </div>
+
+                        <div class="section" id="unsupervised-learning-seeking-representations-of-the-data">
+                            <div class="section" id="clustering-grouping-observations-together">
+                                <h2>聚类：将观测数据分组</h2>
+                                <div class="topic">
+                                    <p class="topic-title first">聚类分析要解决的问题：</p>
+                                    <p>
+                                        给定鸢尾花数据集, 如果我们事先就知道只有3种类型的鸢尾花,但还没有得到一个分割他们的标签集合
+                                        。我们将执行一个<strong>聚类任务(clustering task)</strong>: 将观测数据集划分到间隔良好的组中就是<em>聚类</em>。
+                                    </p>
+                                </div>
+                                <div class="section" id="k-means-clustering">
+                                    <h3>K-means 聚类<a class="headerlink" href="#k-means-clustering" title="Permalink to this headline">¶</a></h3>
+                                    <p>
+                                        请注意，存在着许多不同的聚类标准和相关的算法，其中最简单的聚类算法就是
+                                        <a class="reference internal" href="../../modules/clustering.html#k-means"><span>K-means</span></a>算法。
+                                    </p>
+                                    <a class="reference external image-reference" href="../../auto_examples/cluster/plot_cluster_iris.html">
+                                    <img alt="../../_images/plot_cluster_iris_0021.png" class="align-right" src="./images/plot_cluster_iris_0021.png" style="width: 280.0px; height: 210.0px;" /></a>
+                                    <div class="highlight-python">
+                                        <div class="highlight">
+                                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_iris</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_iris</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k_means</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k_means</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_iris</span><span class="p">)</span> 
+<span class="go">KMeans(copy_x=True, init=&#39;k-means++&#39;, ...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">k_means</span><span class="o">.</span><span class="n">labels_</span><span class="p">[::</span><span class="mi">10</span><span class="p">])</span>
+<span class="go">[1 1 1 1 1 0 0 0 0 0 2 2 2 2 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">y_iris</span><span class="p">[::</span><span class="mi">10</span><span class="p">])</span>
+<span class="go">[0 0 0 0 0 1 1 1 1 1 2 2 2 2 2]</span>
+</pre>
+                                        </div>
+                                    </div>
+                                    <div class="admonition warning">
+                                        <p class="first admonition-title">Warning</p>
+                                        <p>
+                                            聚类算法不能绝对保证还原一个真实的类别集合。首先，选择合适的聚类数目是非常困难的。
+                                            尽管scikit-learn使用了很多技巧, 聚类算法对初始化状态比较敏感，会掉入局部最优值。
+                                        </p>
+                                        <table border="1" class="centered docutils">
+                                            <colgroup>
+                                                <col width="33%" />
+                                                <col width="33%" />
+                                                <col width="33%" />
+                                            </colgroup>
+                                            <tbody valign="top">
+                                                <tr class="row-odd">
+                                                    <td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="k_means_iris_bad_init" src="./images/plot_cluster_iris_0031.png" style="width: 252.0px; height: 189.0px;" /></a></td>
+                                                    <td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="k_means_iris_8" src="./images/plot_cluster_iris_0011.png" style="width: 252.0px; height: 189.0px;" /></a></td>
+                                                    <td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="cluster_iris_truth" src="./images/plot_cluster_iris_0041.png" style="width: 252.0px; height: 189.0px;" /></a></td>
+                                                </tr>
+                                                <tr class="row-even">
+                                                    <td><strong>Bad initialization</strong></td>
+                                                    <td><strong>8 clusters</strong></td>
+                                                    <td><strong>Ground truth</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="last"><strong>不要过度解读聚类结果！！</strong></p>
+                                    </div>
+                                    <div class="topic">
+                                        <p class="topic-title first"><strong>应用范例: 矢量量化(vector quantization)</strong></p>
+                                        <p>
+                                            聚类算法（尤其是KMeans）通常可被看作是一种选择少量样本来压缩信息的方法。
+                                            这一类问题又被叫做
+                                            <a class="reference external" href="http://en.wikipedia.org/wiki/Vector_quantization">矢量量化(vector quantization)</a>.
+                                            比如说, 它可以被用于分离图像色调( posterize an image):
+                                        </p>
+                                        <div class="highlight-python">
+                                            <div class="highlight">
+                                                <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="n">face</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
+<span class="gp">... </span>   <span class="n">face</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">face</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1"># We need an (n_sample, n_feature) array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k_means</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k_means</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+<span class="go">KMeans(copy_x=True, init=&#39;k-means++&#39;, ...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">k_means</span><span class="o">.</span><span class="n">labels_</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">face_compressed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">choose</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">face_compressed</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">face</span><span class="o">.</span><span class="n">shape</span>
+</pre>
+                                            </div>
+                                        </div>
+                                        <table border="1" class="centered docutils">
+                                            <colgroup>
+                                                <col width="25%" />
+                                                <col width="25%" />
+                                                <col width="25%" />
+                                                <col width="25%" />
+                                            </colgroup>
+                                            <tbody valign="top">
+                                                <tr class="row-odd">
+                                                    <td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face" src="./images/plot_face_compress_0011.png" style="width: 180.0px; height: 132.0px;" /></a></td>
+                                                    <td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_compressed" src="./images/plot_face_compress_0031.png" style="width: 180.0px; height: 132.0px;" /></a></td>
+                                                    <td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_regular" src="./images/plot_face_compress_0021.png" style="width: 180.0px; height: 132.0px;" /></a></td>
+                                                    <td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_histogram" src="./images/plot_face_compress_0041.png" style="width: 180.0px; height: 132.0px;" /></a></td>
+                                                </tr>
+                                                <tr class="row-even">
+                                                    <td>Raw image</td>
+                                                    <td>K-means quantization</td>
+                                                    <td>Equal bins</td>
+                                                    <td>Image histogram</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="section" id="hierarchical-agglomerative-clustering-ward">
+                                    <h3>分层合并聚类算法: Ward<a class="headerlink" href="#hierarchical-agglomerative-clustering-ward" title="Permalink to this headline">¶</a></h3>
+                                    <p>
+                                        层次聚类算法(<a class="reference internal" href="../../modules/clustering.html#hierarchical-clustering"><span>Hierarchical clustering</span></a>)
+                                        是一种聚类分析的类型，其目标是构建一个聚类层次结构(build a hierarchy of clusters)。
+                                        一般而言，这种分层次聚类思想的方法有两种：
+                                    </p>
+                                    <blockquote>
+                                        <div>
+                                            <ul class="simple">
+                                                <li>
+                                                    <strong>合并法(Agglomerative)</strong> - 自底向上的方法: 先使得每个样本各成一类，
+                                                    然后通过迭代合并不同的类以最小化耦合(<em>linkage</em>)准则。
+                                                    当观测数据很少的时候，这一方法很有意思。当类别数很大时，它比K均值算法更有计算效率。
+                                                </li>
+                                                <li>
+                                                    <strong>分裂法(Divisive)</strong> - 自顶向下的方法: 先将所有样本归入一类，然后不断迭代分裂增加聚类数目。
+                                                    当类别数量很大时，这一方法不仅很慢而且还是统计病态的。
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </blockquote>
+                                    <div class="section" id="connectivity-constrained-clustering">
+                                        <h4>连接约束聚类法(Connectivity-constrained clustering)<a class="headerlink" href="#connectivity-constrained-clustering" title="Permalink to this headline">¶</a></h4>
+                                        <p>
+                                            当使用自底向上的凝聚聚类法的时候，我们可以通过一个连接图指定那些样本可以聚在一起。
+                                            在scikit-learn中，连接图用邻接矩阵表示，通常用稀疏矩阵存储。
+                                            连接约束的技术在某些时候很有用。比如，在分类图像的时候去检索连通域或连通组件。
+                                        </p>
+                                        <a class="reference external image-reference" href="../../auto_examples/cluster/plot_face_ward_segmentation.html"><img alt="../../_images/plot_face_ward_segmentation_0012.png" class="align-right" src="./images/plot_face_ward_segmentation_0012.png" style="width: 200.0px; height: 200.0px;" /></a>
+                                        <div class="highlight-python">
+                                            <div class="highlight">
+                                                <pre>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.image</span> <span class="kn">import</span> <span class="n">grid_to_graph</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">AgglomerativeClustering</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.testing</span> <span class="kn">import</span> <span class="n">SkipTest</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="kn">import</span> <span class="n">sp_version</span>
+<span class="k">if</span> <span class="n">sp_version</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+                                                <span class="k">raise</span> <span class="n">SkipTest</span><span class="p">(</span><span class="s2">&quot;Skipping because SciPy version earlier than 0.12.0 and &quot;</span>
+                                                <span class="s2">&quot;thus does not include the scipy.misc.face() image.&quot;</span><span class="p">)</span>
+<span class="c1">###############################################################################</span>
+<span class="c1"># Generate data</span>
+<span class="k">try</span><span class="p">:</span>
+                                                <span class="n">face</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                                                <span class="c1"># Newer versions of scipy have face in misc</span>
+                                                <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
+                                                <span class="n">face</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">face</span><span class="p">(</span><span class="n">gray</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># Resize it to 10% of the original size to speed up the processing</span>
+<span class="n">face</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span>
+</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section" id="feature-agglomeration">
+                                        <h4>Feature 合并<a class="headerlink" href="#feature-agglomeration" title="Permalink to this headline">¶</a></h4>
+                                        <p>
+                                            我已经看到，稀疏性可以被用来减轻维数灾难，也就是与特征数量相比，观测数量相对不足。另一个办法是合并那些相似的特征分量
+                                            (<strong>feature agglomeration</strong>)。这一方法可以通过在特征方向上聚类来实现。
+                                        </p>
+                                        <a class="reference external image-reference" href="../../auto_examples/cluster/plot_digits_agglomeration.html"><img alt="../../_images/plot_digits_agglomeration_0011.png" class="align-right" src="./images/plot_digits_agglomeration_0011.png" style="width: 227.99999999999997px; height: 199.49999999999997px;" /></a>
+                                        <div class="highlight-python">
+                                            <div class="highlight">
+                                                <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">images</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connectivity</span> <span class="o">=</span> <span class="n">grid_to_graph</span><span class="p">(</span><span class="o">*</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">agglo</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">FeatureAgglomeration</span><span class="p">(</span><span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">,</span>
+<span class="gp">... </span>                                     <span class="n">n_clusters</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">agglo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+<span class="go">FeatureAgglomeration(affinity=&#39;euclidean&#39;, compute_full_tree=&#39;auto&#39;,...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_reduced</span> <span class="o">=</span> <span class="n">agglo</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_approx</span> <span class="o">=</span> <span class="n">agglo</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_reduced</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images_approx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_approx</span><span class="p">,</span> <span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre>
+                                            </div>
+                                        </div>
+                                        <div class="topic">
+                                            <p class="topic-title first"><code class="docutils literal"><span class="pre">transform</span></code> 和 <code class="docutils literal"><span class="pre">inverse_transform</span></code> 成员方法</p>
+                                            <p>
+                                                有些 estimators 对象暴露了一个 <code class="docutils literal"><span class="pre">transform</span></code> 成员方法, 比如用于维数约简。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section" id="decompositions-from-a-signal-to-components-and-loadings">
+                                <h2>分解: 从信号到分量<a class="headerlink" href="#decompositions-from-a-signal-to-components-and-loadings" title="Permalink to this headline">¶</a></h2>
+                                <div class="topic">
+                                    <p class="topic-title first"><strong>分量与负荷</strong></p>
+                                    <p>
+                                        如果X是我们的多变量数据，那么我们想要解决的问题是在不同的观测基上重写X。
+                                        我们想去学习负荷L与X的分量们C，使其满足<em>X = L C</em>。
+                                        存在很多不同的准则去选择分量。
+                                    </p>
+                                </div>
+                                <div class="section" id="principal-component-analysis-pca">
+                                    <h3>主成分分析: PCA<a class="headerlink" href="#principal-component-analysis-pca" title="Permalink to this headline">¶</a></h3>
+                                    <p>
+                                        <a class="reference internal" href="../../modules/decomposition.html#pca"><span>主成份分析 (PCA)</span></a>
+                                        选择能够代表信号中的最大方差的那些相继分量。
+                                    </p>
+                                    <p class="centered"><a class="reference external" href="../../auto_examples/decomposition/plot_pca_3d.html">
+                                        <img alt="pca_3d_axis" src="./images/plot_pca_3d_0011.png" style="width: 280.0px; height: 210.0px;" /></a> 
+                                    <a class="reference external" href="../../auto_examples/decomposition/plot_pca_3d.html">
+                                        <img alt="pca_3d_aligned" src="./images/plot_pca_3d_0021.png" style="width: 280.0px; height: 210.0px;" /></a></p>
+                                    <p>
+                                        上图中的观测所跨越的点云在一个方向上是非常平坦的，这说明三个单变量特征中的一个
+                                        几乎可以用另外两个特征分量计算出来。PCA寻找的是数据中不平坦的那些方向（也就是方差很大的方向）。
+                                    </p>
+                                    <p>
+                                        当用PCA来变换数据的时候，它可以缩减数据的维数并将原始数据投影到一个主要的子空间。
+                                    </p>
+                                    <div class="highlight-python">
+                                        <div class="highlight">
+                                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a signal with only 2 useful dimensions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x3</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">decomposition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span> <span class="o">=</span> <span class="n">decomposition</span><span class="o">.</span><span class="n">PCA</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">PCA(copy=True, n_components=None, whiten=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_</span><span class="p">)</span>  
+<span class="go">[  2.18565811e+00   1.19346747e+00   8.43026679e-32]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># As we can see, only the 2 first components are useful</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_reduced</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_reduced</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 2)</span>
+</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section" id="independent-component-analysis-ica">
+                                    <h3>独立分量分析: ICA<a class="headerlink" href="#independent-component-analysis-ica" title="Permalink to this headline">¶</a></h3>
+                                    <p>
+                                        <a class="reference internal" href="../../modules/decomposition.html#ica"><span>独立分量分析 (ICA)</span></a>
+                                        选择那些能够使得loadings的分布携带最大量独立信息的分量。 他能够回复非高斯<strong>non-Gaussian</strong>的独立信号。
+                                    </p>
+                                    <a class="reference external image-reference" href="../../auto_examples/decomposition/plot_ica_blind_source_separation.html">
+                                    <img alt="../../_images/plot_ica_blind_source_separation_0012.png" class="align-center" src="./images/plot_ica_blind_source_separation_0012.png" style="width: 560.0px; height: 420.0px;" /></a>
+                                    <div class="highlight-python">
+                                        <div class="highlight">
+                                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate sample data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>  <span class="c1"># Signal 1 : sinusoidal signal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">time</span><span class="p">))</span>  <span class="c1"># Signal 2 : square signal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">+=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Add noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">/=</span> <span class="n">S</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Standardize data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Mix data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>  <span class="c1"># Mixing matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="c1"># Generate observations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Compute ICA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ica</span> <span class="o">=</span> <span class="n">decomposition</span><span class="o">.</span><span class="n">FastICA</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S_</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Get the estimated sources</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A_</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">mixing_</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>  <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S_</span><span class="p">,</span> <span class="n">A_</span><span class="p">)</span> <span class="o">+</span> <span class="n">ica</span><span class="o">.</span><span class="n">mean_</span><span class="p">)</span>
+<span class="go">True</span>
+</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="clearer"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2016-2100, 版权属于张金明博士 (BSD License).
+    </div>
+
+</body>
+</html>
