@@ -87,6 +87,13 @@
     <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="deep_learn\index.html" />
+    <Content Include="deep_learn\matcovnet\computational_blocks.html" />
+    <Content Include="deep_learn\matcovnet\geometry.html" />
+    <Content Include="deep_learn\matcovnet\implemetation_details.html" />
+    <Content Include="deep_learn\matcovnet\index.html" />
+    <Content Include="deep_learn\matcovnet\introduction_to_matcovnet.html" />
+    <Content Include="deep_learn\matcovnet\neural_network_computations.html" />
+    <Content Include="deep_learn\matcovnet\wrapper_pretrainedmodel.html" />
     <Content Include="favicon.ico" />
     <Content Include="home\images\bkg.png" />
     <Content Include="home\images\blacktocat.png" />

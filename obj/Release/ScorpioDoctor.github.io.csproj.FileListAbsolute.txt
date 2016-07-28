@@ -9,3 +9,4 @@ G:\ScorpioDoctor.github.io\bin\ScorpioDoctor.github.io.dll
 G:\ScorpioDoctor.github.io\bin\ScorpioDoctor.github.io.pdb
 G:\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.dll
 G:\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.pdb
+G:\ScorpioDoctor.github.io\obj\Release\ScorpioDoctor.github.io.csprojResolveAssemblyReference.cache
