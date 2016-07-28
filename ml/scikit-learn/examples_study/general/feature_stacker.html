@@ -18,6 +18,10 @@
     <script type="text/javascript" src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
 
     <title>人工智能研究网/机器学习</title>
+
+    <style>
+        p {font-size:large} 
+    </style>
 </head>
 
 
@@ -30,34 +34,26 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="../../../../index.html">网站主页</a></li>
-                <li><a href="../../../../../webmaster.html">站长风采</a></li>
-                <li><a href="../../../../../contact.html">联系我们</a></li>
+                <li><a href="../../../../../webmaster.html">站长风采</a></li> 
                 <li><a href="../../../../../sponsor.html">赞助我们</a></li>
                 <li><a href="../../../index.html">机器学习主页</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
-            </ul>
+            </ul> 
         </div>
     </nav>
 
     <div class="container">
         <div class="section" id="concatenating-multiple-feature-extraction-methods">
-            <span id="example-feature-stacker-py"></span><h1>Concatenating multiple feature extraction methods<a class="headerlink" href="#concatenating-multiple-feature-extraction-methods" title="Permalink to this headline">¶</a></h1>
-            <p>
-                In many real-world examples, there are many ways to extract features from a
-                dataset. Often it is beneficial to combine several methods to obtain good
-                performance. This example shows how to use <code class="docutils literal"><span class="pre">FeatureUnion</span></code> to combine
-                features obtained by PCA and univariate selection.
+            <span id="example-feature-stacker-py"></span><h1>连接多个特征提取方法<a class="headerlink" href="#concatenating-multiple-feature-extraction-methods" title="Permalink to this headline">¶</a></h1>
+            <p >
+                在很多真实世界案例中，存在很多从数据集中抽取特征的方法。通过组合多种不同的方法通常可以获得很好的性能。
+                这个例子展示了怎样使用<code class="docutils literal"><span class="pre">FeatureUnion</span></code>
+                对象来把PCA和单变量选择所获得特征有效组合起来。                
             </p>
             <p>
-                Combining features using this transformer has the benefit that it allows
-                cross validation and grid searches over the whole process.
+                使用此变换组合特征一个好处是你可以在整个过程中使用交叉验证和网格搜索。
             </p>
             <p>
-                The combination used in this example is not particularly helpful on this
-                dataset and is only used to illustrate the usage of FeatureUnion.
+                本例只是演示了一下如何组合特征，其结果对数据集可能并不是横好。
             </p>
             <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/feature_stacker.py"><code class="xref download docutils literal"><span class="pre">feature_stacker.py</span></code></a></p>
             <div class="highlight-python">
@@ -74,16 +70,16 @@
 <span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <a href="../modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest"><span class="n">SelectKBest</span></a>
 <span class="n">iris</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris"><span class="n">load_iris</span></a><span class="p">()</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
-<span class="c1"># This dataset is way to high-dimensional. Better do PCA:</span>
+<span class="c1"># 这是一个高维数据集，非常适合做PCA:</span>
 <span class="n">pca</span> <span class="o">=</span> <a href="../modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"><span class="n">PCA</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="c1"># Maybe some original features where good, too?</span>
+<span class="c1"># 某些原始特征或许就很棒，所以应该把它们独立的挑选出来?</span>
 <span class="n">selection</span> <span class="o">=</span> <a href="../modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest"><span class="n">SelectKBest</span></a><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1"># Build estimator from PCA and Univariate selection:</span>
+<span class="c1"># 从 PCA 和 Univariate selection构建estimator对象:</span>
 <span class="n">combined_features</span> <span class="o">=</span> <a href="../modules/generated/sklearn.pipeline.FeatureUnion.html#sklearn.pipeline.FeatureUnion"><span class="n">FeatureUnion</span></a><span class="p">([(</span><span class="s2">&quot;pca&quot;</span><span class="p">,</span> <span class="n">pca</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;univ_select&quot;</span><span class="p">,</span> <span class="n">selection</span><span class="p">)])</span>
-<span class="c1"># Use combined features to transform dataset:</span>
+<span class="c1"># 使用组合特征变换数据集:</span>
 <span class="n">X_features</span> <span class="o">=</span> <span class="n">combined_features</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">svm</span> <span class="o">=</span> <a href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"><span class="n">SVC</span></a><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
-<span class="c1"># Do grid search over k, n_components and C:</span>
+<span class="c1"># 在三个参数 k, n_components 和 C上进行网格搜索:</span>
 <span class="n">pipeline</span> <span class="o">=</span> <a href="../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline"><span class="n">Pipeline</span></a><span class="p">([(</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">combined_features</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;svm&quot;</span><span class="p">,</span> <span class="n">svm</span><span class="p">)])</span>
 <span class="n">param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">features__pca__n_components</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
                     <span class="n">features__univ_select__k</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>

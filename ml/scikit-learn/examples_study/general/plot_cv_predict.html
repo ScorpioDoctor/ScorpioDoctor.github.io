@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
     <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
 
+    <style>
+        p {
+            font-size: large;
+        }
+    </style>
+
     <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.min.js"></script>
     <script type="text/javascript" src="../../../../css-fonts-js/js/underscore.js"></script>
     <script type="text/javascript" src="../../../../css-fonts-js/js/doctools.js"></script>
@@ -30,15 +36,10 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="../../../../index.html">网站主页</a></li>
-                <li><a href="../../../../../webmaster.html">站长风采</a></li>
-                <li><a href="../../../../../contact.html">联系我们</a></li>
+                <li><a href="../../../../../webmaster.html">站长风采</a></li> 
                 <li><a href="../../../../../sponsor.html">赞助我们</a></li>
                 <li><a href="../../../index.html">机器学习主页</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登 录 </a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退 出 </a></li>
-            </ul>
+            </ul> 
         </div>
     </nav>
 
@@ -46,8 +47,7 @@
         <div class="section" id="plotting-cross-validated-predictions">
             <span id="example-plot-cv-predict-py"></span><h1>Plotting Cross-Validated Predictions<a class="headerlink" href="#plotting-cross-validated-predictions" title="Permalink to this headline">¶</a></h1>
             <p>
-                This example shows how to use <cite>cross_val_predict</cite> to visualize prediction
-                errors.
+                本例子展示了如何使用 <cite>cross_val_predict</cite> 来可视化预测误差。
             </p>
             <img alt="./images/plot_cv_predict_001.png" class="align-center" src="./images/plot_cv_predict_001.png" />
             <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_cv_predict.py"><code class="xref download docutils literal"><span class="pre">plot_cv_predict.py</span></code></a></p>
@@ -60,8 +60,8 @@
 <span class="n">lr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
 <span class="n">boston</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">datasets</span><span class="o">.</span><span class="n">load_boston</span></a><span class="p">()</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
-<span class="c1"># cross_val_predict returns an array of the same size as `y` where each entry</span>
-<span class="c1"># is a prediction obtained by cross validated:</span>
+<span class="c1"># cross_val_predict 返回一个跟`y`一样大的数组，</span>
+<span class="c1"># 其中每一个元素是交叉验证获得的预测值:</span>
 <span class="n">predicted</span> <span class="o">=</span> <a href="../modules/generated/sklearn.cross_validation.cross_val_predict.html#sklearn.cross_validation.cross_val_predict"><span class="n">cross_val_predict</span></a><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span>

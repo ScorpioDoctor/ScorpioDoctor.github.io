@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
     <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
 
+    <style>
+        p {
+            font-size: large;
+        }
+    </style>
+
     <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.min.js"></script>
     <script type="text/javascript" src="../../../../css-fonts-js/js/underscore.js"></script>
     <script type="text/javascript" src="../../../../css-fonts-js/js/doctools.js"></script>
@@ -31,7 +37,6 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="../../../../index.html">网站主页</a></li>
                 <li><a href="../../../../../webmaster.html">站长风采</a></li>
-                <li><a href="../../../../../contact.html">联系我们</a></li>
                 <li><a href="../../../../../sponsor.html">赞助我们</a></li>
                 <li><a href="../../../index.html">机器学习主页</a></li>
             </ul>
@@ -44,14 +49,11 @@
 
     <div class="container">
         <div class="section" id="isotonic-regression">
-            <span id="example-plot-isotonic-regression-py"></span><h1>Isotonic Regression<a class="headerlink" href="#isotonic-regression" title="Permalink to this headline">¶</a></h1>
+            <span id="example-plot-isotonic-regression-py"></span><h1>保序回归(Isotonic Regression)<a class="headerlink" href="#isotonic-regression" title="Permalink to this headline">¶</a></h1>
             <p>
-                An illustration of the isotonic regression on generated data. The
-                isotonic regression finds a non-decreasing approximation of a function
-                while minimizing the mean squared error on the training data. The benefit
-                of such a model is that it does not assume any form for the target
-                function such as linearity. For comparison a linear regression is also
-                presented.
+                本例展示了如何在一个人工生成的数据集上进行<strong>保序回归</strong>.保序回归的基本原理是
+                通过在训练数据集上最小化均方误差找到一个函数的非降逼近。保序回归模型的优点是它不对目标函数做
+                任何形式的先验假设(比如线性假设或二次假设等)。这个例子同时给出了线性回归的结果，作为对比。
             </p>
             <img alt="../_images/plot_isotonic_regression_001.png" class="align-center" src="./images/plot_isotonic_regression_001.png" />
             <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_isotonic_regression.py"><code class="xref download docutils literal"><span class="pre">plot_isotonic_regression.py</span></code></a></p>
