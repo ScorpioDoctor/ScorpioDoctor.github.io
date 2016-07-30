@@ -10,7 +10,12 @@
     <link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />
     <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
     <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
-
+    <style>
+        p {
+            font-size: large;
+        }
+        li{font-size:large}
+    </style>
     <script type="text/javascript" src="../../../../css-fonts-js/js/jquery.min.js"></script>
     <script type="text/javascript" src="../../../../css-fonts-js/js/underscore.js"></script>
     <script type="text/javascript" src="../../../../css-fonts-js/js/doctools.js"></script>
@@ -42,31 +47,26 @@
         <div class="section" id="feature-union-with-heterogeneous-data-sources">
             <span id="example-hetero-feature-union-py"></span><h1>异构数据源的特征融合<a class="headerlink" href="#feature-union-with-heterogeneous-data-sources" title="Permalink to this headline">¶</a></h1>
             <p>
-                Datasets can often contain components of that require different feature
-                extraction and processing pipelines.  This scenario might occur when:
+                数据集可能经常会包含一些需要使用不同特征抽取方法和管道流处理的特征分量。这种场景可能会
+                出现在以下几种情况下：
             </p>
             <ol class="arabic simple">
                 <li>
-                    Your dataset consists of heterogeneous data types (e.g. raster images and
-                    text captions)
+                    你的数据集由异构数据类型构成（比方说既有图像又有文本标题的数据）。
                 </li>
                 <li>
-                    Your dataset is stored in a Pandas DataFrame and different columns
-                    require different processing pipelines.
+                    你的数据集存储成了Pandas DataFrame(Pandas是python环境下最有名的数据统计包，
+                    而DataFrame翻译为数据框，是一种数据组织方式),其中不同的数据列需要不同的管道流来处理。
                 </li>
             </ol>
             <p>
-                This example demonstrates how to use
-                <code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_extraction.FeatureUnion</span></code> on a dataset containing
-                different types of features.  We use the 20-newsgroups dataset and compute
-                standard bag-of-words features for the subject line and body in separate
-                pipelines as well as ad hoc features on the body. We combine them (with
-                weights) using a FeatureUnion and finally train a classifier on the combined
-                set of features.
+                这个例子展示了如何在一个包含了不同类型的特征的数据集上使用<code class="xref py py-class docutils literal"><span class="pre">sklearn.feature_extraction.FeatureUnion</span></code>
+                对象。我们使用 20-newsgroups 数据集并
+                为subject line和body部分使用不同的管道流分别计算标准的bag-of-words特征以及对body部分计算ad hoc 特征。
+                我们将计算得到的特征通过加权方式用FeatureUnion对象组合起来，并最终在这些组合特征上训练一个分类器。
             </p>
             <p>
-                The choice of features is not particularly helpful, but serves to illustrate
-                the technique.
+                在这个例子中特征的选择可能并不是特别有用的，但是它足以说明我们的异构数据源特征融合的技术是如何工作的。
             </p>
             <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/hetero_feature_union.py"><code class="xref download docutils literal"><span class="pre">hetero_feature_union.py</span></code></a></p>
             <div class="highlight-python">

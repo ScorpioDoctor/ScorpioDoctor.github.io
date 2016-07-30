@@ -40,16 +40,15 @@
     <div class="container">
 
         <div class="section" id="explicit-feature-map-approximation-for-rbf-kernels">
-            <span id="example-plot-kernel-approximation-py"></span><h1>Explicit feature map approximation for RBF kernels<a class="headerlink" href="#explicit-feature-map-approximation-for-rbf-kernels" title="Permalink to this headline">¶</a></h1>
+            <span id="example-plot-kernel-approximation-py"></span><h1>RBF核函数的显式特征映射逼近<a class="headerlink" href="#explicit-feature-map-approximation-for-rbf-kernels" title="Permalink to this headline">¶</a></h1>
             <p>
-                An example illustrating the approximation of the feature map
-                of an RBF kernel.
+                该例子展示了RBF核函数的显式特征映射逼近。
             </p>
             <p>
-                It shows how to use <a class="reference internal" href="../modules/generated/sklearn.kernel_approximation.RBFSampler.html#sklearn.kernel_approximation.RBFSampler" title="sklearn.kernel_approximation.RBFSampler"><code class="xref py py-class docutils literal"><span class="pre">RBFSampler</span></code></a> and <a class="reference internal" href="../modules/generated/sklearn.kernel_approximation.Nystroem.html#sklearn.kernel_approximation.Nystroem" title="sklearn.kernel_approximation.Nystroem"><code class="xref py py-class docutils literal"><span class="pre">Nystroem</span></code></a> to
-                approximate the feature map of an RBF kernel for classification with an SVM on
-                the digits dataset. Results using a linear SVM in the original space, a linear
-                SVM using the approximate mappings and using a kernelized SVM are compared.
+                该例子展示了如何使用 <a class="reference internal" href="../modules/generated/sklearn.kernel_approximation.RBFSampler.html#sklearn.kernel_approximation.RBFSampler" title="sklearn.kernel_approximation.RBFSampler"><code class="xref py py-class docutils literal"><span class="pre">RBFSampler</span></code></a>
+                和 <a class="reference internal" href="../modules/generated/sklearn.kernel_approximation.Nystroem.html#sklearn.kernel_approximation.Nystroem" title="sklearn.kernel_approximation.Nystroem"><code class="xref py py-class docutils literal"><span class="pre">Nystroem</span></code></a>
+                来逼近RBF核函数的特征映射，并将此逼近映射用于SVM分类器来分类书写数字数据集。
+                我们同时对比了使用逼近映射的线性SVM分类器和使用RBF核的线性SVM分类器。
                 Timings and accuracy for varying amounts of Monte Carlo samplings (in the case
                 of <a class="reference internal" href="../modules/generated/sklearn.kernel_approximation.RBFSampler.html#sklearn.kernel_approximation.RBFSampler" title="sklearn.kernel_approximation.RBFSampler"><code class="xref py py-class docutils literal"><span class="pre">RBFSampler</span></code></a>, which uses random Fourier features) and different sized
                 subsets of the training set (for <a class="reference internal" href="../modules/generated/sklearn.kernel_approximation.Nystroem.html#sklearn.kernel_approximation.Nystroem" title="sklearn.kernel_approximation.Nystroem"><code class="xref py py-class docutils literal"><span class="pre">Nystroem</span></code></a>) for the approximate mapping
