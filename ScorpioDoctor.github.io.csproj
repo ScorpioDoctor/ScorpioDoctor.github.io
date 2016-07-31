@@ -3134,6 +3134,13 @@
     <Content Include="ml\scikit-learn\examples_study\clustering\images\plot_ward_structured_vs_unstructured.png" />
     <Content Include="ml\scikit-learn\examples_study\clustering\index.html" />
     <Content Include="ml\scikit-learn\examples_study\covariance\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\datasets\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\decision_tree\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\decompose\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\ensembles\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\feature_select\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\gauss_mixture\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\gauss_process\index.html" />
     <Content Include="ml\scikit-learn\examples_study\general\feature_stacker.html" />
     <Content Include="ml\scikit-learn\examples_study\general\hetero_feature_union.html" />
     <Content Include="ml\scikit-learn\examples_study\general\images\feature_stacker.png" />
@@ -3160,7 +3167,13 @@
     <Content Include="ml\scikit-learn\examples_study\general\plot_digits_pipe.html" />
     <Content Include="ml\scikit-learn\examples_study\general\plot_isotonic_regression.html" />
     <Content Include="ml\scikit-learn\examples_study\general\plot_multioutput_face_completion.html" />
+    <Content Include="ml\scikit-learn\examples_study\general_linear_model\index.html" />
     <Content Include="ml\scikit-learn\examples_study\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\manifold_learning\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\model_select\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\nearest_neighbor\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\neuro_networks\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\preprocessing\index.html" />
     <Content Include="ml\scikit-learn\examples_study\realworld\face_recognition.html" />
     <Content Include="ml\scikit-learn\examples_study\realworld\images\face_recognition.png" />
     <Content Include="ml\scikit-learn\examples_study\realworld\images\kenan.jpg" />
@@ -3185,6 +3198,10 @@
     <Content Include="ml\scikit-learn\examples_study\realworld\svm_gui.html" />
     <Content Include="ml\scikit-learn\examples_study\realworld\topics_extraction_with_nmf_lda.html" />
     <Content Include="ml\scikit-learn\examples_study\realworld\wikipedia_principal_eigenvector.html" />
+    <Content Include="ml\scikit-learn\examples_study\semi_suporvised\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\svm\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\tutorial_solution\index.html" />
+    <Content Include="ml\scikit-learn\examples_study\work_document\index.html" />
     <Content Include="ml\scikit-learn\index.html" />
     <Content Include="ml\scikit-learn\tutorial\basic\tutorial.html" />
     <Content Include="ml\scikit-learn\tutorial\basic\images\kenan.jpg" />
@@ -3499,6 +3516,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ml\classical_algorithms\data_trans_precess\" />
+    <Folder Include="ml\classical_algorithms\model_select_evaluate\" />
+    <Folder Include="ml\classical_algorithms\supervised_algorithms\" />
+    <Folder Include="ml\classical_algorithms\unsupervised_algorithms\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <PropertyGroup>
