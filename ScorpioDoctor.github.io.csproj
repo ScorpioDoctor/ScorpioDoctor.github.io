@@ -102,6 +102,8 @@
     <Content Include="home\stylesheets\stylesheet.css" />
     <Content Include="images\kenan.jpg" />
     <Content Include="images\plot_digits_last_image_0011.png" />
+    <Content Include="ml\classical_algorithms\feature_select_reduce\index.html" />
+    <Content Include="ml\classical_algorithms\model_select_evaluate\index.html" />
     <Content Include="ml\classical_algorithms\supervised_algorithms\index.html" />
     <Content Include="ml\classical_algorithms\unsupervised_algorithms\index.html" />
     <Content Include="ml\index.html" />
@@ -3518,8 +3520,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ml\classical_algorithms\feature_select_reduce\" />
-    <Folder Include="ml\classical_algorithms\model_select_evaluate\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <PropertyGroup>
