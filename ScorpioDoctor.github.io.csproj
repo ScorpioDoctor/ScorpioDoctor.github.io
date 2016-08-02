@@ -85,6 +85,7 @@
     <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="css-fonts-js\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="cv\kpts-recog.html" />
     <Content Include="deep_learn\index.html" />
     <Content Include="deep_learn\matcovnet\computational_blocks.html" />
     <Content Include="deep_learn\matcovnet\geometry.html" />
