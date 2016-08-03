@@ -1,12 +1,265 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../css-fonts-js/css/bootstrap.min.css">
+    <script src="../css-fonts-js/js/jquery.min.js"></script>
+    <script src="../css-fonts-js/js/bootstrap.min.js"></script>
+    <style>p{font-size:large}li{font-size:large}ul{font-size:larger}</style>
+    <title>人工智能研究网/机器视觉</title>
+
+    <!--网站访问量统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
 </head>
+
 <body>
-    <div class="page-header">
-        <h1>Random-distributed Multi-granular Features for Keypoints Recognition</h1>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../index.html">studyai.cn</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">网站主页</a></li>
+                <li><a href="../webmaster.html">站长风采</a></li>
+                <li><a href="../sponsor.html">赞助我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header text-center text-primary">
+            <h1>Random-distributed Multi-granular Features for Keypoints Recognition</h1>
+        </div>
+        <div class="content">
+
+            <p>
+                This html page describes how to run the experiemt source codes proposed in the paper entitled as 
+                "Random-distributed Multi-granular Features for Keypoints Recognition"
+            </p>
+
+            <div class="panel">
+                <div class="panel-heading text-success">
+                    <h2>Step1. Dowload the source codes</h2>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        We have uploaded the source codes to Baidu Cloud. you can go to dowload it as follows:
+                        <ul>
+                            <li>
+                                1. Open the link with your web browser: <a href="index.html">click to dowload</a>
+                            </li>
+                            <li>
+                                2. input the password to get start: <mark><strong>xjtu</strong></mark>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-heading text-success">
+                    <h2>Step2. Compiling Environment and Dependency</h2>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Our project was developed with Visual Studio 2013 and OpenCV library On Widonws-7 System:
+                        <ul>
+                            <li>
+                                1. Compiling Environment: <br />
+                                Install Visual Studio 2013 on your computer. Maybe other VS versions can also work, you can try it.
+                            </li>
+                            <li>
+                                2. Dependency library:  <br />
+                                The source codes depend on OpenCV library. The OpenCV version we used is 2.4.9. Other versions like 2.4.X or 3.X may
+                                be also used successfully. You can try it.
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <p>Note that our sources codes are written with pure C++ langurage, which can also be compiled 
+                    and run on other Computer Operating Systems like Ubuntu OS and Mac OS. If you do so, you need install 
+                    and configure your OpenCV patch with you C++ complier correctly.</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading  text-success">
+                    <h2>Step3. The Project Files</h2>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        If you have successfully downlod the project zip file from Baidu Cloud, unzip it and you will 
+                        obtain a file folder like this:
+                        <img src="kpts-recog/project_folders.png" alt="kpts-recog/project_folders.png" 
+                             class="img-rounded"/><br />
+                        The folder <strong>ExperimentResults</strong> is used to contain the evaluation files with the form of "csv".
+                        The folder <strong>ReferenceImages</strong> is used to contain the reference images. We will detect keypoints on them.
+                        The folder <strong>SamplingOperators</strong> is used to contain the sampling operators with optimal aperture sizes. the files will be read by <mark>FeatureExtractor</mark> class.
+                        The folder <strong>RecognitionRateEvaluationProject</strong> is used to contain the source code files like <em>.cpp</em> and <em>.hpp</em>, and the opencv configure files <em>.props</em>
+                       
+                    </p>
+                    <p>
+                        Double click the visual studio solution file <strong>"RecognitionRateEvaluationProject.sln"</strong> to open the project with your visual studio.
+                    </p>
+                </div> 
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading  text-success">
+                    <h2>Step4. The Project DGML</h2>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        The graph is automatic generated DGML using visual studio code analysis tools, which 
+                        describes the basic skeleton of our keypoints recognition project.
+                     </p><br />
+                    <img src="kpts-recog/project_dgml.png" alt="kpts-recog/project_dgml.png"
+                         class="img-rounded" width="1100"/><br /><br />
+                    <p>
+                        The recognition rate tests for each kind of naive bayesian classifier embeded with different sampling operator
+                        are carried out in two cases:<br />
+                        in the first case (the <strong><mark>main_test1</mark></strong> in above graph image), 
+                        the number of keypoints on each reference image is kept constant (equals 800 in our experiments) but the number of 
+                        training samples for per keypoint is gradually increasing from 30 to 3000;<br />
+                        in the secong case (the <strong><mark>main_test2</mark></strong> in above graph image),
+                        the number of training samples for per keypoint is kept constant (equals 2000 in our experiments) but the number of
+                        keypoints on each reference image is gradually increasing from 100 to 1500; <br />
+                        The experiment results are illustrated using two images as follows:
+                    </p>
+                    <img src="kpts-recog/rferns_recog_rate.png" alt="kpts-recog/rferns_recog_rate.png"
+                         class="img-rounded" /><br /><br /> 
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading  text-success">
+                    <h2>Step5. Run The Project</h2>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        The C++ stardard entry function <strong><mark>int main(int argc, char* argv[])</mark></strong>
+                    is in the <mark>MainProc.cpp</mark> file, As the below image shows:                     
+                    </p><br />
+                    <img src="kpts-recog/main_func.png" alt="kpts-recog/main_func.png"
+                         class="img-rounded" width="1100" /><br /><br />
+                    <p>
+                        We recommend that you compile the project with <mark>Release</mark> model instead of 
+                        <mark>Debug</mark> model to make it run faster.
+                    </p>
+                    <p>
+                        You can specify the kind of feature operator and the kind of feature space by the codes like this:<br />
+                        <code>
+                            FeatureExtractor::OperatorTypes OperatorType = FeatureExtractor::OperatorTypes::RWT;<br />
+                            FeatureExtractor::FeatureSpaceTypes SpaceType = FeatureExtractor::FeatureSpaceTypes::BinaryEncode;
+                        </code><br />
+                        The OperatorTypes can be set as follows:<br />
+                        <code>enum OperatorTypes { IDT = 0, HAAR = 1, RWT = 2, LBP = 3, FERN = 4 };//特征采样算子的类型</code><br />
+                        The FeatureSpaceTypes can be set as follows:<br />
+                        <code>enum FeatureSpaceTypes { BinaryEncode = 0, UniformDiscretize = 1, CyclicBinaryEncode = 2 };//特征空间的类型</code>
+                    </p>
+                    <p>
+                        The <strong><mark>main_test1</mark></strong> and <strong><mark>main_test2</mark></strong> will be run on six reference images, which
+                         need long time to run over largely depend on your computer.
+                        you can only run <strong><mark>main_test1</mark></strong> by disabling  <strong><mark>main_test2</mark></strong>; or otherwise.
+                        
+                    </p>
+                    <br />
+                    <p>
+                        When the project start running, The <code>FeatureExtractor</code> class will try to read the sampling operator file that contains 
+                        the optimal sampling operators. So, you should not move the folder <strong>SamplingOperators</strong> and rename its files.
+                        If fail to read optimal_sampling_operator file, it will randomly generated a specified number of sampling operators
+                        under the default aperture constraint.
+                    </p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading  text-success">
+                    <h2>Step6. Save And Plot Experiment Results</h2>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        The experimental results are saved in <mark>.csv</mark> files at the folder <strong>ExperimentResults</strong>.<br />
+
+                        The results of <strong>main_test1</strong> is like this:<br />
+                        <code>string fileName = operatorTypeName + "-" + spaceTypeName + "-" + DataSetName[imgIdx] + "-recog_rate-test1.csv";</code><br />
+                        The results of <strong>main_test2</strong> is like this:<br />
+                        <code>string fileName = operatorTypeName + "-" + spaceTypeName + "-" + DataSetName[imgIdx] + "-recog_rate-test2.csv";</code>
+                    </p>
+                    <p>
+                        Once the specified evaluation run over, you can get the results in the folder <strong>ExperimentResults</strong>.
+                        Then, you can easily copy the data in <mark>csv</mark> files into Excel to plot the recognition rate curves.
+                        we have show one of our experiment results in the image below:
+                    </p>
+                    <img src="kpts-recog/plot_recograte_curves.png" alt="kpts-recog/plot_recograte_curves.png"
+                         class="img-rounded" width="1050" /><br /><br />
+                     
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading  text-success">
+                    <h2>Step7. Parallel Computing using OpenMP library</h2>
+                </div>
+                <div class="panel-body">
+                   <p>
+                       Because the learning of class probability distributions of <strong>K</strong> keypoints can be separated as
+                       <strong>K</strong> separated problems, which can be computed independently . So, we employ the OpenMP parallel
+                       technique to accelerate our project. The usage of OpenMP in visual studio is very easy. 
+                   </p>
+                    <ul>
+                        The step of using OpenMP in visual studio:
+                        <li>
+                            Step1: Copy the OpenMP dll from <mark>Microsoft Visual Studio 12.0\VC\lib\arm</mark> into your project directory
+                            <mark>RecognitionRateEvaluationProject\RecognitionRateEvaluationProject</mark>:<strong>vcomp120.dll</strong> for release model;
+                            and <strong>vcomp120d.dll</strong> for debug model. We have done this for you. if you use other version of visual studio, you can
+                            do this by yourself. the dll file name will be like <strong>vcomp110.dll</strong> etc.. 
+                        </li> 
+                        <li>
+                            Step2: Set your visual studio configuration to allow the using of OpenMP during compiling:
+                            <img src="kpts-recog/openmp_suport.png" height="220"/>
+                        </li>
+                        <li>
+                            Step3: Add a compling instruction above the loops,as follows:
+                            <img src="kpts-recog/omp_codes.png"" />
+                        </li>
+                    </ul>
+                    <br />
+                    <p>CPU Utilization Rate Comparision</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <img src="kpts-recog/no_omp_xiaoguo.png"/>
+                        </div>
+                        <div class="col-sm-6">
+                            <img src="kpts-recog/omp_xiaoguo.png" />
+                        </div>
+                    </div>
+                    <p>
+                        Since our computer is <mark>Dual-Core-Four-Threads</mark>, the <mark>for loop</mark> will be
+                        divided into four parts. Each part run on a single thread.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer text-center text-warning">
+        <p>www.studyai.cn (2016-2100), 版权属于张金明，未经允许，不得转载！</p>
     </div>
 </body>
 </html>
