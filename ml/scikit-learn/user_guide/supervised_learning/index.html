@@ -10,6 +10,16 @@
     <script src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
 
     <title>人工智能研究网</title>
+    <!--网站访问量统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 
 
@@ -204,63 +214,40 @@
                     <li class="toctree-l1">
                         <a class="reference internal" href="supervised_learning.html">1. 监督学习</a><ul>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="modules/linear_model.html">1.1. 广义线性模型</a><ul>
+                                <a class="reference internal" href="./linear_model.html">1.1. 广义线性模型</a><ul>
                                     <li class="toctree-l3">
-                                        <a class="reference internal" href="modules/linear_model.html#ordinary-least-squares">1.1.1. Ordinary Least Squares</a><ul>
-                                            <li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#ordinary-least-squares-complexity">1.1.1.1. Ordinary Least Squares Complexity</a></li>
-                                        </ul>
+                                        <a class="reference internal" href="./linear_model.html#ordinary-least-squares">1.1.1. 普通最小二乘法</a>
+                                        
                                     </li>
                                     <li class="toctree-l3">
-                                        <a class="reference internal" href="modules/linear_model.html#ridge-regression">1.1.2. Ridge Regression</a><ul>
-                                            <li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#ridge-complexity">1.1.2.1. Ridge Complexity</a></li>
-                                            <li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#setting-the-regularization-parameter-generalized-cross-validation">1.1.2.2. Setting the regularization parameter: generalized Cross-Validation</a></li>
-                                        </ul>
+                                        <a class="reference internal" href="./linear_model.html#ridge-regression">1.1.2. 岭回归</a>
+                                        
                                     </li>
                                     <li class="toctree-l3">
-                                        <a class="reference internal" href="modules/linear_model.html#lasso">1.1.3. Lasso</a><ul>
-                                            <li class="toctree-l4">
-                                                <a class="reference internal" href="modules/linear_model.html#setting-regularization-parameter">1.1.3.1. Setting regularization parameter</a><ul>
-                                                    <li class="toctree-l5"><a class="reference internal" href="modules/linear_model.html#using-cross-validation">1.1.3.1.1. Using cross-validation</a></li>
-                                                    <li class="toctree-l5"><a class="reference internal" href="modules/linear_model.html#information-criteria-based-model-selection">1.1.3.1.2. Information-criteria based model selection</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                        <a class="reference internal" href="./linear_model.html#lasso">1.1.3. Lasso</a>
+                                        
                                     </li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#elastic-net">1.1.4. Elastic Net</a></li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#multi-task-lasso">1.1.5. Multi-task Lasso</a></li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#least-angle-regression">1.1.6. Least Angle Regression</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#elastic-net">1.1.4. 弹性网</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#multi-task-lasso">1.1.5. 多任务 Lasso</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#least-angle-regression">1.1.6. 最小角回归（LAR）</a></li>
                                     <li class="toctree-l3">
-                                        <a class="reference internal" href="modules/linear_model.html#lars-lasso">1.1.7. LARS Lasso</a><ul>
-                                            <li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#mathematical-formulation">1.1.7.1. Mathematical formulation</a></li>
-                                        </ul>
+                                        <a class="reference internal" href="modules/linear_model.html#lars-lasso">1.1.7. LARS Lasso</a>
+                                        
                                     </li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#orthogonal-matching-pursuit-omp">1.1.8. Orthogonal Matching Pursuit (OMP)</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#orthogonal-matching-pursuit-omp">1.1.8.正交匹配追踪 (OMP)</a></li>
                                     <li class="toctree-l3">
-                                        <a class="reference internal" href="modules/linear_model.html#bayesian-regression">1.1.9. Bayesian Regression</a><ul>
-                                            <li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#bayesian-ridge-regression">1.1.9.1. Bayesian Ridge Regression</a></li>
-                                            <li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#automatic-relevance-determination-ard">1.1.9.2. Automatic Relevance Determination - ARD</a></li>
-                                        </ul>
+                                        <a class="reference internal" href="./linear_model.html#bayesian-regression">1.1.9. 贝叶斯回归</a>
+                                        
                                     </li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#logistic-regression">1.1.10. Logistic regression</a></li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#stochastic-gradient-descent-sgd">1.1.11. Stochastic Gradient Descent - SGD</a></li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#perceptron">1.1.12. Perceptron</a></li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#passive-aggressive-algorithms">1.1.13. Passive Aggressive Algorithms</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#logistic-regression">1.1.10. Logistic 回归</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#stochastic-gradient-descent-sgd">1.1.11. 随机梯度下降 - SGD</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#perceptron">1.1.12. 感知器</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#passive-aggressive-algorithms">1.1.13. Passive Aggressive Algorithms</a></li>
                                     <li class="toctree-l3">
-                                        <a class="reference internal" href="modules/linear_model.html#robustness-regression-outliers-and-modeling-errors">1.1.14. Robustness regression: outliers and modeling errors</a><ul>
-                                            <li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#different-scenario-and-useful-concepts">1.1.14.1. Different scenario and useful concepts</a></li>
-                                            <li class="toctree-l4">
-                                                <a class="reference internal" href="modules/linear_model.html#ransac-random-sample-consensus">1.1.14.2. RANSAC: RANdom SAmple Consensus</a><ul>
-                                                    <li class="toctree-l5"><a class="reference internal" href="modules/linear_model.html#details-of-the-algorithm">1.1.14.2.1. Details of the algorithm</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="toctree-l4">
-                                                <a class="reference internal" href="modules/linear_model.html#theil-sen-estimator-generalized-median-based-estimator">1.1.14.3. Theil-Sen estimator: generalized-median-based estimator</a><ul>
-                                                    <li class="toctree-l5"><a class="reference internal" href="modules/linear_model.html#theoretical-considerations">1.1.14.3.1. Theoretical considerations</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                        <a class="reference internal" href="./linear_model.html#robustness-regression-outliers-and-modeling-errors">1.1.14. 鲁棒性回归: outliers and modeling errors</a>
+                                        
                                     </li>
-                                    <li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions">1.1.15. Polynomial regression: extending linear models with basis functions</a></li>
+                                    <li class="toctree-l3"><a class="reference internal" href="./linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions">1.1.15. 多项式回归: 使用基函数扩展线性模型</a></li>
                                 </ul>
                             </li>
                             <li class="toctree-l2">

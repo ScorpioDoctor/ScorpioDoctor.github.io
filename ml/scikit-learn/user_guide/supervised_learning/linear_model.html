@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
+
+    <style>p{font-size:large}li{font-size:large}</style>
+
+    <script src="../../../../css-fonts-js/js/jquery.min.js"></script>
+    <script src="../../../../css-fonts-js/js/jquery.js"></script>
+    <script src="../../../../css-fonts-js/js/copybutton.js"></script>
+    <script src="../../../../css-fonts-js/js/doctools.js"></script>
+    <script src="../../../../css-fonts-js/js/jquery.maphilight.js"></script>
+    <script src="../../../../css-fonts-js/js/jquery.maphilight.min.js"></script>
+    <script src="../../../../css-fonts-js/js/underscore.js"></script>
+    <script src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
+    
+
+    <title>人工智能研究网</title>
+    <!--网站访问量统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../../../../index.html">studyai.cn</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../../../../index.html">网站主页</a></li>
+                <li><a href="../../../../webmaster.html">站长风采</a></li>
+                <li><a href="../../../../sponsor.html">赞助我们</a></li>
+                <li><a href="../../../index.html">机器学习主页</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="section" id="generalized-linear-models">
+            <h1>1.1. 广义线性模型<a>¶</a></h1>
+                <p>
+                    下面将要介绍的这些方法主要被用于解决<strong>回归</strong>问题。在线性回归问题中，目标变量被认为是
+                    输入变量的线性组合。用数学语言表示如下：
+                    如果
+                     <img class="math" src="./images/4edbd88750539c2610a7bbfcf79c33cf1ae7a36c.png" alt="\hat{y}" /> 
+                    是回归模型的预测值，那么
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/dfdf17e3ecd9ca5506b2fbf5a7ebd70412326e81.png" alt="\hat{y}(w, x) = w_0 + w_1 x_1 + ... + w_p x_p" /></p>
+                </div>
+                <p>
+                    在整个模块中，我们指定向量
+                    <img class="math" src="./images/eb9ab421187ecd58130545c735c34483dc037fe1.png" alt="w = (w_1,
+                     ..., w_p)" /> 作为线性系数 <code class="docutils literal"><span class="pre">coef_</span></code> 以及 <img class="math" src="./images/87a0c2ec97d8b8f22868ec1242d2417f25d62240.png" alt="w_0" />
+                     作为截距 <code class="docutils literal"><span class="pre">intercept_</span></code>.
+                </p>
+                <p>
+                    如果要用广义线性模型去执行分类任务，则要用Logistic回归
+                    ( <a class="reference internal" href="#logistic-regression"><span>Logistic regression</span></a>.).
+                </p>
+            <div class="section" id="ordinary-least-squares">
+                <h2>1.1.1. 普通最小二乘法<a>¶</a></h2>
+                    <p>
+                        <code class="xref py py-class docutils literal"><span class="pre">LinearRegression</span></code> 
+                        使用系数
+                        <img class="math" src="./images/b0c860d08d30011cba6f6a97b98b32b8d747e51a.png" alt="w = (w_1, ..., w_p)" />
+                         拟合一个线性模型以使得<strong>观测响应</strong>与<strong>预测响应</strong>之间的残差平方和达到最小。
+                        所谓<strong>观测响应</strong>是指来自数据集的
+                        目标变量的值，而<strong>预测响应</strong>则是指由拟合得到的回归方程在对应的输入变量处给出的目标变量的预测值。
+                        以上的文字描述变成数学表述，就是这样的：
+                    </p>
+                    <div class="math">
+                        <p class="text-center"><img src="./images/32028e85feb455d07503a027ba607eafc7909976.png" alt="\underset{w}{min\,} {|| X w - y||_2}^2" /></p>
+                    </div>
+                    <div class="figure align-center">
+                        <img alt="./images/plot_ols_0011.png" src="./images/plot_ols_0011.png" style="width: 400.0px; height: 300.0px;" />
+                    </div>
+                    <p>
+                        <code class="xref py py-class docutils literal"><span class="pre">LinearRegression</span></code> 
+                        的成员方法 <code class="docutils literal"><span class="pre">fit</span></code>接受数组参数 X, y
+                        并将计算出的线性模型的系数 
+                        <img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" /> 
+                        存放在他的成员变量
+                        <code class="docutils literal"><span class="pre">coef_</span></code> 中:
+                    </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span> <span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([ 0.5,  0.5])</span>
+</pre>
+                    </div>
+                </div>
+                    <p>
+                        然而，普通最小二乘法的系数估计依赖于模型的条件的独立性. 
+                        当模型条件存在相关性以及设计矩阵<img class="math" src="./images/f026aecf11ec7f6141ab863f260d395f94b10f51.png" alt="X" />
+                        的各个列之间存在近似的线性依赖时，设计矩阵就会变得越来越<strong>奇异(singular)</strong>。
+                        这将会导致LS的估计对观测响应中的随机误差非常的敏感，从而产生很大的方差。
+                        这种<strong>多重共线性(multicollinearity)</strong>的情形时常会出现在比如没有经过
+                        仔细的实验设计就获得的观测数据中。
+                    </p>
+                    <div class="topic">
+                        <p class="topic-title first">例子:</p>
+                        <ul class="simple">
+                            <li><a class="reference internal" href="../auto_examples/linear_model/plot_ols.html#example-linear-model-plot-ols-py"><span>Linear Regression 例子</span></a></li>
+                        </ul>
+                    </div>
+            </div>
+
+            <div class="section" id="ridge-regression">
+                <h2>1.1.2. 岭回归<a>¶</a></h2>
+                <p>
+                    <code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code> 
+                    回归通过在回归系数上强制加入一个惩罚因子解决了
+                    <a class="reference internal" href="#ordinary-least-squares"><span>Ordinary Least Squares</span></a> 
+                    中存在的一些问题。岭系数是通过最小化带有惩罚因子的残差平方和求解的：
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/11f0787a645f4b5f2b810c0d00618785b58ff574.png" alt="\underset{w}{min\,} {{|| X w - y||_2}^2 + \alpha {||w||_2}^2}" /></p>
+                </div>
+                <p>
+                    其中, <img class="math" src="./images/c8b8590ededc6cdd4c311a1c5584090e60b95be4.png" alt="\alpha \geq 0" /> 
+                    是一个用于控制回归系数缩减量的复杂度参数：
+                    <img class="math" src="./images/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha" />
+                    的值越大, 回归系数的缩减量就越大并且回归系数也会因此对观测数据的共线性更加鲁棒。
+                </p>
+                <div class="figure align-center">
+                    <img class="align-center" alt="./images/plot_ridge_path_0011.png" src="./images/plot_ridge_path_0011.png" style="width: 400.0px; height: 300.0px;" />
+                </div>
+                <p>
+                    和其他线性模型一样, <code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code>
+                     的成员方法<code class="docutils literal"><span class="pre">fit</span></code> 以数组
+                     X, y 为输入参数，并且将估计出的线性模型的回归系数
+                    <img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" />
+                    存放在它的成员变量 <code class="docutils literal"><span class="pre">coef_</span></code> 中:
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Ridge</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span> <span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> 
+<span class="go">Ridge(alpha=0.5, copy_X=True, fit_intercept=True, max_iter=None,</span>
+<span class="go">      normalize=False, random_state=None, solver=&#39;auto&#39;, tol=0.001)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([ 0.34545455,  0.34545455])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span> 
+<span class="go">0.13636...</span>
+</pre>
+                    </div>
+                </div>
+                <div class="topic">
+                    <p class="topic-title first">例子:</p>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="../auto_examples/linear_model/plot_ridge_path.html#example-linear-model-plot-ridge-path-py">
+                            <span>绘制岭迹图(回归系数与正则化因子的函数关系图)</span></a>
+                        </li>
+                        <li><a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#example-text-document-classification-20newsgroups-py">
+                            <span>使用稀疏特征进行文本文档分类</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>1.1.2.2. 设置正则化参数: 广义交叉验证<a>¶</a></h3>
+                    <p>
+                        <code class="xref py py-class docutils literal"><span class="pre">RidgeCV</span></code>
+                        实现了对alpha参数进行交叉验证的岭回归算法。该对象的工作原理与网格搜索交叉验证GridSearchCV的原理是一样的
+                        ，但是它使用了广义交叉验证(GCV)--一个有效的留一法交叉验证(leave-one-out cross-validation)形式。
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>       
+<span class="go">RidgeCV(alphas=[0.1, 1.0, 10.0], cv=None, fit_intercept=True, scoring=None,</span>
+<span class="go">    normalize=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">alpha_</span>                                      
+<span class="go">0.1</span>
+</pre>
+                        </div>
+                    </div>
+                    <div class="topic">
+                        <p class="topic-title first">参考文献</p>
+                        <ul class="simple">
+                            <li>
+                                &#8220;Notes on Regularized Least Squares&#8221;, Rifkin &amp; Lippert (<a class="reference external" href="http://cbcl.mit.edu/projects/cbcl/publications/ps/MIT-CSAIL-TR-2007-025.pdf">technical report</a>,
+                                <a class="reference external" href="http://www.mit.edu/~9.520/spring07/Classes/rlsslides.pdf">course slides</a>).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section" id="lasso">
+                <h2>1.1.3. Lasso<a>¶</a></h2>
+                <p>
+                    <code class="xref py py-class docutils literal"><span class="pre">Lasso</span></code>
+                     是一个用于估计稀疏系数的线性模型。由于此模型偏向于输出那些具有较少参数的解，
+                    而且能够有效的压缩与给定问题有依赖关系的变量的数目，所以它在某些情景下非常有用。
+                    正因为这个原因，Lasso和它的各种变体是压缩感知领域的基础。在某些条件下，它可以恢复
+                    非零权重的精确集合(see
+                    <a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#example-applications-plot-tomography-l1-reconstruction-py">
+                    <span>压缩感知: 使用L1 prior进行断层重建 (Lasso)</span></a>)。
+                </p>
+                <p>
+                    用数学语言表述, 它是由带有<img class="math" src="./images/ed1224e5faf752a5cd66f7e2468ecc4f14208cf9.png" alt="\ell_1" />
+                     prior的正则化因子的线性模型构成，其目标函数是去最小化下式：
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/5ff15825a85204658e3e5aa6e3b5952b8f709c27.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}" /></p>
+                </div>
+                <p>
+                    因此，Lasso的估计过程是去求解一个带有<img class="math" src="./images/984dfa7241b6cabdc9e84f69458e973887308820.png" alt="\alpha ||w||_1" />
+                    的惩罚因子的最小二乘模型的最小化问题。其中，
+                    <img class="math" src="./images/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha" />
+                    是一个常数；
+                    <img class="math" src="./images/a31e290885e74a51fa7f4d3e382e257a552587c8.png" alt="||w||_1" />
+                    是参数向量的<img class="math" src="./images/ed1224e5faf752a5cd66f7e2468ecc4f14208cf9.png" alt="\ell_1" />范数。
+                </p>
+                <p>
+                    对于类<code class="xref py py-class docutils literal"><span class="pre">Lasso</span></code>
+                    的实现采用的是坐标下降法(coordinate descent)来拟合回归系数。
+                    另外还有一种实现方法，请看<a class="reference internal" href="#least-angle-regression">
+                    <span>最小角回归(LAR)</span></a>。
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">Lasso(alpha=0.1, copy_X=True, fit_intercept=True, max_iter=1000,</span>
+<span class="go">   normalize=False, positive=False, precompute=False, random_state=None,</span>
+<span class="go">   selection=&#39;cyclic&#39;, tol=0.0001, warm_start=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([ 0.8])</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    Also useful for lower-level tasks is the function <code class="xref py py-func docutils literal"><span class="pre">lasso_path</span></code>
+                    that  computes the coefficients along the full path of possible values.
+                </p>
+                <div class="topic">
+                    <p class="topic-title first">例子:</p>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#example-linear-model-plot-lasso-and-elasticnet-py">
+                            <span>用于稀疏信号的LASSO和弹性网</span></a></li>
+                        <li><a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#example-applications-plot-tomography-l1-reconstruction-py">
+                            <span>压缩感知: 使用L1 prior进行断层重建</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="admonition note">
+                    <p class="first admonition-title">注意：</p>
+                    <p><strong>用Lasso进行特征选择</strong></p>
+                    <p class="last">
+                        由于Lasso回归产生稀疏模型，它可被用于执行特征选择任务，详情请看
+                        <a class="reference internal" href="feature_selection.html#l1-feature-selection">
+                        <span>基于L1范数的特征选择</span></a>.
+                    </p>
+                </div>
+                
+                <div class="admonition note">
+                    <p class="first admonition-title">注意：</p>
+                    <p><strong>随机稀疏化</strong></p>
+                    <p class="last">
+                        对于特征选择或稀疏恢复，使用<a class="reference internal" href="feature_selection.html#randomized-l1">
+                        随机稀疏模型(<span>Randomized sparse models</span>)</a>将会十分有趣。
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h3>1.1.3.1. 设置正则化参数<a >¶</a></h3>
+                    <p>
+                        正则化参数 <code class="docutils literal"><span class="pre">alpha</span></code> 
+                        控制着Lasso估计出的回归系数的稀疏程度。
+                    </p>
+                    <div class="section">
+                        <h4>1.1.3.1.1. 使用交叉验证<a>¶</a></h4>
+                        <p>
+                            scikit-learn暴露了用交叉验证来设置Lasso的正则化参数<code class="docutils literal"><span class="pre">alpha</span></code> 
+                            的一些对象： <code class="xref py py-class docutils literal"><span class="pre">LassoCV</span></code>
+                            以及 <code class="xref py py-class docutils literal"><span class="pre">LassoLarsCV</span></code>。
+                            <code class="xref py py-class docutils literal"><span class="pre">LassoLarsCV</span></code>是基于
+                            <span>最小角回归（LAR）</span>算法的。
+                        </p>
+                        <p>
+                            对于存在很多共线回归因子的高维数据集，<code class="xref py py-class docutils literal"><span class="pre">LassoCV</span></code>
+                            在大多数时候都是比较好的。
+                            然而，<code class="xref py py-class docutils literal"><span class="pre">LassoLarsCV</span></code>
+                             的优点是探索更多的alpha参数的相关值，并且 如果相比观察的数量，样本的数量是非常小的时候，她总是比
+                            <code class="xref py py-class docutils literal"><span class="pre">LassoCV</span></code>快很多。
+                        </p>
+                        <p class="centered">
+                            <strong><a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_1" src="./images/plot_lasso_model_selection_0021.png" style="width: 384.0px; height: 288.0px;" /></a>
+                             <a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_2" src="./images/plot_lasso_model_selection_0031.png" style="width: 384.0px; height: 288.0px;" /></a></strong>
+                        </p>
+                    </div>
+                    <div class="section" >
+                        <h4>1.1.3.1.2. 基于信息准则的模型选择<a>¶</a></h4>
+                        <p>
+                            作为除交叉验证之外的另一种方法，估计器对象
+                            <code class="xref py py-class docutils literal"><span class="pre">LassoLarsIC</span></code>
+                            提出使用 Akaike信息准则(AIC)和贝叶斯信息准则(BIC)。因为使用K-fold交叉验证时正则路径只计算一次而不是K+1次，
+                            所以这些准则是一个计算上更便宜的替代品,以找到最佳的α.
+                            然而，这样的准则需要对解
+                            的自由度做一个适当的估计。该估计是来自大样本（渐近结果），并假设该模型是正确的（即这些数据
+                            确实是由假设的模型产生的）。当待求解的问题的条件数很差的时候（比如特征个数
+                            大于样本数量的时候），这些准则就会有崩溃的风险                       
+                         </p>
+                        <div class="figure align-center">
+                            <a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_model_selection.html">
+                            <img alt="./images/plot_lasso_model_selection_0011.png" src="./images/plot_lasso_model_selection_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+                        </div>
+                        <div class="topic">
+                            <p class="topic-title first">例子:</p>
+                            <ul class="simple">
+                                <li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_model_selection.html#example-linear-model-plot-lasso-model-selection-py">
+                                    <span>Lasso model selection: Cross-Validation / AIC / BIC</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="elastic-net">
+                <h2>1.1.4. 弹性网<a>¶</a></h2>
+                <p>
+                    <code class="xref py py-class docutils literal"><span class="pre">弹性网(ElasticNet)</span></code>
+                    是一个附加了两部分正则化项L1和L2的线性模型。L1与L2的组合允许我们学习一个稀疏模型，其中只有少数的回归系数
+                    是非零的，像<code class="xref py py-class docutils literal"><span class="pre">Lasso</span></code>一样,
+                    与此同时它仍然可以保持<code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code>的正则化特性。
+                    我们使用<code class="docutils literal"><span class="pre">l1_ratio</span></code> 参数控制L1和L2的凸组合。
+                </p>
+                <p>
+                    当有多个相互关联的特征时，弹性网是非常有用的。Lasso可能随机的选择一个，而弹性网可能把两个
+                    都挑选上。
+                </p>
+                <p>
+                    在Lasso和Ridge之间折中的一个实用的优势是允许弹性网继承一些Ridge在旋转情况下的稳定性。
+                </p>
+                <p>在弹性网模型中，我们要最小化的目标函数如下所示：</p>
+                <div class="math">
+                    <p class="text-center">
+                        <img src="./images/1ad2316c6e8615331c76273a683a0560d1e66d07.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha \rho ||w||_1 +
+                                                            \frac{\alpha(1-\rho)}{2} ||w||_2 ^ 2}" />
+                    </p>
+                </div>
+                <div class="figure align-center">
+                    <a class="reference external image-reference" 
+                       href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html">
+                        <img alt="./images/plot_lasso_coordinate_descent_path_0011.png"
+                             src="./images/plot_lasso_coordinate_descent_path_0011.png"
+                             style="width: 400.0px; height: 300.0px;" />
+                    </a>
+                </div>
+
+                <p>
+                    这个类 <code class="xref py py-class docutils literal"><span class="pre">ElasticNetCV</span></code>
+                     可以通过交叉验证来设置参数
+                    <code class="docutils literal"><span class="pre">alpha</span></code>
+                     (<img class="math" src="./images/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha" />) 
+                    以及 <code class="docutils literal"><span class="pre">l1_ratio</span></code>
+                     (<img class="math" src="./images/f574498915fa9e02eeb5141c24835d077eba3e75.png" alt="\rho" />)。
+                </p>
+                <div class="topic">
+                    <p class="topic-title first">Examples:</p>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#example-linear-model-plot-lasso-and-elasticnet-py"><span>Lasso and Elastic Net for Sparse Signals</span></a></li>
+                        <li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html#example-linear-model-plot-lasso-coordinate-descent-path-py"><span>Lasso and Elastic Net</span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="multi-task-lasso">
+                <h2>1.1.5. 多任务 Lasso<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="least-angle-regression">
+                <h2>1.1.6. 最小角回归（LAR）<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="lars-lasso">
+                <h2>1.1.7. LARS Lasso<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="orthogonal-matching-pursuit-omp">
+                <h2>1.1.8. 正交匹配追踪(OMP)<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="bayesian-regression">
+                <h2>1.1.9. 贝叶斯回归<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="logistic-regression">
+                <h2>1.1.10. Logistic 回归<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="stochastic-gradient-descent-sgd">
+                <h2>1.1.11. 随机梯度下降(SGD)<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="perceptron">
+                <h2>1.1.12. 感知器<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="passive-aggressive-algorithms">
+                <h2>1.1.13. Passive Aggressive Algorithms<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="robustness-regression-outliers-and-modeling-errors">
+                <h2>1.1.14. 鲁棒性回归: 外点与模型误差<a>¶</a></h2>
+            </div>
+
+            <div class="section" id="polynomial-regression-extending-linear-models-with-basis-functions">
+                <h2>1.1.15. 多项式回归：使用基函数扩展线性模型<a>¶</a></h2>
+            </div>
+
+        </div>
+
+
+     </div>
+
+
+</body>
+</html>

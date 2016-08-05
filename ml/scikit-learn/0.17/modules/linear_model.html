@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -216,16 +216,22 @@
             
   <div class="section" id="generalized-linear-models">
 <span id="linear-model"></span><h1>1.1. Generalized Linear Models<a class="headerlink" href="#generalized-linear-models" title="Permalink to this headline">¶</a></h1>
-<p>The following are a set of methods intended for regression in which
-the target value is expected to be a linear combination of the input
-variables. In mathematical notion, if <img class="math" src="../_images/math/4edbd88750539c2610a7bbfcf79c33cf1ae7a36c.png" alt="\hat{y}"/> is the predicted
-value.</p>
-<div class="math">
-<p><img src="../_images/math/dfdf17e3ecd9ca5506b2fbf5a7ebd70412326e81.png" alt="\hat{y}(w, x) = w_0 + w_1 x_1 + ... + w_p x_p"/></p>
-</div><p>Across the module, we designate the vector <img class="math" src="../_images/math/eb9ab421187ecd58130545c735c34483dc037fe1.png" alt="w = (w_1,
-..., w_p)"/> as <code class="docutils literal"><span class="pre">coef_</span></code> and <img class="math" src="../_images/math/87a0c2ec97d8b8f22868ec1242d2417f25d62240.png" alt="w_0"/> as <code class="docutils literal"><span class="pre">intercept_</span></code>.</p>
-<p>To perform classification with generalized linear models, see
-<a class="reference internal" href="#logistic-regression"><span>Logistic regression</span></a>.</p>
+        <p>
+            The following are a set of methods intended for regression in which
+        the target value is expected to be a linear combination of the input
+        variables. In mathematical notion, if <img class="math" src="../_images/math/4edbd88750539c2610a7bbfcf79c33cf1ae7a36c.png" alt="\hat{y}"/> is the predicted
+        value.
+        </p>
+        <div class="math">
+            <p><img src="../_images/math/dfdf17e3ecd9ca5506b2fbf5a7ebd70412326e81.png" alt="\hat{y}(w, x) = w_0 + w_1 x_1 + ... + w_p x_p"/></p>
+        </div>
+      <p>Across the module, we designate the vector <img class="math" src="../_images/math/eb9ab421187ecd58130545c735c34483dc037fe1.png" alt="w = (w_1,
+..., w_p)"/> as <code class="docutils literal"><span class="pre">coef_</span></code> and <img class="math" src="../_images/math/87a0c2ec97d8b8f22868ec1242d2417f25d62240.png" alt="w_0"/> as <code class="docutils literal"><span class="pre">intercept_</span></code>.
+      </p>
+        <p>
+            To perform classification with generalized linear models, see
+            <a class="reference internal" href="#logistic-regression"><span>Logistic regression</span></a>.
+        </p>
 <div class="section" id="ordinary-least-squares">
 <span id="id1"></span><h2>1.1.1. Ordinary Least Squares<a class="headerlink" href="#ordinary-least-squares" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="sklearn.linear_model.LinearRegression"><code class="xref py py-class docutils literal"><span class="pre">LinearRegression</span></code></a> fits a linear model with coefficients
@@ -235,7 +241,8 @@ responses predicted by the linear approximation. Mathematically it
 solves a problem of the form:</p>
 <div class="math">
 <p><img src="../_images/math/32028e85feb455d07503a027ba607eafc7909976.png" alt="\underset{w}{min\,} {|| X w - y||_2}^2"/></p>
-</div><div class="figure align-center">
+</div>
+<div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/linear_model/plot_ols.html"><img alt="../_images/plot_ols_0011.png" src="../_images/plot_ols_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
 </div>
 <p><a class="reference internal" href="generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="sklearn.linear_model.LinearRegression"><code class="xref py py-class docutils literal"><span class="pre">LinearRegression</span></code></a> will take in its <code class="docutils literal"><span class="pre">fit</span></code> method arrays X, y
@@ -348,7 +355,8 @@ weights (see
 as regularizer. The objective function to minimize is:</p>
 <div class="math">
 <p><img src="../_images/math/5ff15825a85204658e3e5aa6e3b5952b8f709c27.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}"/></p>
-</div><p>The lasso estimate thus solves the minimization of the
+</div>
+    <p>The lasso estimate thus solves the minimization of the
 least-squares penalty with <img class="math" src="../_images/math/984dfa7241b6cabdc9e84f69458e973887308820.png" alt="\alpha ||w||_1"/> added, where
 <img class="math" src="../_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> is a constant and <img class="math" src="../_images/math/a31e290885e74a51fa7f4d3e382e257a552587c8.png" alt="||w||_1"/> is the <img class="math" src="../_images/math/ed1224e5faf752a5cd66f7e2468ecc4f14208cf9.png" alt="\ell_1"/>-norm of
 the parameter vector.</p>
@@ -444,7 +452,8 @@ Elastic-Net to inherit some of Ridge&#8217;s stability under rotation.</p>
 <div class="math">
 <p><img src="../_images/math/1ad2316c6e8615331c76273a683a0560d1e66d07.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha \rho ||w||_1 +
 \frac{\alpha(1-\rho)}{2} ||w||_2 ^ 2}"/></p>
-</div><div class="figure align-center">
+</div>
+    <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html"><img alt="../_images/plot_lasso_coordinate_descent_path_0011.png" src="../_images/plot_lasso_coordinate_descent_path_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
 </div>
 <p>The class <a class="reference internal" href="generated/sklearn.linear_model.ElasticNetCV.html#sklearn.linear_model.ElasticNetCV" title="sklearn.linear_model.ElasticNetCV"><code class="xref py py-class docutils literal"><span class="pre">ElasticNetCV</span></code></a> can be used to set the parameters
