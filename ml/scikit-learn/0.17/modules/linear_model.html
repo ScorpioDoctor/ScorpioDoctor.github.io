@@ -477,8 +477,13 @@ with a simple Lasso or a MultiTaskLasso. The Lasso estimates yields
 scattered non-zeros while the non-zeros of the MultiTaskLasso are full
 columns.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_1" src="../_images/plot_multi_task_lasso_support_0011.png" style="width: 384.0px; height: 240.0px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_2" src="../_images/plot_multi_task_lasso_support_0021.png" style="width: 384.0px; height: 288.0px;" /></a></strong></p><p class="centered">
-<strong>Fitting a time-series model, imposing that any active feature be active at all times.</strong></p><div class="topic">
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_1" src="../_images/plot_multi_task_lasso_support_0011.png" style="width: 384.0px; height: 240.0px;" /></a>
+     <a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_2" src="../_images/plot_multi_task_lasso_support_0021.png" style="width: 384.0px; height: 288.0px;" /></a>
+    </strong>
+</p>
+    <p class="centered">
+<strong>Fitting a time-series model, imposing that any active feature be active at all times.</strong></p>
+    <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html#example-linear-model-plot-multi-task-lasso-support-py"><span>Joint feature selection with multi-task Lasso</span></a></li>
@@ -489,10 +494,12 @@ columns.</p>
 The objective function to minimize is:</p>
 <div class="math">
 <p><img src="../_images/math/e5acafef51b1b67dc6d79c39f3ba645819a2d59b.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X W - Y||_2 ^ 2 + \alpha ||W||_{21}}"/></p>
-</div><p>where;</p>
+</div>
+    <p>where;</p>
 <div class="math">
 <p><img src="../_images/math/3fc06d54f9cb1a3e988483f5bbaa2a7f3d0ccbdd.png" alt="||W||_{2 1} = \sum_i \sqrt{\sum_j w_{ij}^2}"/></p>
-</div><p>The implementation in the class <a class="reference internal" href="generated/sklearn.linear_model.MultiTaskLasso.html#sklearn.linear_model.MultiTaskLasso" title="sklearn.linear_model.MultiTaskLasso"><code class="xref py py-class docutils literal"><span class="pre">MultiTaskLasso</span></code></a> uses coordinate descent as
+</div>
+    <p>The implementation in the class <a class="reference internal" href="generated/sklearn.linear_model.MultiTaskLasso.html#sklearn.linear_model.MultiTaskLasso" title="sklearn.linear_model.MultiTaskLasso"><code class="xref py py-class docutils literal"><span class="pre">MultiTaskLasso</span></code></a> uses coordinate descent as
 the algorithm to fit the coefficients.</p>
 </div>
 <div class="section" id="least-angle-regression">
@@ -529,7 +536,8 @@ Statistics article.</li>
 </ul>
 </div></blockquote>
 <p>The LARS model can be used using estimator <a class="reference internal" href="generated/sklearn.linear_model.Lars.html#sklearn.linear_model.Lars" title="sklearn.linear_model.Lars"><code class="xref py py-class docutils literal"><span class="pre">Lars</span></code></a>, or its
-low-level implementation <a class="reference internal" href="generated/sklearn.linear_model.lars_path.html#sklearn.linear_model.lars_path" title="sklearn.linear_model.lars_path"><code class="xref py py-func docutils literal"><span class="pre">lars_path</span></code></a>.</p>
+low-level implementation <a class="reference internal" href="generated/sklearn.linear_model.lars_path.html#sklearn.linear_model.lars_path" title="sklearn.linear_model.lars_path"><code class="xref py py-func docutils literal"><span class="pre">lars_path</span></code></a>.
+    </p>
 </div>
 <div class="section" id="lars-lasso">
 <h2>1.1.7. LARS Lasso<a class="headerlink" href="#lars-lasso" title="Permalink to this headline">¶</a></h2>
@@ -590,7 +598,8 @@ fixed number of non-zero elements:</p>
 <div class="math">
 <p><img src="../_images/math/1e6016cbca75e249f466fe617256488041db5da2.png" alt="\text{arg\,min\,} ||y - X\gamma||_2^2 \text{ subject to } \
 ||\gamma||_0 \leq n_{nonzero\_coefs}"/></p>
-</div><p>Alternatively, orthogonal matching pursuit can target a specific error instead
+</div>
+    <p>Alternatively, orthogonal matching pursuit can target a specific error instead
 of a specific number of non-zero coefficients. This can be expressed as:</p>
 <div class="math">
 <p><img src="../_images/math/8b0cbfdc640be5d9203f375b756bf873bc6b65e6.png" alt="\text{arg\,min\,} ||\gamma||_0 \text{ subject to } ||y-X\gamma||_2^2 \

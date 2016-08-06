@@ -397,22 +397,228 @@
 
             <div class="section" id="multi-task-lasso">
                 <h2>1.1.5. 多任务 Lasso<a>¶</a></h2>
+                <p>
+                    多任务Lasso <a><code class="xref py py-class docutils literal"><span class="pre">MultiTaskLasso</span></code></a> 
+                    是一个用于联合估计多元回归问题的稀疏系数的线性模型： <code class="docutils literal"><span class="pre">y</span></code> 
+                    是一个2D 数组,其shape为(n_samples, n_tasks). 该问题的约束是被选中的那些特征对所有回归问题都必须是一样的。
+                    因此也被称为 tasks.
+                </p>
+                <p>
+                    下图比较了由简单Lasso与MultiTaskLasso所获得的回归系数中非零系数的位置。
+                    简单Lasso估计产生一系列分散的非零系数，而MultiTaskLasso产生的非零系数是充满整列的(full
+                    columns)。 
+                </p>
+                <p class="centered">
+                    <strong>
+                        <img alt="multi_task_lasso_1" src="./images/plot_multi_task_lasso_support_0011.png" style="width: 384.0px; height: 240.0px;" />
+                        <img alt="multi_task_lasso_2" src="./images/plot_multi_task_lasso_support_0021.png" style="width: 384.0px; height: 288.0px;" />
+                    </strong>
+                </p>
+                <p class="centered">
+                    <strong>拟合一个时间序列模型, imposing that any active feature be active at all times.</strong>
+                </p>
+                <div class="topic">
+                    <p class="topic-title first">例子:</p>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html#example-linear-model-plot-multi-task-lasso-support-py"><span>使用multi-task Lasso进行联合特征选择</span></a></li>
+                    </ul>
+                </div>
+
+                <p>
+                    从数学角度看，它是一个附加了混合
+                    <img class="math" src="./images/ed1224e5faf752a5cd66f7e2468ecc4f14208cf9.png" alt="\ell_1" />
+                    <img class="math" src="./images/00534d854d26fe2a55c1065948f9b94f66255a4a.png" alt="\ell_2" />
+                     prior作为正则化项的线性模型.
+                    我们要最小化的目标函数是：
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/e5acafef51b1b67dc6d79c39f3ba645819a2d59b.png" 
+                                                alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X W - Y||_2 ^ 2 + \alpha ||W||_{21}}" /></p>
+                </div>
+                <p>其中;</p>
+                <div class="math">
+                    <p class="text-center">
+                        <img src="./images/3fc06d54f9cb1a3e988483f5bbaa2a7f3d0ccbdd.png"
+                             alt="||W||_{2 1} = \sum_i \sqrt{\sum_j w_{ij}^2}" />
+                    </p>
+                </div>
+                <p> 
+                    <code class="xref py py-class docutils literal"><span class="pre">MultiTaskLasso</span></code>
+                    类的实现使用了坐标下降法来拟合回归系数。
+                </p>
             </div>
 
             <div class="section" id="least-angle-regression">
                 <h2>1.1.6. 最小角回归（LAR）<a>¶</a></h2>
+                <p>
+                    最小角回归（LARS）是一个用于高维数据的回归算法。
+                </p>
+                <p>LARS的优点是:</p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>
+                                当p>>n时，它是数值高效的。 (i.e., 也就是维数的数量显著的大于样本点)
+                            </li>
+                            <li>
+                                它计算起来像forward selection一样快，并且具有与普通最小二乘法一样的复杂度。
+                            </li>
+                            <li>
+                                它产生一个完整的分段线性的解决方案路径，这在交叉验证或类似的模型调整中是有用的。
+                            </li>
+                            <li>
+                                如果两个变量与响应有着几乎同样的相关性，那么他们的系数也应该以近似相同的速率
+                                增加。该算法在这种情况下的行为表现与我们的直觉期望是符合的，而且也更加的稳定。
+                            </li>
+                            <li>
+                                他可以被很容易的修改用来产生其他estimators的解，例如 Lasso的解。
+                            </li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <p>LARS的缺点是:</p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>
+                                因为LARS是基于迭代的残差再拟合，它可能会对噪声的影响比较敏感。这一问题
+                                在Efron et al. (2004) Annals of Statistics article.中有详细的讨论。
+                            </li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <p>
+                    LARS 模型的使用，既可以用<code class="xref py py-class docutils literal"><span class="pre">Lars</span></code>类, 
+                    也可以用更底层的实现 <code class="xref py py-func docutils literal"><span class="pre">lars_path</span></code>.
+                </p>
             </div>
 
             <div class="section" id="lars-lasso">
                 <h2>1.1.7. LARS Lasso<a>¶</a></h2>
+                <p>
+                    <code class="xref py py-class docutils literal"><span class="pre">LassoLars</span></code>
+                    是一个用LARS算法实现的Lasso模型。与基于坐标下降法(coordinate_descent)的实现不一样，这个版本的
+                    Lasso产生精确的解。该解是做为回归系数的范数的分段线性函数。
+                </p>
+                <div class="figure align-center">
+                    <img alt="./images/plot_lasso_lars_0011.png" src="./images/plot_lasso_lars_0011.png" style="width: 400.0px; height: 300.0px;" />
+                </div>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LassoLars</span><span class="p">(</span><span class="n">alpha</span><span class="o">=.</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  
+<span class="go">LassoLars(alpha=0.1, copy_X=True, eps=..., fit_intercept=True,</span>
+<span class="go">     fit_path=True, max_iter=500, normalize=True, positive=False,</span>
+<span class="go">     precompute=&#39;auto&#39;, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>    
+<span class="go">array([ 0.717157...,  0.        ])</span>
+</pre>
+                    </div>
+                </div>
+                <div class="topic">
+                    <p class="topic-title first">例子:</p>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_lars.html#example-linear-model-plot-lasso-lars-py"><span>Lasso path using LARS</span></a></li>
+                    </ul>
+                </div>
+                <p>
+                    Lars算法提供回归系数沿着正则化参数的完整路径，因此一个共同的操作是
+                    由使用函数<code class="xref py py-func docutils literal"><span class="pre">lars_path</span></code>
+                    检索路径所组成的。
+                </p>
+                <div class="section" >
+                    <h3>1.1.7.1. 数学表述形式<a>¶</a></h3>
+                    <p>
+                        该算法与前向逐步回归方法有些相似，但是它不会在每一步都包含变量，估计出的参数沿着一个方向
+                        增加。该方向equiangular to each one’s correlations with the residual.
+                    </p>
+                    <p>
+                        与给出一个向量结果不同，LARS的解是由一个曲线构成。该曲线代表了与参数向量的L1范数的每一个值
+                        所对应的解。全部回归系数路径被存储在一个数组
+                        <code class="docutils literal"><span class="pre">coef_path_</span></code>中,
+                        该数组的size是(n_features, max_features+1). 第一列总是等于0。
+                    </p>
+                    <div class="topic">
+                        <p class="topic-title first">参考文献:</p>
+                        <ul class="simple">
+                            <li>
+                                Original Algorithm is detailed in the paper <a class="reference external" href="http://www-stat.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf">Least Angle Regression</a>
+                                by Hastie et al.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="section" id="orthogonal-matching-pursuit-omp">
                 <h2>1.1.8. 正交匹配追踪(OMP)<a>¶</a></h2>
+                <p>
+                    <code class="xref py py-class docutils literal"><span class="pre">OrthogonalMatchingPursuit</span></code>
+                    和 <code class="xref py py-func docutils literal"><span class="pre">orthogonal_mp</span></code>
+                    实现了OMP算法，用于近似拟合一个对非零回归系数(ie. the L <sub>0</sub> pseudo-norm)的个数进行约束的线性模型。
+                </p>
+                <p>
+                    作为一个像<a class="reference internal" href="#least-angle-regression">
+                    <span>Least Angle Regression</span></a>的前向特征选择方法,正交匹配追踪可以逼近
+                    一个具有固定数量的非零元素的最优解向量。如下所示：
+                </p>
+                <div class="math">
+                    <p class="text-center">
+                        <img src="./images/1e6016cbca75e249f466fe617256488041db5da2.png" alt="\text{arg\,min\,} ||y - X\gamma||_2^2 \text{ subject to } \||\gamma||_0 \leq n_{nonzero\_coefs}" />
+                    </p>
+                </div>
+                <p>
+
+                    或者,正交匹配追踪可以以某个指定的误差为目标而不是以非零元素的数量为目标。这可以表述如下：
+                </p>
+                <div class="math">
+                    <p class="text-center">
+                        <img src="./images/8b0cbfdc640be5d9203f375b756bf873bc6b65e6.png" alt="\text{arg\,min\,} ||\gamma||_0 \text{ subject to } ||y-X\gamma||_2^2 \\leq \text{tol}" />
+                    </p>
+                </div>
+                <p>
+                    OMP基于一个贪婪算法，该算法在每一步都把与当前残差最高度相关的atom包括进来。
+                    OMP与简单匹配追踪有些相似，但是在每一迭代步表现的更好。OMP的每一个迭代步上，残差被
+                    重新计算通过在之前选择的元素上使用正交投影。 
+                </p>
+                <div class="topic">
+                    <p class="topic-title first">例子:</p>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="../auto_examples/linear_model/plot_omp.html#example-linear-model-plot-omp-py"><span>Orthogonal Matching Pursuit</span></a></li>
+                    </ul>
+                </div>
+                <div class="topic">
+                    <p class="topic-title first">参考文献:</p>
+                    <ul class="simple">
+                        <li><a class="reference external" href="http://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf">http://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf</a></li>
+                        <li>
+                            <a class="reference external" href="http://blanche.polytechnique.fr/~mallat/papiers/MallatPursuit93.pdf">Matching pursuits with time-frequency dictionaries</a>,
+                            S. G. Mallat, Z. Zhang,
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="section" id="bayesian-regression">
                 <h2>1.1.9. 贝叶斯回归<a>¶</a></h2>
+                <p>
+                    Bayesian regression techniques can be used to include regularization
+                    parameters in the estimation procedure: the regularization parameter is
+                    not set in a hard sense but tuned to the data at hand.
+                </p>
+                <p>
+                    This can be done by introducing <a class="reference external" href="http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors">uninformative priors</a>
+                    over the hyper parameters of the model.
+                    The <img class="math" src="./images/3c1bc04a0c8dc5a927a0ee5a8ac22c87f3a9dd06.png" alt="\ell_{2}" /> 
+                    regularization used in <a class="reference internal" href="#id2">Ridge Regression</a> is equivalent
+                    to finding a maximum a-postiori solution under a Gaussian prior over the
+                    parameters <img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" />
+                     with precision <img class="math" src="./images/a3723c8c34eb2d8596b820f622d120ba0bc06d21.png" alt="\lambda^-1" />.  Instead of setting
+                    <cite>lambda</cite> manually, it is possible to treat it as a random variable to be
+                    estimated from the data.
+                </p>
+
             </div>
 
             <div class="section" id="logistic-regression">
