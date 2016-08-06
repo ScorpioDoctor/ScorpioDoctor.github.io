@@ -603,34 +603,284 @@
             <div class="section" id="bayesian-regression">
                 <h2>1.1.9. 贝叶斯回归<a>¶</a></h2>
                 <p>
-                    Bayesian regression techniques can be used to include regularization
-                    parameters in the estimation procedure: the regularization parameter is
-                    not set in a hard sense but tuned to the data at hand.
+                    贝叶斯回归技术可以用于在估计过程中包含正则化参数：此处正则化参数不再是人为设置的硬集合，而是
+                    根据训练数据进行调整。
                 </p>
                 <p>
-                    This can be done by introducing <a class="reference external" href="http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors">uninformative priors</a>
-                    over the hyper parameters of the model.
-                    The <img class="math" src="./images/3c1bc04a0c8dc5a927a0ee5a8ac22c87f3a9dd06.png" alt="\ell_{2}" /> 
-                    regularization used in <a class="reference internal" href="#id2">Ridge Regression</a> is equivalent
-                    to finding a maximum a-postiori solution under a Gaussian prior over the
-                    parameters <img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" />
-                     with precision <img class="math" src="./images/a3723c8c34eb2d8596b820f622d120ba0bc06d21.png" alt="\lambda^-1" />.  Instead of setting
-                    <cite>lambda</cite> manually, it is possible to treat it as a random variable to be
-                    estimated from the data.
+                    这可以通过在模型的超参数上引入 <a class="reference external" href="http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors">uninformative priors</a>
+                    来实现。<a class="reference internal" href="#id2">Ridge Regression</a>当中所使用的
+                    <img class="math" src="./images/3c1bc04a0c8dc5a927a0ee5a8ac22c87f3a9dd06.png" alt="\ell_{2}" /> 
+                    正则化项等价于在参数<img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" />
+                    服从高斯先验分布的条件下
+                    以<img class="math" src="./images/a3723c8c34eb2d8596b820f622d120ba0bc06d21.png" alt="\lambda^-1" />的精度
+                    寻找最大后验解。
+                    与手动设置<cite>lambda</cite>的值的那些方法不一样，贝叶斯回归把<cite>lambda</cite>看作是一个随机变量
+                    并且从数据中估计出该参数的分布规律。
                 </p>
+                <p>
+                    为了获得一个完整的概率模型, 输出 <img class="math" src="./images/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y" /> 
+                    被假定为服从围绕<img class="math" src="./images/8dfdd5edae5a6b7ef2c77d131dfb3f8bc2ad87c6.png" alt="X w" />
+                    的高斯分布。
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/aed2154669d76a3bcac8c586953607331f0e7c59.png" alt="p(y|X,w,\alpha) = \mathcal{N}(y|X w,\alpha)" /></p>
+                </div>
+                <p>
+                    Alpha 也被看作是一个需要从数据中估计得到的随机变量。
+                </p>
+                <p>贝叶斯回归的优点是:</p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>它适应于所给定的数据.</li>
+                            <li>
+                                它可以将正则化参数的确定也包括到回归估计过程中。
+                            </li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <p>贝叶斯回归的缺点如下:</p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>模型的推断过程比较耗时.</li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <div class="topic">
+                    <p class="topic-title first">参考文献</p>
+                    <ul class="simple">
+                        <li>
+                            对贝叶斯模型的很好的介绍在这儿：C. Bishop: Pattern
+                            Recognition and Machine learning
+                        </li>
+                        <li>
+                            Original Algorithm is detailed in the  book <cite>
+                                Bayesian learning for neural
+                                networks
+                            </cite> by Radford M. Neal
+                        </li>
+                    </ul>
+                </div>
 
+                <div class="section">
+                    <h3>1.1.9.1. 贝叶斯岭回归<a>¶</a></h3>
+                    <p>
+                        <a><code class="xref py py-class docutils literal"><span class="pre">BayesianRidge</span></code></a>
+                        根据上一节所介绍的原理估计回归问题的概率模型。
+                        参数<img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" />
+                        的先验分布规律有下面的球形高斯分布给出： 
+                    </p>
+                    <div class="math">
+                        <p class="text-center">
+                            <img src="./images/4b7674a6a09bdceb3ea9bf44671b2c4aa6f8d262.png" alt="p(w|\lambda) =\mathcal{N}(w|0,\lambda^{-1}\bold{I_{p}})" />
+                        </p>
+                    </div>
+                    <p>
+                        参数<img class="math" src="./images/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha" />
+                         以及 <img class="math" src="./images/1ab0134b6e0837594649c75a2ed83cfd85a2d03d.png" alt="\lambda" />
+                        的先验分布规律被选择为 
+                        <a class="reference external" href="http://en.wikipedia.org/wiki/Gamma_distribution">
+                            gamma
+                            distributions
+                        </a>, the
+                        conjugate prior for the precision of the Gaussian.
+                    </p>
+                    <p>
+                        根据上面的定义得到的模型被称为 <em>Bayesian Ridge Regression</em>。 它和经典的
+                        <a><code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code></a>模型是相似的。
+                        参数 <img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" />, 
+                        <img class="math" src="./images/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha" /> 以及
+                        <img class="math" src="./images/1ab0134b6e0837594649c75a2ed83cfd85a2d03d.png" alt="\lambda" /> 
+                        在模型拟合过程中被联合估计出来。
+                        余下的超参数包括gamma先验分布的参数
+                        <img class="math" src="./images/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha" />和
+                        <img class="math" src="./images/1ab0134b6e0837594649c75a2ed83cfd85a2d03d.png" alt="\lambda" />
+                         他们通常被选择为
+                        <em>non-informative</em>.  这些参数通过最大化边际似然函数(<em>marginal log likelihood </em>)来估计得到。
+                    </p>
+                    <p>默认情况下： <img class="math" src="./images/5ad6bfdf9e562f74e46b76f28df8f60b983e2a91.png" alt="\alpha_1 = \alpha_2 =  \lambda_1 = \lambda_2 = 1.e^{-6}" />.</p>
+                    <div class="figure align-center">
+                        <a class="reference external image-reference" href="../auto_examples/linear_model/plot_bayesian_ridge.html">
+                            <img alt="./images/plot_bayesian_ridge_0011.png" src="./images/plot_bayesian_ridge_0011.png" style="width: 300.0px; height: 250.0px;" />
+                        </a>
+                    </div>
+                    <p>以下代码展示了贝叶斯岭回归的用法:</p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">BayesianRidge</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="go">BayesianRidge(alpha_1=1e-06, alpha_2=1e-06, compute_score=False, copy_X=True,</span>
+<span class="go">       fit_intercept=True, lambda_1=1e-06, lambda_2=1e-06, n_iter=300,</span>
+<span class="go">       normalize=False, tol=0.001, verbose=False)</span>
+</pre>
+                        </div>
+                    </div>
+
+                    <p>模型拟合完成后，它就可以用来预测新的值:</p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span> <span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="go">array([ 0.50000013])</span>
+</pre>
+                        </div>
+                    </div>
+                    <p>模型的权重<img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" /> 
+                    可以如下获得:</p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([ 0.49999993,  0.49999993])</span>
+</pre>
+                        </div>
+                    </div>
+                    <p>
+                        受贝叶斯框架的影响, 此处找到的权重与
+                        <a class="reference internal" href="#ordinary-least-squares"><span>普通最小二乘法</span></a>
+                        所找的权重稍微有些不一样。然而，贝叶斯岭回归对于病态问题更加鲁棒。
+                    </p>
+                    <div class="topic">
+                        <p class="topic-title first">例子:</p>
+                        <ul class="simple">
+                            <li><a class="reference internal" href="../auto_examples/linear_model/plot_bayesian_ridge.html#example-linear-model-plot-bayesian-ridge-py"><span>Bayesian Ridge Regression</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <p class="topic-title first">参考文献</p>
+                        <ul class="simple">
+                            <li>
+                                More details can be found in the article <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.27.9072&amp;rep=rep1&amp;type=pdf">Bayesian Interpolation</a>
+                                by MacKay, David J. C.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>1.1.9.2. 自动关联确定(ARD)<a>¶</a></h3>
+                    <p>
+                        <code><span class="pre">ARDRegression</span></code> 与 贝叶斯岭回归非常相似,
+                        但是ARD能够获得更加稀疏的回归权重系数<img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" /> 
+                        <a class="footnote-reference" href="#id12" id="id10">[1]</a> 
+                        <a class="footnote-reference" href="#id13" id="id11">[2]</a>.
+                        <code class="xref py py-class docutils literal"><span class="pre">ARDRegression</span></code>
+                        在权重<img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" />,
+                        上加入不同的先验分布假设，丢掉了贝叶斯岭回归中的球形高斯的假设。
+                    </p>
+                    <p>
+                        与贝叶斯岭回归的球形高斯假设不同, <img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" />
+                        上的分布被假定为坐标轴平行的椭圆形高斯分布。
+                    </p>
+                    <p>
+                       这意味着每一个权重 
+                        <img class="math" src="./images/d3dc4f3acdee37990d156185ebe2e4eb8dd6e87f.png" alt="w_{i}" /> 
+                        是从高斯分布中抽取的,此高斯分布以0为中心，以
+                        <img class="math" src="./images/3d9a1fde3ad183d72319e293ff637c7528c831a4.png" alt="\lambda_{i}" />为精度:
+                    </p>
+                    <div class="math">
+                        <p class="text-center">
+                            <img src="./images/f17f00ba8893fd3ea1e8cc7870ba73a12f031c08.png" alt="p(w|\lambda) = \mathcal{N}(w|0,A^{-1})" />
+                        </p>
+                    </div>
+                    <p>其中，对角矩阵定义了椭圆形高斯分布的各个维度方向的主轴： <img class="math" src="./images/13f995fd0de4d863d93b62211954f6da80bde589.png" 
+                                 alt="diag \; (A) = \lambda = \{\lambda_{1},...,\lambda_{p}\}" />。
+                    </p>
+                    <p>
+                        与贝叶斯岭回归做对比,ARD中
+                        <img class="math" src="./images/d3dc4f3acdee37990d156185ebe2e4eb8dd6e87f.png" alt="w_{i}" />
+                        的每个坐标有它自己的标准差 
+                        <img class="math" src="./images/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i" />.
+                        在所有的
+                        <img class="math" src="./images/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i" />
+                        上的先验概率被选择为相同的伽马分布，通过超参数
+                        <img class="math" src="./images/18cbd415b1a8e3f19977c5d04d046d41c585c7de.png" alt="\lambda_1" />
+                        和 <img class="math" src="./images/2bc2d2b207f861ff1c70724ebb8a9cd6831c0d52.png" alt="\lambda_2" />来确定.
+                    </p>
+                    <div class="figure align-center">
+                        <a class="reference external image-reference" href="../auto_examples/linear_model/plot_ard.html">
+                        <img alt="./images/plot_ard_0011.png" src="./images/plot_ard_0011.png" style="width: 300.0px; height: 250.0px;" />
+                        </a>
+                    </div>
+                    <div class="topic">
+                        <p class="topic-title first">例子:</p>
+                        <ul class="simple">
+                            <li><a class="reference internal" href="../auto_examples/linear_model/plot_ard.html#example-linear-model-plot-ard-py">
+                                <span>Automatic Relevance Determination Regression (ARD)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <p class="topic-title first">参考文献:</p>
+                        <table class="docutils footnote" frame="void" id="id12" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr><td class="label"><a class="fn-backref" href="#id10">[1]</a></td><td>Christopher M. Bishop: Pattern Recognition and Machine Learning, Chapter 7.2.1</td></tr>
+                            </tbody>
+                        </table>
+                        <table class="docutils footnote" frame="void" id="id13" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr><td class="label"><a class="fn-backref" href="#id11">[2]</a></td><td>David Wipf and Srikantan Nagarajan: <a class="reference external" href="http://books.nips.cc/papers/files/nips20/NIPS2007_0976.pdf">A new view of automatic relevance determination.</a></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-
+            
             <div class="section" id="logistic-regression">
                 <h2>1.1.10. Logistic 回归<a>¶</a></h2>
+
             </div>
 
             <div class="section" id="stochastic-gradient-descent-sgd">
                 <h2>1.1.11. 随机梯度下降(SGD)<a>¶</a></h2>
+                <p>
+                    随机梯度下降法(SGD)是一个用于拟合线性模型的简单而非常有效的方法，尤其在样本数量和特征数量非常
+                    庞大的情形下。
+                    <code class="docutils literal"><span class="pre">partial_fit</span></code> 方法
+                    允许 核内或核外学习(only/out-of-core learning)。
+                </p>
+                <p>
+                    类<code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code>
+                    和类<code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code>
+                    提供了使用不同的(凸)损失函数以及正则化惩罚因子来拟合线性模型用于分类和回归的功能。
+                    比如, 
+                    <code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code>
+                    可以使用 <code class="docutils literal"><span class="pre">loss=&quot;log&quot;</span></code>
+                    拟合一个logistic回归模型，同时也可以使用
+                    <code class="docutils literal"><span class="pre">loss=&quot;hinge&quot;</span></code>
+                    拟合一个线性支持向量机。
+                </p>
+                <div class="topic">
+                    <p class="topic-title first">更详细的介绍</p>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="sgd.html#sgd"><span>Stochastic Gradient Descent</span></a></li>
+                    </ul>
+                </div>
             </div>
 
             <div class="section" id="perceptron">
                 <h2>1.1.12. 感知器<a>¶</a></h2>
+                <p>
+                    感知器(<a><code class="xref py py-class docutils literal"><span class="pre">Perceptron</span></code></a>)
+                    是另一个适用于大规模学习问题的简单算法。默认情况下，
+                </p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>它无需设定一个学习率.</li>
+                            <li>它无需正则化 (penalized).</li>
+                            <li>它仅仅在犯错误的地方更新模型.</li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <p>
+                    还有另外一个特点是在使用hinge损失函数的情况下，感知器的训练要比SGD稍快一点；而且最终的结果
+                    也更加稀疏。
+                </p>
             </div>
 
             <div class="section" id="passive-aggressive-algorithms">

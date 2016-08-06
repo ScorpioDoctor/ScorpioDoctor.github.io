@@ -3329,6 +3329,7 @@
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\images\plot_theilsen_0011 %281%29.png" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\images\plot_theilsen_0011.png" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\linear_model.html" />
+    <Content Include="ml\scikit-learn\user_guide\supervised_learning\sgd.html" />
     <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\index.html" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\index.html" />
     <Content Include="ml\scikit-learn\_images\kenan.jpg" />

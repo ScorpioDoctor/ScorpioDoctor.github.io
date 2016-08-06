@@ -637,10 +637,12 @@ parameters <img class="math" src="../_images/math/8659700e6646cd91bc02c32affaa5e
 <cite>lambda</cite> manually, it is possible to treat it as a random variable to be
 estimated from the data.</p>
 <p>To obtain a fully probabilistic model, the output <img class="math" src="../_images/math/b124ff74afb0914bb434e8fb849eb56d734412f8.png" alt="y"/> is assumed
-to be Gaussian distributed around <img class="math" src="../_images/math/8dfdd5edae5a6b7ef2c77d131dfb3f8bc2ad87c6.png" alt="X w"/>:</p>
+to be Gaussian distributed around <img class="math" src="../_images/math/8dfdd5edae5a6b7ef2c77d131dfb3f8bc2ad87c6.png" alt="X w"/>:
+</p>
 <div class="math">
 <p><img src="../_images/math/aed2154669d76a3bcac8c586953607331f0e7c59.png" alt="p(y|X,w,\alpha) = \mathcal{N}(y|X w,\alpha)"/></p>
-</div><p>Alpha is again treated as a random variable that is to be estimated from the
+</div>
+    <p>Alpha is again treated as a random variable that is to be estimated from the
 data.</p>
 <p>The advantages of Bayesian Regression are:</p>
 <blockquote>
@@ -673,7 +675,8 @@ The prior for the parameter <img class="math" src="../_images/math/8659700e6646c
 <div class="math">
 <p><img src="../_images/math/4b7674a6a09bdceb3ea9bf44671b2c4aa6f8d262.png" alt="p(w|\lambda) =
 \mathcal{N}(w|0,\lambda^{-1}\bold{I_{p}})"/></p>
-</div><p>The priors over <img class="math" src="../_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> and <img class="math" src="../_images/math/1ab0134b6e0837594649c75a2ed83cfd85a2d03d.png" alt="\lambda"/> are chosen to be <a class="reference external" href="http://en.wikipedia.org/wiki/Gamma_distribution">gamma
+</div>
+    <p>The priors over <img class="math" src="../_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> and <img class="math" src="../_images/math/1ab0134b6e0837594649c75a2ed83cfd85a2d03d.png" alt="\lambda"/> are chosen to be <a class="reference external" href="http://en.wikipedia.org/wiki/Gamma_distribution">gamma
 distributions</a>, the
 conjugate prior for the precision of the Gaussian.</p>
 <p>The resulting model is called <em>Bayesian Ridge Regression</em>, and is similar to the
@@ -737,11 +740,20 @@ elliptical Gaussian distribution.</p>
 centered on zero and with a precision <img class="math" src="../_images/math/3d9a1fde3ad183d72319e293ff637c7528c831a4.png" alt="\lambda_{i}"/>:</p>
 <div class="math">
 <p><img src="../_images/math/f17f00ba8893fd3ea1e8cc7870ba73a12f031c08.png" alt="p(w|\lambda) = \mathcal{N}(w|0,A^{-1})"/></p>
-</div><p>with <img class="math" src="../_images/math/13f995fd0de4d863d93b62211954f6da80bde589.png" alt="diag \; (A) = \lambda = \{\lambda_{1},...,\lambda_{p}\}"/>.</p>
-<p>In contrast to <a class="reference internal" href="#id9">Bayesian Ridge Regression</a>, each coordinate of <img class="math" src="../_images/math/d3dc4f3acdee37990d156185ebe2e4eb8dd6e87f.png" alt="w_{i}"/>
-has its own standard deviation <img class="math" src="../_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/>. The prior over all
-<img class="math" src="../_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/> is chosen to be the same gamma distribution given by
-hyperparameters <img class="math" src="../_images/math/18cbd415b1a8e3f19977c5d04d046d41c585c7de.png" alt="\lambda_1"/> and <img class="math" src="../_images/math/2bc2d2b207f861ff1c70724ebb8a9cd6831c0d52.png" alt="\lambda_2"/>.</p>
+</div>
+    <p>with <img class="math" src="../_images/math/13f995fd0de4d863d93b62211954f6da80bde589.png" alt="diag \; (A) = \lambda = \{\lambda_{1},...,\lambda_{p}\}"/>.</p>
+<p>In contrast to <a class="reference internal" href="#id9">Bayesian Ridge Regression</a>, 
+    each coordinate of 
+    <img class="math" src="../_images/math/d3dc4f3acdee37990d156185ebe2e4eb8dd6e87f.png" alt="w_{i}"/>
+has its own standard deviation
+     <img class="math" src="../_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/>.
+     The prior over all
+<img class="math" src="../_images/math/3b765ea6939f1eba2541e91f870cb3c078aa29be.png" alt="\lambda_i"/> 
+    is chosen to be the same gamma distribution given by
+hyperparameters 
+    <img class="math" src="../_images/math/18cbd415b1a8e3f19977c5d04d046d41c585c7de.png" alt="\lambda_1"/> 
+    and <img class="math" src="../_images/math/2bc2d2b207f861ff1c70724ebb8a9cd6831c0d52.png" alt="\lambda_2"/>.
+    </p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/linear_model/plot_ard.html"><img alt="../_images/plot_ard_0011.png" src="../_images/plot_ard_0011.png" style="width: 300.0px; height: 250.0px;" /></a>
 </div>
@@ -885,7 +897,8 @@ obtained that minimizes the cross-entropy loss.</p>
 <p>Stochastic gradient descent is a simple yet very efficient approach
 to fit linear models. It is particularly useful when the number of samples
 (and the number of features) is very large.
-The <code class="docutils literal"><span class="pre">partial_fit</span></code> method allows only/out-of-core learning.</p>
+The <code class="docutils literal"><span class="pre">partial_fit</span></code> method allows only/out-of-core learning.
+    </p>
 <p>The classes <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> and <a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> provide
 functionality to fit linear models for classification and regression
 using different (convex) loss functions and different penalties.
