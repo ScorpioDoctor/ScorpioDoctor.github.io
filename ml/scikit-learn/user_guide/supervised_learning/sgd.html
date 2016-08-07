@@ -62,6 +62,7 @@
     </nav>
 
     <div class="container">
+
         <div class="section" id="stochastic-gradient-descent">
             <h1>1.5. 随机梯度下降法(SGD)<a>¶</a></h1>
             <p>
@@ -402,8 +403,12 @@
                                 <p class="first">
                                     Empirically, we found that SGD converges after observing
                                     approx. 10^6 training samples. Thus, a reasonable first guess
-                                    for the number of iterations is <code class="docutils literal"><span class="pre">n_iter</span> <span class="pre">=</span> <span class="pre">np.ceil(10**6</span> <span class="pre">/</span> <span class="pre">n)</span></code>,
-                                    where <code class="docutils literal"><span class="pre">n</span></code> is the size of the training set.
+                                    for the number of iterations is <code class="docutils literal">
+                                    <span class="pre">n_iter</span> <span class="pre">=</span> 
+                                    <span class="pre">np.ceil(10**6</span> <span class="pre">/</span> 
+                                    <span class="pre">n)</span></code>,
+                                    where <code class="docutils literal"><span class="pre">n</span></code>
+                                     is the size of the training set.
                                 </p>
                             </li>
                             <li>
@@ -437,17 +442,18 @@
             <div class="section" id="mathematical-formulation">
                 <h2>1.5.6. 数学形式<a>¶</a></h2>
                 <p>
-                    Given a set of training examples <img class="math" src="./images/4af6492b1bf93d4be0e1f0c75f85f65170ed94c0.png" alt="(x_1, y_1), \ldots, (x_n, y_n)" /> where
-                    <img class="math" src="./images/ed7238746ec0fb27be38187ff0576c83ecc0df8f.png" alt="x_i \in \mathbf{R}^n" /> and
-                     <img class="math" src="./images/bb280b0cec96f69df3ad1c8befd46a0a95e843ac.png" alt="y_i \in \{-1,1\}" />, our goal is to
-                    learn a linear scoring function <img class="math" src="./images/3bd8e83af63059e1332f577c656fdff3e8158e74.png" alt="f(x) = w^T x + b" />
-                     with model parameters
+                    给定训练样本集合 <img class="math" src="./images/4af6492b1bf93d4be0e1f0c75f85f65170ed94c0.png" alt="(x_1, y_1), \ldots, (x_n, y_n)" /> ，
+                    其中，
+                    <img class="math" src="./images/ed7238746ec0fb27be38187ff0576c83ecc0df8f.png" alt="x_i \in \mathbf{R}^n" /> 和
+                     <img class="math" src="./images/bb280b0cec96f69df3ad1c8befd46a0a95e843ac.png" alt="y_i \in \{-1,1\}" />,
+                    我们的目标是去学习一个线性得分函数
+                    <img class="math" src="./images/3bd8e83af63059e1332f577c656fdff3e8158e74.png" alt="f(x) = w^T x + b" />
+                     ，该函数的模型参数是
                     <img class="math" src="./images/e0f293430b347291b63495a02f47d30e35fa7229.png" alt="w \in \mathbf{R}^m" /> 
-                    and intercept <img class="math" src="./images/8b75b89abc229b96382c47277d6f475f634940d9.png" alt="b \in \mathbf{R}" />. 
-                    In order
-                    to make predictions, we simply look at the sign of <img class="math" src="./images/14546c27a7b929642f7840acca5f851c503ea109.png" alt="f(x)" />.
-                    A common choice to find the model parameters is by minimizing the regularized
-                    training error given by
+                    和截距 <img class="math" src="./images/8b75b89abc229b96382c47277d6f475f634940d9.png" alt="b \in \mathbf{R}" />. 
+                    为了进行预测，我们只需要查看<img class="math" src="./images/14546c27a7b929642f7840acca5f851c503ea109.png" alt="f(x)" />的正负号
+                    就可以了。
+                    一个通用的寻找模型参数的方法是通过最小化带有正则化项的训练误差，由下式给出：
                 </p>
                 <div class="math">
                     <p class="text-center">
@@ -455,29 +461,29 @@
                     </p>
                 </div>
                 <p>
-                    where <img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" /> 
-                    is a loss function that measures model (mis)fit and
+                    其中， <img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" /> 
+                    是一个用于测量模型拟合误差的损失函数，而
                     <img class="math" src="./images/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R" />
-                     is a regularization term (aka penalty) that penalizes model
-                    complexity; <img class="math" src="./images/7f2c98bf462cba6083cf18483ba9510e3c2fd3d3.png"
-                                      alt="\alpha &gt; 0" /> is a non-negative hyperparameter.
+                     是一个正则化项用于对模型的复杂性添加惩罚；
+                    <img class="math" src="./images/7f2c98bf462cba6083cf18483ba9510e3c2fd3d3.png"
+                                      alt="\alpha &gt; 0" />是一个非负超参数。
                 </p>
                 <p>
-                    Different choices for <img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" /> entail different classifiers such as
+                    <img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" />
+                    的不同选择会产生不同的分类器： 
                 </p>
                 <blockquote>
                     <div>
                         <ul class="simple">
-                            <li>Hinge: (soft-margin) Support Vector Machines.</li>
-                            <li>Log:   Logistic Regression.</li>
-                            <li>Least-Squares: Ridge Regression.</li>
-                            <li>Epsilon-Insensitive: (soft-margin) Support Vector Regression.</li>
+                            <li>Hinge: (soft-margin) 支持向量分类器(SVM).</li>
+                            <li>Log:   Logistic 回归.</li>
+                            <li>Least-Squares:岭回归.</li>
+                            <li>Epsilon-Insensitive: (soft-margin)支持向量回归器(SVR).</li>
                         </ul>
                     </div>
                 </blockquote>
                 <p>
-                    All of the above loss functions can be regarded as an upper bound on the
-                    misclassification error (Zero-one loss) as shown in the Figure below.
+                    所有上述损失函数都可以被认为是在分类误差(0-1损失)上的上界，如下所示：
                 </p>
                 <div class="figure align-center">
                     <a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_loss_functions.html">
@@ -485,24 +491,25 @@
                           style="width: 600.0px; height: 450.0px;" /></a>
                 </div>
                 <p>
-                    Popular choices for the regularization term <img class="math" src="./images/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R" /> include:
+                    正则化项 <img class="math" src="./images/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R" /> 有如下几种可选方案:
                 </p>
                 <blockquote>
                     <div>
                         <ul class="simple">
                             <li>L2 norm: <img class="math" src="./images/a16847a5124181d9b7752831345def32c7688718.png" alt="R(w) := \frac{1}{2} \sum_{i=1}^{n} w_i^2" />,</li>
                             <li>
-                                L1 norm: <img class="math" src="./images/9dcd00d73a520a96fcccfa317471aab11d8b1ce7.png" alt="R(w) := \sum_{i=1}^{n} |w_i|" />, which leads to sparse
-                                solutions.
+                                L1 norm: <img class="math" src="./images/9dcd00d73a520a96fcccfa317471aab11d8b1ce7.png" alt="R(w) := \sum_{i=1}^{n} |w_i|" />, 
+                                将会带来稀疏解。
                             </li>
-                            <li>Elastic Net: <img class="math" src="./images/6d786bc0d556134fd2cd2ff743dd4b1a711bb541.png" alt="R(w) := \frac{\rho}{2} \sum_{i=1}^{n} w_i^2 + (1-\rho) \sum_{i=1}^{n} |w_i|" />, a convex combination of L2 and L1, where
-                             <img class="math" src="./images/f574498915fa9e02eeb5141c24835d077eba3e75.png" alt="\rho" /> is given by <code class="docutils literal"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">l1_ratio</span></code>.</li>
+                            <li>Elastic Net: <img class="math" src="./images/6d786bc0d556134fd2cd2ff743dd4b1a711bb541.png" alt="R(w) := \frac{\rho}{2} \sum_{i=1}^{n} w_i^2 + (1-\rho) \sum_{i=1}^{n} |w_i|" />, L2和L1的凸组合, 其中
+                             <img class="math" src="./images/f574498915fa9e02eeb5141c24835d077eba3e75.png" alt="\rho" /> 由 <code class="docutils literal"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">l1_ratio</span></code>给出。
+                            </li>
                         </ul>
                     </div>
                 </blockquote>
                 <p>
-                    The Figure below shows the contours of the different regularization terms
-                    in the parameter space when <img class="math" src="./images/c12181d671649ed5892696252202bba516d28d3a.png" alt="R(w) = 1" />.
+                    下图展示了当<img class="math" src="./images/c12181d671649ed5892696252202bba516d28d3a.png" alt="R(w) = 1" />
+                    时，在参数空间中的不同的正则化项的边界。
                 </p>
                 <div class="figure align-center">
                     <a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_penalties.html">
@@ -511,70 +518,66 @@
                 <div class="section">
                     <h3>1.5.6.1. SGD<a>¶</a></h3>
                     <p>
-                        Stochastic gradient descent is an optimization method for unconstrained
-                        optimization problems. In contrast to (batch) gradient descent, SGD
-                        approximates the true gradient of <img class="math" src="./images/d5d48823181b7f7a9e96c9cbd3bb70d04abdbd9d.png" alt="E(w,b)" />
-                         by considering a
-                        single training example at a time.
+                        随机梯度下降是用于解决无约束优化问题的优化方法。与批量梯度下降法相对比，SGD通过每次只考虑单个训练样本的
+                        方式来逼近<img class="math" src="./images/d5d48823181b7f7a9e96c9cbd3bb70d04abdbd9d.png" alt="E(w,b)" />
+                        的真实梯度值。
                     </p>
                     <p>
-                        The class <code class="xref py py-class docutils literal">
-                        <span class="pre">SGDClassifier</span></code> implements a first-order SGD learning
-                        routine.  The algorithm iterates over the training examples and for each
-                        example updates the model parameters according to the update rule given by
+                        <code >SGDClassifier</code> 实现了一个一阶的SGD学习过程。
+                        算法在训练样本上迭代并且对每一个样本依据以下的更新规则更新模型参数：
                     </p>
                     <div class="math">
-                        <p>
+                        <p class="text-center">
                             <img src="./images/98cdc3aed40cb93594dbaaf045ea3e1abbd8edcb.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
 + \frac{\partial L(w^T x_i + b, y_i)}{\partial w})" />
                         </p>
                     </div><p>
-                        where <img class="math" src="./images/9172efc523d7488d4c3ed299d0be813de01503b8.png" alt="\eta" /> is the learning rate which controls the step-size in
-                        the parameter space.  The intercept <img class="math" src="./images/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b" /> is updated similarly but
-                        without regularization.
+                        其中，<img class="math" src="./images/9172efc523d7488d4c3ed299d0be813de01503b8.png" alt="\eta" /> 
+                    是学习率参数，用于控制算法在参数空间的搜索步长。截距 <img class="math" src="./images/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b" />
+                    也以同样的方法被更新但是没有正则化项。
                     </p>
                     <p>
-                        The learning rate <img class="math" src="./images/9172efc523d7488d4c3ed299d0be813de01503b8.png" alt="\eta" /> can be either constant or gradually decaying. For
-                        classification, the default learning rate schedule (<code class="docutils literal"><span class="pre">learning_rate='optimal'</span></code>)
-                        is given by
+                        学习率 <img class="math" src="./images/9172efc523d7488d4c3ed299d0be813de01503b8.png" alt="\eta" />
+                        可以设为常量也可以设为一个逐渐减小的量。 默认的学习率调度方法如下所示：
+                         (<code class="docutils literal"><span class="pre">learning_rate='optimal'</span></code>)
                     </p>
                     <div class="math">
-                        <p><img src="./images/f12f7e91b0d9d96b5e417194a1a348c718b981b1.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}" /></p>
+                        <p class="text-center"><img src="./images/f12f7e91b0d9d96b5e417194a1a348c718b981b1.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}" /></p>
                     </div>
                     <p>
-                        where <img class="math" src="./images/ef9270877405055756d345facd044e4ab297f858.png" alt="t" /> is the time step (there are a total of <cite>n_samples * n_iter</cite>
-                        time steps), <img class="math" src="./images/fb761c2e199ad45ccf14767f48b88169479d840f.png" alt="t_0" /> is determined based on a heuristic proposed by Léon Bottou
+                        其中 <img class="math" src="./images/ef9270877405055756d345facd044e4ab297f858.png" alt="t" />是时间步(总共有时间步：<cite>n_samples * n_iter</cite>
+                        个), <img class="math" src="./images/fb761c2e199ad45ccf14767f48b88169479d840f.png" alt="t_0" /> 由一个启发式方法来确定：
                         such that the expected initial updates are comparable with the expected
                         size of the weights (this assuming that the norm of the training samples is
-                        approx. 1). The exact definition can be found in <code class="docutils literal"><span class="pre">_init_t</span></code> in <code class="xref py py-class docutils literal">
-                        <span class="pre">BaseSGD</span></code>.
+                        approx. 1). 它的精确定义可以在这儿找到：<code>_init_t</code>
+                        在<code>BaseSGD</code>.
                     </p>
                     <p>
-                        For regression the default learning rate schedule is inverse scaling
-                        (<code class="docutils literal"><span class="pre">learning_rate='invscaling'</span></code>), given by
+                        对于回归问题，默认的学习率调度方法是 inverse scaling
+                        (<code class="docutils literal"><span class="pre">learning_rate='invscaling'</span></code>), 由下式给出：
                     </p>
                     <div class="math">
-                        <p><img src="./images/1e8904a391eec39276c9794f76d1b3a247e5fdf0.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}" /></p>
+                        <p class="text-center"><img src="./images/1e8904a391eec39276c9794f76d1b3a247e5fdf0.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}" /></p>
                     </div>
                     <p>
-                        where <img class="math" src="./images/17ed5419fbfe317f160a2be3da9c6f0ce53b5b86.png" alt="eta_0" /> and <img class="math" src="./images/138a8dd99b6da12de6f02b76afeda6e5885a7f7c.png" alt="power\_t" /> are hyperparameters chosen by the
-                        user via <code class="docutils literal"><span class="pre">eta0</span></code> and
-                         <code class="docutils literal"><span class="pre">power_t</span></code>, resp.
+                        其中， <img class="math" src="./images/17ed5419fbfe317f160a2be3da9c6f0ce53b5b86.png" alt="eta_0" /> 和
+                         <img class="math" src="./images/138a8dd99b6da12de6f02b76afeda6e5885a7f7c.png" alt="power\_t" /> 
+                        是超参数通过使用 <code>eta0</code> 和 <code>power_t</code> 来分别确定。
                     </p>
                     <p>
-                        For a constant learning rate use <code class="docutils literal"><span class="pre">learning_rate='constant'</span></code> and use <code class="docutils literal"><span class="pre">eta0</span></code>
-                        to specify the learning rate.
+                        对于一个固定的学习率，使用<code>learning_rate='constant'</code> 
+                        和<code>eta0</code>来指定学习率。
                     </p>
                     <p>
-                        The model parameters can be accessed through the members 
-                        <code class="docutils literal"><span class="pre">coef_</span></code> and
-                        <code class="docutils literal"><span class="pre">intercept_</span></code>:
+                        模型参数可以通过成员变量
+                        <code class="docutils literal"><span class="pre">coef_</span></code> 和
+                        <code class="docutils literal"><span class="pre">intercept_</span></code>获得:
                     </p>
                     <blockquote>
                         <div>
                             <ul class="simple">
-                                <li>Member <code class="docutils literal"><span class="pre">coef_</span></code> holds the weights <img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" /></li>
-                                <li>Member <code class="docutils literal"><span class="pre">intercept_</span></code> holds <img class="math" src="./images/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b" /></li>
+                                <li>成员变量 <code class="docutils literal"><span class="pre">coef_</span></code> 存放权重信息 <img class="math" src="./images/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w" /></li>
+                                <li>成员变量 <code class="docutils literal"><span class="pre">intercept_</span></code> 存放 <img class="math" src="./images/5e87bf41a96deddf6cb485ff530f153f2590e9cc.png" alt="b" /></li>
                             </ul>
                         </div>
                     </blockquote>
@@ -638,8 +641,13 @@
                 </div>
             </div>
         </div>
+                
+    </div>
 
-        
+    <div class="container">
+        <div class="footer text-center">
+            &copy; 2016-2100, 版权属于张金明博士 (BSD License).
+        </div>
     </div>
 
 </body>
