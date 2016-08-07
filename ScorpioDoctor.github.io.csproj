@@ -3541,6 +3541,8 @@
     <Content Include="ml\scikit-learn\0.17\_static\iris.pdf" />
     <Content Include="ml\scikit-learn\0.17\_static\ML_MAPS_README.rst" />
     <Content Include="ml\scikit-learn\0.17\objects.inv" />
+    <Content Include="scipy\index.html" />
+    <Content Include="scipy\lession_1.html" />
     <Content Include="sponsor.html" />
     <Content Include="webmaster.html" />
     <Content Include="bin\ScorpioDoctor.github.io.dll.config" />
