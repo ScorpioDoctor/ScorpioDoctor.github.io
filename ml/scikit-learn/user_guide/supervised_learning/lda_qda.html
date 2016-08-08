@@ -86,8 +86,8 @@
                 Discriminant Analysis can learn quadratic boundaries and is therefore more
                 flexible.
             </p>
-            <div class="topic">
-                <p class="topic-title first">Examples:</p>
+            <div class="well well-sm">
+                <p >Examples:</p>
                 <p>
                     <a class="reference internal" href="../auto_examples/classification/plot_lda_qda.html#example-classification-plot-lda-qda-py">
                     <span>Linear and Quadratic Discriminant Analysis with confidence ellipsoid</span></a>
@@ -99,27 +99,222 @@
 
             <div class="section" id="dimensionality-reduction-using-linear-discriminant-analysis">
                 <h2>1.2.1. LDA 用于维数约简<a>¶</a></h2>
-
+                <p>
+                    <code>discriminant_analysis.LinearDiscriminantAnalysis</code> can be used to perform supervised
+                     dimensionality reduction, by projecting the input data to a linear subspace consisting of the 
+                    directions which maximize the separation between classes (in a precise sense discussed in the 
+                    mathematics section below). The dimension of the output is necessarily less that the number of
+                     classes, so this is a in general a rather strong dimensionality reduction, and only makes 
+                    senses in a multiclass setting.
+                </p>
+                <p>
+                    This is implemented in <code>discriminant_analysis.LinearDiscriminantAnalysis.transform</code>。
+                     The desired dimensionality can be set using the <code>n_components</code> constructor parameter。
+                     This parameter has no influence on <code>discriminant_analysis.LinearDiscriminantAnalysis.fit</code>
+                     or <code>discriminant_analysis.LinearDiscriminantAnalysis.predict</code>.
+                </p>
+                <div class="well well-sm">
+                    <p>Examples:</p>
+                    <p>
+                        <a class="reference internal" href="../auto_examples/decomposition/plot_pca_vs_lda.html#example-decomposition-plot-pca-vs-lda-py"><span>Comparison of LDA and PCA 2D projection of Iris dataset</span></a>: Comparison of LDA and PCA
+                        for dimensionality reduction of the Iris dataset
+                    </p>
+                </div>
             </div>
 
             <div class="section" id="mathematical-formulation-of-the-lda-and-qda-classifiers">
                 <h2>1.2.2. LDA分类器与QDA分类器的数学表述<a>¶</a></h2>
-
+                <p>
+                    Both LDA and QDA can be derived from simple probabilistic models which model
+                    the class conditional distribution of the data 
+                    <img class="math" src="./images/6349652f4f3fed24cf0e66ba44b19b5c170cae96.png" alt="P(X|y=k)" /> 
+                    for each class
+                    <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />. 
+                    Predictions can then be obtained by using Bayes&#8217; rule:
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/9e7b9be3116147caceb05da29eb4a66905f66481.png" 
+                            alt="P(y=k | X) = \frac{P(X | y=k) P(y=k)}{P(X)} 
+                            = \frac{P(X | y=k) P(y = k)}{ \sum_{l} P(X | y=l) \cdot P(y=l)}" />
+                    </p>
+                </div>
+                <p>
+                    More specifically, for linear and quadratic discriminant analysis,
+                    <img class="math" src="./images/e69ebd95e385ac5c254ef15635c37b01668decbf.png" alt="P(X|y)" />
+                     is modelled as a multivariate Gaussian distribution with
+                    density:
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/048bd26b8085a30c1baddcc048621fff532ffe47.png" 
+                            alt="p(X | y=k) = \frac{1}{(2\pi)^n |\Sigma_k|^{1/2}}\exp\left(-\frac{1}{2} 
+                            (X-\mu_k)^t \Sigma_k^{-1} (X-\mu_k)\right)" />
+                    </p>
+                </div>
+                <p>
+                    To use this model as a classifier, we just need to estimate from the training
+                    data the class priors <img class="math" src="./images/ca8cad6134f86bef8de0efaa68c0d24323256728.png" 
+                                               alt="P(y=k)" /> 
+                    (by the proportion of instances of class
+                    <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />), 
+                    the class means <img class="math" src="./images/e0f4c204f26e9afa4f5bbeda60af5262e624c148.png" 
+                                         alt="\mu_k" /> (by the empirical sample class means)
+                    and the covariance matrices (either by the empirical sample class covariance
+                    matrices, or by a regularized estimator: see the section on shrinkage below).
+                </p>
+                <p>
+                    In the case of LDA, the Gaussians for each class are assumed to share the same
+                    covariance matrix: <img class="math" src="./images/5a0d5681512c9237a828e2667fdf0499af7fad60.png"
+                                             alt="\Sigma_k = \Sigma" /> for all 
+                    <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />.
+                     This leads to
+                    linear decision surfaces between, as can be seen by comparing the the
+                    log-probability ratios <img class="math" src="./images/e97ecabcc51db3bd271f1b5b0cf3fcebdd989108.png"
+                                                 alt="\log[P(y=k | X) / P(y=l | X)]" />:
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/9dd706ccca2f0ca465f83a2ee3dc72e7ea904c7c.png"
+                             alt="\log\left(\frac{P(y=k|X)}{P(y=l | X)}\right) = 
+                            0 \Leftrightarrow (\mu_k-\mu_l)\Sigma^{-1} X = 
+                            \frac{1}{2} (\mu_k^t \Sigma^{-1} \mu_k - \mu_l^t \Sigma^{-1} \mu_l)" />
+                    </p>
+                </div>
+                <p>
+                    In the case of QDA, there are no assumptions on the covariance matrices
+                    <img class="math" src="./images/07b943c6dd1061bde470bebfa3e9b5e373216870.png" alt="\Sigma_k" />
+                     of the Gaussians, leading to quadratic decision surfaces. See
+                    <a class="footnote-reference" href="#id4" id="id1">[3]</a> for more details.
+                </p>
+                <div class="well well-sm">
+                    <p >Note</p>
+                    <p><strong>Relation with Gaussian Naive Bayes</strong></p>
+                    <p >
+                        If in the QDA model one assumes that the covariance matrices are diagonal,
+                        then this means that we assume the classes are conditionally independent,
+                        and the resulting classifier is equivalent to the Gaussian Naive Bayes
+                        classifier <a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">naive_bayes.GaussianNB</span></code></a>.
+                    </p>
+                </div>
             </div>
 
             <div class="section" id="mathematical-formulation-of-lda-dimensionality-reduction">
                 <h2>1.2.3. LDA维数约简的数学表述<a>¶</a></h2>
-
+                <p>
+                    To understand the use of LDA in dimensionality reduction, it is useful to start
+                    with a geometric reformulation of the LDA classification rule explained above.
+                    We write <img class="math" src="./images/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K" />
+                     for the total number of target classes. Since in LDA we
+                    assume that all classes have the same estimated covariance 
+                    <img class="math" src="./images/19ac15bf260b22dcb61a1042c60259e4b0bfbd64.png" alt="\Sigma" />, we
+                    can rescale the data so that this covariance is the identity:
+                </p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/e6da702a9f1619c67e81ec8cd9d976702ffa4a2e.png" alt="X^* = D^{-1/2}U^t X\text{ with }\Sigma = UDU^t" /></p>
+                </div>
+                <p>
+                    Then one can show that to classify a data point after scaling is equivalent to
+                    finding the estimated class mean <img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" /> which is closest to the data
+                    point in the Euclidean distance. But this can be done just as well after
+                    projecting on the <img class="math" src="./images/da6935a2384c32204e1462bc2b64c3b0c02aaee0.png" alt="K-1" /> affine subspace <img class="math" src="./images/dfe93a68f5d21483dc469d7d85fd6b43ce87f30a.png" alt="H_K" /> generated by all the
+                    <img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" /> for all classes. This shows that, implicit in the LDA
+                    classifier, there is a dimensionality reduction by linear projection onto a
+                    <img class="math" src="./images/da6935a2384c32204e1462bc2b64c3b0c02aaee0.png" alt="K-1" /> dimensional space.
+                </p>
+                <p>
+                    We can reduce the dimension even more, to a chosen <img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" />, by projecting
+                    onto the linear subspace <img class="math" src="./images/7e92db8660cb5a445e9d83da1b9e47a123dece1a.png" alt="H_L" /> which maximize the variance of the
+                    <img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" /> after projection (in effect, we are doing a form of PCA for the
+                    transformed class means <img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" />). This <img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" />
+                     corresponds to the
+                    <code class="docutils literal"><span class="pre">n_components</span></code>
+                     parameter used in the
+                    <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis.transform" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis.transform"><code class="xref py py-func docutils literal"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis.transform</span></code></a> method. See
+                    <a class="footnote-reference" href="#id4" id="id2">[3]</a> for more details.
+                </p>
             </div>
 
             <div class="section" id="shrinkage">
                 <h2>1.2.4. 缩减(Shrinkage)<a>¶</a></h2>
-
+                <p>
+                    Shrinkage is a tool to improve estimation of covariance matrices in situations
+                    where the number of training samples is small compared to the number of
+                    features. In this scenario, the empirical sample covariance is a poor
+                    estimator. Shrinkage LDA can be used by setting the <code class="docutils literal"><span class="pre">shrinkage</span></code> parameter of
+                    the <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis"><code class="xref py py-class docutils literal"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code></a> class to &#8216;auto&#8217;.
+                    This automatically determines the optimal shrinkage parameter in an analytic
+                    way following the lemma introduced by Ledoit and Wolf <a class="footnote-reference" href="#id5" id="id3">[4]</a>. Note that
+                    currently shrinkage only works when setting the <code class="docutils literal"><span class="pre">solver</span></code> parameter to &#8216;lsqr&#8217;
+                    or &#8216;eigen&#8217;.
+                </p>
+                <p>
+                    The <code class="docutils literal"><span class="pre">shrinkage</span></code> parameter can also be manually set between 0 and 1. In
+                    particular, a value of 0 corresponds to no shrinkage (which means the empirical
+                    covariance matrix will be used) and a value of 1 corresponds to complete
+                    shrinkage (which means that the diagonal matrix of variances will be used as
+                    an estimate for the covariance matrix). Setting this parameter to a value
+                    between these two extrema will estimate a shrunk version of the covariance
+                    matrix.
+                </p>
+                <p class="centered">
+                    <strong><a class="reference external" href="../auto_examples/classification/plot_lda.html">
+                        <img alt="shrinkage" src="./images/plot_lda_0011.png" style="width: 600.0px; height: 450.0px;" /></a></strong>
+                </p>
             </div>
 
             <div class="section" id="estimation-algorithms">
                 <h2>1.2.5. 估计算法<a>¶</a></h2>
-
+                <p>
+                    The default solver is &#8216;svd&#8217;. It can perform both classification and transform,
+                    and it does not rely on the calculation of the covariance matrix. This can be
+                    an advantage in situations where the number of features is large. However, the
+                    &#8216;svd&#8217; solver cannot be used with shrinkage.
+                </p>
+                <p>
+                    The &#8216;lsqr&#8217; solver is an efficient algorithm that only works for classification.
+                    It supports shrinkage.
+                </p>
+                <p>
+                    The &#8216;eigen&#8217; solver is based on the optimization of the between class scatter to
+                    within class scatter ratio. It can be used for both classification and
+                    transform, and it supports shrinkage. However, the &#8216;eigen&#8217; solver needs to
+                    compute the covariance matrix, so it might not be suitable for situations with
+                    a high number of features.
+                </p>
+                <div class="well well-sm">
+                    <p >Examples:</p>
+                    <p>
+                        <a class="reference internal" href="../auto_examples/classification/plot_lda.html#example-classification-plot-lda-py">
+                        <span>Normal and Shrinkage Linear Discriminant Analysis for classification</span></a>:
+                         Comparison of LDA classifiers
+                        with and without shrinkage.
+                    </p>
+                </div>
+                <div class="well">
+                    <p class="topic-title first">References:</p>
+                    <table class="docutils footnote" frame="void" id="id4" rules="none">
+                        <colgroup><col class="label" /><col /></colgroup>
+                        <tbody valign="top">
+                            <tr>
+                                <td class="label">[3]</td>
+                                <td>
+                                    <em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> &#8220;The Elements of Statistical Learning&#8221;, Hastie T., Tibshirani R.,
+                                    Friedman J., Section 4.3, p.106-119, 2008.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="docutils footnote" frame="void" id="id5" rules="none">
+                        <colgroup><col class="label" /><col /></colgroup>
+                        <tbody valign="top">
+                            <tr>
+                                <td class="label"><a class="fn-backref" href="#id3">[4]</a></td>
+                                <td>
+                                    Ledoit O, Wolf M. Honey, I Shrunk the Sample Covariance Matrix.
+                                    The Journal of Portfolio Management 30(4), 110-119, 2004.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
