@@ -80,6 +80,28 @@
 
             <div class="headerlink">
                 <h2 class="bg-info">现在开始<a>¶</a></h2>
+                <p>
+                    MatConvNet安装简单易于使用。下图给出了一个使用最近一代的深度卷积网络进行图像分类的完整例子。该例子
+                    包含了下载MatConvNet软件包，编译软件包，下载一个预先训练好的模型，然后运行此模型在Matlab自带的图像集上
+                    进行评估。
+                </p>
+                <div class="figure align-center">
+                    <img src="images/fig1_exp.png"/>
+                </div><p></p>
+                <p>
+                    上面的例子中的关键代码是<code>vl_simplenn</code>命令。<code>vl_simplenn</code>以CNN<code>net</code>
+                    和一个经过预处理的图像<code>im_</code>作为输入参数，输出一个结构体存储的结果<code>res</code>。这一特别的
+                    封装形式可以用来建立简单的CNN网络模型(该模型是一系列算子组成的链条)。通过查看<code>vl_simplenn</code>的
+                    代码，我们可以发现该函数通过调用一系列Matlab函数按配置好的一个变换序列对数据进行变换。这些函数被称之为“构建块”
+                    (building blocks)，它们构成了MatConvNet的骨架。
+                </p>
+                <p>
+                    尽管大多数的blocks实现了一些简单的操作算子，但是使他们不显得琐碎的正是其执行效率以及对CNN反向传播算法(backpropagation)
+                    的支持。下一步我们将说明如何直接使用这些构建块(building blocks)。现在考虑使用一
+                    线性滤波器组(a bank of linear filters)对一张图像进行卷积操作。首先我们要读取一张图像到Matlab工作空间：使用
+                    <code>im = single(imread('peppers.png'))</code>获得一个H&times;W&times;D的图像；其中，D=3是图像的颜色通道数量。
+
+                </p>
             </div>
 
             <div class="headerlink">
