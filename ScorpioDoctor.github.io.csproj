@@ -88,10 +88,12 @@
     <Content Include="cv\kpts-recog.html" />
     <Content Include="cv\kpts-recog\project_folders.png" />
     <Content Include="deep_learn\caffe\index.html" />
+    <Content Include="deep_learn\classical_papers\index.html" />
     <Content Include="deep_learn\cudaconvnet\index.html" />
     <Content Include="deep_learn\index.html" />
     <Content Include="deep_learn\matconvnet\computational_blocks.html" />
     <Content Include="deep_learn\matconvnet\geometry.html" />
+    <Content Include="deep_learn\matconvnet\images\fig1_exp.png" />
     <Content Include="deep_learn\matconvnet\implemetation_details.html" />
     <Content Include="deep_learn\matconvnet\index.html" />
     <Content Include="deep_learn\matconvnet\introduction_to_matcovnet.html" />
@@ -100,6 +102,7 @@
     <Content Include="deep_learn\opencv-dnn\index.html" />
     <Content Include="deep_learn\theano\index.html" />
     <Content Include="deep_learn\torch\index.html" />
+    <Content Include="deep_learn\video-lesson\index.html" />
     <Content Include="favicon.ico" />
     <Content Include="home\images\bkg.png" />
     <Content Include="home\images\blacktocat.png" />
