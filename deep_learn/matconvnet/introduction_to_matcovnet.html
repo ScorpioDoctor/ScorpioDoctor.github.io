@@ -100,12 +100,26 @@
                     的支持。下一步我们将说明如何直接使用这些构建块(building blocks)。现在考虑使用一
                     线性滤波器组(a bank of linear filters)对一张图像进行卷积操作。首先我们要读取一张图像到Matlab工作空间：使用
                     <code>im = single(imread('peppers.png'))</code>获得一个H&times;W&times;D的图像；其中，D=3是图像的颜色通道数量。
-
+                    接着，使用<code>f = randn(3,3,3,16,'single')</code>创建一组K=16的核尺寸为3&times;3的滤波器组。
+                    最后，使用命令<code>y = vl_nnconv(x,f,[])</code>将上述滤波器组应用到图像上进行卷积操作。返回的结果是一个有
+                    K=16个通道的数组，每一个通道对应于滤波器组中的一个滤波器。
+                </p>
+                <p>
+                    尽管我们鼓励大家使用构建块直接建立新的网络架构，但是Matlab还是提供了一些对标准CNN框架结构比如<mark>AlexNet</mark>和
+                    <mark>Network-in-Network</mark>的封装。而且MatConvet也提供了大量的例子在<strong>examples/</strong>目录下，比如<mark>MNIST</mark>，
+                    <mark>CIFAR</mark>以及<mark>ImageNet</mark>。所有这些例子都是用<strong>examples/cnn_train</strong>来进行训练，<code>cnn_train</code>
+                    函数实现了一个随机梯度下降法。尽管此函数非常好用且有很大的弹性，但是它与特定的问题相关，所以我们仍然将它放到<strong>examples/</strong>目录
+                    下。用户完全可以实现一个自己的训练函数版本。
                 </p>
             </div>
 
             <div class="headerlink">
                 <h2 class="bg-info">一睹真容<a>¶</a></h2>
+                <p>
+                    Matcovnet秉承了简单的设计哲学。与那些用软件对CNN进行复杂封装的网络架构不同，MatConvNet提供了一些具有基本功能的
+                    简单的计算模块比如线性卷积核以及ReLU算子等来构造CNN架构。这些构建模块能够被轻而易举的添加到一个完整的CNN模型中还能用于
+                    实现精密复杂的学习算法。尽管我们为你提供了一些
+                </p>
             </div>
 
             <div class="headerlink">
