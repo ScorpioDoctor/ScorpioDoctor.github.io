@@ -3569,6 +3569,7 @@
     <Content Include="webmaster.html" />
     <Content Include="bin\ScorpioDoctor.github.io.dll.config" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="CNAME" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
