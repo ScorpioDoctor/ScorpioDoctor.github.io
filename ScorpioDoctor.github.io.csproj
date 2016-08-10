@@ -57,6 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ai\index.html" />
+    <Content Include="auto_drive\index.html" />
     <Content Include="bigdata\index.html" />
     <Content Include="bin\ScorpioDoctor.github.io.dll" />
     <Content Include="bin\ScorpioDoctor.github.io.pdb" />
@@ -104,6 +106,7 @@
     <Content Include="deep_learn\torch\index.html" />
     <Content Include="deep_learn\video-lesson\index.html" />
     <Content Include="favicon.ico" />
+    <Content Include="grc\index.html" />
     <Content Include="home\images\bkg.png" />
     <Content Include="home\images\blacktocat.png" />
     <Content Include="home\index.html" />
@@ -3357,6 +3360,7 @@
     <Content Include="ml\scikit-learn\_images\kenan.jpg" />
     <Content Include="ml\scikit-learn\_images\plot_digits_last_image_0011.png" />
     <Content Include="nlp\index.html" />
+    <Content Include="optimal\index.html" />
     <Content Include="readme.md" />
     <Content Include="home\params.json" />
     <Content Include="home\README.md" />
@@ -3563,9 +3567,11 @@
     <Content Include="ml\scikit-learn\0.17\_static\iris.pdf" />
     <Content Include="ml\scikit-learn\0.17\_static\ML_MAPS_README.rst" />
     <Content Include="ml\scikit-learn\0.17\objects.inv" />
+    <Content Include="robotics\index.html" />
     <Content Include="scipy\index.html" />
     <Content Include="scipy\lession_1.html" />
     <Content Include="sponsor.html" />
+    <Content Include="swarm\index.html" />
     <Content Include="webmaster.html" />
     <Content Include="bin\ScorpioDoctor.github.io.dll.config" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
