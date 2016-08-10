@@ -3288,7 +3288,12 @@
     <Content Include="ml\scikit-learn\user_guide\compute_efficiency\index.html" />
     <Content Include="ml\scikit-learn\user_guide\dataset_operate\index.html" />
     <Content Include="ml\scikit-learn\user_guide\index.html" />
+    <Content Include="ml\scikit-learn\user_guide\model_select_evaluate\cross_validation.html" />
+    <Content Include="ml\scikit-learn\user_guide\model_select_evaluate\grid_search.html" />
     <Content Include="ml\scikit-learn\user_guide\model_select_evaluate\index.html" />
+    <Content Include="ml\scikit-learn\user_guide\model_select_evaluate\learning_curve.html" />
+    <Content Include="ml\scikit-learn\user_guide\model_select_evaluate\model_evaluation.html" />
+    <Content Include="ml\scikit-learn\user_guide\model_select_evaluate\model_persistence.html" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\calibration.html" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\cross_decomposition.html" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\ensemble.html" />
@@ -3355,8 +3360,17 @@
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\sgd.html" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\svm.html" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\tree.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\biclustering.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\clustering.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\covariance.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\decomposition.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\density.html" />
     <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\index.html" />
     <Content Include="ml\scikit-learn\user_guide\supervised_learning\index.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\manifold.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\mixture.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\neural_networks.html" />
+    <Content Include="ml\scikit-learn\user_guide\unsupervised_learning\outlier_detection.html" />
     <Content Include="ml\scikit-learn\_images\kenan.jpg" />
     <Content Include="ml\scikit-learn\_images\plot_digits_last_image_0011.png" />
     <Content Include="nlp\index.html" />
@@ -3605,6 +3619,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ml\scikit-learn\user_guide\unsupervised_learning\images\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <PropertyGroup>
