@@ -146,6 +146,7 @@
     <Content Include="deep_learn\matconvnet\functions\cnn_mnist.html" />
     <Content Include="deep_learn\matconvnet\functions\cnn_mnist_init.html" />
     <Content Include="deep_learn\matconvnet\functions\cnn_train.html" />
+    <Content Include="deep_learn\matconvnet\functions\function_err.html" />
     <Content Include="deep_learn\matconvnet\functions\index.html" />
     <Content Include="deep_learn\matconvnet\functions\vl_nnsoftmaxloss.html" />
     <Content Include="deep_learn\matconvnet\geometry.html" />
