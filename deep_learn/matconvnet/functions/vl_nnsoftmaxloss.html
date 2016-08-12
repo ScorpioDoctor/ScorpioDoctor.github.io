@@ -48,35 +48,38 @@
 
         <div class="container">
 
-            
+            <div>
+                <img src="images/softmaxloss.png"/>
+            </div>
+            <div>
+                <img src="images/softmaxloss-back.png" />
+            </div>
+
             <div>
                 <pre>
 <code data-language="matlab">
 function Y = vl_nnsoftmaxloss(X,c,dzdy)
-%VL_NNSOFTMAXLOSS CNN combined softmax and logistic loss.
-%   **Deprecated: use `vl_nnloss` instead**
+%VL_NNSOFTMAXLOSS CNN softmax 与 logistic loss的结合.
+%   **已废弃: 使用 `vl_nnloss` 作为替代**
 %
-%   Y = VL_NNSOFTMAX(X, C) applies the softmax operator followed by
-%   the logistic loss the data X. X has dimension H x W x D x N,
-%   packing N arrays of W x H D-dimensional vectors.
+%   Y = VL_NNSOFTMAX(X, C) 在数据X上使用softmax算子再加logistic损失 。
+%   X的维数：H x W x D x N,-->存放N个数组，每个数组是D维W x H向量.
 %
-%   C contains the class labels, which should be integers in the range
-%   1 to D. C can be an array with either N elements or with dimensions
-%   H x W x 1 x N dimensions. In the fist case, a given class label is
-%   applied at all spatial locations; in the second case, different
-%   class labels can be specified for different locations.
+%   C 包含类标签,它们是在1到D之间的整数。
+%   C 可以是有N个元素的数组，或者为H x W x 1 x N。
+%   在第一种情况下，一个给定的类标签被应用到所有的空间位置。
+%   在第二种情况下, 不同的类标签可以被指定给不同的空间位置。
 %
-%   DZDX = VL_NNSOFTMAXLOSS(X, C, DZDY) computes the derivative of the
-%   block projected onto DZDY. DZDX and DZDY have the same dimensions
-%   as X and Y respectively.
+%   DZDX = VL_NNSOFTMAXLOSS(X, C, DZDY) 计算该模块的投影到DZDY的导数
+%   DZDX和DZDY的维数分别与X和Y的维数相同。
 %X = X + 1e-6 ;
 sz = [size(X,1) size(X,2) size(X,3) size(X,4)] ;
 if numel(c) == sz(4)
-  % one label per image
+  % 每张图像对应一个标签,此时c的元素数量和X的第四维N相等
   c = reshape(c, [1 1 1 sz(4)]) ;
 end
 if size(c,1) == 1 & size(c,2) == 1
-  c = repmat(c, [sz(1) sz(2)]) ;
+  c = repmat(c, [sz(1) sz(2)]) ;%将c的前两维扩展成与X的前两维相同。
 end
 if isa(X,'gpuArray')
   dataType = classUnderlying(X) ;
@@ -87,40 +90,40 @@ switch dataType
   case 'double', toClass = @(x) double(x) ;
   case 'single', toClass = @(x) single(x) ;
 end
-% one label per spatial location
+% 每个空间位置一个标签
 sz_ = [size(c,1) size(c,2) size(c,3) size(c,4)] ;
 assert(isequal(sz_, [sz(1) sz(2) sz_(3) sz(4)])) ;
 assert(sz_(3)==1 | sz_(3)==2) ;
-% class c = 0 skips a spatial location
+% 如果对应空间位置上的类标签 c = 0，则跳过此空间位置
 mass = toClass(c(:,:,1,:) > 0) ;
 if sz_(3) == 2
-  % the second channel of c (if present) is used as weights
+  % 如果 c 有第二个通道，那么将其用来存储权重
   mass = mass .* c(:,:,2,:) ;
   c(:,:,2,:) = [] ;
 end
-% convert to indexes
+% 将类标签转换为索引
 c = c - 1 ;
 c_ = 0:numel(c)-1 ;
 c_ = 1 + ...
   mod(c_, sz(1)*sz(2)) + ...
   (sz(1)*sz(2)) * max(c(:), 0)' + ...
   (sz(1)*sz(2)*sz(3)) * floor(c_/(sz(1)*sz(2))) ;
-% compute softmaxloss
+% 计算 softmaxloss
 Xmax = max(X,[],3) ;
 ex = exp(bsxfun(@minus, X, Xmax)) ;
 %n = sz(1)*sz(2) ;
-if nargin <= 2
-  t = Xmax + log(sum(ex,3)) - reshape(X(c_), [sz(1:2) 1 sz(4)]) ;
+if nargin <= 2  %前向传播
+  t = Xmax + log(sum(ex,3)) - reshape(X(c_), [sz(1:2) 1 sz(4)]) ;%公式4.7
   Y = sum(sum(sum(mass .* t,1),2),4) ;
-else
-  Y = bsxfun(@rdivide, ex, sum(ex,3)) ;
+else    %后向传播，计算导数
+  Y = bsxfun(@rdivide, ex, sum(ex,3)) ;%上图中倒数第二个公式
   Y(c_) = Y(c_) - 1;
-  Y = bsxfun(@times, Y, bsxfun(@times, mass, dzdy)) ;
+  Y = bsxfun(@times, Y, bsxfun(@times, mass, dzdy)) ;%上图中倒数第一个公式
 end
-
 </code>
 </pre>
             </div>
+            
             
         </div>
 

@@ -143,6 +143,9 @@
     <Content Include="deep_learn\cudaconvnet\index.html" />
     <Content Include="deep_learn\index.html" />
     <Content Include="deep_learn\matconvnet\computational_blocks.html" />
+    <Content Include="deep_learn\matconvnet\functions\cnn_mnist.html" />
+    <Content Include="deep_learn\matconvnet\functions\cnn_mnist_init.html" />
+    <Content Include="deep_learn\matconvnet\functions\cnn_train.html" />
     <Content Include="deep_learn\matconvnet\functions\index.html" />
     <Content Include="deep_learn\matconvnet\functions\vl_nnsoftmaxloss.html" />
     <Content Include="deep_learn\matconvnet\geometry.html" />
@@ -3692,6 +3695,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="deep_learn\matconvnet\functions\images\" />
     <Folder Include="ml\scikit-learn\user_guide\unsupervised_learning\images\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
