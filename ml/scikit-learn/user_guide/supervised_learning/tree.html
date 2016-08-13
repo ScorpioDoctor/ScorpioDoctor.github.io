@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
-    <!--<link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap-responsive.css" />
-    <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
-    <link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />
-    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />-->
 
     <style>
         p {
@@ -23,11 +19,6 @@
 
     <script src="../../../../css-fonts-js/js/jquery.min.js"></script>
     <script src="../../../../css-fonts-js/js/jquery.js"></script>
-    <!--<script src="../../../../css-fonts-js/js/copybutton.js"></script>
-    <script src="../../../../css-fonts-js/js/doctools.js"></script>
-    <script src="../../../../css-fonts-js/js/jquery.maphilight.js"></script>
-    <script src="../../../../css-fonts-js/js/jquery.maphilight.min.js"></script>
-    <script src="../../../../css-fonts-js/js/underscore.js"></script>-->
     <script src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
 
 
@@ -65,19 +56,97 @@
 
         <div class="section" id="support-vector-machines">
             <h1 class="page-header">1.10 决策树(Decision Trees)<a>¶</a></h1>
-
+            <p>
+                决策树<strong>Decision Trees (DTs)</strong> 是一类用于<a href="#classification">分类</a>
+                和<a href="#regression">回归</a>的非参数监督学习算法。目标是创建一个模型通过从数据中学习一些简单的
+                决策规则来预测目标变量的值。
+            </p>
+            <p>
+                比如在下面的例子中，决策树从数据中学习一系列if-then-else决策规则去逼近一个正弦曲线。树的深度越深，决策规则
+                越复杂，模型拟合的也越精确。
+            </p>
+            <p class="text-center">
+                <img src="images/plot_tree_regression_0011.png" />
+            </p>
+            <p>
+                决策树的优点有以下几个方面：
+            </p>
+            <blockquote>
+                <div>
+                    <ul class="simple">
+                        <li>易于理解和解释。树能够被可视化。</li>
+                        <li>
+                            需要很少的数据准备工作。其他的学习机通常需要数据归一化、虚拟变量创建以及移除空白值(blank values)等预处理操作。
+                            然而，需要注意的是 此模型 不支持 缺失值(missing values)。
+                        </li>
+                        <li>
+                            使用决策树进行数据预测的代价是与训练树所用的数据点的数量呈对数关系的。
+                        </li>
+                        <li>
+                            能够同时处理数值数据(numerical data)和类别数据(categorical data)。其他学习机技术通常被限定于
+                            分析只有一种类型变量的数据集。更多详情请看<a href="#tree-algorithms"><span>决策树算法</span></a>。
+                        </li>
+                        <li>能够处理多输出问题。</li>
+                        <li>
+                            使用白盒模型(white box model)。如果某个给定的情形在模型中被观测到了,那么
+                            对于条件的解释可以使用布尔逻辑很轻松的实现。
+                            作为对比, 在黑盒模型(black box model)中 (例如在人工神经网络中), 
+                            结果可能非常难于解释。
+                        </li>
+                        <li>
+                            可以使用统计测试来验证模型，这使得我们能够对模型的可靠性(reliability)作出评估。 
+                        </li>
+                        <li>
+                            即使当它的某些假设稍微违背了数据集的真实模型，决策树也可以很好的工作。
+                        </li>
+                    </ul>
+                </div>
+            </blockquote>
+            <p>
+                决策树的缺点有以下几个方面：
+            </p>
+            <blockquote>
+                <div>
+                    <ul class="simple">
+                        <li>
+                            决策树学习器可能会创造过于复杂的树使得对数据的泛化能力下降。这被称之为<mark>过拟合(overfitting)</mark>。
+                            有一些机制比如剪枝操作、设置叶节点的最小样本量需求或者限制树的最大深度来避免过拟合发生。
+                        </li>
+                        <li>
+                            数据集中的数据的细微变化可能会导致产生截然不同的树出来，所以决策树存在不稳定性。
+                            解决不稳定性的一种方法是使用集成方法将多个决策树组织起来。
+                        </li>
+                        <li>
+                            学习最优决策树的问题已经被证明是一个NP-完全问题，即使是某些比较简单的情形下获得最优解也非常困难。
+                            因此，能够实际应用的决策树学习算法一般都是基于启发式优化方法的，比如使用贪心算法可以找到一个在叶节点上
+                            进行局部最优决策的决策树。 
+                        </li>
+                        <li>
+                            决策树很难学习和表达某些概念比如异或、奇偶校验和多路复用等问题。
+                        </li>
+                        <li>
+                            Decision tree learners create biased trees if some classes dominate.
+                            It is therefore recommended to balance the dataset prior to fitting
+                            with the decision tree.
+                        </li>
+                    </ul>
+                </div>
+            </blockquote>
             <div class="section" id="classification">
-                <h2>1.10.1. 分类(Classification)<a>¶</a></h2>
-
+                <h2>1.10.1 分类(Classification)<a>¶</a></h2>
+                <p>
+                    <code>DecisionTreeClassifier</code> is a class capable of performing
+                      multi-class classification on a dataset.
+                </p>
             </div>
 
             <div class="section" id="regression">
-                <h2>1.10.2. 回归(Regression)<a>¶</a></h2>
+                <h2>1.10.2 回归(Regression)<a>¶</a></h2>
 
             </div>
 
             <div class="section" id="multi-output-problems">
-                <h2>1.10.3. 多输出问题<a>¶</a></h2>
+                <h2>1.10.3 多输出问题<a>¶</a></h2>
 
             </div>
 
@@ -92,7 +161,7 @@
             </div>
 
             <div class="section" id="tree-algorithms-id3-c4-5-c5-0-and-cart">
-                <h2>1.10.6. 树算法: ID3, C4.5, C5.0 和 CART<a>¶</a></h2>
+                <h2 id="tree-algorithms">1.10.6. 决策树算法: ID3, C4.5, C5.0 和 CART<a>¶</a></h2>
 
             </div>
 

@@ -7,8 +7,7 @@
 
     <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
     <script src="../../../../css-fonts-js/js/jquery.min.js"></script>
-    <script src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
-
+    <script src="../../../../css-fonts-js/js/bootstrap.min.js"></script>  
     <title>人工智能研究网</title>
     <!--网站访问量统计-->
     <script>
@@ -41,8 +40,9 @@
 
     <div class="container">
 
+
         <div class="section" id="user-guide">
-            <span id="id1"></span><h1> 监督学习(Supervised Learning) <a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+            <span id="id1"></span><h1> 监督学习(Supervised Learning) <a>¶</a></h1>
             <style type="text/css">
                 div.bodywrapper blockquote {
                     margin: 0;
@@ -209,12 +209,23 @@
                 div.sidebar {
                     width: 25ex;
                 }
-            </style><div class="toctree-wrapper compound">
+            </style>
+            
+            <style>
+                li.toctree-l2 {
+                    font-size:x-large
+                }
+                li.toctree-l3 {
+                    font-size:large
+                }
+            </style>
+            <div class="toctree-wrapper compound">
+                
                 <ul>
                     <li class="toctree-l1">
-                        <a class="reference internal" href="supervised_learning.html">1. 监督学习</a><ul>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./linear_model.html">1.1. 广义线性模型</a><ul>
+                                <a class="reference internal" href="./linear_model.html">1.1. 广义线性模型</a>
+                                <ul>
                                     <li class="toctree-l3">
                                         <a class="reference internal" href="./linear_model.html#ordinary-least-squares">1.1.1. 普通最小二乘法</a>
                                         
@@ -251,7 +262,8 @@
                                 </ul>
                             </li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./lda_qda.html">1.2. 线性和二次判别分析</a><ul>
+                                <a class="reference internal" href="./lda_qda.html">1.2. 线性和二次判别分析</a>
+                                <ul>
                                     <li class="toctree-l3"><a class="reference internal" href="./lda_qda.html#dimensionality-reduction-using-linear-discriminant-analysis">1.2.1. 使用LDA进行维数约简</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./lda_qda.html#mathematical-formulation-of-the-lda-and-qda-classifiers">1.2.2. LDA和QDA分类器的数学形式</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./lda_qda.html#mathematical-formulation-of-lda-dimensionality-reduction">1.2.3. LDA维数约简的数学形式</a></li>
@@ -261,7 +273,8 @@
                             </li>
                             <li class="toctree-l2"><a class="reference internal" href="./kernel_ridge.html">1.3. 核岭回归</a></li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./svm.html">1.4. 支持向量机</a><ul>
+                                <a class="reference internal" href="./svm.html">1.4. 支持向量机</a>
+                                <ul>
                                     <li class="toctree-l3">
                                         <a class="reference internal" href="./svm.html#classification">1.4.1. 分类</a> 
                                     </li>
@@ -279,7 +292,8 @@
                                 </ul>
                             </li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="sgd.html">1.5. 随机梯度下降</a><ul>
+                                <a class="reference internal" href="sgd.html">1.5. 随机梯度下降</a>
+                                <ul>
                                     <li class="toctree-l3"><a class="reference internal" href="./sgd.html#classification">1.5.1. 分类</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./sgd.html#regression">1.5.2. 回归</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./sgd.html#stochastic-gradient-descent-for-sparse-data">1.5.3. 用于稀疏数据的随机梯度下降法</a></li>
@@ -292,7 +306,8 @@
                                 </ul>
                             </li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./neighbors.html">1.6. 最近邻</a><ul>
+                                <a class="reference internal" href="./neighbors.html">1.6. 最近邻</a>
+                                <ul>
                                     <li class="toctree-l3">
                                         <a class="reference internal" href="./neighbors.html#unsupervised-nearest-neighbors">1.6.1. 无监督最近邻</a> 
                                     </li>
@@ -312,7 +327,8 @@
                                 </ul>
                             </li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./gaussian_process.html">1.7. 高斯过程</a><ul>
+                                <a class="reference internal" href="./gaussian_process.html">1.7. 高斯过程</a>
+                                <ul>
                                     <li class="toctree-l3">
                                         <a class="reference internal" href="./gaussian_process.html#examples">1.7.1. 例子</a>
                                     </li>
@@ -326,7 +342,8 @@
                             </li>
                             <li class="toctree-l2"><a class="reference internal" href="./cross_decomposition.html">1.8. 交叉分解</a></li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./naive_bayes.html">1.9. 朴素贝叶斯</a><ul>
+                                <a class="reference internal" href="./naive_bayes.html">1.9. 朴素贝叶斯</a>
+                                <ul>
                                     <li class="toctree-l3"><a class="reference internal" href="./naive_bayes.html#gaussian-naive-bayes">1.9.1. 高斯朴素贝叶斯</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./naive_bayes.html#multinomial-naive-bayes">1.9.2. 多项式朴素贝叶斯</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./naive_bayes.html#bernoulli-naive-bayes">1.9.3. 伯努利朴素贝叶斯</a></li>
@@ -334,7 +351,8 @@
                                 </ul>
                             </li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./tree.html">1.10. 决策树</a><ul>
+                                <a class="reference internal" href="./tree.html">1.10. 决策树</a>
+                                <ul>
                                     <li class="toctree-l3"><a class="reference internal" href="./tree.html#classification">1.10.1. 分类</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./tree.html#regression">1.10.2. 回归</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./tree.html#multi-output-problems">1.10.3. 多输出问题</a></li>
@@ -369,7 +387,8 @@
                                 </ul>
                             </li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./multiclass.html">1.12. 多类多标签算法</a><ul>
+                                <a class="reference internal" href="./multiclass.html">1.12. 多类多标签算法</a>
+                                <ul>
                                     <li class="toctree-l3"><a class="reference internal" href="./multiclass.html#multilabel-classification-format">1.12.1. Multilabel classification format</a></li>
                                     <li class="toctree-l3">
                                         <a class="reference internal" href="./multiclass.html#one-vs-the-rest">1.12.2. One-Vs-The-Rest</a>
@@ -386,7 +405,8 @@
                                 </ul>
                             </li>
                             <li class="toctree-l2">
-                                <a class="reference internal" href="./feature_selection.html">1.13. 特征选择</a><ul>
+                                <a class="reference internal" href="./feature_selection.html">1.13. 特征选择</a>
+                                <ul>
                                     <li class="toctree-l3"><a class="reference internal" href="./feature_selection.html#removing-features-with-low-variance">1.13.1. Removing features with low variance</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./feature_selection.html#univariate-feature-selection">1.13.2. Univariate feature selection</a></li>
                                     <li class="toctree-l3"><a class="reference internal" href="./feature_selection.html#recursive-feature-elimination">1.13.3. Recursive feature elimination</a></li>
@@ -402,9 +422,9 @@
                             </li>
                             <li class="toctree-l2"><a class="reference internal" href="./isotonic.html">1.15. 保序回归</a></li>
                             <li class="toctree-l2"><a class="reference internal" href="./calibration.html">1.16. 概率校准</a></li>
-                        </ul>
                     </li>
                 </ul>
+                    
             </div>
         </div>
 
