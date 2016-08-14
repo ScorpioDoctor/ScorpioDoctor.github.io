@@ -158,6 +158,7 @@
     <Content Include="deep_learn\matconvnet\index.html" />
     <Content Include="deep_learn\matconvnet\introduction_to_matcovnet.html" />
     <Content Include="deep_learn\matconvnet\neural_network_computations.html" />
+    <Content Include="deep_learn\matconvnet\others\index.html" />
     <Content Include="deep_learn\matconvnet\wrapper_pretrainedmodel.html" />
     <Content Include="deep_learn\opencv-dnn\index.html" />
     <Content Include="deep_learn\theano\index.html" />
