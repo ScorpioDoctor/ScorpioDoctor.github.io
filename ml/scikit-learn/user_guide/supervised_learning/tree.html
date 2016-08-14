@@ -349,6 +349,32 @@
                         </ul>
                     </div>
                 </blockquote>
+                <p>
+                    <a >多输出决策树回归的例子</a>. 在这个例中，输入X是单精度实数，输出Y是X的正弦和余弦。 
+                </p>
+                <p class="text-center">
+                    <img src="images/plot_tree_regression_multioutput_0011.png" />
+                </p>
+                <p>
+                    多输出决策树用于分类的例子<a>人脸补全</a>. 在这个例中，
+                    输入X是上半张脸的像素，而输出Y是对应的下半张脸。
+                </p>
+                <p class="text-center">
+                    <img src="images/plot_multioutput_face_completion_0011.png" width="750" height="847" />
+                </p>
+                <div class="well well-sm">
+                    <p>
+                        例子:<a>多输出决策树回归：正余弦函数拟合</a>；<a>多输出决策树分类：人脸补全</a>
+                    </p>
+                </div>
+                <div class="well well-sm">
+                    <p>
+                        参考文献:
+                            M. Dumont et al,  <a class="reference external" href="http://www.montefiore.ulg.ac.be/services/stochastic/pubs/2009/DMWG09/dumont-visapp09-shortpaper.pdf">
+                            Fast multi-class image annotation with random subwindows and multiple output randomized trees
+                            </a>, International Conference on Computer Vision Theory and Applications 2009
+                    </p>
+                </div>
             </div>
 
             <div class="section" id="complexity">
@@ -358,12 +384,84 @@
 
             <div class="section" id="tips-on-practical-use">
                 <h2>1.10.5 应用实践指南<a>¶</a></h2>
-
+                <blockquote>
+                    <div>
+                        <ul>
+                            <li>
+                                决策树具有使用大量特征过拟合数据的倾向。由于空间高维但样本量少会使得决策树过拟合，
+                                所以确保样本数量与特征数量的比值处在合理区间是很重要的。
+                            </li>
+                            <li>
+                                考虑使用维数约简算法（例如：PCA,ICA,或特征选择方法）为你的决策树选择具有辨别力的特征。
+                            </li>
+                            <li>
+                                通过使用<code>export</code>函数在训练过程中可视化你的树。选择<code>max_depth=3</code>作为
+                                初始树的深度，然后找到初始树在拟合数据上的表现，根据这一表现再不断加深树的深度。
+                            </li>
+                            <li>
+                                Remember that the number of samples required to populate the tree doubles for each
+                                 additional level the tree grows to.
+                                 使用<code>max_depth</code>来控制树的深度以防止过拟合。
+                            </li>
+                            <li>
+                                使用<code>min_samples_split</code>和<code>min_samples_leaf</code>来控制叶节点的样本容量。
+                                当叶节点上的样本容量非常小的时候往往意味着过拟合了；然而，样本容量太大又会妨碍决策树从数据中学习。
+                                尝试以<code>min_samples_leaf=5</code>作为一个初始值。它们之间的主要不同在于<code>min_samples_leaf</code>
+                                确保了叶节点上的最小样本量，而<code>min_samples_split</code>可以创建任意小的叶节点，尽管min_samples_split
+                                在文献中更加的常见。
+                            </li>
+                            <li>
+                                为了防止决策树偏向那些主导类，在训练之前要让数据集中不同类的样本容量之间的比例保持平衡。这可以通过为所有类获取
+                                相同数量的样本做到；或者也可以通过归一化样本权重(sample_weight)到相同的值来做到。
+                                另外，必须注意到加权预剪枝准则比如<code>min_weight_fraction_leaf</code>与那些没有意识到样本权重的准则比如
+                                <code>min_samples_leaf</code>进行比较的话，前者能够确保更少的偏向那些主导类。
+                            </li>
+                            <li>
+                                如果样本被加权，使用基于权重的预剪枝准则比如<code>min_weight_fraction_leaf</code>来优化树结构将会非常简单。
+                                <code>min_weight_fraction_leaf</code>准则确保叶节点包含整体样本权重的一个最小规定比例。
+                            </li>
+                            <li>
+                                所有决策树在其内部使用<code>np.float32</code>型的数组。如果训练数据不是此格式，将会copy一个数据集的副本。
+                            </li>
+                            <li>
+                                如果输入矩阵X非常稀疏，建议你在进行模型拟合前将其转换为稀疏矩阵：<code>csc_matrix</code>；
+                                在做预测前，转为<code>csr_matrix</code>矩阵。相比稠密矩阵，在有大量零元素的稀疏输入矩阵上进行训练可以
+                                加快一个量级的训练时间。
+                            </li>
+                        </ul>
+                    </div>
+                </blockquote>
             </div>
 
             <div class="section" id="tree-algorithms-id3-c4-5-c5-0-and-cart">
                 <h2 id="tree-algorithms">1.10.6. 决策树算法: ID3, C4.5, C5.0 和 CART<a>¶</a></h2>
-
+                <p>
+                    决策树算法的变种都有哪些呢？他们的区别在哪里？<strong>scikit-learn</strong>实现的是哪一种呢？
+                </p>
+                <p>
+                    <a href="https://en.wikipedia.org/wiki/ID3_algorithm" target="_blank">ID3</a> 
+                    (Iterative Dichotomiser 3) 在1986年由Ross Quinlan开发出来。 ID3算法创建一个多路树
+                    (multiway tree), 以贪婪的方式为每个节点寻找分类特征以使得分类后的信息增益达到最大。
+                    所有树都不断增长已达到他们的最大深度，然后使用剪枝操作来提升树在未知数据上的泛化能力。
+                </p>
+                <p>
+                    <strong>C4.5</strong>是ID3算法的后继者。它通过动态定义离散属性(基于数值变量，将这些连续的属性变量
+                    离散化成整型的离散集合)去除了特征必须是按类别的这一限制条件。 C4.5 将训练好的树(即ID3的输出)都转化成
+                    <mark>if-then</mark> 决策规则。这些决策规则的准确性随后被评估出来并进一步决定这些规则被预测过程使用的顺序。 
+                     Pruning is done by removing a rule’s precondition if the accuracy of the rule improves without it.
+                </p>
+                <p>
+                    C5.0 是 Quinlan 的一个最新版本，受专利保护。 It uses less memory
+                     and builds smaller rulesets than C4.5 while being more accurate.
+                </p>
+                <p>
+                    CART (Classification and Regression Trees) is very similar to C4.5, but it differs in that it
+                     supports numerical target variables (regression) and does not compute rule sets. CART constructs 
+                    binary trees using the feature and threshold that yield the largest information gain at each node.
+                </p>
+                <p>
+                    <strong>scikit-learn</strong> 使用 <strong>CART</strong> 算法的优化版本.
+                </p>
             </div>
 
             <div class="section" id="mathematical-formulation">
