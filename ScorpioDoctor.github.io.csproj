@@ -143,11 +143,13 @@
     <Content Include="deep_learn\cudaconvnet\index.html" />
     <Content Include="deep_learn\index.html" />
     <Content Include="deep_learn\matconvnet\computational_blocks.html" />
+    <Content Include="deep_learn\matconvnet\functions\accumulate_gradients.html" />
     <Content Include="deep_learn\matconvnet\functions\cnn_mnist.html" />
     <Content Include="deep_learn\matconvnet\functions\cnn_mnist_init.html" />
     <Content Include="deep_learn\matconvnet\functions\cnn_train.html" />
     <Content Include="deep_learn\matconvnet\functions\function_err.html" />
     <Content Include="deep_learn\matconvnet\functions\index.html" />
+    <Content Include="deep_learn\matconvnet\functions\process_epoch.html" />
     <Content Include="deep_learn\matconvnet\functions\vl_nnsoftmaxloss.html" />
     <Content Include="deep_learn\matconvnet\geometry.html" />
     <Content Include="deep_learn\matconvnet\images\fig1_exp.png" />
