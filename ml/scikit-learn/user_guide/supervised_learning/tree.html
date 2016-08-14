@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />-->
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
 
     <style>
         p {
@@ -125,9 +127,8 @@
                             决策树很难学习和表达某些概念比如异或、奇偶校验和多路复用等问题。
                         </li>
                         <li>
-                            Decision tree learners create biased trees if some classes dominate.
-                            It is therefore recommended to balance the dataset prior to fitting
-                            with the decision tree.
+                            如果某些类起了主导作用，那么决策树学习器将创建一个有偏树(biased trees)。
+                            因此，强烈建议数据集中各类的先验概率应该做到平衡以便拟合出一个更加平衡的决策树。
                         </li>
                     </ul>
                 </div>
@@ -135,19 +136,219 @@
             <div class="section" id="classification">
                 <h2>1.10.1 分类(Classification)<a>¶</a></h2>
                 <p>
-                    <code>DecisionTreeClassifier</code> is a class capable of performing
-                      multi-class classification on a dataset.
+                    <code>DecisionTreeClassifier</code> 是一个能够执行多类别分类任务的类。就像其他分类器一样，
+                    <code>DecisionTreeClassifier</code>类的成员函数<code>fit</code>接受两个参数：一个是用于存放训练样本的
+                    数组X,X可以是稀疏的或稠密的，其大小为<mark>[n_samples, n_features]</mark>； 另外一个参数是训练样本的类别
+                    标签数组Y，Y是整型数组，大小为<mark>[n_samples]</mark>
                 </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    当模型拟合好以后，我们就可以用它来预测样本类别了。
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1])</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    更进一步，我们还可以获得被预测的样本属于各个类的概率值。此概率值是叶节点上同一类的训练样本的比例分数。
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([[ 0.,  1.]])</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    <code>DecisionTreeClassifier</code> 即能够处理二分类问题(其中的标签只有 -1 和 1 两种); 
+                    也能够处理多类分类问题(其中标签集合为 [0, ..., K-1]).
+                </p>
+                <p>
+                    我们可以使用iris数据集按如下的方式构造决策树分类器：
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    一旦决策树被训练好后，我们可以用export_graphviz将树以
+                    <a href="http://www.graphviz.org" target="_blank">Graphviz</a>
+                    的格式导出。下面的例子展示了如何将 iris数据集上训练得到的树导出来：
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;iris.dot&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">f</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    然后，我们就使用Graphviz的节点工具创建个PDF文件：<code>dot -Tpdf iris.dot -o iris.pdf</code>。
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;iris.dot&#39;</span><span class="p">)</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    或者，如果我们安装了Python模块<code>pydot</code>，我们就能够直接在Python中创建pdf文件：
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pydot</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">dot_data</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">pydot</span><span class="o">.</span><span class="n">graph_from_dot_data</span><span class="p">(</span><span class="n">dot_data</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="s2">&quot;iris.pdf&quot;</span><span class="p">)</span> 
+</pre>
+                    </div>
+                </div>
+                <p>
+                    <code class="xref py py-func docutils literal"><span class="pre">export_graphviz</span></code> 
+                    也支持各种各样的美化选项，包括带有颜色的类节点，显式变量和类名。
+                    IPython notebooks 也可以在其内部显示这些绘图，通过使用<cite>Image()</cite> 函数:
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">dot_data</span><span class="p">,</span>  
+<span class="go">                         feature_names=iris.feature_names,  </span>
+<span class="go">                         class_names=iris.target_names,  </span>
+<span class="go">                         filled=True, rounded=True,  </span>
+<span class="go">                         special_characters=True)  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">pydot</span><span class="o">.</span><span class="n">graph_from_dot_data</span><span class="p">(</span><span class="n">dot_data</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Image</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">create_png</span><span class="p">())</span>  
+</pre>
+                    </div>
+                </div>
+                <p class="text-center">
+                    <img src="./images/iris.svg" />
+                </p>
+                <p>当决策树被拟合好以后，就可以用来预测样本类别啦：</p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<span class="go">array([0])</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    更进一步，我们还可以获得被预测的样本属于各个类的概率值。此概率值是叶节点上同一类的训练样本的比例分数。
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<span class="go">array([[ 1.,  0.,  0.]])</span>
+</pre>
+                    </div>
+                </div>
+                <p class="text-center">
+                    <img src="images/plot_iris_0013.png" />
+                </p>
+                <div class="well well-sm">
+                    <p>
+                        例子:<a>绘制鸢尾花数据集上的决策树分类判决界面</a>
+                    </p> 
+                </div>
+
             </div>
 
             <div class="section" id="regression">
                 <h2>1.10.2 回归(Regression)<a>¶</a></h2>
+                <p class="text-center">
+                    <img alt="./images/plot_tree_regression_0011.png" src="./images/plot_tree_regression_0011.png" style="width: 600.0px; height: 450.0px;" />
+                </p>
+                <p>
+                    决策树也可以用于解决回归问题，此时要使用<code>DecisionTreeRegressor</code>类。
+                </p>
+                <p>
+                    就像在分类问题中的设置一样，<code>DecisionTreeRegressor</code>类的<code>fit</code>函数也接受
+                    两个参数：X和y。但是，在回归问题中，目标变量y不再是整型的而是浮点型的连续变量。 
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([ 0.5])</span>
+</pre>
+                    </div>
+                </div>
+                <div class="well well-sm">
+                    <p>
+                        例子:<a>决策树回归应用</a>
+                    </p>
+                </div>
 
             </div>
 
             <div class="section" id="multi-output-problems">
                 <h2>1.10.3 多输出问题<a>¶</a></h2>
-
+                <p>
+                    多输出问题(multi-output problem)也是监督学习问题，它有多个输出需要预测。此时，目标变量Y是一个
+                    大小为<code>[n_samples,n_outputs]</code>的2维数组。
+                </p>
+                <p>
+                    当多个输出之间没有相关性的时候，解决此问题的一个简单办法就是为每一个输出建立一个独立于其他输出的
+                    模型，然后对于每一个输出的预测就可以独立的使用其对应的模型。
+                    然而，很多情况下多个输出变量都依赖于相同的输入变量，这就会导致这些依赖于相同输入的输出变量之间
+                    存在相关性。这时候最好的做法通常是构建单个模型对多个输出进行同时预测。首先，因为我们只建立了一个
+                    单模型，所以需要的训练时间就比较少。其次，单模型估计器的泛化精度通常比较高。
+                </p>
+                <p>
+                    对于决策树来说，这种策略可以很容易地被用来支持多输出的问题。这时候，我们需要做以下改变：
+                </p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>在叶子中存储n个输出值，而不是1个;</li>
+                            <li>
+                                使用分裂准则(splitting criteria)来计算所有n个输出上的平均缩减(average reduction)。
+                            </li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <p>
+                    scikit-learn模块在<code>DecisionTreeClassifier</code>类和<code>DecisionTreeRegressor</code>类中
+                    实现了上述策略来支持多输出问题。如果我们在一个大小为<code>[n_samples,n_outputs]</code>的多变量输出数组上拟合了
+                    一个决策树模型，那么产生的估计器模型的输出具有下述特点：
+                </p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>函数<code>predict</code>的输出具有n_output个值;</li>
+                            <li>
+                                函数<code>predict_proba</code>的输出是一个列表，包含了n_output个类概率数组。
+                            </li>
+                        </ul>
+                    </div>
+                </blockquote>
             </div>
 
             <div class="section" id="complexity">
