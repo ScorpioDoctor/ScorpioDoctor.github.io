@@ -451,13 +451,12 @@
                      Pruning is done by removing a rule’s precondition if the accuracy of the rule improves without it.
                 </p>
                 <p>
-                    C5.0 是 Quinlan 的一个最新版本，受专利保护。 It uses less memory
-                     and builds smaller rulesets than C4.5 while being more accurate.
+                    C5.0 是 Quinlan 的一个最新版本，受专利保护。 与C4.5相比，它使用更少的内存并且构建更小的决策集合但是依然能够达到
+                    更高的准确度。
                 </p>
                 <p>
-                    CART (Classification and Regression Trees) is very similar to C4.5, but it differs in that it
-                     supports numerical target variables (regression) and does not compute rule sets. CART constructs 
-                    binary trees using the feature and threshold that yield the largest information gain at each node.
+                    CART (Classification and Regression Trees) 与C4.5非常相似, 它们的区别在于CART支持数值变量(用于回归)
+                    而且不产生显式的决策规则集合。CART在每一个节点上使用能够产生最大信息增益的特征和阈值构造二叉树。
                 </p>
                 <p>
                     <strong>scikit-learn</strong> 使用 <strong>CART</strong> 算法的优化版本.
@@ -466,11 +465,108 @@
 
             <div class="section" id="mathematical-formulation">
                 <h2>1.10.7. 数学表述<a>¶</a></h2>
+                <p>
+                    给定训练向量集合<img class="math" src="./images/110fea905d9ed71ce598e82f51bf26a1661f8f5c.png" alt="x_i \in R^n" />, i=1,..., l 
+                    和类标签集合<img class="math" src="./images/1ba3ffd927bbc923681949691879142eb7ddcb06.png" alt="y \in R^l" />, 
+                    一个决策树递归的划分空间使得具有相同标签的样本被划分到同一类中。
+                </p>
+                <p>
+                    让<img class="math" src="./images/7b1816c51f7d31275cd3ad400208fb7b3ce136a0.png" alt="Q" />
+                    来表示节点<img class="math" src="./images/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m" />
+                    上的数据。对每一个由特征<img class="math" src="./images/d32c78b759903e3f4bd4fd2ce0b86358f7500c5d.png" alt="j" />
+                    和阈值<img class="math" src="./images/168b41d971e0e2e6d9bf8b198eccfe76a5d71030.png" alt="t_m" />所构成的候选划分
+                    <img class="math" src="./images/9d759be8e66ed0a164c0a65eb31389b7abf6de49.png" alt="\theta = (j, t_m)" />，
+                    将数据Q划分成两个子集：
+                    <img class="math" src="./images/e68adc400e8570b0f58d78c16290ba9bf84f0298.png" alt="Q_{left}(\theta)" /> 和
+                     <img class="math" src="./images/77e715cd935ec58a6793c7282b25172264dde14b.png" alt="Q_{right}(\theta)" />。
+                </p>
+                <div class="math">
+                    <p class="text-center">
+                        <img src="./images/1376e8e59ba3b59ff5f4f9e7dd475684017ea210.png" alt="Q_{left}(\theta) = {(x, y) | x_j &lt;= t_m} Q_{right}(\theta) = Q \setminus Q_{left}(\theta)" />
+                    </p>
+                </div>
+                <p>
+                    在<img class="math" src="./images/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m" />
+                    节点的impurity(杂质)通过使用一个 impurity 函数
+                    <img class="math" src="./images/7d6e812752f434e91c490703e9983f319610933c.png" alt="H()" />进行计算, 
+                    具体选择哪个依赖于我们要求解的任务：回归 或 决策。
+                </p>
+                <div class="math">
+                    <p class="text-center">
+                        <img src="./images/7aaed5ba95d79fa52da0d2596f76ebdc25e8893f.png" alt="G(Q, \theta) = \frac{n_{left}}{N_m} H(Q_{left}(\theta))+ \frac{n_{right}}{N_m} H(Q_{right}(\theta))" />
+                    </p>
+                </div>
+                <p>通过选择参数使得impurity最小化：</p>
+                <div class="math">
+                    <p class="text-center"><img src="./images/5d5c5d759bbce0758c8ad4e6a6d27fb6539b597e.png" alt="\theta^* = \operatorname{argmin}_\theta  G(Q, \theta)" /></p>
+                </div>
+                <p>
+                    在子集<img class="math" src="./images/d93300e24558ddc7c23e5c2633c7f13605a41203.png" alt="Q_{left}(\theta^*)" />
+                    和<img class="math" src="./images/66a9bcb2fb38a49967dec10ad4d7cdded003ee7d.png" alt="Q_{right}(\theta^*)" />上递归
+                    直到达到规定的最大深度：
+                    <img class="math" src="./images/dcf8a6d5a34c9ad0b9b22f7abf78053e907e0729.png" alt="N_m &lt; \min_{samples}" /> or
+                    <img class="math" src="./images/a31baaf9fe13c9b90c5a8091bcd00e981cd8a49f.png" alt="N_m = 1" />.
+                </p>
 
-            </div>
+                <div class="section" id="classification-criteria">
+                    <h3>1.10.7.1. 分类准则 <a>¶</a></h3>
+                    <p>
+                        如果目标是分类输出标签值0,1,...,K-1,
+                        对节点<img class="math" src="./images/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m" />,使用
+                        <img class="math" src="./images/c4a8a2957d6d5970fef35cce3e86d31427eaa216.png" alt="N_m" />
+                        个观测来表达一个区域<img class="math" src="./images/23fee98757d811d8b5ade0fd876948f60f7806d9.png" alt="R_m" />。
+                        让：
+                    </p>
+                    <div class="math">
+                        <p class="text-center"><img src="./images/ebb2cff7b67f3b8c4e06405d8385983efac9659c.png" alt="p_{mk} = 1/ N_m \sum_{x_i \in R_m} I(y_i = k)" /></p>
+                    </div>
+                    <p>
+                        为类k的观测在节点<img class="math" src="./images/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m" />
+                        上的比例。
+                    </p>
+                    <p>对impurity的常见度量有三种：Gini</p>
+                    <div class="math">
+                        <p class="text-center"><img src="./images/6227164813ffb600135aa9f69b90000ace19ba1d.png" alt="H(X_m) = \sum_k p_{mk} (1 - p_{mk})" /></p>
+                    </div><p>Cross-Entropy</p>
+                    <div class="math">
+                        <p class="text-center"><img src="./images/f87532cfb621c0b1934429a5c0987a259ba01364.png" alt="H(X_m) = - \sum_k p_{mk} \log(p_{mk})" /></p>
+                    </div>
+                    <p>和 Misclassification</p>
+                    <div class="math">
+                        <p class="text-center"><img src="./images/73565e0e02602c9b442a103dc229e5024e37ad67.png" alt="H(X_m) = 1 - \max(p_{mk})" /></p>
+                    </div>
+                </div>
 
-            <div class="section" id="implementation-details">
-                <h2>1.10.8. 实现细节<a>¶</a></h2>
+                <div class="section" id="regression-criteria">
+                    <h3>1.10.7.2. 回归准则<a>¶</a></h3>
+                    <p>
+                        如果要预测的目标变量是连续值，那么对于节点
+                        <img class="math" src="./images/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m" />,
+                        使用<img class="math" src="./images/c4a8a2957d6d5970fef35cce3e86d31427eaa216.png" alt="N_m" />观测来表达
+                        一个区域<img class="math" src="./images/23fee98757d811d8b5ade0fd876948f60f7806d9.png" alt="R_m" />。则，普遍适用的
+                        准则是最小化均方误差(Mean Squared Error)。
+                    </p>
+                    <div class="math">
+                        <p class="text-center">
+                            <img src="./images/216499b7b74994c090829dbb0e24bfd8b8d177fc.png" alt="c_m = \frac{1}{N_m} \sum_{i \in N_m} y_iH(X_m) = \frac{1}{N_m} \sum_{i \in N_m} (y_i - c_m)^2" />
+                        </p>
+                    </div><div class="well well-sm">
+                        <p >参考文献:</p>
+                        <ul class="simple">
+                            <li><a class="reference external" href="http://en.wikipedia.org/wiki/Decision_tree_learning">http://en.wikipedia.org/wiki/Decision_tree_learning</a></li>
+                            <li><a class="reference external" href="http://en.wikipedia.org/wiki/Predictive_analytics">http://en.wikipedia.org/wiki/Predictive_analytics</a></li>
+                            <li>
+                                L. Breiman, J. Friedman, R. Olshen, and C. Stone. Classification and
+                                Regression Trees. Wadsworth, Belmont, CA, 1984.
+                            </li>
+                            <li>J.R. Quinlan. C4. 5: programs for machine learning. Morgan Kaufmann, 1993.</li>
+                            <li>
+                                T. Hastie, R. Tibshirani and J. Friedman.
+                                Elements of Statistical Learning, Springer, 2009.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
             </div>
 

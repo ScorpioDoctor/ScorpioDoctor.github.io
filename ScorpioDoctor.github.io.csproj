@@ -142,6 +142,7 @@
     <Content Include="cv\visual-features\index.html" />
     <Content Include="cv\visual-features\points-features\index.html" />
     <Content Include="deep_learn\caffe\index.html" />
+    <Content Include="deep_learn\caffe\others\index.html" />
     <Content Include="deep_learn\classical_papers\index.html" />
     <Content Include="deep_learn\cudaconvnet\index.html" />
     <Content Include="deep_learn\index.html" />
@@ -164,6 +165,7 @@
     <Content Include="deep_learn\matconvnet\wrapper_pretrainedmodel.html" />
     <Content Include="deep_learn\opencv-dnn\index.html" />
     <Content Include="deep_learn\theano\index.html" />
+    <Content Include="deep_learn\theano\others\index.html" />
     <Content Include="deep_learn\torch\index.html" />
     <Content Include="deep_learn\video-lesson\index.html" />
     <Content Include="favicon.ico" />

@@ -540,16 +540,19 @@ feature <img class="math" src="../_images/math/d32c78b759903e3f4bd4fd2ce0b86358f
 <p><img src="../_images/math/1376e8e59ba3b59ff5f4f9e7dd475684017ea210.png" alt="Q_{left}(\theta) = {(x, y) | x_j &lt;= t_m}
 
 Q_{right}(\theta) = Q \setminus Q_{left}(\theta)"/></p>
-</div><p>The impurity at <img class="math" src="../_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> is computed using an impurity function
+</div>
+<p>The impurity at <img class="math" src="../_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> is computed using an impurity function
 <img class="math" src="../_images/math/7d6e812752f434e91c490703e9983f319610933c.png" alt="H()"/>, the choice of which depends on the task being solved
 (classification or regression)</p>
 <div class="math">
 <p><img src="../_images/math/7aaed5ba95d79fa52da0d2596f76ebdc25e8893f.png" alt="G(Q, \theta) = \frac{n_{left}}{N_m} H(Q_{left}(\theta))
 + \frac{n_{right}}{N_m} H(Q_{right}(\theta))"/></p>
-</div><p>Select the parameters that minimises the impurity</p>
+</div>
+<p>Select the parameters that minimises the impurity</p>
 <div class="math">
 <p><img src="../_images/math/5d5c5d759bbce0758c8ad4e6a6d27fb6539b597e.png" alt="\theta^* = \operatorname{argmin}_\theta  G(Q, \theta)"/></p>
-</div><p>Recurse for subsets <img class="math" src="../_images/math/d93300e24558ddc7c23e5c2633c7f13605a41203.png" alt="Q_{left}(\theta^*)"/> and
+</div>
+<p>Recurse for subsets <img class="math" src="../_images/math/d93300e24558ddc7c23e5c2633c7f13605a41203.png" alt="Q_{left}(\theta^*)"/> and
 <img class="math" src="../_images/math/66a9bcb2fb38a49967dec10ad4d7cdded003ee7d.png" alt="Q_{right}(\theta^*)"/> until the maximum allowable depth is reached,
 <img class="math" src="../_images/math/dcf8a6d5a34c9ad0b9b22f7abf78053e907e0729.png" alt="N_m &lt; \min_{samples}"/> or <img class="math" src="../_images/math/a31baaf9fe13c9b90c5a8091bcd00e981cd8a49f.png" alt="N_m = 1"/>.</p>
 <div class="section" id="classification-criteria">
