@@ -66,33 +66,27 @@
         <div class="section" id="linear-and-quadratic-discriminant-analysis">
             <h1 class="page-header">1.2. 线性和二次判别分析（LDA 和 QDA）<a>¶</a></h1>
             <p>
-                Linear Discriminant Analysis <code>(discriminant_analysis.LinearDiscriminantAnalysis)</code> 
-                and Quadratic Discriminant Analysis <code>(discriminant_analysis.QuadraticDiscriminantAnalysis)</code>
-                 are two classic classifiers, with, as their names suggest, a linear and a quadratic decision surface, respectively.
+                线性判别分析 <code>(discriminant_analysis.LinearDiscriminantAnalysis)</code> 与 二次判别分析 <code>(discriminant_analysis.QuadraticDiscriminantAnalysis)</code>
+                 是两个经典的分类器。就像它们的名字所暗示的那样，LDA产生线性决策面，QDA产生二次决策面。
             </p>
             <p>
-                These classifiers are attractive because they have closed-form solutions that
-                can be easily computed, are inherently multiclass, have proven to work well in
-                practice and have no hyperparameters to tune.
+                这些分类器有相当的吸引力，因为它们具有易于计算的解析解(closed-form solutions)而且还是天
+                生的多类分类器，已经被证明在实践中工作的很好而且没有需要小心调节的超参数。
             </p>
-            <p class="centered">
-                <strong><a class="reference external" href="../auto_examples/classification/plot_lda_qda.html">
-                    <img alt="ldaqda" src="./images/plot_lda_qda_0011.png" style="width: 640.0px; height: 480.0px;" /></a></strong>
+            <p class="text-center">
+                <strong><a >
+                    <img alt="ldaqda" src="./images/plot_lda_qda_0011.png" style="width: 640.0px; height: 480.0px;" />
+                    </a></strong>
             </p>
             <p>
-                The plot shows decision boundaries for Linear Discriminant Analysis and
-                Quadratic Discriminant Analysis. The bottom row demonstrates that Linear
-                Discriminant Analysis can only learn linear boundaries, while Quadratic
-                Discriminant Analysis can learn quadratic boundaries and is therefore more
-                flexible.
+                上图展示了LDA和QDA的决策边界。此图通过对比说明了LDA只能学习到线性边界， QDA则可以学习到二次边界而且其边界也因此更有弹性。
             </p>
             <div class="well well-sm">
-                <p >Examples:</p>
+                <p >例子:</p>
                 <p>
                     <a class="reference internal" href="../auto_examples/classification/plot_lda_qda.html#example-classification-plot-lda-qda-py">
                     <span>Linear and Quadratic Discriminant Analysis with confidence ellipsoid</span></a>
-                    : Comparison of LDA and QDA
-                    on synthetic data.
+                    :  LDA和QDA在人工合成的数据集上的对比
                 </p>
             </div>
 
@@ -100,10 +94,10 @@
             <div class="section" id="dimensionality-reduction-using-linear-discriminant-analysis">
                 <h2>1.2.1. LDA 用于维数约简<a>¶</a></h2>
                 <p>
-                    <code>discriminant_analysis.LinearDiscriminantAnalysis</code> can be used to perform supervised
-                     dimensionality reduction, by projecting the input data to a linear subspace consisting of the 
-                    directions which maximize the separation between classes (in a precise sense discussed in the 
-                    mathematics section below). The dimension of the output is necessarily less that the number of
+                    <code>discriminant_analysis.LinearDiscriminantAnalysis</code> 可以被用于执行有监督的维数约简操作。
+                   其原理是将输入数据投影到线性子空间中。该线性子空间是由能够最大化类间分离性的那些方向所张成
+                    (在下面的数学表述小结中将更精确的讨论此问题)。 
+                    The dimension of the output is necessarily less that the number of
                      classes, so this is a in general a rather strong dimensionality reduction, and only makes 
                     senses in a multiclass setting.
                 </p>
