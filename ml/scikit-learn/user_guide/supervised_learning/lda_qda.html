@@ -244,33 +244,27 @@
             <div class="section" id="estimation-algorithms">
                 <h2>1.2.5. 估计算法<a>¶</a></h2>
                 <p>
-                    The default solver is &#8216;svd&#8217;. It can perform both classification and transform,
-                    and it does not rely on the calculation of the covariance matrix. This can be
-                    an advantage in situations where the number of features is large. However, the
-                    &#8216;svd&#8217; solver cannot be used with shrinkage.
+                    默认求解器(solver)是&#8216;svd&#8217;，既可用于分类也可用于数据的维数约简变换。
+                    而且它不依赖于协方差矩阵的计算。然而，求解器&#8216;svd&#8217;无法与shrinkage共同使用。
                 </p>
                 <p>
-                    The &#8216;lsqr&#8217; solver is an efficient algorithm that only works for classification.
-                    It supports shrinkage.
+                    求解器&#8216;lsqr&#8217;是一个只能用来分类的高效算法，而且可以支持shrinkage。
                 </p>
                 <p>
-                    The &#8216;eigen&#8217; solver is based on the optimization of the between class scatter to
-                    within class scatter ratio. It can be used for both classification and
-                    transform, and it supports shrinkage. However, the &#8216;eigen&#8217; solver needs to
-                    compute the covariance matrix, so it might not be suitable for situations with
-                    a high number of features.
+                    求解器 &#8216;eigen&#8217; 是通过优化类间散布与类内散布的比率来工作。它既可用于分类也可用于数据的维数约简变换
+                    而且支持 shrinkage。 然而, 求解器&#8216;eigen&#8217; 需要计算协方差矩阵,
+                    所以它不适合用在当特征数量比较多的情况。
                 </p>
                 <div class="well well-sm">
-                    <p >Examples:</p>
+                    <p >例子:</p>
                     <p>
-                        <a class="reference internal" href="../auto_examples/classification/plot_lda.html#example-classification-plot-lda-py">
+                        <a>
                         <span>Normal and Shrinkage Linear Discriminant Analysis for classification</span></a>:
-                         Comparison of LDA classifiers
-                        with and without shrinkage.
+                         带shrinkage和不带shrinkage的LDA分类器的比较。
                     </p>
                 </div>
                 <div class="well">
-                    <p class="topic-title first">References:</p>
+                    <p class="topic-title first">参考文献:</p>
                     <table class="docutils footnote" frame="void" id="id4" rules="none">
                         <colgroup><col class="label" /><col /></colgroup>
                         <tbody valign="top">

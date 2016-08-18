@@ -6,16 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap.min.css" />
-    <!--<link rel="stylesheet" href="../../../../css-fonts-js/css/bootstrap-responsive.css" />
-    <link rel="stylesheet" href="../../../../css-fonts-js/css/gallery.css" />
     <link rel="stylesheet" href="../../../../css-fonts-js/css/nature.css" />
-    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />-->
+    <link rel="stylesheet" href="../../../../css-fonts-js/css/pygments.css" />
 
     <style>
         p {
             font-size: large;
         }
-
         li {
             font-size: large;
         }
@@ -23,11 +20,6 @@
 
     <script src="../../../../css-fonts-js/js/jquery.min.js"></script>
     <script src="../../../../css-fonts-js/js/jquery.js"></script>
-    <!--<script src="../../../../css-fonts-js/js/copybutton.js"></script>
-    <script src="../../../../css-fonts-js/js/doctools.js"></script>
-    <script src="../../../../css-fonts-js/js/jquery.maphilight.js"></script>
-    <script src="../../../../css-fonts-js/js/jquery.maphilight.min.js"></script>
-    <script src="../../../../css-fonts-js/js/underscore.js"></script>-->
     <script src="../../../../css-fonts-js/js/bootstrap.min.js"></script>
 
 
@@ -66,13 +58,429 @@
         <div class="section">
             <h1 class="page-header">1.11 集成方法(Ensemble Methods)<a>¶</a></h1>
 
+            <p>
+                <strong>集成方法</strong> 的目标是组合若干基础估计器(base estimator由给定的学习算法构建)
+                的预测来提高只使用单个估计器无法达到的泛化性/鲁棒性。
+            </p>
+            <p>集成方法通常有两个家族:</p>
+            <ul>
+                <li>
+                    <p class="first">
+                        在 <strong>平均方法(averaging methods)</strong>中, 驱动原则是构建若干独立的估计器然后对所有估计器的
+                        输出做平均。从平均意义上来说，组合估计器通常总是比任意单个基础估计器更好，因为组合估计器的输出的方差
+                        被减小了。
+                    </p>
+                    <p><strong>例子:</strong>
+                     <a class="reference internal" href="#bagging"><span>Bagging methods</span></a>,
+                     <a class="reference internal" href="#forest"><span>Forests of randomized trees</span></a>,
+                     ...</p>
+                </li>
+                <li>
+                    <p class="first">
+                        作为对比, 在<strong>推举方法(boosting methods)</strong>中, 
+                        若干基础估计器被序列化构建并且我们试图减小组合估计器的偏差。主要动机是
+                        通过组合若干弱模型来获得一个强大的集成估计器。
+                    </p>
+                    <p><strong>例子:</strong> 
+                    <a class="reference internal" href="#adaboost"><span>自适应推举(AdaBoost)</span></a>, 
+                    <a class="reference internal" href="#gradient-boosting"><span>梯度树推举(Gradient Tree Boosting)</span></a>,
+                     ...</p>
+                </li>
+            </ul>
+            
             <div class="section" id="classification">
                 <h2>1.11.1 Bagging meta-estimator<a>¶</a></h2>
+                <p>
+                    在集成方法中, bagging 方法形成了一类算法，这些算法在原始训练集的随机子集上构造一种黑盒估计器的若干
+                    实例，然后总体合计这些估计器实例各自的预测结果产生一个最终的预测。这些方法用来减小基础估计器(如决策树)
+                    的预测输出的方差。这通过引入随机性到它的构造过程中然后从这些带有随机性的估计器实例中制造出一个集成方法来实现。
+                    在很多情况下，bagging方法可被视为是一种提高单个模型的预测能力的非常简单的方法，而且无需改动那个单个模型。
+                    由于它们提供了一种减小过拟合的方法，
+                    与那些通常只使用弱模型(比如shallow decision trees)的推举方法(boosting methods)相比，bagging方法配合强而复
+                    杂的模型(例如fully developed decision trees)能够工作的很好。
+                </p>
+                <p>
+                    Bagging方法有很多种，但大多数时候，他们之间的区别在于从训练集中抽取随机子集的方法不同：
+                </p>
+                <blockquote>
 
+                    <div>
+                        <ul class="simple">
+                            <li>
+                                当数据集的随机子集被抽取作为样本随机子集的时候，
+                                这种方法被称为 Pasting <a class="reference internal" href="#b1999" id="id1">[B1999]</a>.
+                            </li>
+                            <li>
+                                当样本以替换的方式被抽取时，这种方法被称作
+                                Bagging <a class="reference internal" href="#b1996" id="id2">[B1996]</a>.
+                            </li>
+                            <li>
+                                当数据集的随机子集被抽取作为特征的随机子集的时候，这种方法被称作 Random Subspaces <a class="reference internal" href="#h1998" id="id3">[H1998]</a>.
+                            </li>
+                            <li>
+                                最后，当若干基础估计器构建在样本子集和特征子集上时，该方法被称为 Random Patches <a class="reference internal" href="#lg2012" id="id4">[LG2012]</a>.
+                            </li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <p>
+                    在 scikit-learn 中, bagging 方法以统一的
+                     BaggingClassifier meta-estimator的形式提供 (resp. BaggingRegressor), 
+                    以用户指定的基础估计器和用于指定抽取随机子集的策略的参数作为输入。
+                    特别的，max_samples 和 max_features 分别控制样本子集和特征子集的大小；而
+                    bootstrap和bootstrap_features控制着样本和特征是否以替换方式被抽取出来。
+                    当使用可用样本的子集时，泛化误差可以通过设置oob_score=True用out-of-bag的样本来估计。
+                    作为一个例子，下面的片段展示了如何以KNeighborsClassifier为基础估计器来
+                    实例化一个bagging集成估计器。构建每一个基础估计器使用了所有样本的50%的子集和所有特征的50%的子集。
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">BaggingClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bagging</span> <span class="o">=</span> <span class="n">BaggingClassifier</span><span class="p">(</span><span class="n">KNeighborsClassifier</span><span class="p">(),</span>
+<span class="gp">... </span>                            <span class="n">max_samples</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre>
+                    </div>
+                </div>
+                <div class="topic">
+                    <p class="topic-title first">例子:</p>
+                    <ul class="simple">
+                        <li><a class="reference internal" href="../auto_examples/ensemble/plot_bias_variance.html#example-ensemble-plot-bias-variance-py"><span>Single estimator versus bagging: bias-variance decomposition</span></a></li>
+                    </ul>
+                </div>
+                <div class="topic">
+                    <p class="topic-title first">参考文献：</p>
+                    <table class="docutils citation" frame="void" id="b1999" rules="none">
+                        <colgroup><col class="label" /><col /></colgroup>
+                        <tbody valign="top">
+                            <tr>
+                                <td class="label"><a class="fn-backref" href="#id1">[B1999]</a></td>
+                                <td>
+                                    L. Breiman, &#8220;Pasting small votes for classification in large
+                                    databases and on-line&#8221;, Machine Learning, 36(1), 85-103, 1999.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="docutils citation" frame="void" id="b1996" rules="none">
+                        <colgroup><col class="label" /><col /></colgroup>
+                        <tbody valign="top">
+                            <tr>
+                                <td class="label"><a class="fn-backref" href="#id2">[B1996]</a></td>
+                                <td>
+                                    L. Breiman, &#8220;Bagging predictors&#8221;, Machine Learning, 24(2),
+                                    123-140, 1996.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="docutils citation" frame="void" id="h1998" rules="none">
+                        <colgroup><col class="label" /><col /></colgroup>
+                        <tbody valign="top">
+                            <tr>
+                                <td class="label"><a class="fn-backref" href="#id3">[H1998]</a></td>
+                                <td>
+                                    T. Ho, &#8220;The random subspace method for constructing decision
+                                    forests&#8221;, Pattern Analysis and Machine Intelligence, 20(8), 832-844,
+                                    1998.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="docutils citation" frame="void" id="lg2012" rules="none">
+                        <colgroup><col class="label" /><col /></colgroup>
+                        <tbody valign="top">
+                            <tr>
+                                <td class="label"><a class="fn-backref" href="#id4">[LG2012]</a></td>
+                                <td>
+                                    G. Louppe and P. Geurts, &#8220;Ensembles on Random Patches&#8221;,
+                                    Machine Learning and Knowledge Discovery in Databases, 346-361, 2012.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="section" id="regression">
                 <h2>1.11.2. Forests of randomized trees<a>¶</a></h2>
+                <p>
+                    The <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.ensemble</span></code></a> module includes two averaging algorithms based
+                    on randomized <a class="reference internal" href="tree.html#tree"><span>decision trees</span></a>: the RandomForest algorithm
+                    and the Extra-Trees method. Both algorithms are perturb-and-combine
+                    techniques <a class="reference internal" href="#b1998" id="id5">[B1998]</a> specifically designed for trees. This means a diverse
+                    set of classifiers is created by introducing randomness in the classifier
+                    construction.  The prediction of the ensemble is given as the averaged
+                    prediction of the individual classifiers.
+                </p>
+                <p>
+                    As other classifiers, forest classifiers have to be fitted with two
+                    arrays: a sparse or dense array X of size <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code> holding the
+                    training samples, and an array Y of size <code class="docutils literal"><span class="pre">[n_samples]</span></code> holding the
+                    target values (class labels) for the training samples:
+                </p>
+                <div class="highlight-python">
+                    <div class="highlight">
+                        <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre>
+                    </div>
+                </div>
+                <p>
+                    Like <a class="reference internal" href="tree.html#tree"><span>decision trees</span></a>, forests of trees also extend
+                    to <a class="reference internal" href="tree.html#tree-multioutput"><span>multi-output problems</span></a>  (if Y is an array of size
+                    <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_outputs]</span></code>).
+                </p>
+
+                <div class="section" id="random-forests">
+                    <h3>1.11.2.1. Random Forests<a class="headerlink" href="#random-forests" title="Permalink to this headline">¶</a></h3>
+                    <p>
+                        In random forests (see <a class="reference internal" href="generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="sklearn.ensemble.RandomForestClassifier"><code class="xref py py-class docutils literal"><span class="pre">RandomForestClassifier</span></code></a> and
+                        <a class="reference internal" href="generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor" title="sklearn.ensemble.RandomForestRegressor"><code class="xref py py-class docutils literal"><span class="pre">RandomForestRegressor</span></code></a> classes), each tree in the ensemble is
+                        built from a sample drawn with replacement (i.e., a bootstrap sample)
+                        from the training set. In addition, when splitting a node during the
+                        construction of the tree, the split that is chosen is no longer the
+                        best split among all features. Instead, the split that is picked is the
+                        best split among a random subset of the features. As a result of this
+                        randomness, the bias of the forest usually slightly increases (with
+                        respect to the bias of a single non-random tree) but, due to averaging,
+                        its variance also decreases, usually more than compensating for the
+                        increase in bias, hence yielding an overall better model.
+                    </p>
+                    <p>
+                        In contrast to the original publication <a class="reference internal" href="#b2001" id="id6">[B2001]</a>, the scikit-learn
+                        implementation combines classifiers by averaging their probabilistic
+                        prediction, instead of letting each classifier vote for a single class.
+                    </p>
+                </div>
+
+                <div class="section" id="extremely-randomized-trees">
+                    <h3>1.11.2.2. Extremely Randomized Trees<a class="headerlink" href="#extremely-randomized-trees" title="Permalink to this headline">¶</a></h3>
+                    <p>
+                        In extremely randomized trees (see <a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" title="sklearn.ensemble.ExtraTreesClassifier"><code class="xref py py-class docutils literal"><span class="pre">ExtraTreesClassifier</span></code></a>
+                        and <a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesRegressor.html#sklearn.ensemble.ExtraTreesRegressor" title="sklearn.ensemble.ExtraTreesRegressor"><code class="xref py py-class docutils literal"><span class="pre">ExtraTreesRegressor</span></code></a> classes), randomness goes one step
+                        further in the way splits are computed. As in random forests, a random
+                        subset of candidate features is used, but instead of looking for the
+                        most discriminative thresholds, thresholds are drawn at random for each
+                        candidate feature and the best of these randomly-generated thresholds is
+                        picked as the splitting rule. This usually allows to reduce the variance
+                        of the model a bit more, at the expense of a slightly greater increase
+                        in bias:
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">ExtraTreesClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>                             
+<span class="go">0.97...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>                             
+<span class="go">0.999...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">ExtraTreesClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.999</span>
+<span class="go">True</span>
+</pre>
+                        </div>
+                    </div>
+                    <div class="figure align-center">
+                        <a><img alt="./images/plot_forest_iris_0011.png" src="./images/plot_forest_iris_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+                    </div>
+                </div>
+
+                <div class="section" id="parameters">
+                    <h3>1.11.2.3. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+                    <p>
+                        The main parameters to adjust when using these methods is <code class="docutils literal"><span class="pre">n_estimators</span></code>
+                        and <code class="docutils literal"><span class="pre">max_features</span></code>. The former is the number of trees in the forest. The
+                        larger the better, but also the longer it will take to compute. In
+                        addition, note that results will stop getting significantly better
+                        beyond a critical number of trees. The latter is the size of the random
+                        subsets of features to consider when splitting a node. The lower the
+                        greater the reduction of variance, but also the greater the increase in
+                        bias. Empirical good default values are <code class="docutils literal"><span class="pre">max_features=n_features</span></code>
+                        for regression problems, and <code class="docutils literal"><span class="pre">max_features=sqrt(n_features)</span></code> for
+                        classification tasks (where <code class="docutils literal"><span class="pre">n_features</span></code> is the number of features
+                        in the data). Good results are often achieved when setting <code class="docutils literal"><span class="pre">max_depth=None</span></code>
+                        in combination with <code class="docutils literal"><span class="pre">min_samples_split=1</span></code> (i.e., when fully developing the
+                        trees). Bear in mind though that these values are usually not optimal, and
+                        might result in models that consume a lot of ram. The best parameter values
+                        should always be cross-validated. In addition, note that in random forests,
+                        bootstrap samples are used by default (<code class="docutils literal"><span class="pre">bootstrap=True</span></code>)
+                        while the default strategy for extra-trees is to use the whole dataset
+                        (<code class="docutils literal"><span class="pre">bootstrap=False</span></code>).
+                        When using bootstrap sampling the generalization error can be estimated
+                        on the left out or out-of-bag samples. This can be enabled by
+                        setting <code class="docutils literal"><span class="pre">oob_score=True</span></code>.
+                    </p>
+                </div>
+
+
+                <div class="section" id="parallelization">
+                    <h3>1.11.2.4. Parallelization<a class="headerlink" href="#parallelization" title="Permalink to this headline">¶</a></h3>
+                    <p>
+                        Finally, this module also features the parallel construction of the trees
+                        and the parallel computation of the predictions through the <code class="docutils literal"><span class="pre">n_jobs</span></code>
+                        parameter. If <code class="docutils literal"><span class="pre">n_jobs=k</span></code> then computations are partitioned into
+                        <code class="docutils literal"><span class="pre">k</span></code> jobs, and run on <code class="docutils literal"><span class="pre">k</span></code> cores of the machine. If <code class="docutils literal"><span class="pre">n_jobs=-1</span></code>
+                        then all cores available on the machine are used. Note that because of
+                        inter-process communication overhead, the speedup might not be linear
+                        (i.e., using <code class="docutils literal"><span class="pre">k</span></code> jobs will unfortunately not be <code class="docutils literal"><span class="pre">k</span></code> times as
+                        fast). Significant speedup can still be achieved though when building
+                        a large number of trees, or when building a single tree requires a fair
+                        amount of time (e.g., on large datasets).
+                    </p>
+                    <div class="topic">
+                        <p class="topic-title first">Examples:</p>
+                        <ul class="simple">
+                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_forest_iris.html#example-ensemble-plot-forest-iris-py"><span>Plot the decision surfaces of ensembles of trees on the iris dataset</span></a></li>
+                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_forest_importances_faces.html#example-ensemble-plot-forest-importances-faces-py"><span>Pixel importances with a parallel forest of trees</span></a></li>
+                            <li><a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span>Face completion with a multi-output estimators</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="topic">
+                        <p class="topic-title first">References</p>
+                        <table class="docutils citation" frame="void" id="b2001" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr>
+                                    <td class="label"><a class="fn-backref" href="#id6">[B2001]</a></td>
+                                    <td>
+                                        <ol class="first last upperalpha simple" start="12">
+                                            <li>Breiman, &#8220;Random Forests&#8221;, Machine Learning, 45(1), 5-32, 2001.</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="docutils citation" frame="void" id="b1998" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr>
+                                    <td class="label"><a class="fn-backref" href="#id5">[B1998]</a></td>
+                                    <td>
+                                        <ol class="first last upperalpha simple" start="12">
+                                            <li>Breiman, &#8220;Arcing Classifiers&#8221;, Annals of Statistics 1998.</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="docutils citation" frame="void" id="gew2006" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr>
+                                    <td class="label">[GEW2006]</td>
+                                    <td>
+                                        P. Geurts, D. Ernst., and L. Wehenkel, &#8220;Extremely randomized
+                                        trees&#8221;, Machine Learning, 63(1), 3-42, 2006.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section" id="feature-importance-evaluation">
+                    <span id="random-forest-feature-importance"></span><h3>1.11.2.5. Feature importance evaluation<a class="headerlink" href="#feature-importance-evaluation" title="Permalink to this headline">¶</a></h3>
+                    <p>
+                        The relative rank (i.e. depth) of a feature used as a decision node in a
+                        tree can be used to assess the relative importance of that feature with
+                        respect to the predictability of the target variable. Features used at
+                        the top of the tree are used contribute to the final prediction decision
+                        of a larger fraction of the input samples. The <strong>
+                            expected fraction of
+                            the samples
+                        </strong> they contribute to can thus be used as an estimate of the
+                        <strong>relative importance of the features</strong>.
+                    </p>
+                    <p>
+                        By <strong>averaging</strong> those expected activity rates over several randomized
+                        trees one can <strong>reduce the variance</strong> of such an estimate and use it
+                        for feature selection.
+                    </p>
+                    <p>
+                        The following example shows a color-coded representation of the relative
+                        importances of each individual pixel for a face recognition task using
+                        a <a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" title="sklearn.ensemble.ExtraTreesClassifier"><code class="xref py py-class docutils literal"><span class="pre">ExtraTreesClassifier</span></code></a> model.
+                    </p>
+                    <div class="figure align-center">
+                        <a><img alt=".//images//plot_forest_importances_faces_0011.png" src="./images/plot_forest_importances_faces_0011.png" style="width: 450.0px; height: 450.0px;" /></a>
+                    </div>
+                    <p>
+                        In practice those estimates are stored as an attribute named
+                        <code class="docutils literal"><span class="pre">feature_importances_</span></code> on the fitted model. This is an array with shape
+                        <code class="docutils literal"><span class="pre">(n_features,)</span></code> whose values are positive and sum to 1.0. The higher
+                        the value, the more important is the contribution of the matching feature
+                        to the prediction function.
+                    </p>
+                    <div class="topic">
+                        <p class="topic-title first">Examples:</p>
+                        <ul class="simple">
+                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_forest_importances_faces.html#example-ensemble-plot-forest-importances-faces-py"><span>Pixel importances with a parallel forest of trees</span></a></li>
+                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_forest_importances.html#example-ensemble-plot-forest-importances-py"><span>Feature importances with forests of trees</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section" id="totally-random-trees-embedding">
+                    <span id="random-trees-embedding"></span><h3>1.11.2.6. Totally Random Trees Embedding<a class="headerlink" href="#totally-random-trees-embedding" title="Permalink to this headline">¶</a></h3>
+                    <p>
+                        <a class="reference internal" href="generated/sklearn.ensemble.RandomTreesEmbedding.html#sklearn.ensemble.RandomTreesEmbedding" title="sklearn.ensemble.RandomTreesEmbedding"><code class="xref py py-class docutils literal"><span class="pre">RandomTreesEmbedding</span></code></a> implements an unsupervised transformation of the
+                        data.  Using a forest of completely random trees, <a class="reference internal" href="generated/sklearn.ensemble.RandomTreesEmbedding.html#sklearn.ensemble.RandomTreesEmbedding" title="sklearn.ensemble.RandomTreesEmbedding"><code class="xref py py-class docutils literal"><span class="pre">RandomTreesEmbedding</span></code></a>
+                        encodes the data by the indices of the leaves a data point ends up in.  This
+                        index is then encoded in a one-of-K manner, leading to a high dimensional,
+                        sparse binary coding.
+                        This coding can be computed very efficiently and can then be used as a basis
+                        for other learning tasks.
+                        The size and sparsity of the code can be influenced by choosing the number of
+                        trees and the maximum depth per tree. For each tree in the ensemble, the coding
+                        contains one entry of one. The size of the coding is at most <code class="docutils literal">
+                            <span class="pre">n_estimators</span> <span class="pre">*</span> <span class="pre">2</span>
+                            <span class="pre">**</span> <span class="pre">max_depth</span>
+                        </code>, the maximum number of leaves in the forest.
+                    </p>
+                    <p>
+                        As neighboring data points are more likely to lie within the same leaf of a tree,
+                        the transformation performs an implicit, non-parametric density estimation.
+                    </p>
+                    <div class="topic">
+                        <p class="topic-title first">Examples:</p>
+                        <ul class="simple">
+                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_random_forest_embedding.html#example-ensemble-plot-random-forest-embedding-py"><span>Hashing feature transformation using Totally Random Trees</span></a></li>
+                            <li>
+                                <a class="reference internal" href="../auto_examples/manifold/plot_lle_digits.html#example-manifold-plot-lle-digits-py"><span>Manifold learning on handwritten digits: Locally Linear Embedding, Isomap...</span></a> compares non-linear
+                                dimensionality reduction techniques on handwritten digits.
+                            </li>
+                            <li>
+                                <a class="reference internal" href="../auto_examples/ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py"><span>Feature transformations with ensembles of trees</span></a> compares
+                                supervised and unsupervised tree based feature transformations.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="admonition seealso">
+                        <p class="first admonition-title">See also</p>
+                        <p class="last">
+                            <a class="reference internal" href="manifold.html#manifold"><span>Manifold learning</span></a> techniques can also be useful to derive non-linear
+                            representations of feature space, also these approaches focus also on
+                            dimensionality reduction.
+                        </p>
+                    </div>
+                </div>
 
             </div>
 
