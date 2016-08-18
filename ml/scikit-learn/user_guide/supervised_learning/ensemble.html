@@ -205,19 +205,16 @@
             <div class="section" id="regression">
                 <h2>1.11.2. Forests of randomized trees<a>¶</a></h2>
                 <p>
-                    The <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.ensemble</span></code></a> module includes two averaging algorithms based
-                    on randomized <a class="reference internal" href="tree.html#tree"><span>decision trees</span></a>: the RandomForest algorithm
-                    and the Extra-Trees method. Both algorithms are perturb-and-combine
-                    techniques <a class="reference internal" href="#b1998" id="id5">[B1998]</a> specifically designed for trees. This means a diverse
-                    set of classifiers is created by introducing randomness in the classifier
-                    construction.  The prediction of the ensemble is given as the averaged
-                    prediction of the individual classifiers.
+                    scikit-learn的<code>sklearn.ensemble</code> 模块包含两个基于随机决策树的<strong>平均算法</strong>：
+                    随机森林算法(RandomForest algorithm)和极大树(Extra-Trees method)方法。这两个算法都是特别为树算法设计的
+                    扰动-组合(perturb-and-combine)技术<a class="reference internal" href="#b1998" id="id5">[B1998]</a>。
+                    这意味着在分类器的构造过程中引入的随机性将会产生一组不同分类器的集合。最后，集成分类器的预测是将
+                    各个独立分类器的预测做平均然后输出。
                 </p>
                 <p>
-                    As other classifiers, forest classifiers have to be fitted with two
-                    arrays: a sparse or dense array X of size <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code> holding the
-                    training samples, and an array Y of size <code class="docutils literal"><span class="pre">[n_samples]</span></code> holding the
-                    target values (class labels) for the training samples:
+                    就像其他分类器一样，森林分类器必须要在两个数组上拟合：一个大小为<code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code>
+                    的包含训练样本的稀疏或稠密的数组X;以及一个大小为<code class="docutils literal"><span class="pre">[n_samples]</span></code>
+                    的包含了目标变量(类标签)的数组Y:
                 </p>
                 <div class="highlight-python">
                     <div class="highlight">
@@ -230,45 +227,35 @@
                     </div>
                 </div>
                 <p>
-                    Like <a class="reference internal" href="tree.html#tree"><span>decision trees</span></a>, forests of trees also extend
-                    to <a class="reference internal" href="tree.html#tree-multioutput"><span>multi-output problems</span></a>  (if Y is an array of size
-                    <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_outputs]</span></code>).
+                    与 <a class="reference internal" href="tree.html#tree"><span>决策树</span></a>一样, 森林算法也
+                    被扩展用于多输出问题(<a class="reference internal" href="tree.html#tree-multioutput"><span>multi-output problems</span></a>)
+                    :数组Y的大小为<code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_outputs]</span></code>。
                 </p>
 
                 <div class="section" id="random-forests">
-                    <h3>1.11.2.1. Random Forests<a class="headerlink" href="#random-forests" title="Permalink to this headline">¶</a></h3>
+                    <h3>1.11.2.1. 随机森林(Random Forests)<a >¶</a></h3>
                     <p>
-                        In random forests (see <a class="reference internal" href="generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="sklearn.ensemble.RandomForestClassifier"><code class="xref py py-class docutils literal"><span class="pre">RandomForestClassifier</span></code></a> and
-                        <a class="reference internal" href="generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor" title="sklearn.ensemble.RandomForestRegressor"><code class="xref py py-class docutils literal"><span class="pre">RandomForestRegressor</span></code></a> classes), each tree in the ensemble is
-                        built from a sample drawn with replacement (i.e., a bootstrap sample)
-                        from the training set. In addition, when splitting a node during the
-                        construction of the tree, the split that is chosen is no longer the
-                        best split among all features. Instead, the split that is picked is the
-                        best split among a random subset of the features. As a result of this
-                        randomness, the bias of the forest usually slightly increases (with
-                        respect to the bias of a single non-random tree) but, due to averaging,
-                        its variance also decreases, usually more than compensating for the
-                        increase in bias, hence yielding an overall better model.
+                        在随机森林(<code>RandomForestClassifier</code>类和<code>RandomForestRegressor</code>类)中，
+                        森林中的每个树都是构造于一个样本，该样本以置换方式(replacement--> i.e., a bootstrap sample)从训练集
+                        中抽取。另外，在划分节点构造树的过程中，选择的划分也不再是所有特征上的最好划分。相反的，选择的划分是在
+                        所有特征的一个随机子集上的最好划分。作为此随机性的一个结果，随机森林的偏差相比于那些单个无随机性决策树
+                        的偏差来说稍微有些大；但是，由于最后的平均操作，随机森林的预测方差也会降低(通常足以弥补偏差的增加)，
+                        因此产生了整体上比较好的模型。
                     </p>
                     <p>
-                        In contrast to the original publication <a class="reference internal" href="#b2001" id="id6">[B2001]</a>, the scikit-learn
-                        implementation combines classifiers by averaging their probabilistic
-                        prediction, instead of letting each classifier vote for a single class.
+                        与原始的版本<a class="reference internal" href="#b2001" id="id6">[B2001]</a>对比 , 
+                        scikit-learn 通过平均单个分类器的概率性预测来组合若干单个分类器去实现随机森林，而不是让每个分类器为单个类投票。
                     </p>
                 </div>
 
                 <div class="section" id="extremely-randomized-trees">
-                    <h3>1.11.2.2. Extremely Randomized Trees<a class="headerlink" href="#extremely-randomized-trees" title="Permalink to this headline">¶</a></h3>
+                    <h3>1.11.2.2. 极大随机树(Extremely Randomized Trees)<a>¶</a></h3>
                     <p>
-                        In extremely randomized trees (see <a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" title="sklearn.ensemble.ExtraTreesClassifier"><code class="xref py py-class docutils literal"><span class="pre">ExtraTreesClassifier</span></code></a>
-                        and <a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesRegressor.html#sklearn.ensemble.ExtraTreesRegressor" title="sklearn.ensemble.ExtraTreesRegressor"><code class="xref py py-class docutils literal"><span class="pre">ExtraTreesRegressor</span></code></a> classes), randomness goes one step
-                        further in the way splits are computed. As in random forests, a random
-                        subset of candidate features is used, but instead of looking for the
-                        most discriminative thresholds, thresholds are drawn at random for each
-                        candidate feature and the best of these randomly-generated thresholds is
-                        picked as the splitting rule. This usually allows to reduce the variance
-                        of the model a bit more, at the expense of a slightly greater increase
-                        in bias:
+                        在极大随机树(<code>ExtraTreesClassifier</code>类和<code>ExtraTreesRegressor</code>类)中，
+                        在划分(or 分裂 splits)的计算方式上随机性又更进一步。就像在随机森林中那样，极大随机树也使用
+                        候选特征集合的一个随机子集。与寻找最有判别力的阈值的策略不同，在极大随机树中每一个候选特征的阈值
+                        也是随机抽取的。然后，这些随机产生的阈值中的最好的阈值将被用到分裂规则中去。这种策略通常能够
+                        使得模型方差降的更低，但代价是模型的偏差也会稍微增加。
                     </p>
                     <div class="highlight-python">
                         <div class="highlight">
@@ -297,9 +284,10 @@
 </pre>
                         </div>
                     </div>
-                    <div class="figure align-center">
-                        <a><img alt="./images/plot_forest_iris_0011.png" src="./images/plot_forest_iris_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
-                    </div>
+                    <p class="text-center">
+                        <a><img alt="./images/plot_forest_iris_0011.png" src="./images/plot_forest_iris_0011.png"
+                                 style="width: 600.0px; height: 450.0px;" /></a>
+                    </p>
                 </div>
 
                 <div class="section" id="parameters">
