@@ -97,21 +97,20 @@
                     <code>discriminant_analysis.LinearDiscriminantAnalysis</code> 可以被用于执行有监督的维数约简操作。
                    其原理是将输入数据投影到线性子空间中。该线性子空间是由能够最大化类间分离性的那些方向所张成
                     (在下面的数学表述小结中将更精确的讨论此问题)。 
-                    The dimension of the output is necessarily less that the number of
-                     classes, so this is a in general a rather strong dimensionality reduction, and only makes 
-                    senses in a multiclass setting.
+                    输出的维数必需小于类的数量,所以此方法是一个普遍来说比较强的降维方法而且仅仅在多类问题中才有使用的意义。
                 </p>
                 <p>
-                    This is implemented in <code>discriminant_analysis.LinearDiscriminantAnalysis.transform</code>。
-                     The desired dimensionality can be set using the <code>n_components</code> constructor parameter。
-                     This parameter has no influence on <code>discriminant_analysis.LinearDiscriminantAnalysis.fit</code>
-                     or <code>discriminant_analysis.LinearDiscriminantAnalysis.predict</code>.
+                    <code>discriminant_analysis.LinearDiscriminantAnalysis.transform</code>函数实现了LDA维数约简。
+                     我们想要的维数大小可以通过构造器参数<code>n_components</code>来设置。这一参数的设置不会影响
+                    <code>discriminant_analysis.LinearDiscriminantAnalysis.fit</code>
+                    和<code>discriminant_analysis.LinearDiscriminantAnalysis.predict</code>.
                 </p>
                 <div class="well well-sm">
-                    <p>Examples:</p>
+                    <p>例子:</p>
                     <p>
-                        <a class="reference internal" href="../auto_examples/decomposition/plot_pca_vs_lda.html#example-decomposition-plot-pca-vs-lda-py"><span>Comparison of LDA and PCA 2D projection of Iris dataset</span></a>: Comparison of LDA and PCA
-                        for dimensionality reduction of the Iris dataset
+                        <a class="reference internal">
+                        <span>Comparison of LDA and PCA 2D projection of Iris dataset</span></a>:
+                         在Iris数据集上对比LDA和PCA的维数约简功能
                     </p>
                 </div>
             </div>
@@ -119,51 +118,48 @@
             <div class="section" id="mathematical-formulation-of-the-lda-and-qda-classifiers">
                 <h2>1.2.2. LDA分类器与QDA分类器的数学表述<a>¶</a></h2>
                 <p>
-                    Both LDA and QDA can be derived from simple probabilistic models which model
-                    the class conditional distribution of the data 
+                    LDA和QDA都可以从简单的概率模型推导出来。此简单概率模型为每一个类
+                    <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />
+                    建立其数据的类条件概率分布：
                     <img class="math" src="./images/6349652f4f3fed24cf0e66ba44b19b5c170cae96.png" alt="P(X|y=k)" /> 
-                    for each class
-                    <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />. 
-                    Predictions can then be obtained by using Bayes&#8217; rule:
+                    。一旦为所有类都建立上述条件概率模型后，就可以使用Bayes决策规则进行预则：
                 </p>
                 <div class="math">
-                    <p class="text-center"><img src="./images/9e7b9be3116147caceb05da29eb4a66905f66481.png" 
+                    <p class="text-center">
+                        <img src="./images/9e7b9be3116147caceb05da29eb4a66905f66481.png" 
                             alt="P(y=k | X) = \frac{P(X | y=k) P(y=k)}{P(X)} 
                             = \frac{P(X | y=k) P(y = k)}{ \sum_{l} P(X | y=l) \cdot P(y=l)}" />
                     </p>
                 </div>
                 <p>
-                    More specifically, for linear and quadratic discriminant analysis,
+                    更具体地说，对于线性和二次判别分析来说，类条件概率密度函数
                     <img class="math" src="./images/e69ebd95e385ac5c254ef15635c37b01668decbf.png" alt="P(X|y)" />
-                     is modelled as a multivariate Gaussian distribution with
-                    density:
+                     被建模为多变量高斯分布的形式：
                 </p>
                 <div class="math">
-                    <p class="text-center"><img src="./images/048bd26b8085a30c1baddcc048621fff532ffe47.png" 
+                    <p class="text-center">
+                        <img src="./images/048bd26b8085a30c1baddcc048621fff532ffe47.png" 
                             alt="p(X | y=k) = \frac{1}{(2\pi)^n |\Sigma_k|^{1/2}}\exp\left(-\frac{1}{2} 
                             (X-\mu_k)^t \Sigma_k^{-1} (X-\mu_k)\right)" />
                     </p>
                 </div>
                 <p>
-                    To use this model as a classifier, we just need to estimate from the training
-                    data the class priors <img class="math" src="./images/ca8cad6134f86bef8de0efaa68c0d24323256728.png" 
-                                               alt="P(y=k)" /> 
-                    (by the proportion of instances of class
-                    <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />), 
-                    the class means <img class="math" src="./images/e0f4c204f26e9afa4f5bbeda60af5262e624c148.png" 
-                                         alt="\mu_k" /> (by the empirical sample class means)
-                    and the covariance matrices (either by the empirical sample class covariance
-                    matrices, or by a regularized estimator: see the section on shrinkage below).
+                    想要使用此模型作为分类器，我们只需要从训练数据中估计出每个类的先验概率
+                    <img class="math" src="./images/ca8cad6134f86bef8de0efaa68c0d24323256728.png"  alt="P(y=k)" /> 
+                    (通常是训练集中类<img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />
+                    的样本所占的比例), 
+                    类均值 <img class="math" src="./images/e0f4c204f26e9afa4f5bbeda60af5262e624c148.png"alt="\mu_k" />
+                     (通常取为该类所有样本上计算出的经验均值)
+                    以及协方差矩阵 (通常取为从该类样本上得到的经验协方差；或者是使用一个正则化估计器
+                    请看下面的 shrinkage 小节).
                 </p>
                 <p>
-                    In the case of LDA, the Gaussians for each class are assumed to share the same
-                    covariance matrix: <img class="math" src="./images/5a0d5681512c9237a828e2667fdf0499af7fad60.png"
-                                             alt="\Sigma_k = \Sigma" /> for all 
-                    <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />.
-                     This leads to
-                    linear decision surfaces between, as can be seen by comparing the the
-                    log-probability ratios <img class="math" src="./images/e97ecabcc51db3bd271f1b5b0cf3fcebdd989108.png"
-                                                 alt="\log[P(y=k | X) / P(y=l | X)]" />:
+                    在LDA中, 所有类的高斯分布被假定为具有相同的协方差矩阵:
+                     <img class="math" src="./images/5a0d5681512c9237a828e2667fdf0499af7fad60.png" alt="\Sigma_k = \Sigma" /> 对所有的类
+                    <img class="math" src="./images/e9203da50e1059455123460d4e716c9c7f440cc3.png" alt="k" />都成立。
+                    这个假设将会导致一个线性决策面，通过对比对数概率比(the log-probability ratios)
+                    <img class="math" src="./images/e97ecabcc51db3bd271f1b5b0cf3fcebdd989108.png" alt="\log[P(y=k | X) / P(y=l | X)]" />
+                    就可以看到这一点：
                 </p>
                 <div class="math">
                     <p class="text-center"><img src="./images/9dd706ccca2f0ca465f83a2ee3dc72e7ea904c7c.png"
@@ -173,19 +169,16 @@
                     </p>
                 </div>
                 <p>
-                    In the case of QDA, there are no assumptions on the covariance matrices
-                    <img class="math" src="./images/07b943c6dd1061bde470bebfa3e9b5e373216870.png" alt="\Sigma_k" />
-                     of the Gaussians, leading to quadratic decision surfaces. See
-                    <a class="footnote-reference" href="#id4" id="id1">[3]</a> for more details.
+                    在QDA中，没有对各个类的高斯分布的协方差矩阵<img class="math" src="./images/07b943c6dd1061bde470bebfa3e9b5e373216870.png" alt="\Sigma_k" />
+                    做任何假设。这导致了一个二次决策面，详情请看<a class="footnote-reference" href="#id4" id="id1">[3]</a>。 
                 </p>
                 <div class="well well-sm">
                     <p >Note</p>
-                    <p><strong>Relation with Gaussian Naive Bayes</strong></p>
+                    <p><strong>与高斯朴素分类器的关系</strong></p>
                     <p >
-                        If in the QDA model one assumes that the covariance matrices are diagonal,
-                        then this means that we assume the classes are conditionally independent,
-                        and the resulting classifier is equivalent to the Gaussian Naive Bayes
-                        classifier <a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">naive_bayes.GaussianNB</span></code></a>.
+                        如果我们假定在QDA模型中协方差矩阵是对角阵，那么这意味着我们假定了所有类都是条件独立的。
+                        而且由此产生的分类器就与高斯朴素贝叶斯分类器是等价的
+                         <code class="xref py py-class docutils literal"><span class="pre">naive_bayes.GaussianNB</span></code>。
                     </p>
                 </div>
             </div>
@@ -193,47 +186,41 @@
             <div class="section" id="mathematical-formulation-of-lda-dimensionality-reduction">
                 <h2>1.2.3. LDA维数约简的数学表述<a>¶</a></h2>
                 <p>
-                    To understand the use of LDA in dimensionality reduction, it is useful to start
-                    with a geometric reformulation of the LDA classification rule explained above.
-                    We write <img class="math" src="./images/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K" />
-                     for the total number of target classes. Since in LDA we
-                    assume that all classes have the same estimated covariance 
-                    <img class="math" src="./images/19ac15bf260b22dcb61a1042c60259e4b0bfbd64.png" alt="\Sigma" />, we
-                    can rescale the data so that this covariance is the identity:
+                    为了理解LDA在维数约简中的使用，我们要从几何角度重新解释和表述上述的LDA分类器规则。
+                    我们把所有类的数量记为<img class="math" src="./images/28e003020d0ae96250b302d7d779c791f183f707.png" alt="K" />
+                    既然我们已经假定在LDA中所有类的样本上估计出的各自的协方差矩阵是相等的
+                    <img class="math" src="./images/19ac15bf260b22dcb61a1042c60259e4b0bfbd64.png" alt="\Sigma" />,
+                    那么我们就可以重新调正样本数据的尺度使得这个协方差矩阵变为单位矩阵：
                 </p>
                 <div class="math">
                     <p class="text-center"><img src="./images/e6da702a9f1619c67e81ec8cd9d976702ffa4a2e.png" alt="X^* = D^{-1/2}U^t X\text{ with }\Sigma = UDU^t" /></p>
                 </div>
                 <p>
-                    Then one can show that to classify a data point after scaling is equivalent to
-                    finding the estimated class mean <img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" /> which is closest to the data
-                    point in the Euclidean distance. But this can be done just as well after
-                    projecting on the <img class="math" src="./images/da6935a2384c32204e1462bc2b64c3b0c02aaee0.png" alt="K-1" /> affine subspace <img class="math" src="./images/dfe93a68f5d21483dc469d7d85fd6b43ce87f30a.png" alt="H_K" /> generated by all the
-                    <img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" /> for all classes. This shows that, implicit in the LDA
-                    classifier, there is a dimensionality reduction by linear projection onto a
-                    <img class="math" src="./images/da6935a2384c32204e1462bc2b64c3b0c02aaee0.png" alt="K-1" /> dimensional space.
+                    当所有类的数据被重调尺度后对一个数据点的分类就等价于在欧氏空间中找到一个距离该点最近的类均值<img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" />
+                    并认为该点就属于那个最近的类均值所代表的类。但是，这种方法只有在投影到由所有类的均值向量<img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" />
+                    所张成的<img class="math" src="./images/da6935a2384c32204e1462bc2b64c3b0c02aaee0.png" alt="K-1" />维仿射子空间
+                    <img class="math" src="./images/dfe93a68f5d21483dc469d7d85fd6b43ce87f30a.png" alt="H_K" />
+                    上才可以工作的很好。这就表明在LDA中隐含了一个将原始数据线性投影到
+                    <img class="math" src="./images/da6935a2384c32204e1462bc2b64c3b0c02aaee0.png" alt="K-1" />维空间的维数约简操作。
                 </p>
                 <p>
-                    We can reduce the dimension even more, to a chosen <img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" />, by projecting
-                    onto the linear subspace <img class="math" src="./images/7e92db8660cb5a445e9d83da1b9e47a123dece1a.png" alt="H_L" /> which maximize the variance of the
-                    <img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" /> after projection (in effect, we are doing a form of PCA for the
-                    transformed class means <img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" />). This <img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" />
-                     corresponds to the
-                    <code class="docutils literal"><span class="pre">n_components</span></code>
-                     parameter used in the
-                    <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis.transform" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis.transform"><code class="xref py py-func docutils literal"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis.transform</span></code></a> method. See
-                    <a class="footnote-reference" href="#id4" id="id2">[3]</a> for more details.
+                    我们还可以约减更多的维数：选择一个<img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" />，
+                    然后将数据投影到一个线性子空间 <img class="math" src="./images/7e92db8660cb5a445e9d83da1b9e47a123dece1a.png" alt="H_L" />
+                    最大化投影以后的<img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" />的方差。
+                    (从效果上说，我们是在对投影变换后的类均值<img class="math" src="./images/5ee369a0219cf8053e73a6926064947a02d97434.png" alt="\mu^*_k" />做PCA变换)
+                    这个<img class="math" src="./images/0a5711c7a37994043b2bc3bb374adca232491762.png" alt="L" />
+                     对应于成员方法<code>discriminant_analysis.LinearDiscriminantAnalysis.transform</code>的参数<code class="docutils literal"><span class="pre">n_components</span></code>。
+                     详情请看<a class="footnote-reference" href="#id4" id="id2">[3]</a>。
                 </p>
             </div>
 
             <div class="section" id="shrinkage">
                 <h2>1.2.4. 缩减(Shrinkage)<a>¶</a></h2>
                 <p>
-                    Shrinkage is a tool to improve estimation of covariance matrices in situations
-                    where the number of training samples is small compared to the number of
-                    features. In this scenario, the empirical sample covariance is a poor
-                    estimator. Shrinkage LDA can be used by setting the <code class="docutils literal"><span class="pre">shrinkage</span></code> parameter of
-                    the <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis"><code class="xref py py-class docutils literal"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code></a> class to &#8216;auto&#8217;.
+                    Shrinkage 是一个用来在训练样本数目相对于特征数量比较少的情况下提升协方差估计质量的工具。
+                    在这种情形下，经验样本协方差是一个比较差的估计。
+                    Shrinkage LDA 可以通过设置<code>discriminant_analysis.LinearDiscriminantAnalysis</code>
+                    类的<code class="docutils literal"><span class="pre">shrinkage</span></code> 参数为‘auto’来使用。
                     This automatically determines the optimal shrinkage parameter in an analytic
                     way following the lemma introduced by Ledoit and Wolf <a class="footnote-reference" href="#id5" id="id3">[4]</a>. Note that
                     currently shrinkage only works when setting the <code class="docutils literal"><span class="pre">solver</span></code> parameter to &#8216;lsqr&#8217;
