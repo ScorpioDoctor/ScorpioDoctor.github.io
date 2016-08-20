@@ -55,7 +55,7 @@
 
     <div class="container">
 
-        <div class="section">
+        <div class="section" id="ensemble-methods">
             <h1 class="page-header">1.11 集成方法(Ensemble Methods)<a>¶</a></h1>
 
             <p>
@@ -70,25 +70,29 @@
                         输出做平均。从平均意义上来说，组合估计器通常总是比任意单个基础估计器更好，因为组合估计器的输出的方差
                         被减小了。
                     </p>
-                    <p><strong>例子:</strong>
-                     <a class="reference internal" href="#bagging"><span>Bagging methods</span></a>,
-                     <a class="reference internal" href="#forest"><span>Forests of randomized trees</span></a>,
-                     ...</p>
+                    <p>
+                        <strong>例子:</strong>
+                        <a class="reference internal" href="#bagging"><span>Bagging methods</span></a>,
+                        <a class="reference internal" href="#forest"><span>Forests of randomized trees</span></a>,
+                        ...
+                    </p>
                 </li>
                 <li>
                     <p class="first">
-                        作为对比, 在<strong>推举方法(boosting methods)</strong>中, 
+                        作为对比, 在<strong>推举方法(boosting methods)</strong>中,
                         若干基础估计器被序列化构建并且我们试图减小组合估计器的偏差。主要动机是
                         通过组合若干弱模型来获得一个强大的集成估计器。
                     </p>
-                    <p><strong>例子:</strong> 
-                    <a class="reference internal" href="#adaboost"><span>自适应推举(AdaBoost)</span></a>, 
-                    <a class="reference internal" href="#gradient-boosting"><span>梯度树推举(Gradient Tree Boosting)</span></a>,
-                     ...</p>
+                    <p>
+                        <strong>例子:</strong>
+                        <a class="reference internal" href="#adaboost"><span>自适应推举(AdaBoost)</span></a>,
+                        <a class="reference internal" href="#gradient-boosting"><span>梯度树推举(Gradient Tree Boosting)</span></a>,
+                        ...
+                    </p>
                 </li>
             </ul>
-            
-            <div class="section" id="classification">
+
+            <div class="section" id="bagging-meta-estimator">
                 <h2>1.11.1 Bagging meta-estimator<a>¶</a></h2>
                 <p>
                     在集成方法中, bagging 方法形成了一类算法，这些算法在原始训练集的随机子集上构造一种黑盒估计器的若干
@@ -125,7 +129,7 @@
                 </blockquote>
                 <p>
                     在 scikit-learn 中, bagging 方法以统一的
-                     BaggingClassifier meta-estimator的形式提供 (resp. BaggingRegressor), 
+                    BaggingClassifier meta-estimator的形式提供 (resp. BaggingRegressor),
                     以用户指定的基础估计器和用于指定抽取随机子集的策略的参数作为输入。
                     特别的，max_samples 和 max_features 分别控制样本子集和特征子集的大小；而
                     bootstrap和bootstrap_features控制着样本和特征是否以替换方式被抽取出来。
@@ -202,7 +206,7 @@
                 </div>
             </div>
 
-            <div class="section" id="regression">
+            <div class="section" id="forests-of-randomized-trees">
                 <h2>1.11.2. Forests of randomized trees<a>¶</a></h2>
                 <p>
                     scikit-learn的<code>sklearn.ensemble</code> 模块包含两个基于随机决策树的<strong>平均算法</strong>：
@@ -233,7 +237,7 @@
                 </p>
 
                 <div class="section" id="random-forests">
-                    <h3>1.11.2.1. 随机森林(Random Forests)<a >¶</a></h3>
+                    <h3>1.11.2.1. 随机森林(Random Forests)<a>¶</a></h3>
                     <p>
                         在随机森林(<code>RandomForestClassifier</code>类和<code>RandomForestRegressor</code>类)中，
                         森林中的每个树都是构造于一个样本，该样本以置换方式(replacement--> i.e., a bootstrap sample)从训练集
@@ -243,7 +247,7 @@
                         因此产生了整体上比较好的模型。
                     </p>
                     <p>
-                        与原始的版本<a class="reference internal" href="#b2001" id="id6">[B2001]</a>对比 , 
+                        与原始的版本<a class="reference internal" href="#b2001" id="id6">[B2001]</a>对比 ,
                         scikit-learn 通过平均单个分类器的概率性预测来组合若干单个分类器去实现随机森林，而不是让每个分类器为单个类投票。
                     </p>
                 </div>
@@ -285,63 +289,47 @@
                         </div>
                     </div>
                     <p class="text-center">
-                        <a><img alt="./images/plot_forest_iris_0011.png" src="./images/plot_forest_iris_0011.png"
-                                 style="width: 600.0px; height: 450.0px;" /></a>
+                        <a>
+                            <img alt="./images/plot_forest_iris_0011.png" src="./images/plot_forest_iris_0011.png"
+                                 style="width: 600.0px; height: 450.0px;" />
+                        </a>
                     </p>
                 </div>
 
                 <div class="section" id="parameters">
-                    <h3>1.11.2.3. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+                    <h3>1.11.2.3. 参数 <a>¶</a></h3>
                     <p>
-                        The main parameters to adjust when using these methods is <code class="docutils literal"><span class="pre">n_estimators</span></code>
-                        and <code class="docutils literal"><span class="pre">max_features</span></code>. The former is the number of trees in the forest. The
-                        larger the better, but also the longer it will take to compute. In
-                        addition, note that results will stop getting significantly better
-                        beyond a critical number of trees. The latter is the size of the random
-                        subsets of features to consider when splitting a node. The lower the
-                        greater the reduction of variance, but also the greater the increase in
-                        bias. Empirical good default values are <code class="docutils literal"><span class="pre">max_features=n_features</span></code>
-                        for regression problems, and <code class="docutils literal"><span class="pre">max_features=sqrt(n_features)</span></code> for
-                        classification tasks (where <code class="docutils literal"><span class="pre">n_features</span></code> is the number of features
-                        in the data). Good results are often achieved when setting <code class="docutils literal"><span class="pre">max_depth=None</span></code>
-                        in combination with <code class="docutils literal"><span class="pre">min_samples_split=1</span></code> (i.e., when fully developing the
-                        trees). Bear in mind though that these values are usually not optimal, and
-                        might result in models that consume a lot of ram. The best parameter values
-                        should always be cross-validated. In addition, note that in random forests,
-                        bootstrap samples are used by default (<code class="docutils literal"><span class="pre">bootstrap=True</span></code>)
-                        while the default strategy for extra-trees is to use the whole dataset
-                        (<code class="docutils literal"><span class="pre">bootstrap=False</span></code>).
-                        When using bootstrap sampling the generalization error can be estimated
-                        on the left out or out-of-bag samples. This can be enabled by
-                        setting <code class="docutils literal"><span class="pre">oob_score=True</span></code>.
+                        使用这些方法的时候，需要调节的主要参数有两个：<code>n_estimators</code>和<code>max_features</code>。前一个参数
+                        森林中树的数量。树越多，分类器越好，当然计算代价也越大。另外需要注意的是，当树的数量增加到一定程度，分类性能就再也不增加了。
+                        后一个参数是在树节点上进行分裂时特征的随机子集的大小。这个随机子集越小，输出方差也会越小但同时也会导致偏差增加。
+                        这两个参数的比较好的默认经验值是：对于回归问题<code>max_features=n_features</code>；对于分类问题<code>max_features=sqrt(n_features)</code>。
+                        其中，<code>n_features</code>是数据中特征的总数量。当设置<code>max_depth=None</code>并且<code>min_samples_split=1</code>时，
+                        也就是说当我们允许树完全发展的时候，通常能够获得比较好的结果。但是这样的设置通常不是最优的，而且会消耗大量内存。我们
+                        应该使用交叉验证来获得最佳参数。另外，在随机森林中，默认使用了boostrap样本<code>bootstrap=True</code>；而在极大随机树中，
+                        默认使用整个样本集，即<code>bootstrap=False</code>。当使用bootstrap样本的时候，泛化误差可以在剩下的样本集上估计得到。这可以通过设置
+                        <code>oob_score=True</code>来开启。
                     </p>
                 </div>
 
 
                 <div class="section" id="parallelization">
-                    <h3>1.11.2.4. Parallelization<a class="headerlink" href="#parallelization" title="Permalink to this headline">¶</a></h3>
+                    <h3>1.11.2.4. 并行计算<a>¶</a></h3>
                     <p>
-                        Finally, this module also features the parallel construction of the trees
-                        and the parallel computation of the predictions through the <code class="docutils literal"><span class="pre">n_jobs</span></code>
-                        parameter. If <code class="docutils literal"><span class="pre">n_jobs=k</span></code> then computations are partitioned into
-                        <code class="docutils literal"><span class="pre">k</span></code> jobs, and run on <code class="docutils literal"><span class="pre">k</span></code> cores of the machine. If <code class="docutils literal"><span class="pre">n_jobs=-1</span></code>
-                        then all cores available on the machine are used. Note that because of
-                        inter-process communication overhead, the speedup might not be linear
-                        (i.e., using <code class="docutils literal"><span class="pre">k</span></code> jobs will unfortunately not be <code class="docutils literal"><span class="pre">k</span></code> times as
-                        fast). Significant speedup can still be achieved though when building
-                        a large number of trees, or when building a single tree requires a fair
-                        amount of time (e.g., on large datasets).
+                        最后，ensemble模块支持很多的树的并行构建以及通过<code>n_jobs</code>进行并行预测。如果<code>n_jobs=k</code>，
+                        那么计算将被划分成<code>k</code>个任务然后在计算机的<code>k</code>个核上并行计算。如果<code>n_jobs=-1</code>，
+                        那么计算机中所有的可用核都将被使用。注意到由于inter处理器的通信等，加速可能不会是线性的(也就是不会是k倍的)。
+                        但当我们要构建一大批树或者数据集很大的时候，仍然可以获得显著的加速。
                     </p>
                     <div class="topic">
-                        <p class="topic-title first">Examples:</p>
+                        <p class="topic-title first">例子:</p>
                         <ul class="simple">
-                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_forest_iris.html#example-ensemble-plot-forest-iris-py"><span>Plot the decision surfaces of ensembles of trees on the iris dataset</span></a></li>
-                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_forest_importances_faces.html#example-ensemble-plot-forest-importances-faces-py"><span>Pixel importances with a parallel forest of trees</span></a></li>
-                            <li><a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span>Face completion with a multi-output estimators</span></a></li>
+                            <li><a><span>Plot the decision surfaces of ensembles of trees on the iris dataset</span></a></li>
+                            <li><a><span>Pixel importances with a parallel forest of trees</span></a></li>
+                            <li><a><span>Face completion with a multi-output estimators</span></a></li>
                         </ul>
                     </div>
                     <div class="topic">
-                        <p class="topic-title first">References</p>
+                        <p class="topic-title first">参考文献</p>
                         <table class="docutils citation" frame="void" id="b2001" rules="none">
                             <colgroup><col class="label" /><col /></colgroup>
                             <tbody valign="top">
@@ -384,105 +372,256 @@
                 </div>
 
                 <div class="section" id="feature-importance-evaluation">
-                    <span id="random-forest-feature-importance"></span><h3>1.11.2.5. Feature importance evaluation<a class="headerlink" href="#feature-importance-evaluation" title="Permalink to this headline">¶</a></h3>
+                    <span id="random-forest-feature-importance"></span><h3>1.11.2.5. 特征重要性评估<a href="#feature-importance-evaluation" title="Permalink to this headline">¶</a></h3>
                     <p>
-                        The relative rank (i.e. depth) of a feature used as a decision node in a
-                        tree can be used to assess the relative importance of that feature with
-                        respect to the predictability of the target variable. Features used at
-                        the top of the tree are used contribute to the final prediction decision
-                        of a larger fraction of the input samples. The <strong>
-                            expected fraction of
-                            the samples
-                        </strong> they contribute to can thus be used as an estimate of the
-                        <strong>relative importance of the features</strong>.
+                        在一个树中，用作决策节点的特征的相对排名(也就是深度)可以被用于评价那个特征
+                        对于目标变量的预测的相对重要性。在树顶部的那些特征有助于更大的一部分的输入样本的
+                        最终预测决策。因此，这些特征贡献的<strong>expected fraction of the samples</strong>可被用于
+                        估计特征的相对重要性(<strong>relative importance of the features</strong>)。
                     </p>
                     <p>
-                        By <strong>averaging</strong> those expected activity rates over several randomized
-                        trees one can <strong>reduce the variance</strong> of such an estimate and use it
-                        for feature selection.
+                        通过<strong>平均</strong>那些在若干个树上的期望激活率(expected activity rates),我们可以
+                        <strong>减小估计器的方差</strong>并且用它进行特征选择。
                     </p>
                     <p>
-                        The following example shows a color-coded representation of the relative
-                        importances of each individual pixel for a face recognition task using
-                        a <a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" title="sklearn.ensemble.ExtraTreesClassifier"><code class="xref py py-class docutils literal"><span class="pre">ExtraTreesClassifier</span></code></a> model.
+                        下面的例子展示了使用<code>ExtraTreesClassifier</code>模型进行人脸识别过程中每一个独立的像素的
+                        相对重要性的彩色表示。
                     </p>
-                    <div class="figure align-center">
+                    <p class="text-center">
                         <a><img alt=".//images//plot_forest_importances_faces_0011.png" src="./images/plot_forest_importances_faces_0011.png" style="width: 450.0px; height: 450.0px;" /></a>
-                    </div>
+                    </p>
                     <p>
-                        In practice those estimates are stored as an attribute named
-                        <code class="docutils literal"><span class="pre">feature_importances_</span></code> on the fitted model. This is an array with shape
-                        <code class="docutils literal"><span class="pre">(n_features,)</span></code> whose values are positive and sum to 1.0. The higher
-                        the value, the more important is the contribution of the matching feature
-                        to the prediction function.
+                        在实践中，这些特征重要性的估计结果被存储在拟合好的树模型的属性<code>feature_importances_</code>中。
+                        这是一个大小为<code>(n_features,)</code>的数组，其中的值是正的而且和为1。值越大，代表那个对应特征对预测函数的贡献的重要性越大。
                     </p>
                     <div class="topic">
-                        <p class="topic-title first">Examples:</p>
+                        <p class="topic-title first">例子:</p>
                         <ul class="simple">
-                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_forest_importances_faces.html#example-ensemble-plot-forest-importances-faces-py"><span>Pixel importances with a parallel forest of trees</span></a></li>
-                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_forest_importances.html#example-ensemble-plot-forest-importances-py"><span>Feature importances with forests of trees</span></a></li>
+                            <li><a><span>Pixel importances with a parallel forest of trees</span></a></li>
+                            <li><a><span>Feature importances with forests of trees</span></a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="section" id="totally-random-trees-embedding">
-                    <span id="random-trees-embedding"></span><h3>1.11.2.6. Totally Random Trees Embedding<a class="headerlink" href="#totally-random-trees-embedding" title="Permalink to this headline">¶</a></h3>
+                    <span id="random-trees-embedding"></span><h3>1.11.2.6. 完全随机树嵌入(Totally Random Trees Embedding)<a class="headerlink" href="#totally-random-trees-embedding" title="Permalink to this headline">¶</a></h3>
                     <p>
-                        <a class="reference internal" href="generated/sklearn.ensemble.RandomTreesEmbedding.html#sklearn.ensemble.RandomTreesEmbedding" title="sklearn.ensemble.RandomTreesEmbedding"><code class="xref py py-class docutils literal"><span class="pre">RandomTreesEmbedding</span></code></a> implements an unsupervised transformation of the
-                        data.  Using a forest of completely random trees, <a class="reference internal" href="generated/sklearn.ensemble.RandomTreesEmbedding.html#sklearn.ensemble.RandomTreesEmbedding" title="sklearn.ensemble.RandomTreesEmbedding"><code class="xref py py-class docutils literal"><span class="pre">RandomTreesEmbedding</span></code></a>
-                        encodes the data by the indices of the leaves a data point ends up in.  This
-                        index is then encoded in a one-of-K manner, leading to a high dimensional,
-                        sparse binary coding.
-                        This coding can be computed very efficiently and can then be used as a basis
-                        for other learning tasks.
-                        The size and sparsity of the code can be influenced by choosing the number of
-                        trees and the maximum depth per tree. For each tree in the ensemble, the coding
+                        <a><code class="xref py py-class docutils literal"><span class="pre">RandomTreesEmbedding</span></code></a>
+                        实现了一个对数据的无监督变换操作。使用一个包含若干完全随机树的森林，<code>RandomTreesEmbedding</code>对象使用
+                        一个数据点在树上结束的那些叶节点的索引来编码此数据点。这些叶节点索引随后以one-of-K的方式被编码，
+                        这会产生高维稀疏二值编码。编码操作可以高效的计算出来然后被用做其他学习任务的基础。
+                        编码的长度与稀疏性会受到树的数量以及每棵树的最大深度的影响。 For each tree in the ensemble, the coding
                         contains one entry of one. The size of the coding is at most <code class="docutils literal">
                             <span class="pre">n_estimators</span> <span class="pre">*</span> <span class="pre">2</span>
                             <span class="pre">**</span> <span class="pre">max_depth</span>
                         </code>, the maximum number of leaves in the forest.
                     </p>
                     <p>
-                        As neighboring data points are more likely to lie within the same leaf of a tree,
-                        the transformation performs an implicit, non-parametric density estimation.
+                        由于邻居节点会以很大的可能性落入一棵树的同一个叶节点，所以此变换执行了一个隐式的无参数的密度估计过程。
                     </p>
                     <div class="topic">
-                        <p class="topic-title first">Examples:</p>
+                        <p class="topic-title first">例子:</p>
                         <ul class="simple">
-                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_random_forest_embedding.html#example-ensemble-plot-random-forest-embedding-py"><span>Hashing feature transformation using Totally Random Trees</span></a></li>
+                            <li><a><span>使用完全随机树(Totally Random Trees)进行哈希特征变换</span></a></li>
                             <li>
-                                <a class="reference internal" href="../auto_examples/manifold/plot_lle_digits.html#example-manifold-plot-lle-digits-py"><span>Manifold learning on handwritten digits: Locally Linear Embedding, Isomap...</span></a> compares non-linear
-                                dimensionality reduction techniques on handwritten digits.
+                                <a><span>Manifold learning on handwritten digits: Locally Linear Embedding, Isomap...</span></a>
+                                在手写字符集上比较非线性维数约简技术。
                             </li>
                             <li>
-                                <a class="reference internal" href="../auto_examples/ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py"><span>Feature transformations with ensembles of trees</span></a> compares
-                                supervised and unsupervised tree based feature transformations.
+                                <a><span>Feature transformations with ensembles of trees</span></a>基于特征变换比较监督树和无监督树。
                             </li>
                         </ul>
                     </div>
                     <div class="admonition seealso">
                         <p class="first admonition-title">See also</p>
                         <p class="last">
-                            <a class="reference internal" href="manifold.html#manifold"><span>Manifold learning</span></a> techniques can also be useful to derive non-linear
-                            representations of feature space, also these approaches focus also on
-                            dimensionality reduction.
+                            <a><span>Manifold learning</span></a> 技术也可以用于实现特征空间的非线性表达，而且这些方法也聚焦于
+                            维数约简。
                         </p>
                     </div>
                 </div>
 
             </div>
 
-            <div class="section" id="multi-output-problems">
-                <h2>1.11.3. AdaBoost<a>¶</a></h2>
+            <div class="section" id="adaboost">
+                <h2>1.11.3. 自适应推举算法：AdaBoost<a>¶</a></h2>
+                <p>
+                    <code>sklearn.ensemble</code> 模块包含了著名推举算法：AdaBoost； 由 Freund 和 Schapire 于 1995
+                    <a class="reference internal" href="#fs1995" id="id8">[FS1995]</a>提出。
+                </p>
+                <p>
+                    AdaBoost算法的核心原则是在采样权重可重复修改的数据上拟合一个弱学习器序列。此处，弱学习器是指那些仅仅比随机猜测稍微好一点儿
+                    的学习器模型，例如小决策树。使用这些拟合好的弱学习器进行预测的方法是组合弱学习器的加权投票结果来产生最终预测。在每一个
+                    称为推举(boosting)的迭代中，对数据的修改操作是将权重
+                    <img class="math" src="./images/ee71d9a60992887aa4b7a1e010886633661a7ada.png" alt="w_1" />,
+                    <img class="math" src="./images/9c87339c285f85c875225faea7ee0af7107cf77b.png" alt="w_2" />,
+                    ..., <img class="math" src="./images/093edac7548ff6dcb81cfbee5ef2249fb8295d23.png" alt="w_N" />
+                    添加到每一个训练样本上。 初始化的时候，这些权重都被设置为
+                    <img class="math" src="./images/f517ce4e0d7328c27b2820bb5259535d3e1d8aa7.png" alt="w_i = 1/N" />,
+                    所以在第一步只是在原始数据上简单的训练一个弱分类器。在每一次的后继迭代中，样本权重会被单独修改，然后学习算法会被重新用在这些权重已被修改的数据上进行训练。
+                    在一个给定的迭代步中，那些被上一迭代步的推举模型错误预测的样本会获得更高的权重，而预测正确的样本的权重会下降。随着迭代的持续进行，
+                    那些比较难于预测的样本将会获得推举模型的持续关注。因此，每一个后续添加的弱学习器将会被强制聚焦到那些之前一直被错误预测的样本上。
+                    <a class="reference internal" href="#htf" id="id9">[HTF]</a>.
+                </p>
+                <p class="text-center">
+                    <a class="reference external image-reference">
+                        <img alt="./images/plot_adaboost_hastie_10_2_0011.png" src="./images/plot_adaboost_hastie_10_2_0011.png"
+                             style="width: 600.0px; height: 450.0px;" />
+                    </a>
+                </p>
+                <p>AdaBoost可被用于分类和回归问题:</p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>
+                                对于多任务分类问题,<code>AdaBoostClassifier</code>实现了AdaBoost-SAMME 和 AdaBoost-SAMME.R <a class="reference internal" href="#zzrh2009" id="id10">[ZZRH2009]</a>.
+                            </li>
+                            <li>对于回归问题, <code>AdaBoostRegressor</code>实现了 AdaBoost.R2 <a class="reference internal" href="#d1997" id="id11">[D1997]</a>.</li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <div class="section" id="usage">
+                    <h3>1.11.3.1. AdaBoost用法<a>¶</a></h3>
+                    <p>
+                        下面的例子展示了如何使用100个弱学习器拟合一个AdaBoost分类器：
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">AdaBoostClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">AdaBoostClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>                             
+<span class="go">0.9...</span>
+</pre>
+                        </div>
+                    </div>
+                    <p>
+                        弱学习器的个数通过参数<code>n_estimators</code>来控制。参数<code>learning_rate</code>控制着弱学习器在最终的组合预测输出中的高效率。
+                        默认情况下，所有弱学习器都是决策树桩(decision stumps)。 不同的弱学习器可以通过参数<code>base_estimator</code>来指定。
+                        用于获得好结果的可调参数主要是<code>n_estimators</code>以及基础估计器(base estimators)的复杂度。如果基础估计器是是
+                        决策树的话，那么复杂度就要通过树的最大深度<code>max_depth</code>或者每个叶节点需要的最小样本量<code>min_samples_leaf</code>。
+                    </p>
 
+                    <div class="topic">
+                        <p class="topic-title first">例子:</p>
+                        <ul class="simple">
+                            <li>
+                                <a class="reference internal"><span>Discrete versus Real AdaBoost</span></a>比较分类误差：decision stump, decision tree, 和 a boosted
+                                decision stump using AdaBoost-SAMME and AdaBoost-SAMME.R.
+                            </li>
+                            <li>
+                                <a class="reference internal"><span>Multi-class AdaBoosted Decision Trees</span></a> 展示AdaBoost-SAMME 和 AdaBoost-SAMME.R 在多分类问题上的性能。
+                            </li>
+                            <li>
+                                <a class="reference internal"><span>Two-class AdaBoost</span></a>
+                                展示AdaBoost-SAMME在非线性可分的两类问题上的决策边界和决策函数值。
+                            </li>
+                            <li>
+                                <a class="reference internal"><span>Decision Tree Regression with AdaBoost</span></a>
+                                展示AdaBoost.R2算法如何用于回归问题。
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="topic">
+                        <p class="topic-title first">参考文献：</p>
+                        <table class="docutils citation" frame="void" id="fs1995" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr>
+                                    <td class="label"><a class="fn-backref" href="#id8">[FS1995]</a></td>
+                                    <td>
+                                        Y. Freund, and R. Schapire, &#8220;A Decision-Theoretic Generalization of
+                                        On-Line Learning and an Application to Boosting&#8221;, 1997.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="docutils citation" frame="void" id="zzrh2009" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr>
+                                    <td class="label"><a class="fn-backref" href="#id10">[ZZRH2009]</a></td>
+                                    <td>
+                                        J. Zhu, H. Zou, S. Rosset, T. Hastie. &#8220;Multi-class AdaBoost&#8221;,
+                                        2009.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="docutils citation" frame="void" id="d1997" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr>
+                                    <td class="label"><a class="fn-backref" href="#id11">[D1997]</a></td>
+                                    <td>
+                                        <ol class="first last upperalpha simple" start="8">
+                                            Drucker. &#8220;Improving Regressors using Boosting Techniques&#8221;, 1997.
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="docutils citation" frame="void" id="htf" rules="none">
+                            <colgroup><col class="label" /><col /></colgroup>
+                            <tbody valign="top">
+                                <tr>
+                                    <td class="label"><a class="fn-backref" href="#id9">[HTF]</a></td>
+                                    <td>
+                                        T. Hastie, R. Tibshirani and J. Friedman, &#8220;Elements of
+                                        Statistical Learning Ed. 2&#8221;, Springer, 2009.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="section" id="complexity">
+            <div class="section" id="gradient-tree-boosting">
                 <h2>1.11.4 Gradient Tree Boosting<a>¶</a></h2>
-
+                <p>
+                    <a class="reference external" href="http://en.wikipedia.org/wiki/Gradient_boosting">Gradient Tree Boosting</a>
+                    or Gradient Boosted Regression Trees (GBRT) is a generalization
+                    of boosting to arbitrary
+                    differentiable loss functions. GBRT is an accurate and effective
+                    off-the-shelf procedure that can be used for both regression and
+                    classification problems.  Gradient Tree Boosting models are used in a
+                    variety of areas including Web search ranking and ecology.
+                </p>
+                <p>The advantages of GBRT are:</p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>Natural handling of data of mixed type (= heterogeneous features)</li>
+                            <li>Predictive power</li>
+                            <li>Robustness to outliers in output space (via robust loss functions)</li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <p>The disadvantages of GBRT are:</p>
+                <blockquote>
+                    <div>
+                        <ul class="simple">
+                            <li>
+                                Scalability, due to the sequential nature of boosting it can
+                                hardly be parallelized.
+                            </li>
+                        </ul>
+                    </div>
+                </blockquote>
+                <p>
+                    The module <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.ensemble</span></code></a> provides methods
+                    for both classification and regression via gradient boosted regression
+                    trees.
+                </p>
             </div>
 
-            <div class="section" id="tips-on-practical-use">
+            <div class="section" id="votingclassifier">
                 <h2>1.11.5 VotingClassifier<a>¶</a></h2>
 
             </div>
