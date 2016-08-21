@@ -707,26 +707,18 @@
                 <div class="section" id="controlling-the-tree-size">
                     <span id="gradient-boosting-tree-size"></span><h3>1.11.4.4. 控制树的大小<a>¶</a></h3>
                     <p>
-                        The size of the regression tree base learners defines the level of variable
-                        interactions that can be captured by the gradient boosting model. In general,
-                        a tree of depth <code class="docutils literal"><span class="pre">h</span></code> can capture interactions of order <code class="docutils literal"><span class="pre">h</span></code> .
-                        There are two ways in which the size of the individual regression trees can
-                        be controlled.
+                        回归树基本学习器的大小决定了梯度推举模型能够捕获的变量之间相互影响的水平。一般来说，一颗深度为<code>h</code>的树可以捕获<code>h</code>阶的相互影响。
+                        有两种方法来控制每个独立的回归树的大小。
                     </p>
                     <p>
-                        If you specify <code class="docutils literal"><span class="pre">max_depth=h</span></code> then complete binary trees
-                        of depth <code class="docutils literal"><span class="pre">h</span></code> will be grown. Such trees will have (at most) <code class="docutils literal"><span class="pre">2**h</span></code> leaf nodes
-                        and <code class="docutils literal"><span class="pre">2**h</span> <span class="pre">-</span> <span class="pre">1</span></code> split nodes.
+                        如果你指定了<code>max_depth=h</code>，那么一个深度为<code>h</code>的完整二叉树就会生长出来。这棵完整二叉树最多会有<code>2**h</code>个叶节点，以及<code>2**h-1</code>个分裂节点。
                     </p>
                     <p>
-                        Alternatively, you can control the tree size by specifying the number of
-                        leaf nodes via the parameter <code class="docutils literal"><span class="pre">max_leaf_nodes</span></code>. In this case,
-                        trees will be grown using best-first search where nodes with the highest improvement
-                        in impurity will be expanded first.
-                        A tree with <code class="docutils literal"><span class="pre">max_leaf_nodes=k</span></code> has <code class="docutils literal"><span class="pre">k</span> <span class="pre">-</span> <span class="pre">1</span></code> split nodes and thus can
-                        model interactions of up to order <code class="docutils literal"><span class="pre">max_leaf_nodes</span> <span class="pre">-</span> <span class="pre">1</span></code> .
+                        另一种控制树的大小的方法是通过参数<code>max_leaf_nodes</code>指定叶节点的数量。这种情况下，树的生长使用最好节点优先分裂的搜索策略(best-first search):那些在impurity上有最大提升的节点将会被首先扩展。
+                        一颗拥有最大节点数量为<code>max_leaf_nodes=k</code>的树将会有<code>k-1</code>个分裂节点，因此它可以建模的相互影响的阶数可以达到<code>max_leaf_nodes-1</code>阶。
                     </p>
                     <p>
+
                         We found that <code class="docutils literal"><span class="pre">max_leaf_nodes=k</span></code> gives comparable results to <code class="docutils literal"><span class="pre">max_depth=k-1</span></code>
                         but is significantly faster to train at the expense of a slightly higher
                         training error.
