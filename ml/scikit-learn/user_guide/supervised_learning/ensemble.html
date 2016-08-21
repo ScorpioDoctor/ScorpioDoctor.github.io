@@ -25,7 +25,7 @@
 
     <title>人工智能研究网</title>
     <!--网站访问量统计-->
-    <script>
+    <!--<script>
         var _hmt = _hmt || [];
         (function () {
             var hm = document.createElement("script");
@@ -33,7 +33,7 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
-    </script>
+    </script>-->
 </head>
 
 
@@ -612,6 +612,130 @@
                 <p>
                     <code>sklearn.ensemble</code>模块提供了用于回归和分类的GBRT方法。
                 </p>
+
+                <div class="section" id="classification">
+                    <h3>1.11.4.1. 分类<a>¶</a></h3>
+                    <p>
+                        <code>GradientBoostingClassifier</code>对象支持二分类和多分类问题。
+                        下面的例子演示了怎样拟合一个带有100个决策树桩作为弱学习器的梯度推举分类器。
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_hastie_10_2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_hastie_10_2</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="mi">2000</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2000</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>                 
+<span class="go">0.913...</span>
+</pre>
+                        </div>
+                    </div>
+                    <p>
+                        弱学习器(即回归树)的数量由参数<code>n_estimators</code>来控制；每棵树的大小可以通过设置树的最大深度
+                        <code>max_depth</code>或设置叶节点的最大个数<code>max_leaf_nodes</code>来控制。参数<code>learning_rate</code>是一个在范围(0.0,1.0]之间的超参数，使用
+                        <a class="reference internal" href="#gradient-boosting-shrinkage"><span>shrinkage</span></a>控制过拟合。
+                    </p>
+                    <div class="admonition note">
+                        <p class="first admonition-title">注意</p>
+                        <p class="last">
+                            两类以上的分类问题在每次迭代中需要<code>n_classes</code>个回归树的归纳，因此，归纳树的总数量等于<code>n_classes</code>*<code>n_estimators</code>。
+                            如果数据集包含了数量很多的类，那么建议使用<a><code><span class="pre">RandomForestClassifier</span></code></a>作为对<code>GradientBoostingClassifier</code>的替代。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section" id="regression">
+                    <h3>1.11.4.2. 回归<a>¶</a></h3>
+                    <p>
+                        <code>GradientBoostingRegressor</code>支持一系列<a class="reference internal" href="#gradient-boosting-loss"><span>不同的损失函数</span></a>
+                        用于回归，可以通过参数<code class="docutils literal"><span class="pre">loss</span></code>来指定; 默认的回归损失函数是least squares (<code class="docutils literal"><span class="pre">'ls'</span></code>).
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman1</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">200</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="mi">200</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="mi">200</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">200</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">est</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ls&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">est</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>    
+<span class="go">5.00...</span>
+</pre>
+                        </div>
+                    </div>
+                    <p>
+                        下图展示了将带有最小均方损失以及500个弱学习器的<code>GradientBoostingRegressor</code>回归器对象应用到
+                        波士顿房价数据集(<code class="pre">sklearn.datasets.load_boston</code>)上得到的结果。左边的图展示了迭代过程中的训练和测试误差；
+                        每次迭代产生的训练误差存储在梯度推举模型的<code>train_score_</code>属性中，而每次迭代后的测试误差通过成员方法<code>staged_predict</code>来获得，该函数返回一个产生每阶段预测结果的生成器。
+                        这些训练过程的结果图可以帮助我们确定弱学习器的最优数量<code>n_estimators</code>。右边的图展示了特征重要性，通过<code>feature_importances_</code>属性来获得。
+                    </p>
+                    <p class="text-center">
+                        <a><img alt="./images/plot_gradient_boosting_regression_0011.png" src="./images/plot_gradient_boosting_regression_0011.png" style="width: 900.0px; height: 450.0px;" /></a>
+                    </p>
+                    <div class="topic">
+                        <p class="topic-title first">例子:</p>
+                        <ul class="simple">
+                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_gradient_boosting_regression.html#example-ensemble-plot-gradient-boosting-regression-py"><span>Gradient Boosting regression</span></a></li>
+                            <li><a class="reference internal" href="../auto_examples/ensemble/plot_gradient_boosting_oob.html#example-ensemble-plot-gradient-boosting-oob-py"><span>Gradient Boosting Out-of-Bag estimates</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section" id="fitting-additional-weak-learners">
+                    <span id="gradient-boosting-warm-start"></span><h3>1.11.4.3. 拟合后期添加的弱学习器<a class="headerlink" href="#fitting-additional-weak-learners" title="Permalink to this headline">¶</a></h3>
+                    <p>
+                        <code>GradientBoostingRegressor</code> 和 <code>GradientBoostingClassifier</code>对象都支持<code>warm_start=True</code>，
+                        它允许你添加更多的弱学习器到一个已经拟合好的模型中。
+                    </p>
+                    <div class="highlight-python">
+                        <div class="highlight">
+                            <pre><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">est</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># set warm_start and new nr of trees</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">est</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span> <span class="c1"># fit additional 100 trees to est</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">est</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>    
+<span class="go">3.84...</span>
+</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" id="controlling-the-tree-size">
+                    <span id="gradient-boosting-tree-size"></span><h3>1.11.4.4. 控制树的大小<a>¶</a></h3>
+                    <p>
+                        The size of the regression tree base learners defines the level of variable
+                        interactions that can be captured by the gradient boosting model. In general,
+                        a tree of depth <code class="docutils literal"><span class="pre">h</span></code> can capture interactions of order <code class="docutils literal"><span class="pre">h</span></code> .
+                        There are two ways in which the size of the individual regression trees can
+                        be controlled.
+                    </p>
+                    <p>
+                        If you specify <code class="docutils literal"><span class="pre">max_depth=h</span></code> then complete binary trees
+                        of depth <code class="docutils literal"><span class="pre">h</span></code> will be grown. Such trees will have (at most) <code class="docutils literal"><span class="pre">2**h</span></code> leaf nodes
+                        and <code class="docutils literal"><span class="pre">2**h</span> <span class="pre">-</span> <span class="pre">1</span></code> split nodes.
+                    </p>
+                    <p>
+                        Alternatively, you can control the tree size by specifying the number of
+                        leaf nodes via the parameter <code class="docutils literal"><span class="pre">max_leaf_nodes</span></code>. In this case,
+                        trees will be grown using best-first search where nodes with the highest improvement
+                        in impurity will be expanded first.
+                        A tree with <code class="docutils literal"><span class="pre">max_leaf_nodes=k</span></code> has <code class="docutils literal"><span class="pre">k</span> <span class="pre">-</span> <span class="pre">1</span></code> split nodes and thus can
+                        model interactions of up to order <code class="docutils literal"><span class="pre">max_leaf_nodes</span> <span class="pre">-</span> <span class="pre">1</span></code> .
+                    </p>
+                    <p>
+                        We found that <code class="docutils literal"><span class="pre">max_leaf_nodes=k</span></code> gives comparable results to <code class="docutils literal"><span class="pre">max_depth=k-1</span></code>
+                        but is significantly faster to train at the expense of a slightly higher
+                        training error.
+                        The parameter <code class="docutils literal"><span class="pre">max_leaf_nodes</span></code> corresponds to the variable <code class="docutils literal"><span class="pre">J</span></code> in the
+                        chapter on gradient boosting in <a class="reference internal" href="#f2001" id="id13">[F2001]</a> and is related to the parameter
+                        <code class="docutils literal"><span class="pre">interaction.depth</span></code> in R&#8217;s gbm package where <code class="docutils literal"><span class="pre">max_leaf_nodes</span> <span class="pre">==</span> <span class="pre">interaction.depth</span> <span class="pre">+</span> <span class="pre">1</span></code> .
+                    </p>
+                </div>
+
             </div>
 
             <div class="section" id="votingclassifier">
