@@ -583,41 +583,34 @@
             </div>
 
             <div class="section" id="gradient-tree-boosting">
-                <h2>1.11.4 Gradient Tree Boosting<a>¶</a></h2>
+                <h2>1.11.4 梯度树推举:Gradient Tree Boosting<a>¶</a></h2>
                 <p>
                     <a class="reference external" href="http://en.wikipedia.org/wiki/Gradient_boosting">Gradient Tree Boosting</a>
-                    or Gradient Boosted Regression Trees (GBRT) is a generalization
-                    of boosting to arbitrary
-                    differentiable loss functions. GBRT is an accurate and effective
-                    off-the-shelf procedure that can be used for both regression and
-                    classification problems.  Gradient Tree Boosting models are used in a
-                    variety of areas including Web search ranking and ecology.
+                    或 Gradient Boosted Regression Trees (GBRT) 是推举算法的一个推广模型，可以使用任意的可微损失函数。
+                    GBRT是准确的和有效的现成的程序可被用于回归和分类任务。梯度树推举模型用途广泛包括网络搜索排序和以及生态学。
                 </p>
-                <p>The advantages of GBRT are:</p>
+                <p>GBRT的优点是:</p>
                 <blockquote>
                     <div>
                         <ul class="simple">
-                            <li>Natural handling of data of mixed type (= heterogeneous features)</li>
-                            <li>Predictive power</li>
-                            <li>Robustness to outliers in output space (via robust loss functions)</li>
+                            <li>天然具备处理混合数据(或异构特征)的能力</li>
+                            <li>强大的预测能力</li>
+                            <li>对输出空间的离群值有很好的鲁棒性(即，鲁棒损失函数)</li>
                         </ul>
                     </div>
                 </blockquote>
-                <p>The disadvantages of GBRT are:</p>
+                <p>GBRT的缺点是:</p>
                 <blockquote>
                     <div>
                         <ul class="simple">
                             <li>
-                                Scalability, due to the sequential nature of boosting it can
-                                hardly be parallelized.
+                                可扩展性, 由于推举算法的序列化天性，它很难并行计算。
                             </li>
                         </ul>
                     </div>
                 </blockquote>
                 <p>
-                    The module <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.ensemble</span></code></a> provides methods
-                    for both classification and regression via gradient boosted regression
-                    trees.
+                    <code>sklearn.ensemble</code>模块提供了用于回归和分类的GBRT方法。
                 </p>
             </div>
 
