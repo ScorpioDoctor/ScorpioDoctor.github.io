@@ -24,7 +24,7 @@
     </style>
 
     <!--网站访问量统计-->
-    <script>
+    <!--<script>
         var _hmt = _hmt || [];
         (function () {
             var hm = document.createElement("script");
@@ -32,8 +32,7 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
-    </script>
-
+    </script>-->
 </head>
 
 
@@ -56,33 +55,30 @@
     <section>
 
         <div class="page-header">
-            <h1 class="text-center"><code>cnn_train.m</code>之梯度累计函数解剖</h1>
+            <h1 class="text-center"><code>vl_simplenn.m</code>函数解剖</h1>
         </div>
 
         <div class="container">
-
-            <h2><code>function [net,res] = accumulate_gradients(opts, lr, batchSize, net, res, mmap)</code></h2>
+            
+            <h2><code>function res = vl_simplenn(net, x, dzdy, res, varargin)</code></h2>
             <p class="text-center">
-                <img src="images/accumulate_gradients_2.png" alt="images/accumulate_gradients_2.png" />
-                <img src="images/accumulate_gradients_3.png" alt="images/accumulate_gradients_3.png" />
+                <img src="images/vl_simplenn_1.png" alt="images/vl_simplenn_1.png" />
+                <img src="images/vl_simplenn_2.png" alt="images/vl_simplenn_2.png" />
+                <img src="images/vl_simplenn_3.png" alt="images/vl_simplenn_3.png" />
+                <img src="images/vl_simplenn_4.png" alt="images/vl_simplenn_4.png" />
+                <img src="images/vl_simplenn_5.png" alt="images/vl_simplenn_5.png" />
+                <img src="images/vl_simplenn_6.png" alt="images/vl_simplenn_6.png" />
+                <img src="images/vl_simplenn_7.png" alt="images/vl_simplenn_7.png" />
+                <img src="images/vl_simplenn_8.png" alt="images/vl_simplenn_8.png" />
+                <img src="images/vl_simplenn_9.png" alt="images/vl_simplenn_9.png" />
+                <img src="images/vl_simplenn_10.png" alt="images/vl_simplenn_10.png" />
+                <img src="images/vl_simplenn_11.png" alt="images/vl_simplenn_11.png" /> 
             </p>
-            <hr />
-
-            <h2><code>function mmap = map_gradients(fname, net, res, numGpus)</code></h2>
-            <p class="text-center">
-                <img src="images/map_gradients_1.png" alt="images/map_gradients_1.png" />
-            </p>
-            <hr />
-
-            <h2><code>function write_gradients(mmap, net, res)</code></h2>
-            <p class="text-center">
-                <img src="images/write_gradients_1.png" alt="images/write_gradients_1.png" />
-            </p>
-            <hr />
-
+           
         </div>
 
     </section>
+
     <hr />
     <div class="container">
         <div class="footer text-center">
@@ -91,4 +87,3 @@
     </div>
 </body>
 </html>
-
