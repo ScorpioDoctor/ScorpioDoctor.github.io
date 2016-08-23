@@ -165,6 +165,7 @@
     <Content Include="deep_learn\matconvnet\others\index.html" />
     <Content Include="deep_learn\matconvnet\wrapper_pretrainedmodel.html" />
     <Content Include="deep_learn\tensorflow\index.html" />
+    <Content Include="deep_learn\tensorflow\others\index.html" />
     <Content Include="deep_learn\theano\index.html" />
     <Content Include="deep_learn\theano\others\index.html" />
     <Content Include="deep_learn\torch\index.html" />
