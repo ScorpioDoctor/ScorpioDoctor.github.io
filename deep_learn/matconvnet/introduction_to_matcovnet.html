@@ -117,9 +117,32 @@
                 <h2 class="bg-info">一睹真容<a>¶</a></h2>
                 <p>
                     Matcovnet秉承了简单的设计哲学。与那些用软件对CNN进行复杂封装的网络架构不同，MatConvNet提供了一些具有基本功能的
-                    简单的计算模块比如线性卷积核以及ReLU算子等来构造CNN架构。这些构建模块能够被轻而易举的添加到一个完整的CNN模型中还能用于
-                    实现精密复杂的学习算法。尽管我们为你提供了一些
+                    简单的计算模块比如线性卷积核以及ReLU算子等来构造CNN架构。这些构建模块能够被轻而易举的添加到一个完整的CNN模型中,还能用于
+                    实现精密复杂的学习算法。尽管我们为你提供了一些真实世界的CNN架构案例以及训练这些模型的方法，但是你仍然可以用MatConvNet为你提供的
+                    最基本的构建块来设计你自己的架构。在此过程中，通常不需要你再去写C语言代码来构建新的网络架构。正因如此，MatConvNet是一个用于计算机视觉
+                    以及CNNs研究的理想科研环境。
                 </p>
+                <blockquote>
+                    <ul>MatConvNet提供了以下的元素：
+                        <li>
+                            CNN计算模块：一个优化过的程序集合实现了CNN的基本构建模块的计算。例如，卷积模块由函数
+                            <code>y=vl_nnconv(x,f,b)</code>来实现，其中<code>x</code>是一个图像，<code>f</code>是
+                            一个滤波器组,<code>b</code>是偏置向量。反向传播过程中的导数以如下的方式计算：<code>[dzdx,dzdf,dzdb] = vl_nnconv(x,f,b,dzdy)</code>。
+                            其中，<code>dzdy</code>是CNN的输出对于<code>y</code>的导数。
+                        </li>
+                        <li>
+                            CNN封装：MatConvNet提供了一个简单的封装形式，通过函数<code>vl_simplenn</code>来实现。它实现了一个
+                            具有线性拓扑结构的CNN网络架构(将不同构建模块串接在一起，像羊肉串一样)。MatConvNet还提供了另一种
+                            更加灵活的封装形式，它支持具有任意拓扑结构的网络架构，被包装在<code>dagnn.DagNN</code>类中。
+                        </li>
+                        <li>
+                            案例应用：MatConvNet提供了学习带有随机梯度下降法的CNNs的很多例子。这些例子使用了MNIST,CIFAR10，以及ImageNet数据集，可以运行在CPU和GPU上。
+                        </li>
+                        <li>
+                            预训练模型：MatConvNet提供了若干个比较优秀的预训练好的可以直接拿来用的CNN模型，可以用于分类图像，或者产生图像编码。
+                        </li>
+                    </ul>
+                </blockquote>
             </div>
 
             <div class="headerlink">
