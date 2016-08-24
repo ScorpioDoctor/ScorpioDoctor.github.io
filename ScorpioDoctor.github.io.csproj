@@ -141,6 +141,8 @@
     <Content Include="cv\video-lession\index.html" />
     <Content Include="cv\visual-features\index.html" />
     <Content Include="cv\visual-features\points-features\index.html" />
+    <Content Include="deep_learn\caffe\functions\caffe_proto.html" />
+    <Content Include="deep_learn\caffe\functions\index.html" />
     <Content Include="deep_learn\caffe\index.html" />
     <Content Include="deep_learn\caffe\others\index.html" />
     <Content Include="deep_learn\classical_papers\index.html" />
@@ -3682,6 +3684,7 @@
     <Content Include="css-fonts-js\rainbow\themes\sass\zenburnesque.sass" />
     <Content Include="css-fonts-js\rainbow\themes\sass\_base.sass" />
     <Content Include="css-fonts-js\rainbow\themes\sass\_init.sass" />
+    <Content Include="deep_learn\caffe\functions\caffe.proto" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3711,6 +3714,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="deep_learn\caffe\functions\images\" />
     <Folder Include="deep_learn\matconvnet\functions\images\" />
     <Folder Include="ml\scikit-learn\user_guide\unsupervised_learning\images\" />
     <Folder Include="obj\Debug\TempPE\" />
