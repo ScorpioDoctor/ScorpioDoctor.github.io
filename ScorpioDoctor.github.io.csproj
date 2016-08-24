@@ -154,6 +154,7 @@
     <Content Include="deep_learn\matconvnet\functions\function_err.html" />
     <Content Include="deep_learn\matconvnet\functions\index.html" />
     <Content Include="deep_learn\matconvnet\functions\process_epoch.html" />
+    <Content Include="deep_learn\matconvnet\functions\vl_nnloss.html" />
     <Content Include="deep_learn\matconvnet\functions\vl_nnrelu.html" />
     <Content Include="deep_learn\matconvnet\functions\vl_nnpool.html" />
     <Content Include="deep_learn\matconvnet\functions\vl_nnsoftmaxloss.html" />
