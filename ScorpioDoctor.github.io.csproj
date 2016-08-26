@@ -74,6 +74,7 @@
     <Content Include="css-fonts-js\js\jquery.maphilight.js" />
     <Content Include="css-fonts-js\js\jquery.maphilight.min.js" />
     <Content Include="css-fonts-js\js\jquery.min.js" />
+    <Content Include="css-fonts-js\js\MathJax.js" />
     <Content Include="css-fonts-js\js\searchtools.js" />
     <Content Include="css-fonts-js\js\underscore-1.3.1.js" />
     <Content Include="css-fonts-js\js\underscore.js" />
@@ -146,6 +147,9 @@
     <Content Include="deep_learn\caffe\index.html" />
     <Content Include="deep_learn\caffe\others\index.html" />
     <Content Include="deep_learn\classical_papers\index.html" />
+    <Content Include="deep_learn\knowleges\images\RNN-rolled.png" />
+    <Content Include="deep_learn\knowleges\index.html" />
+    <Content Include="deep_learn\knowleges\lijie_lstm_networks.html" />
     <Content Include="deep_learn\others\index.html" />
     <Content Include="deep_learn\index.html" />
     <Content Include="deep_learn\matconvnet\computational_blocks.html" />

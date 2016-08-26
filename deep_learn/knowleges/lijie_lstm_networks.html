@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../../css-fonts-js/css/bootstrap.min.css">
+    <script src="../../css-fonts-js/js/jquery.min.js"></script>
+    <script src="../../css-fonts-js/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}}); </script>
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"> </script>
+    <title>人工智能研究网/深度学习</title>
+
+    <style>
+        p {
+            font-size: large;
+        }
+    </style>
+    <!--网站访问量统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../../index.html">studyai.cn</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../../index.html">网站主页</a></li>
+                <li><a href="../../webmaster.html">站长风采</a></li>
+                <li><a href="../../sponsor.html">赞助我们</a></li>
+                <li><a href="../index.html">深度学习首页</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="content">
+
+        <div class="page-header">
+            <h1 class="text-center">理解LSTM网络</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>循环神经网络RNN</h2>
+                <p>
+                    人类的思维或思考不会在每一秒都从零开始。比如当你正在读这篇文章的时候，你对当前的单词的理解总是建立在对前面单词的理解的基础上的。你不会将之前读到的信息抛之脑后然后重新理解当前单词的语义。总而言之，你的思维具有连续性和一致性。
+                </p>
+                <p>
+                    传统神经网络模型无法实现这一点，而且这也似乎是它们的主要缺陷。举例来说, 你想要对一场电影中的任意时间点上所发生的事件进行分类。一个传统神经网络会怎样从电影中之前发生的事件进行推理并且判断当前时间点发生的事件的类型呢？这个问题的答案目前还不清楚。
+                </p>
+                <p>
+                    RNN网络(Recurrent neural networks)正是强调了这一问题。RNN网络内部有循环(loops)使得它可以保持和存留信息。
+                </p>
+                <p class="text-center">
+                    <img src="images/RNN-rolled.png" width="150" height="200"/><br />
+                    RNN网络的循环
+                </p>
+                <p>
+                    在上图中, $A$表示一个神经网络块，它接受一些输入$x_{t}$然后输出一个值$h_t$. 循环过程允许信息从网络的当前状态流到下一个状态。
+                </p>
+                <p>
+                    这些循环的存在使得RNN看起来很神秘。然而，当你稍微细想一想, RNN与一般神经网络并不是完全不同。 RNN网络可以看作是一个相同单元的多次拷贝, 每个单元都会给它的后继单元传递一个消息。我们把循环展开后就会明白其中发生了些撒：
+                </p>
+                <p class="text-center">
+                    <img src="images/RNN-unrolled.png" width="504" height="132" /><br />
+                    展开后的RNN
+                </p>
+                <p>
+                    这种链状特性揭示了RNN与序列和列表紧密相关。RNN是处理这种序列化数据的天然的神经网络架构。
+                </p>
+                <p>
+                    确然，它们一直就被用于这样的问题中。在过去的几年中，RNNs已经被成功的应用到一系列问题中：语言识别，语言建模，翻译, 图像标注 … 。
+                    RNNs的这些迷人特性将会在博客<a href="lijie_lstm_networks.html">RNNs难以置信的效果</a>中讨论。
+                </p>
+                <p>
+                   这些成功的关键是使用了“LSTMs”：一种非常特殊的RNN，它在很多任务上比标准RNN工作的更好。几乎所有令人兴奋的结果都是在这一类RNN上取得的。 本文重点关注LSTMs。
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>长期依赖问题</h2>
+            </div>
+
+            <div class="section">
+                <h2>LSTM网络</h2>
+            </div>
+
+            <div class="section">
+                <h2>LSTMs的核心思想</h2>
+            </div>
+
+            <div class="section">
+                <h2>Step-by-Step LSTM Walk Through</h2>
+            </div>
+
+            <div class="section">
+                <h2>Step-by-Step LSTM Walk Through</h2>
+            </div>
+
+            <div class="section">
+                <h2>Variants on Long Short Term Memory</h2>
+            </div>
+
+            <div class="section">
+                <h2>总结</h2>
+            </div>
+
+            <div class="section">
+                <h2>感谢</h2>
+            </div>
+        </div>
+
+    </section>
+
+    <hr />
+    <div class="container">
+        <div class="footer text-center">
+            &copy; 2016-2100, 版权属于人工智能研究网(studyai.cn)。
+        </div>
+    </div>
+
+</body>
+</html>
