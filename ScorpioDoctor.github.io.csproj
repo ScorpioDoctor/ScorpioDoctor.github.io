@@ -146,7 +146,15 @@
     <Content Include="deep_learn\caffe\functions\index.html" />
     <Content Include="deep_learn\caffe\index.html" />
     <Content Include="deep_learn\caffe\others\index.html" />
+    <Content Include="deep_learn\classical_papers\action-recog\index.html" />
+    <Content Include="deep_learn\classical_papers\classification\index.html" />
+    <Content Include="deep_learn\classical_papers\detection\index.html" />
+    <Content Include="deep_learn\classical_papers\face-recog\facenet.html" />
+    <Content Include="deep_learn\classical_papers\face-recog\index.html" />
     <Content Include="deep_learn\classical_papers\index.html" />
+    <Content Include="deep_learn\classical_papers\segmentation\index.html" />
+    <Content Include="deep_learn\classical_papers\tracking\index.html" />
+    <Content Include="deep_learn\classical_papers\img-caption\index.html" />
     <Content Include="deep_learn\knowleges\images\RNN-rolled.png" />
     <Content Include="deep_learn\knowleges\index.html" />
     <Content Include="deep_learn\knowleges\lijie_lstm_networks.html" />
