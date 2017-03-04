@@ -595,6 +595,10 @@ a{
     .st-container >a {
         font-size:13px;
     }
+    .st-courses-wall{
+        padding-top:0%;
+        padding-left:0%;
+    }
 }
 /*根据屏幕调正元素尺寸*/
 @media screen and (max-width:360px){
@@ -604,6 +608,11 @@ a{
     
     .st-container > a {
         font-size:10px;
+    }
+    
+    .st-courses-wall{
+        padding-top:0%;
+        padding-left:0%;
     }
     
 }
