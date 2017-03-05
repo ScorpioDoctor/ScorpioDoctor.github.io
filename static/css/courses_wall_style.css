@@ -133,10 +133,10 @@ a{
 
 .st-pannel h2{
     color:#e23a6e;
-    font-size:54px;
-    line-height:50px;
+    font-size:34px;
+    line-height:35px;
     text-align:center;
-    font-weight:900;
+    font-weight:300;
     width:80%;
     position:absolute;
     left:10%;
@@ -146,9 +146,13 @@ a{
     -webkit-backface-visibility:hidden; 
 }
 
-.st-courses-wall{
-    position: relative;
-    margin-left: 6%; 
+.st-courses-wall { 
+    /*position:absolute;
+    left:7%;
+    top:25%;
+    margin-top:-70px;*/
+    /*position: absolute;*/
+    margin-left: 7%; 
     margin-top: 6%; 
     /*padding-top:7%;
     padding-left:5%;*/
