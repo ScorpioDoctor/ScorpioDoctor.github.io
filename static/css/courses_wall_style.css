@@ -130,9 +130,28 @@ a{
     overflow:hidden;
 }
 
+
+.st-pannel h2{
+    color:#e23a6e;
+    font-size:54px;
+    line-height:50px;
+    text-align:center;
+    font-weight:900;
+    width:80%;
+    position:absolute;
+    left:10%;
+    top:50%;
+    margin-top:-70px;
+    text-shadow:1px 1px 1px 1px rgba(151,24,64,0.2);
+    -webkit-backface-visibility:hidden; 
+}
+
 .st-courses-wall{
-    padding-top:7%;
-    padding-left:5%;
+    position: relative;
+    margin-left: 6%; 
+    margin-top: 6%; 
+    /*padding-top:7%;
+    padding-left:5%;*/
 }
 
 /*定义最下面导航菜单条的点击事件的全屏切换的动画*/
@@ -172,20 +191,6 @@ a{
     transform:translateY(-400%);
 }
 
-.st-pannel h2{
-    color:#e23a6e;
-    font-size:54px;
-    line-height:50px;
-    text-align:center;
-    font-weight:900;
-    width:80%;
-    position:absolute;
-    left:10%;
-    top:50%;
-    margin-top:-70px;
-    text-shadow:1px 1px 1px 1px rgba(151,24,64,0.2);
-    -webkit-backface-visibility:hidden; 
-}
 
 /*把moveDown动画效果添加到st-pannel里面的h2标签上，实现标签乡下运动*/
 #st-control-1:checked ~ .st-scroll #st-pannel-1 h2,
