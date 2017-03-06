@@ -1,173 +1,229 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
+  
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">  
-      
-    <title>人工智能研究网</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./images/favicon.ico">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!--<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>-->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+    <title>人工智能研究网--StudyAi.cn</title>
 
-<body>
-    <!--导航栏-->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container-fluid">
-            <!--导航栏表头-->
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="./assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <script src="./assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="./static/css/carousel.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <!-- NAVBAR
+    ================================================== -->
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">StudyAi.cn</a>
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">StudyAi.cn</a>
             </div>
-
-            <!--板块导航-->
-            <div>
-                <ul class="nav navbar-nav">
-                    <li><a href="ainews_index.html" target="_blank">AI新闻</a>
-                    </li>
-                    <li class="active">
-                        <a href="aicourses_index.html" target="_blank">AI课程</a>
-                    </li>
-                    <li><a href="aixueshu_index.html" target="_blank">AI学术</a>
-                    </li>
-                    <li><a href="aiblogs_index.html" target="_blank">AI博客</a>
-                    </li>
-                    <li><a href="aiwenda_index.html" target="_blank">AI问答</a>
-                    </li>
-                </ul>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">主页</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#contact">联系我们</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多内容 <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">机器学习</a></li>
+                    <li><a href="#">机器视觉</a></li>
+                    <li><a href="#">语音识别</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
             </div>
-            <!--板块导航结束-->
-            <!--站内搜索-->
-            <div>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">提交</button>
-                </form>
-            </div>
-            <!--站内搜索结束-->
-            <!--注册登录-->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-            </ul>
+          </div>
+        </nav>
 
-        </div>
-    </nav>
-
-    <!--欢迎信息-->
-    <div class="container">
-        <div class="jumbotron">
-            <h1 style="color:crimson">欢迎来到人工智能研究网</h1>
-        </div>
+      </div>
     </div>
 
-    <!--课程章节列表开始-->
 
-    <!--AI新闻-->
-    <div class="container">
-        <div class="page-header">
-            <h3>
-                <a  href="ainews_index.html" target="_blank">AI新闻 >>>>>AI产业界的风向标！
-                </a>
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-md-9 col-md-offset-1">
-                <h4>我们人工智能研究网将坚持为你跟踪报道最新最全最真实最有料的AI产业界新闻！</h4>
-            </div> 
-        </div>
-        <br />
-    </div><!--AI新闻-->
-
-    <!--AI课程-->
-    <div class="container">
-        <div class="page-header">
-            <h3>
-                <a  href="aicourses_index.html" target="_blank">AI课程 >>>>>AI教育界的梦工厂！
-                </a>
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-md-9 col-md-offset-1">
-                <h4>我们人工智能研究网将坚持为你奉上最全面的一站式AI技术学习课程，成为AI学习者的梦工厂！</h4>
-            </div> 
-        </div>
-        <br />
-    </div><!--AI课程-->
-
-    <!--AI学术-->
-    <div class="container">
-        <div class="page-header">
-            <h3>
-                <a  href="aixueshu_index.html" target="_blank">AI学术 >>>>>AI学术界的指南针！
-                </a>
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-md-9 col-md-offset-1">
-                <h4>我们人工智能研究网将坚持为你奉上最权威的AI学术前沿方向，成为AI研究者的指南针！</h4>
-            </div> 
-        </div>
-        <br />
-    </div><!--AI学术-->
-
-    <!--AI博客-->
-    <div class="container">
-        <div class="page-header">
-            <h3>
-                <a  href="aiblogs_index.html" target="_blank">AI博客 >>>>>AI开发者的知识库！
-                </a>
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-md-9 col-md-offset-1">
-                <h4>我们人工智能研究网将坚持为你打造纯粹的一流的AI博客平台，成为AI开发者的知识库！</h4>
-            </div> 
-        </div>
-        <br />
-    </div><!--AI博客-->
-
-    <!--AI问答-->
-    <div class="container">
-        <div class="page-header">
-            <h3>
-                <a  href="aiwenda_index.html" target="_blank">AI问答 >>>>>AI交流者的知乎平台！
-                </a>
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-md-9 col-md-offset-1">
-                <h4>我们人工智能研究网将坚持为你打造高效的强大的AI知乎平台，成为AI群体交流的知乎平台！</h4>
-            </div> 
-        </div>
-        <br />
-    </div><!--AI问答-->
-
-
-    <!--课程章节列表结束-->
-
-
-    <!--网站页脚信息-->
-    <hr /> <hr />
-    <footer class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <p>&copy; 2016 人工智能研究网 StudyAi.cn</p>
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="images/curser_img_4.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>人工智能研究网</h1>
+              <!-- <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p> -->
             </div>
-            <div class="col-md-4">
-                <p>联系我们</p>
-            </div>
-            <div class="col-md-4">
-                <p>官方微信号：studyai</p>
-            </div>
+          </div>
         </div>
-    </footer>
-    <!--网站页脚信息结束-->
+        <div class="item">
+          <img class="second-slide" src="images/curser_img_2.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>人工智能研究网</h1>
+              <!-- <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p> -->
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="third-slide" src="images/curser_img_3.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>人工智能研究网</h1>
+              <!-- <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
 
-</body>
 
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle" src="images/kenan.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>机器学习</h2>
+          <p>机器学习(Machine Learning, ML)是一门多领域交叉学科，
+            涉及概率论、统计学、逼近论、凸分析、算法复杂度理论等多门学科。
+            专门研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，
+            重新组织已有的知识结构使之不断改善自身的性能。</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src="images/kenan.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>机器视觉</h2>
+          <p>机器视觉系统是通过机器视觉产品(即图像摄取装置，分CMOS和CCD两种)将被
+            摄取目标转换成图像信号，传送给专用的图像处理系统，得到
+            被摄目标的形态信息，根据像素分布和亮度、颜色等信息，
+            转变成数字化信号;图像系统对这些信号进行各种运算来抽取目标的特征，
+            进而根据判别的结果来控制现场的设备动作。</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src="images/kenan.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>语音识别</h2>
+          <p>近二十年来，语音识别技术取得显著进步，开始从实验室走向市场。
+          人们预计，未来10年内，语音识别技术将进入工业、家电、通信、汽车电子、
+            医疗、家庭服务、消费电子产品等各个领域。语音识别技术所涉及的领域包括：信号处理、 模式识别、概率论和信息论、发声机理和听觉机理、人工智能等等。</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive center-block" 
+            src="images/market1.jpg" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+          <img class="featurette-image img-responsive center-block"
+          src="images/market2.jpg" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive center-block"
+          src="images/market4.jpg" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script>window.jQuery || document.write('<script src="./assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="./assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
