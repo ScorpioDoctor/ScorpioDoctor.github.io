@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+    <title>1.2. 线性判别分析和二次判别分析（Linear and Quadratic Discriminant Analysis） &#8212; scikit-learn 0.20.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.3. 核岭回归（Kernel ridge regression）" href="kernel_ridge.html" />
+    <link rel="prev" title="1.1. 广义线性模型(Generalized Linear Models)" href="linear_model.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/lda_qda.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
+  </script>
+
+  </head><body>
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar" id="scikit-navbar">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../install.html">Installation</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">Documentation</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
+            <li><a href="../tutorial/index.html">Tutorials</a></li>
+            <li><a href="../user_guide.html">User guide</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../glossary.html">Glossary</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers/contributing.html">Contributing</a></li>
+            <li class="divider"></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">All available versions</a></li>
+                <li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">Examples</a></li>
+            </ul>
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
+            <div class="search_form">
+                <div class="gcse-search" id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+        <div class="rellink">
+        <a href="linear_model.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        1.1. 广义线性模型(G...
+        </span>
+            <span class="hiddenrellink">
+            1.1. 广义线性模型(Generalized Linear Models)
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="kernel_ridge.html"
+        accesskey="N">Next
+        <br/>
+        <span class="smallrellink">
+        1.3. 核岭回归（Ker...
+        </span>
+            <span class="hiddenrellink">
+            1.3. 核岭回归（Kernel ridge regression）
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../supervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        1. 监督学习(Super...
+        </span>
+            <span class="hiddenrellink">
+            1. 监督学习(Supervised learning)
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version"><b>scikit-learn v0.20.1</b><br/>
+      <a href="http://scikit-learn.org/dev/versions.html">Other versions</a></p>
+    <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
+    <ul>
+<li><a class="reference internal" href="#">1.2. 线性判别分析和二次判别分析（Linear and Quadratic Discriminant Analysis）</a><ul>
+<li><a class="reference internal" href="#id1">1.2.1. 使用线性判别分析进行维数约减</a></li>
+<li><a class="reference internal" href="#id2">1.2.2. LDA 和 QDA 分类器的数学化形式</a></li>
+<li><a class="reference internal" href="#lda">1.2.3. LDA 维数约减的数学化形式</a></li>
+<li><a class="reference internal" href="#shrinkage">1.2.4. 收缩(Shrinkage)</a></li>
+<li><a class="reference internal" href="#id6">1.2.5. 估计算法</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="linear-and-quadratic-discriminant-analysis">
+<span id="lda-qda"></span><h1>1.2. 线性判别分析和二次判别分析（Linear and Quadratic Discriminant Analysis）<a class="headerlink" href="#linear-and-quadratic-discriminant-analysis" title="Permalink to this headline">¶</a></h1>
+<p>线性判别分析( <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis"><code class="xref py py-class docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code></a> ) 和
+二次判别分析(<a class="reference internal" href="generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis" title="sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis"><code class="xref py py-class docutils literal notranslate"><span class="pre">discriminant_analysis.QuadraticDiscriminantAnalysis</span></code></a>)
+是两个经典的分类器。 正如他们名字所描述的那样，他们分别代表了线性决策平面和二次决策平面。</p>
+<p>这些分类器十分具有吸引力，因为他们可以很容易计算得到闭式解(即解析解)，其天生具有多分类的特性，
+在实践中已经被证明很有效，并且没有超参数要去调节。</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/classification/plot_lda_qda.html"><img alt="ldaqda" src="../_images/sphx_glr_plot_lda_qda_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>以上这些图像展示了 线性判别分析(LDA)以及 二次判别分析(QDA)的决策边界。
+其中，最后一行表明了线性判别分析只能学习线性边界， 而二次判别分析则可以学习二次边界，因此它相对而言更加灵活。</p>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<p><a class="reference internal" href="../auto_examples/classification/plot_lda_qda.html#sphx-glr-auto-examples-classification-plot-lda-qda-py"><span class="std std-ref">Linear and Quadratic Discriminant Analysis with covariance ellipsoid</span></a>: Comparison of LDA and QDA
+on synthetic data.</p>
+</div>
+<div class="section" id="id1">
+<h2>1.2.1. 使用线性判别分析进行维数约减<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis"><code class="xref py py-class docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code></a> 可以进行有监督的维数约简，
+这是通过把输入数据投影到一个线性子空间来实现的，而这个线性子空间是由最大化类之间分离的方向所组成的。（详细的内容见下面的数学推导）。
+输出的维度必然会比原来的类别数量更少的。因此它总体而言是十分强大的降维方式，同样也仅仅在多分类环境下才能感觉到。</p>
+<p>实现方式在 <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis.transform" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis.transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis.transform</span></code></a> 中。关于维度的数量可以通过 <code class="docutils literal notranslate"><span class="pre">n_components</span></code> 参数来调节。
+值得注意的是，这个参数不会对 <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis.fit" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis.fit"><code class="xref py py-func docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis.fit</span></code></a> 或者
+<a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis.predict" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis.predict"><code class="xref py py-func docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis.predict</span></code></a> 产生影响。</p>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<p><a class="reference internal" href="../auto_examples/decomposition/plot_pca_vs_lda.html#sphx-glr-auto-examples-decomposition-plot-pca-vs-lda-py"><span class="std std-ref">Comparison of LDA and PCA 2D projection of Iris dataset</span></a>: Comparison of LDA and PCA
+for dimensionality reduction of the Iris dataset</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>1.2.2. LDA 和 QDA 分类器的数学化形式<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>LDA 和 QDA 都可以通过简单的概率模型推导出来，对每一个类别 <span class="math notranslate nohighlight">\(k\)</span> 的类条件分布 <span class="math notranslate nohighlight">\(P(X|y=k)\)</span> 进行建模。
+有了类条件概率分布(class conditional distribution)后，预测就可以通过贝叶斯定理所获得。</p>
+<div class="math notranslate nohighlight">
+\[P(y=k | X) = \frac{P(X | y=k) P(y=k)}{P(X)} = \frac{P(X | y=k) P(y = k)}{ \sum_{l} P(X | y=l) \cdot P(y=l)}\]</div>
+<p>我们选择能够使上述条件概率最大化的类别 <span class="math notranslate nohighlight">\(k\)</span> 作为预测结果 。</p>
+<p>更具体地说，对于线性以及二次判别分析，类条件分布 <span class="math notranslate nohighlight">\(P(X|y)\)</span> 被建模成多变量高斯分布(multivariate Gaussian distribution),
+其密度函数如下所示：</p>
+<div class="math notranslate nohighlight">
+\[P(X | y=k) = \frac{1}{(2\pi)^{d/2} |\Sigma_k|^{1/2}}\exp\left(-\frac{1}{2} (X-\mu_k)^t \Sigma_k^{-1} (X-\mu_k)\right)\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(d\)</span> 是特征分量的个数.</p>
+<p>为了把该模型作为分类器使用，我们只需要从训练数据中估计出类的先验概率 <span class="math notranslate nohighlight">\(P(y=k)\)</span> 的样本的比例得到）
+类别均值 <span class="math notranslate nohighlight">\(\mu_k\)</span> （通过经验样本的类别均值得到）以及协方差矩阵
+(通过经验样本的类别协方差或者正则化的估计器 estimator 得到: 见下面的 shrinkage 章节)。</p>
+<p>在LDA中，假定每个类的高斯分布与其他所有类共享同一个协方差矩阵 <span class="math notranslate nohighlight">\(\Sigma_k = \Sigma\)</span> 。这样一个假设就导致了线性决策面(linear decision surfaces),
+我们可以通过比较对数概率比(log-probability ratios): <span class="math notranslate nohighlight">\(\log[P(y=k | X) / P(y=l | X)]\)</span> 看到这一现象：</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\log\left(\frac{P(y=k|X)}{P(y=l|X)}\right)=
+\log\left(\frac{P(X|y=k)P(y=k)}{P(X|y=l)P(y=l)}\right)=0 \Leftrightarrow\\(\mu_k-\mu_l)^t\Sigma^{-1} X =
+\frac{1}{2} (\mu_k^t \Sigma^{-1} \mu_k - \mu_l^t \Sigma^{-1} \mu_l)
+- \log\frac{P(y=k)}{P(y=l)}\end{aligned}\end{align} \]</div>
+<p>在QDA中, 对各个类的高斯分布的协方差矩阵 <span class="math notranslate nohighlight">\(\Sigma_k\)</span> 没有做任何假定，这样就会产生二次决策面(quadratic decision surfaces)。
+请看参考文献 <a class="footnote-reference" href="#id7" id="id3">[3]</a> 获得更多详情。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>QDA与高斯朴素贝叶斯的关系(Gaussian Naive Bayes)</strong></p>
+<p class="last">如果我们在QDA模型中假定了协方差矩阵为对角阵(diagonal),那么就假定了每一个类的输入是条件独立的(conditionally independent),
+由此产生的分类器就等价于高斯贝叶斯分类器( <a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal notranslate"><span class="pre">naive_bayes.GaussianNB</span></code></a> ).</p>
+</div>
+</div>
+<div class="section" id="lda">
+<h2>1.2.3. LDA 维数约减的数学化形式<a class="headerlink" href="#lda" title="Permalink to this headline">¶</a></h2>
+<p>为了理解 LDA 在降维上的应用，我们从上面解释的 LDA 分类规则的几何重构(geometric reformulation)开始说起是十分有用的。
+令 <span class="math notranslate nohighlight">\(K\)</span> 为目标类的总数量。既然我们在LDA中假定了所有类都共享同一个估计得到的协方差矩阵 <span class="math notranslate nohighlight">\(\Sigma\)</span>, 我们就可以
+缩放数据(rescale the data)使得这个共享的协方差矩阵是个单位阵(identity):</p>
+<div class="math notranslate nohighlight">
+\[X^* = D^{-1/2}U^t X\text{ with }\Sigma = UDU^t\]</div>
+<p>然后，我们就会发现要对一个经过缩放的数据点进行分类就等价于在欧式空间中找到距离这个数据点最近的某个类的均值 <span class="math notranslate nohighlight">\(\mu^*_k\)</span>，只要找到这个均值，
+就可以把该均值所代表的类标签付给我门要分类的那个数据点。 But this can be done just as well after
+projecting on the <span class="math notranslate nohighlight">\(K-1\)</span> affine subspace <span class="math notranslate nohighlight">\(H_K\)</span> generated by all the
+<span class="math notranslate nohighlight">\(\mu^*_k\)</span> for all classes. 这表明 LDA 分类器通过在 <span class="math notranslate nohighlight">\(K-1\)</span> 维空间上的线性投影潜在的具有维数约简的功能(
+This shows that, implicit in the LDA classifier, there is a dimensionality reduction by linear projection onto a
+<span class="math notranslate nohighlight">\(K-1\)</span> dimensional space.)。</p>
+<p>We can reduce the dimension even more, to a chosen <span class="math notranslate nohighlight">\(L\)</span>, by projecting
+onto the linear subspace <span class="math notranslate nohighlight">\(H_L\)</span> which maximizes the variance of the
+<span class="math notranslate nohighlight">\(\mu^*_k\)</span> after projection (in effect, we are doing a form of PCA for the
+transformed class means <span class="math notranslate nohighlight">\(\mu^*_k\)</span>). This <span class="math notranslate nohighlight">\(L\)</span> corresponds to the
+<code class="docutils literal notranslate"><span class="pre">n_components</span></code> parameter used in the
+<a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis.transform" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis.transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis.transform</span></code></a> method. See
+<a class="footnote-reference" href="#id7" id="id4">[3]</a> for more details.</p>
+</div>
+<div class="section" id="shrinkage">
+<h2>1.2.4. 收缩(Shrinkage)<a class="headerlink" href="#shrinkage" title="Permalink to this headline">¶</a></h2>
+<p>收缩(Shrinkage)是一种在训练样本数量相比特征而言很小的情况下可以提升协方差矩阵预测准确性的工具。
+在这个情况下，经验样本协方差是对真实协方差矩阵的很差的预测。Shrinkage LDA 可以通过设置 <a class="reference internal" href="generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html#sklearn.discriminant_analysis.LinearDiscriminantAnalysis" title="sklearn.discriminant_analysis.LinearDiscriminantAnalysis"><code class="xref py py-class docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code></a>
+类的 <code class="docutils literal notranslate"><span class="pre">shrinkage</span></code> 参数为 ‘auto’ 来实现。根据Ledoit and Wolf <a class="footnote-reference" href="#id8" id="id5">[4]</a> 的介绍的引理(lemma)，这样做可以以解析的方式自动确定最优的收缩参数。
+需要注意的是，目前 shrinkage 只能在 求解器参数 <code class="docutils literal notranslate"><span class="pre">solver</span></code> 为 ‘lsqr’ 或 ‘eigen’ 的时候正常工作。</p>
+<p>参数 <code class="docutils literal notranslate"><span class="pre">shrinkage</span></code> 也可以手动的设置为 0 到 1 之间的值。如果参数值等于0则意味着没有任何收缩shrinkage (也意味着经验协方差矩阵(empirical
+covariance matrix)将会被使用) ；如果参数值等于1就意味着完全收缩(complete shrinkage)
+(这也意味着方差的对角矩阵(diagonal matrix of variances)将会被作为协方差矩阵的估计值)。将参数 <code class="docutils literal notranslate"><span class="pre">shrinkage</span></code> 的取值设定在0到1之间的话
+就可以估计出一个收缩版的协方差矩阵(a shrunk version of the covariance matrix)。</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/classification/plot_lda.html"><img alt="shrinkage" src="../_images/sphx_glr_plot_lda_0011.png" style="width: 480.0px; height: 360.0px;" /></a></strong></p></div>
+<div class="section" id="id6">
+<h2>1.2.5. 估计算法<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>默认的求解器是 ‘svd’。 它既可以执行分类也可以执行变换(transform),而且不依赖于协方差矩阵的计算，在特征的数量很大的时候这将是一大优势。
+然而，’svd’ 求解器不能与 <code class="docutils literal notranslate"><span class="pre">shrinkage</span></code> 参数同时使用。</p>
+<p>‘lsqr’ 求解器是一个只能用于分类的高效算法，它支持 shrinkage。</p>
+<p>‘eigen’ 求解器 是一种通过优化类间散度(between class scatter)与类内散度(within class scatter)的比率进行求解的方法。它也支持 shrinkage。
+然而， ‘eigen’ 求解器需要计算协方差, 因此这种求解器不适用于高维特征的情况。</p>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<p><a class="reference internal" href="../auto_examples/classification/plot_lda.html#sphx-glr-auto-examples-classification-plot-lda-py"><span class="std std-ref">Normal and Shrinkage Linear Discriminant Analysis for classification</span></a>: Comparison of LDA classifiers
+with and without shrinkage.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> “The Elements of Statistical Learning”, Hastie T., Tibshirani R.,
+Friedman J., Section 4.3, p.106-119, 2008.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Ledoit O, Wolf M. Honey, I Shrunk the Sample Covariance Matrix.
+The Journal of Portfolio Management 30(4), 110-119, 2004.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/lda_qda.rst.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="linear_model.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="kernel_ridge.html">Next
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-22606712-2', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function() {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>
