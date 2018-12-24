@@ -383,7 +383,7 @@ RandomForest 算法和 Extra-Trees 算法。这两种算法都是专门为树而
 </pre></div>
 </div>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/ensemble/plot_forest_iris.html"><img alt="../_images/sphx_glr_plot_forest_iris_0011.png" src="../_images/sphx_glr_plot_forest_iris_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/ensemble/plot_forest_iris.html"><img alt="../images/sphx_glr_plot_forest_iris_0011.png" src="../images/sphx_glr_plot_forest_iris_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 </div>
 <div class="section" id="id10">
@@ -455,7 +455,7 @@ trees”, Machine Learning, 63(1), 3-42, 2006.</li>
 <p>下面的例子展示了一个面部识别任务中每个像素的相对重要性，其中重要性由颜色（的深浅）来表示，使用的模型是
 <a class="reference internal" href="generated/sklearn.ensemble.ExtraTreesClassifier.html#sklearn.ensemble.ExtraTreesClassifier" title="sklearn.ensemble.ExtraTreesClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtraTreesClassifier</span></code></a> 模型.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/ensemble/plot_forest_importances_faces.html"><img alt="../_images/sphx_glr_plot_forest_importances_faces_0011.png" src="../_images/sphx_glr_plot_forest_importances_faces_0011.png" style="width: 360.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/ensemble/plot_forest_importances_faces.html"><img alt="../images/sphx_glr_plot_forest_importances_faces_0011.png" src="../images/sphx_glr_plot_forest_importances_faces_0011.png" style="width: 360.0px; height: 360.0px;" /></a>
 </div>
 <p>实际上，对于训练完成的模型这些估计值存储在 <code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> 属性中。
 这是一个大小为 <code class="docutils literal notranslate"><span class="pre">(n_features,)</span></code> 的数组，其每个元素值为正，并且总和为 1.0。
@@ -523,7 +523,7 @@ dimensionality reduction.</p>
 正确预测的训练样本的权重就会增加，而那些已经被上一步得到的模型(boosted model)正确预测的样本的权重会被降低。
 随着迭代过程的推进，那些比较难预测的样本会获得不断增加的权重。每一个后继的弱学习器就会被强制聚焦到这些被以前的学习器序列错分的权重较高的难分样本上[HTF]_。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/ensemble/plot_adaboost_hastie_10_2.html"><img alt="../_images/sphx_glr_plot_adaboost_hastie_10_2_0011.png" src="../_images/sphx_glr_plot_adaboost_hastie_10_2_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/ensemble/plot_adaboost_hastie_10_2.html"><img alt="../images/sphx_glr_plot_adaboost_hastie_10_2_0011.png" src="../images/sphx_glr_plot_adaboost_hastie_10_2_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <p>AdaBoost 既可以用于分类问题也可以用于回归问题:</p>
 <blockquote>
@@ -672,7 +672,7 @@ Gradient Tree Boosting 模型被广泛用于各个领域包括网站搜索排序
 用来产生每一步迭代的预测结果。类似下面这样的图表， 可以用于决定最优的树的数量，从而进行提前停止。右图表示每个特征的重要性，
 它 可以通过 <code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> 属性来获取.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/ensemble/plot_gradient_boosting_regression.html"><img alt="../_images/sphx_glr_plot_gradient_boosting_regression_0011.png" src="../_images/sphx_glr_plot_gradient_boosting_regression_0011.png" style="width: 900.0px; height: 450.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/ensemble/plot_gradient_boosting_regression.html"><img alt="../images/sphx_glr_plot_gradient_boosting_regression_0011.png" src="../images/sphx_glr_plot_gradient_boosting_regression_0011.png" style="width: 900.0px; height: 450.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>
@@ -798,7 +798,7 @@ log odds-ratio 给出。</li>
 <p>下图展示了收缩和子采样对于模型拟合好坏的影响。我们可以明显看到指定收缩率比没有收缩拥有更好的表现。
 而将子采样和收缩率相结合能进一步的提高模型的准确率。相反，使用子采样而不使用收缩的结果十分糟糕。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/ensemble/plot_gradient_boosting_regularization.html"><img alt="../_images/sphx_glr_plot_gradient_boosting_regularization_0011.png" src="../_images/sphx_glr_plot_gradient_boosting_regularization_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/ensemble/plot_gradient_boosting_regularization.html"><img alt="../images/sphx_glr_plot_gradient_boosting_regularization_0011.png" src="../images/sphx_glr_plot_gradient_boosting_regularization_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <p>另一个减少方差的策略是特征子采样,这种方法类似于 <a class="reference internal" href="generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="sklearn.ensemble.RandomForestClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></a> 中的随机分割。子采样的特征数量可以通过参数 <code class="docutils literal notranslate"><span class="pre">max_features</span></code> 来控制。</p>
 <div class="admonition note">
@@ -860,7 +860,7 @@ to the current predictions.
 <p>由于人类感知能力的限制，目标特征的设置必须小一点(通常是1到2)，因此目标特征通常在最重要的特征中选择。</p>
 <p>下图展示了加州住房数据集的四个单向和一个双向c部分依赖图(four one-way PDP 和 one two-way PDP):</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/ensemble/plot_partial_dependence.html"><img alt="../_images/sphx_glr_plot_partial_dependence_0011.png" src="../_images/sphx_glr_plot_partial_dependence_0011.png" style="width: 448.0px; height: 336.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/ensemble/plot_partial_dependence.html"><img alt="../images/sphx_glr_plot_partial_dependence_0011.png" src="../images/sphx_glr_plot_partial_dependence_0011.png" style="width: 448.0px; height: 336.0px;" /></a>
 </div>
 <p>单向PDPs (One-way PDPs) 告诉我们目标响应和目标特征的相互影响(例如：线性或者非线性)。
 上面的左上图展示了一个地区的中等收入对中等房价的影响。我们可以清楚的看到两者之间是线性相关的。</p>
@@ -1096,7 +1096,7 @@ The Annals of Statistics, Vol. 29, No. 5, 2001.</td></tr>
 </pre></div>
 </div>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/ensemble/plot_voting_decision_regions.html"><img alt="../_images/sphx_glr_plot_voting_decision_regions_0011.png" src="../_images/sphx_glr_plot_voting_decision_regions_0011.png" style="width: 750.0px; height: 600.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/ensemble/plot_voting_decision_regions.html"><img alt="../images/sphx_glr_plot_voting_decision_regions_0011.png" src="../images/sphx_glr_plot_voting_decision_regions_0011.png" style="width: 750.0px; height: 600.0px;" /></a>
 </div>
 </div>
 <div class="section" id="id43">

@@ -257,7 +257,7 @@ variables)。 用数学语言来描述是这样的： 假设 <span class="math n
 <div class="math notranslate nohighlight">
 \[\min_{w} {|| X w - y||_2}^2\]</div>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ols.html"><img alt="../_images/sphx_glr_plot_ols_0011.png" src="../_images/sphx_glr_plot_ols_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ols.html"><img alt="../images/sphx_glr_plot_ols_0011.png" src="../images/sphx_glr_plot_ols_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p><a class="reference internal" href="generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="sklearn.linear_model.LinearRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearRegression</span></code></a> 会调用 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法来拟合数组 X， y，并且将线性模型的系数 <span class="math notranslate nohighlight">\(w\)</span> 存储在其成员变量 <code class="docutils literal notranslate"><span class="pre">coef_</span></code> 中:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
@@ -294,7 +294,7 @@ variables)。 用数学语言来描述是这样的： 假设 <span class="math n
 <p>其中, <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span> 是一个控制缩减量(amount of shrinkage)的复杂度参数:
 <span class="math notranslate nohighlight">\(\alpha\)</span> 的值越大, 缩减量就越大，故而线性模型的系数对共线性(collinearity)就越鲁棒.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ridge_path.html"><img alt="../_images/sphx_glr_plot_ridge_path_0011.png" src="../_images/sphx_glr_plot_ridge_path_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ridge_path.html"><img alt="../images/sphx_glr_plot_ridge_path_0011.png" src="../images/sphx_glr_plot_ridge_path_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p>与其他线性模型一样, <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code></a> 会调用 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法来拟合数组 X， y，并且将线性模型的系数 <span class="math notranslate nohighlight">\(w\)</span> 存储在其成员变量 <code class="docutils literal notranslate"><span class="pre">coef_</span></code> 中:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
@@ -399,7 +399,7 @@ in IEEE Journal of Selected Topics in Signal Processing, 2007
 然而，<a class="reference internal" href="generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV" title="sklearn.linear_model.LassoLarsCV"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsCV</span></code></a> 在寻找更有相关性的 <cite>alpha</cite> 参数值上更具有优势，
 而且如果样本数量与特征数量相比非常小时，通常 <a class="reference internal" href="generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV" title="sklearn.linear_model.LassoLarsCV"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsCV</span></code></a> 比 <a class="reference internal" href="generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV" title="sklearn.linear_model.LassoCV"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoCV</span></code></a> 要快。</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_1" src="../_images/sphx_glr_plot_lasso_model_selection_0021.png" style="width: 307.2px; height: 230.39999999999998px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_2" src="../_images/sphx_glr_plot_lasso_model_selection_0031.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p></div>
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_1" src="../images/sphx_glr_plot_lasso_model_selection_0021.png" style="width: 307.2px; height: 230.39999999999998px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_2" src="../images/sphx_glr_plot_lasso_model_selection_0031.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p></div>
 <div class="section" id="id10">
 <h4>1.1.3.1.2. 基于信息标准的模型选择<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <p>有多种选择时，估计器 <a class="reference internal" href="generated/sklearn.linear_model.LassoLarsIC.html#sklearn.linear_model.LassoLarsIC" title="sklearn.linear_model.LassoLarsIC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsIC</span></code></a> 建议使用 Akaike information criterion （Akaike 信息准则）（AIC）
@@ -407,7 +407,7 @@ in IEEE Journal of Selected Topics in Signal Processing, 2007
 所以找到 alpha 的最优值是一种计算上更便宜的替代方法。 然而，这样的标准需要对解决方案的自由度进行适当的估计，对于大样本（渐近结果）导出，
 并假设模型是正确的，即数据实际上是由该模型生成的。 当问题严重受限（比样本更多的特征）时，他们也倾向于打破。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="../_images/sphx_glr_plot_lasso_model_selection_0011.png" src="../_images/sphx_glr_plot_lasso_model_selection_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="../images/sphx_glr_plot_lasso_model_selection_0011.png" src="../images/sphx_glr_plot_lasso_model_selection_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>
@@ -430,7 +430,7 @@ in IEEE Journal of Selected Topics in Signal Processing, 2007
 <p>下图比较了通过使用简单的 Lasso 或 MultiTaskLasso 得到的 W 中非零的位置。
 Lasso 估计产生分散的非零值，而 MultiTaskLasso 的一整列都是非零的。</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_1" src="../_images/sphx_glr_plot_multi_task_lasso_support_0011.png" style="width: 384.0px; height: 240.0px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_2" src="../_images/sphx_glr_plot_multi_task_lasso_support_0021.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p><p class="centered">
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_1" src="../images/sphx_glr_plot_multi_task_lasso_support_0011.png" style="width: 384.0px; height: 240.0px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_2" src="../images/sphx_glr_plot_multi_task_lasso_support_0021.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p><p class="centered">
 <strong>Fitting a time-series model, imposing that any active feature be active at all times.</strong></p><div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
@@ -460,7 +460,7 @@ Lasso 估计产生分散的非零值，而 MultiTaskLasso 的一整列都是非�
 \[\min_{w} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha \rho ||w||_1 +
 \frac{\alpha(1-\rho)}{2} ||w||_2 ^ 2}\]</div>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html"><img alt="../_images/sphx_glr_plot_lasso_coordinate_descent_path_0011.png" src="../_images/sphx_glr_plot_lasso_coordinate_descent_path_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html"><img alt="../images/sphx_glr_plot_lasso_coordinate_descent_path_0011.png" src="../images/sphx_glr_plot_lasso_coordinate_descent_path_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p><a class="reference internal" href="generated/sklearn.linear_model.ElasticNetCV.html#sklearn.linear_model.ElasticNetCV" title="sklearn.linear_model.ElasticNetCV"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElasticNetCV</span></code></a> 类可以被用来通过交叉验证设置 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> (<span class="math notranslate nohighlight">\(\alpha\)</span>) 和 <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code> (<span class="math notranslate nohighlight">\(\rho\)</span>) 参数。</p>
 <div class="topic">
@@ -524,7 +524,7 @@ regression)很像。在每一步，它寻找与响应最有关联的 预测。�
 <p><a class="reference internal" href="generated/sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLars</span></code></a> 是一个使用 LARS 算法的 lasso 模型，不同于基于坐标下降法的实现，
 它可以得到一个精确解，也就是一个关于自身参数标准化后的一个分段线性解。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_lars.html"><img alt="../_images/sphx_glr_plot_lasso_lars_0011.png" src="../_images/sphx_glr_plot_lasso_lars_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_lars.html"><img alt="../images/sphx_glr_plot_lasso_lars_0011.png" src="../images/sphx_glr_plot_lasso_lars_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LassoLars</span><span class="p">(</span><span class="n">alpha</span><span class="o">=.</span><span class="mi">1</span><span class="p">)</span>
@@ -641,7 +641,7 @@ networks by Radford M. Neal</li>
 log likelihood</em>)。</p>
 <p>默认情况下 <span class="math notranslate nohighlight">\(\alpha_1 = \alpha_2 =  \lambda_1 = \lambda_2 = 10^{-6}\)</span>.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_bayesian_ridge.html"><img alt="../_images/sphx_glr_plot_bayesian_ridge_0011.png" src="../_images/sphx_glr_plot_bayesian_ridge_0011.png" style="width: 300.0px; height: 250.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_bayesian_ridge.html"><img alt="../images/sphx_glr_plot_bayesian_ridge_0011.png" src="../images/sphx_glr_plot_bayesian_ridge_0011.png" style="width: 300.0px; height: 250.0px;" /></a>
 </div>
 <p>Bayesian Ridge Regression 用于回归问题</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
@@ -698,7 +698,7 @@ has its own standard deviation <span class="math notranslate nohighlight">\(\lam
 <span class="math notranslate nohighlight">\(\lambda_i\)</span> is chosen to be the same gamma distribution given by
 hyperparameters <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ard.html"><img alt="../_images/sphx_glr_plot_ard_0011.png" src="../_images/sphx_glr_plot_ard_0011.png" style="width: 300.0px; height: 250.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ard.html"><img alt="../images/sphx_glr_plot_ard_0011.png" src="../images/sphx_glr_plot_ard_0011.png" style="width: 300.0px; height: 250.0px;" /></a>
 </div>
 <p>ARD is also known in the literature as <em>Sparse Bayesian Learning</em> and
 <em>Relevance Vector Machine</em> <a class="footnote-reference" href="#id28" id="id24">[3]</a> <a class="footnote-reference" href="#id29" id="id25">[4]</a>.</p>
@@ -961,7 +961,7 @@ K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR 7 (2006)</l
 <h2>1.1.15. 鲁棒回归:处理离群点（outliers）和模型错误<a class="headerlink" href="#outliers" title="Permalink to this headline">¶</a></h2>
 <p>Robust regression 特别适用于回归模型包含损坏数据（corrupt data）的情况，如离群点或模型中的错误。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../_images/sphx_glr_plot_theilsen_0011.png" src="../_images/sphx_glr_plot_theilsen_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../images/sphx_glr_plot_theilsen_0011.png" src="../images/sphx_glr_plot_theilsen_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <div class="section" id="id37">
 <h3>1.1.15.1. 各种使用场景与相关概念<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
@@ -979,8 +979,8 @@ K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR 7 (2006)</l
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="y_outliers" src="../_images/sphx_glr_plot_robust_fit_0031.png" style="width: 300.0px; height: 240.0px;" /></a></td>
-<td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="X_outliers" src="../_images/sphx_glr_plot_robust_fit_0021.png" style="width: 300.0px; height: 240.0px;" /></a></td>
+<tr class="row-even"><td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="y_outliers" src="../images/sphx_glr_plot_robust_fit_0031.png" style="width: 300.0px; height: 240.0px;" /></a></td>
+<td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="X_outliers" src="../images/sphx_glr_plot_robust_fit_0021.png" style="width: 300.0px; height: 240.0px;" /></a></td>
 </tr>
 </tbody>
 </table>
@@ -999,8 +999,8 @@ outliers.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="y_outliers" src="../_images/sphx_glr_plot_robust_fit_0031.png" style="width: 300.0px; height: 240.0px;" /></a></td>
-<td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="large_y_outliers" src="../_images/sphx_glr_plot_robust_fit_0051.png" style="width: 300.0px; height: 240.0px;" /></a></td>
+<tr class="row-even"><td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="y_outliers" src="../images/sphx_glr_plot_robust_fit_0031.png" style="width: 300.0px; height: 240.0px;" /></a></td>
+<td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="large_y_outliers" src="../images/sphx_glr_plot_robust_fit_0051.png" style="width: 300.0px; height: 240.0px;" /></a></td>
 </tr>
 </tbody>
 </table>
@@ -1053,7 +1053,7 @@ which may be subject to noise, and outliers, which are e.g. caused by erroneous
 measurements or invalid hypotheses about the data. The resulting model is then
 estimated only from the determined inliers.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ransac.html"><img alt="../_images/sphx_glr_plot_ransac_0011.png" src="../_images/sphx_glr_plot_ransac_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ransac.html"><img alt="../images/sphx_glr_plot_ransac_0011.png" src="../images/sphx_glr_plot_ransac_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <div class="section" id="id38">
 <h4>1.1.15.2.1. 算法细节<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h4>
@@ -1132,7 +1132,7 @@ setting, Theil-Sen has a breakdown point of about 29.3% in case of a
 simple linear regression which means that it can tolerate arbitrary
 corrupted data of up to 29.3%.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../_images/sphx_glr_plot_theilsen_0011.png" src="../_images/sphx_glr_plot_theilsen_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../images/sphx_glr_plot_theilsen_0011.png" src="../images/sphx_glr_plot_theilsen_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p>The implementation of <a class="reference internal" href="generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor" title="sklearn.linear_model.TheilSenRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TheilSenRegressor</span></code></a> in scikit-learn follows a
 generalization to a multivariate linear regression model <a class="footnote-reference" href="#f1" id="id40">[8]</a> using the
@@ -1180,7 +1180,7 @@ lesser than a certain threshold. It differs from <a class="reference internal" h
 and <a class="reference internal" href="generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor" title="sklearn.linear_model.RANSACRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">RANSACRegressor</span></code></a> because it does not ignore the effect of the outliers
 but gives a lesser weight to them.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_huber_vs_ridge.html"><img alt="../_images/sphx_glr_plot_huber_vs_ridge_001.png" src="../_images/sphx_glr_plot_huber_vs_ridge_001.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_huber_vs_ridge.html"><img alt="../images/sphx_glr_plot_huber_vs_ridge_001.png" src="../images/sphx_glr_plot_huber_vs_ridge_001.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p>The loss function that <a class="reference internal" href="generated/sklearn.linear_model.HuberRegressor.html#sklearn.linear_model.HuberRegressor" title="sklearn.linear_model.HuberRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">HuberRegressor</span></code></a> minimizes is given by</p>
 <div class="math notranslate nohighlight">
@@ -1255,7 +1255,7 @@ flexibility to fit a much broader range of data.</p>
 <p>Here is an example of applying this idea to one-dimensional data, using
 polynomial features of varying degrees:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_polynomial_interpolation.html"><img alt="../_images/sphx_glr_plot_polynomial_interpolation_0011.png" src="../_images/sphx_glr_plot_polynomial_interpolation_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_polynomial_interpolation.html"><img alt="../images/sphx_glr_plot_polynomial_interpolation_0011.png" src="../images/sphx_glr_plot_polynomial_interpolation_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p>This figure is created using the <a class="reference internal" href="generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures" title="sklearn.preprocessing.PolynomialFeatures"><code class="xref py py-class docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code></a> preprocessor.
 This preprocessor transforms an input data matrix into a new data matrix

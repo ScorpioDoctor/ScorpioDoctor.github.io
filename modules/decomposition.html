@@ -234,14 +234,14 @@ clustering algorithm.</p>
 <p>Below is an example of the iris dataset, which is comprised of 4
 features, projected on the 2 dimensions that explain most variance:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_lda.html"><img alt="../_images/sphx_glr_plot_pca_vs_lda_0011.png" src="../_images/sphx_glr_plot_pca_vs_lda_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_lda.html"><img alt="../images/sphx_glr_plot_pca_vs_lda_0011.png" src="../images/sphx_glr_plot_pca_vs_lda_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <p>The <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code></a> object also provides a
 probabilistic interpretation of the PCA that can give a likelihood of
 data based on the amount of variance it explains. As such it implements a
 <cite>score</cite> method that can be used in cross-validation:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html"><img alt="../_images/sphx_glr_plot_pca_vs_fa_model_selection_0011.png" src="../_images/sphx_glr_plot_pca_vs_fa_model_selection_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html"><img alt="../images/sphx_glr_plot_pca_vs_fa_model_selection_0011.png" src="../images/sphx_glr_plot_pca_vs_fa_model_selection_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
@@ -273,10 +273,10 @@ in order update <code class="docutils literal notranslate"><span class="pre">exp
 memory usage depends on the number of samples per batch, rather than the
 number of samples to be processed in the dataset.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_incremental_pca.html"><img alt="../_images/sphx_glr_plot_incremental_pca_0011.png" src="../_images/sphx_glr_plot_incremental_pca_0011.png" style="width: 600.0px; height: 600.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_incremental_pca.html"><img alt="../images/sphx_glr_plot_incremental_pca_0011.png" src="../images/sphx_glr_plot_incremental_pca_0011.png" style="width: 600.0px; height: 600.0px;" /></a>
 </div>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_incremental_pca.html"><img alt="../_images/sphx_glr_plot_incremental_pca_0021.png" src="../_images/sphx_glr_plot_incremental_pca_0021.png" style="width: 600.0px; height: 600.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_incremental_pca.html"><img alt="../images/sphx_glr_plot_incremental_pca_0021.png" src="../images/sphx_glr_plot_incremental_pca_0021.png" style="width: 600.0px; height: 600.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
@@ -312,7 +312,7 @@ singular vectors reshaped as portraits. Since we only require the top
 and <span class="math notranslate nohighlight">\(n_{features} = 64 \times 64 = 4096\)</span>, the computation time is
 less than 1s:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="orig_img" src="../_images/sphx_glr_plot_faces_decomposition_0011.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>Note: with the optional parameter <code class="docutils literal notranslate"><span class="pre">svd_solver='randomized'</span></code>, we also
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="orig_img" src="../images/sphx_glr_plot_faces_decomposition_0011.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>Note: with the optional parameter <code class="docutils literal notranslate"><span class="pre">svd_solver='randomized'</span></code>, we also
 need to give <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code></a> the size of the lower-dimensional space
 <code class="docutils literal notranslate"><span class="pre">n_components</span></code> as a mandatory input parameter.</p>
 <p>If we note <span class="math notranslate nohighlight">\(n_{\max} = \max(n_{\mathrm{samples}}, n_{\mathrm{features}})\)</span> and
@@ -350,7 +350,7 @@ has many applications including denoising, compression and structured
 prediction (kernel dependency estimation). <a class="reference internal" href="generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA" title="sklearn.decomposition.KernelPCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelPCA</span></code></a> supports both
 <code class="docutils literal notranslate"><span class="pre">transform</span></code> and <code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code>.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_kernel_pca.html"><img alt="../_images/sphx_glr_plot_kernel_pca_0011.png" src="../_images/sphx_glr_plot_kernel_pca_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_kernel_pca.html"><img alt="../images/sphx_glr_plot_kernel_pca_0011.png" src="../images/sphx_glr_plot_kernel_pca_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
@@ -390,7 +390,7 @@ norms that take into account adjacency and different kinds of structure; see
 <a class="reference internal" href="#jen09" id="id5">[Jen09]</a> for a review of such methods.
 For more details on how to use Sparse PCA, see the Examples section, below.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="spca_img" src="../_images/sphx_glr_plot_faces_decomposition_0051.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>Note that there are many different formulations for the Sparse PCA
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="spca_img" src="../images/sphx_glr_plot_faces_decomposition_0051.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>Note that there are many different formulations for the Sparse PCA
 problem. The one implemented here is based on <a class="reference internal" href="#mrl09" id="id6">[Mrl09]</a> . The optimization
 problem solved is a PCA problem (dictionary learning) with an
 <span class="math notranslate nohighlight">\(\ell_1\)</span> penalty on the components:</p>
@@ -571,7 +571,7 @@ dictionary fixed, and then updating the dictionary to best fit the sparse code.<
              \text{subject to } &amp; ||V_k||_2 = 1 \text{ for all }
              0 \leq k &lt; n_{\mathrm{atoms}}\end{split}\]</div>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img2" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="dict_img2" src="../_images/sphx_glr_plot_faces_decomposition_0061.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>After using such a procedure to fit the dictionary, the transform is simply a
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img2" src="../images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="dict_img2" src="../images/sphx_glr_plot_faces_decomposition_0061.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>After using such a procedure to fit the dictionary, the transform is simply a
 sparse coding step that shares the same implementation with all dictionary
 learning objects (see <a class="reference internal" href="#sparsecoder"><span class="std std-ref">用预先计算好的字典进行稀疏编码</span></a>).</p>
 <p>It is also possible to constrain the dictionary and/or code to be positive to
@@ -579,11 +579,11 @@ match constraints that may be present in the data. Below are the faces with
 different positivity constraints applied. Red indicates negative values, blue
 indicates positive values, and white represents zeros.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos1" src="../_images/sphx_glr_plot_faces_decomposition_0111.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos2" src="../_images/sphx_glr_plot_faces_decomposition_0121.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos3" src="../_images/sphx_glr_plot_faces_decomposition_0131.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos4" src="../_images/sphx_glr_plot_faces_decomposition_0141.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>The following image shows how a dictionary learned from 4x4 pixel image patches
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos1" src="../images/sphx_glr_plot_faces_decomposition_0111.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos2" src="../images/sphx_glr_plot_faces_decomposition_0121.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos3" src="../images/sphx_glr_plot_faces_decomposition_0131.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos4" src="../images/sphx_glr_plot_faces_decomposition_0141.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>The following image shows how a dictionary learned from 4x4 pixel image patches
 extracted from part of the image of a raccoon face looks like.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="../_images/sphx_glr_plot_image_denoising_0011.png" src="../_images/sphx_glr_plot_image_denoising_0011.png" style="width: 210.0px; height: 200.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="../images/sphx_glr_plot_image_denoising_0011.png" src="../images/sphx_glr_plot_image_denoising_0011.png" style="width: 210.0px; height: 200.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
@@ -612,7 +612,7 @@ implement a stopping condition.</p>
 iterating only once over a mini-batch. This can be used for online learning
 when the data is not readily available from the start, or for when the data
 does not fit into the memory.</p>
-<a class="reference external image-reference" href="../auto_examples/cluster/plot_dict_face_patches.html"><img alt="../_images/sphx_glr_plot_dict_face_patches_0011.png" class="align-right" src="../_images/sphx_glr_plot_dict_face_patches_0011.png" style="width: 210.0px; height: 200.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/cluster/plot_dict_face_patches.html"><img alt="../images/sphx_glr_plot_dict_face_patches_0011.png" class="align-right" src="../images/sphx_glr_plot_dict_face_patches_0011.png" style="width: 210.0px; height: 200.0px;" /></a>
 <div class="topic">
 <p class="topic-title first"><strong>Clustering for dictionary learning</strong></p>
 <p>Note that when using dictionary learning to extract a representation
@@ -672,16 +672,16 @@ models, e.g. Mixture of Factor Analysers. One gets very different models (e.g.
 matrix) to <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code></a>. However, one can not make any general statements
 about these components (e.g. whether they are orthogonal):</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img3" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="fa_img3" src="../_images/sphx_glr_plot_faces_decomposition_0091.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>The main advantage for Factor Analysis over <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code></a> is that
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img3" src="../images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="fa_img3" src="../images/sphx_glr_plot_faces_decomposition_0091.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>The main advantage for Factor Analysis over <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code></a> is that
 it can model the variance in every direction of the input space independently
 (heteroscedastic noise):</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="../_images/sphx_glr_plot_faces_decomposition_0081.png" src="../_images/sphx_glr_plot_faces_decomposition_0081.png" style="width: 150.0px; height: 168.75px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="../images/sphx_glr_plot_faces_decomposition_0081.png" src="../images/sphx_glr_plot_faces_decomposition_0081.png" style="width: 150.0px; height: 168.75px;" /></a>
 </div>
 <p>This allows better model selection than probabilistic PCA in the presence
 of heteroscedastic noise:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html"><img alt="../_images/sphx_glr_plot_pca_vs_fa_model_selection_0021.png" src="../_images/sphx_glr_plot_pca_vs_fa_model_selection_0021.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html"><img alt="../images/sphx_glr_plot_pca_vs_fa_model_selection_0021.png" src="../images/sphx_glr_plot_pca_vs_fa_model_selection_0021.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
@@ -703,12 +703,12 @@ of the PCA variants.</p>
 <p>It is classically used to separate mixed signals (a problem known as
 <em>blind source separation</em>), as in the example below:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_ica_blind_source_separation.html"><img alt="../_images/sphx_glr_plot_ica_blind_source_separation_0011.png" src="../_images/sphx_glr_plot_ica_blind_source_separation_0011.png" style="width: 384.0px; height: 288.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_ica_blind_source_separation.html"><img alt="../images/sphx_glr_plot_ica_blind_source_separation_0011.png" src="../images/sphx_glr_plot_ica_blind_source_separation_0011.png" style="width: 384.0px; height: 288.0px;" /></a>
 </div>
 <p>ICA can also be used as yet another non linear decomposition that finds
 components with some sparsity:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img4" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="ica_img4" src="../_images/sphx_glr_plot_faces_decomposition_0041.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><div class="topic">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img4" src="../images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="ica_img4" src="../images/sphx_glr_plot_faces_decomposition_0041.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/decomposition/plot_ica_blind_source_separation.html#sphx-glr-auto-examples-decomposition-plot-ica-blind-source-separation-py"><span class="std std-ref">Blind source separation using FastICA</span></a></li>
@@ -740,7 +740,7 @@ resulting in interpretable models. The following example displays 16
 sparse components found by <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal notranslate"><span class="pre">NMF</span></code></a> from the images in the Olivetti
 faces dataset, in comparison with the PCA eigenfaces.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img5" src="../_images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="nmf_img5" src="../_images/sphx_glr_plot_faces_decomposition_0031.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>The <code class="xref py py-attr docutils literal notranslate"><span class="pre">init</span></code> attribute determines the initialization method applied, which
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img5" src="../images/sphx_glr_plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.59999999999997px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="nmf_img5" src="../images/sphx_glr_plot_faces_decomposition_0031.png" style="width: 360.0px; height: 270.59999999999997px;" /></a></strong></p><p>The <code class="xref py py-attr docutils literal notranslate"><span class="pre">init</span></code> attribute determines the initialization method applied, which
 has a great impact on the performance of the method. <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal notranslate"><span class="pre">NMF</span></code></a> implements the
 method Nonnegative Double Singular Value Decomposition. NNDSVD <a class="footnote-reference" href="#id21" id="id15">[4]</a> is based on
 two SVD processes, one approximating the data matrix, the other approximating
@@ -798,7 +798,7 @@ defined by :</p>
 <div class="math notranslate nohighlight">
 \[d_{\beta}(X, Y) = \sum_{i,j} \frac{1}{\beta(\beta - 1)}(X_{ij}^\beta + (\beta-1)Y_{ij}^\beta - \beta X_{ij} Y_{ij}^{\beta - 1})\]</div>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/decomposition/plot_beta_divergence.html"><img alt="../_images/sphx_glr_plot_beta_divergence_0011.png" src="../_images/sphx_glr_plot_beta_divergence_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_beta_divergence.html"><img alt="../images/sphx_glr_plot_beta_divergence_0011.png" src="../images/sphx_glr_plot_beta_divergence_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <p>Note that this definition is not valid if <span class="math notranslate nohighlight">\(\beta \in (0; 1)\)</span>, yet it can
 be continuously extended to the definitions of <span class="math notranslate nohighlight">\(d_{KL}\)</span> and <span class="math notranslate nohighlight">\(d_{IS}\)</span>
@@ -884,7 +884,7 @@ C. Fevotte, J. Idier, 2011</td></tr>
 discrete dataset such as text corpora. It is also a topic model that is used for
 discovering abstract topics from a collection of documents.</p>
 <p>The graphical model of LDA is a three-level generative model:</p>
-<img alt="../_images/lda_model_graph.png" class="align-center" src="../_images/lda_model_graph.png" />
+<img alt="../images/lda_model_graph.png" class="align-center" src="../images/lda_model_graph.png" />
 <p>Note on notations presented in the graphical model above, which can be found in
 Hoffman et al. (2013):</p>
 <blockquote>

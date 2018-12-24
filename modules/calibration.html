@@ -205,7 +205,7 @@ such that among the samples to which it gave a predict_proba value close to 0.8,
 approximately 80% actually belong to the positive class. The following plot compares
 how well the probabilistic predictions of different classifiers are calibrated:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_compare_calibration.html"><img alt="../_images/sphx_glr_plot_compare_calibration_0011.png" src="../_images/sphx_glr_plot_compare_calibration_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_compare_calibration.html"><img alt="../images/sphx_glr_plot_compare_calibration_0011.png" src="../images/sphx_glr_plot_compare_calibration_0011.png" /></a>
 </div>
 <p><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a> returns well calibrated predictions by default as it directly
 optimizes log-loss. In contrast, the other methods return biased probabilities;
@@ -259,7 +259,7 @@ The first image present a dataset with 2 classes and 3 blobs of
 data. The blob in the middle contains random samples of each class.
 The probability for the samples in this blob should be 0.5.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../_images/sphx_glr_plot_calibration_0011.png" src="../_images/sphx_glr_plot_calibration_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../images/sphx_glr_plot_calibration_0011.png" src="../images/sphx_glr_plot_calibration_0011.png" /></a>
 </div>
 <p>The following image shows on the data above the estimated probability
 using a Gaussian naive Bayes classifier without calibration,
@@ -268,7 +268,7 @@ calibration. One can observe that the non-parametric model
 provides the most accurate probability estimates for samples
 in the middle, i.e., 0.5.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../_images/sphx_glr_plot_calibration_0021.png" src="../_images/sphx_glr_plot_calibration_0021.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../images/sphx_glr_plot_calibration_0021.png" src="../images/sphx_glr_plot_calibration_0021.png" /></a>
 </div>
 <p>The following experiment is performed on an artificial dataset for binary
 classification with 100,000 samples (1,000 of them are used for model fitting)
@@ -282,7 +282,7 @@ Calibration loss is defined as the mean squared deviation from empirical probabi
 derived from the slope of ROC segments. Refinement loss can be defined as the expected
 optimal loss as measured by the area under the optimal cost curve.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../_images/sphx_glr_plot_calibration_curve_0021.png" src="../_images/sphx_glr_plot_calibration_curve_0021.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../images/sphx_glr_plot_calibration_curve_0021.png" src="../images/sphx_glr_plot_calibration_curve_0021.png" /></a>
 </div>
 <p>One can observe here that logistic regression is well calibrated as its curve is
 nearly diagonal. Linear SVC’s calibration curve or reliability diagram has a
@@ -294,7 +294,7 @@ nearly identical results. The next figure shows the calibration curve of
 Gaussian naive Bayes on the same data, with both kinds of calibration and also
 without calibration.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../_images/sphx_glr_plot_calibration_curve_0011.png" src="../_images/sphx_glr_plot_calibration_curve_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../images/sphx_glr_plot_calibration_curve_0011.png" src="../images/sphx_glr_plot_calibration_curve_0011.png" /></a>
 </div>
 <p>One can see that Gaussian naive Bayes performs very badly but does so in an
 other way than linear SVC: While linear SVC exhibited a sigmoid calibration
@@ -328,7 +328,7 @@ probability vectors predicted by the same classifier after sigmoid calibration
 on a hold-out validation set. Colors indicate the true class of an instance
 (red: class 1, green: class 2, blue: class 3).</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_multiclass.html"><img alt="../_images/sphx_glr_plot_calibration_multiclass_0001.png" src="../_images/sphx_glr_plot_calibration_multiclass_0001.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_multiclass.html"><img alt="../images/sphx_glr_plot_calibration_multiclass_0001.png" src="../images/sphx_glr_plot_calibration_multiclass_0001.png" /></a>
 </div>
 <p>The base classifier is a random forest classifier with 25 base estimators
 (trees). If this classifier is trained on all 800 training datapoints, it is
@@ -338,7 +338,7 @@ method=’sigmoid’ on the remaining 200 datapoints reduces the confidence of t
 predictions, i.e., moves the probability vectors from the edges of the simplex
 towards the center:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_multiclass.html"><img alt="../_images/sphx_glr_plot_calibration_multiclass_0011.png" src="../_images/sphx_glr_plot_calibration_multiclass_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_multiclass.html"><img alt="../images/sphx_glr_plot_calibration_multiclass_0011.png" src="../images/sphx_glr_plot_calibration_multiclass_0011.png" /></a>
 </div>
 <p>This calibration results in a lower log-loss. Note that an alternative would
 have been to increase the number of base estimators which would have resulted in

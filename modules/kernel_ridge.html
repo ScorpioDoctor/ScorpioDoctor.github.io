@@ -203,14 +203,14 @@ KRR使用了平方误差损失而SVR使用了 <span class="math notranslate nohi
 和RBF核的带宽进行了优化。学习到的曲线非常相似，但是 <a class="reference internal" href="generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge" title="sklearn.kernel_ridge.KernelRidge"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelRidge</span></code></a> 的拟合比 <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code> 的拟合 快 7倍(两者都用了网格搜索)。
 然而，在对100000个目标值的预测上SVR要快三倍，因为SVR学习到的是一个稀疏模型，它仅仅使用了大约1/3的训练数据点作为支撑向量。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/plot_kernel_ridge_regression.html"><img alt="../_images/sphx_glr_plot_kernel_ridge_regression_0011.png" src="../_images/sphx_glr_plot_kernel_ridge_regression_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/plot_kernel_ridge_regression.html"><img alt="../images/sphx_glr_plot_kernel_ridge_regression_0011.png" src="../images/sphx_glr_plot_kernel_ridge_regression_0011.png" /></a>
 </div>
 <p>下一个图比较了不同大小的训练集上 <a class="reference internal" href="generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge" title="sklearn.kernel_ridge.KernelRidge"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelRidge</span></code></a> 和 <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code> 的拟合时间和预测时间。
 对于中型训练集(小于1000个样本)，拟合 <a class="reference internal" href="generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge" title="sklearn.kernel_ridge.KernelRidge"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelRidge</span></code></a> 比 <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code> 快；然而，对于较大的训练集，SVR更快。
 在预测时间方面，由于学习到的稀疏解，在所有不同大小的训练集上 <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code> 比 <a class="reference internal" href="generated/sklearn.kernel_ridge.KernelRidge.html#sklearn.kernel_ridge.KernelRidge" title="sklearn.kernel_ridge.KernelRidge"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelRidge</span></code></a> 更快。
 请注意，稀疏度和预测时间取决于 <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code> 的参数 <span class="math notranslate nohighlight">\(\epsilon\)</span> 和 <span class="math notranslate nohighlight">\(C\)</span> ；<span class="math notranslate nohighlight">\(\epsilon = 0\)</span> 将对应于稠密模型。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/plot_kernel_ridge_regression.html"><img alt="../_images/sphx_glr_plot_kernel_ridge_regression_0021.png" src="../_images/sphx_glr_plot_kernel_ridge_regression_0021.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/plot_kernel_ridge_regression.html"><img alt="../images/sphx_glr_plot_kernel_ridge_regression_0021.png" src="../images/sphx_glr_plot_kernel_ridge_regression_0021.png" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">参考文献:</p>

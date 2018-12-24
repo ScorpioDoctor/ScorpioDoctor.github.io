@@ -212,7 +212,7 @@ familiar with one common density estimation technique: the histogram.</p>
 number of data points within each bin is tallied.  An example of a histogram
 can be seen in the upper-left panel of the following figure:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="hist_to_kde" src="../_images/sphx_glr_plot_kde_1d_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>A major problem with histograms, however, is that the choice of binning can
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="hist_to_kde" src="../images/sphx_glr_plot_kde_1d_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>A major problem with histograms, however, is that the choice of binning can
 have a disproportionate effect on the resulting visualization.  Consider the
 upper-right panel of the above figure.  It shows a histogram over the same
 data, with the bins shifted right.  The results of the two visualizations look
@@ -245,7 +245,7 @@ dimensionality causes its performance to degrade in high dimensions.</p>
 <p>In the following figure, 100 points are drawn from a bimodal distribution,
 and the kernel density estimates are shown for three choices of kernels:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="kde_1d_distribution" src="../_images/sphx_glr_plot_kde_1d_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>It’s clear how the kernel shape affects the smoothness of the resulting
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="kde_1d_distribution" src="../images/sphx_glr_plot_kde_1d_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>It’s clear how the kernel shape affects the smoothness of the resulting
 distribution.  The scikit-learn kernel density estimator can be used as
 follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors.kde</span> <span class="k">import</span> <span class="n">KernelDensity</span>
@@ -271,7 +271,7 @@ to an unsmooth (i.e. high-variance) density distribution.</p>
 <p><a class="reference internal" href="generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity" title="sklearn.neighbors.KernelDensity"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.neighbors.KernelDensity</span></code></a> implements several common kernel
 forms, which are shown in the following figure:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="kde_kernels" src="../_images/sphx_glr_plot_kde_1d_0021.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>The form of these kernels is as follows:</p>
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="kde_kernels" src="../images/sphx_glr_plot_kde_1d_0021.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>The form of these kernels is as follows:</p>
 <ul>
 <li><p class="first">Gaussian kernel (<code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'gaussian'</span></code>)</p>
 <p><span class="math notranslate nohighlight">\(K(x; h) \propto \exp(- \frac{x^2}{2h^2} )\)</span></p>
@@ -302,14 +302,14 @@ is an example of using a kernel density estimate for a visualization
 of geospatial data, in this case the distribution of observations of two
 different species on the South American continent:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/neighbors/plot_species_kde.html"><img alt="species_kde" src="../_images/sphx_glr_plot_species_kde_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>One other useful application of kernel density estimation is to learn a
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_species_kde.html"><img alt="species_kde" src="../images/sphx_glr_plot_species_kde_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>One other useful application of kernel density estimation is to learn a
 non-parametric generative model of a dataset in order to efficiently
 draw new samples from this generative model.
 Here is an example of using this process to
 create a new set of hand-written digits, using a Gaussian kernel learned
 on a PCA projection of the data:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/neighbors/plot_digits_kde_sampling.html"><img alt="digits_kde" src="../_images/sphx_glr_plot_digits_kde_sampling_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>The “new” data consists of linear combinations of the input data, with weights
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_digits_kde_sampling.html"><img alt="digits_kde" src="../images/sphx_glr_plot_digits_kde_sampling_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>The “new” data consists of linear combinations of the input data, with weights
 probabilistically drawn given the KDE model.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>

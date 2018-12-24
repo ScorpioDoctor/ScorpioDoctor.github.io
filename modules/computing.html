@@ -363,13 +363,13 @@ systems and demonstrates most of the notions discussed above.</p>
 <p>Furthermore, it also shows the evolution of the performance of different
 algorithms with the number of processed examples.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="../_images/sphx_glr_plot_out_of_core_classification_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="../images/sphx_glr_plot_out_of_core_classification_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
 vectorization is much more expensive than learning itself. From the different
 algorithms, <code class="docutils literal notranslate"><span class="pre">MultinomialNB</span></code> is the most expensive, but its overhead can be
 mitigated by increasing the size of the mini-batches (exercise: change
 <code class="docutils literal notranslate"><span class="pre">minibatch_size</span></code> to 100 and 10000 in the program and compare).</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="../_images/sphx_glr_plot_out_of_core_classification_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p></div>
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="../images/sphx_glr_plot_out_of_core_classification_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p></div>
 <div class="section" id="notes">
 <h4>6.1.1.5. Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h4>
 <table class="docutils footnote" frame="void" id="id3" rules="none">
@@ -429,8 +429,8 @@ linear algebra libraries optimizations etc.). Here we see on a setting
 with few features that independently of estimator choice the bulk mode is
 always faster, and for some of them by 1 to 2 orders of magnitude:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="atomic_prediction_latency" src="../_images/sphx_glr_plot_prediction_latency_0011.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="bulk_prediction_latency" src="../_images/sphx_glr_plot_prediction_latency_0021.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>To benchmark different estimators for your case you can simply change the
+<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="atomic_prediction_latency" src="../images/sphx_glr_plot_prediction_latency_0011.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p class="centered">
+<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="bulk_prediction_latency" src="../images/sphx_glr_plot_prediction_latency_0021.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>To benchmark different estimators for your case you can simply change the
 <code class="docutils literal notranslate"><span class="pre">n_features</span></code> parameter in this example:
 <a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#sphx-glr-auto-examples-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a>. This should give
 you an estimate of the order of magnitude of the prediction latency.</p>
@@ -464,7 +464,7 @@ From a computing perspective it also means that the number of basic operations
 too. Here is a graph of the evolution of the prediction latency with the
 number of features:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="influence_of_n_features_on_latency" src="../_images/sphx_glr_plot_prediction_latency_0031.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>Overall you can expect the prediction time to increase at least linearly with
+<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="influence_of_n_features_on_latency" src="../images/sphx_glr_plot_prediction_latency_0031.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>Overall you can expect the prediction time to increase at least linearly with
 the number of features (non-linear cases can happen depending on the global
 memory footprint and estimator).</p>
 </div>
@@ -521,7 +521,7 @@ describe it fully. Of course sparsity influences in turn the prediction time
 as the sparse dot-product takes time roughly proportional to the number of
 non-zero coefficients.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="en_model_complexity" src="../_images/sphx_glr_plot_model_complexity_influence_0011.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>For the <a class="reference internal" href="classes.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a> family of algorithms with a non-linear kernel,
+<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="en_model_complexity" src="../images/sphx_glr_plot_model_complexity_influence_0011.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>For the <a class="reference internal" href="classes.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a> family of algorithms with a non-linear kernel,
 the latency is tied to the number of support vectors (the fewer the faster).
 Latency and throughput should (asymptotically) grow linearly with the number
 of support vectors in a SVC or SVR model. The kernel will also influence the
@@ -530,13 +530,13 @@ support vector. In the following graph the <code class="docutils literal notrans
 <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm.classes.NuSVR</span></code> was used to influence the number of
 support vectors.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="nusvr_model_complexity" src="../_images/sphx_glr_plot_model_complexity_influence_0021.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>For <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a> of trees (e.g. RandomForest, GBT,
+<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="nusvr_model_complexity" src="../images/sphx_glr_plot_model_complexity_influence_0021.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>For <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a> of trees (e.g. RandomForest, GBT,
 ExtraTrees etc) the number of trees and their depth play the most
 important role. Latency and throughput should scale linearly with the number
 of trees. In this case we used directly the <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> parameter of
 <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.gradient_boosting.GradientBoostingRegressor</span></code>.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="gbt_model_complexity" src="../_images/sphx_glr_plot_model_complexity_influence_0031.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>In any case be warned that decreasing model complexity can hurt accuracy as
+<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="gbt_model_complexity" src="../images/sphx_glr_plot_model_complexity_influence_0031.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>In any case be warned that decreasing model complexity can hurt accuracy as
 mentioned above. For instance a non-linearly separable problem can be handled
 with a speedy linear model but prediction power will very likely suffer in
 the process.</p>
@@ -555,7 +555,7 @@ the chosen model.</p>
 <blockquote>
 <div></div></blockquote>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="prediction_time" src="../_images/sphx_glr_plot_out_of_core_classification_0041.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>In many cases it is thus recommended to carefully time and profile your
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="prediction_time" src="../images/sphx_glr_plot_out_of_core_classification_0041.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>In many cases it is thus recommended to carefully time and profile your
 feature extraction code as it may be a good place to start optimizing when
 your overall latency is too slow for your application.</p>
 </div>
@@ -568,7 +568,7 @@ time. Here is a benchmark from the
 <a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#sphx-glr-auto-examples-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a> example that measures
 this quantity for a number of estimators on synthetic data:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="throughput_benchmark" src="../_images/sphx_glr_plot_prediction_latency_0041.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>These throughputs are achieved on a single process. An obvious way to
+<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="throughput_benchmark" src="../images/sphx_glr_plot_prediction_latency_0041.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>These throughputs are achieved on a single process. An obvious way to
 increase the throughput of your application is to spawn additional instances
 (usually processes in Python because of the
 <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">GIL</a>) that share the

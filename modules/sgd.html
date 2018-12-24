@@ -232,7 +232,7 @@
 </div>
 <p><a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">SGDClassifier</span></code></a> 类实现了一个简单的随机梯度下降学习例程, 支持不同的 loss functions（损失函数）和 penalties for classification（分类惩罚）。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_separating_hyperplane.html"><img alt="../_images/sphx_glr_plot_sgd_separating_hyperplane_0011.png" src="../_images/sphx_glr_plot_sgd_separating_hyperplane_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_separating_hyperplane.html"><img alt="../images/sphx_glr_plot_sgd_separating_hyperplane_0011.png" src="../images/sphx_glr_plot_sgd_separating_hyperplane_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <p>与其他分类器一样，拟合 SGD 我们需要两个 array （数组）：保存训练样本的 size 为 <code class="docutils literal notranslate"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code> 的数组 X 以及保存训练样本目标值（类标签）
 的 size 为 <code class="docutils literal notranslate"><span class="pre">[n_samples]</span></code> 的数组 Y</p>
@@ -303,7 +303,7 @@ L1 penalty 的一些不足。 参数 <code class="docutils literal notranslate">
 我们计算每个分类器的 confidence score（置信度分数）（也就是与超平面的距离），并选择置信度最高的分类。
 下图阐释了基于 iris（鸢尾花）数据集上的 OVA 方法。虚线表示三个 OVA 分类器; 不同背景色代表由三个分类器产生的决策面。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_iris.html"><img alt="../_images/sphx_glr_plot_sgd_iris_0011.png" src="../_images/sphx_glr_plot_sgd_iris_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_iris.html"><img alt="../images/sphx_glr_plot_sgd_iris_0011.png" src="../images/sphx_glr_plot_sgd_iris_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <p>在 multi-class classification的情况下， <code class="docutils literal notranslate"><span class="pre">coef_</span></code> 是 <code class="docutils literal notranslate"><span class="pre">shape=[n_classes,</span> <span class="pre">n_features]</span></code> 的一个二维数组，
 <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> 是 <code class="docutils literal notranslate"><span class="pre">shape=[n_classes]</span></code> 的一个一维数组。 <code class="docutils literal notranslate"><span class="pre">coef_</span></code> 的第 i 行保存了第 i 类的 OVA 分类器的权重向量；
@@ -436,7 +436,7 @@ of the Trade 1998.</li>
 </div></blockquote>
 <p>所有上述损失函数可以看作是错误分类误差（Zero-one loss即0-1损失）的上限，如下图所示：</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_loss_functions.html"><img alt="../_images/sphx_glr_plot_sgd_loss_functions_0011.png" src="../_images/sphx_glr_plot_sgd_loss_functions_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_loss_functions.html"><img alt="../images/sphx_glr_plot_sgd_loss_functions_0011.png" src="../images/sphx_glr_plot_sgd_loss_functions_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <p>比较流行的正则化项 <span class="math notranslate nohighlight">\(R\)</span> 包括：</p>
 <blockquote>
@@ -448,7 +448,7 @@ of the Trade 1998.</li>
 </div></blockquote>
 <p>下图显示当 <span class="math notranslate nohighlight">\(R(w) = 1\)</span> 时参数空间中不同正则项的轮廓。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_penalties.html"><img alt="../_images/sphx_glr_plot_sgd_penalties_0011.png" src="../_images/sphx_glr_plot_sgd_penalties_0011.png" style="width: 750.0px; height: 750.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_penalties.html"><img alt="../images/sphx_glr_plot_sgd_penalties_0011.png" src="../images/sphx_glr_plot_sgd_penalties_0011.png" style="width: 750.0px; height: 750.0px;" /></a>
 </div>
 <div class="section" id="id9">
 <h3>1.5.7.1. SGD<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>

@@ -805,7 +805,7 @@ and not for more than two annotators.</p>
 </pre></div>
 </div>
 <p>这里有一个混淆矩阵的可视化表示。 (请看来自于这个例子的图片 <a class="reference internal" href="../auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py"><span class="std std-ref">Confusion matrix</span></a> ):</p>
-<a class="reference external image-reference" href="../auto_examples/model_selection/plot_confusion_matrix.html"><img alt="../_images/sphx_glr_plot_confusion_matrix_0011.png" class="align-center" src="../_images/sphx_glr_plot_confusion_matrix_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_confusion_matrix.html"><img alt="../images/sphx_glr_plot_confusion_matrix_0011.png" class="align-center" src="../images/sphx_glr_plot_confusion_matrix_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>对于二分类问题, 我们可以得到 真负(true negatives), 假正(false positives), 假负(false negatives) 和 真正(true positives) 的数量</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1340,7 +1340,7 @@ positive class, confidence values, or binary decisions.
 </pre></div>
 </div>
 <p>下图展示了这样一个ROC曲线的例子:</p>
-<a class="reference external image-reference" href="../auto_examples/model_selection/plot_roc.html"><img alt="../_images/sphx_glr_plot_roc_0011.png" class="align-center" src="../_images/sphx_glr_plot_roc_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_roc.html"><img alt="../images/sphx_glr_plot_roc_0011.png" class="align-center" src="../images/sphx_glr_plot_roc_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>函数 <a class="reference internal" href="generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score" title="sklearn.metrics.roc_auc_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">roc_auc_score</span></code></a> 计算 ROC曲线下的面积, 也被记为 AUC 或 AUROC.  通过计算曲线下的面积，ROC曲线信息被总结到一个数字中。
 更多详细信息请参考  <a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve">Wikipedia article on AUC</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1356,7 +1356,7 @@ positive class, confidence values, or binary decisions.
 如果预测输出已经被二值化(binarized)，那么函数 <a class="reference internal" href="generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score" title="sklearn.metrics.roc_auc_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">roc_auc_score</span></code></a> 也可被用于多类分类问题中。</p>
 <p>在那些高虚警率(false positive rate)不被容忍的情况下，<a class="reference internal" href="generated/sklearn.metrics.roc_auc_score.html#sklearn.metrics.roc_auc_score" title="sklearn.metrics.roc_auc_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">roc_auc_score</span></code></a> 函数的参数 <code class="docutils literal notranslate"><span class="pre">max_fpr</span></code> 可被用来把ROC曲线累加到一个给定的限制(
 can be used to summarize the ROC curve up to the given limit)。</p>
-<a class="reference external image-reference" href="../auto_examples/model_selection/plot_roc.html"><img alt="../_images/sphx_glr_plot_roc_0021.png" class="align-center" src="../_images/sphx_glr_plot_roc_0021.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_roc.html"><img alt="../images/sphx_glr_plot_roc_0021.png" class="align-center" src="../images/sphx_glr_plot_roc_0021.png" style="width: 480.0px; height: 360.0px;" /></a>
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">

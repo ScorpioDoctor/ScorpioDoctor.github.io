@@ -204,7 +204,7 @@
 第二个估计器的预测结果几乎完全逼近真实曲线，最后一个估计器的结果完美逼近所有训练数据点，但不能很好地拟合
 真实的函数，即对训练数据的变化非常敏感（高方差）。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/model_selection/plot_underfitting_overfitting.html"><img alt="../_images/sphx_glr_plot_underfitting_overfitting_0011.png" src="../_images/sphx_glr_plot_underfitting_overfitting_0011.png" style="width: 700.0px; height: 250.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_underfitting_overfitting.html"><img alt="../images/sphx_glr_plot_underfitting_overfitting_0011.png" src="../images/sphx_glr_plot_underfitting_overfitting_0011.png" style="width: 700.0px; height: 250.0px;" /></a>
 </div>
 <p>偏差和方差是估计器所固有的属性，我们通常必须选择合适的学习算法和超参数，以使得偏差和方差都尽可能的低
 （参见偏差-方差困境 <a class="reference external" href="https://en.wikipedia.org/wiki/Bias-variance_dilemma">Bias-variance dilemma</a>)。
@@ -257,7 +257,7 @@
 如果两种得分都很高则说明估计器拟合得很好。较低的训练得分和较高的验证得分这种情况通常是不会发生的。
 所有三种情况都可以 在下面的图中找到， 其中我们改变了数字数据集上 SVM 的参数 <span class="math notranslate nohighlight">\(\gamma\)</span> 。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/model_selection/plot_validation_curve.html"><img alt="../_images/sphx_glr_plot_validation_curve_0011.png" src="../_images/sphx_glr_plot_validation_curve_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_validation_curve.html"><img alt="../images/sphx_glr_plot_validation_curve_0011.png" src="../images/sphx_glr_plot_validation_curve_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 </div>
 <div class="section" id="learning-curve">
@@ -267,12 +267,12 @@
 验证分数和训练分数都收敛到一个很低的值，那么我们即使添加更多的训练数据也很难从中获益。在下面的图中你可以看到一个例子：
 朴素贝叶斯大致收敛到一个较低的分数。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/model_selection/plot_learning_curve.html"><img alt="../_images/sphx_glr_plot_learning_curve_0011.png" src="../_images/sphx_glr_plot_learning_curve_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_learning_curve.html"><img alt="../images/sphx_glr_plot_learning_curve_0011.png" src="../images/sphx_glr_plot_learning_curve_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p>我们可能需要使用estimator或者当前estimator的一个参数化形式来学习更复杂概念（i.e. 有一个较低的偏差）。
 如果训练样本的数量达到最大时，训练集得分比验证集得分大得多，那么增加更多的训练样本很可能会增加泛化能力。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/model_selection/plot_learning_curve.html"><img alt="../_images/sphx_glr_plot_learning_curve_0021.png" src="../_images/sphx_glr_plot_learning_curve_0021.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_learning_curve.html"><img alt="../images/sphx_glr_plot_learning_curve_0021.png" src="../images/sphx_glr_plot_learning_curve_0021.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p>我们可以使用 <a class="reference internal" href="generated/sklearn.model_selection.learning_curve.html#sklearn.model_selection.learning_curve" title="sklearn.model_selection.learning_curve"><code class="xref py py-func docutils literal notranslate"><span class="pre">learning_curve</span></code></a> 函数来产生绘制这样一个学习曲线所需的值
 （已使用的样本数量，训练集上的平均得分和验证集上的平均得分）</p>

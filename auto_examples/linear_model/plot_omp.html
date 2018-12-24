@@ -239,7 +239,7 @@ measurement encoded with a dictionary</p>
 <span class="c1"># plot the noise-free reconstruction</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_omp_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_omp_001.png" />
+<img alt="../../images/sphx_glr_plot_omp_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_omp_001.png" />
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">omp</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.OrthogonalMatchingPursuit.html#sklearn.linear_model.OrthogonalMatchingPursuit" title="View documentation for sklearn.linear_model.OrthogonalMatchingPursuit"><span class="n">OrthogonalMatchingPursuit</span></a><span class="p">(</span><span class="n">n_nonzero_coefs</span><span class="o">=</span><span class="n">n_nonzero_coefs</span><span class="p">)</span>
 <span class="n">omp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">coef</span> <span class="o">=</span> <span class="n">omp</span><span class="o">.</span><span class="n">coef_</span>
@@ -252,7 +252,7 @@ measurement encoded with a dictionary</p>
 <span class="c1"># plot the noisy reconstruction</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_omp_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_omp_002.png" />
+<img alt="../../images/sphx_glr_plot_omp_002.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_omp_002.png" />
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">omp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_noisy</span><span class="p">)</span>
 <span class="n">coef</span> <span class="o">=</span> <span class="n">omp</span><span class="o">.</span><span class="n">coef_</span>
 <span class="n">idx_r</span><span class="p">,</span> <span class="o">=</span> <span class="n">coef</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
@@ -264,7 +264,7 @@ measurement encoded with a dictionary</p>
 <span class="c1"># plot the noisy reconstruction with number of non-zeros set by CV</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_omp_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_omp_003.png" />
+<img alt="../../images/sphx_glr_plot_omp_003.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_omp_003.png" />
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">omp_cv</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.OrthogonalMatchingPursuitCV.html#sklearn.linear_model.OrthogonalMatchingPursuitCV" title="View documentation for sklearn.linear_model.OrthogonalMatchingPursuitCV"><span class="n">OrthogonalMatchingPursuitCV</span></a><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">omp_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_noisy</span><span class="p">)</span>
 <span class="n">coef</span> <span class="o">=</span> <span class="n">omp_cv</span><span class="o">.</span><span class="n">coef_</span>
@@ -280,7 +280,7 @@ measurement encoded with a dictionary</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_omp_004.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_omp_004.png" />
+<img alt="../../images/sphx_glr_plot_omp_004.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_omp_004.png" />
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.389 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-linear-model-plot-omp-py">
 <div class="sphx-glr-download docutils container">
