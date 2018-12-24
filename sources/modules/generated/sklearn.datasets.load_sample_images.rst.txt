@@ -1,0 +1,12 @@
+:mod:`sklearn.datasets`.load_sampleimages
+=======================================================
+
+.. currentmodule:: sklearn.datasets
+
+.. autofunction:: load_sampleimages
+
+.. include:: sklearn.datasets.load_sampleimages.examples
+
+.. raw:: html
+
+    <div class="clearer"></div>
