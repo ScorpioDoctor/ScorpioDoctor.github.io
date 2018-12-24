@@ -218,7 +218,7 @@
 <div class="section" id="k-means">
 <h3>K-means 聚类<a class="headerlink" href="#k-means" title="Permalink to this headline">¶</a></h3>
 <p>关于聚类有很多不同的聚类标准和相关算法，其中最简便的算法是 <a class="reference internal" href="../../modules/clustering.html#k-means"><span class="std std-ref">K-均值(K-means)</span></a>。</p>
-<a class="reference external image-reference" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="../../_images/sphx_glr_plot_cluster_iris_002.png" class="align-right" src="../../_images/sphx_glr_plot_cluster_iris_002.png" style="width: 280.0px; height: 210.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="../../images/sphx_glr_plot_cluster_iris_002.png" class="align-right" src="../../images/sphx_glr_plot_cluster_iris_002.png" style="width: 280.0px; height: 210.0px;" /></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_iris</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
@@ -245,9 +245,9 @@
 <col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="k_means_iris_bad_init" src="../../_images/sphx_glr_plot_cluster_iris_003.png" style="width: 252.0px; height: 189.0px;" /></a></td>
-<td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="k_means_iris_8" src="../../_images/sphx_glr_plot_cluster_iris_001.png" style="width: 252.0px; height: 189.0px;" /></a></td>
-<td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="cluster_iris_truth" src="../../_images/sphx_glr_plot_cluster_iris_004.png" style="width: 252.0px; height: 189.0px;" /></a></td>
+<tr class="row-odd"><td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="k_means_iris_bad_init" src="../../images/sphx_glr_plot_cluster_iris_003.png" style="width: 252.0px; height: 189.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="k_means_iris_8" src="../../images/sphx_glr_plot_cluster_iris_001.png" style="width: 252.0px; height: 189.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/cluster/plot_cluster_iris.html"><img alt="cluster_iris_truth" src="../../images/sphx_glr_plot_cluster_iris_004.png" style="width: 252.0px; height: 189.0px;" /></a></td>
 </tr>
 <tr class="row-even"><td><strong>Bad initialization</strong></td>
 <td><strong>8 clusters</strong></td>
@@ -286,10 +286,10 @@
 <col width="25%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face" src="../../_images/sphx_glr_plot_face_compress_001.png" style="width: 180.0px; height: 132.0px;" /></a></td>
-<td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_compressed" src="../../_images/sphx_glr_plot_face_compress_003.png" style="width: 180.0px; height: 132.0px;" /></a></td>
-<td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_regular" src="../../_images/sphx_glr_plot_face_compress_002.png" style="width: 180.0px; height: 132.0px;" /></a></td>
-<td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_histogram" src="../../_images/sphx_glr_plot_face_compress_004.png" style="width: 180.0px; height: 132.0px;" /></a></td>
+<tr class="row-odd"><td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face" src="../../images/sphx_glr_plot_face_compress_001.png" style="width: 180.0px; height: 132.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_compressed" src="../../images/sphx_glr_plot_face_compress_003.png" style="width: 180.0px; height: 132.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_regular" src="../../images/sphx_glr_plot_face_compress_002.png" style="width: 180.0px; height: 132.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/cluster/plot_face_compress.html"><img alt="face_histogram" src="../../images/sphx_glr_plot_face_compress_004.png" style="width: 180.0px; height: 132.0px;" /></a></td>
 </tr>
 <tr class="row-even"><td>Raw image</td>
 <td>K-means quantization</td>
@@ -318,7 +318,7 @@
 <h4>连接约束聚类(Connectivity-constrained clustering)<a class="headerlink" href="#connectivity-constrained-clustering" title="Permalink to this headline">¶</a></h4>
 <p>对于逐次聚合聚类(agglomerative clustering)，通过连接图可以指定哪些样本可以被聚合在一个簇。在 scikit-learn 中，图由邻接矩阵来表示，
 通常该矩阵是一个稀疏矩阵。这种表示方法是非常有用的，例如在聚类图像时检索连接区域(有时也被称为连接要素):</p>
-<a class="reference external image-reference" href="../../auto_examples/cluster/plot_coin_ward_segmentation.html"><img alt="../../_images/sphx_glr_plot_coin_ward_segmentation_001.png" class="align-right" src="../../_images/sphx_glr_plot_coin_ward_segmentation_001.png" style="width: 200.0px; height: 200.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/cluster/plot_coin_ward_segmentation.html"><img alt="../../images/sphx_glr_plot_coin_ward_segmentation_001.png" class="align-right" src="../../images/sphx_glr_plot_coin_ward_segmentation_001.png" style="width: 200.0px; height: 200.0px;" /></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -352,7 +352,7 @@
 <p>我们已经知道，稀疏性可以缓解特征维度带来的问题，i.e 即与特征数量相比，样本数量太少。
 另一个解决该问题的方式是合并相似的维度：<a href="#id4"><span class="problematic" id="id5">**</span></a>feature agglomeration**（特征聚集）。
 该方法可以通过对特征聚类来实现。换 句话说，就是对样本数据转置后进行聚类。</p>
-<a class="reference external image-reference" href="../../auto_examples/cluster/plot_digits_agglomeration.html"><img alt="../../_images/sphx_glr_plot_digits_agglomeration_001.png" class="align-right" src="../../_images/sphx_glr_plot_digits_agglomeration_001.png" style="width: 227.99999999999997px; height: 199.49999999999997px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/cluster/plot_digits_agglomeration.html"><img alt="../../images/sphx_glr_plot_digits_agglomeration_001.png" class="align-right" src="../../images/sphx_glr_plot_digits_agglomeration_001.png" style="width: 227.99999999999997px; height: 199.49999999999997px;" /></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">images</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">images</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
@@ -387,7 +387,7 @@ the dimensionality of the dataset.</p>
 <h3>主成分分析: PCA<a class="headerlink" href="#pca" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../../modules/decomposition.html#pca"><span class="std std-ref">主成分分析 (PCA)</span></a> 将能够解释数据信息最大方差的的连续成分提取出来(selects the successive components that
 explain the maximum variance in the signal)。</p>
-<p class="centered"><a class="reference external" href="../../auto_examples/decomposition/plot_pca_3d.html"><img alt="pca_3d_axis" src="../../_images/sphx_glr_plot_pca_3d_001.png" style="width: 280.0px; height: 210.0px;" /></a> <a class="reference external" href="../../auto_examples/decomposition/plot_pca_3d.html"><img alt="pca_3d_aligned" src="../../_images/sphx_glr_plot_pca_3d_002.png" style="width: 280.0px; height: 210.0px;" /></a></p>
+<p class="centered"><a class="reference external" href="../../auto_examples/decomposition/plot_pca_3d.html"><img alt="pca_3d_axis" src="../../images/sphx_glr_plot_pca_3d_001.png" style="width: 280.0px; height: 210.0px;" /></a> <a class="reference external" href="../../auto_examples/decomposition/plot_pca_3d.html"><img alt="pca_3d_aligned" src="../../images/sphx_glr_plot_pca_3d_002.png" style="width: 280.0px; height: 210.0px;" /></a></p>
 <p>上图中样本点的分布在一个方向上是非常平坦的：即三个单变量特征中的任何一个都可以有另外两个特征来表示。
 主成分分析法(PCA)可以找到使得数据分布不 flat 的矢量方向(可以反映数据主要信息的特征方向)。</p>
 <p>当用PCA来 transform（转换） 数据时，它可以通过在主子空间(principal subspace)上投影来降低数据的维数。</p>
@@ -419,7 +419,7 @@ explain the maximum variance in the signal)。</p>
 selects components so that the distribution of their loadings carries
 a maximum amount of independent information.)。
 该方法能够恢复 <a href="#id7"><span class="problematic" id="id8">**</span></a>non-Gaussian**（非高斯）独立信号:</p>
-<a class="reference external image-reference" href="../../auto_examples/decomposition/plot_ica_blind_source_separation.html"><img alt="../../_images/sphx_glr_plot_ica_blind_source_separation_001.png" class="align-center" src="../../_images/sphx_glr_plot_ica_blind_source_separation_001.png" style="width: 448.0px; height: 336.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/decomposition/plot_ica_blind_source_separation.html"><img alt="../../images/sphx_glr_plot_ica_blind_source_separation_001.png" class="align-center" src="../../images/sphx_glr_plot_ica_blind_source_separation_001.png" style="width: 448.0px; height: 336.0px;" /></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate sample data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">signal</span>
