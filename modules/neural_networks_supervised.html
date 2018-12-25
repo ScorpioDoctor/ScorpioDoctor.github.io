@@ -87,7 +87,7 @@
                 <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
                 <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
                 <li><a href="http://scikit-learn.org/dev/versions.html">All available versions</a></li>
-                <li><a href="../downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -365,54 +365,39 @@ Stochastic Gradient Descent (SGD) 使用损失函数相对需要更新的那个�
 </div>
 <div class="section" id="id7">
 <h2>1.17.7. 数学表达式<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<p>Given a set of training examples <span class="math notranslate nohighlight">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span>
-where <span class="math notranslate nohighlight">\(x_i \in \mathbf{R}^n\)</span> and <span class="math notranslate nohighlight">\(y_i \in \{0, 1\}\)</span>, a one hidden
-layer one hidden neuron MLP learns the function <span class="math notranslate nohighlight">\(f(x) = W_2 g(W_1^T x + b_1) + b_2\)</span>
-where <span class="math notranslate nohighlight">\(W_1 \in \mathbf{R}^m\)</span> and <span class="math notranslate nohighlight">\(W_2, b_1, b_2 \in \mathbf{R}\)</span> are
-model parameters. <span class="math notranslate nohighlight">\(W_1, W_2\)</span> represent the weights of the input layer and
-hidden layer, respectively; and <span class="math notranslate nohighlight">\(b_1, b_2\)</span> represent the bias added to
-the hidden layer and the output layer, respectively.
-<span class="math notranslate nohighlight">\(g(\cdot) : R \rightarrow R\)</span> is the activation function, set by default as
-the hyperbolic tan. It is given as,</p>
+<p>给定一个训练样本集合 <span class="math notranslate nohighlight">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span>
+其中 <span class="math notranslate nohighlight">\(x_i \in \mathbf{R}^n\)</span> 和 <span class="math notranslate nohighlight">\(y_i \in \{0, 1\}\)</span>, 具有一个隐藏层一个隐藏神经元的MLP
+学习这样一个函数 <span class="math notranslate nohighlight">\(f(x) = W_2 g(W_1^T x + b_1) + b_2\)</span>
+其中 <span class="math notranslate nohighlight">\(W_1 \in \mathbf{R}^m\)</span> 和 <span class="math notranslate nohighlight">\(W_2, b_1, b_2 \in \mathbf{R}\)</span> 是
+模型参数。 <span class="math notranslate nohighlight">\(W_1, W_2\)</span> 分别表示输入层和隐藏层的权重； <span class="math notranslate nohighlight">\(b_1, b_2\)</span> 分别表示添加到隐藏层和输出层的偏置。
+<span class="math notranslate nohighlight">\(g(\cdot) : R \rightarrow R\)</span> 是激活函数, 默认设为 双曲正切函数(hyperbolic tan)，其表达式如下：</p>
 <div class="math notranslate nohighlight">
 \[g(z)= \frac{e^z-e^{-z}}{e^z+e^{-z}}\]</div>
-<p>For binary classification, <span class="math notranslate nohighlight">\(f(x)\)</span> passes through the logistic function
-<span class="math notranslate nohighlight">\(g(z)=1/(1+e^{-z})\)</span> to obtain output values between zero and one. A
-threshold, set to 0.5, would assign samples of outputs larger or equal 0.5
-to the positive class, and the rest to the negative class.</p>
-<p>If there are more than two classes, <span class="math notranslate nohighlight">\(f(x)\)</span> itself would be a vector of
-size (n_classes,). Instead of passing through logistic function, it passes
-through the softmax function, which is written as,</p>
+<p>对于二分类, <span class="math notranslate nohighlight">\(f(x)\)</span> 被传递到 logistic 函数 <span class="math notranslate nohighlight">\(g(z)=1/(1+e^{-z})\)</span> 里面去
+以获得介于0和1之间的输出值。如果某个样本对应的网络输出值大于等于 0.5，那么这个样本就被判断为正样本，反之则为负样本。</p>
+<p>如果类的个数不止两个, 该 <span class="math notranslate nohighlight">\(f(x)\)</span> 函数自身将是一个size为 (n_classes,) 的向量。
+这时候我们不会把它传递到logistic函数中去了，而是传递到软最大化函数(softmax)中去，表达式如下：</p>
 <div class="math notranslate nohighlight">
 \[\text{softmax}(z)_i = \frac{\exp(z_i)}{\sum_{l=1}^k\exp(z_l)}\]</div>
-<p>where <span class="math notranslate nohighlight">\(z_i\)</span> represents the <span class="math notranslate nohighlight">\(i\)</span> th element of the input to softmax,
-which corresponds to class <span class="math notranslate nohighlight">\(i\)</span>, and <span class="math notranslate nohighlight">\(K\)</span> is the number of classes.
-The result is a vector containing the probabilities that sample <span class="math notranslate nohighlight">\(x\)</span>
-belong to each class. The output is the class with the highest probability.</p>
-<p>In regression, the output remains as <span class="math notranslate nohighlight">\(f(x)\)</span>; therefore, output activation
-function is just the identity function.</p>
-<p>MLP uses different loss functions depending on the problem type. The loss
-function for classification is Cross-Entropy, which in binary case is given as,</p>
+<p>其中 <span class="math notranslate nohighlight">\(z_i\)</span> 是输入到softmax的数据中的第 <span class="math notranslate nohighlight">\(i\)</span> 个元素,
+与第 <span class="math notranslate nohighlight">\(i\)</span> 个类相对应，<span class="math notranslate nohighlight">\(K\)</span> 是类的总数量。
+网络输出的结果是一个向量，包含了样本 <span class="math notranslate nohighlight">\(x\)</span> 属于每个类的概率。网络的最终预测结果是拥有最高类概率的那个类。</p>
+<p>在回归问题中，输出任然是 <span class="math notranslate nohighlight">\(f(x)\)</span>; 因此, 输出激活函数只是一个 identity function。</p>
+<p>MLP 根据问题的类型选择不同的损失函数。 用于分类的损失函数是交叉熵(Cross-Entropy)损失，在二元分类的情况下由下式给出：</p>
 <div class="math notranslate nohighlight">
 \[Loss(\hat{y},y,W) = -y \ln {\hat{y}} - (1-y) \ln{(1-\hat{y})} + \alpha ||W||_2^2\]</div>
-<p>where <span class="math notranslate nohighlight">\(\alpha ||W||_2^2\)</span> is an L2-regularization term (aka penalty)
-that penalizes complex models; and <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> is a non-negative
-hyperparameter that controls the magnitude of the penalty.</p>
-<p>For regression, MLP uses the Square Error loss function; written as,</p>
+<p>其中 <span class="math notranslate nohighlight">\(\alpha ||W||_2^2\)</span> 是一个 L2-regularization 项 (aka penalty) 用来惩罚模型复杂度；
+<span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> 是一个非负超参数用来控制惩罚量。</p>
+<p>对于回归问题, MLP 使用平方误差(Square Error)损失函数; 如下所示：</p>
 <div class="math notranslate nohighlight">
 \[Loss(\hat{y},y,W) = \frac{1}{2}||\hat{y} - y ||_2^2 + \frac{\alpha}{2} ||W||_2^2\]</div>
-<p>Starting from initial random weights, multi-layer perceptron (MLP) minimizes
-the loss function by repeatedly updating these weights. After computing the
-loss, a backward pass propagates it from the output layer to the previous
-layers, providing each weight parameter with an update value meant to decrease
-the loss.</p>
-<p>In gradient descent, the gradient <span class="math notranslate nohighlight">\(\nabla Loss_{W}\)</span> of the loss with respect
-to the weights is computed and deducted from <span class="math notranslate nohighlight">\(W\)</span>.
-More formally, this is expressed as,</p>
+<p>从一个初始的随机权重开始，多层感知器(MLP)通过不断的更新这些权重来最小化损失函数。
+当损失被计算出来后，反向传递将它从输出层传播到前一层，为每一个权重参数提供一个更新值使得损失下降。</p>
+<p>在梯度下降算法中，损失相对于权重的梯度 <span class="math notranslate nohighlight">\(\nabla Loss_{W}\)</span> 被计算出来然后再从梯度值 <span class="math notranslate nohighlight">\(W\)</span> 中减去。
+这个过程的正式的数学表达式如下：</p>
 <div class="math notranslate nohighlight">
 \[W^{i+1} = W^i - \epsilon \nabla {Loss}_{W}^{i}\]</div>
-<p>where <span class="math notranslate nohighlight">\(i\)</span> is the iteration step, and <span class="math notranslate nohighlight">\(\epsilon\)</span> is the learning rate
-with a value larger than 0.</p>
+<p>其中 <span class="math notranslate nohighlight">\(i\)</span> 是迭代步数,  <span class="math notranslate nohighlight">\(\epsilon\)</span> 是学习率，是一个大于0的数。</p>
 <p>当达到预设的最大迭代次数时，该算法停止；或 当损失的改善低于某个较小的数字时也会停止。</p>
 </div>
 <div class="section" id="mlp-tips">
