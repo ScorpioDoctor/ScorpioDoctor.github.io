@@ -191,33 +191,27 @@
             
   <div class="section" id="cross-decomposition">
 <span id="id1"></span><h1>1.8. 交叉分解（Cross decomposition）<a class="headerlink" href="#cross-decomposition" title="Permalink to this headline">¶</a></h1>
-<p>The cross decomposition module contains two main families of algorithms: the
-partial least squares (PLS) and the canonical correlation analysis (CCA).</p>
-<p>These families of algorithms are useful to find linear relations between two
-multivariate datasets: the <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> arguments of the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method
-are 2D arrays.</p>
+<p>交叉分解(cross decomposition)模块包括了两个算法家族: 偏最小二乘法(the partial least squares(PLS)) 和
+典型相关分析(the canonical correlation analysis (CCA)).</p>
+<p>这些算法对于寻找两个多元数据集(multivariate dataset,也叫多变量数据集)之间的线性关系是非常有用的:
+用于 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法 的 <code class="docutils literal notranslate"><span class="pre">X</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Y</span></code> 参数都是 2D arrays.</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/cross_decomposition/plot_compare_cross_decomposition.html"><img alt="../images/sphx_glr_plot_compare_cross_decomposition_0011.png" src="../images/sphx_glr_plot_compare_cross_decomposition_0011.png" style="width: 900.0px; height: 600.0px;" /></a>
 </div>
-<p>Cross decomposition algorithms find the fundamental relations between two
-matrices (X and Y). They are latent variable approaches to modeling the
-covariance structures in these two spaces. They will try to find the
-multidimensional direction in the X space that explains the maximum
-multidimensional variance direction in the Y space. PLS-regression is
-particularly suited when the matrix of predictors has more variables than
-observations, and when there is multicollinearity among X values. By contrast,
-standard regression will fail in these cases.</p>
-<p>Classes included in this module are <a class="reference internal" href="generated/sklearn.cross_decomposition.PLSRegression.html#sklearn.cross_decomposition.PLSRegression" title="sklearn.cross_decomposition.PLSRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">PLSRegression</span></code></a>
-<a class="reference internal" href="generated/sklearn.cross_decomposition.PLSCanonical.html#sklearn.cross_decomposition.PLSCanonical" title="sklearn.cross_decomposition.PLSCanonical"><code class="xref py py-class docutils literal notranslate"><span class="pre">PLSCanonical</span></code></a>, <a class="reference internal" href="generated/sklearn.cross_decomposition.CCA.html#sklearn.cross_decomposition.CCA" title="sklearn.cross_decomposition.CCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">CCA</span></code></a> and <a class="reference internal" href="generated/sklearn.cross_decomposition.PLSSVD.html#sklearn.cross_decomposition.PLSSVD" title="sklearn.cross_decomposition.PLSSVD"><code class="xref py py-class docutils literal notranslate"><span class="pre">PLSSVD</span></code></a></p>
+<p>交叉分解算法找到两个矩阵(X and Y)之间的基本关系。它们是建模这两个空间中协方差结构的隐变量方法(latent variable approaches)。
+他们将试图在 X 空间中找到多维方向(multidimensional direction)，从而解释 Y 空间中的最大多维方差方向。
+PLS-regression 尤其适用于当预测因子的矩阵(matrix of predictors)比观测值(observations)有更多的变量时 和
+当X的值之间存在多重共线性(multicollinearity)时 的情况。作为对比，标准回归算法在这些问题上将会失败。</p>
+<p>这个模块中包括的类有 <a class="reference internal" href="generated/sklearn.cross_decomposition.PLSRegression.html#sklearn.cross_decomposition.PLSRegression" title="sklearn.cross_decomposition.PLSRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">PLSRegression</span></code></a> <a class="reference internal" href="generated/sklearn.cross_decomposition.PLSCanonical.html#sklearn.cross_decomposition.PLSCanonical" title="sklearn.cross_decomposition.PLSCanonical"><code class="xref py py-class docutils literal notranslate"><span class="pre">PLSCanonical</span></code></a>, <a class="reference internal" href="generated/sklearn.cross_decomposition.CCA.html#sklearn.cross_decomposition.CCA" title="sklearn.cross_decomposition.CCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">CCA</span></code></a> 和 <a class="reference internal" href="generated/sklearn.cross_decomposition.PLSSVD.html#sklearn.cross_decomposition.PLSSVD" title="sklearn.cross_decomposition.PLSSVD"><code class="xref py py-class docutils literal notranslate"><span class="pre">PLSSVD</span></code></a>。</p>
 <div class="topic">
-<p class="topic-title first">Reference:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li>JA Wegelin
 <a class="reference external" href="https://www.stat.washington.edu/research/reports/2000/tr371.pdf">A survey of Partial Least Squares (PLS) methods, with emphasis on the two-block case</a></li>
 </ul>
 </div>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/cross_decomposition/plot_compare_cross_decomposition.html#sphx-glr-auto-examples-cross-decomposition-plot-compare-cross-decomposition-py"><span class="std std-ref">Compare cross decomposition methods</span></a></li>
 </ul>
