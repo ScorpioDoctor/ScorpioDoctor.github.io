@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+    <title>监督学习: 从高维观测中预测输出变量 &#8212; scikit-learn 0.20.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../static/css/bootstrap-responsive.css"/>
+
+    <link rel="stylesheet" href="../../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <script type="text/javascript" src="../../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="模型选择: 选择合适的估计器及其参数" href="model_selection.html" />
+    <link rel="prev" title="统计学习: 问题设置以及 scikit-learn 中的估计器对象(estimator object)" href="settings.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/tutorial/statistical_inference/supervised_learning.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
+  </script>
+
+  <!-- 百度站长统计代码 -->
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar" id="scikit-navbar">
+            <ul>
+                <li><a href="../../index.html">首页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
+            <li><a href="../index.html">教程</a></li>
+            <li><a href="../../user_guide.html">用户指南</a></li>
+            <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../glossary.html">术语表</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers/contributing.html">贡献者</a></li>
+            <li class="divider"></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">稳定版</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">开发版</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+                <li><a href="../../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">案例</a></li>
+            </ul>
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
+            <div class="search_form">
+                <div class="gcse-search" id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+        <div class="rellink">
+        <a href="settings.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        统计学习: 问题设置以及 ...
+        </span>
+            <span class="hiddenrellink">
+            统计学习: 问题设置以及 scikit-learn 中的估计器对象(estimator object)
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="model_selection.html"
+        accesskey="N">Next
+        <br/>
+        <span class="smallrellink">
+        模型选择: 选择合适的估计器及其参数
+        </span>
+            <span class="hiddenrellink">
+            模型选择: 选择合适的估计器及其参数
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        用于科学数据处理的统计学习教程
+        </span>
+            <span class="hiddenrellink">
+            用于科学数据处理的统计学习教程
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version"><b>scikit-learn v0.20.1</b><br/>
+      <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+    <p class="citing">请 <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">引用我们 </a></b>如果使用了此软件.</p>
+    <ul>
+<li><a class="reference internal" href="#">监督学习: 从高维观测中预测输出变量</a><ul>
+<li><a class="reference internal" href="#id2">最近邻算法与维数灾难</a><ul>
+<li><a class="reference internal" href="#k">K-近邻分类器</a></li>
+<li><a class="reference internal" href="#curse-of-dimensionality">维数灾难</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">线性模型：从回归到稀疏</a><ul>
+<li><a class="reference internal" href="#id6">线性回归</a></li>
+<li><a class="reference internal" href="#shrinkage">缩减(Shrinkage)</a></li>
+<li><a class="reference internal" href="#sparsity">稀疏性(Sparsity)</a></li>
+<li><a class="reference internal" href="#clf-tut">分类</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#svms">支持向量机 (SVMs)</a><ul>
+<li><a class="reference internal" href="#id10">线性 SVMs</a></li>
+<li><a class="reference internal" href="#using-kernels-tut">使用核函数的SVMs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="supervised-learning-tut">
+<span id="id1"></span><h1>监督学习: 从高维观测中预测输出变量<a class="headerlink" href="#supervised-learning-tut" title="Permalink to this headline">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">监督学习中要求解的问题</p>
+<p>监督学习(<a class="reference internal" href="../../supervised_learning.html#supervised-learning"><span class="std std-ref">Supervised learning</span></a>)旨在学习两个数据集合之间的关联：
+观测数据集合 <code class="docutils literal notranslate"><span class="pre">X</span></code> 和 我们想要预测的外部变量 <code class="docutils literal notranslate"><span class="pre">y</span></code>。 变量 <code class="docutils literal notranslate"><span class="pre">y</span></code> 通常被称为 “target” 或 “labels”。
+大多数情况下，<code class="docutils literal notranslate"><span class="pre">y</span></code> 是一个长度为 <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> 的 1-D 数组。</p>
+<p>scikit-learn中的所有supervised <a class="reference external" href="https://en.wikipedia.org/wiki/Estimator">estimators</a>
+都实现了两个方法：一个是用于在训练数据上拟合模型的 <code class="docutils literal notranslate"><span class="pre">fit(X,</span> <span class="pre">y)</span></code> ；另一个是用于预测未知标记的观测数据 <code class="docutils literal notranslate"><span class="pre">X</span></code>
+的 <code class="docutils literal notranslate"><span class="pre">predict(X)</span></code>，返回模型预测得到的标签 <code class="docutils literal notranslate"><span class="pre">y</span></code>。</p>
+</div>
+<div class="topic">
+<p class="topic-title first">术语词汇: 分类(classification) 与 回归(regression)</p>
+<p>如果预测任务是把观测数据在一个有限的标签集合中进行分类，或者说是给观测到的对象”命名”,那么这样的预测任务
+就叫**分类**任务；另一方面，如果我们的目的是预测一个连续目标变量，那么这样的预测任务就叫**回归**任务。</p>
+<p>scikit-learn中进行分类任务的时候, <code class="docutils literal notranslate"><span class="pre">y</span></code> 通常是一个整型数或字符串构成的向量。</p>
+<p>注意: 请参考 <a class="reference internal" href="../basic/tutorial.html#introduction"><span class="std std-ref">Introduction to machine learning with scikit-learn
+Tutorial</span></a> 快速浏览scikit-learn中使用的基本机器学习词汇。</p>
+</div>
+<div class="section" id="id2">
+<h2>最近邻算法与维数灾难<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="topic">
+<p class="topic-title first">分类鸢尾花 (irises):</p>
+<a class="reference external image-reference" href="../../auto_examples/datasets/plot_iris_dataset.html"><img alt="../../images/sphx_glr_plot_iris_dataset_001.png" class="align-right" src="../../images/sphx_glr_plot_iris_dataset_001.png" style="width: 520.0px; height: 390.0px;" /></a>
+<p>鸢尾花数据集(iris dataset)是一个分类任务，要根据花瓣(petal)和花萼(sepal)的长度与宽度辨别3种不同品种的鸢尾花</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">iris_y</span><span class="p">)</span>
+<span class="go">array([0, 1, 2])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="k">
+<h3>K-近邻分类器<a class="headerlink" href="#k" title="Permalink to this headline">¶</a></h3>
+<p>针对这问题，我们可以使用的最简单的分类器就是最近邻分类器(<a class="reference external" href="https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm">nearest neighbor</a>):
+给定一个新的观测 <code class="docutils literal notranslate"><span class="pre">X_test</span></code>, 在训练集中找到一个与新的观测距离最近的观测。因为训练集的观测数据的类标签是已知的，所以那个最近邻的类标签就可以被当作
+新观测 <code class="docutils literal notranslate"><span class="pre">X_test</span></code> 的类标签了。(请参考sklearn的在线文档 <a class="reference internal" href="../../modules/neighbors.html#neighbors"><span class="std std-ref">Nearest Neighbors section</span></a> 查看更多最近邻分类器的信息)</p>
+<div class="topic">
+<p class="topic-title first">训练集 和 测试集</p>
+<p>在实验任何学习算法的时候，我们不能在学习器在训练阶段已经见过的样本上测试评估模型的预测性能，这样会带来欺骗性。
+所以，我们通常把数据集划分成训练集和测试集。在模型的性能评估阶段，测试集中的数据对学习器来说是全新的从未见过的数据。
+这样的测试结果才会真实可靠。</p>
+</div>
+<p><strong>KNN (k nearest neighbors) classification example</strong>:</p>
+<a class="reference external image-reference" href="../../auto_examples/neighbors/plot_classification.html"><img alt="../../images/sphx_glr_plot_classification_001.png" class="align-center" src="../../images/sphx_glr_plot_classification_001.png" style="width: 448.0px; height: 336.0px;" /></a>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Split iris data in train and test data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># A random permutation, to split the data randomly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iris_X</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_X_train</span> <span class="o">=</span> <span class="n">iris_X</span><span class="p">[</span><span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_y_train</span> <span class="o">=</span> <span class="n">iris_y</span><span class="p">[</span><span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_X_test</span> <span class="o">=</span> <span class="n">iris_X</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_y_test</span> <span class="o">=</span> <span class="n">iris_y</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create and fit a nearest-neighbor classifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris_X_train</span><span class="p">,</span> <span class="n">iris_y_train</span><span class="p">)</span> 
+<span class="go">KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkowski&#39;,</span>
+<span class="go">           metric_params=None, n_jobs=None, n_neighbors=5, p=2,</span>
+<span class="go">           weights=&#39;uniform&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris_X_test</span><span class="p">)</span>
+<span class="go">array([1, 2, 1, 0, 0, 0, 2, 1, 2, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris_y_test</span>
+<span class="go">array([1, 1, 1, 0, 0, 0, 2, 1, 2, 0])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="curse-of-dimensionality">
+<span id="id3"></span><h3>维数灾难<a class="headerlink" href="#curse-of-dimensionality" title="Permalink to this headline">¶</a></h3>
+<p>For an estimator to be effective, you need the distance between neighboring
+points to be less than some value <span class="math notranslate nohighlight">\(d\)</span>, which depends on the problem.
+In one dimension, this requires on average <span class="math notranslate nohighlight">\(n \sim 1/d\)</span> points.
+In the context of the above <span class="math notranslate nohighlight">\(k\)</span>-NN example, if the data is described by
+just one feature with values ranging from 0 to 1 and with <span class="math notranslate nohighlight">\(n\)</span> training
+observations, then new data will be no further away than <span class="math notranslate nohighlight">\(1/n\)</span>.
+Therefore, the nearest neighbor decision rule will be efficient as soon as
+<span class="math notranslate nohighlight">\(1/n\)</span> is small compared to the scale of between-class feature variations.</p>
+<p>If the number of features is <span class="math notranslate nohighlight">\(p\)</span>, you now require <span class="math notranslate nohighlight">\(n \sim 1/d^p\)</span>
+points.  Let’s say that we require 10 points in one dimension: now <span class="math notranslate nohighlight">\(10^p\)</span>
+points are required in <span class="math notranslate nohighlight">\(p\)</span> dimensions to pave the <span class="math notranslate nohighlight">\([0, 1]\)</span> space.
+As <span class="math notranslate nohighlight">\(p\)</span> becomes large, the number of training points required for a good
+estimator grows exponentially.</p>
+<p>For example, if each point is just a single number (8 bytes), then an
+effective <span class="math notranslate nohighlight">\(k\)</span>-NN estimator in a paltry <span class="math notranslate nohighlight">\(p \sim 20\)</span> dimensions would
+require more training data than the current estimated size of the entire
+internet (±1000 Exabytes or so).</p>
+<p>这被称之为维数灾难( <a class="reference external" href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">curse of dimensionality</a>),
+是很多机器学习理论和算法都会强调的核心问题。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>线性模型：从回归到稀疏<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="topic">
+<p class="topic-title first">糖尿病数据集(Diabetes dataset)</p>
+<p>糖尿病数据集由442个病人的10个生理变量组成 (age, sex, weight, blood pressure) , 还有一个指示一年以后疾病进展情况的变量</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes_X_train</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes_X_test</span>  <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes_y_train</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diabetes_y_test</span>  <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+</pre></div>
+</div>
+<p>这个数据集的任务是根据已有的生理变量数据预测疾病的进展情况。</p>
+</div>
+<div class="section" id="id6">
+<h3>线性回归<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>线性回归( <a class="reference internal" href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="sklearn.linear_model.LinearRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearRegression</span></code></a> )，以其最简单的形式，通过调整一组参数将线性模型拟合到给定的数据集，
+以使模型的平方残差之和(the sum of the squared residuals)尽可能小。</p>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols.html"><img alt="../../images/sphx_glr_plot_ols_001.png" class="align-right" src="../../images/sphx_glr_plot_ols_001.png" style="width: 256.0px; height: 192.0px;" /></a>
+<p>线性模型: <span class="math notranslate nohighlight">\(y = X\beta + \epsilon\)</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(X\)</span>: data(训练数据)</li>
+<li><span class="math notranslate nohighlight">\(y\)</span>: target variable(目标变量)</li>
+<li><span class="math notranslate nohighlight">\(\beta\)</span>: Coefficients(系数)</li>
+<li><span class="math notranslate nohighlight">\(\epsilon\)</span>: Observation noise(观测噪声)</li>
+</ul>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">diabetes_X_train</span><span class="p">,</span> <span class="n">diabetes_y_train</span><span class="p">)</span>
+<span class="gp">... </span>                                      
+<span class="go">LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,</span>
+<span class="go">                 normalize=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="go">[   0.30349955 -237.63931533  510.53060544  327.73698041 -814.13170937</span>
+<span class="go">  492.81458798  102.84845219  184.60648906  743.51961675   76.09517222]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The mean square error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">)</span> <span class="o">-</span> <span class="n">diabetes_y_test</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span>                                                  
+<span class="go">2004.56760268...</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Explained variance score: 1 is perfect prediction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># and 0 means that there is no linear relationship</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># between X and y.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">,</span> <span class="n">diabetes_y_test</span><span class="p">)</span> 
+<span class="go">0.5850753022690...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="shrinkage">
+<span id="id7"></span><h3>缩减(Shrinkage)<a class="headerlink" href="#shrinkage" title="Permalink to this headline">¶</a></h3>
+<p>如果每个维度的数据点很少，则观测中的噪声将会引起高方差:</p>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols_ridge_variance.html"><img alt="../../images/sphx_glr_plot_ols_ridge_variance_001.png" class="align-right" src="../../images/sphx_glr_plot_ols_ridge_variance_001.png" style="width: 280.0px; height: 210.0px;" /></a>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> 
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span> 
+<span class="gp">... </span>    <span class="n">this_X</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">X</span>
+<span class="gp">... </span>    <span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">this_X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> 
+<span class="gp">... </span>    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">this_X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  
+</pre></div>
+</div>
+<p>高维统计学习的一个解决方案是将回归系数缩小到零：任意两个随机选择的观测值集很可能不相关。这被称之为岭回归。
+A solution in high-dimensional statistical learning is to <em>shrink</em> the
+regression coefficients to zero: any two randomly chosen set of
+observations are likely to be uncorrelated. This is called <a class="reference internal" href="../../modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code></a>
+regression:</p>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols_ridge_variance.html"><img alt="../../images/sphx_glr_plot_ols_ridge_variance_002.png" class="align-right" src="../../images/sphx_glr_plot_ols_ridge_variance_002.png" style="width: 280.0px; height: 210.0px;" /></a>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=.</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> 
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span> 
+<span class="gp">... </span>    <span class="n">this_X</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">X</span>
+<span class="gp">... </span>    <span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">this_X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> 
+<span class="gp">... </span>    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">this_X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>这是偏差/方差折衷(<strong>bias/variance tradeoff</strong>)的一个例子：岭 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> 参数越大，偏差越高，方差越低。</p>
+<p>我们可以选择 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> 来最小化遗漏错误，这次使用糖尿病数据集而不是我们的合成数据</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">([</span><span class="n">regr</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="gp">... </span>           <span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">diabetes_X_train</span><span class="p">,</span> <span class="n">diabetes_y_train</span><span class="p">)</span>
+<span class="gp">... </span>           <span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">,</span> <span class="n">diabetes_y_test</span><span class="p">)</span>
+<span class="gp">... </span>       <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">])</span>
+<span class="gp">... </span>                           
+<span class="go">[0.5851110683883..., 0.5852073015444..., 0.5854677540698...,</span>
+<span class="go"> 0.5855512036503..., 0.5830717085554..., 0.57058999437...]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sparsity">
+<span id="id8"></span><h3>稀疏性(Sparsity)<a class="headerlink" href="#sparsity" title="Permalink to this headline">¶</a></h3>
+<p class="centered"><strong>Fitting only features 1 and 2</strong></p>
+<p class="centered">
+<strong><a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_1" src="../../images/sphx_glr_plot_ols_3d_001.png" style="width: 260.0px; height: 195.0px;" /></a> <a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_3" src="../../images/sphx_glr_plot_ols_3d_003.png" style="width: 260.0px; height: 195.0px;" /></a> <a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_2" src="../../images/sphx_glr_plot_ols_3d_002.png" style="width: 260.0px; height: 195.0px;" /></a></strong></p><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">完整的糖尿病数据集的表示将涉及11个维度（10个特征维度和1个目标变量）。很难对这种高维表示形成直官感受，
+但是认识到它是一个相当空的空间(a fairly <em>empty</em> space)可能是有用的。</p>
+</div>
+<p>我们可以看到，虽然特征2在全模型上有很强的系数，但当与特征1比较时，发现它传递的 <code class="docutils literal notranslate"><span class="pre">y</span></code> 的信息却很少。</p>
+<p>为了改善问题的条件(即减轻维数灾难)，只选择信息量大的特征(informative features)并把信息量太小的特征(non-informative features)
+抛弃掉(比如把特征2直接置为0)是很有趣的。岭回归(Ridge regression)的做法是降低这些non-informative features的贡献，但是不会把他们全部置为0。
+还有另外一种惩罚方法，叫做 <a class="reference internal" href="../../modules/linear_model.html#lasso"><span class="std std-ref">Lasso</span></a> (least absolute shrinkage and selection operator), 可以把线性模型的一些系数设置为0。
+这样的方法被称为 <strong>sparse method</strong>，并且稀疏性可视为奥坎姆剃刀(Occam’s razor)原理的应用: 总是倾向于简单点儿的模型(<em>prefer simpler models</em>)。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">regr</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="gp">... </span>              <span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">diabetes_X_train</span><span class="p">,</span> <span class="n">diabetes_y_train</span><span class="p">)</span>
+<span class="gp">... </span>              <span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">,</span> <span class="n">diabetes_y_test</span><span class="p">)</span>
+<span class="gp">... </span>          <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">best_alpha</span> <span class="o">=</span> <span class="n">alphas</span><span class="p">[</span><span class="n">scores</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">scores</span><span class="p">))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">best_alpha</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">diabetes_X_train</span><span class="p">,</span> <span class="n">diabetes_y_train</span><span class="p">)</span>
+<span class="go">Lasso(alpha=0.025118864315095794, copy_X=True, fit_intercept=True,</span>
+<span class="go">   max_iter=1000, normalize=False, positive=False, precompute=False,</span>
+<span class="go">   random_state=None, selection=&#39;cyclic&#39;, tol=0.0001, warm_start=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>  
+<span class="go">[   0.         -212.43764548  517.19478111  313.77959962 -160.8303982    -0.</span>
+<span class="go"> -187.19554705   69.38229038  508.66011217   71.84239008]</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first"><strong>针对同一问题的不同算法</strong></p>
+<p>不同的算法可以用来解决相同的数学问题。例如，Scikit-Learn中的 <code class="docutils literal notranslate"><span class="pre">Lasso</span></code> 对象使用坐标下降法
+(<a class="reference external" href="https://en.wikipedia.org/wiki/Coordinate_descent">coordinate descent</a>)解决了lasso回归问题，
+这种方法在大型数据集上是有效的。然而，Scikit-Learn还提供 <a class="reference internal" href="../../modules/generated/sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLars</span></code></a> 对象(使用了 <em>LARS</em> 算法)，
+这对于权向量估计非常稀疏的问题(即只有很少量的观测数据的问题)是非常有效的。</p>
+</div>
+</div>
+<div class="section" id="clf-tut">
+<span id="id9"></span><h3>分类<a class="headerlink" href="#clf-tut" title="Permalink to this headline">¶</a></h3>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_logistic.html"><img alt="../../images/sphx_glr_plot_logistic_001.png" class="align-right" src="../../images/sphx_glr_plot_logistic_001.png" style="width: 260.0px; height: 195.0px;" /></a>
+<p>对于分类，如在虹膜( <a class="reference external" href="https://en.wikipedia.org/wiki/Iris_flower_data_set">iris</a> )分类任务中，
+线性回归并不是正确的方法，因为它会给远离决策前沿的数据赋予太多的权重。
+这时，一个可用的线性方法是去拟合一个 <strong>sigmoid</strong> function 或者 <strong>logistic</strong> function:</p>
+<div class="math notranslate nohighlight">
+\[y = \textrm{sigmoid}(X\beta - \textrm{offset}) + \epsilon =
+\frac{1}{1 + \textrm{exp}(- X\beta + \textrm{offset})} + \epsilon\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span>
+<span class="gp">... </span>                                      <span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;multinomial&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris_X_train</span><span class="p">,</span> <span class="n">iris_y_train</span><span class="p">)</span>  
+<span class="go">LogisticRegression(C=100000.0, class_weight=None, dual=False,</span>
+<span class="go">    fit_intercept=True, intercept_scaling=1, max_iter=100,</span>
+<span class="go">    multi_class=&#39;multinomial&#39;, n_jobs=None, penalty=&#39;l2&#39;, random_state=None,</span>
+<span class="go">    solver=&#39;lbfgs&#39;, tol=0.0001, verbose=0, warm_start=False)</span>
+</pre></div>
+</div>
+<p>上述方法就是广为人知的 <a class="reference internal" href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a>.</p>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_iris_logistic.html"><img alt="../../images/sphx_glr_plot_iris_logistic_001.png" src="../../images/sphx_glr_plot_iris_logistic_001.png" style="width: 332.0px; height: 249.0px;" /></a>
+<div class="topic">
+<p class="topic-title first">多类别分类任务</p>
+<p>如果你有多个类需要预测，那么一个可选的方法是训练多个一对多分类器(one-versus-all classifiers),然后在预测阶段使用
+启发式投票做出最终的决策。</p>
+</div>
+<div class="topic">
+<p class="topic-title first">在logistic回归模型中如何达到 缩减(Shrinkage) 与 稀疏(sparsity)</p>
+<p>参数 <code class="docutils literal notranslate"><span class="pre">C</span></code> 控制着 <a class="reference internal" href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a> 对象中正则化的量：<code class="docutils literal notranslate"><span class="pre">C</span></code> 的值越大会导致越小的正则化量。
+<code class="docutils literal notranslate"><span class="pre">penalty=&quot;l2&quot;</span></code> 会导致logistic回归模型的模型系数发生缩减但系数本身并不会变的稀疏 <a class="reference internal" href="#shrinkage"><span class="std std-ref">缩减(Shrinkage)</span></a>, 而
+<code class="docutils literal notranslate"><span class="pre">penalty=&quot;l1&quot;</span></code> 会导致logistic回归模型的模型系数变得稀疏起来 <a class="reference internal" href="#sparsity"><span class="std std-ref">稀疏性(Sparsity)</span></a>.</p>
+</div>
+<div class="green topic">
+<p class="topic-title first"><strong>练习</strong></p>
+<p>尝试用最近邻模型和线性模型对数字数据集(digits dataset)进行分类。留出最后的10%作为测试集，
+并测试模型在这些数据上的预测性能。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">linear_model</span>
+
+<span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
+<span class="n">X_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span> <span class="o">/</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">y_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+<p>练习题答案: <a class="reference download internal" download="" href="../../downloads/819593ffb50a1c66d3044a8d60e71ffb/plot_digits_classification_exercise.py"><code class="xref download docutils literal notranslate"><span class="pre">../../auto_examples/exercises/plot_digits_classification_exercise.py</span></code></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="svms">
+<h2>支持向量机 (SVMs)<a class="headerlink" href="#svms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h3>线性 SVMs<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../modules/svm.html#svm"><span class="std std-ref">支持向量机（Support Vector Machines）</span></a> 属于判别式模型家族：这类模型试图找到一个若干样本的组合来构建一个能够最大化两类之间间隔的平面。
+(they try to find a combination of samples to build a plane maximizing the margin between the two classes.)
+模型的正则化可以由参数 <code class="docutils literal notranslate"><span class="pre">C</span></code> 来控制: 一个较小的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 意味着在计算间隔(margin)的时候用到了分隔线(separating line)周围
+很多或全部的观测值,也就意味着较大的正则化量；而一个较大的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 意味着在计算间隔(margin)的时候用到了距离分隔线(separating line)
+比较近的若干个观测值,也就意味着较小的正则化量。</p>
+<table border="1" class="centered docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong>Unregularized SVM</strong></th>
+<th class="head"><strong>Regularized SVM (default)</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_margin.html"><img alt="svm_margin_unreg" src="../../images/sphx_glr_plot_svm_margin_001.png" style="width: 280.0px; height: 210.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/svm/plot_svm_margin.html"><img alt="svm_margin_reg" src="../../images/sphx_glr_plot_svm_margin_002.png" style="width: 280.0px; height: 210.0px;" /></a></td>
+</tr>
+</tbody>
+</table>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../auto_examples/svm/plot_iris.html#sphx-glr-auto-examples-svm-plot-iris-py"><span class="std std-ref">Plot different SVM classifiers in the iris dataset</span></a></li>
+</ul>
+</div>
+<p>SVMs 既可以用于回归问题 –<a class="reference internal" href="../../modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code></a> (Support Vector Regression)–,也可以用于分类问题 –<a class="reference internal" href="../../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> (Support Vector Classification).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris_X_train</span><span class="p">,</span> <span class="n">iris_y_train</span><span class="p">)</span>    
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">    decision_function_shape=&#39;ovr&#39;, degree=3, gamma=&#39;auto_deprecated&#39;,</span>
+<span class="go">    kernel=&#39;linear&#39;, max_iter=-1, probability=False, random_state=None,</span>
+<span class="go">    shrinking=True, tol=0.001, verbose=False)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>归一化数据(Normalizing data)</strong></p>
+<p class="last">对于包括SVMs在内的许多估计器来说，保证每个特征都有单位标准差对于获得良好的预测是非常重要的!!!</p>
+</div>
+</div>
+<div class="section" id="using-kernels-tut">
+<span id="id11"></span><h3>使用核函数的SVMs<a class="headerlink" href="#using-kernels-tut" title="Permalink to this headline">¶</a></h3>
+<p>类在特征空间中并不总是线性可分的。解决方法是建立一个非线性的决策函数，比如多项式就是一个替代品。
+这可以使用核技巧(<em>kernel trick</em>)来完成，它可以被看作是通过在观测数据上定位核(kernel)来创建决策能量:</p>
+<table border="1" class="centered docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Linear kernel</strong></td>
+<td><strong>Polynomial kernel</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_linear" src="../../images/sphx_glr_plot_svm_kernels_001.png" style="width: 260.0px; height: 195.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_poly" src="../../images/sphx_glr_plot_svm_kernels_002.png" style="width: 260.0px; height: 195.0px;" /></a></td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;poly&#39;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># degree: polynomial degree</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="centered docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>RBF kernel (Radial Basis Function)</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_rbf" src="../../images/sphx_glr_plot_svm_kernels_003.png" style="width: 260.0px; height: 195.0px;" /></a></td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># gamma: inverse of size of</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># radial kernel</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="topic">
+<p class="topic-title first"><strong>交互式例子</strong></p>
+<p>参考链接 <a class="reference internal" href="../../auto_examples/applications/svm_gui.html#sphx-glr-auto-examples-applications-svm-gui-py"><span class="std std-ref">SVM GUI</span></a> 去下载
+<code class="docutils literal notranslate"><span class="pre">svm_gui.py</span></code>; 用鼠标左键与右键点击添加两个类的样本点创建两个类，然后在数据上拟合SVM模型,并改变参数和数据。</p>
+</div>
+<a class="reference external image-reference" href="../../auto_examples/datasets/plot_iris_dataset.html"><img alt="../../images/sphx_glr_plot_iris_dataset_001.png" class="align-right" src="../../images/sphx_glr_plot_iris_dataset_001.png" style="width: 560.0px; height: 420.0px;" /></a>
+<div class="green topic">
+<p class="topic-title first"><strong>练习</strong></p>
+<p>尝试使用SVMs对虹膜数据集(iris dataset)中的第1类和第2类进行分类,只使用前两个特征。
+每个类留出10%的样本做测试集测试模型性能。</p>
+<p><strong>Warning</strong>: the classes are ordered, do not leave out the last 10%,
+you would be testing on only one class.</p>
+<p><strong>Hint</strong>: 您可以在网格上使用 <code class="docutils literal notranslate"><span class="pre">decision_function</span></code> 方法来获得直观感觉.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>练习题答案: <a class="reference download internal" download="" href="../../downloads/46825bbfde93b955ddf119145852baa5/plot_iris_exercise.py"><code class="xref download docutils literal notranslate"><span class="pre">../../auto_examples/exercises/plot_iris_exercise.py</span></code></a></p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
+      <a href="../../_sources/tutorial/statistical_inference/supervised_learning.rst.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="settings.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="model_selection.html">Next
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-22606712-2', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function() {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>
