@@ -173,8 +173,8 @@
     <ul>
 <li><a class="reference internal" href="#">4.6. 随机投影(Random Projection)</a><ul>
 <li><a class="reference internal" href="#the-johnson-lindenstrauss-lemma">4.6.1. The Johnson-Lindenstrauss lemma</a></li>
-<li><a class="reference internal" href="#gaussian-random-projection">4.6.2. Gaussian random projection</a></li>
-<li><a class="reference internal" href="#sparse-random-projection">4.6.3. Sparse random projection</a></li>
+<li><a class="reference internal" href="#gaussian-random-matrix">4.6.2. 高斯随机投影</a></li>
+<li><a class="reference internal" href="#sparse-random-matrix">4.6.3. 稀疏随机投影</a></li>
 </ul>
 </li>
 </ul>
@@ -196,19 +196,14 @@
             
   <div class="section" id="random-projection">
 <span id="id1"></span><h1>4.6. 随机投影(Random Projection)<a class="headerlink" href="#random-projection" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference internal" href="classes.html#module-sklearn.random_projection" title="sklearn.random_projection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.random_projection</span></code></a> module implements a simple and
-computationally efficient way to reduce the dimensionality of the data by
-trading a controlled amount of accuracy (as additional variance) for faster
-processing times and smaller model sizes. This module implements two types of
-unstructured random matrix:
-<a class="reference internal" href="#gaussian-random-matrix"><span class="std std-ref">Gaussian random matrix</span></a> and
+<p><a class="reference internal" href="classes.html#module-sklearn.random_projection" title="sklearn.random_projection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.random_projection</span></code></a> 模块实现了一种简单、计算效率高的方法来降低数据的维数。
+该方法通过交易 准确率的可控量 来换取 更快的处理时间和更小的模型规模。
+这个模块实现了两种类型的无结构化的随机矩阵(unstructured random matrix):
+<a class="reference internal" href="#gaussian-random-matrix"><span class="std std-ref">Gaussian random matrix</span></a> 和
 <a class="reference internal" href="#sparse-random-matrix"><span class="std std-ref">sparse random matrix</span></a>.</p>
-<p>The dimensions and distribution of random projections matrices are
-controlled so as to preserve the pairwise distances between any two
-samples of the dataset. Thus random projection is a suitable approximation
-technique for distance based method.</p>
+<p>控制随机投影矩阵的维数和分布，以保持数据集中任意两个样本之间的配对距离。因此，随机投影是一种适合于基于距离的近似方法。</p>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li>Sanjoy Dasgupta. 2000.
 <a class="reference external" href="http://cseweb.ucsd.edu/~dasgupta/papers/randomf.pdf">Experiments with random projection.</a>
@@ -224,20 +219,14 @@ Knowledge discovery and data mining (KDD ‘01). ACM, New York, NY, USA,
 </div>
 <div class="section" id="the-johnson-lindenstrauss-lemma">
 <span id="johnson-lindenstrauss"></span><h2>4.6.1. The Johnson-Lindenstrauss lemma<a class="headerlink" href="#the-johnson-lindenstrauss-lemma" title="Permalink to this headline">¶</a></h2>
-<p>The main theoretical result behind the efficiency of random projection is the
-<a class="reference external" href="https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma">Johnson-Lindenstrauss lemma (quoting Wikipedia)</a>:</p>
+<p>随机投影效率背后的主要理论结果 是
+<a class="reference external" href="https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma">Johnson-Lindenstrauss lemma (引用自维基百科)</a>:</p>
 <blockquote>
-<div>In mathematics, the Johnson-Lindenstrauss lemma is a result
-concerning low-distortion embeddings of points from high-dimensional
-into low-dimensional Euclidean space. The lemma states that a small set
-of points in a high-dimensional space can be embedded into a space of
-much lower dimension in such a way that distances between the points are
-nearly preserved. The map used for the embedding is at least Lipschitz,
-and can even be taken to be an orthogonal projection.</div></blockquote>
-<p>Knowing only the number of samples, the
-<a class="reference internal" href="generated/sklearn.random_projection.johnson_lindenstrauss_min_dim.html#sklearn.random_projection.johnson_lindenstrauss_min_dim" title="sklearn.random_projection.johnson_lindenstrauss_min_dim"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.random_projection.johnson_lindenstrauss_min_dim</span></code></a> estimates
-conservatively the minimal size of the random subspace to guarantee a
-bounded distortion introduced by the random projection:</p>
+<div>在数学上, Johnson-Lindenstrauss 引理是一个关于点从高维到低维欧氏空间的低失真嵌入(low-distortion embeddings)的结果。
+引理指出，高维空间中的一小部分点可以嵌入到较低维的空间中，这样就几乎保持了点之间的距离。
+用于嵌入的映射至少是Lipschitz的，甚至可以看作是正交投影(orthogonal projection)。</div></blockquote>
+<p>仅仅只知道样本的数量, 函数 <a class="reference internal" href="generated/sklearn.random_projection.johnson_lindenstrauss_min_dim.html#sklearn.random_projection.johnson_lindenstrauss_min_dim" title="sklearn.random_projection.johnson_lindenstrauss_min_dim"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.random_projection.johnson_lindenstrauss_min_dim</span></code></a> 保守估计随机子空间的最小
+size 以便保证随机投影引入的是一个有界的失真(bounded distortion)。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.random_projection</span> <span class="k">import</span> <span class="n">johnson_lindenstrauss_min_dim</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">johnson_lindenstrauss_min_dim</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="go">663</span>
@@ -254,7 +243,7 @@ bounded distortion introduced by the random projection:</p>
 <a class="reference external image-reference" href="../auto_examples/plot_johnson_lindenstrauss_bound.html"><img alt="../images/sphx_glr_plot_johnson_lindenstrauss_bound_0021.png" src="../images/sphx_glr_plot_johnson_lindenstrauss_bound_0021.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <div class="topic">
-<p class="topic-title first">Example:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
 <li>See <a class="reference internal" href="../auto_examples/plot_johnson_lindenstrauss_bound.html#sphx-glr-auto-examples-plot-johnson-lindenstrauss-bound-py"><span class="std std-ref">The Johnson-Lindenstrauss bound for embedding with random projections</span></a>
 for a theoretical explication on the Johnson-Lindenstrauss lemma and an
@@ -262,21 +251,18 @@ empirical validation using sparse random matrices.</li>
 </ul>
 </div>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li>Sanjoy Dasgupta and Anupam Gupta, 1999.
 <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.39.3334&amp;rep=rep1&amp;type=pdf">An elementary proof of the Johnson-Lindenstrauss Lemma.</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="gaussian-random-projection">
-<span id="gaussian-random-matrix"></span><h2>4.6.2. Gaussian random projection<a class="headerlink" href="#gaussian-random-projection" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="generated/sklearn.random_projection.GaussianRandomProjection.html#sklearn.random_projection.GaussianRandomProjection" title="sklearn.random_projection.GaussianRandomProjection"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.random_projection.GaussianRandomProjection</span></code></a> reduces the
-dimensionality by projecting the original input space on a randomly generated
-matrix where components are drawn from the following distribution
-<span class="math notranslate nohighlight">\(N(0, \frac{1}{n_{components}})\)</span>.</p>
-<p>Here a small excerpt which illustrates how to use the Gaussian random
-projection transformer:</p>
+<div class="section" id="gaussian-random-matrix">
+<span id="id2"></span><h2>4.6.2. 高斯随机投影<a class="headerlink" href="#gaussian-random-matrix" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.random_projection.GaussianRandomProjection.html#sklearn.random_projection.GaussianRandomProjection" title="sklearn.random_projection.GaussianRandomProjection"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.random_projection.GaussianRandomProjection</span></code></a> 类 通过把原始输入空间投影(projecting)到
+一个随机产生的矩阵(矩阵的components是从 <span class="math notranslate nohighlight">\(N(0, \frac{1}{n_{components}})\)</span> 分布中抽取的)进行维数约减。</p>
+<p>下面的小例子展示了如何使用高斯随机投影</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">random_projection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
@@ -287,16 +273,12 @@ projection transformer:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="sparse-random-projection">
-<span id="sparse-random-matrix"></span><h2>4.6.3. Sparse random projection<a class="headerlink" href="#sparse-random-projection" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="generated/sklearn.random_projection.SparseRandomProjection.html#sklearn.random_projection.SparseRandomProjection" title="sklearn.random_projection.SparseRandomProjection"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.random_projection.SparseRandomProjection</span></code></a> reduces the
-dimensionality by projecting the original input space using a sparse
-random matrix.</p>
-<p>Sparse random matrices are an alternative to dense Gaussian random
-projection matrix that guarantees similar embedding quality while being much
-more memory efficient and allowing faster computation of the projected data.</p>
-<p>If we define <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">density</span></code>, the elements of the random matrix
-are drawn from</p>
+<div class="section" id="sparse-random-matrix">
+<span id="id3"></span><h2>4.6.3. 稀疏随机投影<a class="headerlink" href="#sparse-random-matrix" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.random_projection.SparseRandomProjection.html#sklearn.random_projection.SparseRandomProjection" title="sklearn.random_projection.SparseRandomProjection"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.random_projection.SparseRandomProjection</span></code></a> 类 通过把原始输入空间投影(projecting)到
+一个稀疏随机矩阵进行维数约减。</p>
+<p>稀疏随机矩阵是稠密高斯随机投影矩阵的一个替代方案，它既保证了相似的嵌入质量同时有很高的存储效率和更快速的投影数据的计算。</p>
+<p>如果我们定义 <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">density</span></code>, 那么随机矩阵的元素可以从下面的分布中抽取:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left\{
 \begin{array}{c c l}
@@ -305,11 +287,9 @@ are drawn from</p>
 +\sqrt{\frac{s}{n_{\text{components}}}} &amp; &amp; 1 / 2s\\
 \end{array}
 \right.\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(n_{\text{components}}\)</span> is the size of the projected subspace.
-By default the density of non zero elements is set to the minimum density as
-recommended by Ping Li et al.: <span class="math notranslate nohighlight">\(1 / \sqrt{n_{\text{features}}}\)</span>.</p>
-<p>Here a small excerpt which illustrates how to use the sparse random
-projection transformer:</p>
+<p>其中 <span class="math notranslate nohighlight">\(n_{\text{components}}\)</span> 是投影子空间的size。默认情况下，Ping Li 等人推荐把非零元素的密度被设置为最小密度:
+<span class="math notranslate nohighlight">\(1 / \sqrt{n_{\text{features}}}\)</span> 。</p>
+<p>下面的小例子展示了如何使用 稀疏随机投影变换器:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">random_projection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
@@ -320,7 +300,7 @@ projection transformer:</p>
 </pre></div>
 </div>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li>D. Achlioptas. 2003.
 <a class="reference external" href="http://www.cs.ucsc.edu/~optas/papers/jl.pdf">Database-friendly random projections: Johnson-Lindenstrauss  with binary
