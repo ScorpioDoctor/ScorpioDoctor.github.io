@@ -11,28 +11,28 @@
     <title>4.3. 预处理数据(Preprocessing data) &#8212; scikit-learn 0.20.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
-  <link rel="stylesheet" href="../static/css/bootstrap-responsive.css"/>
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
 
-    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script type="text/javascript" src="../static/jquery.js"></script>
-    <script type="text/javascript" src="../static/underscore.js"></script>
-    <script type="text/javascript" src="../static/doctools.js"></script>
-    <script type="text/javascript" src="../static/js/copybutton.js"></script>
-    <script type="text/javascript" src="../static/js/extra.js"></script>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
-    <link rel="shortcut icon" href="../static/favicon.ico"/>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4.4. 缺失值处理(Imputation of missing values)" href="impute.html" />
-    <link rel="prev" title="4.2. 特征抽取(Feature extraction)" href="feature_extraction.html" />
+    <link rel="prev" title="4.2. 特征提取(Feature extraction)" href="feature_extraction.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
   <script>
      VERSION_SUBDIR = (function(groups) {
          return groups ? groups[1] : null;
@@ -64,7 +64,7 @@
 <div class="header-wrapper">
     <div class="header">
         <p class="logo"><a href="../index.html">
-            <img src="../static/scikit-learn-logo-small.png" alt="Logo"/>
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
         </a>
         </p><div class="navbar" id="scikit-navbar">
             <ul>
@@ -87,7 +87,7 @@
                 <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
                 <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
                 <li><a href="http://scikit-learn.org/dev/versions.html">All available versions</a></li>
-                <li><a href="../downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <li><a href="../_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -111,7 +111,7 @@
 <a href="https://github.com/scikit-learn/scikit-learn">
   <img class="fork-me"
        style="position: absolute; top: 0; right: 0; border: 0;"
-       src="../static/img/forkme.png"
+       src="../_static/img/forkme.png"
        alt="Fork me on GitHub" />
 </a>
 
@@ -125,10 +125,10 @@
         accesskey="P">Previous
         <br/>
         <span class="smallrellink">
-        4.2. 特征抽取(Fea...
+        4.2. 特征提取(Fea...
         </span>
             <span class="hiddenrellink">
-            4.2. 特征抽取(Feature extraction)
+            4.2. 特征提取(Feature extraction)
             </span>
         </a>
         </div>
@@ -172,28 +172,28 @@
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
 <li><a class="reference internal" href="#">4.3. 预处理数据(Preprocessing data)</a><ul>
-<li><a class="reference internal" href="#standardization-or-mean-removal-and-variance-scaling">4.3.1. Standardization, or mean removal and variance scaling</a><ul>
-<li><a class="reference internal" href="#scaling-features-to-a-range">4.3.1.1. Scaling features to a range</a></li>
-<li><a class="reference internal" href="#scaling-sparse-data">4.3.1.2. Scaling sparse data</a></li>
-<li><a class="reference internal" href="#scaling-data-with-outliers">4.3.1.3. Scaling data with outliers</a></li>
-<li><a class="reference internal" href="#centering-kernel-matrices">4.3.1.4. Centering kernel matrices</a></li>
+<li><a class="reference internal" href="#or">4.3.1. 标准化,or 均值去除和方差缩放</a><ul>
+<li><a class="reference internal" href="#id1">4.3.1.1. 缩放特征到指定范围</a></li>
+<li><a class="reference internal" href="#id2">4.3.1.2. 缩放稀疏数据</a></li>
+<li><a class="reference internal" href="#id3">4.3.1.3. 缩放带有异常值的数据</a></li>
+<li><a class="reference internal" href="#kernel-centering">4.3.1.4. 中心化 核矩阵</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#non-linear-transformation">4.3.2. Non-linear transformation</a><ul>
-<li><a class="reference internal" href="#mapping-to-a-uniform-distribution">4.3.2.1. Mapping to a Uniform distribution</a></li>
-<li><a class="reference internal" href="#mapping-to-a-gaussian-distribution">4.3.2.2. Mapping to a Gaussian distribution</a></li>
+<li><a class="reference internal" href="#preprocessing-transformer">4.3.2. 非线性变换</a><ul>
+<li><a class="reference internal" href="#id6">4.3.2.1. 映射到均匀分布</a></li>
+<li><a class="reference internal" href="#id7">4.3.2.2. 映射到高斯分布</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#normalization">4.3.3. Normalization</a></li>
-<li><a class="reference internal" href="#encoding-categorical-features">4.3.4. Encoding categorical features</a></li>
-<li><a class="reference internal" href="#discretization">4.3.5. Discretization</a><ul>
-<li><a class="reference internal" href="#k-bins-discretization">4.3.5.1. K-bins discretization</a></li>
-<li><a class="reference internal" href="#feature-binarization">4.3.5.2. Feature binarization</a></li>
+<li><a class="reference internal" href="#preprocessing-normalization">4.3.3. 归一化</a></li>
+<li><a class="reference internal" href="#preprocessing-categorical-features">4.3.4. 编码 标称型特征</a></li>
+<li><a class="reference internal" href="#preprocessing-discretization">4.3.5. 离散化</a><ul>
+<li><a class="reference internal" href="#k-bins">4.3.5.1. K-bins 离散化</a></li>
+<li><a class="reference internal" href="#preprocessing-binarization">4.3.5.2. 特征二值化</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#imputation-of-missing-values">4.3.6. Imputation of missing values</a></li>
-<li><a class="reference internal" href="#generating-polynomial-features">4.3.7. Generating polynomial features</a></li>
-<li><a class="reference internal" href="#custom-transformers">4.3.8. Custom transformers</a></li>
+<li><a class="reference internal" href="#imputation">4.3.6. 缺失值补全</a></li>
+<li><a class="reference internal" href="#polynomial-features">4.3.7. 产生多项式特征</a></li>
+<li><a class="reference internal" href="#function-transformer">4.3.8. 自定义变换器</a></li>
 </ul>
 </li>
 </ul>
@@ -215,33 +215,20 @@
             
   <div class="section" id="preprocessing-data">
 <span id="preprocessing"></span><h1>4.3. 预处理数据(Preprocessing data)<a class="headerlink" href="#preprocessing-data" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code> package provides several common
-utility functions and transformer classes to change raw feature vectors
-into a representation that is more suitable for the downstream estimators.</p>
-<p>In general, learning algorithms benefit from standardization of the data set. If
-some outliers are present in the set, robust scalers or transformers are more
-appropriate. The behaviors of the different scalers, transformers, and
-normalizers on a dataset containing marginal outliers is highlighted in
-<a class="reference internal" href="../auto_examples/preprocessing/plot_all_scaling.html#sphx-glr-auto-examples-preprocessing-plot-all-scaling-py"><span class="std std-ref">Compare the effect of different scalers on data with outliers</span></a>.</p>
-<div class="section" id="standardization-or-mean-removal-and-variance-scaling">
-<span id="preprocessing-scaler"></span><h2>4.3.1. Standardization, or mean removal and variance scaling<a class="headerlink" href="#standardization-or-mean-removal-and-variance-scaling" title="Permalink to this headline">¶</a></h2>
-<p><strong>Standardization</strong> of datasets is a <strong>common requirement for many
-machine learning estimators</strong> implemented in scikit-learn; they might behave
-badly if the individual features do not more or less look like standard
-normally distributed data: Gaussian with <strong>zero mean and unit variance</strong>.</p>
-<p>In practice we often ignore the shape of the distribution and just
-transform the data to center it by removing the mean value of each
-feature, then scale it by dividing non-constant features by their
-standard deviation.</p>
-<p>For instance, many elements used in the objective function of
-a learning algorithm (such as the RBF kernel of Support Vector
-Machines or the l1 and l2 regularizers of linear models) assume that
-all features are centered around zero and have variance in the same
-order. If a feature has a variance that is orders of magnitude larger
-than others, it might dominate the objective function and make the
-estimator unable to learn from other features correctly as expected.</p>
-<p>The function <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">scale</span></code></a> provides a quick and easy way to perform this
-operation on a single array-like dataset:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code> 包提供了几个常见的实用工具函数和变换器类，用来将原始特征向量修改为更适合机器学习模型的表达形式。</p>
+<p>一般来说，机器学习算法会受益于数据集的标准化。如果数据集中出现一些离群/异常值(outliers)，那么鲁棒的缩放器或变换器(scalers or transformers)更合适。
+不同缩放器、变换器和归一化器(normalizer)在包含边缘离群值的数据集上的行为请参看 <a class="reference internal" href="../auto_examples/preprocessing/plot_all_scaling.html#sphx-glr-auto-examples-preprocessing-plot-all-scaling-py"><span class="std std-ref">Compare the effect of different scalers on data with outliers</span></a> 。</p>
+<div class="section" id="or">
+<span id="preprocessing-scaler"></span><h2>4.3.1. 标准化,or 均值去除和方差缩放<a class="headerlink" href="#or" title="Permalink to this headline">¶</a></h2>
+<p>数据集的 标准化(<strong>Standardization</strong>) 对 <strong>scikit-learn中实现的大多数机器学习算法来说是常见的要求</strong> 。
+如果个别特征或多或少看起来不是很像标准正态分布(具有零均值和单位方差)，那么这些机器学习算法的表现可能会比较差。</p>
+<p>在实践中,我们经常忽略分布的形状，直接通过去除每个特征分量的均值来对每个特征进行中心化，
+再通过除以非常量特征(non-constant features)的标准差对其进行缩放。</p>
+<p>例如，在机器学习算法的目标函数(例如SVM的RBF内核或线性模型的l1和l2正则化)
+中有很多地方都假定了所有特征都是以0为中心而且它们的方差也具有相同的阶数。
+如果某个特征的方差比其他特征大几个数量级，那么它就会在学习算法的目标函数中占据主导位置，
+导致学习器并不能像我们所期望的那样，从其他特征中学习。</p>
+<p>函数 <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">scale</span></code></a> 提供了一个快速简单的方法来在单个 array-like 数据集上执行上述标准化操作</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">preprocessing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
@@ -255,7 +242,7 @@ operation on a single array-like dataset:</p>
 <span class="go">       [-1.22...,  1.22..., -1.06...]])</span>
 </pre></div>
 </div>
-<p>Scaled data has zero mean and unit variance:</p>
+<p>被缩放的数据具有零均值和单位方差:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="go">array([0., 0., 0.])</span>
 
@@ -263,48 +250,41 @@ operation on a single array-like dataset:</p>
 <span class="go">array([1., 1., 1.])</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">preprocessing</span></code> module further provides a utility class
-<a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a> that implements the <code class="docutils literal notranslate"><span class="pre">Transformer</span></code> API to compute
-the mean and standard deviation on a training set so as to be
-able to later reapply the same transformation on the testing set.
-This class is hence suitable for use in the early steps of a
-<a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">preprocessing</span></code> 模块还提供了一个工具类 <a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a> ，它实现了 <code class="docutils literal notranslate"><span class="pre">Transformer</span></code> 的API来计算训练集上的平均值和标准偏差，
+以便以后能够在测试集上重新应用相同的变换。因此，这个类适用于 <a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a> 的早期步骤:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span>
 <span class="go">StandardScaler(copy=True, with_mean=True, with_std=True)</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">mean_</span>                                      
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">mean_</span>                                      <span class="c1"># doctest: +ELLIPSIS</span>
 <span class="go">array([1. ..., 0. ..., 0.33...])</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">scale_</span>                                       
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">scale_</span>                                       <span class="c1"># doctest: +ELLIPSIS</span>
 <span class="go">array([0.81..., 0.81..., 1.24...])</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>                           
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>                           <span class="c1"># doctest: +ELLIPSIS</span>
 <span class="go">array([[ 0.  ..., -1.22...,  1.33...],</span>
 <span class="go">       [ 1.22...,  0.  ..., -0.26...],</span>
 <span class="go">       [-1.22...,  1.22..., -1.06...]])</span>
 </pre></div>
 </div>
-<p>The scaler instance can then be used on new data to transform it the
-same way it did on the training set:</p>
+<p>然后，缩放器的实例就可以在新的数据上实现和训练集相同缩放操作:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>                
 <span class="go">array([[-2.44...,  1.22..., -0.26...]])</span>
 </pre></div>
 </div>
-<p>It is possible to disable either centering or scaling by either
-passing <code class="docutils literal notranslate"><span class="pre">with_mean=False</span></code> or <code class="docutils literal notranslate"><span class="pre">with_std=False</span></code> to the constructor
-of <a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a>.</p>
-<div class="section" id="scaling-features-to-a-range">
-<h3>4.3.1.1. Scaling features to a range<a class="headerlink" href="#scaling-features-to-a-range" title="Permalink to this headline">¶</a></h3>
-<p>An alternative standardization is scaling features to
-lie between a given minimum and maximum value, often between zero and one,
-or so that the maximum absolute value of each feature is scaled to unit size.
-This can be achieved using <a class="reference internal" href="generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler" title="sklearn.preprocessing.MinMaxScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinMaxScaler</span></code></a> or <a class="reference internal" href="generated/sklearn.preprocessing.MaxAbsScaler.html#sklearn.preprocessing.MaxAbsScaler" title="sklearn.preprocessing.MaxAbsScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code></a>,
-respectively.</p>
-<p>The motivation to use this scaling include robustness to very small
-standard deviations of features and preserving zero entries in sparse data.</p>
-<p>Here is an example to scale a toy data matrix to the <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> range:</p>
+<p>你也可以通过在 <a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a> 类的构造函数中传入参数 <code class="docutils literal notranslate"><span class="pre">with_mean=False</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">with_std=False</span></code> 来禁用中心化或缩放操作。</p>
+<div class="section" id="id1">
+<h3>4.3.1.1. 缩放特征到指定范围<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>另外一种可选的标准化(standardization)是将特征缩放到给定的最小值和最大值之间，通常在 0 和 1 之间，
+或者也可以将每个特征的最大绝对值转换至单位大小。
+可以分别使用 <a class="reference internal" href="generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler" title="sklearn.preprocessing.MinMaxScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinMaxScaler</span></code></a> 或 <a class="reference internal" href="generated/sklearn.preprocessing.MaxAbsScaler.html#sklearn.preprocessing.MaxAbsScaler" title="sklearn.preprocessing.MaxAbsScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code></a> 实现。</p>
+<p>使用这种缩放的动机包括实现对特征的极小标准差的鲁棒性以及在稀疏矩阵中保留零元素。</p>
+<p>以下是一个将简单的数据矩阵缩放到 <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> 范围内的例子:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
 <span class="gp">... </span>                    <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
 <span class="gp">... </span>                    <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
@@ -317,17 +297,15 @@ standard deviations of features and preserving zero entries in sparse data.</p>
 <span class="go">       [0.        , 1.        , 0.        ]])</span>
 </pre></div>
 </div>
-<p>The same instance of the transformer can then be applied to some new test data
-unseen during the fit call: the same scaling and shifting operations will be
-applied to be consistent with the transformation performed on the train data:</p>
+<p>然后，上述变换器的同一个实例可以被用于在训练过程中不可见的新的测试数据:实现和训练数据上
+一致的缩放和移位操作(scaling and shifting operations):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">4.</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_minmax</span> <span class="o">=</span> <span class="n">min_max_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_minmax</span>
 <span class="go">array([[-1.5       ,  0.        ,  1.66666667]])</span>
 </pre></div>
 </div>
-<p>It is possible to introspect the scaler attributes to find about the exact
-nature of the transformation learned on the training data:</p>
+<p>可以检查缩放器（scaler）的属性，来观察在训练集中学习到的变换操作的基本性质</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">min_max_scaler</span><span class="o">.</span><span class="n">scale_</span>                             
 <span class="go">array([0.5       , 0.5       , 0.33...])</span>
 
@@ -335,18 +313,16 @@ nature of the transformation learned on the training data:</p>
 <span class="go">array([0.        , 0.5       , 0.33...])</span>
 </pre></div>
 </div>
-<p>If <a class="reference internal" href="generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler" title="sklearn.preprocessing.MinMaxScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinMaxScaler</span></code></a> is given an explicit <code class="docutils literal notranslate"><span class="pre">feature_range=(min,</span> <span class="pre">max)</span></code> the
-full formula is:</p>
+<p>如果给 <a class="reference internal" href="generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler" title="sklearn.preprocessing.MinMaxScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinMaxScaler</span></code></a> 类提供一个明确的 <code class="docutils literal notranslate"><span class="pre">feature_range=(min,</span> <span class="pre">max)</span></code> ， 那么完整的公式是:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 
 <span class="n">X_scaled</span> <span class="o">=</span> <span class="n">X_std</span> <span class="o">*</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">+</span> <span class="nb">min</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.MaxAbsScaler.html#sklearn.preprocessing.MaxAbsScaler" title="sklearn.preprocessing.MaxAbsScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code></a> works in a very similar fashion, but scales in a way
-that the training data lies within the range <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">1]</span></code> by dividing through
-the largest maximum value in each feature. It is meant for data
-that is already centered at zero or sparse data.</p>
-<p>Here is how to use the toy data from the previous example with this scaler:</p>
+<p>类 <a class="reference internal" href="generated/sklearn.preprocessing.MaxAbsScaler.html#sklearn.preprocessing.MaxAbsScaler" title="sklearn.preprocessing.MaxAbsScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code></a> 的工作原理与 <a class="reference internal" href="generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler" title="sklearn.preprocessing.MinMaxScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinMaxScaler</span></code></a> 类 非常相似，
+但是它只通过除以每个特征的最大值将训练数据缩放至 <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">1]</span></code> 区间内，
+这就意味着，训练数据应该是已经零中心化或者是稀疏数据。</p>
+<p>用先前的例子中的数据实现最大绝对值缩放操作</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
 <span class="gp">... </span>                    <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
 <span class="gp">... </span>                    <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
@@ -365,81 +341,57 @@ that is already centered at zero or sparse data.</p>
 <span class="go">array([2.,  1.,  2.])</span>
 </pre></div>
 </div>
-<p>As with <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">scale</span></code></a>, the module further provides convenience functions
-<a class="reference internal" href="generated/sklearn.preprocessing.minmax_scale.html#sklearn.preprocessing.minmax_scale" title="sklearn.preprocessing.minmax_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">minmax_scale</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.maxabs_scale.html#sklearn.preprocessing.maxabs_scale" title="sklearn.preprocessing.maxabs_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">maxabs_scale</span></code></a> if you don’t want to create
-an object.</p>
+<p>就像函数  <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">scale</span></code></a> 一样，预处理模块进一步提供了方便的函数 <a class="reference internal" href="generated/sklearn.preprocessing.minmax_scale.html#sklearn.preprocessing.minmax_scale" title="sklearn.preprocessing.minmax_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">minmax_scale</span></code></a> 和 <a class="reference internal" href="generated/sklearn.preprocessing.maxabs_scale.html#sklearn.preprocessing.maxabs_scale" title="sklearn.preprocessing.maxabs_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">maxabs_scale</span></code></a> 。
+当你不想创建对象时，可以使用这些函数 。</p>
 </div>
-<div class="section" id="scaling-sparse-data">
-<h3>4.3.1.2. Scaling sparse data<a class="headerlink" href="#scaling-sparse-data" title="Permalink to this headline">¶</a></h3>
-<p>Centering sparse data would destroy the sparseness structure in the data, and
-thus rarely is a sensible thing to do. However, it can make sense to scale
-sparse inputs, especially if features are on different scales.</p>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.MaxAbsScaler.html#sklearn.preprocessing.MaxAbsScaler" title="sklearn.preprocessing.MaxAbsScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code></a>  and <a class="reference internal" href="generated/sklearn.preprocessing.maxabs_scale.html#sklearn.preprocessing.maxabs_scale" title="sklearn.preprocessing.maxabs_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">maxabs_scale</span></code></a> were specifically designed
-for scaling sparse data, and are the recommended way to go about this.
-However, <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">scale</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a> can accept <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code>
-matrices  as input, as long as <code class="docutils literal notranslate"><span class="pre">with_mean=False</span></code> is explicitly passed
-to the constructor. Otherwise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> will be raised as
-silently centering would break the sparsity and would often crash the
-execution by allocating excessive amounts of memory unintentionally.
-<a class="reference internal" href="generated/sklearn.preprocessing.RobustScaler.html#sklearn.preprocessing.RobustScaler" title="sklearn.preprocessing.RobustScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">RobustScaler</span></code></a> cannot be fitted to sparse inputs, but you can use
-the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method on sparse inputs.</p>
-<p>Note that the scalers accept both Compressed Sparse Rows and Compressed
-Sparse Columns format (see <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code> and
-<code class="docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code>). Any other sparse input will be <strong>converted to
-the Compressed Sparse Rows representation</strong>.  To avoid unnecessary memory
-copies, it is recommended to choose the CSR or CSC representation upstream.</p>
-<p>Finally, if the centered data is expected to be small enough, explicitly
-converting the input to an array using the <code class="docutils literal notranslate"><span class="pre">toarray</span></code> method of sparse matrices
-is another option.</p>
+<div class="section" id="id2">
+<h3>4.3.1.2. 缩放稀疏数据<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>中心化稀疏(矩阵)数据会破坏数据的稀疏结构，因此很少有一个比较合理的实现方式。但是缩放稀疏输入是有意义的，尤其是当几个特征在不同的量级范围时。</p>
+<p>类 <a class="reference internal" href="generated/sklearn.preprocessing.MaxAbsScaler.html#sklearn.preprocessing.MaxAbsScaler" title="sklearn.preprocessing.MaxAbsScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code></a>  和 函数 <a class="reference internal" href="generated/sklearn.preprocessing.maxabs_scale.html#sklearn.preprocessing.maxabs_scale" title="sklearn.preprocessing.maxabs_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">maxabs_scale</span></code></a> 是专为缩放稀疏数据而设计的，并且是缩放稀疏数据的推荐方法。
+但是， 函数 <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">scale</span></code></a> 和 <a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a> 类也能够接受 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> 作为输入，只要参数 <code class="docutils literal notranslate"><span class="pre">with_mean=False</span></code> 被显式的传入它的构造器。
+否则会出现 <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> 的错误，因为默默的中心化(silently centering)会破坏稀疏性，并且经常会因为分配过多的内存而使执行崩溃。
+<a class="reference internal" href="generated/sklearn.preprocessing.RobustScaler.html#sklearn.preprocessing.RobustScaler" title="sklearn.preprocessing.RobustScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">RobustScaler</span></code></a> 类不能适配(fit)稀疏输入，但你可以在稀疏输入上使用 <code class="docutils literal notranslate"><span class="pre">transform</span></code> 方法。</p>
+<p>注意，缩放器(scaler)可以接受 压缩过的稀疏行 也可以接受 压缩过的稀疏列(参见 <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code> 以及 <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code> )。
+任何其他 稀疏输入将会 ** 转化为压缩稀疏行表示 ** 。为了避免不必要的内存复制，建议在早期选择 CSR 或 CSC 表示。</p>
+<p>最后，如果已经中心化的数据足够小，使用 <code class="docutils literal notranslate"><span class="pre">toarray</span></code> 方法将输入的稀疏矩阵显式转换为数组是另一种选择。</p>
 </div>
-<div class="section" id="scaling-data-with-outliers">
-<h3>4.3.1.3. Scaling data with outliers<a class="headerlink" href="#scaling-data-with-outliers" title="Permalink to this headline">¶</a></h3>
-<p>If your data contains many outliers, scaling using the mean and variance
-of the data is likely to not work very well. In these cases, you can use
-<a class="reference internal" href="generated/sklearn.preprocessing.robust_scale.html#sklearn.preprocessing.robust_scale" title="sklearn.preprocessing.robust_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">robust_scale</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.RobustScaler.html#sklearn.preprocessing.RobustScaler" title="sklearn.preprocessing.RobustScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">RobustScaler</span></code></a> as drop-in replacements
-instead. They use more robust estimates for the center and range of your
-data.</p>
+<div class="section" id="id3">
+<h3>4.3.1.3. 缩放带有异常值的数据<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>如果你的数据包含许多异常值，使用均值和方差缩放可能并不是一个很好的选择。
+这种情况下，你可以使用 <a class="reference internal" href="generated/sklearn.preprocessing.robust_scale.html#sklearn.preprocessing.robust_scale" title="sklearn.preprocessing.robust_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">robust_scale</span></code></a> 以及 <a class="reference internal" href="generated/sklearn.preprocessing.RobustScaler.html#sklearn.preprocessing.RobustScaler" title="sklearn.preprocessing.RobustScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">RobustScaler</span></code></a> 作为替代品。
+它们对你的数据的中心和范围使用更有鲁棒性的估计。</p>
 <div class="topic">
-<p class="topic-title first">References:</p>
-<p>Further discussion on the importance of centering and scaling data is
-available on this FAQ: <a class="reference external" href="http://www.faqs.org/faqs/ai-faq/neural-nets/part2/section-16.html">Should I normalize/standardize/rescale the data?</a></p>
+<p class="topic-title first">参考文献:</p>
+<p>更多关于中心化和缩放数据的重要性讨论在此FAQ中提及: <a class="reference external" href="http://www.faqs.org/faqs/ai-faq/neural-nets/part2/section-16.html">Should I normalize/standardize/rescale the data?</a></p>
 </div>
 <div class="topic">
-<p class="topic-title first">Scaling vs Whitening</p>
-<p>It is sometimes not enough to center and scale the features
-independently, since a downstream model can further make some assumption
-on the linear independence of the features.</p>
-<p>To address this issue you can use <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code></a> with
-<code class="docutils literal notranslate"><span class="pre">whiten=True</span></code> to further remove the linear correlation across features.</p>
+<p class="topic-title first">缩放与白化(Scaling vs Whitening)</p>
+<p>有时候独立地中心化和缩放数据是不够的，因为下游的机器学习模型会进一步对特征之间的线性依赖做出一些假设。</p>
+<p>要解决这个问题，你可以使用 <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code></a> 类 并指定参数 <code class="docutils literal notranslate"><span class="pre">whiten=True</span></code> 来进一步移除特征间的线性关联。</p>
 </div>
 <div class="topic">
-<p class="topic-title first">Scaling a 1D array</p>
-<p>All above functions (i.e. <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">scale</span></code></a>, <a class="reference internal" href="generated/sklearn.preprocessing.minmax_scale.html#sklearn.preprocessing.minmax_scale" title="sklearn.preprocessing.minmax_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">minmax_scale</span></code></a>,
-<a class="reference internal" href="generated/sklearn.preprocessing.maxabs_scale.html#sklearn.preprocessing.maxabs_scale" title="sklearn.preprocessing.maxabs_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">maxabs_scale</span></code></a>, and <a class="reference internal" href="generated/sklearn.preprocessing.robust_scale.html#sklearn.preprocessing.robust_scale" title="sklearn.preprocessing.robust_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">robust_scale</span></code></a>) accept 1D array which can be
-useful in some specific case.</p>
+<p class="topic-title first">缩放一个 1D array</p>
+<p>上面介绍过的所有函数(i.e. <a class="reference internal" href="generated/sklearn.preprocessing.scale.html#sklearn.preprocessing.scale" title="sklearn.preprocessing.scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">scale</span></code></a>, <a class="reference internal" href="generated/sklearn.preprocessing.minmax_scale.html#sklearn.preprocessing.minmax_scale" title="sklearn.preprocessing.minmax_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">minmax_scale</span></code></a>, <a class="reference internal" href="generated/sklearn.preprocessing.maxabs_scale.html#sklearn.preprocessing.maxabs_scale" title="sklearn.preprocessing.maxabs_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">maxabs_scale</span></code></a>, 和 <a class="reference internal" href="generated/sklearn.preprocessing.robust_scale.html#sklearn.preprocessing.robust_scale" title="sklearn.preprocessing.robust_scale"><code class="xref py py-func docutils literal notranslate"><span class="pre">robust_scale</span></code></a>)
+都可以直接处理一维数组。</p>
 </div>
 </div>
-<div class="section" id="centering-kernel-matrices">
-<span id="kernel-centering"></span><h3>4.3.1.4. Centering kernel matrices<a class="headerlink" href="#centering-kernel-matrices" title="Permalink to this headline">¶</a></h3>
-<p>If you have a kernel matrix of a kernel <span class="math notranslate nohighlight">\(K\)</span> that computes a dot product
-in a feature space defined by function <span class="math notranslate nohighlight">\(phi\)</span>,
-a <a class="reference internal" href="generated/sklearn.preprocessing.KernelCenterer.html#sklearn.preprocessing.KernelCenterer" title="sklearn.preprocessing.KernelCenterer"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelCenterer</span></code></a> can transform the kernel matrix
-so that it contains inner products in the feature space
-defined by <span class="math notranslate nohighlight">\(phi\)</span> followed by removal of the mean in that space.</p>
+<div class="section" id="kernel-centering">
+<span id="id4"></span><h3>4.3.1.4. 中心化 核矩阵<a class="headerlink" href="#kernel-centering" title="Permalink to this headline">¶</a></h3>
+<p>如果你有一个 核 <span class="math notranslate nohighlight">\(K\)</span> 的核矩阵(其中，核 <span class="math notranslate nohighlight">\(K\)</span> 在 由函数 <span class="math notranslate nohighlight">\(phi\)</span> 定义的特征空间上计算点积(dot product)),
+类 <a class="reference internal" href="generated/sklearn.preprocessing.KernelCenterer.html#sklearn.preprocessing.KernelCenterer" title="sklearn.preprocessing.KernelCenterer"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelCenterer</span></code></a> 可以 变换 核矩阵(kernel matrix) 以使得它包含由函数 <span class="math notranslate nohighlight">\(phi\)</span>
+定义的被去除了均值的特征空间上的内积(inner products)。</p>
 </div>
 </div>
-<div class="section" id="non-linear-transformation">
-<span id="preprocessing-transformer"></span><h2>4.3.2. Non-linear transformation<a class="headerlink" href="#non-linear-transformation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="mapping-to-a-uniform-distribution">
-<h3>4.3.2.1. Mapping to a Uniform distribution<a class="headerlink" href="#mapping-to-a-uniform-distribution" title="Permalink to this headline">¶</a></h3>
-<p>Like scalers, <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantileTransformer</span></code></a> puts all features into the same,
-known range or distribution. However, by performing a rank transformation, it
-smooths out unusual distributions and is less influenced by outliers than
-scaling methods. It does, however, distort correlations and distances within
-and across features.</p>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantileTransformer</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.quantile_transform.html#sklearn.preprocessing.quantile_transform" title="sklearn.preprocessing.quantile_transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">quantile_transform</span></code></a> provide a
-non-parametric transformation based on the quantile function to map the data to
-a uniform distribution with values between 0 and 1:</p>
+<div class="section" id="preprocessing-transformer">
+<span id="id5"></span><h2>4.3.2. 非线性变换<a class="headerlink" href="#preprocessing-transformer" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>4.3.2.1. 映射到均匀分布<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>类似于缩放器(scalers)， <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantileTransformer</span></code></a> 类将 所有特征 放到 同样的已知范围 或 同样的已知分布 下。
+但是，通过执行一个排序变换(rank transformation), 它能够使 异常的分布(unusual distributions) 被平滑化，
+并且能够做到 比使用缩放器(scalers)方法 更少地受到离群值的影响。
+然而，它的确使 特征间 及 特征内 的 关联和距离 被打乱了。</p>
+<p>类 <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantileTransformer</span></code></a> 和 函数 <a class="reference internal" href="generated/sklearn.preprocessing.quantile_transform.html#sklearn.preprocessing.quantile_transform" title="sklearn.preprocessing.quantile_transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">quantile_transform</span></code></a>
+提供了一个 基于分位数函数的无参数变换器 将数据映射到一个取值在0到1之间的均匀分布上</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
@@ -452,15 +404,13 @@ a uniform distribution with values between 0 and 1:</p>
 <span class="go">array([ 4.3,  5.1,  5.8,  6.5,  7.9])</span>
 </pre></div>
 </div>
-<p>This feature corresponds to the sepal length in cm. Once the quantile
-transformation applied, those landmarks approach closely the percentiles
-previously defined:</p>
+<p>这个特征对应于萼片的长度(以厘米为单位)。一旦应用分位数变换，这些landmarks就接近于之前定义的百分位数</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_train_trans</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 <span class="gp">... </span>
 <span class="go">array([ 0.00... ,  0.24...,  0.49...,  0.73...,  0.99... ])</span>
 </pre></div>
 </div>
-<p>This can be confirmed on a independent testing set with similar remarks:</p>
+<p>这可以在带有类似remarks的独立测试集上得到确认</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 <span class="gp">... </span>
 <span class="go">array([ 4.4  ,  5.125,  5.75 ,  6.175,  7.3  ])</span>
@@ -470,15 +420,12 @@ previously defined:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="mapping-to-a-gaussian-distribution">
-<h3>4.3.2.2. Mapping to a Gaussian distribution<a class="headerlink" href="#mapping-to-a-gaussian-distribution" title="Permalink to this headline">¶</a></h3>
-<p>In many modeling scenarios, normality of the features in a dataset is desirable.
-Power transforms are a family of parametric, monotonic transformations that aim
-to map data from any distribution to as close to a Gaussian distribution as
-possible in order to stabilize variance and minimize skewness.</p>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.PowerTransformer.html#sklearn.preprocessing.PowerTransformer" title="sklearn.preprocessing.PowerTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerTransformer</span></code></a> currently provides two such power transformations,
-the Yeo-Johnson transform and the Box-Cox transform.</p>
-<p>The Yeo-Johnson transform is given by:</p>
+<div class="section" id="id7">
+<h3>4.3.2.2. 映射到高斯分布<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>在许多建模场景中，需要数据集中的特征的正态化(normality)。幂变换(Power transforms)是一类参数化的单调变换(parametric, monotonic transformations)，
+其目的是将数据从任何分布映射到尽可能接近高斯分布，以便稳定方差(stabilize variance)和最小化偏斜(minimize skewness)。</p>
+<p>类 <a class="reference internal" href="generated/sklearn.preprocessing.PowerTransformer.html#sklearn.preprocessing.PowerTransformer" title="sklearn.preprocessing.PowerTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerTransformer</span></code></a> 目前提供两个这样的幂变换,the Yeo-Johnson transform 和 the Box-Cox transform。</p>
+<p>The Yeo-Johnson transform 如下定义:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}x_i^{(\lambda)} =
 \begin{cases}
@@ -487,17 +434,16 @@ the Yeo-Johnson transform and the Box-Cox transform.</p>
 -[(-x_i + 1)^{2 - \lambda} - 1] / (2 - \lambda) &amp; \text{if } \lambda \neq 2, x_i &lt; 0, \\[8pt]
  - \ln (- x_i + 1) &amp; \text{if } \lambda = 2, x_i &lt; 0
 \end{cases}\end{split}\]</div>
-<p>while the Box-Cox transform is given by:</p>
+<p>而 the Box-Cox transform 如下定义:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}x_i^{(\lambda)} =
 \begin{cases}
 \dfrac{x_i^\lambda - 1}{\lambda} &amp; \text{if } \lambda \neq 0, \\[8pt]
 \ln{(x_i)} &amp; \text{if } \lambda = 0,
 \end{cases}\end{split}\]</div>
-<p>Box-Cox can only be applied to strictly positive data. In both methods, the
-transformation is parameterized by <span class="math notranslate nohighlight">\(\lambda\)</span>, which is determined through
-maximum likelihood estimation. Here is an example of using Box-Cox to map
-samples drawn from a lognormal distribution to a normal distribution:</p>
+<p>Box-Cox 仅能被应用于严格正(positive)的数据上。 在这两种方法中，变换(transformation)通过 <span class="math notranslate nohighlight">\(\lambda\)</span> 被参数化：
+参数 <span class="math notranslate nohighlight">\(\lambda\)</span> 的值可以通过极大似然估计法(maximum likelihood estimation)得到。这里有一个使用例子：使用 Box-Cox
+把从对数正态分布(lognormal distribution)抽取出的样本映射成服从正太分布(normal distribution)的数据:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">PowerTransformer</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;box-cox&#39;</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_lognormal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">616</span><span class="p">)</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_lognormal</span>                                         
@@ -510,20 +456,15 @@ samples drawn from a lognormal distribution to a normal distribution:</p>
 <span class="go">       [ 0.69..., -0.84...,  0.10...]])</span>
 </pre></div>
 </div>
-<p>While the above example sets the <cite>standardize</cite> option to <cite>False</cite>,
-<a class="reference internal" href="generated/sklearn.preprocessing.PowerTransformer.html#sklearn.preprocessing.PowerTransformer" title="sklearn.preprocessing.PowerTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerTransformer</span></code></a> will apply zero-mean, unit-variance normalization
-to the transformed output by default.</p>
-<p>Below are examples of Box-Cox and Yeo-Johnson applied to various probability
-distributions.  Note that when applied to certain distributions, the power
-transforms achieve very Gaussian-like results, but with others, they are
-ineffective. This highlights the importance of visualizing the data before and
-after transformation.</p>
+<p>上述例子设置了参数 <cite>standardize</cite> 的选项为 <cite>False</cite> 。  但是，默认情况下，类 <a class="reference internal" href="generated/sklearn.preprocessing.PowerTransformer.html#sklearn.preprocessing.PowerTransformer" title="sklearn.preprocessing.PowerTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerTransformer</span></code></a> 将会应用
+zero-mean, unit-variance normalization 到变换出的输出上。</p>
+<p>下面的例子中 将 Box-Cox 和 Yeo-Johnson 应用到各种不同的概率分布上。 请注意 当把这些方法用到某个分布上的时候，
+幂变换得到的分布非常像高斯分布。但是对其他的一些分布，结果却不太有效。这更加强调了在幂变换前后对数据进行可视化的重要性。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/preprocessing/plot_map_data_to_normal.html"><img alt="../images/sphx_glr_plot_map_data_to_normal_0011.png" src="../images/sphx_glr_plot_map_data_to_normal_0011.png" style="width: 400.0px; height: 800.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/preprocessing/plot_map_data_to_normal.html"><img alt="../_images/sphx_glr_plot_map_data_to_normal_0011.png" src="../_images/sphx_glr_plot_map_data_to_normal_0011.png" style="width: 400.0px; height: 800.0px;" /></a>
 </div>
-<p>It is also possible to map data to a normal distribution using
-<a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantileTransformer</span></code></a> by setting <code class="docutils literal notranslate"><span class="pre">output_distribution='normal'</span></code>.
-Using the earlier example with the iris dataset:</p>
+<p>我们也可以 使用类 <a class="reference internal" href="generated/sklearn.preprocessing.QuantileTransformer.html#sklearn.preprocessing.QuantileTransformer" title="sklearn.preprocessing.QuantileTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantileTransformer</span></code></a> (通过设置 <code class="docutils literal notranslate"><span class="pre">output_distribution='normal'</span></code>)把数据
+变换成一个正态分布。下面是将其应用到iris dataset上的结果:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">QuantileTransformer</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">output_distribution</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -537,23 +478,15 @@ Using the earlier example with the iris dataset:</p>
 <span class="go">       [7.9...,   4.4...,   6.9...,   2.5...]])</span>
 </pre></div>
 </div>
-<p>Thus the median of the input becomes the mean of the output, centered at 0. The
-normal output is clipped so that the input’s minimum and maximum —
-corresponding to the 1e-7 and 1 - 1e-7 quantiles respectively — do not
-become infinite under the transformation.</p>
+<p>因此，输入的中值(median)变成了输出的均值(mean)，以 0 为中心。正态输出被裁剪以便输入的最大最小值(分别对应于 1e-7 和 1 - 1e-7)不会在变换之下变成无穷。</p>
 </div>
 </div>
-<div class="section" id="normalization">
-<span id="preprocessing-normalization"></span><h2>4.3.3. Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">¶</a></h2>
-<p><strong>Normalization</strong> is the process of <strong>scaling individual samples to have
-unit norm</strong>. This process can be useful if you plan to use a quadratic form
-such as the dot-product or any other kernel to quantify the similarity
-of any pair of samples.</p>
-<p>This assumption is the base of the <a class="reference external" href="https://en.wikipedia.org/wiki/Vector_Space_Model">Vector Space Model</a> often used in text
-classification and clustering contexts.</p>
-<p>The function <a class="reference internal" href="generated/sklearn.preprocessing.normalize.html#sklearn.preprocessing.normalize" title="sklearn.preprocessing.normalize"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalize</span></code></a> provides a quick and easy way to perform this
-operation on a single array-like dataset, either using the <code class="docutils literal notranslate"><span class="pre">l1</span></code> or <code class="docutils literal notranslate"><span class="pre">l2</span></code>
-norms:</p>
+<div class="section" id="preprocessing-normalization">
+<span id="id8"></span><h2>4.3.3. 归一化<a class="headerlink" href="#preprocessing-normalization" title="Permalink to this headline">¶</a></h2>
+<p>归一化(<strong>Normalization</strong>) 是 <strong>缩放单个样本使其具有单位范数</strong> 的过程。
+如果你计划使用二次形式(quadratic form 如点积或任何其他核函数)来量化任何样本间的相似度，则此过程将非常有用。</p>
+<p>这个 assumption 是 向量空间模型(<a class="reference external" href="https://en.wikipedia.org/wiki/Vector_Space_Model">Vector Space Model</a> ) 的基础，经常在文本分类和内容聚类中使用.</p>
+<p>函数 <a class="reference internal" href="generated/sklearn.preprocessing.normalize.html#sklearn.preprocessing.normalize" title="sklearn.preprocessing.normalize"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalize</span></code></a> 提供了一个快速简单的方法在类似数组的数据集上执行操作，使用 <code class="docutils literal notranslate"><span class="pre">l1</span></code> 或 <code class="docutils literal notranslate"><span class="pre">l2</span></code> 范数</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
 <span class="gp">... </span>     <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
 <span class="gp">... </span>     <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]]</span>
@@ -565,18 +498,15 @@ norms:</p>
 <span class="go">       [ 0.  ...,  0.70..., -0.70...]])</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">preprocessing</span></code> module further provides a utility class
-<a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normalizer</span></code></a> that implements the same operation using the
-<code class="docutils literal notranslate"><span class="pre">Transformer</span></code> API (even though the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method is useless in this case:
-the class is stateless as this operation treats samples independently).</p>
-<p>This class is hence suitable for use in the early steps of a
-<a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">preprocessing</span></code> 模块提供的工具类  <a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normalizer</span></code></a> 使用 <code class="docutils literal notranslate"><span class="pre">Transformer</span></code> API 实现了相同的操作
+(尽管在这种情况下， <code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法是没有用的：该类是无状态的，因为归一化操作独立的对待样本)。</p>
+<p>因此这个类适用于 <a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a> 的早期步骤</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">normalizer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">Normalizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># fit does nothing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">normalizer</span>
 <span class="go">Normalizer(copy=True, norm=&#39;l2&#39;)</span>
 </pre></div>
 </div>
-<p>The normalizer instance can then be used on sample vectors as any transformer:</p>
+<p>在这之后 归一化器的实例 就可以被使用在样本向量中，像任何其他变换器一样</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">normalizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                            
 <span class="go">array([[ 0.40..., -0.40...,  0.81...],</span>
 <span class="go">       [ 1.  ...,  0.  ...,  0.  ...],</span>
@@ -587,28 +517,23 @@ the class is stateless as this operation treats samples independently).</p>
 </pre></div>
 </div>
 <div class="topic">
-<p class="topic-title first">Sparse input</p>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.normalize.html#sklearn.preprocessing.normalize" title="sklearn.preprocessing.normalize"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalize</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normalizer</span></code></a> accept <strong>both dense array-like
-and sparse matrices from scipy.sparse as input</strong>.</p>
-<p>For sparse input the data is <strong>converted to the Compressed Sparse Rows
-representation</strong> (see <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code>) before being fed to
-efficient Cython routines. To avoid unnecessary memory copies, it is
-recommended to choose the CSR representation upstream.</p>
+<p class="topic-title first">稀疏输入</p>
+<p>函数 <a class="reference internal" href="generated/sklearn.preprocessing.normalize.html#sklearn.preprocessing.normalize" title="sklearn.preprocessing.normalize"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalize</span></code></a> 和 类 <a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normalizer</span></code></a> 接受 <strong>both dense array-like
+and sparse matrices from scipy.sparse 作为输入</strong>.</p>
+<p>对于稀疏输入，在被提交给高效Cython例程前，数据被 <strong>转化为压缩的稀疏行形式</strong> (参见 <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code> )。
+为了避免不必要的内存复制，推荐在上游选择CSR表示。</p>
 </div>
 </div>
-<div class="section" id="encoding-categorical-features">
-<span id="preprocessing-categorical-features"></span><h2>4.3.4. Encoding categorical features<a class="headerlink" href="#encoding-categorical-features" title="Permalink to this headline">¶</a></h2>
-<p>Often features are not given as continuous values but categorical.
-For example a person could have features <code class="docutils literal notranslate"><span class="pre">[&quot;male&quot;,</span> <span class="pre">&quot;female&quot;]</span></code>,
+<div class="section" id="preprocessing-categorical-features">
+<span id="id9"></span><h2>4.3.4. 编码 标称型特征<a class="headerlink" href="#preprocessing-categorical-features" title="Permalink to this headline">¶</a></h2>
+<p>在机器学习中，特征经常不是连续的数值型的而是 标称型的(categorical)。举个例子，一个人的特征可能有
+<code class="docutils literal notranslate"><span class="pre">[&quot;male&quot;,</span> <span class="pre">&quot;female&quot;]</span></code>,
 <code class="docutils literal notranslate"><span class="pre">[&quot;from</span> <span class="pre">Europe&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">US&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">Asia&quot;]</span></code>,
-<code class="docutils literal notranslate"><span class="pre">[&quot;uses</span> <span class="pre">Firefox&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Chrome&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Safari&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Internet</span> <span class="pre">Explorer&quot;]</span></code>.
-Such features can be efficiently coded as integers, for instance
-<code class="docutils literal notranslate"><span class="pre">[&quot;male&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">US&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Internet</span> <span class="pre">Explorer&quot;]</span></code> could be expressed as
-<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">3]</span></code> while <code class="docutils literal notranslate"><span class="pre">[&quot;female&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">Asia&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Chrome&quot;]</span></code> would be
-<code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">1]</span></code>.</p>
-<p>To convert categorical features to such integer codes, we can use the
-<a class="reference internal" href="generated/sklearn.preprocessing.OrdinalEncoder.html#sklearn.preprocessing.OrdinalEncoder" title="sklearn.preprocessing.OrdinalEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code></a>. This estimator transforms each categorical feature to one
-new feature of integers (0 to n_categories - 1):</p>
+<code class="docutils literal notranslate"><span class="pre">[&quot;uses</span> <span class="pre">Firefox&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Chrome&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Safari&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Internet</span> <span class="pre">Explorer&quot;]</span></code> 等。
+这些特征能够被有效地编码成整数，比如 <code class="docutils literal notranslate"><span class="pre">[&quot;male&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">US&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Internet</span> <span class="pre">Explorer&quot;]</span></code> 可以被表示为 [0, 1, 3] ，
+<code class="docutils literal notranslate"><span class="pre">[&quot;female&quot;,</span> <span class="pre">&quot;from</span> <span class="pre">Asia&quot;,</span> <span class="pre">&quot;uses</span> <span class="pre">Chrome&quot;]</span></code> 表示为 [1, 2, 1] 。</p>
+<p>要把 标称型特征(categorical features) 转换为 这样的整数编码(integer codes), 我们可以使用 <a class="reference internal" href="generated/sklearn.preprocessing.OrdinalEncoder.html#sklearn.preprocessing.OrdinalEncoder" title="sklearn.preprocessing.OrdinalEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code></a> 。
+这个 etimator 把每一个 categorical feature 变换成 一个新的整数数字特征 (0 到 n_categories - 1):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OrdinalEncoder</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  
@@ -617,18 +542,12 @@ new feature of integers (0 to n_categories - 1):</p>
 <span class="go">array([[0., 1., 1.]])</span>
 </pre></div>
 </div>
-<p>Such integer representation can, however, not be used directly with all
-scikit-learn estimators, as these expect continuous input, and would interpret
-the categories as being ordered, which is often not desired (i.e. the set of
-browsers was ordered arbitrarily).</p>
-<p>Another possibility to convert categorical features to features that can be used
-with scikit-learn estimators is to use a one-of-K, also known as one-hot or
-dummy encoding.
-This type of encoding can be obtained with the <a class="reference internal" href="generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder" title="sklearn.preprocessing.OneHotEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneHotEncoder</span></code></a>,
-which transforms each categorical feature with
-<code class="docutils literal notranslate"><span class="pre">n_categories</span></code> possible values into <code class="docutils literal notranslate"><span class="pre">n_categories</span></code> binary features, with
-one of them 1, and all others 0.</p>
-<p>Continuing the example above:</p>
+<p>这样的整数特征表示并不能在scikit-learn的估计器中直接使用，因为这样的连续输入，
+估计器会认为类别之间是有序的，但实际却是无序的。(例如：浏览器的类别数据则是任意排序的)。</p>
+<p>另外一种将 categorical features 转换为能够被scikit-learn中模型使用的编码是 one-of-K， 又称之为 one-hot 编码 或 dummy encoding。
+这种编码类型已经在类 <a class="reference internal" href="generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder" title="sklearn.preprocessing.OneHotEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneHotEncoder</span></code></a> 中实现。该类把每一个具有 <code class="docutils literal notranslate"><span class="pre">n_categories</span></code> 个可能取值的 categorical特征 变换为
+长度为 <code class="docutils literal notranslate"><span class="pre">n_categories</span></code> 的二进制特征向量，里面只有一个地方是1，其余位置都是0。</p>
+<p>继续我们上面的例子:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  
@@ -641,15 +560,12 @@ one of them 1, and all others 0.</p>
 <span class="go">       [0., 1., 1., 0., 0., 1.]])</span>
 </pre></div>
 </div>
-<p>By default, the values each feature can take is inferred automatically
-from the dataset and can be found in the <code class="docutils literal notranslate"><span class="pre">categories_</span></code> attribute:</p>
+<p>默认情况下，每个特征使用几维的数值可以从数据集自动推断。而且可以在属性 <code class="docutils literal notranslate"><span class="pre">categories_</span></code> 中找到:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">categories_</span>
 <span class="go">[array([&#39;female&#39;, &#39;male&#39;], dtype=object), array([&#39;from Europe&#39;, &#39;from US&#39;], dtype=object), array([&#39;uses Firefox&#39;, &#39;uses Safari&#39;], dtype=object)]</span>
 </pre></div>
 </div>
-<p>It is possible to specify this explicitly using the parameter <code class="docutils literal notranslate"><span class="pre">categories</span></code>.
-There are two genders, four possible continents and four web browsers in our
-dataset:</p>
+<p>当然，你也可以通过使用参数 <code class="docutils literal notranslate"><span class="pre">categories</span></code> 来明确指定。在我们的例子数据集中，有两个性别类，四个可能的洲，四个网络浏览器</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">genders</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;from Africa&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">browsers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uses Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;uses IE&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]</span>
@@ -666,13 +582,9 @@ dataset:</p>
 <span class="go">array([[1., 0., 0., 1., 0., 0., 1., 0., 0., 0.]])</span>
 </pre></div>
 </div>
-<p>If there is a possibility that the training data might have missing categorical
-features, it can often be better to specify <code class="docutils literal notranslate"><span class="pre">handle_unknown='ignore'</span></code> instead
-of setting the <code class="docutils literal notranslate"><span class="pre">categories</span></code> manually as above. When
-<code class="docutils literal notranslate"><span class="pre">handle_unknown='ignore'</span></code> is specified and unknown categories are encountered
-during transform, no error will be raised but the resulting one-hot encoded
-columns for this feature will be all zeros
-(<code class="docutils literal notranslate"><span class="pre">handle_unknown='ignore'</span></code> is only supported for one-hot encoding):</p>
+<p>如果训练数据中可能含有缺失的categrical features, 通过指定 <code class="docutils literal notranslate"><span class="pre">handle_unknown='ignore'</span></code> 通常比像上面代码那样手动设置 <code class="docutils literal notranslate"><span class="pre">categories</span></code> 更好。
+当 <code class="docutils literal notranslate"><span class="pre">handle_unknown='ignore'</span></code> 被指定后，并且在变换过程中真的碰到了未知的 categories, 则 不会抛出任何错误但是由此产生的该特征的 one-hot 编码列
+将会全部变成 0 。(这个参数设置选项 <code class="docutils literal notranslate"><span class="pre">handle_unknown='ignore'</span></code> 仅仅在 one-hot encoding 的时候得到支持):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
@@ -683,60 +595,50 @@ columns for this feature will be all zeros
 <span class="go">array([[1., 0., 0., 0., 0., 0.]])</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="feature_extraction.html#dict-feature-extraction"><span class="std std-ref">Loading features from dicts</span></a> for categorical features that are represented
-as a dict, not as scalars.</p>
+<p>请查看 <a class="reference internal" href="feature_extraction.html#dict-feature-extraction"><span class="std std-ref">从字典加载特征</span></a> 用于表示成字典形式的标称型特征而不是标量形式。</p>
 </div>
-<div class="section" id="discretization">
-<span id="preprocessing-discretization"></span><h2>4.3.5. Discretization<a class="headerlink" href="#discretization" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Discretization_of_continuous_features">Discretization</a>
-(otherwise known as quantization or binning) provides a way to partition continuous
-features into discrete values. Certain datasets with continuous features
-may benefit from discretization, because discretization can transform the dataset
-of continuous attributes to one with only nominal attributes.</p>
-<p>One-hot encoded discretized features can make a model more expressive, while
-maintaining interpretability. For instance, pre-processing with a discretizer
-can introduce nonlinearity to linear models.</p>
-<div class="section" id="k-bins-discretization">
-<h3>4.3.5.1. K-bins discretization<a class="headerlink" href="#k-bins-discretization" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.KBinsDiscretizer.html#sklearn.preprocessing.KBinsDiscretizer" title="sklearn.preprocessing.KBinsDiscretizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a> discretizers features into <code class="docutils literal notranslate"><span class="pre">k</span></code> equal width bins:</p>
+<div class="section" id="preprocessing-discretization">
+<span id="id10"></span><h2>4.3.5. 离散化<a class="headerlink" href="#preprocessing-discretization" title="Permalink to this headline">¶</a></h2>
+<p>离散化 (<a class="reference external" href="https://en.wikipedia.org/wiki/Discretization_of_continuous_features">Discretization</a>)
+(有些时候叫 量化(quantization) 或 装箱(binning)) 提供了将连续特征划分为离散特征值的方法。
+某些具有连续特征的数据集会受益于离散化，因为 离散化可以把具有连续属性的数据集变换成只有名义属性(nominal attributes)的数据集。
+(译者注： nominal attributes 其实就是 categorical features, 可以译为 名称属性，名义属性，符号属性，离散属性 等)</p>
+<p>One-hot 编码的离散化特征 可以使得一个模型更加的有表现力(expressive)，同时还能保留其可解释性(interpretability)。
+比如，用离散化器进行预处理可以给线性模型引入非线性。</p>
+<div class="section" id="k-bins">
+<h3>4.3.5.1. K-bins 离散化<a class="headerlink" href="#k-bins" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.preprocessing.KBinsDiscretizer.html#sklearn.preprocessing.KBinsDiscretizer" title="sklearn.preprocessing.KBinsDiscretizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a> 类使用 <code class="docutils literal notranslate"><span class="pre">k</span></code> 个等宽的 bins 把特征离散化</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mi">15</span> <span class="p">],</span>
 <span class="gp">... </span>              <span class="p">[</span>  <span class="mf">0.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="mi">14</span> <span class="p">],</span>
 <span class="gp">... </span>              <span class="p">[</span>  <span class="mf">6.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mi">11</span> <span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">est</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">KBinsDiscretizer</span><span class="p">(</span><span class="n">n_bins</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">encode</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>By default the output is one-hot encoded into a sparse matrix
-(See <a class="reference internal" href="#preprocessing-categorical-features"><span class="std std-ref">Encoding categorical features</span></a>)
-and this can be configured with the <code class="docutils literal notranslate"><span class="pre">encode</span></code> parameter.
-For each feature, the bin edges are computed during <code class="docutils literal notranslate"><span class="pre">fit</span></code> and together with
-the number of bins, they will define the intervals. Therefore, for the current
-example, these intervals are defined as:</p>
+<p>默认情况下，输出是被 one-hot 编码到一个稀疏矩阵。(请看 <a class="reference internal" href="#preprocessing-categorical-features"><span class="std std-ref">编码 标称型特征</span></a>)。
+而且可以使用参数 <code class="docutils literal notranslate"><span class="pre">encode</span></code> 进行配置。对每一个特征， bin 的边界以及总数目 在 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 过程中被计算出来，它们将用来定义区间。
+因此，对现在的例子，这些区间间隔被定义如下:</p>
 <blockquote>
 <div><ul class="simple">
 <li>feature 1: <span class="math notranslate nohighlight">\({[-\infty, -1), [-1, 2), [2, \infty)}\)</span></li>
 <li>feature 2: <span class="math notranslate nohighlight">\({[-\infty, 5), [5, \infty)}\)</span></li>
 <li>feature 3: <span class="math notranslate nohighlight">\({[-\infty, 14), [14, \infty)}\)</span></li>
 </ul>
-<p>Based on these bin intervals, <code class="docutils literal notranslate"><span class="pre">X</span></code> is transformed as follows:</p>
+</div></blockquote>
+<p>基于这些 bin 区间, <code class="docutils literal notranslate"><span class="pre">X</span></code> 就被变换成下面这样:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">est</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                      
 <span class="go">array([[ 0., 1., 1.],</span>
 <span class="go">       [ 1., 1., 1.],</span>
 <span class="go">       [ 2., 0., 0.]])</span>
 </pre></div>
 </div>
-</div></blockquote>
-<p>The resulting dataset contains ordinal attributes which can be further used
-in a <a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a>.</p>
-<p>Discretization is similar to constructing histograms for continuous data.
-However, histograms focus on counting features which fall into particular
-bins, whereas discretization focuses on assigning feature values to these bins.</p>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.KBinsDiscretizer.html#sklearn.preprocessing.KBinsDiscretizer" title="sklearn.preprocessing.KBinsDiscretizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a> implements different binning strategies, which can be
-selected with the <code class="docutils literal notranslate"><span class="pre">strategy</span></code> parameter. The ‘uniform’ strategy uses
-constant-width bins. The ‘quantile’ strategy uses the quantiles values to have
-equally populated bins in each feature. The ‘kmeans’ strategy defines bins based
-on a k-means clustering procedure performed on each feature independently.</p>
+<p>由此产生的数据集包含了有序属性(ordinal attributes),可以被进一步用在类  <a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a> 中。</p>
+<p>离散化(Discretization) 类似于为连续数据构建直方图(histograms)。
+然而，直方图聚焦于统计特征落在特定的bins里面的数量，而离散化聚焦于给这些bins分配特征取值。</p>
+<p><a class="reference internal" href="generated/sklearn.preprocessing.KBinsDiscretizer.html#sklearn.preprocessing.KBinsDiscretizer" title="sklearn.preprocessing.KBinsDiscretizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a> 类实现了不同的 binning 策略，可以通过参数 <code class="docutils literal notranslate"><span class="pre">strategy</span></code> 进行选择。 ‘uniform’ 策略使用固定宽度的bins。
+‘quantile’ 策略在每个特征上使用 分位数(quantiles)值以便具有相同填充的bins。
+‘kmeans’ 策略基于 在每个特征上独立执行的 k-means 聚类过程 定义bins。</p>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/preprocessing/plot_discretization.html#sphx-glr-auto-examples-preprocessing-plot-discretization-py"><span class="std std-ref">Using KBinsDiscretizer to discretize continuous features</span></a></li>
 <li><a class="reference internal" href="../auto_examples/preprocessing/plot_discretization_classification.html#sphx-glr-auto-examples-preprocessing-plot-discretization-classification-py"><span class="std std-ref">Feature discretization</span></a></li>
@@ -744,21 +646,15 @@ on a k-means clustering procedure performed on each feature independently.</p>
 </ul>
 </div>
 </div>
-<div class="section" id="feature-binarization">
-<span id="preprocessing-binarization"></span><h3>4.3.5.2. Feature binarization<a class="headerlink" href="#feature-binarization" title="Permalink to this headline">¶</a></h3>
-<p><strong>Feature binarization</strong> is the process of <strong>thresholding numerical
-features to get boolean values</strong>. This can be useful for downstream
-probabilistic estimators that make assumption that the input data
-is distributed according to a multi-variate <a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a>. For instance,
-this is the case for the <a class="reference internal" href="generated/sklearn.neural_network.BernoulliRBM.html#sklearn.neural_network.BernoulliRBM" title="sklearn.neural_network.BernoulliRBM"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.neural_network.BernoulliRBM</span></code></a>.</p>
-<p>It is also common among the text processing community to use binary
-feature values (probably to simplify the probabilistic reasoning) even
-if normalized counts (a.k.a. term frequencies) or TF-IDF valued features
-often perform slightly better in practice.</p>
-<p>As for the <a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normalizer</span></code></a>, the utility class
-<a class="reference internal" href="generated/sklearn.preprocessing.Binarizer.html#sklearn.preprocessing.Binarizer" title="sklearn.preprocessing.Binarizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binarizer</span></code></a> is meant to be used in the early stages of
-<a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a>. The <code class="docutils literal notranslate"><span class="pre">fit</span></code> method does nothing
-as each sample is treated independently of others:</p>
+<div class="section" id="preprocessing-binarization">
+<span id="id11"></span><h3>4.3.5.2. 特征二值化<a class="headerlink" href="#preprocessing-binarization" title="Permalink to this headline">¶</a></h3>
+<p>特征二值化(<strong>Feature binarization</strong>) 是 <strong>将数值特征用阈值过滤得到布尔值</strong> 的过程。这对于pipeline中下游的概率型模型是有用的，
+它们假设输入数据是 多值伯努利分布(multi-variate <a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a>) 。
+例如这个模型 <a class="reference internal" href="generated/sklearn.neural_network.BernoulliRBM.html#sklearn.neural_network.BernoulliRBM" title="sklearn.neural_network.BernoulliRBM"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.neural_network.BernoulliRBM</span></code></a> 就用到了 多值伯努利分布 。</p>
+<p>即使 归一化计数(a.k.a. term frequencies) 和 TF-IDF值特征 在实践中表现稍好一些，
+在文本处理社区中也常常使用二值化特征值(这可能会简化概率推理(probabilistic reasoning))。</p>
+<p>与 <a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normalizer</span></code></a> 类一样，工具类 <a class="reference internal" href="generated/sklearn.preprocessing.Binarizer.html#sklearn.preprocessing.Binarizer" title="sklearn.preprocessing.Binarizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binarizer</span></code></a> 也被用于 <a class="reference internal" href="generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a> 的早期步骤中。
+因为每个样本被当做是独立于其他样本的，所以 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法是不做任何事的:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
 <span class="gp">... </span>     <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
 <span class="gp">... </span>     <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]]</span>
@@ -773,7 +669,7 @@ as each sample is treated independently of others:</p>
 <span class="go">       [0., 1., 0.]])</span>
 </pre></div>
 </div>
-<p>It is possible to adjust the threshold of the binarizer:</p>
+<p>二值化器(binarizer)的阈值是可以被调节的:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binarizer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">Binarizer</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">1.1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">binarizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="go">array([[0., 0., 1.],</span>
@@ -781,29 +677,26 @@ as each sample is treated independently of others:</p>
 <span class="go">       [0., 0., 0.]])</span>
 </pre></div>
 </div>
-<p>As for the <a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normalizer</span></code></a> classes, the
-preprocessing module provides a companion function <a class="reference internal" href="generated/sklearn.preprocessing.binarize.html#sklearn.preprocessing.binarize" title="sklearn.preprocessing.binarize"><code class="xref py py-func docutils literal notranslate"><span class="pre">binarize</span></code></a>
-to be used when the transformer API is not necessary.</p>
-<p>Note that the <a class="reference internal" href="generated/sklearn.preprocessing.Binarizer.html#sklearn.preprocessing.Binarizer" title="sklearn.preprocessing.Binarizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binarizer</span></code></a> is similar to the <a class="reference internal" href="generated/sklearn.preprocessing.KBinsDiscretizer.html#sklearn.preprocessing.KBinsDiscretizer" title="sklearn.preprocessing.KBinsDiscretizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a>
-when <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">2</span></code>, and when the bin edge is at the value <code class="docutils literal notranslate"><span class="pre">threshold</span></code>.</p>
+<p>与 <a class="reference internal" href="generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a> 类 和 <a class="reference internal" href="generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Normalizer</span></code></a> 类一样， 预处理模块也提供了一个函数 <a class="reference internal" href="generated/sklearn.preprocessing.binarize.html#sklearn.preprocessing.binarize" title="sklearn.preprocessing.binarize"><code class="xref py py-func docutils literal notranslate"><span class="pre">binarize</span></code></a>
+供我们使用，当 变换器(transformer) API 并不是必须的 的时候。</p>
+<p>请注意 当 <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">2</span></code> ， 和 当 bin edge is at the value <code class="docutils literal notranslate"><span class="pre">threshold</span></code> 时， <a class="reference internal" href="generated/sklearn.preprocessing.Binarizer.html#sklearn.preprocessing.Binarizer" title="sklearn.preprocessing.Binarizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binarizer</span></code></a> 与 <a class="reference internal" href="generated/sklearn.preprocessing.KBinsDiscretizer.html#sklearn.preprocessing.KBinsDiscretizer" title="sklearn.preprocessing.KBinsDiscretizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a> 是类似的。</p>
 <div class="topic">
-<p class="topic-title first">Sparse input</p>
-<p><a class="reference internal" href="generated/sklearn.preprocessing.binarize.html#sklearn.preprocessing.binarize" title="sklearn.preprocessing.binarize"><code class="xref py py-func docutils literal notranslate"><span class="pre">binarize</span></code></a> and <a class="reference internal" href="generated/sklearn.preprocessing.Binarizer.html#sklearn.preprocessing.Binarizer" title="sklearn.preprocessing.Binarizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binarizer</span></code></a> accept <strong>both dense array-like
-and sparse matrices from scipy.sparse as input</strong>.</p>
-<p>For sparse input the data is <strong>converted to the Compressed Sparse Rows
-representation</strong> (see <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code>).
-To avoid unnecessary memory copies, it is recommended to choose the CSR
-representation upstream.</p>
+<p class="topic-title first">稀疏输入</p>
+<p>函数 <a class="reference internal" href="generated/sklearn.preprocessing.binarize.html#sklearn.preprocessing.binarize" title="sklearn.preprocessing.binarize"><code class="xref py py-func docutils literal notranslate"><span class="pre">binarize</span></code></a> 和 类 <a class="reference internal" href="generated/sklearn.preprocessing.Binarizer.html#sklearn.preprocessing.Binarizer" title="sklearn.preprocessing.Binarizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binarizer</span></code></a> 都接受 <strong>稠密数组型的输入</strong>，和 <strong>来自 scipy.sparse 的稀疏矩阵作为输入</strong> 。</p>
+<p>对于 稀疏输入，数据被转换为 <strong>Compressed Sparse Rows representation</strong> (请看 <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code>).
+为了避免不必要的内存拷贝, 在pipeline的早期阶段 推荐使用 CSR representation。</p>
 </div>
 </div>
 </div>
-<div class="section" id="imputation-of-missing-values">
-<span id="imputation"></span><h2>4.3.6. Imputation of missing values<a class="headerlink" href="#imputation-of-missing-values" title="Permalink to this headline">¶</a></h2>
-<p>Tools for imputing missing values are discussed at <a class="reference internal" href="impute.html#impute"><span class="std std-ref">缺失值处理(Imputation of missing values)</span></a>.</p>
+<div class="section" id="imputation">
+<span id="id12"></span><h2>4.3.6. 缺失值补全<a class="headerlink" href="#imputation" title="Permalink to this headline">¶</a></h2>
+<p>关于 缺失值(missing values) 补全的方法和工具 的讨论，请看章节: <a class="reference internal" href="impute.html#impute"><span class="std std-ref">缺失值处理(Imputation of missing values)</span></a> 。</p>
 </div>
-<div class="section" id="generating-polynomial-features">
-<span id="polynomial-features"></span><h2>4.3.7. Generating polynomial features<a class="headerlink" href="#generating-polynomial-features" title="Permalink to this headline">¶</a></h2>
-<p>Often it’s useful to add complexity to the model by considering nonlinear features of the input data. A simple and common method to use is polynomial features, which can get features’ high-order and interaction terms. It is implemented in <a class="reference internal" href="generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures" title="sklearn.preprocessing.PolynomialFeatures"><code class="xref py py-class docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code></a>:</p>
+<div class="section" id="polynomial-features">
+<span id="id13"></span><h2>4.3.7. 产生多项式特征<a class="headerlink" href="#polynomial-features" title="Permalink to this headline">¶</a></h2>
+<p>通常，在机器学习中，通过使用一些输入数据的非线性特征来增加模型的复杂度是有用的。
+一个简单通用的办法是使用多项式特征(polynomial features)，这可以获得特征的更高阶次和互相间关系的 项(terms)。
+上述功能已经在 <a class="reference internal" href="generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures" title="sklearn.preprocessing.PolynomialFeatures"><code class="xref py py-class docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code></a> 类中实现</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">PolynomialFeatures</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -818,8 +711,9 @@ representation upstream.</p>
 <span class="go">       [ 1.,  4.,  5., 16., 20., 25.]])</span>
 </pre></div>
 </div>
-<p>The features of X have been transformed from <span class="math notranslate nohighlight">\((X_1, X_2)\)</span> to <span class="math notranslate nohighlight">\((1, X_1, X_2, X_1^2, X_1X_2, X_2^2)\)</span>.</p>
-<p>In some cases, only interaction terms among features are required, and it can be gotten with the setting <code class="docutils literal notranslate"><span class="pre">interaction_only=True</span></code>:</p>
+<p>X 的特征向量 已经从 <span class="math notranslate nohighlight">\((X_1, X_2)\)</span> 变换为 <span class="math notranslate nohighlight">\((1, X_1, X_2, X_1^2, X_1X_2, X_2^2)\)</span> 。</p>
+<p>在有些情形下, 仅仅需要特征之间的相互作用项(interaction terms among features), 这时候通过设置 <code class="docutils literal notranslate"><span class="pre">interaction_only=True</span></code> 就可以得到我们
+想要的 相互作用项</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>                                                 
 <span class="go">array([[0, 1, 2],</span>
@@ -832,16 +726,16 @@ representation upstream.</p>
 <span class="go">       [  1.,   6.,   7.,   8.,  42.,  48.,  56., 336.]])</span>
 </pre></div>
 </div>
-<p>The features of X have been transformed from <span class="math notranslate nohighlight">\((X_1, X_2, X_3)\)</span> to <span class="math notranslate nohighlight">\((1, X_1, X_2, X_3, X_1X_2, X_1X_3, X_2X_3, X_1X_2X_3)\)</span>.</p>
-<p>Note that polynomial features are used implicitly in <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_method">kernel methods</a> (e.g., <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm.SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA" title="sklearn.decomposition.KernelPCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.decomposition.KernelPCA</span></code></a>) when using polynomial <a class="reference internal" href="svm.html#svm-kernels"><span class="std std-ref">核函数</span></a>.</p>
+<p>X 的特征向量 已经从 <span class="math notranslate nohighlight">\((X_1, X_2, X_3)\)</span> 变换为 <span class="math notranslate nohighlight">\((1, X_1, X_2, X_3, X_1X_2, X_1X_3, X_2X_3, X_1X_2X_3)\)</span>.</p>
+<p>请注意，当我们使用多项式核 <a class="reference internal" href="svm.html#svm-kernels"><span class="std std-ref">核函数</span></a> 的时候， 多项式特征 在 <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_method">kernel methods</a> 中被隐式的使用了。
+(比如说, <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm.SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA" title="sklearn.decomposition.KernelPCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.decomposition.KernelPCA</span></code></a>)。</p>
 <p>See <a class="reference internal" href="../auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py"><span class="std std-ref">Polynomial interpolation</span></a> for Ridge regression using created polynomial features.</p>
 </div>
-<div class="section" id="custom-transformers">
-<span id="function-transformer"></span><h2>4.3.8. Custom transformers<a class="headerlink" href="#custom-transformers" title="Permalink to this headline">¶</a></h2>
-<p>Often, you will want to convert an existing Python function into a transformer
-to assist in data cleaning or processing. You can implement a transformer from
-an arbitrary function with <a class="reference internal" href="generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer" title="sklearn.preprocessing.FunctionTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionTransformer</span></code></a>. For example, to build
-a transformer that applies a log transformation in a pipeline, do:</p>
+<div class="section" id="function-transformer">
+<span id="id14"></span><h2>4.3.8. 自定义变换器<a class="headerlink" href="#function-transformer" title="Permalink to this headline">¶</a></h2>
+<p>通常，在机器学习中，你可能想要将一个已有的 Python 函数转化为一个变换器(transformer)来协助数据清理或处理。
+你可以使用 <a class="reference internal" href="generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer" title="sklearn.preprocessing.FunctionTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionTransformer</span></code></a> 类从任意函数中实现一个transformer。例如，在一个pipeline中构建一个实现日志转换的transformer，
+就可以这样做</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">FunctionTransformer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -851,18 +745,15 @@ a transformer that applies a log transformation in a pipeline, do:</p>
 <span class="go">       [1.09861229, 1.38629436]])</span>
 </pre></div>
 </div>
-<p>You can ensure that <code class="docutils literal notranslate"><span class="pre">func</span></code> and <code class="docutils literal notranslate"><span class="pre">inverse_func</span></code> are the inverse of each other
-by setting <code class="docutils literal notranslate"><span class="pre">check_inverse=True</span></code> and calling <code class="docutils literal notranslate"><span class="pre">fit</span></code> before
-<code class="docutils literal notranslate"><span class="pre">transform</span></code>. Please note that a warning is raised and can be turned into an
-error with a <code class="docutils literal notranslate"><span class="pre">filterwarnings</span></code>:</p>
+<p>你可以保证 <code class="docutils literal notranslate"><span class="pre">func</span></code> 和 <code class="docutils literal notranslate"><span class="pre">inverse_func</span></code> 是互为可逆的(the inverse of each other) 通过设置 <code class="docutils literal notranslate"><span class="pre">check_inverse=True</span></code> 并且在 调用 <code class="docutils literal notranslate"><span class="pre">transform</span></code> 之前
+调用 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 。 请注意 一个 warning 会被抛出，并且 可以使用 <code class="docutils literal notranslate"><span class="pre">filterwarnings</span></code> 将其转为一个 error</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;.*check_inverse*.&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For a full code example that demonstrates using a <a class="reference internal" href="generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer" title="sklearn.preprocessing.FunctionTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionTransformer</span></code></a>
-to do custom feature selection,
-see <a class="reference internal" href="../auto_examples/preprocessing/plot_function_transformer.html#sphx-glr-auto-examples-preprocessing-plot-function-transformer-py"><span class="std std-ref">Using FunctionTransformer to select columns</span></a></p>
+<p>我们提供了一个完整的代码案例来展示 <a class="reference internal" href="generated/sklearn.preprocessing.FunctionTransformer.html#sklearn.preprocessing.FunctionTransformer" title="sklearn.preprocessing.FunctionTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionTransformer</span></code></a> 类进行自定义特征选择的用法，请看：
+<a class="reference internal" href="../auto_examples/preprocessing/plot_function_transformer.html#sphx-glr-auto-examples-preprocessing-plot-function-transformer-py"><span class="std std-ref">Using FunctionTransformer to select columns</span></a></p>
 </div>
 </div>
 
