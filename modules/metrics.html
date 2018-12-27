@@ -8,31 +8,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   
-    <title>4.8. Pairwise metrics, Affinities and Kernels &#8212; scikit-learn 0.20.1 documentation</title>
+    <title>4.8. 成对测度, 相似性 和 核 &#8212; scikit-learn 0.20.1 documentation</title>
   <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
-  <link rel="stylesheet" href="../static/css/bootstrap-responsive.css"/>
+  <link rel="stylesheet" href="../staticcss/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../staticcss/bootstrap-responsive.css"/>
 
-    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script type="text/javascript" src="../static/jquery.js"></script>
-    <script type="text/javascript" src="../static/underscore.js"></script>
-    <script type="text/javascript" src="../static/doctools.js"></script>
-    <script type="text/javascript" src="../static/js/copybutton.js"></script>
-    <script type="text/javascript" src="../static/js/extra.js"></script>
+    <link rel="stylesheet" href="../staticnature.css" type="text/css" />
+    <link rel="stylesheet" href="../staticpygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../staticgallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../staticdocumentation_options.js"></script>
+    <script type="text/javascript" src="../staticjquery.js"></script>
+    <script type="text/javascript" src="../staticunderscore.js"></script>
+    <script type="text/javascript" src="../staticdoctools.js"></script>
+    <script type="text/javascript" src="../staticjs/copybutton.js"></script>
+    <script type="text/javascript" src="../staticjs/extra.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
-    <link rel="shortcut icon" href="../static/favicon.ico"/>
+    <link rel="shortcut icon" href="../staticfavicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4.9. Transforming the prediction target (y)" href="preprocessing_targets.html" />
+    <link rel="next" title="4.9. 变换预测目标 (y)" href="preprocessing_targets.html" />
     <link rel="prev" title="4.7. 核逼近（Kernel Approximation）" href="kernel_approximation.html" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../staticjs/bootstrap.min.js" type="text/javascript"></script>
   <script>
      VERSION_SUBDIR = (function(groups) {
          return groups ? groups[1] : null;
@@ -64,7 +64,7 @@
 <div class="header-wrapper">
     <div class="header">
         <p class="logo"><a href="../index.html">
-            <img src="../static/scikit-learn-logo-small.png" alt="Logo"/>
+            <img src="../staticscikit-learn-logo-small.png" alt="Logo"/>
         </a>
         </p><div class="navbar" id="scikit-navbar">
             <ul>
@@ -111,7 +111,7 @@
 <a href="https://github.com/scikit-learn/scikit-learn">
   <img class="fork-me"
        style="position: absolute; top: 0; right: 0; border: 0;"
-       src="../static/img/forkme.png"
+       src="../staticimg/forkme.png"
        alt="Fork me on GitHub" />
 </a>
 
@@ -140,10 +140,10 @@
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        4.9. Transfor...
+        4.9. 变换预测目标 (y)
         </span>
             <span class="hiddenrellink">
-            4.9. Transforming the prediction target (y)
+            4.9. 变换预测目标 (y)
             </span>
         </a>
         </div>
@@ -171,13 +171,13 @@
       <a href="http://scikit-learn.org/dev/versions.html">Other versions</a></p>
     <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite us </a></b>if you use the software.</p>
     <ul>
-<li><a class="reference internal" href="#">4.8. Pairwise metrics, Affinities and Kernels</a><ul>
-<li><a class="reference internal" href="#cosine-similarity">4.8.1. Cosine similarity</a></li>
-<li><a class="reference internal" href="#linear-kernel">4.8.2. Linear kernel</a></li>
-<li><a class="reference internal" href="#polynomial-kernel">4.8.3. Polynomial kernel</a></li>
-<li><a class="reference internal" href="#sigmoid-kernel">4.8.4. Sigmoid kernel</a></li>
-<li><a class="reference internal" href="#rbf-kernel">4.8.5. RBF kernel</a></li>
-<li><a class="reference internal" href="#laplacian-kernel">4.8.6. Laplacian kernel</a></li>
+<li><a class="reference internal" href="#">4.8. 成对测度, 相似性 和 核</a><ul>
+<li><a class="reference internal" href="#cosine-similarity">4.8.1. 余弦相似度</a></li>
+<li><a class="reference internal" href="#linear-kernel">4.8.2. 线性核</a></li>
+<li><a class="reference internal" href="#polynomial-kernel">4.8.3. 多项式核</a></li>
+<li><a class="reference internal" href="#sigmoid">4.8.4. Sigmoid核</a></li>
+<li><a class="reference internal" href="#rbf">4.8.5. RBF 核</a></li>
+<li><a class="reference internal" href="#laplacian-kernel">4.8.6. 拉普拉斯核</a></li>
 <li><a class="reference internal" href="#chi-squared-kernel">4.8.7. Chi-squared kernel</a></li>
 </ul>
 </li>
@@ -198,42 +198,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="pairwise-metrics-affinities-and-kernels">
-<span id="metrics"></span><h1>4.8. Pairwise metrics, Affinities and Kernels<a class="headerlink" href="#pairwise-metrics-affinities-and-kernels" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference internal" href="classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics.pairwise</span></code></a> submodule implements utilities to evaluate
-pairwise distances or affinity of sets of samples.</p>
-<p>This module contains both distance metrics and kernels. A brief summary is
-given on the two here.</p>
-<p>Distance metrics are functions <code class="docutils literal notranslate"><span class="pre">d(a,</span> <span class="pre">b)</span></code> such that <code class="docutils literal notranslate"><span class="pre">d(a,</span> <span class="pre">b)</span> <span class="pre">&lt;</span> <span class="pre">d(a,</span> <span class="pre">c)</span></code>
-if objects <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are considered “more similar” than objects <code class="docutils literal notranslate"><span class="pre">a</span></code>
-and <code class="docutils literal notranslate"><span class="pre">c</span></code>. Two objects exactly alike would have a distance of zero.
-One of the most popular examples is Euclidean distance.
-To be a ‘true’ metric, it must obey the following four conditions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">a</span> <span class="ow">and</span> <span class="n">b</span>
-<span class="mf">2.</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="k">if</span> <span class="ow">and</span> <span class="n">only</span> <span class="k">if</span> <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">positive</span> <span class="n">definiteness</span>
-<span class="mf">3.</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">d</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">symmetry</span>
-<span class="mf">4.</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">the</span> <span class="n">triangle</span> <span class="n">inequality</span>
+  <div class="section" id="metrics">
+<span id="id1"></span><h1>4.8. 成对测度, 相似性 和 核<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics.pairwise</span></code></a> 子模块实现了一系列工具用于评估成对距离(pairwise distances)或 样本集合之间的相似性(affinity of sets of samples)。</p>
+<p>这个模块包含了距离测度(distance metrics)和核函数(kernel)。这里给出了它们的一个简要的总结。</p>
+<p>距离测度是一种函数 <code class="docutils literal notranslate"><span class="pre">d(a,</span> <span class="pre">b)</span></code>,  如果 <code class="docutils literal notranslate"><span class="pre">a</span></code> 和 <code class="docutils literal notranslate"><span class="pre">b</span></code> 的相似性比 <code class="docutils literal notranslate"><span class="pre">a</span></code> 和 <code class="docutils literal notranslate"><span class="pre">c</span></code> 的相似性高的话 ，那么 <code class="docutils literal notranslate"><span class="pre">d(a,</span> <span class="pre">b)</span> <span class="pre">&lt;</span> <span class="pre">d(a,</span> <span class="pre">c)</span></code> ;
+如果 <code class="docutils literal notranslate"><span class="pre">a</span></code> 和 <code class="docutils literal notranslate"><span class="pre">b</span></code> 完全相似的话， 那么 <code class="docutils literal notranslate"><span class="pre">d(a,</span> <span class="pre">b)</span> <span class="pre">=</span> <span class="pre">0</span></code> 。
+距离测度中最广为人知的就是 欧氏距离(Euclidean distance)。
+要想成为一个真正的测度(‘true’ metric), 它必须遵守以下四个条件</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">对所有的</span> <span class="n">a</span> <span class="n">和</span> <span class="n">b</span>
+<span class="mf">2.</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="k">if</span> <span class="ow">and</span> <span class="n">only</span> <span class="k">if</span> <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">正定性</span><span class="p">(</span><span class="n">positive</span> <span class="n">definiteness</span><span class="p">)</span>
+<span class="mf">3.</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">d</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">对称性</span><span class="p">(</span><span class="n">symmetry</span><span class="p">)</span>
+<span class="mf">4.</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">三角不等式</span><span class="p">(</span><span class="n">the</span> <span class="n">triangle</span> <span class="n">inequality</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Kernels are measures of similarity, i.e. <code class="docutils literal notranslate"><span class="pre">s(a,</span> <span class="pre">b)</span> <span class="pre">&gt;</span> <span class="pre">s(a,</span> <span class="pre">c)</span></code>
-if objects <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are considered “more similar” than objects
-<code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code>. A kernel must also be positive semi-definite.</p>
-<p>There are a number of ways to convert between a distance metric and a
-similarity measure, such as a kernel. Let <code class="docutils literal notranslate"><span class="pre">D</span></code> be the distance, and <code class="docutils literal notranslate"><span class="pre">S</span></code> be
-the kernel:</p>
+<p>核(kernel)是相似性的度量, i.e.  如果 <code class="docutils literal notranslate"><span class="pre">a</span></code> 和 <code class="docutils literal notranslate"><span class="pre">b</span></code> 被认为比 <code class="docutils literal notranslate"><span class="pre">a</span></code> 和 <code class="docutils literal notranslate"><span class="pre">c</span></code> “更相似”，则 <code class="docutils literal notranslate"><span class="pre">s(a,</span> <span class="pre">b)</span> <span class="pre">&gt;</span> <span class="pre">s(a,</span> <span class="pre">c)</span></code> 。
+核(kernel)也必须是半正定的(positive semi-definite)。</p>
+<p>有很多种方法可以在一个距离测度(distance metric)和相似性度量(similarity measure)之间转换，比如用 kenel 进行这种转换。
+让 <code class="docutils literal notranslate"><span class="pre">D</span></code> 是某种距离, 并且 <code class="docutils literal notranslate"><span class="pre">S</span></code> 是一个 kernel:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">np.exp(-D</span> <span class="pre">*</span> <span class="pre">gamma)</span></code>, where one heuristic for choosing
-<code class="docutils literal notranslate"><span class="pre">gamma</span></code> is <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">num_features</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">np.exp(-D</span> <span class="pre">*</span> <span class="pre">gamma)</span></code>, 其中用于选择 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 的一种启发式方法是 <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">num_features</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">1.</span> <span class="pre">/</span> <span class="pre">(D</span> <span class="pre">/</span> <span class="pre">np.max(D))</span></code></li>
 </ol>
 </div></blockquote>
-<p>The distances between the row vectors of <code class="docutils literal notranslate"><span class="pre">X</span></code> and the row vectors of <code class="docutils literal notranslate"><span class="pre">Y</span></code>
-can be evaluated using <a class="reference internal" href="generated/sklearn.metrics.pairwise_distances.html#sklearn.metrics.pairwise_distances" title="sklearn.metrics.pairwise_distances"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairwise_distances</span></code></a>. If <code class="docutils literal notranslate"><span class="pre">Y</span></code> is omitted the
-pairwise distances of the row vectors of <code class="docutils literal notranslate"><span class="pre">X</span></code> are calculated. Similarly,
-<a class="reference internal" href="generated/sklearn.metrics.pairwise.pairwise_kernels.html#sklearn.metrics.pairwise.pairwise_kernels" title="sklearn.metrics.pairwise.pairwise_kernels"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairwise.pairwise_kernels</span></code></a> can be used to calculate the kernel between <cite>X</cite>
-and <cite>Y</cite> using different kernel functions. See the API reference for more
-details.</p>
+<p><code class="docutils literal notranslate"><span class="pre">X</span></code> 的行向量和 <code class="docutils literal notranslate"><span class="pre">Y</span></code> 的行向量之间的距离可以用函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise_distances.html#sklearn.metrics.pairwise_distances" title="sklearn.metrics.pairwise_distances"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairwise_distances</span></code></a> 进行计算。
+如果 <code class="docutils literal notranslate"><span class="pre">Y</span></code> 被忽略，则 <code class="docutils literal notranslate"><span class="pre">X</span></code> 的所有行向量的成对距离(pairwise distances)就会被计算。
+类似的，函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.pairwise_kernels.html#sklearn.metrics.pairwise.pairwise_kernels" title="sklearn.metrics.pairwise.pairwise_kernels"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairwise.pairwise_kernels</span></code></a> 可以使用不同的核函数(kernel functions)来计算 <cite>X</cite> 和 <cite>Y</cite> 之间的 kernel。
+请查看API获得更对详情。:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">pairwise_distances</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="k">import</span> <span class="n">pairwise_kernels</span>
@@ -254,24 +246,21 @@ details.</p>
 </pre></div>
 </div>
 <div class="section" id="cosine-similarity">
-<span id="id1"></span><h2>4.8.1. Cosine similarity<a class="headerlink" href="#cosine-similarity" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.metrics.pairwise.cosine_similarity.html#sklearn.metrics.pairwise.cosine_similarity" title="sklearn.metrics.pairwise.cosine_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">cosine_similarity</span></code></a> computes the L2-normalized dot product of vectors.
-That is, if <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are row vectors,
-their cosine similarity <span class="math notranslate nohighlight">\(k\)</span> is defined as:</p>
+<span id="id2"></span><h2>4.8.1. 余弦相似度<a class="headerlink" href="#cosine-similarity" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.cosine_similarity.html#sklearn.metrics.pairwise.cosine_similarity" title="sklearn.metrics.pairwise.cosine_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">cosine_similarity</span></code></a> 计算向量之间的L2归范化的点积(L2-normalized dot product)。
+那就是, 如果 <span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(y\)</span> 是两个行向量,则它们的余弦相似度(cosine similarity)
+<span class="math notranslate nohighlight">\(k\)</span> 定义如下:</p>
 <div class="math notranslate nohighlight">
 \[k(x, y) = \frac{x y^\top}{\|x\| \|y\|}\]</div>
-<p>This is called cosine similarity, because Euclidean (L2) normalization
-projects the vectors onto the unit sphere,
-and their dot product is then the cosine of the angle between the points
-denoted by the vectors.</p>
-<p>This kernel is a popular choice for computing the similarity of documents
-represented as tf-idf vectors.
-<a class="reference internal" href="generated/sklearn.metrics.pairwise.cosine_similarity.html#sklearn.metrics.pairwise.cosine_similarity" title="sklearn.metrics.pairwise.cosine_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">cosine_similarity</span></code></a> accepts <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> matrices.
-(Note that the tf-idf functionality in <code class="docutils literal notranslate"><span class="pre">sklearn.feature_extraction.text</span></code>
-can produce normalized vectors, in which case <a class="reference internal" href="generated/sklearn.metrics.pairwise.cosine_similarity.html#sklearn.metrics.pairwise.cosine_similarity" title="sklearn.metrics.pairwise.cosine_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">cosine_similarity</span></code></a>
-is equivalent to <a class="reference internal" href="generated/sklearn.metrics.pairwise.linear_kernel.html#sklearn.metrics.pairwise.linear_kernel" title="sklearn.metrics.pairwise.linear_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_kernel</span></code></a>, only slower.)</p>
+<p>之所以被称之为 余弦相似度, 是因为 Euclidean (L2) normalization 把两个向量投影到单位球
+(unit sphere),这时它们的点积就是两个向量之间的夹角的余弦值。</p>
+<p>kernel 是计算以 tf-idf 向量表示的文档相似度的流行选择。
+函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.cosine_similarity.html#sklearn.metrics.pairwise.cosine_similarity" title="sklearn.metrics.pairwise.cosine_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">cosine_similarity</span></code></a> 接受 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> 矩阵。
+(注意 <code class="docutils literal notranslate"><span class="pre">sklearn.feature_extraction.text</span></code> 中的 tf-idf 系列函数 能够产生规范化的向量
+(normalized vectors), 在这种情况下 函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.cosine_similarity.html#sklearn.metrics.pairwise.cosine_similarity" title="sklearn.metrics.pairwise.cosine_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">cosine_similarity</span></code></a> 等价于 函数
+<a class="reference internal" href="generated/sklearn.metrics.pairwise.linear_kernel.html#sklearn.metrics.pairwise.linear_kernel" title="sklearn.metrics.pairwise.linear_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_kernel</span></code></a>, 只是较慢一点儿。)</p>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li>C.D. Manning, P. Raghavan and H. Schütze (2008). Introduction to
 Information Retrieval. Cambridge University Press.
@@ -280,75 +269,68 @@ Information Retrieval. Cambridge University Press.
 </div>
 </div>
 <div class="section" id="linear-kernel">
-<span id="id2"></span><h2>4.8.2. Linear kernel<a class="headerlink" href="#linear-kernel" title="Permalink to this headline">¶</a></h2>
-<p>The function <a class="reference internal" href="generated/sklearn.metrics.pairwise.linear_kernel.html#sklearn.metrics.pairwise.linear_kernel" title="sklearn.metrics.pairwise.linear_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_kernel</span></code></a> computes the linear kernel, that is, a
-special case of <a class="reference internal" href="generated/sklearn.metrics.pairwise.polynomial_kernel.html#sklearn.metrics.pairwise.polynomial_kernel" title="sklearn.metrics.pairwise.polynomial_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">polynomial_kernel</span></code></a> with <code class="docutils literal notranslate"><span class="pre">degree=1</span></code> and <code class="docutils literal notranslate"><span class="pre">coef0=0</span></code> (homogeneous).
-If <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are column vectors, their linear kernel is:</p>
+<span id="id3"></span><h2>4.8.2. 线性核<a class="headerlink" href="#linear-kernel" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.linear_kernel.html#sklearn.metrics.pairwise.linear_kernel" title="sklearn.metrics.pairwise.linear_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_kernel</span></code></a> 计算线性核(linear kernel), 这就是说, 这是函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.polynomial_kernel.html#sklearn.metrics.pairwise.polynomial_kernel" title="sklearn.metrics.pairwise.polynomial_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">polynomial_kernel</span></code></a> 的一种特殊情形，
+其中参数取值为：<code class="docutils literal notranslate"><span class="pre">degree=1</span></code> 并且 <code class="docutils literal notranslate"><span class="pre">coef0=0</span></code> (homogeneous)。
+若 <code class="docutils literal notranslate"><span class="pre">x</span></code> 和 <code class="docutils literal notranslate"><span class="pre">y</span></code> 是列向量, 它们的线性核 计算如下:</p>
 <div class="math notranslate nohighlight">
 \[k(x, y) = x^\top y\]</div>
 </div>
 <div class="section" id="polynomial-kernel">
-<span id="id3"></span><h2>4.8.3. Polynomial kernel<a class="headerlink" href="#polynomial-kernel" title="Permalink to this headline">¶</a></h2>
-<p>The function <a class="reference internal" href="generated/sklearn.metrics.pairwise.polynomial_kernel.html#sklearn.metrics.pairwise.polynomial_kernel" title="sklearn.metrics.pairwise.polynomial_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">polynomial_kernel</span></code></a> computes the degree-d polynomial kernel
-between two vectors. The polynomial kernel represents the similarity between two
-vectors. Conceptually, the polynomial kernels considers not only the similarity
-between vectors under the same dimension, but also across dimensions. When used
-in machine learning algorithms, this allows to account for feature interaction.</p>
-<p>The polynomial kernel is defined as:</p>
+<span id="id4"></span><h2>4.8.3. 多项式核<a class="headerlink" href="#polynomial-kernel" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.polynomial_kernel.html#sklearn.metrics.pairwise.polynomial_kernel" title="sklearn.metrics.pairwise.polynomial_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">polynomial_kernel</span></code></a> 计算两个向量之间的d-阶多项式核(polynomial kernel)。
+多项式核表达了两个向量之间的相似度。在概念上，多项式核不仅考虑了同一维下向量之间的相似性，而且考虑了各维之间的相似性。
+当用于机器学习算法的时候, 这个特性允许我们把特征之间的相互作用也考虑进去。</p>
+<p>多项式核的定义如下:</p>
 <div class="math notranslate nohighlight">
 \[k(x, y) = (\gamma x^\top y +c_0)^d\]</div>
-<p>where:</p>
+<p>其中:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> are the input vectors</li>
-<li><code class="docutils literal notranslate"><span class="pre">d</span></code> is the kernel degree</li>
+<li><code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> 是输入向量</li>
+<li><code class="docutils literal notranslate"><span class="pre">d</span></code> 是 核的阶数(kernel degree)</li>
 </ul>
 </div></blockquote>
-<p>If <span class="math notranslate nohighlight">\(c_0 = 0\)</span> the kernel is said to be homogeneous.</p>
+<p>如果 <span class="math notranslate nohighlight">\(c_0 = 0\)</span> ， 则这个 kernel 就被说成是 同质的(homogeneous)。</p>
 </div>
-<div class="section" id="sigmoid-kernel">
-<span id="id4"></span><h2>4.8.4. Sigmoid kernel<a class="headerlink" href="#sigmoid-kernel" title="Permalink to this headline">¶</a></h2>
-<p>The function <a class="reference internal" href="generated/sklearn.metrics.pairwise.sigmoid_kernel.html#sklearn.metrics.pairwise.sigmoid_kernel" title="sklearn.metrics.pairwise.sigmoid_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigmoid_kernel</span></code></a> computes the sigmoid kernel between two
-vectors. The sigmoid kernel is also known as hyperbolic tangent, or Multilayer
-Perceptron (because, in the neural network field, it is often used as neuron
-activation function). It is defined as:</p>
+<div class="section" id="sigmoid">
+<span id="sigmoid-kernel"></span><h2>4.8.4. Sigmoid核<a class="headerlink" href="#sigmoid" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.sigmoid_kernel.html#sklearn.metrics.pairwise.sigmoid_kernel" title="sklearn.metrics.pairwise.sigmoid_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigmoid_kernel</span></code></a> 计算两个向量之间的 sigmoid kernel 。
+sigmoid kernel 也被称之为 双曲正切(hyperbolic tangent), 或 Multilayer Perceptron
+(因为在神经网络领域, 它经常被用于 神经元激活函数)。 它的定义如下:</p>
 <div class="math notranslate nohighlight">
 \[k(x, y) = \tanh( \gamma x^\top y + c_0)\]</div>
-<p>where:</p>
+<p>其中:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> are the input vectors</li>
-<li><span class="math notranslate nohighlight">\(\gamma\)</span> is known as slope</li>
-<li><span class="math notranslate nohighlight">\(c_0\)</span> is known as intercept</li>
+<li><code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> 时输入向量</li>
+<li><span class="math notranslate nohighlight">\(\gamma\)</span> 是 斜率(slope)</li>
+<li><span class="math notranslate nohighlight">\(c_0\)</span> 是 截距(intercept)</li>
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="rbf-kernel">
-<span id="id5"></span><h2>4.8.5. RBF kernel<a class="headerlink" href="#rbf-kernel" title="Permalink to this headline">¶</a></h2>
-<p>The function <a class="reference internal" href="generated/sklearn.metrics.pairwise.rbf_kernel.html#sklearn.metrics.pairwise.rbf_kernel" title="sklearn.metrics.pairwise.rbf_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">rbf_kernel</span></code></a> computes the radial basis function (RBF) kernel
-between two vectors. This kernel is defined as:</p>
+<div class="section" id="rbf">
+<span id="rbf-kernel"></span><h2>4.8.5. RBF 核<a class="headerlink" href="#rbf" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.rbf_kernel.html#sklearn.metrics.pairwise.rbf_kernel" title="sklearn.metrics.pairwise.rbf_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">rbf_kernel</span></code></a> 计算两个向量之间的 径向基函数核(RBF kernel)。
+它的定义如下:</p>
 <div class="math notranslate nohighlight">
 \[k(x, y) = \exp( -\gamma \| x-y \|^2)\]</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are the input vectors. If <span class="math notranslate nohighlight">\(\gamma = \sigma^{-2}\)</span>
-the kernel is known as the Gaussian kernel of variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">x</span></code> 和 <code class="docutils literal notranslate"><span class="pre">y</span></code> 是输入向量。 如果 <span class="math notranslate nohighlight">\(\gamma = \sigma^{-2}\)</span> ，
+该 RBF kernel 被称为 方差的高斯核(the Gaussian kernel of variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>)。</p>
 </div>
 <div class="section" id="laplacian-kernel">
-<span id="id6"></span><h2>4.8.6. Laplacian kernel<a class="headerlink" href="#laplacian-kernel" title="Permalink to this headline">¶</a></h2>
-<p>The function <a class="reference internal" href="generated/sklearn.metrics.pairwise.laplacian_kernel.html#sklearn.metrics.pairwise.laplacian_kernel" title="sklearn.metrics.pairwise.laplacian_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">laplacian_kernel</span></code></a> is a variant on the radial basis
-function kernel defined as:</p>
+<span id="id5"></span><h2>4.8.6. 拉普拉斯核<a class="headerlink" href="#laplacian-kernel" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.laplacian_kernel.html#sklearn.metrics.pairwise.laplacian_kernel" title="sklearn.metrics.pairwise.laplacian_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">laplacian_kernel</span></code></a> 是 RBF kernel 的一个变体:</p>
 <div class="math notranslate nohighlight">
 \[k(x, y) = \exp( -\gamma \| x-y \|_1)\]</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are the input vectors and <span class="math notranslate nohighlight">\(\|x-y\|_1\)</span> is the
-Manhattan distance between the input vectors.</p>
-<p>It has proven useful in ML applied to noiseless data.
-See e.g. <a class="reference external" href="http://onlinelibrary.wiley.com/doi/10.1002/qua.24954/abstract/">Machine learning for quantum mechanics in a nutshell</a>.</p>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">x</span></code> 和 <code class="docutils literal notranslate"><span class="pre">y</span></code> 是输入向量 并且 <span class="math notranslate nohighlight">\(\|x-y\|_1\)</span> 是输入向量之间的 曼哈顿距离(Manhattan distance) 。</p>
+<p>它在ML中被证明是适用于无噪音数据的。
+请看 e.g. <a class="reference external" href="http://onlinelibrary.wiley.com/doi/10.1002/qua.24954/abstract/">Machine learning for quantum mechanics in a nutshell</a>.</p>
 </div>
 <div class="section" id="chi-squared-kernel">
 <span id="chi2-kernel"></span><h2>4.8.7. Chi-squared kernel<a class="headerlink" href="#chi-squared-kernel" title="Permalink to this headline">¶</a></h2>
-<p>The chi-squared kernel is a very popular choice for training non-linear SVMs in
-computer vision applications.
-It can be computed using <a class="reference internal" href="generated/sklearn.metrics.pairwise.chi2_kernel.html#sklearn.metrics.pairwise.chi2_kernel" title="sklearn.metrics.pairwise.chi2_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">chi2_kernel</span></code></a> and then passed to an
-<a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm.SVC</span></code></a> with <code class="docutils literal notranslate"><span class="pre">kernel=&quot;precomputed&quot;</span></code>:</p>
+<p>The chi-squared kernel 是一个在计算机视觉应用中广受欢迎的用于训练 non-linear SVMs 的核。
+它使用函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.chi2_kernel.html#sklearn.metrics.pairwise.chi2_kernel" title="sklearn.metrics.pairwise.chi2_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">chi2_kernel</span></code></a> 进行计算，然后传递给类 <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm.SVC</span></code></a> ，并将参数设置为 <code class="docutils literal notranslate"><span class="pre">kernel=&quot;precomputed&quot;</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="k">import</span> <span class="n">chi2_kernel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span><span class="p">]]</span>
@@ -365,21 +347,20 @@ It can be computed using <a class="reference internal" href="generated/sklearn.m
 <span class="go">array([0, 1, 0, 1])</span>
 </pre></div>
 </div>
-<p>It can also be directly used as the <code class="docutils literal notranslate"><span class="pre">kernel</span></code> argument:</p>
+<p>它也可以直接被用作 <code class="docutils literal notranslate"><span class="pre">kernel</span></code> 的参数</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">svm</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">chi2_kernel</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="go">array([0, 1, 0, 1])</span>
 </pre></div>
 </div>
-<p>The chi squared kernel is given by</p>
+<p>The chi squared kernel 由下式给出:</p>
 <div class="math notranslate nohighlight">
 \[k(x, y) = \exp \left (-\gamma \sum_i \frac{(x[i] - y[i]) ^ 2}{x[i] + y[i]} \right )\]</div>
-<p>The data is assumed to be non-negative, and is often normalized to have an L1-norm of one.
-The normalization is rationalized with the connection to the chi squared distance,
-which is a distance between discrete probability distributions.</p>
-<p>The chi squared kernel is most commonly used on histograms (bags) of visual words.</p>
+<p>数据被假定为非负的，并且通常被归一化为 1 的 L1范数 (L1-norm of one)。归一化是通过与 chi squared distance 的连接来合理化的，
+chi squared distance 是 两个离散概率分布之间的距离。</p>
+<p>chi squared kernel 最常用于 视觉词汇的直方图(词袋)(histograms (bags) of visual words)。</p>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li>Zhang, J. and Marszalek, M. and Lazebnik, S. and Schmid, C.
 Local features and kernels for classification of texture and object
