@@ -780,7 +780,7 @@ About Unicode</a>.</p>
 </div>
 <div class="section" id="hashingvectorizer-scaling">
 <h3>4.2.3.9. 使用 HashingVectorizer 执行核外scaling<a class="headerlink" href="#hashingvectorizer-scaling" title="Permalink to this headline">¶</a></h3>
-<p>使用 <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a> 的一个有趣的开发是执行外核 <a class="reference external" href="https://en.wikipedia.org/wiki/Out-of-core_algorithm">out-of-core</a> 缩放的能力。
+<p>使用 <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a> 的一个有趣的开发是执行核外 <a class="reference external" href="https://en.wikipedia.org/wiki/Out-of-core_algorithm">out-of-core</a> 缩放的能力。
 这意味着我们可以从无法放入电脑主内存的数据中进行学习。</p>
 <p>实现核外扩展的一个策略是将数据以流的方式以一小批提交给估计器。每批的向量化都是用 <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a> 。
 这样来保证估计器的输入空间的维度是相等的。 因此任何时间使用的内存数都限定在小频次的大小。 尽管用这种方法可以处理的数据没有限制，
@@ -867,9 +867,9 @@ N-gram 提取和停止字过滤在分析器级进行，因此定制分析器可�
 <span id="id16"></span><h2>4.2.4. 图像特征提取<a class="headerlink" href="#image-feature-extraction" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id17">
 <h3>4.2.4.1. 图像块提取<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d" title="sklearn.feature_extraction.image.extract_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_patches_2d</span></code></a> 函数从存储为二维数组的图像或沿着第三轴的颜色信息三维提取图像块程序。
-要从其所有补丁重建图像，请使用 <a class="reference internal" href="generated/sklearn.feature_extraction.image.reconstruct_from_patches_2d.html#sklearn.feature_extraction.image.reconstruct_from_patches_2d" title="sklearn.feature_extraction.image.reconstruct_from_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">reconstruct_from_patches_2d</span></code></a> 。
-例如让我们使用3个彩色通道（例如 RGB 格式）生成一个 4x4 像素的图像:</p>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d" title="sklearn.feature_extraction.image.extract_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_patches_2d</span></code></a> 函数从存储为二维数组的灰度图像或三维数组的彩色图像中提取图像块(patches)。
+彩色图像的颜色信息在第三个纬度存放。如果要从所有的图像块(patches)中重建图像，请使用函数 <a class="reference internal" href="generated/sklearn.feature_extraction.image.reconstruct_from_patches_2d.html#sklearn.feature_extraction.image.reconstruct_from_patches_2d" title="sklearn.feature_extraction.image.reconstruct_from_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">reconstruct_from_patches_2d</span></code></a> 。
+比如我们生成一个 4x4 像素的RGB格式三通道图像:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="k">import</span> <span class="n">image</span>
 
@@ -898,13 +898,13 @@ N-gram 提取和停止字过滤在分析器级进行，因此定制分析器可�
 <span class="go">       [27, 30]])</span>
 </pre></div>
 </div>
-<p>现在让我们尝试通过在重叠区域进行平均来从补丁重建原始图像:</p>
+<p>现在让我们尝试通过在重叠区域进行平均来从图像块重建原始图像:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">reconstruct_from_patches_2d</span><span class="p">(</span><span class="n">patches</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">one_image</span><span class="p">,</span> <span class="n">reconstructed</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="generated/sklearn.feature_extraction.image.PatchExtractor.html#sklearn.feature_extraction.image.PatchExtractor" title="sklearn.feature_extraction.image.PatchExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">PatchExtractor</span></code></a> 类的工作方式与 <a class="reference internal" href="generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d" title="sklearn.feature_extraction.image.extract_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_patches_2d</span></code></a> 函数相同, 只是它支持多种图像作为输入。
-它被实现为一个估计器，因此它可以在 pipelines 中使用。请看:</p>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.image.PatchExtractor.html#sklearn.feature_extraction.image.PatchExtractor" title="sklearn.feature_extraction.image.PatchExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">PatchExtractor</span></code></a> 类的工作方式与 <a class="reference internal" href="generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d" title="sklearn.feature_extraction.image.extract_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_patches_2d</span></code></a> 函数相同, 只是它支持多幅图像作为输入。
+它被实现为一个estimator，因此它可以在 pipelines 中使用。请看:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">five_images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">PatchExtractor</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">five_images</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span><span class="o">.</span><span class="n">shape</span>
@@ -914,13 +914,14 @@ N-gram 提取和停止字过滤在分析器级进行，因此定制分析器可�
 </div>
 <div class="section" id="id18">
 <h3>4.2.4.2. 图像的连接图<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
-<p>scikit-learn 中的几个估计可以使用特征或样本之间的连接信息。 例如，Ward clustering (<a class="reference internal" href="clustering.html#hierarchical-clustering"><span class="std std-ref">层次聚类(Hierarchical clustering)</span></a>)
-可以聚集在一起，只有图像的相邻像素，从而形成连续的斑块:</p>
+<p>scikit-learn 中的好几个estimators可以使用特征或样本之间的连接信息(connectivity information)。
+例如，Ward clustering (<a class="reference internal" href="clustering.html#hierarchical-clustering"><span class="std std-ref">层次聚类(Hierarchical clustering)</span></a>) 可以只把相邻像素(neighboring pixels)聚集在一起，从而形成连续的斑块:</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_coin_ward_segmentation.html"><img alt="../images/sphx_glr_plot_coin_ward_segmentation_0011.png" src="../images/sphx_glr_plot_coin_ward_segmentation_0011.png" style="width: 200.0px; height: 200.0px;" /></a>
 </div>
-<p>For this purpose, the estimators use a ‘connectivity’ matrix, giving which samples are connected.</p>
-<p>该函数 <a class="reference internal" href="generated/sklearn.feature_extraction.image.img_to_graph.html#sklearn.feature_extraction.image.img_to_graph" title="sklearn.feature_extraction.image.img_to_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">img_to_graph</span></code></a> 从2D或3D图像返回这样一个矩阵。类似地，<a class="reference internal" href="generated/sklearn.feature_extraction.image.grid_to_graph.html#sklearn.feature_extraction.image.grid_to_graph" title="sklearn.feature_extraction.image.grid_to_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">grid_to_graph</span></code></a> 为给定这些图像的形状的图像构建连接矩阵。</p>
+<p>出于这个目的, 这些estimators使用一个连接性矩阵(‘connectivity’ matrix), 给出哪些样本是连接着的。</p>
+<p>函数 <a class="reference internal" href="generated/sklearn.feature_extraction.image.img_to_graph.html#sklearn.feature_extraction.image.img_to_graph" title="sklearn.feature_extraction.image.img_to_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">img_to_graph</span></code></a> 从2D或3D图像返回这样一个矩阵(‘connectivity’ matrix)。
+类似地，函数 <a class="reference internal" href="generated/sklearn.feature_extraction.image.grid_to_graph.html#sklearn.feature_extraction.image.grid_to_graph" title="sklearn.feature_extraction.image.grid_to_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">grid_to_graph</span></code></a> 为给定shape的图像构建连接矩阵。</p>
 <p>这些矩阵可用于在使用连接信息的估计器中强加连接，如 (<a class="reference internal" href="clustering.html#hierarchical-clustering"><span class="std std-ref">层次聚类(Hierarchical clustering)</span></a>)，而且还要构建预计算的内核或相似矩阵。</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
