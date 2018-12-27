@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="static/favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4.1. 管道流与组合式估计器（Pipelines and composite estimators）" href="modules/compose.html" />
+    <link rel="next" title="4.1. 管道流与复合估计器(Pipelines and composite estimators)" href="modules/compose.html" />
     <link rel="prev" title="3.5. 验证曲线：绘制得分曲线评估模型" href="modules/learning_curve.html" />
   
   
@@ -87,7 +87,7 @@
                 <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">Stable version</a></li>')</script>
                 <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">Development version</a></li>')</script>
                 <li><a href="http://scikit-learn.org/dev/versions.html">All available versions</a></li>
-                <li><a href="downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
+                <li><a href="_downloads/scikit-learn-docs.pdf">PDF documentation</a></li>
               </ul>
             </div>
         </li>
@@ -140,10 +140,10 @@
         accesskey="N">Next
         <br/>
         <span class="smallrellink">
-        4.1. 管道流与组合式估...
+        4.1. 管道流与复合估计...
         </span>
             <span class="hiddenrellink">
-            4.1. 管道流与组合式估计器（Pipelines and composite estimators）
+            4.1. 管道流与复合估计器(Pipelines and composite estimators)
             </span>
         </a>
         </div>
@@ -227,7 +227,7 @@
 <span id="data-transforms"></span><h1>4. 数据集变换(Dataset transformations)<a class="headerlink" href="#dataset-transformations" title="Permalink to this headline">¶</a></h1>
 <p>scikit-learn provides a library of transformers, which may clean (see
 <a class="reference internal" href="modules/preprocessing.html#preprocessing"><span class="std std-ref">预处理数据(Preprocessing data)</span></a>), reduce (see <a class="reference internal" href="modules/unsupervised_reduction.html#data-reduction"><span class="std std-ref">无监督维数约减(Unsupervised dimensionality reduction)</span></a>), expand (see
-<a class="reference internal" href="modules/kernel_approximation.html#kernel-approximation"><span class="std std-ref">核逼近（Kernel Approximation）</span></a>) or generate (see <a class="reference internal" href="modules/feature_extraction.html#feature-extraction"><span class="std std-ref">特征抽取(Feature extraction)</span></a>)
+<a class="reference internal" href="modules/kernel_approximation.html#kernel-approximation"><span class="std std-ref">核逼近（Kernel Approximation）</span></a>) or generate (see <a class="reference internal" href="modules/feature_extraction.html#feature-extraction"><span class="std std-ref">特征提取(Feature extraction)</span></a>)
 feature representations.</p>
 <p>Like other estimators, these are represented by classes with a <code class="docutils literal notranslate"><span class="pre">fit</span></code> method,
 which learns model parameters (e.g. mean and standard deviation for
@@ -236,52 +236,52 @@ this transformation model to unseen data. <code class="docutils literal notransl
 convenient and efficient for modelling and transforming the training data
 simultaneously.</p>
 <p>Combining such transformers, either in parallel or series is covered in
-<a class="reference internal" href="modules/compose.html#combining-estimators"><span class="std std-ref">管道流与组合式估计器（Pipelines and composite estimators）</span></a>. <a class="reference internal" href="modules/metrics.html#metrics"><span class="std std-ref">Pairwise metrics, Affinities and Kernels</span></a> covers transforming feature
+<a class="reference internal" href="modules/compose.html#combining-estimators"><span class="std std-ref">管道流与复合估计器(Pipelines and composite estimators)</span></a>. <a class="reference internal" href="modules/metrics.html#metrics"><span class="std std-ref">Pairwise metrics, Affinities and Kernels</span></a> covers transforming feature
 spaces into affinity matrices, while <a class="reference internal" href="modules/preprocessing_targets.html#preprocessing-targets"><span class="std std-ref">Transforming the prediction target (y)</span></a> considers
 transformations of the target space (e.g. categorical labels) for use in
 scikit-learn.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules/compose.html">4.1. 管道流与组合式估计器（Pipelines and composite estimators）</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#pipeline-chaining-estimators">4.1.1. Pipeline: chaining estimators</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#usage">4.1.1.1. Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/compose.html">4.1. 管道流与复合估计器(Pipelines and composite estimators)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#pipeline">4.1.1. Pipeline: 链式估计器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#id2">4.1.1.1. 用法</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/compose.html#notes">4.1.1.2. Notes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#caching-transformers-avoid-repeated-computation">4.1.1.3. Caching transformers: avoid repeated computation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#transformers">4.1.1.3. 缓存 transformers: 避免重复计算</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#transforming-target-in-regression">4.1.2. Transforming target in regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#featureunion-composite-feature-spaces">4.1.3. FeatureUnion: composite feature spaces</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#id1">4.1.3.1. Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#transformed-target-regressor">4.1.2. 变换回归问题的目标</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#featureunion">4.1.3. FeatureUnion: 复合特征空间</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#id4">4.1.3.1. 用法</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#columntransformer-for-heterogeneous-data">4.1.4. ColumnTransformer for heterogeneous data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#columntransformer">4.1.4. 异构数据变换器:ColumnTransformer</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="modules/feature_extraction.html">4.2. 特征抽取(Feature extraction)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#loading-features-from-dicts">4.2.1. Loading features from dicts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#feature-hashing">4.2.2. Feature hashing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#implementation-details">4.2.2.1. Implementation details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/feature_extraction.html">4.2. 特征提取(Feature extraction)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#dict-feature-extraction">4.2.1. 从字典加载特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#feature-hashing">4.2.2. 特征哈希(散列)化</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id5">4.2.2.1. 实现细节</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#text-feature-extraction">4.2.3. Text feature extraction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#the-bag-of-words-representation">4.2.3.1. The Bag of Words representation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#sparsity">4.2.3.2. Sparsity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#common-vectorizer-usage">4.2.3.3. Common Vectorizer usage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="modules/feature_extraction.html#using-stop-words">4.2.3.3.1. Using stop words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#text-feature-extraction">4.2.3. 文本特征提取</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id7">4.2.3.1. 词袋表示法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id8">4.2.3.2. 稀疏性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#vectorizer">4.2.3.3. 常见 Vectorizer 的用法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/feature_extraction.html#stop-words">4.2.3.3.1. 使用 stop words</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#tfidf-term-weighting">4.2.3.4. Tf–idf term weighting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#decoding-text-files">4.2.3.5. Decoding text files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#applications-and-examples">4.2.3.6. Applications and examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#limitations-of-the-bag-of-words-representation">4.2.3.7. Limitations of the Bag of Words representation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#vectorizing-a-large-text-corpus-with-the-hashing-trick">4.2.3.8. Vectorizing a large text corpus with the hashing trick</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#performing-out-of-core-scaling-with-hashingvectorizer">4.2.3.9. Performing out-of-core scaling with HashingVectorizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#customizing-the-vectorizer-classes">4.2.3.10. Customizing the vectorizer classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id11">4.2.3.5. 解码文本文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id12">4.2.3.6. 应用和案例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id13">4.2.3.7. 词袋表示法的局限性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#hashing-vectorizer">4.2.3.8. 用散列技巧矢量化大型语料库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#hashingvectorizer-scaling">4.2.3.9. 使用 HashingVectorizer 执行核外scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id15">4.2.3.10. 自定义向量化器类</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#image-feature-extraction">4.2.4. Image feature extraction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#patch-extraction">4.2.4.1. Patch extraction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#connectivity-graph-of-an-image">4.2.4.2. Connectivity graph of an image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#image-feature-extraction">4.2.4. 图像特征提取</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id17">4.2.4.1. 图像块提取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id18">4.2.4.2. 图像的连接图</a></li>
 </ul>
 </li>
 </ul>
