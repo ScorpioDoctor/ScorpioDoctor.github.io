@@ -1,0 +1,993 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+    <title>4.2. 特征提取(Feature extraction) &#8212; scikit-learn 0.20.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../static/css/bootstrap-responsive.css"/>
+
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.3. 预处理数据(Preprocessing data)" href="preprocessing.html" />
+    <link rel="prev" title="4.1. 管道流与复合估计器(Pipelines and composite estimators)" href="compose.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/feature_extraction.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
+  </script>
+
+  <!-- 百度站长统计代码 -->
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar" id="scikit-navbar">
+            <ul>
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
+            <li><a href="../tutorial/index.html">教程</a></li>
+            <li><a href="../user_guide.html">用户指南</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../glossary.html">术语表</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers/contributing.html">贡献者</a></li>
+            <li class="divider"></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">稳定版</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">开发版</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+                <li><a href="../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">案例</a></li>
+            </ul>
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
+            <div class="search_form">
+                <div class="gcse-search" id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+        <div class="rellink">
+        <a href="compose.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        4.1. 管道流与复合估计...
+        </span>
+            <span class="hiddenrellink">
+            4.1. 管道流与复合估计器(Pipelines and composite estimators)
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="preprocessing.html"
+        accesskey="N">Next
+        <br/>
+        <span class="smallrellink">
+        4.3. 预处理数据(Pr...
+        </span>
+            <span class="hiddenrellink">
+            4.3. 预处理数据(Preprocessing data)
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../data_transforms.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        4. 数据集变换(Data...
+        </span>
+            <span class="hiddenrellink">
+            4. 数据集变换(Dataset transformations)
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version"><b>scikit-learn v0.20.1</b><br/>
+      <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+    <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!</p>
+    <ul>
+<li><a class="reference internal" href="#">4.2. 特征提取(Feature extraction)</a><ul>
+<li><a class="reference internal" href="#dict-feature-extraction">4.2.1. 从字典加载特征</a></li>
+<li><a class="reference internal" href="#feature-hashing">4.2.2. 特征哈希(散列)化</a><ul>
+<li><a class="reference internal" href="#id5">4.2.2.1. 实现细节</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#text-feature-extraction">4.2.3. 文本特征提取</a><ul>
+<li><a class="reference internal" href="#id7">4.2.3.1. 词袋表示法</a></li>
+<li><a class="reference internal" href="#id8">4.2.3.2. 稀疏性</a></li>
+<li><a class="reference internal" href="#vectorizer">4.2.3.3. 常见 Vectorizer 的用法</a><ul>
+<li><a class="reference internal" href="#stop-words">4.2.3.3.1. 使用 stop words</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tfidf-term-weighting">4.2.3.4. Tf–idf term weighting</a></li>
+<li><a class="reference internal" href="#id11">4.2.3.5. 解码文本文件</a></li>
+<li><a class="reference internal" href="#id12">4.2.3.6. 应用和案例</a></li>
+<li><a class="reference internal" href="#id13">4.2.3.7. 词袋表示法的局限性</a></li>
+<li><a class="reference internal" href="#hashing-vectorizer">4.2.3.8. 用散列技巧矢量化大型语料库</a></li>
+<li><a class="reference internal" href="#hashingvectorizer-scaling">4.2.3.9. 使用 HashingVectorizer 执行核外scaling</a></li>
+<li><a class="reference internal" href="#id15">4.2.3.10. 自定义向量化器类</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image-feature-extraction">4.2.4. 图像特征提取</a><ul>
+<li><a class="reference internal" href="#id17">4.2.4.1. 图像块提取</a></li>
+<li><a class="reference internal" href="#id18">4.2.4.2. 图像的连接图</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="feature-extraction">
+<span id="id1"></span><h1>4.2. 特征提取(Feature extraction)<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="classes.html#module-sklearn.feature_extraction" title="sklearn.feature_extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a> 模块可以被用于以机器学习算法支持的格式从原始数据集(如文本和图像)提取特征。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">特征提取与特征选择 <a class="reference internal" href="feature_selection.html#feature-selection"><span class="std std-ref">特征选择(Feature selection)</span></a> 有很大的不同 ：前者是将任何形式的数据如文本，图像转换成可用于机器学习的数值型特征；
+后者是一种应用在这些特征上的机器学习技术。</p>
+</div>
+<div class="section" id="dict-feature-extraction">
+<span id="id2"></span><h2>4.2.1. 从字典加载特征<a class="headerlink" href="#dict-feature-extraction" title="Permalink to this headline">¶</a></h2>
+<p>类 <a class="reference internal" href="generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" title="sklearn.feature_extraction.DictVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictVectorizer</span></code></a> 可用于将 以标准Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> 对象的列表形式表示的特征数组转换为
+scikit-learn 估计器使用的 NumPy/SciPy 表示形式。</p>
+<p>虽然处理速度不是特别快，但Python的 <code class="docutils literal notranslate"><span class="pre">dict</span></code> 优点是使用方便，稀疏（缺失的特征不需要存储），
+并且除了值之外还存储特征名称。</p>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" title="sklearn.feature_extraction.DictVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictVectorizer</span></code></a> 类实现了对 标称型特征(categorical or  nominal or discrete features)的 one-of-K 或 “one-hot” 编码。
+标称型特征是 “attribute-value” 对，其中 value的取值被限制在一个不排序的可能性的离散列表中。 (e.g. 话题标识符，对象类型，标签，名称)。</p>
+<p>在下面, “city” 是一个 标称型属性(特征)，而 “temperature” 是一个传统的 数值型特征(numerical feature):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Dubai&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">33.</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">12.</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">18.</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="k">import</span> <span class="n">DictVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span> <span class="o">=</span> <span class="n">DictVectorizer</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[ 1.,  0.,  0., 33.],</span>
+<span class="go">       [ 0.,  1.,  0., 12.],</span>
+<span class="go">       [ 0.,  0.,  1., 18.]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
+<span class="go">[&#39;city=Dubai&#39;, &#39;city=London&#39;, &#39;city=San Francisco&#39;, &#39;temperature&#39;]</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.DictVectorizer.html#sklearn.feature_extraction.DictVectorizer" title="sklearn.feature_extraction.DictVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictVectorizer</span></code></a> 类也是在自然语言处理模型中训练序列分类器的有用的表达变换(representation transformation)，
+通常通过提取围绕特定兴趣词的特征窗口来工作。</p>
+<p>例如，假设我们具有提取我们想要用作训练序列分类器（例如：块）的互补标签的部分语音（PoS）标签的一个算法。
+以下 dict 可以是在 “The cat sat on the mat.” 的句子，围绕 “sat” 一词提取的这样一个特征窗口:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos_window</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">{</span>
+<span class="gp">... </span>        <span class="s1">&#39;word-2&#39;</span><span class="p">:</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;pos-2&#39;</span><span class="p">:</span> <span class="s1">&#39;DT&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;word-1&#39;</span><span class="p">:</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;pos-1&#39;</span><span class="p">:</span> <span class="s1">&#39;NN&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;word+1&#39;</span><span class="p">:</span> <span class="s1">&#39;on&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;pos+1&#39;</span><span class="p">:</span> <span class="s1">&#39;PP&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="c1"># in a real application one would extract many such dictionaries</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+<p>上述描述可以被矢量化为适合于传递给分类器的稀疏二维矩阵（可能要在pipe之后进行 <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">text.TfidfTransformer</span></code></a> 归一化）:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span> <span class="o">=</span> <span class="n">DictVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_vectorized</span> <span class="o">=</span> <span class="n">vec</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">pos_window</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_vectorized</span>                
+<span class="go">&lt;1x6 sparse matrix of type &#39;&lt;... &#39;numpy.float64&#39;&gt;&#39;</span>
+<span class="go">    with 6 stored elements in Compressed Sparse ... format&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_vectorized</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1., 1., 1., 1., 1., 1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vec</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
+<span class="go">[&#39;pos+1=PP&#39;, &#39;pos-1=NN&#39;, &#39;pos-2=DT&#39;, &#39;word+1=on&#39;, &#39;word-1=cat&#39;, &#39;word-2=the&#39;]</span>
+</pre></div>
+</div>
+<p>你可以想象，如果一个文本语料库的每一个单词都提取了这样一个上下文，那么所得的矩阵将会非常宽（许多 one-hot-features），其中大部分通常将会是0。
+为了使产生的数据结构能够适应内存，该类 <code class="docutils literal notranslate"><span class="pre">DictVectorizer</span></code> 默认使用 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> 矩阵而不是 <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>。</p>
+</div>
+<div class="section" id="feature-hashing">
+<span id="id3"></span><h2>4.2.2. 特征哈希(散列)化<a class="headerlink" href="#feature-hashing" title="Permalink to this headline">¶</a></h2>
+<p>类 <a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureHasher</span></code></a> 是一种高速，低内存消耗的 向量化方法，它使用了特征散列化
+(<a class="reference external" href="https://en.wikipedia.org/wiki/Feature_hashing">feature hashing</a>) 技术 ，或可称为 “散列法”(hashing trick)的技术。
+该类的做法不是去构建 训练中遇到的特征 的哈希表，如向量化所做的那样, <a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureHasher</span></code></a> 类实例 将哈希函数应用于特征，
+以便直接在样本矩阵中确定它们的列索引。
+结果是以牺牲可检测性(inspectability)为代价，带来速度的提高和内存使用的减少;
+hasher 不记得输入特征是什么样的，也没有 <code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code> 办法。</p>
+<p>由于散列函数可能导致（不相关）特征之间的冲突，因此使用带符号散列函数，并且散列值的符号确定存储在特征的输出矩阵中的值的符号。
+这样，碰撞可能会抵消而不是累积错误，并且任何输出特征的值的预期平均值为零。默认情况下，此机制将使用 <code class="docutils literal notranslate"><span class="pre">alternate_sign=True</span></code> 启用，
+尤其对小型哈希表的大小（ <code class="docutils literal notranslate"><span class="pre">n_features</span> <span class="pre">&lt;</span> <span class="pre">10000</span></code> ）特别有用。 对于大哈希表的大小，可以禁用它，以便将输出传递给估计器，
+如 <a class="reference internal" href="generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB" title="sklearn.naive_bayes.MultinomialNB"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.naive_bayes.MultinomialNB</span></code></a> 或 <a class="reference internal" href="generated/sklearn.feature_selection.chi2.html#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection.chi2</span></code></a> 特征选择器，这些特征选项器希望输入是非负的。</p>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureHasher</span></code></a> 类接受三种类型的输入：mappings ，<code class="docutils literal notranslate"><span class="pre">(feature,</span> <span class="pre">value)</span></code> pairs，或 strings。
+其中 mappings 就像是python的 <code class="docutils literal notranslate"><span class="pre">dict</span></code> 或在 <code class="docutils literal notranslate"><span class="pre">collections</span></code> 模块中的字典的变体。
+到底使用哪种参数依赖于构造器的 <code class="docutils literal notranslate"><span class="pre">input_type</span></code> 参数。
+Mapping 被当作是由 <code class="docutils literal notranslate"><span class="pre">(feature,</span> <span class="pre">value)</span></code> 组成的列表(list), 而 单个字符串有一个内在的值 1 ，因此 <code class="docutils literal notranslate"><span class="pre">['feat1',</span> <span class="pre">'feat2',</span> <span class="pre">'feat3']</span></code>
+被解释成 <code class="docutils literal notranslate"><span class="pre">[('feat1',</span> <span class="pre">1),</span> <span class="pre">('feat2',</span> <span class="pre">1),</span> <span class="pre">('feat3',</span> <span class="pre">1)]</span></code>。
+如果一个特征在一个样本中多次出现，那么该特征关联的值就会被累加起来，比如像这样 (<code class="docutils literal notranslate"><span class="pre">('feat',</span> <span class="pre">2)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">('feat',</span> <span class="pre">3.5)</span></code> 就变成了 <code class="docutils literal notranslate"><span class="pre">('feat',</span> <span class="pre">5.5)</span></code>)。
+类 <a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureHasher</span></code></a> 的输出总是 CSR 格式的 一个 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> 矩阵。</p>
+<p>特征散列(Feature hashing)可以被用于文档分类，但是它不像 <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">text.CountVectorizer</span></code></a> 类,
+<a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureHasher</span></code></a> 类不进行单词分割 或其他预处理除了 Unicode-to-UTF-8 编码;
+请看下面 <a class="reference internal" href="#hashing-vectorizer"><span class="std std-ref">用散列技巧矢量化大型语料库</span></a> , 是一个 combined tokenizer/hasher 。</p>
+<p>作为一个例子，考虑一个单词级的自然语言处理任务，它需要从 <code class="docutils literal notranslate"><span class="pre">(token,</span> <span class="pre">part_of_speech)</span></code> pairs 中抽取特征。
+我们可以使用一个 Python 生成器函数 来提取特征</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">token_features</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">part_of_speech</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="k">yield</span> <span class="s2">&quot;numeric&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="s2">&quot;token=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">yield</span> <span class="s2">&quot;token,pos=</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">part_of_speech</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">():</span>
+        <span class="k">yield</span> <span class="s2">&quot;uppercase_initial&quot;</span>
+    <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">isupper</span><span class="p">():</span>
+        <span class="k">yield</span> <span class="s2">&quot;all_uppercase&quot;</span>
+    <span class="k">yield</span> <span class="s2">&quot;pos=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">part_of_speech</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>然后, 要被传递到 <code class="docutils literal notranslate"><span class="pre">FeatureHasher.transform</span></code> 里面去的 <code class="docutils literal notranslate"><span class="pre">raw_X</span></code> 可以使用下面的方法构建:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">raw_X</span> <span class="o">=</span> <span class="p">(</span><span class="n">token_features</span><span class="p">(</span><span class="n">tok</span><span class="p">,</span> <span class="n">pos_tagger</span><span class="p">(</span><span class="n">tok</span><span class="p">))</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>然后使用下面的方法把它喂给 FeatureHasher 类的一个对象实例 (hasher)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hasher</span> <span class="o">=</span> <span class="n">FeatureHasher</span><span class="p">(</span><span class="n">input_type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">hasher</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">raw_X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>得到的输出是一个 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> 类型的矩阵 <code class="docutils literal notranslate"><span class="pre">X</span></code>。</p>
+<p>这里需要注意的是 由于我们使用了Python的生成器，导致在特征抽取过程中引入了懒惰性:
+只有在hasher有需求的时候tokens才会被处理(tokens are only processed on demand from the hasher)。</p>
+<div class="section" id="id5">
+<h3>4.2.2.1. 实现细节<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.FeatureHasher.html#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureHasher</span></code></a> 类使用带符号的 32-bit 变体的 MurmurHash3。 作为其结果(也因为 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> 里面的限制)，
+当前支持的特征的最大数量 <span class="math notranslate nohighlight">\(2^{31} - 1\)</span> 。</p>
+<p>散列技巧(hashing trick)的原始形式源于Weinberger et al。 使用两个分开的哈希函数，<span class="math notranslate nohighlight">\(h\)</span> 和 <span class="math notranslate nohighlight">\(\xi\)</span> 分别确定特征的列索引和符号。
+现有的实现是基于假设：MurmurHash3的符号位与其他位独立(the sign bit of MurmurHash3 is independent of its other bits)。</p>
+<p>由于使用简单的模数将哈希函数转换为列索引，建议使用2次幂作为 <code class="docutils literal notranslate"><span class="pre">n_features</span></code> 参数; 否则特征不会被均匀的分布到列中。</p>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<ul class="simple">
+<li>Kilian Weinberger, Anirban Dasgupta, John Langford, Alex Smola and
+Josh Attenberg (2009). <a class="reference external" href="http://alex.smola.org/papers/2009/Weinbergeretal09.pdf">Feature hashing for large scale multitask learning</a>. Proc. ICML.</li>
+<li><a class="reference external" href="https://github.com/aappleby/smhasher">MurmurHash3</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="text-feature-extraction">
+<span id="id6"></span><h2>4.2.3. 文本特征提取<a class="headerlink" href="#text-feature-extraction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>4.2.3.1. 词袋表示法<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>文本分析是机器学习算法的主要应用领域。 然而，原始数据，符号文字序列不能直接传递给算法，因为它们大多数要求具有固定长度的数字矩阵特征向量，
+而不是具有可变长度的原始文本文档。</p>
+<p>为解决这个问题，scikit-learn 提供了从文本内容中提取数字特征的最常见方法，即：</p>
+<ul class="simple">
+<li><strong>tokenizing</strong> 令牌化 即对每个可能的 词令牌(token) 分成字符串并赋予整型id，例如通过使用空格和标点符号作为令牌分隔符(token separators)。</li>
+<li><strong>counting</strong> 统计计数 即数出每个文档中令牌的出现次数。</li>
+<li><strong>normalizing</strong> 标准化 即 对大多数样本/文档中出现的重要性递减的token进行归一化和加权</li>
+</ul>
+<p>在这个机制中, 特征和样本是如下定义的：</p>
+<ul class="simple">
+<li>每个单独的令牌发生频率（归一化或不归一化）被视为一个特征 (each <strong>individual token occurrence frequency</strong> (normalized or not)
+is treated as a <strong>feature</strong>.)。</li>
+<li>给定文档中所有的令牌频率向量被看做一个多元样本(the vector of all the token frequencies for a given <strong>document</strong> is
+considered a multivariate <strong>sample</strong>.)。</li>
+</ul>
+<p>因此，文档的集合(文集：corpus of documents)可被表示为矩阵形式，每行对应一个文本文档，每列对应文集中出现的词令牌(如单个词)。</p>
+<p>我们称 向量化(<strong>vectorization</strong>) 是将文本文档集合转换为数字集合特征向量的通用方法。 这种特别的策略（令牌化，计数和归一化）被称为
+<strong>Bag of Words</strong> 或 “Bag of n-grams” 表示法。文档由单词的出现与否和出现频率来描述，同时完全忽略文档中单词的相对位置信息。</p>
+</div>
+<div class="section" id="id8">
+<h3>4.2.3.2. 稀疏性<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>由于大多数文本文档通常只使用文集的词向量全集中的一个小子集，所以得到的矩阵将具有许多特征值为零（通常大于99％）。</p>
+<p>例如，10,000 个短文本文档（如电子邮件）的集合将使用总共100,000个独特词的大小的词汇，而每个文档将单独使用100到1000个独特的单词。</p>
+<p>为了能够将这样的矩阵存储在存储器中，并且还可以加速代数的矩阵/向量运算，实现通常将使用诸如 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> 包中的稀疏实现</p>
+</div>
+<div class="section" id="vectorizer">
+<h3>4.2.3.3. 常见 Vectorizer 的用法<a class="headerlink" href="#vectorizer" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 在单个类中实现了 词语切分(tokenization) 和 出现频数统计(occurrence counting)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span>
+</pre></div>
+</div>
+<p>这个模型有很多参数，但参数的默认初始值是相当合理的（请参阅 <a class="reference internal" href="classes.html#text-feature-extraction-ref"><span class="std std-ref">参考文档</span></a> 了解详细信息）:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span>                     
+<span class="go">CountVectorizer(analyzer=...&#39;word&#39;, binary=False, decode_error=...&#39;strict&#39;,</span>
+<span class="go">        dtype=&lt;... &#39;numpy.int64&#39;&gt;, encoding=...&#39;utf-8&#39;, input=...&#39;content&#39;,</span>
+<span class="go">        lowercase=True, max_df=1.0, max_features=None, min_df=1,</span>
+<span class="go">        ngram_range=(1, 1), preprocessor=None, stop_words=None,</span>
+<span class="go">        strip_accents=None, token_pattern=...&#39;(?u)\\b\\w\\w+\\b&#39;,</span>
+<span class="go">        tokenizer=None, vocabulary=None)</span>
+</pre></div>
+</div>
+<p>我们用该类对一个简约的文本语料库进行 分词(tokenize)和 统计单词出现频数</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s1">&#39;This is the first document.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;This is the second second document.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;And the third one.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;Is this the first document?&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>                              
+<span class="go">&lt;4x9 sparse matrix of type &#39;&lt;... &#39;numpy.int64&#39;&gt;&#39;</span>
+<span class="go">    with 19 stored elements in Compressed Sparse ... format&gt;</span>
+</pre></div>
+</div>
+<p>默认配置是 通过提取至少包含2个字母的单词来对 string 进行分词。做这一步的函数可以显式地被调用</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">analyze</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">build_analyzer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">analyze</span><span class="p">(</span><span class="s2">&quot;This is a text document to analyze.&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;this&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;analyze&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>analyzer 在拟合过程中找到的每个 term（项）都会被分配一个唯一的整数索引，对应于 resulting matrix 中的一列。
+此列的一些说明可以被检索如下</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;third&#39;</span><span class="p">,</span> <span class="s1">&#39;this&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>           
+<span class="go">array([[0, 1, 1, 1, 0, 0, 1, 0, 1],</span>
+<span class="go">       [0, 1, 0, 1, 0, 2, 1, 0, 1],</span>
+<span class="go">       [1, 0, 0, 0, 1, 0, 1, 1, 0],</span>
+<span class="go">       [0, 1, 1, 1, 0, 0, 1, 0, 1]]...)</span>
+</pre></div>
+</div>
+<p>从 feature名称 到 列索引(column index) 的逆映射存储在 <code class="docutils literal notranslate"><span class="pre">vocabulary_</span></code> 属性中:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;document&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>因此，在未来对 transform 方法的调用中，在 训练语料库(training corpus) 中没有看到的单词将被完全忽略：:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s1">&#39;Something completely new.&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="gp">... </span>                          
+<span class="go">array([[0, 0, 0, 0, 0, 0, 0, 0, 0]]...)</span>
+</pre></div>
+</div>
+<p>请注意，在前面的语料库中，第一个和最后一个文档具有完全相同的词，因此被编码成相同的向量。
+特别是我们丢失了 最后一个文件是一个疑问的形式 的信息。
+为了保留局部的词组顺序信息，除了提取一元模型 1-grams（个别词）之外，我们还可以提取 2-grams 的单词</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bigram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>                                    <span class="n">token_pattern</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\b\w+\b&#39;</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">analyze</span> <span class="o">=</span> <span class="n">bigram_vectorizer</span><span class="o">.</span><span class="n">build_analyzer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">analyze</span><span class="p">(</span><span class="s1">&#39;Bi-grams are cool!&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;bi&#39;</span><span class="p">,</span> <span class="s1">&#39;grams&#39;</span><span class="p">,</span> <span class="s1">&#39;are&#39;</span><span class="p">,</span> <span class="s1">&#39;cool&#39;</span><span class="p">,</span> <span class="s1">&#39;bi grams&#39;</span><span class="p">,</span> <span class="s1">&#39;grams are&#39;</span><span class="p">,</span> <span class="s1">&#39;are cool&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>由上述 向量化器(vectorizer) 提取的 vocabulary 因此会变得更大，同时可以在局部定位模式时消除歧义</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_2</span> <span class="o">=</span> <span class="n">bigram_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_2</span>
+<span class="gp">... </span>                          
+<span class="go">array([[0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0],</span>
+<span class="go">       [0, 0, 1, 0, 0, 1, 1, 0, 0, 2, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0],</span>
+<span class="go">       [1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0],</span>
+<span class="go">       [0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1]]...)</span>
+</pre></div>
+</div>
+<p>特别是 “Is this” 的疑问形式只出现在最后一个文档中:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">feature_index</span> <span class="o">=</span> <span class="n">bigram_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;is this&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_2</span><span class="p">[:,</span> <span class="n">feature_index</span><span class="p">]</span>     
+<span class="go">array([0, 0, 0, 1]...)</span>
+</pre></div>
+</div>
+<div class="section" id="stop-words">
+<span id="id9"></span><h4>4.2.3.3.1. 使用 stop words<a class="headerlink" href="#stop-words" title="Permalink to this headline">¶</a></h4>
+<p>Stop words are words like “and”, “the”, “him”, which are presumed to be
+uninformative in representing the content of a text, and which may be
+removed to avoid them being construed as signal for prediction.  Sometimes,
+however, similar words are useful for prediction, such as in classifying
+writing style or personality.</p>
+<p>There are several known issues in our provided ‘english’ stop word list. See
+<a class="reference internal" href="#nqy18" id="id10">[NQY18]</a>.</p>
+<p>Please take care in choosing a stop word list.
+Popular stop word lists may include words that are highly informative to
+some tasks, such as <em>computer</em>.</p>
+<p>You should also make sure that the stop word list has had the same
+preprocessing and tokenization applied as the one used in the vectorizer.
+The word <em>we’ve</em> is split into <em>we</em> and <em>ve</em> by CountVectorizer’s default
+tokenizer, so if <em>we’ve</em> is in <code class="docutils literal notranslate"><span class="pre">stop_words</span></code>, but <em>ve</em> is not, <em>ve</em> will
+be retained from <em>we’ve</em> in transformed text.  Our vectorizers will try to
+identify and warn about some kinds of inconsistencies.</p>
+<div class="topic">
+<p class="topic-title first">References</p>
+<table class="docutils citation" frame="void" id="nqy18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[NQY18]</a></td><td>J. Nothman, H. Qin and R. Yurchak (2018).
+<a class="reference external" href="http://aclweb.org/anthology/W18-2502">“Stop Word Lists in Free Open-source Software Packages”</a>.
+In <em>Proc. Workshop for NLP Open Source Software</em>.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="tfidf-term-weighting">
+<span id="tfidf"></span><h3>4.2.3.4. Tf–idf term weighting<a class="headerlink" href="#tfidf-term-weighting" title="Permalink to this headline">¶</a></h3>
+<p>在一个大的文本语料库中，一些单词将出现很多次（例如 “the”, “a”, “is” 是英文），因此对文档的实际内容没有什么有意义的信息。
+如果我们直接将直接计数数据提供给分类器，那么这些非常频繁的词组(very frequent terms)会掩盖住那些我们感兴趣但却很少出现的词。</p>
+<p>为了重新计算特征权重，并将其转化为适合分类器使用的浮点值，因此使用 tf-idf 变换(tf–idf transform)是非常常见的。</p>
+<p>Tf 表示 <strong>term-frequency</strong> 而 tf–idf 表示 term-frequency 乘以 <strong>inverse document-frequency</strong>:
+<span class="math notranslate nohighlight">\(\text{tf-idf(t,d)}=\text{tf(t,d)} \times \text{idf(t)}\)</span>.</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code> 的默认设置, <code class="docutils literal notranslate"><span class="pre">TfidfTransformer(norm='l2',</span> <span class="pre">use_idf=True,</span> <span class="pre">smooth_idf=True,</span> <span class="pre">sublinear_tf=False)</span></code>
+term 的频率( the term frequency), 一个term出现在给定文档的次数，被乘以 idf component, 计算如下：</p>
+<p><span class="math notranslate nohighlight">\(\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1\)</span>,</p>
+<p>其中 <span class="math notranslate nohighlight">\(n_d\)</span> 是文档的总数量，<span class="math notranslate nohighlight">\(\text{df}(d,t)\)</span> 包含某个 term <span class="math notranslate nohighlight">\(t\)</span> 的文档的数量。然后计算出的 tf-idf
+vectors 用欧式范数归一化，如下所示：</p>
+<p><span class="math notranslate nohighlight">\(v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
+v{_2}^2 + \dots + v{_n}^2}}\)</span>.</p>
+<p>上面所介绍的就是用于信息检索领域的原始的 term加权机制。该 term加权机制 在文档分类和聚类中的表现也比较好。</p>
+<p>接下来的小节包含了对 tf-idfs 的进一步解释以及实验案例来说明 tf-idfs 是如何准确计算出来的，以及 scikit-learn 的类
+<a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfTransformer</span></code></a> 是如何计算 tf-idfs 的。还有 <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code></a> 类与标准的 idf 的定义的细微差别。
+标准的 idf 的定义 如下所示：</p>
+<p><span class="math notranslate nohighlight">\(\text{idf}(t) = log{\frac{n_d}{1+\text{df}(d,t)}}.\)</span></p>
+<p>在 <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfTransformer</span></code></a> 类和 <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code></a> 类中，如果设置了 <code class="docutils literal notranslate"><span class="pre">smooth_idf=False</span></code> ,那么
+数量 “1” 就被加到 idf 上而不是 idf 的分母上:</p>
+<p><span class="math notranslate nohighlight">\(\text{idf}(t) = log{\frac{n_d}{\text{df}(d,t)}} + 1\)</span></p>
+<p>归一化是被 <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfTransformer</span></code></a> 类实现的</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfTransformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">(</span><span class="n">smooth_idf</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span>   
+<span class="go">TfidfTransformer(norm=...&#39;l2&#39;, smooth_idf=False, sublinear_tf=False,</span>
+<span class="go">                 use_idf=True)</span>
+</pre></div>
+</div>
+<p>请再次查看 <a class="reference internal" href="classes.html#text-feature-extraction-ref"><span class="std std-ref">参考文档</span></a> 来获得所有参数的细节信息。</p>
+<p>让我们以下面的数量来举个栗子。 第一个 term 出现次数 100%，因此可能不是很感兴趣。另外两个特征出现的次数仅仅比50%小点儿，
+因此有可能是更加能够代表文档内容的表示:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">counts</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>          <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>          <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>          <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>          <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>          <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tfidf</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tfidf</span>                         
+<span class="go">&lt;6x3 sparse matrix of type &#39;&lt;... &#39;numpy.float64&#39;&gt;&#39;</span>
+<span class="go">    with 9 stored elements in Compressed Sparse ... format&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>                        
+<span class="go">array([[0.81940995, 0.        , 0.57320793],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [0.47330339, 0.88089948, 0.        ],</span>
+<span class="go">       [0.58149261, 0.        , 0.81355169]])</span>
+</pre></div>
+</div>
+<p>每一行都被归一化到单位欧式范数:</p>
+<p><span class="math notranslate nohighlight">\(v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
+v{_2}^2 + \dots + v{_n}^2}}\)</span></p>
+<p>比如, 我们可以计算在 <cite>counts</cite> 数组中的第一个文档中第一个 term 的 tf-idf :</p>
+<p><span class="math notranslate nohighlight">\(n_{d} = 6\)</span></p>
+<p><span class="math notranslate nohighlight">\(\text{df}(d, t)_{\text{term1}} = 6\)</span></p>
+<p><span class="math notranslate nohighlight">\(\text{idf}(d, t)_{\text{term1}} =
+log \frac{n_d}{\text{df}(d, t)} + 1 = log(1)+1 = 1\)</span></p>
+<p><span class="math notranslate nohighlight">\(\text{tf-idf}_{\text{term1}} = \text{tf} \times \text{idf} = 3 \times 1 = 3\)</span></p>
+<p>现在, 如果我们重复上述计算过程去计算文档中剩余的 2 个 terms, 我们可以得到：</p>
+<p><span class="math notranslate nohighlight">\(\text{tf-idf}_{\text{term2}} = 0 \times (log(6/1)+1) = 0\)</span></p>
+<p><span class="math notranslate nohighlight">\(\text{tf-idf}_{\text{term3}} = 1 \times (log(6/2)+1) \approx 2.0986\)</span></p>
+<p>原始 tf-idfs 的向量:</p>
+<p><span class="math notranslate nohighlight">\(\text{tf-idf}_{\text{raw}} = [3, 0, 2.0986].\)</span></p>
+<p>然后, 应用 Euclidean (L2) norm, 我们可以在文档1 上得到以下 tf-idfs :</p>
+<p><span class="math notranslate nohighlight">\(\frac{[3, 0, 2.0986]}{\sqrt{\big(3^2 + 0^2 + 2.0986^2\big)}}
+= [ 0.819,  0,  0.573].\)</span></p>
+<p>更进一步, 默认参数 <code class="docutils literal notranslate"><span class="pre">smooth_idf=True</span></code> 会添加 “1” 到分子和分母上，就好像又看到了另一篇文档而这篇文档恰好包含了所有的term仅仅一次，这么做就可以避免
+除零的异常发生了:</p>
+<p><span class="math notranslate nohighlight">\(\text{idf}(t) = log{\frac{1 + n_d}{1+\text{df}(d,t)}} + 1\)</span></p>
+<p>使用这个修改版本, 文档1 中 第三个 term 的 tf-idf 变为 1.8473:</p>
+<p><span class="math notranslate nohighlight">\(\text{tf-idf}_{\text{term3}} = 1 \times log(7/3)+1 \approx 1.8473\)</span></p>
+<p>并且 L2-normalized tf-idf 变为</p>
+<p><span class="math notranslate nohighlight">\(\frac{[3, 0, 1.8473]}{\sqrt{\big(3^2 + 0^2 + 1.8473^2\big)}}
+= [0.8515, 0, 0.5243]\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[0.85151335, 0.        , 0.52433293],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [1.        , 0.        , 0.        ],</span>
+<span class="go">       [0.55422893, 0.83236428, 0.        ],</span>
+<span class="go">       [0.63035731, 0.        , 0.77630514]])</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法计算出的每个feature的权重被保存在模型属性 <code class="docutils literal notranslate"><span class="pre">idf_</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">idf_</span>                       
+<span class="go">array([1. ..., 2.25..., 1.84...])</span>
+</pre></div>
+</div>
+<p>由于 tf–idf 在文本特征提取中被经常使用，我们还提供了另一个类 <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code></a> 来组合 <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 和 <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfTransformer</span></code></a>
+的所有的选项到一个单一模型中去</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">... </span>                               
+<span class="go">&lt;4x9 sparse matrix of type &#39;&lt;... &#39;numpy.float64&#39;&gt;&#39;</span>
+<span class="go">    with 19 stored elements in Compressed Sparse ... format&gt;</span>
+</pre></div>
+</div>
+<p>虽然 tf-idf normalization 通常非常有用，但是可能有一种情况是二元出现标记( binary occurrence markers)会提供更好的特征。
+这可以使用类 <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 的 <code class="docutils literal notranslate"><span class="pre">binary</span></code> 参数来实现。 特别地，一些估计器，诸如 <a class="reference internal" href="naive_bayes.html#bernoulli-naive-bayes"><span class="std std-ref">伯努利朴素贝叶斯</span></a>
+显式的使用离散的布尔随机变量。 而且，非常短的文本很可能影响 tf-idf 值，而 二进制出现信息(binary occurrence info) 更稳定。</p>
+<p>通常情况下，调整特征提取参数的最佳方法是使用基于网格搜索的交叉验证，例如通过将特征提取器与分类器进行流水线化:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../auto_examples/model_selection/grid_search_text_feature_extraction.html#sphx-glr-auto-examples-model-selection-grid-search-text-feature-extraction-py"><span class="std std-ref">Sample pipeline for text feature extraction and evaluation</span></a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id11">
+<h3>4.2.3.5. 解码文本文件<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>文本由字符组成，但文件由字节组成。字节转化成字符依照一定的编码(encoding)方式。
+为了在Python中的使用文本文档，这些字节必须被 解码 为 Unicode 的字符集。
+常用的编码方式有 ASCII，Latin-1（西欧），KOI8-R（俄语）和通用编码 UTF-8 和 UTF-16。
+还有许多其他的编码存在</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">编码也可以称为 ‘字符集’, 但是这个术语不太准确: 单个字符集可能存在多个编码。</p>
+</div>
+<p>scikit-learn 中的文本提取器知道如何解码文本文件， 但只有当您告诉他们文件的编码的情况下才行，
+<a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 才需要一个 <code class="docutils literal notranslate"><span class="pre">encoding</span></code> 参数。
+对于现代文本文件，正确的编码可能是 UTF-8，因此它也是默认解码方式 (<code class="docutils literal notranslate"><span class="pre">encoding=&quot;utf-8&quot;</span></code>)。</p>
+<p>如果正在加载的文本不是使用UTF-8进行编码，则会得到 <code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code>.
+矢量化的方式可以通过设定 <code class="docutils literal notranslate"><span class="pre">decode_error</span></code> 参数设置为 <code class="docutils literal notranslate"><span class="pre">&quot;ignore&quot;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">&quot;replace&quot;</span></code> 来避免抛出解码错误。
+有关详细信息，请参阅Python函数 <code class="docutils literal notranslate"><span class="pre">bytes.decode</span></code> 的文档（在Python提示符下键入 <code class="docutils literal notranslate"><span class="pre">help(bytes.decode)</span></code> ）。</p>
+<p>如果您在解码文本时遇到问题，请尝试以下操作:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>- 了解文本的实际编码方式。该文件可能带有标题或 README，告诉您编码，或者可能有一些标准编码，您可以根据文本的来源来推断编码方式。
+</pre></div>
+</div>
+<ul class="simple">
+<li>您可能可以使用 UNIX 命令 <code class="docutils literal notranslate"><span class="pre">file</span></code> 找出它一般使用什么样的编码。 Python <code class="docutils literal notranslate"><span class="pre">chardet</span></code> 模块附带一个名为 <code class="docutils literal notranslate"><span class="pre">chardetect.py</span></code> 的脚本，
+它会猜测具体的编码，尽管你不能依靠它的猜测是正确的。</li>
+<li>你可以尝试 UTF-8 并忽略错误。您可以使用 <code class="docutils literal notranslate"><span class="pre">bytes.decode(errors='replace')</span></code> 对字节字符串进行解码，
+用无意义字符替换所有解码错误，或在向量化器中设置 <code class="docutils literal notranslate"><span class="pre">decode_error='replace'</span></code>. 这可能会损坏您的功能的有用性。</li>
+<li>真实文本可能来自各种使用不同编码的来源，或者甚至以与编码的编码不同的编码进行粗略解码。这在从 Web 检索的文本中是常见的。
+Python 包 <code class="docutils literal notranslate"><span class="pre">ftfy</span></code> 可以自动排序一些解码错误类，所以您可以尝试将未知文本解码为 <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> ，然后使用 <code class="docutils literal notranslate"><span class="pre">ftfy</span></code> 修复错误。</li>
+<li>如果文本的编码的混合，那么它很难整理分类（20个新闻组数据集的情况），您可以把它们回到简单的单字节编码，如 <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> 。
+某些文本可能显示不正确，但至少相同的字节序列将始终代表相同的功能。.</li>
+</ul>
+<p>例如，以下代码段使用 <code class="docutils literal notranslate"><span class="pre">chardet</span></code> （没有附带在scikit-learn中，必须单独安装）来计算出编码方式。
+然后，它将文本向量化并打印学习的词汇（特征）。输出在下方给出。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">chardet</span>    <span class="c1"># doctest: +SKIP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text1</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Sei mir gegr</span><span class="se">\xc3\xbc\xc3\x9f</span><span class="s2">t mein Sauerkraut&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text2</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;holdselig sind deine Ger</span><span class="se">\xfc</span><span class="s2">che&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text3</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xff\xfe</span><span class="s2">A</span><span class="se">\x00</span><span class="s2">u</span><span class="se">\x00</span><span class="s2">f</span><span class="se">\x00</span><span class="s2"> </span><span class="se">\x00</span><span class="s2">F</span><span class="se">\x00</span><span class="s2">l</span><span class="se">\x00\xfc\x00</span><span class="s2">g</span><span class="se">\x00</span><span class="s2">e</span><span class="se">\x00</span><span class="s2">l</span><span class="se">\x00</span><span class="s2">n</span><span class="se">\x00</span><span class="s2"> </span><span class="se">\x00</span><span class="s2">d</span><span class="se">\x00</span><span class="s2">e</span><span class="se">\x00</span><span class="s2">s</span><span class="se">\x00</span><span class="s2"> </span><span class="se">\x00</span><span class="s2">G</span><span class="se">\x00</span><span class="s2">e</span><span class="se">\x00</span><span class="s2">s</span><span class="se">\x00</span><span class="s2">a</span><span class="se">\x00</span><span class="s2">n</span><span class="se">\x00</span><span class="s2">g</span><span class="se">\x00</span><span class="s2">e</span><span class="se">\x00</span><span class="s2">s</span><span class="se">\x00</span><span class="s2">,</span><span class="se">\x00</span><span class="s2"> </span><span class="se">\x00</span><span class="s2">H</span><span class="se">\x00</span><span class="s2">e</span><span class="se">\x00</span><span class="s2">r</span><span class="se">\x00</span><span class="s2">z</span><span class="se">\x00</span><span class="s2">l</span><span class="se">\x00</span><span class="s2">i</span><span class="se">\x00</span><span class="s2">e</span><span class="se">\x00</span><span class="s2">b</span><span class="se">\x00</span><span class="s2">c</span><span class="se">\x00</span><span class="s2">h</span><span class="se">\x00</span><span class="s2">e</span><span class="se">\x00</span><span class="s2">n</span><span class="se">\x00</span><span class="s2">,</span><span class="se">\x00</span><span class="s2"> </span><span class="se">\x00</span><span class="s2">t</span><span class="se">\x00</span><span class="s2">r</span><span class="se">\x00</span><span class="s2">a</span><span class="se">\x00</span><span class="s2">g</span><span class="se">\x00</span><span class="s2"> </span><span class="se">\x00</span><span class="s2">i</span><span class="se">\x00</span><span class="s2">c</span><span class="se">\x00</span><span class="s2">h</span><span class="se">\x00</span><span class="s2"> </span><span class="se">\x00</span><span class="s2">d</span><span class="se">\x00</span><span class="s2">i</span><span class="se">\x00</span><span class="s2">c</span><span class="se">\x00</span><span class="s2">h</span><span class="se">\x00</span><span class="s2"> </span><span class="se">\x00</span><span class="s2">f</span><span class="se">\x00</span><span class="s2">o</span><span class="se">\x00</span><span class="s2">r</span><span class="se">\x00</span><span class="s2">t</span><span class="se">\x00</span><span class="s2">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decoded</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">chardet</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="s1">&#39;encoding&#39;</span><span class="p">])</span>
+<span class="gp">... </span>           <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">text1</span><span class="p">,</span> <span class="n">text2</span><span class="p">,</span> <span class="n">text3</span><span class="p">)]</span>        <span class="c1"># doctest: +SKIP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">decoded</span><span class="p">)</span><span class="o">.</span><span class="n">vocabulary_</span>    <span class="c1"># doctest: +SKIP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>                           <span class="c1"># doctest: +SKIP</span>
+</pre></div>
+</div>
+<p>(根据 <code class="docutils literal notranslate"><span class="pre">chardet</span></code> 的版本，可能会返回第一个值错误的结果。)</p>
+<p>有关 Unicode 和字符编码的一般介绍，请参阅 Joel Spolsky’s <a class="reference external" href="http://www.joelonsoftware.com/articles/Unicode.html">Absolute Minimum Every Software Developer Must Know
+About Unicode</a>.</p>
+</div>
+<div class="section" id="id12">
+<h3>4.2.3.6. 应用和案例<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>词汇表达方式相当简单，但在实践中却非常有用。</p>
+<p>特别是在 <strong>supervised setting</strong> 中，它能够把快速和可扩展的线性模型组合来训练 <strong>document classifiers</strong> , 例如:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../auto_examples/text/plot_document_classification_20newsgroups.html#sphx-glr-auto-examples-text-plot-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></li>
+</ul>
+</div></blockquote>
+<p>在 <strong>unsupervised setting</strong> 中，可以通过应用诸如 <a class="reference internal" href="clustering.html#k-means"><span class="std std-ref">K-均值(K-means)</span></a> 的聚类算法来将相似文档分组在一起：</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../auto_examples/text/plot_document_clustering.html#sphx-glr-auto-examples-text-plot-document-clustering-py"><span class="std std-ref">Clustering text documents using k-means</span></a></li>
+</ul>
+</div></blockquote>
+<p>最后，通过松弛聚类的约束条件，可以通过使用非负矩阵分解( <a class="reference internal" href="decomposition.html#nmf"><span class="std std-ref">非负矩阵分解 (NMF or NNMF)</span></a> )来发现语料库的主要主题：</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../auto_examples/applications/plot_topics_extraction_with_nmf_lda.html#sphx-glr-auto-examples-applications-plot-topics-extraction-with-nmf-lda-py"><span class="std std-ref">Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation</span></a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id13">
+<h3>4.2.3.7. 词袋表示法的局限性<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>单个单词(unigrams)的集合无法捕获短语和多字表达，有效地忽略了任何单词顺序依赖。
+另外，这个单词模型不包含潜在的拼写错误或词汇推倒。</p>
+<p>N-grams 来救场！不去构建一个简单的unigrams集合 (n=1)，而是使用bigrams集合 (n=2)，其中计算连续字对。</p>
+<p>还可以考虑 n-gram 的集合，这是一种对拼写错误和派生有弹性的表示。</p>
+<p>例如，假设我们正在处理两个文档的语料库： <code class="docutils literal notranslate"><span class="pre">['words',</span> <span class="pre">'wprds']</span></code> . 第二个文件包含 <cite>words</cite> 一词的拼写错误。
+一个简单的单词表示将把这两个视为非常不同的文档，两个可能的特征都是不同的。
+然而，一个 2-gram 的表示可以找到匹配的文档中的8个特征中的4个，这可能有助于优选的分类器更好地决定:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char_wb&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">counts</span> <span class="o">=</span> <span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="s1">&#39;wprds&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39; w&#39;</span><span class="p">,</span> <span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;pr&#39;</span><span class="p">,</span> <span class="s1">&#39;rd&#39;</span><span class="p">,</span> <span class="s1">&#39;s &#39;</span><span class="p">,</span> <span class="s1">&#39;wo&#39;</span><span class="p">,</span> <span class="s1">&#39;wp&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">counts</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="go">array([[1, 1, 1, 0, 1, 1, 1, 0],</span>
+<span class="go">       [1, 1, 0, 1, 1, 1, 0, 1]])</span>
+</pre></div>
+</div>
+<p>在上面的例子中，使用 <code class="docutils literal notranslate"><span class="pre">char_wb</span></code> 分析器，它只能从字边界内的字符（每侧填充空格）创建 n-gram。 <code class="docutils literal notranslate"><span class="pre">char</span></code> 分析器可以创建跨越单词的 n-gram</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char_wb&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s1">&#39;jumpy fox&#39;</span><span class="p">])</span>
+<span class="gp">... </span>                               
+<span class="go">&lt;1x4 sparse matrix of type &#39;&lt;... &#39;numpy.int64&#39;&gt;&#39;</span>
+<span class="go">   with 4 stored elements in Compressed Sparse ... format&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39; fox &#39;</span><span class="p">,</span> <span class="s1">&#39; jump&#39;</span><span class="p">,</span> <span class="s1">&#39;jumpy&#39;</span><span class="p">,</span> <span class="s1">&#39;umpy &#39;</span><span class="p">])</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;char&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s1">&#39;jumpy fox&#39;</span><span class="p">])</span>
+<span class="gp">... </span>                               
+<span class="go">&lt;1x5 sparse matrix of type &#39;&lt;... &#39;numpy.int64&#39;&gt;&#39;</span>
+<span class="go">    with 5 stored elements in Compressed Sparse ... format&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ngram_vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;jumpy&#39;</span><span class="p">,</span> <span class="s1">&#39;mpy f&#39;</span><span class="p">,</span> <span class="s1">&#39;py fo&#39;</span><span class="p">,</span> <span class="s1">&#39;umpy &#39;</span><span class="p">,</span> <span class="s1">&#39;y fox&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>对于使用白色空格进行单词分离的语言，对于语言边界感知变体 <code class="docutils literal notranslate"><span class="pre">char_wb</span></code> 尤其有趣，
+因为在这种情况下，它会产生比原始 <code class="docutils literal notranslate"><span class="pre">char</span></code> 变体显着更少的噪音特征。
+对于这样的语言，它可以增加使用这些特征训练的分类器的预测精度和收敛速度，
+同时保持关于拼写错误和词导出的稳健性。</p>
+<p>虽然可以通过提取 n-gram 而不是单独的单词来保存一些局部定位信息，
+但是包含 n-gram 的单词和袋子可以破坏文档的大部分内部结构，因此破坏了该内部结构的大部分含义。</p>
+<p>为了处理自然语言理解的更广泛的任务，因此应考虑到句子和段落的局部结构。因此，许多这样的模型将被称为 “结构化输出” 问题，
+这些问题目前不在 scikit-learn 的范围之内。</p>
+</div>
+<div class="section" id="hashing-vectorizer">
+<span id="id14"></span><h3>4.2.3.8. 用散列技巧矢量化大型语料库<a class="headerlink" href="#hashing-vectorizer" title="Permalink to this headline">¶</a></h3>
+<p>上述向量化方案是简单的，但是它存在 从字符串令牌到整数特征索引的内存映射 （ <code class="docutils literal notranslate"><span class="pre">vocabulary_</span></code> 属性），在处理 大型数据集时会引起几个问题 :</p>
+<ul class="simple">
+<li>语料库越大，词汇量越大，使用的内存也越大.</li>
+<li>拟合（fitting）需要根据原始数据集的大小等比例分配中间数据结构的大小.</li>
+<li>构建词映射需要完整的传递数据集，因此不可能以严格在线的方式拟合文本分类器.</li>
+<li>pickling和un-pickling <code class="docutils literal notranslate"><span class="pre">vocabulary</span></code> 很大的向量器会非常慢（通常比pickling/un-pickling flat数据结构，比如同等大小的Numpy数组还要慢）.</li>
+<li>将向量化任务分隔成并行的子任务很不容易实现，因为 <code class="docutils literal notranslate"><span class="pre">vocabulary_</span></code> 属性要共享状态有一个细颗粒度的同步障碍：
+从标记字符串中映射特征索引与每个标记的首次出现顺序是独立的，
+因此应该被共享，在这点上并行worker的性能受到了损害，使他们比串行更慢。</li>
+</ul>
+<p>通过组合由 <code class="docutils literal notranslate"><span class="pre">sklearn.feature_extraction.FeatureHasher</span></code> 类实现的 “散列技巧” (<a class="reference internal" href="#feature-hashing"><span class="std std-ref">特征哈希(散列)化</span></a>)
+和 <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 的文本预处理和标记化功能，可以克服这些限制。</p>
+<p>这种组合是在 <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a> 中实现的，该类是与 <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 大部分 API 兼容的变换器(transformer)类。
+<a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a> 是无状态的，这意味着您不需要 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 它:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">HashingVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hv</span> <span class="o">=</span> <span class="n">HashingVectorizer</span><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hv</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">... </span>                               
+<span class="go">&lt;4x10 sparse matrix of type &#39;&lt;... &#39;numpy.float64&#39;&gt;&#39;</span>
+<span class="go">    with 16 stored elements in Compressed Sparse ... format&gt;</span>
+</pre></div>
+</div>
+<p>你可以看到从向量输出中抽取了16个非0特征标记：与之前由 <a class="reference internal" href="generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 在同一个样本语料库抽取的19个非0特征要少。
+差异来自哈希方法的冲突，因为较低的 <code class="docutils literal notranslate"><span class="pre">n_features</span></code> 参数的值。</p>
+<p>在真实世界的环境下，<code class="docutils literal notranslate"><span class="pre">n_features</span></code> 参数可以使用默认值 <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">**</span> <span class="pre">20``（将近100万可能的特征）。</span>
+<span class="pre">如果内存或者下游模型的大小是一个问题，那么选择一个较小的值比如</span> <span class="pre">``2</span> <span class="pre">**</span> <span class="pre">18</span></code> 可能有一些帮助，
+而不需要为典型的文本分类任务引入太多额外的冲突。</p>
+<p>注意 维度并不影响CPU的算法训练时间，训练是在操作CSR矩阵
+（<code class="docutils literal notranslate"><span class="pre">LinearSVC(dual=True)</span></code>, <code class="docutils literal notranslate"><span class="pre">Perceptron</span></code>, <code class="docutils literal notranslate"><span class="pre">SGDClassifier</span></code>, <code class="docutils literal notranslate"><span class="pre">PassiveAggressive</span></code>），
+但是，它对CSC matrices (<code class="docutils literal notranslate"><span class="pre">LinearSVC(dual=False)</span></code>, <code class="docutils literal notranslate"><span class="pre">Lasso()</span></code>, etc)算法有效。</p>
+<p>让我们再次尝试使用默认设置:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hv</span> <span class="o">=</span> <span class="n">HashingVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hv</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">... </span>                              
+<span class="go">&lt;4x1048576 sparse matrix of type &#39;&lt;... &#39;numpy.float64&#39;&gt;&#39;</span>
+<span class="go">    with 19 stored elements in Compressed Sparse ... format&gt;</span>
+</pre></div>
+</div>
+<p>冲突没有再出现，但是，代价是输出空间的维度值非常大。当然，这里使用的19词以外的其他词之前仍会有冲突。</p>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a> 还具有以下限制</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>- 不能反转模型（没有 ``inverse_transform`` 方法）。 因为进行mapping的哈希方法的单向本质，也无法访问原始的字符串表征。
+</pre></div>
+</div>
+<ul class="simple">
+<li>没有提供 IDF 加权，因为这需要在模型中引入状态。如果需要的话，可以在管道中添加 <a class="reference internal" href="generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfTransformer</span></code></a> 。</li>
+</ul>
+</div>
+<div class="section" id="hashingvectorizer-scaling">
+<h3>4.2.3.9. 使用 HashingVectorizer 执行核外scaling<a class="headerlink" href="#hashingvectorizer-scaling" title="Permalink to this headline">¶</a></h3>
+<p>使用 <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a> 的一个有趣的开发是执行核外 <a class="reference external" href="https://en.wikipedia.org/wiki/Out-of-core_algorithm">out-of-core</a> 缩放的能力。
+这意味着我们可以从无法放入电脑主内存的数据中进行学习。</p>
+<p>实现核外扩展的一个策略是将数据以流的方式以一小批提交给估计器。每批的向量化都是用 <a class="reference internal" href="generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a> 。
+这样来保证估计器的输入空间的维度是相等的。 因此任何时间使用的内存数都限定在小频次的大小。 尽管用这种方法可以处理的数据没有限制，
+但是从实用角度学习时间受到想要在这个任务上花费的CPU时间的限制。</p>
+<p>对于文本分类任务中的外核缩放的完整示例，请参阅  <a class="reference internal" href="../auto_examples/applications/plot_out_of_core_classification.html#sphx-glr-auto-examples-applications-plot-out-of-core-classification-py"><span class="std std-ref">Out-of-core classification of text documents</span></a>.</p>
+</div>
+<div class="section" id="id15">
+<h3>4.2.3.10. 自定义向量化器类<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>通过将可调用对象传递给向量化程序构造函数可以定制行为::</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_tokenizer</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">my_tokenizer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">build_analyzer</span><span class="p">()(</span><span class="sa">u</span><span class="s2">&quot;Some... punctuation!&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;some...&#39;</span><span class="p">,</span> <span class="s1">&#39;punctuation!&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>特别的，我们命名:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">preprocessor</span></code>: 可以将整个文档作为输入（作为单个字符串）的可调用对象，并返回文档的可能转换的版本，仍然是整个字符串。
+这可以用于删除HTML标签，小写整个文档等。</li>
+<li><code class="docutils literal notranslate"><span class="pre">tokenizer</span></code>: 一个可从预处理器接收输出并将其分成标记的可调用对象，然后返回这些列表。</li>
+<li><code class="docutils literal notranslate"><span class="pre">analyzer</span></code>: 一个可替代预处理程序和标记器的可调用程序。默认分析仪都会调用预处理器和刻录机，但是自定义分析仪将会跳过这个。
+N-gram 提取和停止字过滤在分析器级进行，因此定制分析器可能必须重现这些步骤。</li>
+</ul>
+</div></blockquote>
+<p>(Lucene 用户可能会识别这些名称，但请注意，scikit-learn 概念可能无法一对一映射到 Lucene 概念上。)</p>
+<p>为了使预处理器，标记器和分析器了解模型参数，可以从类派生并覆盖 <code class="docutils literal notranslate"><span class="pre">build_preprocessor</span></code>, <code class="docutils literal notranslate"><span class="pre">build_tokenizer</span></code> 和 <code class="docutils literal notranslate"><span class="pre">build_analyzer</span></code> 工厂方法，
+而不是传递自定义函数。</p>
+<p>一些经验和技巧:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">如果文档由外部包进行预先标记，则将它们存储在文件（或字符串）中，令牌由空格分隔，并传递  <code class="docutils literal notranslate"><span class="pre">analyzer=str.split</span></code></p>
+</li>
+<li><p class="first">Fancy 令牌级分析，如词干，词法，复合分割，基于词性的过滤等不包括在 scikit-learn 代码库中，但可以通过定制分词器或分析器来添加。</p>
+<p>这是一个 <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code>, 使用 NLTK 的 tokenizer 和 lemmatizer: <a class="reference external" href="http://www.nltk.org">NLTK</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nltk</span> <span class="k">import</span> <span class="n">word_tokenize</span>          
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="k">import</span> <span class="n">WordNetLemmatizer</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">LemmaTokenizer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">wnl</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">wnl</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">doc</span><span class="p">)]</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">LemmaTokenizer</span><span class="p">())</span>  
+</pre></div>
+</div>
+<p>(请注意，这不会过滤标点符号。)</p>
+<p>例如，以下例子将英国的一些拼写变成美国拼写:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">to_british</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(...)our$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1or&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([bt])re$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1er&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([iy])s(e$|ing|ation)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1z\2&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;ogue$&quot;</span><span class="p">,</span> <span class="s2">&quot;og&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">yield</span> <span class="n">t</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">CustomVectorizer</span><span class="p">(</span><span class="n">CountVectorizer</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">build_tokenizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tokenize</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CustomVectorizer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">build_tokenizer</span><span class="p">()</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="k">lambda</span> <span class="n">doc</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">to_british</span><span class="p">(</span><span class="n">tokenize</span><span class="p">(</span><span class="n">doc</span><span class="p">)))</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">CustomVectorizer</span><span class="p">()</span><span class="o">.</span><span class="n">build_analyzer</span><span class="p">()(</span><span class="sa">u</span><span class="s2">&quot;color colour&quot;</span><span class="p">))</span> 
+<span class="go">[...&#39;color&#39;, ...&#39;color&#39;]</span>
+</pre></div>
+</div>
+<p>用于其他样式的预处理; 例子包括 stemming, lemmatization, 或 normalizing numerical tokens, 后者说明如下:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../auto_examples/bicluster/plot_bicluster_newsgroups.html#sphx-glr-auto-examples-bicluster-plot-bicluster-newsgroups-py"><span class="std std-ref">Biclustering documents with the Spectral Co-clustering algorithm</span></a></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>在处理不使用显式字分隔符（例如空格）的亚洲语言时，自定义向量化器也是有用的。</p>
+</div>
+</div>
+<div class="section" id="image-feature-extraction">
+<span id="id16"></span><h2>4.2.4. 图像特征提取<a class="headerlink" href="#image-feature-extraction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id17">
+<h3>4.2.4.1. 图像块提取<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d" title="sklearn.feature_extraction.image.extract_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_patches_2d</span></code></a> 函数从存储为二维数组的灰度图像或三维数组的彩色图像中提取图像块(patches)。
+彩色图像的颜色信息在第三个纬度存放。如果要从所有的图像块(patches)中重建图像，请使用函数 <a class="reference internal" href="generated/sklearn.feature_extraction.image.reconstruct_from_patches_2d.html#sklearn.feature_extraction.image.reconstruct_from_patches_2d" title="sklearn.feature_extraction.image.reconstruct_from_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">reconstruct_from_patches_2d</span></code></a> 。
+比如我们生成一个 4x4 像素的RGB格式三通道图像:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="k">import</span> <span class="n">image</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">one_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">one_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># R channel of a fake RGB picture</span>
+<span class="go">array([[ 0,  3,  6,  9],</span>
+<span class="go">       [12, 15, 18, 21],</span>
+<span class="go">       [24, 27, 30, 33],</span>
+<span class="go">       [36, 39, 42, 45]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">extract_patches_2d</span><span class="p">(</span><span class="n">one_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">max_patches</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 2, 2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">array([[[ 0,  3],</span>
+<span class="go">        [12, 15]],</span>
+
+<span class="go">       [[15, 18],</span>
+<span class="go">        [27, 30]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">extract_patches_2d</span><span class="p">(</span><span class="n">one_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(9, 2, 2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">array([[15, 18],</span>
+<span class="go">       [27, 30]])</span>
+</pre></div>
+</div>
+<p>现在让我们尝试通过在重叠区域进行平均来从图像块重建原始图像:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reconstructed</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">reconstruct_from_patches_2d</span><span class="p">(</span><span class="n">patches</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">one_image</span><span class="p">,</span> <span class="n">reconstructed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="generated/sklearn.feature_extraction.image.PatchExtractor.html#sklearn.feature_extraction.image.PatchExtractor" title="sklearn.feature_extraction.image.PatchExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">PatchExtractor</span></code></a> 类的工作方式与 <a class="reference internal" href="generated/sklearn.feature_extraction.image.extract_patches_2d.html#sklearn.feature_extraction.image.extract_patches_2d" title="sklearn.feature_extraction.image.extract_patches_2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_patches_2d</span></code></a> 函数相同, 只是它支持多幅图像作为输入。
+它被实现为一个estimator，因此它可以在 pipelines 中使用。请看:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">five_images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">PatchExtractor</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">five_images</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(45, 2, 2, 3)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>4.2.4.2. 图像的连接图<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p>scikit-learn 中的好几个estimators可以使用特征或样本之间的连接信息(connectivity information)。
+例如，Ward clustering (<a class="reference internal" href="clustering.html#hierarchical-clustering"><span class="std std-ref">层次聚类(Hierarchical clustering)</span></a>) 可以只把相邻像素(neighboring pixels)聚集在一起，从而形成连续的斑块:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/cluster/plot_coin_ward_segmentation.html"><img alt="../images/sphx_glr_plot_coin_ward_segmentation_0011.png" src="../images/sphx_glr_plot_coin_ward_segmentation_0011.png" style="width: 200.0px; height: 200.0px;" /></a>
+</div>
+<p>出于这个目的, 这些estimators使用一个连接性矩阵(‘connectivity’ matrix), 给出哪些样本是连接着的。</p>
+<p>函数 <a class="reference internal" href="generated/sklearn.feature_extraction.image.img_to_graph.html#sklearn.feature_extraction.image.img_to_graph" title="sklearn.feature_extraction.image.img_to_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">img_to_graph</span></code></a> 从2D或3D图像返回这样一个矩阵(‘connectivity’ matrix)。
+类似地，函数 <a class="reference internal" href="generated/sklearn.feature_extraction.image.grid_to_graph.html#sklearn.feature_extraction.image.grid_to_graph" title="sklearn.feature_extraction.image.grid_to_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">grid_to_graph</span></code></a> 为给定shape的图像构建连接矩阵。</p>
+<p>这些矩阵可用于在使用连接信息的估计器中强加连接，如 (<a class="reference internal" href="clustering.html#hierarchical-clustering"><span class="std std-ref">层次聚类(Hierarchical clustering)</span></a>)，而且还要构建预计算的内核或相似矩阵。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>案例</strong></p>
+<ul class="last simple">
+<li><a class="reference internal" href="../auto_examples/cluster/plot_coin_ward_segmentation.html#sphx-glr-auto-examples-cluster-plot-coin-ward-segmentation-py"><span class="std std-ref">A demo of structured Ward hierarchical clustering on an image of coins</span></a></li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_segmentation_toy.html#sphx-glr-auto-examples-cluster-plot-segmentation-toy-py"><span class="std std-ref">Spectral clustering for image segmentation</span></a></li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_feature_agglomeration_vs_univariate_selection.html#sphx-glr-auto-examples-cluster-plot-feature-agglomeration-vs-univariate-selection-py"><span class="std std-ref">Feature agglomeration vs. univariate selection</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/feature_extraction.rst.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="compose.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="preprocessing.html">Next
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-22606712-2', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function() {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>
