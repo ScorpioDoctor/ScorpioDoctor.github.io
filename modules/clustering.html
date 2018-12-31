@@ -185,67 +185,67 @@
     <ul>
 <li><a class="reference internal" href="#">2.3. 聚类(Clustering)</a><ul>
 <li><a class="reference internal" href="#id2">2.3.1. 聚类算法一览</a></li>
-<li><a class="reference internal" href="#k-k-means">2.3.2. K-均值(K-means)</a><ul>
-<li><a class="reference internal" href="#mini-batch-kmeans">2.3.2.1. 小批量 K-Means</a></li>
+<li><a class="reference internal" href="#k">2.3.2. K-均值</a><ul>
+<li><a class="reference internal" href="#mini-batch-kmeans">2.3.2.1. 小批量 K-均值</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#affinity-propagation">2.3.3. Affinity Propagation</a></li>
-<li><a class="reference internal" href="#mean-shift">2.3.4. 均值漂移(Mean Shift)</a></li>
-<li><a class="reference internal" href="#spectral-clustering">2.3.5. Spectral clustering</a><ul>
-<li><a class="reference internal" href="#id9">2.3.5.1. 不同的标记分配策略</a></li>
-<li><a class="reference internal" href="#spectral-clustering-graphs">2.3.5.2. Spectral Clustering Graphs</a></li>
+<li><a class="reference internal" href="#affinity-propagation">2.3.3. 吸引子传播</a></li>
+<li><a class="reference internal" href="#mean-shift">2.3.4. 均值漂移</a></li>
+<li><a class="reference internal" href="#spectral-clustering">2.3.5. 谱聚类</a><ul>
+<li><a class="reference internal" href="#id9">2.3.5.1. 不同的标签分配策略</a></li>
+<li><a class="reference internal" href="#id10">2.3.5.2. 谱聚类用于图聚类问题</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#hierarchical-clustering">2.3.6. 层次聚类(Hierarchical clustering)</a><ul>
 <li><a class="reference internal" href="#different-linkage-type-ward-complete-average-and-single-linkage">2.3.6.1. Different linkage type: Ward, complete, average, and single linkage</a></li>
-<li><a class="reference internal" href="#id11">2.3.6.2. 添加连通性约束</a></li>
-<li><a class="reference internal" href="#id12">2.3.6.3. 改变聚类测度</a></li>
+<li><a class="reference internal" href="#id13">2.3.6.2. 添加连通性约束</a></li>
+<li><a class="reference internal" href="#id14">2.3.6.3. 改变聚类测度</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#dbscan">2.3.7. DBSCAN</a></li>
 <li><a class="reference internal" href="#birch">2.3.8. Birch</a></li>
 <li><a class="reference internal" href="#clustering-evaluation">2.3.9. 聚类算法性能评估</a><ul>
 <li><a class="reference internal" href="#adjusted-rand-index">2.3.9.1. Adjusted Rand index</a><ul>
-<li><a class="reference internal" href="#id16">2.3.9.1.1. 优点</a></li>
-<li><a class="reference internal" href="#id17">2.3.9.1.2. 缺点</a></li>
-<li><a class="reference internal" href="#id18">2.3.9.1.3. 数学化表达形式</a></li>
+<li><a class="reference internal" href="#id20">2.3.9.1.1. 优点</a></li>
+<li><a class="reference internal" href="#id21">2.3.9.1.2. 缺点</a></li>
+<li><a class="reference internal" href="#id22">2.3.9.1.3. 数学表达形式</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#mutual-info-score">2.3.9.2. 基于互信息的得分</a><ul>
-<li><a class="reference internal" href="#id20">2.3.9.2.1. 优点</a></li>
-<li><a class="reference internal" href="#id21">2.3.9.2.2. 缺点</a></li>
-<li><a class="reference internal" href="#id22">2.3.9.2.3. 数学表达形式</a></li>
+<li><a class="reference internal" href="#id24">2.3.9.2.1. 优点</a></li>
+<li><a class="reference internal" href="#id25">2.3.9.2.2. 缺点</a></li>
+<li><a class="reference internal" href="#id26">2.3.9.2.3. 数学表达形式</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#homogeneity-completeness-and-v-measure">2.3.9.3. Homogeneity, completeness and V-measure</a><ul>
-<li><a class="reference internal" href="#id27">2.3.9.3.1. 优点</a></li>
-<li><a class="reference internal" href="#id28">2.3.9.3.2. 缺点</a></li>
-<li><a class="reference internal" href="#id29">2.3.9.3.3. 数学表达形式</a></li>
+<li><a class="reference internal" href="#id31">2.3.9.3.1. 优点</a></li>
+<li><a class="reference internal" href="#id32">2.3.9.3.2. 缺点</a></li>
+<li><a class="reference internal" href="#id33">2.3.9.3.3. 数学表达形式</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#fowlkes-mallows-scores">2.3.9.4. Fowlkes-Mallows scores</a><ul>
-<li><a class="reference internal" href="#id31">2.3.9.4.1. 优点</a></li>
-<li><a class="reference internal" href="#id32">2.3.9.4.2. 缺点</a></li>
+<li><a class="reference internal" href="#id35">2.3.9.4.1. 优点</a></li>
+<li><a class="reference internal" href="#id36">2.3.9.4.2. 缺点</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#silhouette-coefficient">2.3.9.5. Silhouette Coefficient</a><ul>
-<li><a class="reference internal" href="#id34">2.3.9.5.1. 优点</a></li>
-<li><a class="reference internal" href="#id35">2.3.9.5.2. 缺点</a></li>
+<li><a class="reference internal" href="#id38">2.3.9.5.1. 优点</a></li>
+<li><a class="reference internal" href="#id39">2.3.9.5.2. 缺点</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#calinski-harabaz-index">2.3.9.6. Calinski-Harabaz Index</a><ul>
-<li><a class="reference internal" href="#id37">2.3.9.6.1. 优点</a></li>
-<li><a class="reference internal" href="#id38">2.3.9.6.2. 缺点</a></li>
+<li><a class="reference internal" href="#id41">2.3.9.6.1. 优点</a></li>
+<li><a class="reference internal" href="#id42">2.3.9.6.2. 缺点</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#davies-bouldin-index">2.3.9.7. Davies-Bouldin Index</a><ul>
-<li><a class="reference internal" href="#id40">2.3.9.7.1. 优点</a></li>
-<li><a class="reference internal" href="#id41">2.3.9.7.2. 缺点</a></li>
+<li><a class="reference internal" href="#id44">2.3.9.7.1. 优点</a></li>
+<li><a class="reference internal" href="#id45">2.3.9.7.2. 缺点</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#contingency-matrix">2.3.9.8. Contingency Matrix</a><ul>
-<li><a class="reference internal" href="#id43">2.3.9.8.1. 优点</a></li>
-<li><a class="reference internal" href="#id44">2.3.9.8.2. 缺点</a></li>
+<li><a class="reference internal" href="#id47">2.3.9.8.1. 优点</a></li>
+<li><a class="reference internal" href="#id48">2.3.9.8.2. 缺点</a></li>
 </ul>
 </li>
 </ul>
@@ -287,7 +287,7 @@
 </div>
 <div class="section" id="id2">
 <h2>2.3.1. 聚类算法一览<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-center" id="id45">
+<div class="figure align-center" id="id49">
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_cluster_comparison.html"><img alt="../images/sphx_glr_plot_cluster_comparison_0011.png" src="../images/sphx_glr_plot_cluster_comparison_0011.png" style="width: 1050.0px; height: 625.0px;" /></a>
 <p class="caption"><span class="caption-text">scikit-learn中的聚类算法比较</span></p>
 </div>
@@ -371,8 +371,8 @@ i.e. 一个非平坦的流形，而标准的欧氏距离不是正确的度量.�
 <p>用于聚类的高斯混合模型在 :ref:<a href="#id3"><span class="problematic" id="id4">`</span></a>专门讨论混合模型的文档 &lt;mixture&gt;`中进行了描述。
 KMeans可以看做是高斯混合模型的特例，其中每个分量的协方差相等。</p>
 </div>
-<div class="section" id="k-k-means">
-<span id="k-means"></span><h2>2.3.2. K-均值(K-means)<a class="headerlink" href="#k-k-means" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="k">
+<span id="k-means"></span><h2>2.3.2. K-均值<a class="headerlink" href="#k" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="sklearn.cluster.KMeans"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMeans</span></code></a> 算法通过尝试将样本分离成n个方差相等的组来对数据进行聚类，最小化了一个称为惯性(<a class="reference external" href="inertia">inertia</a>)或
 聚类内和平方(within-cluster sum-of-squares)的准则。
 该算法需要指定簇数。它可以很好地扩展到大量的样本，并且已经在许多不同的应用领域得到了广泛的应用。</p>
@@ -442,7 +442,7 @@ algorithms</em>, Society for Industrial and Applied Mathematics (2007)</li>
 </ul>
 </div>
 <div class="section" id="mini-batch-kmeans">
-<span id="id5"></span><h3>2.3.2.1. 小批量 K-Means<a class="headerlink" href="#mini-batch-kmeans" title="Permalink to this headline">¶</a></h3>
+<span id="id5"></span><h3>2.3.2.1. 小批量 K-均值<a class="headerlink" href="#mini-batch-kmeans" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans" title="sklearn.cluster.MiniBatchKMeans"><code class="xref py py-class docutils literal notranslate"><span class="pre">MiniBatchKMeans</span></code></a> 是 <a class="reference internal" href="generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="sklearn.cluster.KMeans"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMeans</span></code></a> 算法的一个变体，它使用 mini-batches 来减少计算时间，同时仍然尝试优化相同的目标函数(objective function)。
 小批量样本(Mini-batches)是输入数据的子集，在每个训练迭代中进行随机抽样。
 这些mini-batches大大减少了收敛到局部解所需的计算量。 与其他降低 k-means 收敛时间的算法作对比，mini-batch k-means 产生的结果通常只比标准算法略差。</p>
@@ -473,33 +473,22 @@ wide web</em> (2010)</li>
 </div>
 </div>
 <div class="section" id="affinity-propagation">
-<span id="id6"></span><h2>2.3.3. Affinity Propagation<a class="headerlink" href="#affinity-propagation" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.cluster.AffinityPropagation.html#sklearn.cluster.AffinityPropagation" title="sklearn.cluster.AffinityPropagation"><code class="xref py py-class docutils literal notranslate"><span class="pre">AffinityPropagation</span></code></a> creates clusters by sending messages between
-pairs of samples until convergence. A dataset is then described using a small
-number of exemplars, which are identified as those most representative of other
-samples. The messages sent between pairs represent the suitability for one
-sample to be the exemplar of the other, which is updated in response to the
-values from other pairs. This updating happens iteratively until convergence,
-at which point the final exemplars are chosen, and hence the final clustering
-is given.</p>
+<span id="id6"></span><h2>2.3.3. 吸引子传播<a class="headerlink" href="#affinity-propagation" title="Permalink to this headline">¶</a></h2>
+<p>(译者注：Affinity Propagation Clustering 可翻译为：仿射传播聚类，吸引子传播聚类，相似性传播聚类，亲和力传播聚类，以下简称 AP聚类)</p>
+<p><a class="reference internal" href="generated/sklearn.cluster.AffinityPropagation.html#sklearn.cluster.AffinityPropagation" title="sklearn.cluster.AffinityPropagation"><code class="xref py py-class docutils literal notranslate"><span class="pre">AffinityPropagation</span></code></a> 聚类方法是通过在样本对之间发送消息直到收敛来创建聚类。
+然后使用少量示例样本作为聚类中心来描述数据集， 聚类中心是数据集中最能代表一类数据的样本。
+在样本对之间发送的消息表示一个样本作为另一个样本的示例样本的 适合程度(suitability)，适合程度值在根据通信的反馈不断更新。
+更新迭代直到收敛，完成聚类中心的选取，因此也给出了最终聚类。</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_affinity_propagation.html"><img alt="../images/sphx_glr_plot_affinity_propagation_0011.png" src="../images/sphx_glr_plot_affinity_propagation_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
-<p>Affinity Propagation can be interesting as it chooses the number of
-clusters based on the data provided. For this purpose, the two important
-parameters are the <em>preference</em>, which controls how many exemplars are
-used, and the <em>damping factor</em> which damps the responsibility and
-availability messages to avoid numerical oscillations when updating these
-messages.</p>
-<p>The main drawback of Affinity Propagation is its complexity. The
-algorithm has a time complexity of the order <span class="math notranslate nohighlight">\(O(N^2 T)\)</span>, where <span class="math notranslate nohighlight">\(N\)</span>
-is the number of samples and <span class="math notranslate nohighlight">\(T\)</span> is the number of iterations until
-convergence. Further, the memory complexity is of the order
-<span class="math notranslate nohighlight">\(O(N^2)\)</span> if a dense similarity matrix is used, but reducible if a
-sparse similarity matrix is used. This makes Affinity Propagation most
-appropriate for small to medium sized datasets.</p>
+<p>Affinity Propagation 算法比较有趣的是可以根据提供的数据决定聚类的数目。 因此有两个比较重要的参数:
+<em>preference</em>: 决定使用多少个示例样本; <em>damping factor</em>: 阻尼因子,用于减少吸引信息和归属信息以防止更新减少吸引度和归属度信息时数据振荡。</p>
+<p>AP聚类算法主要的缺点是算法的复杂度。 AP聚类算法的时间复杂度是 <span class="math notranslate nohighlight">\(O(N^2 T)\)</span> , 其中 <span class="math notranslate nohighlight">\(N\)</span> 是样本的个数 ，
+<span class="math notranslate nohighlight">\(T\)</span> 是收敛之前迭代的次数。如果使用密集的相似性矩阵空间复杂度是 <span class="math notranslate nohighlight">\(O(N^2)\)</span> ，如果使用稀疏的相似性矩阵空间复杂度可以降低。
+这使得AP聚类最适合中小型数据集(small to medium sized datasets)。</p>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/cluster/plot_affinity_propagation.html#sphx-glr-auto-examples-cluster-plot-affinity-propagation-py"><span class="std std-ref">Demo of affinity propagation clustering algorithm</span></a>: Affinity
 Propagation on a synthetic 2D datasets with 3 classes.</li>
@@ -507,77 +496,55 @@ Propagation on a synthetic 2D datasets with 3 classes.</li>
 Financial time series to find groups of companies</li>
 </ul>
 </div>
-<p><strong>Algorithm description:</strong>
-The messages sent between points belong to one of two categories. The first is
-the responsibility <span class="math notranslate nohighlight">\(r(i, k)\)</span>,
-which is the accumulated evidence that sample <span class="math notranslate nohighlight">\(k\)</span>
-should be the exemplar for sample <span class="math notranslate nohighlight">\(i\)</span>.
-The second is the availability <span class="math notranslate nohighlight">\(a(i, k)\)</span>
-which is the accumulated evidence that sample <span class="math notranslate nohighlight">\(i\)</span>
-should choose sample <span class="math notranslate nohighlight">\(k\)</span> to be its exemplar,
-and considers the values for all other samples that <span class="math notranslate nohighlight">\(k\)</span> should
-be an exemplar. In this way, exemplars are chosen by samples if they are (1)
-similar enough to many samples and (2) chosen by many samples to be
-representative of themselves.</p>
-<p>More formally, the responsibility of a sample <span class="math notranslate nohighlight">\(k\)</span>
-to be the exemplar of sample <span class="math notranslate nohighlight">\(i\)</span> is given by:</p>
+<p><strong>算法描述:</strong>
+样本之间传递的信息有两种。 第一种是 responsibility <span class="math notranslate nohighlight">\(r(i, k)\)</span>, 样本 <span class="math notranslate nohighlight">\(k\)</span> 适合作为样本 <span class="math notranslate nohighlight">\(i\)</span> 的典型代表(exemplar)的累计证据。
+第二种是 availability <span class="math notranslate nohighlight">\(a(i, k)\)</span>, 样本 <span class="math notranslate nohighlight">\(i\)</span> 应该选择样本 <span class="math notranslate nohighlight">\(k\)</span> 作为它的典型代表(exemplar)的累计证据，
+并考虑对所有其他样本来说 <span class="math notranslate nohighlight">\(k\)</span> 作为exemplar的累计证据。
+用这种方式, exemplars被选择是因为这些exemplars满足了两个条件: (1)它们与很多样本足够相似，(2)它们被很多样本选择作为自己的代表。</p>
+<p>更正式一点, 一个样本 <span class="math notranslate nohighlight">\(k\)</span> 要成为样本 <span class="math notranslate nohighlight">\(i\)</span> 的exemplar的 responsibility 由下式给出:</p>
 <div class="math notranslate nohighlight">
 \[r(i, k) \leftarrow s(i, k) - max [ a(i, k') + s(i, k') \forall k' \neq k ]\]</div>
-<p>Where <span class="math notranslate nohighlight">\(s(i, k)\)</span> is the similarity between samples <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(k\)</span>.
-The availability of sample <span class="math notranslate nohighlight">\(k\)</span>
-to be the exemplar of sample <span class="math notranslate nohighlight">\(i\)</span> is given by:</p>
+<p>其中 <span class="math notranslate nohighlight">\(s(i, k)\)</span> 是样本 <span class="math notranslate nohighlight">\(k\)</span> 和样本 <span class="math notranslate nohighlight">\(i\)</span> 之间的相似度。</p>
+<p>样本 <span class="math notranslate nohighlight">\(k\)</span> 要成为样本 <span class="math notranslate nohighlight">\(i\)</span> 的exemplar的 availability 由下式给出:</p>
 <div class="math notranslate nohighlight">
 \[a(i, k) \leftarrow min [0, r(k, k) + \sum_{i'~s.t.~i' \notin \{i, k\}}{r(i', k)}]\]</div>
-<p>To begin with, all values for <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(a\)</span> are set to zero,
-and the calculation of each iterates until convergence.
-As discussed above, in order to avoid numerical oscillations when updating the
-messages, the damping factor <span class="math notranslate nohighlight">\(\lambda\)</span> is introduced to iteration process:</p>
+<p>在开始的时候, <span class="math notranslate nohighlight">\(r\)</span> 和 <span class="math notranslate nohighlight">\(a\)</span> 中的所有值被设为 0, 并且迭代计算到收敛为止。
+为了防止更新messages时出现数据振荡，在迭代过程中引入阻尼因子 <span class="math notranslate nohighlight">\(\lambda\)</span> :</p>
 <div class="math notranslate nohighlight">
 \[r_{t+1}(i, k) = \lambda\cdot r_{t}(i, k) + (1-\lambda)\cdot r_{t+1}(i, k)\]</div>
 <div class="math notranslate nohighlight">
 \[a_{t+1}(i, k) = \lambda\cdot a_{t}(i, k) + (1-\lambda)\cdot a_{t+1}(i, k)\]</div>
-<p>where <span class="math notranslate nohighlight">\(t\)</span> indicates the iteration times.</p>
+<p>其中 <span class="math notranslate nohighlight">\(t\)</span> 是迭代次数。</p>
 </div>
 <div class="section" id="mean-shift">
-<span id="id7"></span><h2>2.3.4. 均值漂移(Mean Shift)<a class="headerlink" href="#mean-shift" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.cluster.MeanShift.html#sklearn.cluster.MeanShift" title="sklearn.cluster.MeanShift"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeanShift</span></code></a> clustering aims to discover <em>blobs</em> in a smooth density of
-samples. It is a centroid based algorithm, which works by updating candidates
-for centroids to be the mean of the points within a given region. These
-candidates are then filtered in a post-processing stage to eliminate
-near-duplicates to form the final set of centroids.</p>
-<p>Given a candidate centroid <span class="math notranslate nohighlight">\(x_i\)</span> for iteration <span class="math notranslate nohighlight">\(t\)</span>, the candidate
-is updated according to the following equation:</p>
+<span id="id7"></span><h2>2.3.4. 均值漂移<a class="headerlink" href="#mean-shift" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.cluster.MeanShift.html#sklearn.cluster.MeanShift" title="sklearn.cluster.MeanShift"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeanShift</span></code></a> 聚类算法旨在于发现一个样本密度平滑的 <em>blobs</em> 。 均值漂移算法是一种基于质心的算法，
+其工作原理是更新质心的候选点，使其成为给定区域内点的均值。
+然后，这些候选者在后处理阶段被过滤以消除近似重复(near-duplicates)，从而形成最终质心集合。</p>
+<p>给定第 <span class="math notranslate nohighlight">\(t\)</span> 次迭代中的候选质心 <span class="math notranslate nohighlight">\(x_i\)</span> , 候选质心的位置将按照如下公式更新:</p>
 <div class="math notranslate nohighlight">
 \[x_i^{t+1} = m(x_i^t)\]</div>
-<p>Where <span class="math notranslate nohighlight">\(N(x_i)\)</span> is the neighborhood of samples within a given distance
-around <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(m\)</span> is the <em>mean shift</em> vector that is computed for each
-centroid that points towards a region of the maximum increase in the density of points.
-This is computed using the following equation, effectively updating a centroid
-to be the mean of the samples within its neighborhood:</p>
+<p>其中 <span class="math notranslate nohighlight">\(N(x_i)\)</span> 是围绕 <span class="math notranslate nohighlight">\(x_i\)</span> 的给定距离内的样本邻域， <span class="math notranslate nohighlight">\(m\)</span> 是为指向点密度最大增加的区域的每一个质心计算的均值漂移向量
+(<em>mean shift</em> vector)。
+该均值漂移向量由下面的公式计算, 通过漂移向量可以高效的把一个质心更新到它的邻域内样本均值所在的地方：</p>
 <div class="math notranslate nohighlight">
 \[m(x_i) = \frac{\sum_{x_j \in N(x_i)}K(x_j - x_i)x_j}{\sum_{x_j \in N(x_i)}K(x_j - x_i)}\]</div>
-<p>The algorithm automatically sets the number of clusters, instead of relying on a
-parameter <code class="docutils literal notranslate"><span class="pre">bandwidth</span></code>, which dictates the size of the region to search through.
-This parameter can be set manually, but can be estimated using the provided
-<code class="docutils literal notranslate"><span class="pre">estimate_bandwidth</span></code> function, which is called if the bandwidth is not set.</p>
-<p>The algorithm is not highly scalable, as it requires multiple nearest neighbor
-searches during the execution of the algorithm. The algorithm is guaranteed to
-converge, however the algorithm will stop iterating when the change in centroids
-is small.</p>
-<p>Labelling a new sample is performed by finding the nearest centroid for a
-given sample.</p>
+<p>该算法自动设置聚类的数量, 而不是依赖参数 <code class="docutils literal notranslate"><span class="pre">bandwidth</span></code> 来决定要搜索的区域的大小。
+此参数可以手动设置，但可以使用提供的 <code class="docutils literal notranslate"><span class="pre">estimate_bandwidth</span></code> 函数进行估计，如果没有设置带宽，则调用该函数。</p>
+<p>该算法不具有很高的可扩展性(not highly scalable)，因为在算法执行过程中需要多个最近邻搜索。
+该算法保证收敛，但当质心变化较小时，该算法将停止迭代。</p>
+<p>标记一个新的样本是通过为给定的样本找到最近的质心来完成的。</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_mean_shift.html"><img alt="../images/sphx_glr_plot_mean_shift_0011.png" src="../images/sphx_glr_plot_mean_shift_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_mean_shift.html#sphx-glr-auto-examples-cluster-plot-mean-shift-py"><span class="std std-ref">A demo of the mean-shift clustering algorithm</span></a>: Mean Shift clustering
-on a synthetic 2D datasets with 3 classes.</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_mean_shift.html#sphx-glr-auto-examples-cluster-plot-mean-shift-py"><span class="std std-ref">A demo of the mean-shift clustering algorithm</span></a>: 带有3个类的合成2D数据集上的均值漂移聚类。</li>
 </ul>
 </div>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.76.8968&amp;rep=rep1&amp;type=pdf">“Mean shift: A robust approach toward feature space analysis.”</a>
 D. Comaniciu and P. Meer, <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em> (2002)</li>
@@ -585,55 +552,38 @@ D. Comaniciu and P. Meer, <em>IEEE Transactions on Pattern Analysis and Machine 
 </div>
 </div>
 <div class="section" id="spectral-clustering">
-<span id="id8"></span><h2>2.3.5. Spectral clustering<a class="headerlink" href="#spectral-clustering" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.cluster.SpectralClustering.html#sklearn.cluster.SpectralClustering" title="sklearn.cluster.SpectralClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpectralClustering</span></code></a> does a low-dimension embedding of the
-affinity matrix between samples, followed by a KMeans in the low
-dimensional space. It is especially efficient if the affinity matrix is
-sparse and the <a class="reference external" href="https://github.com/pyamg/pyamg">pyamg</a> module is installed.
-SpectralClustering requires the number of clusters to be specified. It
-works well for a small number of clusters but is not advised when using
-many clusters.</p>
-<p>For two clusters, it solves a convex relaxation of the <a class="reference external" href="http://people.eecs.berkeley.edu/~malik/papers/SM-ncut.pdf">normalised
-cuts</a> problem on
-the similarity graph: cutting the graph in two so that the weight of the
-edges cut is small compared to the weights of the edges inside each
-cluster. This criteria is especially interesting when working on images:
-graph vertices are pixels, and edges of the similarity graph are a
-function of the gradient of the image.</p>
+<span id="id8"></span><h2>2.3.5. 谱聚类<a class="headerlink" href="#spectral-clustering" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.cluster.SpectralClustering.html#sklearn.cluster.SpectralClustering" title="sklearn.cluster.SpectralClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpectralClustering</span></code></a> 是在样本之间进行affinity matrix的低维度嵌入，后面紧跟一个在低维空间中运行的 KMeans。
+如果affinity matrix是稀疏的并且 <a class="reference external" href="https://github.com/pyamg/pyamg">pyamg</a>  模块已经安装好，则这是非常有效的。
+SpectralClustering 需要指定聚类数。这个算法适用于聚类数少时，在聚类数多是不建议使用。</p>
+<p>对于两个聚类，它解决了相似图上正规化割集(<a class="reference external" href="http://people.eecs.berkeley.edu/~malik/papers/SM-ncut.pdf">normalised cuts</a>)问题的一个凸松弛问题：
+将图形切割成两个，使得切割的边缘的权重比每个簇内的边缘的权重小。
+在图像处理时，这个criteria是特别有趣的: 图的顶点是像素，相似图的边缘是图像梯度的函数。</p>
 <p class="centered">
 <strong><a class="reference external" href="../auto_examples/cluster/plot_segmentation_toy.html"><img alt="noisy_img" src="../images/sphx_glr_plot_segmentation_toy_0011.png" style="width: 240.0px; height: 240.0px;" /></a> <a class="reference external" href="../auto_examples/cluster/plot_segmentation_toy.html"><img alt="segmented_img" src="../images/sphx_glr_plot_segmentation_toy_0021.png" style="width: 240.0px; height: 240.0px;" /></a></strong></p><div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>Transforming distance to well-behaved similarities</p>
-<p>Note that if the values of your similarity matrix are not well
-distributed, e.g. with negative values or with a distance matrix
-rather than a similarity, the spectral problem will be singular and
-the problem not solvable. In which case it is advised to apply a
-transformation to the entries of the matrix. For instance, in the
-case of a signed distance matrix, is common to apply a heat kernel:</p>
+<p>请注意，如果你的相似矩阵的值分布不均匀，例如:存在负值或者像是一个距离矩阵而不是相似性矩阵，
+那么 spectral problem 将会变得奇异，并且不能解决。 在这种情况下，建议对矩阵的 entries 进行变换。
+比如在有符号的距离矩阵情况下 通常使用 heat kernel:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">similarity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">beta</span> <span class="o">*</span> <span class="n">distance</span> <span class="o">/</span> <span class="n">distance</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
 </pre></div>
 </div>
-<p class="last">See the examples for such an application.</p>
+<p class="last">请看关于这个应用的例子。</p>
 </div>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_segmentation_toy.html#sphx-glr-auto-examples-cluster-plot-segmentation-toy-py"><span class="std std-ref">Spectral clustering for image segmentation</span></a>: Segmenting objects
-from a noisy background using spectral clustering.</li>
-<li><a class="reference internal" href="../auto_examples/cluster/plot_coin_segmentation.html#sphx-glr-auto-examples-cluster-plot-coin-segmentation-py"><span class="std std-ref">Segmenting the picture of greek coins in regions</span></a>: Spectral clustering
-to split the image of coins in regions.</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_segmentation_toy.html#sphx-glr-auto-examples-cluster-plot-segmentation-toy-py"><span class="std std-ref">Spectral clustering for image segmentation</span></a>: 利用谱聚类从含噪背景中分割目标。</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_coin_segmentation.html#sphx-glr-auto-examples-cluster-plot-coin-segmentation-py"><span class="std std-ref">Segmenting the picture of greek coins in regions</span></a>: 谱聚类分割在区域中的硬币图像。</li>
 </ul>
 </div>
 <div class="section" id="id9">
-<h3>2.3.5.1. 不同的标记分配策略<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<p>Different label assignment strategies can be used, corresponding to the
-<code class="docutils literal notranslate"><span class="pre">assign_labels</span></code> parameter of <a class="reference internal" href="generated/sklearn.cluster.SpectralClustering.html#sklearn.cluster.SpectralClustering" title="sklearn.cluster.SpectralClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpectralClustering</span></code></a>.
-The <code class="docutils literal notranslate"><span class="pre">&quot;kmeans&quot;</span></code> strategy can match finer details of the data, but it can be
-more unstable. In particular, unless you control the <code class="docutils literal notranslate"><span class="pre">random_state</span></code>, it
-may not be reproducible from run-to-run, as it depends on a random
-initialization. On the other hand, the <code class="docutils literal notranslate"><span class="pre">&quot;discretize&quot;</span></code> strategy is 100%
-reproducible, but it tends to create parcels of fairly even and
-geometrical shape.</p>
+<h3>2.3.5.1. 不同的标签分配策略<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>可以使用不同的标签分配策略, 对应于 <a class="reference internal" href="generated/sklearn.cluster.SpectralClustering.html#sklearn.cluster.SpectralClustering" title="sklearn.cluster.SpectralClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpectralClustering</span></code></a> 类的 <code class="docutils literal notranslate"><span class="pre">assign_labels</span></code> 参数。
+<code class="docutils literal notranslate"><span class="pre">&quot;kmeans&quot;</span></code> 可以匹配更精细的数据细节，但是可能更加不稳定。 特别是，除非你控置 <code class="docutils literal notranslate"><span class="pre">random_state</span></code>
+否则可能无法复现运行的结果 ，因为它取决于随机初始化。另一方面， 使用 <code class="docutils literal notranslate"><span class="pre">&quot;discretize&quot;</span></code> 策略是 100% 可以复现的，
+但是它往往会产生相当均匀的几何形状的边缘。</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="50%" />
@@ -651,11 +601,10 @@ geometrical shape.</p>
 </tbody>
 </table>
 </div>
-<div class="section" id="spectral-clustering-graphs">
-<h3>2.3.5.2. Spectral Clustering Graphs<a class="headerlink" href="#spectral-clustering-graphs" title="Permalink to this headline">¶</a></h3>
-<p>Spectral Clustering can also be used to cluster graphs by their spectral
-embeddings.  In this case, the affinity matrix is the adjacency matrix of the
-graph, and SpectralClustering is initialized with <cite>affinity=’precomputed’</cite>:</p>
+<div class="section" id="id10">
+<h3>2.3.5.2. 谱聚类用于图聚类问题<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>谱聚类还可以通过谱嵌入对图进行聚类。在这种情况下，affinity matrix 是图的邻接矩阵，SpectralClustering
+由 <cite>affinity=’precomputed’</cite> 进行初始化</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">SpectralClustering</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">SpectralClustering</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">affinity</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="n">assign_labels</span><span class="o">=</span><span class="s1">&#39;discretize&#39;</span><span class="p">)</span>
@@ -663,7 +612,7 @@ graph, and SpectralClustering is initialized with <cite>affinity=’precomputed�
 </pre></div>
 </div>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.165.9323">“A Tutorial on Spectral Clustering”</a>
 Ulrike von Luxburg, 2007</li>
@@ -678,137 +627,93 @@ Andrew Y. Ng, Michael I. Jordan, Yair Weiss, 2001</li>
 </div>
 </div>
 <div class="section" id="hierarchical-clustering">
-<span id="id10"></span><h2>2.3.6. 层次聚类(Hierarchical clustering)<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this headline">¶</a></h2>
-<p>Hierarchical clustering is a general family of clustering algorithms that
-build nested clusters by merging or splitting them successively. This
-hierarchy of clusters is represented as a tree (or dendrogram). The root of the
-tree is the unique cluster that gathers all the samples, the leaves being the
-clusters with only one sample. See the <a class="reference external" href="https://en.wikipedia.org/wiki/Hierarchical_clustering">Wikipedia page</a> for more details.</p>
-<p>The <a class="reference internal" href="generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code></a> object performs a hierarchical clustering
-using a bottom up approach: each observation starts in its own cluster, and
-clusters are successively merged together. The linkage criteria determines the
-metric used for the merge strategy:</p>
+<span id="id11"></span><h2>2.3.6. 层次聚类(Hierarchical clustering)<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this headline">¶</a></h2>
+<p>层次聚类是一种通过不断合并或分割嵌套聚类来构建嵌套聚类的通用聚类算法。
+聚类的层次结构被表示为一棵树(或树状图)。树的根是收集所有样本的唯一簇，叶是只有一个样本的簇。
+请看 <a class="reference external" href="https://en.wikipedia.org/wiki/Hierarchical_clustering">维基百科的相关词条</a> 获得更多信息。</p>
+<p>聚合聚类(<a class="reference internal" href="generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code></a>)对象使用自下而上的方法执行分层聚类：每个observation从自己的簇开始，
+簇依次合并在一起。链接准则(linkage criteria)确定用于合并策略的度量:</p>
 <ul class="simple">
-<li><strong>Ward</strong> minimizes the sum of squared differences within all clusters. It is a
-variance-minimizing approach and in this sense is similar to the k-means
-objective function but tackled with an agglomerative hierarchical
-approach.</li>
-<li><strong>Maximum</strong> or <strong>complete linkage</strong> minimizes the maximum distance between
-observations of pairs of clusters.</li>
-<li><strong>Average linkage</strong> minimizes the average of the distances between all
-observations of pairs of clusters.</li>
-<li><strong>Single linkage</strong> minimizes the distance between the closest
-observations of pairs of clusters.</li>
+<li><strong>Ward</strong> 最小化所有簇内的平方差总和。这是一种 方差最小化(variance-minimizing) 的方法，
+在这点上，这是与k-means 的目标函数相似的，但是它用了聚合分层(agglomerative hierarchical)的方法处理。</li>
+<li><strong>Maximum</strong> or <strong>complete linkage</strong> 最小化每两个簇的样本之间的最大距离。</li>
+<li><strong>Average linkage</strong> 最小化每两个簇的样本之间的平均距离。</li>
+<li><strong>Single linkage</strong> 最小化每两个簇中最近的样本之间的距离。</li>
 </ul>
-<p><a class="reference internal" href="generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code></a> can also scale to large number of samples
-when it is used jointly with a connectivity matrix, but is computationally
-expensive when no connectivity constraints are added between samples: it
-considers at each step all the possible merges.</p>
+<p><a class="reference internal" href="generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code></a> 在与连接矩阵(connectivity matrix)联合使用时，也可以扩大到大量的样本，但是 在样本之间没有添加连接约束时，
+计算代价很大:每一个步骤都要考虑所有可能的合并。</p>
 <div class="topic">
 <p class="topic-title first"><a class="reference internal" href="generated/sklearn.cluster.FeatureAgglomeration.html#sklearn.cluster.FeatureAgglomeration" title="sklearn.cluster.FeatureAgglomeration"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureAgglomeration</span></code></a></p>
-<p>The <a class="reference internal" href="generated/sklearn.cluster.FeatureAgglomeration.html#sklearn.cluster.FeatureAgglomeration" title="sklearn.cluster.FeatureAgglomeration"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureAgglomeration</span></code></a> uses agglomerative clustering to
-group together features that look very similar, thus decreasing the
-number of features. It is a dimensionality reduction tool, see
-<a class="reference internal" href="unsupervised_reduction.html#data-reduction"><span class="std std-ref">无监督维数约减(Unsupervised dimensionality reduction)</span></a>.</p>
+<p><a class="reference internal" href="generated/sklearn.cluster.FeatureAgglomeration.html#sklearn.cluster.FeatureAgglomeration" title="sklearn.cluster.FeatureAgglomeration"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureAgglomeration</span></code></a> 类使用 agglomerative clustering 将看上去相似的特征组合在一起，
+从而减少特征的数量。这是一个降维工具, 请看 <a class="reference internal" href="unsupervised_reduction.html#data-reduction"><span class="std std-ref">无监督维数约减(Unsupervised dimensionality reduction)</span></a>。</p>
 </div>
 <div class="section" id="different-linkage-type-ward-complete-average-and-single-linkage">
 <h3>2.3.6.1. Different linkage type: Ward, complete, average, and single linkage<a class="headerlink" href="#different-linkage-type-ward-complete-average-and-single-linkage" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code></a> supports Ward, single, average, and complete
-linkage strategies.</p>
+<p><a class="reference internal" href="generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code></a> 支持 Ward, single, average, 和 complete linkage 策略。</p>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_linkage_comparison.html"><img alt="../images/sphx_glr_plot_linkage_comparison_0011.png" src="../images/sphx_glr_plot_linkage_comparison_0011.png" style="width: 589.1px; height: 623.5px;" /></a>
-<p>Agglomerative cluster has a “rich get richer” behavior that leads to
-uneven cluster sizes. In this regard, single linkage is the worst
-strategy, and Ward gives the most regular sizes. However, the affinity
-(or distance used in clustering) cannot be varied with Ward, thus for non
-Euclidean metrics, average linkage is a good alternative. Single linkage,
-while not robust to noisy data, can be computed very efficiently and can
-therefore be useful to provide hierarchical clustering of larger datasets.
-Single linkage can also perform well on non-globular data.</p>
+<p>聚合聚类存在 “rich get richer” 现象导致聚类大小不均匀(uneven cluster sizes)。这方面 single linkage 是最坏的策略，Ward 给出了最规则的大小。
+然而，在 Ward 中 affinity (or distance used in clustering) 不能被改变，对于 non Euclidean metrics 来说 average linkage 是一个好的选择。
+Single linkage,虽然对噪声数据没有鲁棒性，但可以非常有效地进行计算，因此对于提供更大数据集的分层聚类非常有用。
+Single linkage 也可以很好地表现在非球形(non-globular)数据上。</p>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_digits_linkage.html#sphx-glr-auto-examples-cluster-plot-digits-linkage-py"><span class="std std-ref">Various Agglomerative Clustering on a 2D embedding of digits</span></a>: exploration of the
-different linkage strategies in a real dataset.</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_digits_linkage.html#sphx-glr-auto-examples-cluster-plot-digits-linkage-py"><span class="std std-ref">Various Agglomerative Clustering on a 2D embedding of digits</span></a>: 在一个真实的数据集中探索不同的linkage策略。</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id11">
-<h3>2.3.6.2. 添加连通性约束<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<p>An interesting aspect of <a class="reference internal" href="generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code></a> is that
-connectivity constraints can be added to this algorithm (only adjacent
-clusters can be merged together), through a connectivity matrix that defines
-for each sample the neighboring samples following a given structure of the
-data. For instance, in the swiss-roll example below, the connectivity
-constraints forbid the merging of points that are not adjacent on the swiss
-roll, and thus avoid forming clusters that extend across overlapping folds of
-the roll.</p>
+<div class="section" id="id13">
+<h3>2.3.6.2. 添加连通性约束<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="sklearn.cluster.AgglomerativeClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code></a> 类中一个有趣的特点是可以使用连接矩阵(connectivity matrix)将连接约束添加到算法中(只有相邻的聚类可以合并到一起)，
+连接矩阵为每一个样本给定了相邻的样本。 例如，在下面的瑞典卷卷(swiss-roll) 的例子中，连接约束禁止在不相邻的 swiss roll 上合并，
+从而防止形成在 roll 上 重复折叠的聚类。</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/cluster/plot_ward_structured_vs_unstructured.html"><img alt="unstructured" src="../images/sphx_glr_plot_ward_structured_vs_unstructured_0011.png" style="width: 313.6px; height: 235.2px;" /></a> <a class="reference external" href="../auto_examples/cluster/plot_ward_structured_vs_unstructured.html"><img alt="structured" src="../images/sphx_glr_plot_ward_structured_vs_unstructured_0021.png" style="width: 313.6px; height: 235.2px;" /></a></strong></p><p>These constraint are useful to impose a certain local structure, but they
-also make the algorithm faster, especially when the number of the samples
-is high.</p>
-<p>The connectivity constraints are imposed via an connectivity matrix: a
-scipy sparse matrix that has elements only at the intersection of a row
-and a column with indices of the dataset that should be connected. This
-matrix can be constructed from a-priori information: for instance, you
-may wish to cluster web pages by only merging pages with a link pointing
-from one to another. It can also be learned from the data, for instance
-using <a class="reference internal" href="generated/sklearn.neighbors.kneighbors_graph.html#sklearn.neighbors.kneighbors_graph" title="sklearn.neighbors.kneighbors_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.neighbors.kneighbors_graph</span></code></a> to restrict
-merging to nearest neighbors as in <a class="reference internal" href="../auto_examples/cluster/plot_agglomerative_clustering.html#sphx-glr-auto-examples-cluster-plot-agglomerative-clustering-py"><span class="std std-ref">this example</span></a>, or
-using <a class="reference internal" href="generated/sklearn.feature_extraction.image.grid_to_graph.html#sklearn.feature_extraction.image.grid_to_graph" title="sklearn.feature_extraction.image.grid_to_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.feature_extraction.image.grid_to_graph</span></code></a> to
-enable only merging of neighboring pixels on an image, as in the
-<a class="reference internal" href="../auto_examples/cluster/plot_coin_ward_segmentation.html#sphx-glr-auto-examples-cluster-plot-coin-ward-segmentation-py"><span class="std std-ref">coin</span></a> example.</p>
+<strong><a class="reference external" href="../auto_examples/cluster/plot_ward_structured_vs_unstructured.html"><img alt="unstructured" src="../images/sphx_glr_plot_ward_structured_vs_unstructured_0011.png" style="width: 313.6px; height: 235.2px;" /></a> <a class="reference external" href="../auto_examples/cluster/plot_ward_structured_vs_unstructured.html"><img alt="structured" src="../images/sphx_glr_plot_ward_structured_vs_unstructured_0021.png" style="width: 313.6px; height: 235.2px;" /></a></strong></p><p>这些约束对于强加一定的局部结构是很有用的，但是这也使得算法更快，特别是当样本数量巨大时。</p>
+<p>连通性的限制是通过连接矩阵(connectivity matrix)来实现的:一个 scipy sparse matrix(仅在一行和一列的交集处具有应该连接在一起的数据集的索引)。
+这个矩阵可以通过先验信息构建:例如，你可能通过仅仅将从一个连接指向另一个的链接合并页面来聚类页面。也可以从数据中学习到,
+例如使用 <a class="reference internal" href="generated/sklearn.neighbors.kneighbors_graph.html#sklearn.neighbors.kneighbors_graph" title="sklearn.neighbors.kneighbors_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.neighbors.kneighbors_graph</span></code></a> 限制与最近邻的合并，
+就像 <a class="reference internal" href="../auto_examples/cluster/plot_agglomerative_clustering.html#sphx-glr-auto-examples-cluster-plot-agglomerative-clustering-py"><span class="std std-ref">这个例子</span></a>
+中那样, 或者使用 <a class="reference internal" href="generated/sklearn.feature_extraction.image.grid_to_graph.html#sklearn.feature_extraction.image.grid_to_graph" title="sklearn.feature_extraction.image.grid_to_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.feature_extraction.image.grid_to_graph</span></code></a> 仅合并图像上相邻的像素点，
+就像 <a class="reference internal" href="../auto_examples/cluster/plot_coin_ward_segmentation.html#sphx-glr-auto-examples-cluster-plot-coin-ward-segmentation-py"><span class="std std-ref">这个例子</span></a> 。</p>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_coin_ward_segmentation.html#sphx-glr-auto-examples-cluster-plot-coin-ward-segmentation-py"><span class="std std-ref">A demo of structured Ward hierarchical clustering on an image of coins</span></a>: Ward clustering
-to split the image of coins in regions.</li>
-<li><a class="reference internal" href="../auto_examples/cluster/plot_ward_structured_vs_unstructured.html#sphx-glr-auto-examples-cluster-plot-ward-structured-vs-unstructured-py"><span class="std std-ref">Hierarchical clustering: structured vs unstructured ward</span></a>: Example of
-Ward algorithm on a swiss-roll, comparison of structured approaches
-versus unstructured approaches.</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_coin_ward_segmentation.html#sphx-glr-auto-examples-cluster-plot-coin-ward-segmentation-py"><span class="std std-ref">A demo of structured Ward hierarchical clustering on an image of coins</span></a>: 使用 Ward 聚类 分割硬币图像。</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_ward_structured_vs_unstructured.html#sphx-glr-auto-examples-cluster-plot-ward-structured-vs-unstructured-py"><span class="std std-ref">Hierarchical clustering: structured vs unstructured ward</span></a>: 瑞士卷上的Ward算法示例，结构化方法与非结构化方法的比较。</li>
 <li><a class="reference internal" href="../auto_examples/cluster/plot_feature_agglomeration_vs_univariate_selection.html#sphx-glr-auto-examples-cluster-plot-feature-agglomeration-vs-univariate-selection-py"><span class="std std-ref">Feature agglomeration vs. univariate selection</span></a>:
-Example of dimensionality reduction with feature agglomeration based on
-Ward hierarchical clustering.</li>
+基于Ward层次聚类的特征聚类降维实例。</li>
 <li><a class="reference internal" href="../auto_examples/cluster/plot_agglomerative_clustering.html#sphx-glr-auto-examples-cluster-plot-agglomerative-clustering-py"><span class="std std-ref">Agglomerative clustering with and without structure</span></a></li>
 </ul>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p><strong>Connectivity constraints with single, average and complete linkage</strong></p>
-<p class="last">Connectivity constraints and single, complete or average linkage can enhance
-the ‘rich getting richer’ aspect of agglomerative clustering,
-particularly so if they are built with
-<a class="reference internal" href="generated/sklearn.neighbors.kneighbors_graph.html#sklearn.neighbors.kneighbors_graph" title="sklearn.neighbors.kneighbors_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.neighbors.kneighbors_graph</span></code></a>. In the limit of a small
-number of clusters, they tend to give a few macroscopically occupied
-clusters and almost empty ones. (see the discussion in
-<a class="reference internal" href="../auto_examples/cluster/plot_agglomerative_clustering.html#sphx-glr-auto-examples-cluster-plot-agglomerative-clustering-py"><span class="std std-ref">Agglomerative clustering with and without structure</span></a>).
-Single linkage is the most brittle linkage option with regard to this issue.</p>
+<p class="last">连接约束 和 complete or average linkage 可以增强聚合聚类中的 ‘rich getting richer’ 现象。
+特别是，当它们使用函数 <a class="reference internal" href="generated/sklearn.neighbors.kneighbors_graph.html#sklearn.neighbors.kneighbors_graph" title="sklearn.neighbors.kneighbors_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.neighbors.kneighbors_graph</span></code></a> 进行构建时。 在少量聚类的限制下，
+更倾向于给出一些 macroscopically occupied clusters
+并且几乎是空的 (讨论内容请查看 <a class="reference internal" href="../auto_examples/cluster/plot_agglomerative_clustering.html#sphx-glr-auto-examples-cluster-plot-agglomerative-clustering-py"><span class="std std-ref">Agglomerative clustering with and without structure</span></a>)。
+在这个问题上，Single linkage 是最脆弱的 linkage 选项。</p>
 </div>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_agglomerative_clustering.html"><img alt="../images/sphx_glr_plot_agglomerative_clustering_0011.png" src="../images/sphx_glr_plot_agglomerative_clustering_0011.png" style="width: 380.0px; height: 152.0px;" /></a>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_agglomerative_clustering.html"><img alt="../images/sphx_glr_plot_agglomerative_clustering_0021.png" src="../images/sphx_glr_plot_agglomerative_clustering_0021.png" style="width: 380.0px; height: 152.0px;" /></a>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_agglomerative_clustering.html"><img alt="../images/sphx_glr_plot_agglomerative_clustering_0031.png" src="../images/sphx_glr_plot_agglomerative_clustering_0031.png" style="width: 380.0px; height: 152.0px;" /></a>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_agglomerative_clustering.html"><img alt="../images/sphx_glr_plot_agglomerative_clustering_0041.png" src="../images/sphx_glr_plot_agglomerative_clustering_0041.png" style="width: 380.0px; height: 152.0px;" /></a>
 </div>
-<div class="section" id="id12">
-<h3>2.3.6.3. 改变聚类测度<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<p>Single, average and complete linkage can be used with a variety of distances (or
-affinities), in particular Euclidean distance (<em>l2</em>), Manhattan distance
-(or Cityblock, or <em>l1</em>), cosine distance, or any precomputed affinity
-matrix.</p>
+<div class="section" id="id14">
+<h3>2.3.6.3. 改变聚类测度<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<p>Single, average 和 complete linkage 可以使用各种距离 (or affinities), 特别是 欧氏距离(l2),
+曼哈顿距离(Manhattan distance)(or 城市区块距离(Cityblock), or l1), 余弦距离(cosine distance),
+或者 任何预先计算的亲和度(affinity)矩阵。</p>
 <ul class="simple">
-<li><em>l1</em> distance is often good for sparse features, or sparse noise: i.e.
-many of the features are zero, as in text mining using occurrences of
-rare words.</li>
-<li><em>cosine</em> distance is interesting because it is invariant to global
-scalings of the signal.</li>
+<li><em>l1</em> distance 有利于稀疏特征或者稀疏噪声: 例如很多特征都是0，在文本挖掘中统计稀有词汇的出现就会出现这种情况。</li>
+<li><em>cosine</em> distance 非常有趣因为它对信号的全局放缩具有不变性。</li>
 </ul>
-<p>The guidelines for choosing a metric is to use one that maximizes the
-distance between samples in different classes, and minimizes that within
-each class.</p>
+<p>选择度量的准则是使用一个准则，使不同类中的样本之间的距离最大化，并使每个类内的距离最小化。</p>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_agglomerative_clustering_metrics.html"><img alt="../images/sphx_glr_plot_agglomerative_clustering_metrics_0051.png" src="../images/sphx_glr_plot_agglomerative_clustering_metrics_0051.png" style="width: 204.8px; height: 153.6px;" /></a>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_agglomerative_clustering_metrics.html"><img alt="../images/sphx_glr_plot_agglomerative_clustering_metrics_0061.png" src="../images/sphx_glr_plot_agglomerative_clustering_metrics_0061.png" style="width: 204.8px; height: 153.6px;" /></a>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_agglomerative_clustering_metrics.html"><img alt="../images/sphx_glr_plot_agglomerative_clustering_metrics_0071.png" src="../images/sphx_glr_plot_agglomerative_clustering_metrics_0071.png" style="width: 204.8px; height: 153.6px;" /></a>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/cluster/plot_agglomerative_clustering_metrics.html#sphx-glr-auto-examples-cluster-plot-agglomerative-clustering-metrics-py"><span class="std std-ref">Agglomerative clustering with different metrics</span></a></li>
 </ul>
@@ -816,84 +721,51 @@ each class.</p>
 </div>
 </div>
 <div class="section" id="dbscan">
-<span id="id13"></span><h2>2.3.7. DBSCAN<a class="headerlink" href="#dbscan" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="sklearn.cluster.DBSCAN"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBSCAN</span></code></a> algorithm views clusters as areas of high density
-separated by areas of low density. Due to this rather generic view, clusters
-found by DBSCAN can be any shape, as opposed to k-means which assumes that
-clusters are convex shaped. The central component to the DBSCAN is the concept
-of <em>core samples</em>, which are samples that are in areas of high density. A
-cluster is therefore a set of core samples, each close to each other
-(measured by some distance measure)
-and a set of non-core samples that are close to a core sample (but are not
-themselves core samples). There are two parameters to the algorithm,
-<code class="docutils literal notranslate"><span class="pre">min_samples</span></code> and <code class="docutils literal notranslate"><span class="pre">eps</span></code>,
-which define formally what we mean when we say <em>dense</em>.
-Higher <code class="docutils literal notranslate"><span class="pre">min_samples</span></code> or lower <code class="docutils literal notranslate"><span class="pre">eps</span></code>
-indicate higher density necessary to form a cluster.</p>
-<p>More formally, we define a core sample as being a sample in the dataset such
-that there exist <code class="docutils literal notranslate"><span class="pre">min_samples</span></code> other samples within a distance of
-<code class="docutils literal notranslate"><span class="pre">eps</span></code>, which are defined as <em>neighbors</em> of the core sample. This tells
-us that the core sample is in a dense area of the vector space. A cluster
-is a set of core samples that can be built by recursively taking a core
-sample, finding all of its neighbors that are core samples, finding all of
-<em>their</em> neighbors that are core samples, and so on. A cluster also has a
-set of non-core samples, which are samples that are neighbors of a core sample
-in the cluster but are not themselves core samples. Intuitively, these samples
-are on the fringes of a cluster.</p>
-<p>Any core sample is part of a cluster, by definition. Any sample that is not a
-core sample, and is at least <code class="docutils literal notranslate"><span class="pre">eps</span></code> in distance from any core sample, is
-considered an outlier by the algorithm.</p>
-<p>In the figure below, the color indicates cluster membership, with large circles
-indicating core samples found by the algorithm. Smaller circles are non-core
-samples that are still part of a cluster. Moreover, the outliers are indicated
-by black points below.</p>
+<span id="id15"></span><h2>2.3.7. DBSCAN<a class="headerlink" href="#dbscan" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="sklearn.cluster.DBSCAN"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBSCAN</span></code></a> 算法将聚类视为被低密度区域分隔的高密度区域。由于这个相当普遍的观点，
+DBSCAN发现的聚类可以是任何形状的，与假设聚类是 convex shaped 的 K-means 相反。
+DBSCAN 的核心概念是 <em>core samples</em> , 是指位于高密度区域的样本。 因此一个聚类是一组核心样本，
+每个核心样本彼此靠近（通过一定距离度量测量） 和一组接近核心样本的非核心样本（但本身不是核心样本）。
+算法中的两个参数, <code class="docutils literal notranslate"><span class="pre">min_samples</span></code>  和 <code class="docutils literal notranslate"><span class="pre">eps</span></code> ,正式的定义了我们所说的 <a href="#id16"><span class="problematic" id="id17">*</span></a>dense*（稠密）。
+较高的 <code class="docutils literal notranslate"><span class="pre">min_samples</span></code> 或者较低的 <code class="docutils literal notranslate"><span class="pre">eps</span></code> 表示形成聚类需要较高的密度。</p>
+<p>更正式的,我们定义核心样本(core sample)是指数据集中的一个样本，在 <code class="docutils literal notranslate"><span class="pre">eps</span></code> 距离范围内存在 <code class="docutils literal notranslate"><span class="pre">min_samples</span></code> 个其他样本，
+这些样本被定义为核心样本的邻居(<em>neighbors</em>) 。 这告诉我们核心样本在向量空间的稠密区域。 一个聚类是一个核心样本的集合，
+可以通过递归来构建，选取一个核心样本，寻找它所有的neighbors中的核心样本，然后寻找新获取的核心样本(<em>their</em>)的 neighbors中的核心样本，
+递归这个过程。 聚类中还具有一组非核心样本，它们是聚类中核心样本的邻居的样本，但本身并不是核心样本。 显然，这些样本位于聚类的边缘。</p>
+<p>根据定义，任何核心样本都是聚类的一部分，任何不是核心样本并且和任意一个核心样本距离都至少大于 <code class="docutils literal notranslate"><span class="pre">eps</span></code> 的样本被认为是 outliers。</p>
+<p>在下图中，颜色表示聚类成员，大圆圈表示算法发现的核心样本。 较小的圆圈是仍然是聚类的一部分的非核心样本。 此外，异常值(outliers)由下面的黑点表示。</p>
 <p class="centered">
 <strong><a class="reference external" href="../auto_examples/cluster/plot_dbscan.html"><img alt="dbscan_results" src="../images/sphx_glr_plot_dbscan_0011.png" style="width: 320.0px; height: 240.0px;" /></a></strong></p><div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/cluster/plot_dbscan.html#sphx-glr-auto-examples-cluster-plot-dbscan-py"><span class="std std-ref">Demo of DBSCAN clustering algorithm</span></a></li>
 </ul>
 </div>
 <div class="topic">
-<p class="topic-title first">Implementation</p>
-<p>The DBSCAN algorithm is deterministic, always generating the same clusters
-when given the same data in the same order.  However, the results can differ when
-data is provided in a different order. First, even though the core samples
-will always be assigned to the same clusters, the labels of those clusters
-will depend on the order in which those samples are encountered in the data.
-Second and more importantly, the clusters to which non-core samples are assigned
-can differ depending on the data order.  This would happen when a non-core sample
-has a distance lower than <code class="docutils literal notranslate"><span class="pre">eps</span></code> to two core samples in different clusters. By the
-triangular inequality, those two core samples must be more distant than
-<code class="docutils literal notranslate"><span class="pre">eps</span></code> from each other, or they would be in the same cluster. The non-core
-sample is assigned to whichever cluster is generated first in a pass
-through the data, and so the results will depend on the data ordering.</p>
-<p>The current implementation uses ball trees and kd-trees
-to determine the neighborhood of points,
-which avoids calculating the full distance matrix
-(as was done in scikit-learn versions before 0.14).
-The possibility to use custom metrics is retained;
-for details, see <code class="xref py py-class docutils literal notranslate"><span class="pre">NearestNeighbors</span></code>.</p>
+<p class="topic-title first">实现</p>
+<p>DBSCAN 算法是具有确定性的，当以相同的顺序给出相同的数据时总是形成相同的聚类。
+然而，当以不同的顺序提供数据时聚类的结果可能不相同。首先，即使核心样本总是被分配给相同的簇，
+这些簇的标签将取决于数据中遇到这些样本的顺序。第二个更重要的是，给非核心样本分派的聚簇可能因数据顺序而有所不同。
+当一个非核心样本距离两个核心样本的距离都小于  <code class="docutils literal notranslate"><span class="pre">eps</span></code> 时，就会发生这种情况。
+通过三角不等式可知，这两个核心样本距离一定大于  <code class="docutils literal notranslate"><span class="pre">eps</span></code> 或者处于同一个聚类中。
+非核心样本将被非配到首先查找到改样本的类别，因此结果将取决于数据的顺序。</p>
+<p>当前版本使用 ball trees 和 kd-trees 来确定样本点的邻域，这样避免了计算全部的距离矩阵 （0.14 之前的 scikit-learn 版本计算全部的距离矩阵）。
+保留使用自定义指标(custom metrics)的可能性。细节请参照 <code class="xref py py-class docutils literal notranslate"><span class="pre">NearestNeighbors</span></code> 。</p>
 </div>
 <div class="topic">
-<p class="topic-title first">Memory consumption for large sample sizes</p>
-<p>This implementation is by default not memory efficient because it constructs
-a full pairwise similarity matrix in the case where kd-trees or ball-trees cannot
-be used (e.g. with sparse matrices). This matrix will consume n^2 floats.
-A couple of mechanisms for getting around this are:</p>
+<p class="topic-title first">大样本量的内存消耗</p>
+<p>默认的实现方式并不是内存高效的，因为它在不能使用 kd-trees 或者 ball-trees 的情况下构建一个完整的两两相似度矩阵(pairwise similarity matrix)。
+这个矩阵将消耗 n^2 个浮点数。 解决这个问题的几种机制:</p>
 <ul class="simple">
-<li>A sparse radius neighborhood graph (where missing entries are presumed to
-be out of eps) can be precomputed in a memory-efficient way and dbscan
-can be run over this with <code class="docutils literal notranslate"><span class="pre">metric='precomputed'</span></code>.  See
-<a class="reference internal" href="generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors.radius_neighbors_graph" title="sklearn.neighbors.NearestNeighbors.radius_neighbors_graph"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sklearn.neighbors.NearestNeighbors.radius_neighbors_graph</span></code></a>.</li>
-<li>The dataset can be compressed, either by removing exact duplicates if
-these occur in your data, or by using BIRCH. Then you only have a
-relatively small number of representatives for a large number of points.
-You can then provide a <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> when fitting DBSCAN.</li>
+<li>稀疏半径邻域图(A sparse radius neighborhood graph)(其中缺少条目被假定为距离超出 eps) 可以以内存高效的方式预先计算，
+并且dbscan(参数设置为 <code class="docutils literal notranslate"><span class="pre">metric='precomputed'</span></code>)可以在这个图上运行。
+请看 <a class="reference internal" href="generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors.radius_neighbors_graph" title="sklearn.neighbors.NearestNeighbors.radius_neighbors_graph"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sklearn.neighbors.NearestNeighbors.radius_neighbors_graph</span></code></a> 。</li>
+<li>通过删除发生在数据中的准确副本或着使用 BIRCH 方法对数据集进行压缩。
+然后，你就可以用一个数量相对少的样本集合来代表大量的样本点。再然后，你还可以在拟合DBSCAN的时候提供 <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code>。</li>
 </ul>
 </div>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li>“A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases
 with Noise”
@@ -904,7 +776,7 @@ and Data Mining, Portland, OR, AAAI Press, pp. 226–231. 1996</li>
 </div>
 </div>
 <div class="section" id="birch">
-<span id="id14"></span><h2>2.3.8. Birch<a class="headerlink" href="#birch" title="Permalink to this headline">¶</a></h2>
+<span id="id18"></span><h2>2.3.8. Birch<a class="headerlink" href="#birch" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="generated/sklearn.cluster.Birch.html#sklearn.cluster.Birch" title="sklearn.cluster.Birch"><code class="xref py py-class docutils literal notranslate"><span class="pre">Birch</span></code></a> builds a tree called the Characteristic Feature Tree (CFT)
 for the given data. The data is essentially lossy compressed to a set of
 Characteristic Feature nodes (CF Nodes). The CF Nodes have a number of
@@ -960,7 +832,7 @@ large number of subclusters either as a preprocessing step or otherwise,
 Birch is more useful than MiniBatchKMeans.</li>
 </ul>
 </div></blockquote>
-<p><strong>How to use partial_fit?</strong></p>
+<p><strong>如何使用partial_fit?</strong></p>
 <p>To avoid the computation of global clustering, for every call of <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>
 the user is advised</p>
 <blockquote>
@@ -975,7 +847,7 @@ which performs the global clustering.</li>
 </div></blockquote>
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_birch_vs_minibatchkmeans.html"><img alt="../images/sphx_glr_plot_birch_vs_minibatchkmeans_0011.png" src="../images/sphx_glr_plot_birch_vs_minibatchkmeans_0011.png" /></a>
 <div class="topic">
-<p class="topic-title first">References:</p>
+<p class="topic-title first">参考文献:</p>
 <ul class="simple">
 <li>Tian Zhang, Raghu Ramakrishnan, Maron Livny
 BIRCH: An efficient data clustering method for large databases.
@@ -987,22 +859,20 @@ JBirch - Java implementation of BIRCH clustering algorithm
 </div>
 </div>
 <div class="section" id="clustering-evaluation">
-<span id="id15"></span><h2>2.3.9. 聚类算法性能评估<a class="headerlink" href="#clustering-evaluation" title="Permalink to this headline">¶</a></h2>
-<p>Evaluating the performance of a clustering algorithm is not as trivial as
-counting the number of errors or the precision and recall of a supervised
-classification algorithm. In particular any evaluation metric should not
+<span id="id19"></span><h2>2.3.9. 聚类算法性能评估<a class="headerlink" href="#clustering-evaluation" title="Permalink to this headline">¶</a></h2>
+<p>评估聚类算法的性能并不像计算错误数或监督分类算法的精确度和召回率那样简单。
+特别是，任何评估指标都不应该考虑聚类标签的绝对值。
+In particular any evaluation metric should not
 take the absolute values of the cluster labels into account but rather
 if this clustering define separations of the data similar to some ground
 truth set of classes or satisfying some assumption such that members
 belong to the same class are more similar that members of different
-classes according to some similarity metric.</p>
+classes according to some similarity metric.
+(译者注：这句英文简直逆天了，看了五分钟都没看出咋断句，不译了,o(∩_∩)o 哈哈)。</p>
 <div class="section" id="adjusted-rand-index">
 <span id="adjusted-rand-score"></span><h3>2.3.9.1. Adjusted Rand index<a class="headerlink" href="#adjusted-rand-index" title="Permalink to this headline">¶</a></h3>
-<p>Given the knowledge of the ground truth class assignments <code class="docutils literal notranslate"><span class="pre">labels_true</span></code>
-and our clustering algorithm assignments of the same samples
-<code class="docutils literal notranslate"><span class="pre">labels_pred</span></code>, the <strong>adjusted Rand index</strong> is a function that measures
-the <strong>similarity</strong> of the two assignments, ignoring permutations and <strong>with
-chance normalization</strong>:</p>
+<p>给定真实的类分配(ground truth class assignments): <code class="docutils literal notranslate"><span class="pre">labels_true</span></code> 和 我们的聚类算法对同样的样本集预测出的类分配：<code class="docutils literal notranslate"><span class="pre">labels_pred</span></code>,
+<strong>adjusted Rand index</strong> 是一个用来度量上述两种分配的相似度(<strong>similarity</strong>)的函数，ignoring permutations 和 <strong>with chance normalization</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
@@ -1011,92 +881,76 @@ chance normalization</strong>:</p>
 <span class="go">0.24...</span>
 </pre></div>
 </div>
-<p>One can permute 0 and 1 in the predicted labels, rename 2 to 3, and get
-the same score:</p>
+<p>可以在预测的标签中排列(permute) 0 和 1，重命名为 2 到 3， 得到相同的分数</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
 <span class="go">0.24...</span>
 </pre></div>
 </div>
-<p>Furthermore, <a class="reference internal" href="generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score" title="sklearn.metrics.adjusted_rand_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">adjusted_rand_score</span></code></a> is <strong>symmetric</strong>: swapping the argument
-does not change the score. It can thus be used as a <strong>consensus
-measure</strong>:</p>
+<p>更进一步, 函数 <a class="reference internal" href="generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score" title="sklearn.metrics.adjusted_rand_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">adjusted_rand_score</span></code></a> 是 <strong>对称的(symmetric)</strong>: 交换参数(argument)不会改变得分(score)。
+它可以作为 <strong>共识度量(consensus measure)</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">labels_pred</span><span class="p">,</span> <span class="n">labels_true</span><span class="p">)</span>  
 <span class="go">0.24...</span>
 </pre></div>
 </div>
-<p>Perfect labeling is scored 1.0:</p>
+<p>完美的标记(perfect labeling)得分为 1.0</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="n">labels_true</span><span class="p">[:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>
 <span class="go">1.0</span>
 </pre></div>
 </div>
-<p>Bad (e.g. independent labelings) have negative or close to 0.0 scores:</p>
+<p>坏的标记 (e.g. independent labelings) 具有负值或接近 0.0 的得分:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
 <span class="go">-0.12...</span>
 </pre></div>
 </div>
-<div class="section" id="id16">
-<h4>2.3.9.1.1. 优点<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id20">
+<h4>2.3.9.1.1. 优点<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><strong>Random (uniform) label assignments have a ARI score close to 0.0</strong>
-for any value of <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> (which is not the
-case for raw Rand index or the V-measure for instance).</li>
-<li><strong>Bounded range [-1, 1]</strong>: negative values are bad (independent
-labelings), similar clusterings have a positive ARI, 1.0 is the perfect
-match score.</li>
-<li><strong>No assumption is made on the cluster structure</strong>: can be used
-to compare clustering algorithms such as k-means which assumes isotropic
-blob shapes with results of spectral clustering algorithms which can
-find cluster with “folded” shapes.</li>
+<li><strong>随机(均匀)标签分配的 ARI 得分接近于 0.0</strong>
+对于 <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> 和 <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> 的任何值（这不是 raw Rand index 或者 V-measure 的情况）。</li>
+<li><strong>得分被界定在 [-1, 1] 的区间内</strong>: 负值是坏的(独立性标签), 相似的聚类有一个正的 ARI， 1.0 是完美的匹配得分。</li>
+<li><strong>没有对簇的结构做任何假定</strong>:  可以用于比较聚类算法，比如 假定了各向同性的blob shapes的k-means方法的结果 和 寻找具有
+“folded”形状的谱聚类方法的结果进行比较。</li>
 </ul>
 </div>
-<div class="section" id="id17">
-<h4>2.3.9.1.2. 缺点<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id21">
+<h4>2.3.9.1.2. 缺点<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Contrary to inertia, <strong>ARI requires knowledge of the ground truth
-classes</strong> while is almost never available in practice or requires manual
-assignment by human annotators (as in the supervised learning setting).</p>
-<p>However ARI can also be useful in a purely unsupervised setting as a
-building block for a Consensus Index that can be used for clustering
-model selection (TODO).</p>
+<li><p class="first">与惯性(inertia)方法不同, <strong>ARI 需要 ground truth classes 的相关知识</strong>
+而在实践中几乎不可得到，或者需要人工标注者手动分配（如在监督学习环境中）。</p>
+<p>然而，ARI 还可以在纯粹无监督的设置中作为可用于 聚类模型选择 的共识索引的构建模块。</p>
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_adjusted_for_chance_measures.html#sphx-glr-auto-examples-cluster-plot-adjusted-for-chance-measures-py"><span class="std std-ref">Adjustment for chance in clustering performance evaluation</span></a>: Analysis of
-the impact of the dataset size on the value of clustering measures
-for random assignments.</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_adjusted_for_chance_measures.html#sphx-glr-auto-examples-cluster-plot-adjusted-for-chance-measures-py"><span class="std std-ref">Adjustment for chance in clustering performance evaluation</span></a>: 分析数据集大小对随机分配聚类度量值的影响。</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id18">
-<h4>2.3.9.1.3. 数学化表达形式<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
-<p>If C is a ground truth class assignment and K the clustering, let us
-define <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> as:</p>
+<div class="section" id="id22">
+<h4>2.3.9.1.3. 数学表达形式<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<p>如果 C 是 ground truth class assignment 以及 K 是聚类算法给出的class assignment, 让我们定义 <span class="math notranslate nohighlight">\(a\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 如下:</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(a\)</span>, the number of pairs of elements that are in the same set
-in C and in the same set in K</li>
-<li><span class="math notranslate nohighlight">\(b\)</span>, the number of pairs of elements that are in different sets
-in C and in different sets in K</li>
+<li><span class="math notranslate nohighlight">\(a\)</span>, 在C中相同集合和在K中相同集合的元素对的数量(the number of pairs of elements that are in the same set
+in C and in the same set in K)</li>
+<li><span class="math notranslate nohighlight">\(b\)</span>, 在C中不同集合和在K中不同集合的元素对的数量(the number of pairs of elements that are in different sets
+in C and in different sets in K)</li>
 </ul>
-<p>The raw (unadjusted) Rand index is then given by:</p>
+<p>那么，原始的 (未调整的,unadjusted) Rand index 由下式给出:</p>
 <div class="math notranslate nohighlight">
 \[\text{RI} = \frac{a + b}{C_2^{n_{samples}}}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(C_2^{n_{samples}}\)</span> is the total number of possible pairs
-in the dataset (without ordering).</p>
-<p>However the RI score does not guarantee that random label assignments
-will get a value close to zero (esp. if the number of clusters is in
-the same order of magnitude as the number of samples).</p>
-<p>To counter this effect we can discount the expected RI <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span> of
-random labelings by defining the adjusted Rand index as follows:</p>
+<p>其中 <span class="math notranslate nohighlight">\(C_2^{n_{samples}}\)</span> 是在(未排序的)数据集中所有可能的元素对的总数量。</p>
+<p>然而，RI 评分不能保证随机标签分配(random label assignments)将获得接近零的值（特别是如果簇的数量与样本数量有相同的数量级）。</p>
+<p>为了抵消这种影响，我们可以通过定义调整后的 Rand index(adjusted Rand index,即ARI) 来
+对随机标签分配的 期望 RI <span class="math notranslate nohighlight">\(E[\text{RI}]\)</span> 打折(discount), 如下所示:</p>
 <div class="math notranslate nohighlight">
 \[\text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\max(\text{RI}) - E[\text{RI}]}\]</div>
 <div class="topic">
-<p class="topic-title first">References</p>
+<p class="topic-title first">参考文献</p>
 <ul class="simple">
 <li><a class="reference external" href="http://link.springer.com/article/10.1007%2FBF01908075">Comparing Partitions</a>
 L. Hubert and P. Arabie, Journal of Classification 1985</li>
@@ -1106,14 +960,12 @@ L. Hubert and P. Arabie, Journal of Classification 1985</li>
 </div>
 </div>
 <div class="section" id="mutual-info-score">
-<span id="id19"></span><h3>2.3.9.2. 基于互信息的得分<a class="headerlink" href="#mutual-info-score" title="Permalink to this headline">¶</a></h3>
-<p>Given the knowledge of the ground truth class assignments <code class="docutils literal notranslate"><span class="pre">labels_true</span></code> and
-our clustering algorithm assignments of the same samples <code class="docutils literal notranslate"><span class="pre">labels_pred</span></code>, the
-<strong>Mutual Information</strong> is a function that measures the <strong>agreement</strong> of the two
-assignments, ignoring permutations.  Two different normalized versions of this
-measure are available, <strong>Normalized Mutual Information (NMI)</strong> and <strong>Adjusted
-Mutual Information (AMI)</strong>. NMI is often used in the literature, while AMI was
-proposed more recently and is <strong>normalized against chance</strong>:</p>
+<span id="id23"></span><h3>2.3.9.2. 基于互信息的得分<a class="headerlink" href="#mutual-info-score" title="Permalink to this headline">¶</a></h3>
+<p>给定真实的类分配(class assignments): <code class="docutils literal notranslate"><span class="pre">labels_true</span></code> 和 我们的聚类算法对同样的样本集预测出的类分配：<code class="docutils literal notranslate"><span class="pre">labels_pred</span></code>,
+<strong>互信息(Mutual Information)</strong> 是一个函数，用于度量两个分配集合的一致性，忽略了排列组合(the <strong>agreement</strong> of the two
+assignments, ignoring permutations)。
+这种度量方法的两个不同的归一化版本目前可用: <strong>Normalized Mutual Information (NMI)</strong> 和 <strong>Adjusted Mutual Information (AMI)</strong>。
+NMI 在文献中可以经常看到, 而 AMI 最近才被提出 and is <strong>normalized against chance</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
@@ -1122,21 +974,19 @@ proposed more recently and is <strong>normalized against chance</strong>:</p>
 <span class="go">0.22504...</span>
 </pre></div>
 </div>
-<p>One can permute 0 and 1 in the predicted labels, rename 2 to 3 and get
-the same score:</p>
+<p>可以在预测出的标签(predicted labels)中排列 0 和 1, 重命名为 2 到 3， 并得到相同的得分</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_mutual_info_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
 <span class="go">0.22504...</span>
 </pre></div>
 </div>
-<p>All, <a class="reference internal" href="generated/sklearn.metrics.mutual_info_score.html#sklearn.metrics.mutual_info_score" title="sklearn.metrics.mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">mutual_info_score</span></code></a>, <a class="reference internal" href="generated/sklearn.metrics.adjusted_mutual_info_score.html#sklearn.metrics.adjusted_mutual_info_score" title="sklearn.metrics.adjusted_mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">adjusted_mutual_info_score</span></code></a> and
-<a class="reference internal" href="generated/sklearn.metrics.normalized_mutual_info_score.html#sklearn.metrics.normalized_mutual_info_score" title="sklearn.metrics.normalized_mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalized_mutual_info_score</span></code></a> are symmetric: swapping the argument does
-not change the score. Thus they can be used as a <strong>consensus measure</strong>:</p>
+<p>所有的函数, <a class="reference internal" href="generated/sklearn.metrics.mutual_info_score.html#sklearn.metrics.mutual_info_score" title="sklearn.metrics.mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">mutual_info_score</span></code></a>, <a class="reference internal" href="generated/sklearn.metrics.adjusted_mutual_info_score.html#sklearn.metrics.adjusted_mutual_info_score" title="sklearn.metrics.adjusted_mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">adjusted_mutual_info_score</span></code></a> 和 <a class="reference internal" href="generated/sklearn.metrics.normalized_mutual_info_score.html#sklearn.metrics.normalized_mutual_info_score" title="sklearn.metrics.normalized_mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalized_mutual_info_score</span></code></a>
+都是对称的(symmetric): 交换函数的参数不会改变得分。 因此它们可以用作 <strong>consensus measure</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_mutual_info_score</span><span class="p">(</span><span class="n">labels_pred</span><span class="p">,</span> <span class="n">labels_true</span><span class="p">)</span>  
 <span class="go">0.22504...</span>
 </pre></div>
 </div>
-<p>Perfect labeling is scored 1.0:</p>
+<p>完美标签分配(Perfect labeling)的得分是 1.0:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="n">labels_true</span><span class="p">[:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_mutual_info_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
 <span class="go">1.0</span>
@@ -1145,40 +995,33 @@ not change the score. Thus they can be used as a <strong>consensus measure</stro
 <span class="go">1.0</span>
 </pre></div>
 </div>
-<p>This is not true for <code class="docutils literal notranslate"><span class="pre">mutual_info_score</span></code>, which is therefore harder to judge:</p>
+<p>这对于 <code class="docutils literal notranslate"><span class="pre">mutual_info_score</span></code> 是不成立的, 因此该得分更难于判断:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">mutual_info_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
 <span class="go">0.69...</span>
 </pre></div>
 </div>
-<p>Bad (e.g. independent labelings) have non-positive scores:</p>
+<p>坏的标签分配 (e.g. independent labelings) 具有负的得分(non-positive scores):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">adjusted_mutual_info_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
 <span class="go">-0.10526...</span>
 </pre></div>
 </div>
-<div class="section" id="id20">
-<h4>2.3.9.2.1. 优点<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id24">
+<h4>2.3.9.2.1. 优点<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><strong>Random (uniform) label assignments have a AMI score close to 0.0</strong>
-for any value of <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> (which is not the
-case for raw Mutual Information or the V-measure for instance).</li>
-<li><strong>Upper bound  of 1</strong>:  Values close to zero indicate two label
-assignments that are largely independent, while values close to one
-indicate significant agreement. Further, an AMI of exactly 1 indicates
-that the two label assignments are equal (with or without permutation).</li>
+<li><strong>随机(均匀)标签分配有一个接近于0的 AMI得分。</strong>
+对于 <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> 和 <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> 的任何值（这不是 raw Mutual Information 或者 V-measure 的情况）。</li>
+<li><strong>上界为 1</strong> :  得分值接近于 0 表明两个标签分配集合很大程度上是独立的(largely independent), 而得分值接近于 1 表明两个标签分配集合
+具有很大的一致性(significant agreement)。 更进一步, 正好是1的AMI表示两个标签分配相等。 (with or without permutation).</li>
 </ul>
 </div>
-<div class="section" id="id21">
-<h4>2.3.9.2.2. 缺点<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id25">
+<h4>2.3.9.2.2. 缺点<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Contrary to inertia, <strong>MI-based measures require the knowledge
-of the ground truth classes</strong> while almost never available in practice or
-requires manual assignment by human annotators (as in the supervised learning
-setting).</p>
-<p>However MI-based measures can also be useful in purely unsupervised setting as a
-building block for a Consensus Index that can be used for clustering
-model selection.</p>
+<li><p class="first">与惯性(inertia)方法不同, <strong>基于互信息的度量(MI-based measures) 需要 ground truth classes 的相关知识</strong>
+而在实践中几乎不可得到，或者需要人工标注者手动分配（如在监督学习环境中）。</p>
+<p>然而，MI-based measures 还可以在纯粹无监督的设置中作为可用于 聚类模型选择 的共识索引的构建模块。</p>
 </li>
 <li><p class="first">NMI and MI are not adjusted against chance.</p>
 </li>
@@ -1186,64 +1029,52 @@ model selection.</p>
 <div class="topic">
 <p class="topic-title first">Examples:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_adjusted_for_chance_measures.html#sphx-glr-auto-examples-cluster-plot-adjusted-for-chance-measures-py"><span class="std std-ref">Adjustment for chance in clustering performance evaluation</span></a>: Analysis of
-the impact of the dataset size on the value of clustering measures
-for random assignments. This example also includes the Adjusted Rand
-Index.</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_adjusted_for_chance_measures.html#sphx-glr-auto-examples-cluster-plot-adjusted-for-chance-measures-py"><span class="std std-ref">Adjustment for chance in clustering performance evaluation</span></a>:</li>
 </ul>
+<blockquote>
+<div>分析数据集大小对随机分配聚类度量值的影响。 此示例还包括 Adjusted Rand Index。</div></blockquote>
 </div>
 </div>
-<div class="section" id="id22">
-<h4>2.3.9.2.3. 数学表达形式<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
-<p>Assume two label assignments (of the same N objects), <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>.
-Their entropy is the amount of uncertainty for a partition set, defined by:</p>
+<div class="section" id="id26">
+<h4>2.3.9.2.3. 数学表达形式<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
+<p>假定我们有两个标签分配集合(of the same N objects), <span class="math notranslate nohighlight">\(U\)</span> 和 <span class="math notranslate nohighlight">\(V\)</span>.
+它们的熵(entropy)是划分集(partition set)的不确定性量(the amount of uncertainty), 定义如下:</p>
 <div class="math notranslate nohighlight">
 \[H(U) = - \sum_{i=1}^{|U|}P(i)\log(P(i))\]</div>
-<p>where <span class="math notranslate nohighlight">\(P(i) = |U_i| / N\)</span> is the probability that an object picked at
-random from <span class="math notranslate nohighlight">\(U\)</span> falls into class <span class="math notranslate nohighlight">\(U_i\)</span>. Likewise for <span class="math notranslate nohighlight">\(V\)</span>:</p>
+<p>其中 <span class="math notranslate nohighlight">\(P(i) = |U_i| / N\)</span> 是从 <span class="math notranslate nohighlight">\(U\)</span> 集合中随机挑选的一个object落到 <span class="math notranslate nohighlight">\(U_i\)</span> 集合中的概率。
+对于 <span class="math notranslate nohighlight">\(V\)</span> 集合也是一样的:</p>
 <div class="math notranslate nohighlight">
 \[H(V) = - \sum_{j=1}^{|V|}P'(j)\log(P'(j))\]</div>
-<p>With <span class="math notranslate nohighlight">\(P'(j) = |V_j| / N\)</span>. The mutual information (MI) between <span class="math notranslate nohighlight">\(U\)</span>
-and <span class="math notranslate nohighlight">\(V\)</span> is calculated by:</p>
+<p>其中 <span class="math notranslate nohighlight">\(P'(j) = |V_j| / N\)</span>。 <span class="math notranslate nohighlight">\(U\)</span> 和 <span class="math notranslate nohighlight">\(V\)</span> 之间的互信息(mutual information)的计算公式如下 :</p>
 <div class="math notranslate nohighlight">
 \[\text{MI}(U, V) = \sum_{i=1}^{|U|}\sum_{j=1}^{|V|}P(i, j)\log\left(\frac{P(i,j)}{P(i)P'(j)}\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(P(i, j) = |U_i \cap V_j| / N\)</span> is the probability that an object
-picked at random falls into both classes <span class="math notranslate nohighlight">\(U_i\)</span> and <span class="math notranslate nohighlight">\(V_j\)</span>.</p>
-<p>It also can be expressed in set cardinality formulation:</p>
+<p>其中 <span class="math notranslate nohighlight">\(P(i, j) = |U_i \cap V_j| / N\)</span> 是随机选择的object落到这两类集合 <span class="math notranslate nohighlight">\(U_i\)</span> 和 <span class="math notranslate nohighlight">\(V_j\)</span> 中的概率。</p>
+<p>互信息还可以用set cardinality的形式来表述 :</p>
 <div class="math notranslate nohighlight">
 \[\text{MI}(U, V) = \sum_{i=1}^{|U|} \sum_{j=1}^{|V|} \frac{|U_i \cap V_j|}{N}\log\left(\frac{N|U_i \cap V_j|}{|U_i||V_j|}\right)\]</div>
-<p>The normalized mutual information is defined as</p>
+<p>归一化的互信息定义如下:</p>
 <div class="math notranslate nohighlight">
 \[\text{NMI}(U, V) = \frac{\text{MI}(U, V)}{\text{mean}(H(U), H(V))}\]</div>
-<p>This value of the mutual information and also the normalized variant is not
-adjusted for chance and will tend to increase as the number of different labels
-(clusters) increases, regardless of the actual amount of “mutual information”
-between the label assignments.</p>
-<p>The expected value for the mutual information can be calculated using the
-following equation [VEB2009]. In this equation,
-<span class="math notranslate nohighlight">\(a_i = |U_i|\)</span> (the number of elements in <span class="math notranslate nohighlight">\(U_i\)</span>) and
-<span class="math notranslate nohighlight">\(b_j = |V_j|\)</span> (the number of elements in <span class="math notranslate nohighlight">\(V_j\)</span>).</p>
+<p>不管两个标签分配集合(label assignments)之间的互信息的实际量有多大，互信息的值包括归一化互信息的值没有针对偶然性进行调整(not adjusted for chance)
+而且 倾向于随着不同标签(聚类)的数量的增加而增加。</p>
+<p>互信息的期望值可以用等式 [VEB2009] 计算。在这个等式中, <span class="math notranslate nohighlight">\(a_i = |U_i|\)</span> (<span class="math notranslate nohighlight">\(U_i\)</span> 集合中的元素数量) 和
+<span class="math notranslate nohighlight">\(b_j = |V_j|\)</span> ( <span class="math notranslate nohighlight">\(V_j\)</span> 集合中的元素数量)。</p>
 <div class="math notranslate nohighlight">
 \[E[\text{MI}(U,V)]=\sum_{i=1}^{|U|} \sum_{j=1}^{|V|} \sum_{n_{ij}=(a_i+b_j-N)^+
 }^{\min(a_i, b_j)} \frac{n_{ij}}{N}\log \left( \frac{ N.n_{ij}}{a_i b_j}\right)
 \frac{a_i!b_j!(N-a_i)!(N-b_j)!}{N!n_{ij}!(a_i-n_{ij})!(b_j-n_{ij})!
 (N-a_i-b_j+n_{ij})!}\]</div>
-<p>Using the expected value, the adjusted mutual information can then be
-calculated using a similar form to that of the adjusted Rand index:</p>
+<p>使用了互信息期望值后, 经过调整的互信息的计算将使用与 ARI(adjusted Rand index) 类似的形式进行 :</p>
 <div class="math notranslate nohighlight">
 \[\text{AMI} = \frac{\text{MI} - E[\text{MI}]}{\text{mean}(H(U), H(V)) - E[\text{MI}]}\]</div>
-<p>For normalized mutual information and adjusted mutual information, the normalizing
-value is typically some <em>generalized</em> mean of the entropies of each clustering.
-Various generalized means exist, and no firm rules exist for preferring one over the
-others.  The decision is largely a field-by-field basis; for instance, in community
-detection, the arithmetic mean is most common. Each
-normalizing method provides “qualitatively similar behaviours” [YAT2016]. In our
-implementation, this is controlled by the <code class="docutils literal notranslate"><span class="pre">average_method</span></code> parameter.</p>
-<p>Vinh et al. (2010) named variants of NMI and AMI by their averaging method [VEB2010]. Their
-‘sqrt’ and ‘sum’ averages are the geometric and arithmetic means; we use these
-more broadly common names.</p>
+<p>对于归一化互信息和调整后的互信息，归一化值通常是每个聚类的熵的一些广义均值(<em>generalized</em> mean)。
+有各种广义均值存在，并没有明确的规则说某一个优先于其他的。这个决定很大程度上是取决于各个领域的基础；
+例如，在社区检测(community detection)中，算术平均值是最常见的。每一种归一化方法提供 “qualitatively similar behaviours” [YAT2016]。
+在我们的实现中, 这是通过参数 <code class="docutils literal notranslate"><span class="pre">average_method</span></code> 进行控制的。</p>
+<p>Vinh et al. (2010) 对各种 NMI 和 AMI 的变体 用它们使用的平均方法(averaging method) 进行了命名 [VEB2010] 。
+他们在论文里说的 ‘sqrt’ 和 ‘sum’ 平均 分别是 几何 和 算数 平均；我们使用这些更广泛的通用名称。</p>
 <div class="topic">
-<p class="topic-title first">References</p>
+<p class="topic-title first">参考文献</p>
 <ul class="simple">
 <li>Strehl, Alexander, and Joydeep Ghosh (2002). “Cluster ensembles – a
 knowledge reuse framework for combining multiple partitions”. Journal of
@@ -1301,7 +1132,7 @@ cluster.</li>
 </pre></div>
 </div>
 <p>The V-measure is actually equivalent to the mutual information (NMI)
-discussed above, with the aggregation function being the arithmetic mean <a class="reference internal" href="#b2011" id="id26">[B2011]</a>.</p>
+discussed above, with the aggregation function being the arithmetic mean <a class="reference internal" href="#b2011" id="id30">[B2011]</a>.</p>
 <p>Homogeneity, completeness and V-measure can be computed at once using
 <a class="reference internal" href="generated/sklearn.metrics.homogeneity_completeness_v_measure.html#sklearn.metrics.homogeneity_completeness_v_measure" title="sklearn.metrics.homogeneity_completeness_v_measure"><code class="xref py py-func docutils literal notranslate"><span class="pre">homogeneity_completeness_v_measure</span></code></a> as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">homogeneity_completeness_v_measure</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>
@@ -1327,8 +1158,8 @@ the <strong>agreement</strong> of two independent assignments on the same datase
 </pre></div>
 </div>
 </div>
-<div class="section" id="id27">
-<h4>2.3.9.3.1. 优点<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id31">
+<h4>2.3.9.3.1. 优点<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><strong>Bounded scores</strong>: 0.0 is as bad as it can be, 1.0 is a perfect score.</li>
 <li>Intuitive interpretation: clustering with bad V-measure can be
@@ -1340,8 +1171,8 @@ blob shapes with results of spectral clustering algorithms which can
 find cluster with “folded” shapes.</li>
 </ul>
 </div>
-<div class="section" id="id28">
-<h4>2.3.9.3.2. 缺点<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id32">
+<h4>2.3.9.3.2. 缺点<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p class="first">The previously introduced metrics are <strong>not normalized with regards to
 random labeling</strong>: this means that depending on the number of samples,
@@ -1372,8 +1203,8 @@ for random assignments.</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id29">
-<h4>2.3.9.3.3. 数学表达形式<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id33">
+<h4>2.3.9.3.3. 数学表达形式<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
 <p>Homogeneity and completeness scores are formally given by:</p>
 <div class="math notranslate nohighlight">
 \[h = 1 - \frac{H(C|K)}{H(C)}\]</div>
@@ -1407,7 +1238,7 @@ Andrew Rosenberg and Julia Hirschberg, 2007</li>
 <table class="docutils citation" frame="void" id="b2011" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id26">[B2011]</a></td><td><a class="reference external" href="http://www.cs.columbia.edu/~hila/hila-thesis-distributed.pdf">Identication and Characterization of Events in Social Media</a>, Hila
+<tr><td class="label"><a class="fn-backref" href="#id30">[B2011]</a></td><td><a class="reference external" href="http://www.cs.columbia.edu/~hila/hila-thesis-distributed.pdf">Identication and Characterization of Events in Social Media</a>, Hila
 Becker, PhD Thesis.</td></tr>
 </tbody>
 </table>
@@ -1415,7 +1246,7 @@ Becker, PhD Thesis.</td></tr>
 </div>
 </div>
 <div class="section" id="fowlkes-mallows-scores">
-<span id="id30"></span><h3>2.3.9.4. Fowlkes-Mallows scores<a class="headerlink" href="#fowlkes-mallows-scores" title="Permalink to this headline">¶</a></h3>
+<span id="id34"></span><h3>2.3.9.4. Fowlkes-Mallows scores<a class="headerlink" href="#fowlkes-mallows-scores" title="Permalink to this headline">¶</a></h3>
 <p>The Fowlkes-Mallows index (<a class="reference internal" href="generated/sklearn.metrics.fowlkes_mallows_score.html#sklearn.metrics.fowlkes_mallows_score" title="sklearn.metrics.fowlkes_mallows_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.fowlkes_mallows_score</span></code></a>) can be
 used when the ground truth class assignments of the samples is known. The
 Fowlkes-Mallows score FMI is defined as the geometric mean of the
@@ -1461,8 +1292,8 @@ the same score:</p>
 <span class="go">0.0</span>
 </pre></div>
 </div>
-<div class="section" id="id31">
-<h4>2.3.9.4.1. 优点<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id35">
+<h4>2.3.9.4.1. 优点<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><strong>Random (uniform) label assignments have a FMI score close to 0.0</strong>
 for any value of <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> (which is not the
@@ -1478,8 +1309,8 @@ blob shapes with results of spectral clustering algorithms which can
 find cluster with “folded” shapes.</li>
 </ul>
 </div>
-<div class="section" id="id32">
-<h4>2.3.9.4.2. 缺点<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id36">
+<h4>2.3.9.4.2. 缺点<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Contrary to inertia, <strong>FMI-based measures require the knowledge
 of the ground truth classes</strong> while almost never available in practice or
@@ -1498,7 +1329,7 @@ hierarchical clusterings”. Journal of the American Statistical Association.
 </div>
 </div>
 <div class="section" id="silhouette-coefficient">
-<span id="id33"></span><h3>2.3.9.5. Silhouette Coefficient<a class="headerlink" href="#silhouette-coefficient" title="Permalink to this headline">¶</a></h3>
+<span id="id37"></span><h3>2.3.9.5. Silhouette Coefficient<a class="headerlink" href="#silhouette-coefficient" title="Permalink to this headline">¶</a></h3>
 <p>If the ground truth labels are not known, evaluation must be performed using
 the model itself. The Silhouette Coefficient
 (<a class="reference internal" href="generated/sklearn.metrics.silhouette_score.html#sklearn.metrics.silhouette_score" title="sklearn.metrics.silhouette_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.silhouette_score</span></code></a>)
@@ -1545,8 +1376,8 @@ and Applied Mathematics 20: 53–65.
 <a class="reference external" href="https://doi.org/10.1016/0377-0427(87)90125-7">doi:10.1016/0377-0427(87)90125-7</a>.</li>
 </ul>
 </div>
-<div class="section" id="id34">
-<h4>2.3.9.5.1. 优点<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id38">
+<h4>2.3.9.5.1. 优点<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The score is bounded between -1 for incorrect clustering and +1 for highly
 dense clustering. Scores around zero indicate overlapping clusters.</li>
@@ -1554,8 +1385,8 @@ dense clustering. Scores around zero indicate overlapping clusters.</li>
 to a standard concept of a cluster.</li>
 </ul>
 </div>
-<div class="section" id="id35">
-<h4>2.3.9.5.2. 缺点<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id39">
+<h4>2.3.9.5.2. 缺点<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The Silhouette Coefficient is generally higher for convex clusters than other
 concepts of clusters, such as density based clusters like those obtained
@@ -1571,7 +1402,7 @@ the silhouette analysis is used to choose an optimal value for n_clusters.</li>
 </div>
 </div>
 <div class="section" id="calinski-harabaz-index">
-<span id="id36"></span><h3>2.3.9.6. Calinski-Harabaz Index<a class="headerlink" href="#calinski-harabaz-index" title="Permalink to this headline">¶</a></h3>
+<span id="id40"></span><h3>2.3.9.6. Calinski-Harabaz Index<a class="headerlink" href="#calinski-harabaz-index" title="Permalink to this headline">¶</a></h3>
 <p>If the ground truth labels are not known, the Calinski-Harabaz index
 (<a class="reference internal" href="generated/sklearn.metrics.calinski_harabaz_score.html#sklearn.metrics.calinski_harabaz_score" title="sklearn.metrics.calinski_harabaz_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.calinski_harabaz_score</span></code></a>) - also known as the Variance
 Ratio Criterion - can be used to evaluate the model, where a higher
@@ -1609,16 +1440,16 @@ cluster analysis.</p>
 <span class="go">561.62...</span>
 </pre></div>
 </div>
-<div class="section" id="id37">
-<h4>2.3.9.6.1. 优点<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id41">
+<h4>2.3.9.6.1. 优点<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The score is higher when clusters are dense and well separated, which relates
 to a standard concept of a cluster.</li>
 <li>The score is fast to compute</li>
 </ul>
 </div>
-<div class="section" id="id38">
-<h4>2.3.9.6.2. 缺点<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id42">
+<h4>2.3.9.6.2. 缺点<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The Calinski-Harabaz index is generally higher for convex clusters than other
 concepts of clusters, such as density based clusters like those obtained
@@ -1635,7 +1466,7 @@ analysis”. Communications in Statistics-theory and Methods 3: 1-27.
 </div>
 </div>
 <div class="section" id="davies-bouldin-index">
-<span id="id39"></span><h3>2.3.9.7. Davies-Bouldin Index<a class="headerlink" href="#davies-bouldin-index" title="Permalink to this headline">¶</a></h3>
+<span id="id43"></span><h3>2.3.9.7. Davies-Bouldin Index<a class="headerlink" href="#davies-bouldin-index" title="Permalink to this headline">¶</a></h3>
 <p>If the ground truth labels are not known, the Davies-Bouldin index
 (<a class="reference internal" href="generated/sklearn.metrics.davies_bouldin_score.html#sklearn.metrics.davies_bouldin_score" title="sklearn.metrics.davies_bouldin_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.davies_bouldin_score</span></code></a>) can be used to evaluate the
 model, where a lower Davies-Bouldin index relates to a model with better
@@ -1670,15 +1501,15 @@ cluster analysis as follows:</p>
 <span class="go">0.6619...</span>
 </pre></div>
 </div>
-<div class="section" id="id40">
-<h4>2.3.9.7.1. 优点<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id44">
+<h4>2.3.9.7.1. 优点<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The computation of Davies-Bouldin is simpler than that of Silhouette scores.</li>
 <li>The index is computed only quantities and features inherent to the dataset.</li>
 </ul>
 </div>
-<div class="section" id="id41">
-<h4>2.3.9.7.2. 缺点<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id45">
+<h4>2.3.9.7.2. 缺点<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>The Davies-Boulding index is generally higher for convex clusters than other
 concepts of clusters, such as density based clusters like those obtained from
@@ -1704,7 +1535,7 @@ Journal of Intelligent Information Systems, 17(2-3), 107-145.
 </div>
 </div>
 <div class="section" id="contingency-matrix">
-<span id="id42"></span><h3>2.3.9.8. Contingency Matrix<a class="headerlink" href="#contingency-matrix" title="Permalink to this headline">¶</a></h3>
+<span id="id46"></span><h3>2.3.9.8. Contingency Matrix<a class="headerlink" href="#contingency-matrix" title="Permalink to this headline">¶</a></h3>
 <p>Contingency matrix (<a class="reference internal" href="generated/sklearn.metrics.cluster.contingency_matrix.html#sklearn.metrics.cluster.contingency_matrix" title="sklearn.metrics.cluster.contingency_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.cluster.contingency_matrix</span></code></a>)
 reports the intersection cardinality for every true/predicted cluster pair.
 The contingency matrix provides sufficient statistics for all clustering
@@ -1727,8 +1558,8 @@ whose true cluster is “b”. Of them, none is in predicted cluster 0, one is i
 <p>A <a class="reference internal" href="model_evaluation.html#confusion-matrix"><span class="std std-ref">confusion matrix</span></a> for classification is a square
 contingency matrix where the order of rows and columns correspond to a list
 of classes.</p>
-<div class="section" id="id43">
-<h4>2.3.9.8.1. 优点<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id47">
+<h4>2.3.9.8.1. 优点<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Allows to examine the spread of each true cluster across predicted
 clusters and vice versa.</li>
@@ -1737,8 +1568,8 @@ of a similarity statistic (like the others listed in this document) between
 the two clusterings.</li>
 </ul>
 </div>
-<div class="section" id="id44">
-<h4>2.3.9.8.2. 缺点<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id48">
+<h4>2.3.9.8.2. 缺点<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Contingency matrix is easy to interpret for a small number of clusters, but
 becomes very hard to interpret for a large number of clusters.</li>
