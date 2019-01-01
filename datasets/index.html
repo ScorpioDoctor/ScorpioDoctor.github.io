@@ -204,7 +204,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#labeled-faces-in-the-wild-dataset">5.3.3. 野外人脸识别数据集中的标记人脸</a><ul>
-<li><a class="reference internal" href="#id13">5.3.3.1. Usage</a></li>
+<li><a class="reference internal" href="#id16">5.3.3.1. Usage</a></li>
 <li><a class="reference internal" href="#examples">5.3.3.2. Examples</a></li>
 </ul>
 </li>
@@ -215,15 +215,15 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#sample-generators">5.4. 人工合成的数据集</a><ul>
-<li><a class="reference internal" href="#id20">5.4.1. 用于分类和回归的数据集的生成器</a><ul>
-<li><a class="reference internal" href="#id21">5.4.1.1. 单标签</a></li>
-<li><a class="reference internal" href="#id22">5.4.1.2. 多标签</a></li>
-<li><a class="reference internal" href="#id23">5.4.1.3. 双向聚类</a></li>
+<li><a class="reference internal" href="#id23">5.4.1. 用于分类和回归的数据集的生成器</a><ul>
+<li><a class="reference internal" href="#id24">5.4.1.1. 单标签</a></li>
+<li><a class="reference internal" href="#id25">5.4.1.2. 多标签</a></li>
+<li><a class="reference internal" href="#id26">5.4.1.3. 双向聚类</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id24">5.4.2. 用于回归的数据集生成器</a></li>
-<li><a class="reference internal" href="#id25">5.4.3. 用于流形学习的数据集生成器</a></li>
-<li><a class="reference internal" href="#id26">5.4.4. 用于信号分解的生成器</a></li>
+<li><a class="reference internal" href="#id27">5.4.2. 用于回归的数据集生成器</a></li>
+<li><a class="reference internal" href="#id28">5.4.3. 用于流形学习的数据集生成器</a></li>
+<li><a class="reference internal" href="#id29">5.4.4. 用于信号分解的生成器</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#loading-other-datasets">5.5. 加载其他类型的数据集</a><ul>
@@ -257,47 +257,39 @@
             
   <div class="section" id="datasets">
 <span id="id1"></span><h1>5. 数据集加载工具<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">sklearn.datasets</span></code> package embeds some small toy datasets
-as introduced in the <a class="reference internal" href="../tutorial/basic/tutorial.html#loading-example-dataset"><span class="std std-ref">Getting Started</span></a> section.</p>
-<p>This package also features helpers to fetch larger datasets commonly
-used by the machine learning community to benchmark algorithms on data
-that comes from the ‘real world’.</p>
-<p>To evaluate the impact of the scale of the dataset (<code class="docutils literal notranslate"><span class="pre">n_samples</span></code> and
-<code class="docutils literal notranslate"><span class="pre">n_features</span></code>) while controlling the statistical properties of the data
-(typically the correlation and informativeness of the features), it is
-also possible to generate synthetic data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sklearn.datasets</span></code> package 自带了一些迷你数据集(small toy datasets)，
+这在 <a class="reference internal" href="../tutorial/basic/tutorial.html#loading-example-dataset"><span class="std std-ref">Getting Started</span></a> 章节也提到过。</p>
+<p>这个 package 也提供了很多帮助函数去获取稍大一点儿的数据集，这些数据集是在机器学习社区中经常用到的
+用来测试算法的性能的，他们都是来自 真实世界(‘real world’)的数据集。</p>
+<p>为了评估数据集(<code class="docutils literal notranslate"><span class="pre">n_samples</span></code> 和 <code class="docutils literal notranslate"><span class="pre">n_features</span></code>) 的规模(scale)对算法模型的影响，同时还能控制数据的某些统计属性
+(典型的比如特征的相关性和信息量)，我们还需要人工合成一些数据集(generate synthetic data)。</p>
+<p><strong>译者注：</strong> 由于我之前在人工智能社区网(wwww.studyai.com)做过一些scikit-learn的视频课程，当时对数据集的API这块儿讲的挺详细的，下面我把当时讲课
+时自己制作的PPT和视频的链接地址放在这儿，大家可以去听听，看看，我觉得PPT总结的还是不错的，o(∩_∩)o 哈哈  。
+(<a class="reference external" href="http://www.studyai.com/article/ddf094e18e834a95">Sklearn数据集操作API (一)</a>)，
+(<a class="reference external" href="http://www.studyai.com/article/dbb7ea7264784b11">Sklearn数据集操作API (三)</a>)，
+(<a class="reference external" href="http://www.studyai.com/article/b82ea4b5ae084e8f">Sklearn数据集操作API (四)</a>)，
+数据集这一段 对应的视频教程 可以去
+(<a class="reference external" href="https://list.youku.com/albumlist/show/id_49255928.html?spm=a2h0j.11185381.bpmodule-playpage-righttitle.5~H2~A">我的优酷自频道</a>)
+里面找sklearn的播单，感兴趣的可以听听。</p>
 <div class="section" id="api">
 <h2>5.1. 通用数据集 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
-<p>There are three main kinds of dataset interfaces that can be used to get
-datasets depending on the desired type of dataset.</p>
-<p><strong>The dataset loaders.</strong> They can be used to load small standard datasets,
-described in the <a class="reference internal" href="#toy-datasets"><span class="std std-ref">迷你数据集</span></a> section.</p>
-<p><strong>The dataset fetchers.</strong> They can be used to download and load larger datasets,
-described in the <a class="reference internal" href="#real-world-datasets"><span class="std std-ref">真实世界中的数据集</span></a> section.</p>
-<p>Both loaders and fetchers functions return a dictionary-like object holding
-at least two items: an array of shape <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> * <code class="docutils literal notranslate"><span class="pre">n_features</span></code> with
-key <code class="docutils literal notranslate"><span class="pre">data</span></code> (except for 20newsgroups) and a numpy array of
-length <code class="docutils literal notranslate"><span class="pre">n_samples</span></code>, containing the target values, with key <code class="docutils literal notranslate"><span class="pre">target</span></code>.</p>
-<p>It’s also possible for almost all of these function to constrain the output
-to be a tuple containing only the data and the target, by setting the
-<code class="docutils literal notranslate"><span class="pre">return_X_y</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<p>The datasets also contain a full description in their <code class="docutils literal notranslate"><span class="pre">DESCR</span></code> attribute and
-some contain <code class="docutils literal notranslate"><span class="pre">feature_names</span></code> and <code class="docutils literal notranslate"><span class="pre">target_names</span></code>. See the dataset
-descriptions below for details.</p>
-<p><strong>The dataset generation functions.</strong> They can be used to generate controlled
-synthetic datasets, described in the <a class="reference internal" href="#sample-generators"><span class="std std-ref">人工合成的数据集</span></a> section.</p>
-<p>These functions return a tuple <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">y)</span></code> consisting of a <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> *
-<code class="docutils literal notranslate"><span class="pre">n_features</span></code> numpy array <code class="docutils literal notranslate"><span class="pre">X</span></code> and an array of length <code class="docutils literal notranslate"><span class="pre">n_samples</span></code>
-containing the targets <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
-<p>In addition, there are also miscellanous tools to load datasets of other
-formats or from other locations, described in the <a class="reference internal" href="#loading-other-datasets"><span class="std std-ref">加载其他类型的数据集</span></a>
-section.</p>
+<p>根据所需数据集的类型，有三种主要类型的数据集API接口可用于获取数据集。</p>
+<p><strong>The dataset loaders.</strong> 这些可用来加载小的标准数据集, 在 <a class="reference internal" href="#toy-datasets"><span class="std std-ref">迷你数据集</span></a> 中有介绍。</p>
+<p><strong>The dataset fetchers.</strong> 这些可用来下载并加载大的 real-world 数据集, 在 <a class="reference internal" href="#real-world-datasets"><span class="std std-ref">真实世界中的数据集</span></a> 中有介绍。</p>
+<p>loaders 和 fetchers 的所有函数都返回一个字典一样的对象，里面至少包含两项 :
+shape 为 <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> * <code class="docutils literal notranslate"><span class="pre">n_features</span></code> 的数组，对应的字典key是 <code class="docutils literal notranslate"><span class="pre">data</span></code> (20newsgroups 数据集除外)
+以及 长度为 <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> 的numpy数组, 包含了目标值(target values), 对应的字典key是 <code class="docutils literal notranslate"><span class="pre">target</span></code>。</p>
+<p>通过将 <code class="docutils literal notranslate"><span class="pre">return_X_y</span></code> 参数设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code> ，几乎所有这些函数都可以将输出约束为只包含数据和目标的元组。</p>
+<p>数据集还包含一个完整的 <code class="docutils literal notranslate"><span class="pre">DESCR</span></code> 属性描述，一些数据集还包含了 <code class="docutils literal notranslate"><span class="pre">feature_names</span></code> 和 <code class="docutils literal notranslate"><span class="pre">target_names</span></code> 。有关详细信息，请参阅下面的数据集说明。</p>
+<p><strong>The dataset generation functions.</strong> 它们可以用来生成受控的合成数据集(synthetic datasets), 在 <a class="reference internal" href="#sample-generators"><span class="std std-ref">人工合成的数据集</span></a> 中有介绍。</p>
+<p>这些函数返回一个元组 <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">y)</span></code> ，该元组由shape为 <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> * <code class="docutils literal notranslate"><span class="pre">n_features</span></code> 的
+numpy数组 <code class="docutils literal notranslate"><span class="pre">X</span></code> 和长度为 <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> 的包含目标 <code class="docutils literal notranslate"><span class="pre">y</span></code> 的数组组成。</p>
+<p>此外，还有一些用于加载其他格式或其他位置的数据集的混合工具(miscellanous tools),在 <a class="reference internal" href="#loading-other-datasets"><span class="std std-ref">加载其他类型的数据集</span></a> 中有介绍。</p>
 </div>
 <div class="section" id="toy-datasets">
-<span id="id2"></span><h2>5.2. 迷你数据集<a class="headerlink" href="#toy-datasets" title="Permalink to this headline">¶</a></h2>
-<p>scikit-learn comes with a few small standard datasets that do not require to
-download any file from some external website.</p>
-<p>They can be loaded using the following functions:</p>
+<span id="id5"></span><h2>5.2. 迷你数据集<a class="headerlink" href="#toy-datasets" title="Permalink to this headline">¶</a></h2>
+<p>scikit-learn 附带一些小的标准数据集，这些数据集不需要从某个外部网站下载任何文件。</p>
+<p>这些数据集可以用下面的函数加载 :</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -327,13 +319,11 @@ download any file from some external website.</p>
 </tr>
 </tbody>
 </table>
-<p>These datasets are useful to quickly illustrate the behavior of the
-various algorithms implemented in scikit-learn. They are however often too
-small to be representative of real world machine learning tasks.</p>
+<p>这些数据集对于快速说明在scikit-learn中实现的各种算法的行为非常有用。然而，它们往往太小，无法代表现实世界中的机器学习任务。</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="section" id="boston-dataset">
-<span id="id3"></span><h3>5.2.1. 波士顿房价数据集<a class="headerlink" href="#boston-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id6"></span><h3>5.2.1. 波士顿房价数据集<a class="headerlink" href="#boston-dataset" title="Permalink to this headline">¶</a></h3>
 <p><strong>Data Set Characteristics:</strong></p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -396,7 +386,7 @@ problems.</p>
 </div>
 </div>
 <div class="section" id="iris-dataset">
-<span id="id4"></span><h3>5.2.2. 鸢尾花植物数据集<a class="headerlink" href="#iris-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id7"></span><h3>5.2.2. 鸢尾花植物数据集<a class="headerlink" href="#iris-dataset" title="Permalink to this headline">¶</a></h3>
 <p><strong>Data Set Characteristics:</strong></p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -533,7 +523,7 @@ conceptual clustering system finds 3 classes in the data.</li>
 </div>
 </div>
 <div class="section" id="diabetes-dataset">
-<span id="id5"></span><h3>5.2.3. 糖尿病数据集<a class="headerlink" href="#diabetes-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id8"></span><h3>5.2.3. 糖尿病数据集<a class="headerlink" href="#diabetes-dataset" title="Permalink to this headline">¶</a></h3>
 <p>Ten baseline variables, age, sex, body mass index, average blood
 pressure, and six blood serum measurements were obtained for each of n =
 442 diabetes patients, as well as the response of interest, a
@@ -581,7 +571,7 @@ Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) “Lea
 (<a class="reference external" href="http://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf">http://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf</a>)</p>
 </div>
 <div class="section" id="digits-dataset">
-<span id="id6"></span><h3>5.2.4. 用于手写字符光学识别的数据集<a class="headerlink" href="#digits-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id9"></span><h3>5.2.4. 用于手写字符光学识别的数据集<a class="headerlink" href="#digits-dataset" title="Permalink to this headline">¶</a></h3>
 <p><strong>Data Set Characteristics:</strong></p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -651,7 +641,7 @@ Algorithm. NIPS. 2000.</li>
 </div>
 </div>
 <div class="section" id="linnerrud-dataset">
-<span id="id7"></span><h3>5.2.5. Linnerrud dataset<a class="headerlink" href="#linnerrud-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id10"></span><h3>5.2.5. Linnerrud dataset<a class="headerlink" href="#linnerrud-dataset" title="Permalink to this headline">¶</a></h3>
 <p><strong>Data Set Characteristics:</strong></p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -691,7 +681,7 @@ Algorithm. NIPS. 2000.</li>
 </div>
 </div>
 <div class="section" id="wine-dataset">
-<span id="id8"></span><h3>5.2.6. 白酒识别数据集<a class="headerlink" href="#wine-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id11"></span><h3>5.2.6. 白酒识别数据集<a class="headerlink" href="#wine-dataset" title="Permalink to this headline">¶</a></h3>
 <p><strong>Data Set Characteristics:</strong></p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -898,7 +888,7 @@ Mathematics and Statistics, James Cook University of North Queensland.
 </div>
 </div>
 <div class="section" id="breast-cancer-dataset">
-<span id="id9"></span><h3>5.2.7. 乳腺癌数据集<a class="headerlink" href="#breast-cancer-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id12"></span><h3>5.2.7. 乳腺癌数据集<a class="headerlink" href="#breast-cancer-dataset" title="Permalink to this headline">¶</a></h3>
 <p><strong>Data Set Characteristics:</strong></p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -1141,10 +1131,9 @@ to diagnose breast cancer from fine-needle aspirates. Cancer Letters 77 (1994)
 </div>
 </div>
 <div class="section" id="real-world-datasets">
-<span id="id10"></span><h2>5.3. 真实世界中的数据集<a class="headerlink" href="#real-world-datasets" title="Permalink to this headline">¶</a></h2>
-<p>scikit-learn provides tools to load larger datasets, downloading them if
-necessary.</p>
-<p>They can be loaded using the following functions:</p>
+<span id="id13"></span><h2>5.3. 真实世界中的数据集<a class="headerlink" href="#real-world-datasets" title="Permalink to this headline">¶</a></h2>
+<p>scikit-learn 提供加载较大数据集的工具，并在必要时下载这些数据集。</p>
+<p>这些数据集可以用下面的函数加载 :</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -1232,7 +1221,7 @@ consists of 64x64 images.</p>
 <p>When using these images, please give credit to AT&amp;T Laboratories Cambridge.</p>
 </div>
 <div class="section" id="newsgroups-dataset">
-<span id="id11"></span><h3>5.3.2. 20组新闻文本数据集<a class="headerlink" href="#newsgroups-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id14"></span><h3>5.3.2. 20组新闻文本数据集<a class="headerlink" href="#newsgroups-dataset" title="Permalink to this headline">¶</a></h3>
 <p>The 20 newsgroups dataset comprises around 18000 newsgroups posts on
 20 topics split in two subsets: one for training (or development)
 and the other one for testing (or for performance evaluation). The split
@@ -1468,7 +1457,7 @@ lower because it is more realistic.</p>
 </div>
 </div>
 <div class="section" id="labeled-faces-in-the-wild-dataset">
-<span id="id12"></span><h3>5.3.3. 野外人脸识别数据集中的标记人脸<a class="headerlink" href="#labeled-faces-in-the-wild-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id15"></span><h3>5.3.3. 野外人脸识别数据集中的标记人脸<a class="headerlink" href="#labeled-faces-in-the-wild-dataset" title="Permalink to this headline">¶</a></h3>
 <p>This dataset is a collection of JPEG pictures of famous people collected
 over the internet, all details are available on the official website:</p>
 <blockquote>
@@ -1508,8 +1497,8 @@ face detector from various online websites.</p>
 </tbody>
 </table>
 </div></blockquote>
-<div class="section" id="id13">
-<h4>5.3.3.1. Usage<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id16">
+<h4>5.3.3.1. Usage<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> provides two loaders that will automatically download,
 cache, parse the metadata files, decode the jpeg and convert the
 interesting slices into memmapped numpy arrays. This dataset size is more
@@ -1599,7 +1588,7 @@ University of Massachusetts, Amherst, Technical Report 07-49, October, 2007.</li
 </div>
 </div>
 <div class="section" id="covtype-dataset">
-<span id="id14"></span><h3>5.3.4. 森林植被类型数据集<a class="headerlink" href="#covtype-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id17"></span><h3>5.3.4. 森林植被类型数据集<a class="headerlink" href="#covtype-dataset" title="Permalink to this headline">¶</a></h3>
 <p>The samples in this dataset correspond to 30×30m patches of forest in the US,
 collected for the task of predicting each patch’s cover type,
 i.e. the dominant species of tree.
@@ -1641,7 +1630,7 @@ The dataset will be downloaded from the web if necessary.</p>
 <span id="rcv1-dataset"></span><h3>5.3.5. 路透社语料库数据集(RCV1)<a class="headerlink" href="#rcv1" title="Permalink to this headline">¶</a></h3>
 <p>Reuters Corpus Volume I (RCV1) is an archive of over 800,000 manually
 categorized newswire stories made available by Reuters, Ltd. for research
-purposes. The dataset is extensively described in <a class="footnote-reference" href="#id17" id="id15">[1]</a>.</p>
+purposes. The dataset is extensively described in <a class="footnote-reference" href="#id20" id="id18">[1]</a>.</p>
 <p><strong>Data Set Characteristics:</strong></p>
 <blockquote>
 <div><table border="1" class="docutils">
@@ -1675,7 +1664,7 @@ version: RCV1-v2, vectors, full sets, topics multilabels:</p>
 <p><code class="docutils literal notranslate"><span class="pre">data</span></code>:
 The feature matrix is a scipy CSR sparse matrix, with 804414 samples and
 47236 features. Non-zero values contains cosine-normalized, log TF-IDF vectors.
-A nearly chronological split is proposed in <a class="footnote-reference" href="#id17" id="id16">[1]</a>: The first 23149 samples are
+A nearly chronological split is proposed in <a class="footnote-reference" href="#id20" id="id19">[1]</a>: The first 23149 samples are
 the training set. The last 781265 samples are the testing set. This follows
 the official LYRL2004 chronological split. The array has 0.16% of non zero
 values:</p>
@@ -1711,10 +1700,10 @@ magnitude, from 5 occurrences for ‘GMIL’, to 381327 for ‘CCAT’:</p>
 The compressed size is about 656 MB.</p>
 <div class="topic">
 <p class="topic-title first">References</p>
-<table class="docutils footnote" frame="void" id="id17" rules="none">
+<table class="docutils footnote" frame="void" id="id20" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id15">1</a>, <a class="fn-backref" href="#id16">2</a>)</em> Lewis, D. D., Yang, Y., Rose, T. G., &amp; Li, F. (2004).
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id18">1</a>, <a class="fn-backref" href="#id19">2</a>)</em> Lewis, D. D., Yang, Y., Rose, T. G., &amp; Li, F. (2004).
 RCV1: A new benchmark collection for text categorization research.
 The Journal of Machine Learning Research, 5, 361-397.</td></tr>
 </tbody>
@@ -1859,7 +1848,7 @@ and the target values in <code class="docutils literal notranslate"><span class=
 web if necessary.</p>
 </div>
 <div class="section" id="california-housing-dataset">
-<span id="id18"></span><h3>5.3.7. 加利福尼亚房价数据集<a class="headerlink" href="#california-housing-dataset" title="Permalink to this headline">¶</a></h3>
+<span id="id21"></span><h3>5.3.7. 加利福尼亚房价数据集<a class="headerlink" href="#california-housing-dataset" title="Permalink to this headline">¶</a></h3>
 <p><strong>Data Set Characteristics:</strong></p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -1913,15 +1902,13 @@ Statistics and Probability Letters, 33 (1997) 291-297</li>
 </div>
 </div>
 <div class="section" id="sample-generators">
-<span id="id19"></span><h2>5.4. 人工合成的数据集<a class="headerlink" href="#sample-generators" title="Permalink to this headline">¶</a></h2>
-<p>In addition, scikit-learn includes various random sample generators that
-can be used to build artificial datasets of controlled size and complexity.</p>
-<div class="section" id="id20">
-<h3>5.4.1. 用于分类和回归的数据集的生成器<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
-<p>These generators produce a matrix of features and corresponding discrete
-targets.</p>
-<div class="section" id="id21">
-<h4>5.4.1.1. 单标签<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<span id="id22"></span><h2>5.4. 人工合成的数据集<a class="headerlink" href="#sample-generators" title="Permalink to this headline">¶</a></h2>
+<p>此外，scikit-learn还包括各种随机样本生成器，可用于构建具有可控大小和复杂性的人工数据集(artificial datasets)。</p>
+<div class="section" id="id23">
+<h3>5.4.1. 用于分类和回归的数据集的生成器<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<p>这些生成器产生一个特征矩阵和相应的离散目标。</p>
+<div class="section" id="id24">
+<h4>5.4.1.1. 单标签<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
 <p>Both <a class="reference internal" href="../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs" title="sklearn.datasets.make_blobs"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_blobs</span></code></a> and <a class="reference internal" href="../modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification" title="sklearn.datasets.make_classification"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_classification</span></code></a> create multiclass
 datasets by allocating each class one or more normally-distributed clusters of
 points.  <a class="reference internal" href="../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs" title="sklearn.datasets.make_blobs"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_blobs</span></code></a> provides greater control regarding the centers and
@@ -1939,8 +1926,8 @@ clustering or linear classification), including optional Gaussian noise.
 They are useful for visualisation. produces Gaussian
 data with a spherical decision boundary for binary classification.</p>
 </div>
-<div class="section" id="id22">
-<h4>5.4.1.2. 多标签<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id25">
+<h4>5.4.1.2. 多标签<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference internal" href="../modules/generated/sklearn.datasets.make_multilabel_classification.html#sklearn.datasets.make_multilabel_classification" title="sklearn.datasets.make_multilabel_classification"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_multilabel_classification</span></code></a> generates random samples with multiple
 labels, reflecting a bag of words drawn from a mixture of topics. The number of
 topics for each document is drawn from a Poisson distribution, and the topics
@@ -1958,8 +1945,8 @@ distribution.</li>
 </ul>
 <a class="reference external image-reference" href="../auto_examples/datasets/plot_random_multilabel_dataset.html"><img alt="../images/sphx_glr_plot_random_multilabel_dataset_0011.png" class="align-center" src="../images/sphx_glr_plot_random_multilabel_dataset_0011.png" style="width: 400.0px; height: 200.0px;" /></a>
 </div>
-<div class="section" id="id23">
-<h4>5.4.1.3. 双向聚类<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id26">
+<h4>5.4.1.3. 双向聚类<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -1976,8 +1963,8 @@ distribution.</li>
 </table>
 </div>
 </div>
-<div class="section" id="id24">
-<h3>5.4.2. 用于回归的数据集生成器<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id27">
+<h3>5.4.2. 用于回归的数据集生成器<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../modules/generated/sklearn.datasets.make_regression.html#sklearn.datasets.make_regression" title="sklearn.datasets.make_regression"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_regression</span></code></a> produces regression targets as an optionally-sparse
 random linear combination of random features, with noise. Its informative
 features may be uncorrelated, or low rank (few features account for most of the
@@ -1990,8 +1977,8 @@ Others encode explicitly non-linear relations:
 <a class="reference internal" href="../modules/generated/sklearn.datasets.make_friedman2.html#sklearn.datasets.make_friedman2" title="sklearn.datasets.make_friedman2"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_friedman2</span></code></a> includes feature multiplication and reciprocation; and
 <a class="reference internal" href="../modules/generated/sklearn.datasets.make_friedman3.html#sklearn.datasets.make_friedman3" title="sklearn.datasets.make_friedman3"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_friedman3</span></code></a> is similar with an arctan transformation on the target.</p>
 </div>
-<div class="section" id="id25">
-<h3>5.4.3. 用于流形学习的数据集生成器<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id28">
+<h3>5.4.3. 用于流形学习的数据集生成器<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -2007,8 +1994,8 @@ Others encode explicitly non-linear relations:
 </tbody>
 </table>
 </div>
-<div class="section" id="id26">
-<h3>5.4.4. 用于信号分解的生成器<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id29">
+<h3>5.4.4. 用于信号分解的生成器<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -2032,9 +2019,9 @@ Others encode explicitly non-linear relations:
 </div>
 </div>
 <div class="section" id="loading-other-datasets">
-<span id="id27"></span><h2>5.5. 加载其他类型的数据集<a class="headerlink" href="#loading-other-datasets" title="Permalink to this headline">¶</a></h2>
+<span id="id30"></span><h2>5.5. 加载其他类型的数据集<a class="headerlink" href="#loading-other-datasets" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="sample-images">
-<span id="id28"></span><h3>5.5.1. 示例图像<a class="headerlink" href="#sample-images" title="Permalink to this headline">¶</a></h3>
+<span id="id31"></span><h3>5.5.1. 示例图像<a class="headerlink" href="#sample-images" title="Permalink to this headline">¶</a></h3>
 <p>Scikit-learn also embed a couple of sample JPEG images published under Creative
 Commons license by their authors. Those image can be useful to test algorithms
 and pipeline on 2D data.</p>
@@ -2171,7 +2158,7 @@ dataset on the openml website:</p>
 </pre></div>
 </div>
 <div class="section" id="openml-versions">
-<span id="id30"></span><h4>5.5.3.1. 数据集版本<a class="headerlink" href="#openml-versions" title="Permalink to this headline">¶</a></h4>
+<span id="id33"></span><h4>5.5.3.1. 数据集版本<a class="headerlink" href="#openml-versions" title="Permalink to this headline">¶</a></h4>
 <p>A dataset is uniquely specified by its <code class="docutils literal notranslate"><span class="pre">data_id</span></code>, but not necessarily by its
 name. Several different “versions” of a dataset with the same name can exist
 which can contain entirely different datasets.
@@ -2236,7 +2223,7 @@ ACM SIGKDD Explorations Newsletter, 15(2), 49-60, 2014.</li>
 </div>
 </div>
 <div class="section" id="external-datasets">
-<span id="id31"></span><h3>5.5.4. 从外部数据集加载数据<a class="headerlink" href="#external-datasets" title="Permalink to this headline">¶</a></h3>
+<span id="id34"></span><h3>5.5.4. 从外部数据集加载数据<a class="headerlink" href="#external-datasets" title="Permalink to this headline">¶</a></h3>
 <p>scikit-learn works on any numeric data stored as numpy arrays or scipy sparse
 matrices. Other types that are convertible to numeric arrays such as pandas
 DataFrame are also acceptable.</p>
