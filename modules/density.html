@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+    <title>2.8. 概率密度估计(Density Estimation) &#8212; scikit-learn 0.20.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../static/css/bootstrap-responsive.css"/>
+
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.9. 无监督神经网络模型(unsupervised Neural network models)" href="neural_networks_unsupervised.html" />
+    <link rel="prev" title="2.7. 奇异值和外点检测(Novelty and Outlier Detection)" href="outlier_detection.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+     VERSION_SUBDIR = (function(groups) {
+         return groups ? groups[1] : null;
+     })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+  </script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/density.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+    function showMenu() {
+      var topNav = document.getElementById("scikit-navbar");
+      if (topNav.className === "navbar") {
+          topNav.className += " responsive";
+      } else {
+          topNav.className = "navbar";
+      }
+    };
+  </script>
+
+  <!-- 百度站长统计代码 -->
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar" id="scikit-navbar">
+            <ul>
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script></li>
+            <li><a href="../tutorial/index.html">教程</a></li>
+            <li><a href="../user_guide.html">用户指南</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../glossary.html">术语表</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers/contributing.html">贡献者</a></li>
+            <li class="divider"></li>
+                <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="http://scikit-learn.org/stable/documentation.html">稳定版</a></li>')</script>
+                <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html">开发版</a></li>')</script>
+                <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+                <li><a href="../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">案例</a></li>
+            </ul>
+            <a href="javascript:void(0);" onclick="showMenu()">
+                <div class="nav-icon">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </a>
+            <div class="search_form">
+                <div class="gcse-search" id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+        <div class="rellink">
+        <a href="outlier_detection.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        2.7. 奇异值和外点检测...
+        </span>
+            <span class="hiddenrellink">
+            2.7. 奇异值和外点检测(Novelty and Outlier Detection)
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="neural_networks_unsupervised.html"
+        accesskey="N">Next
+        <br/>
+        <span class="smallrellink">
+        2.9. 无监督神经网络模...
+        </span>
+            <span class="hiddenrellink">
+            2.9. 无监督神经网络模型(unsupervised Neural network models)
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../unsupervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        2. 无监督学习(Unsu...
+        </span>
+            <span class="hiddenrellink">
+            2. 无监督学习(Unsupervised learning)
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version"><b>scikit-learn v0.20.1</b><br/>
+      <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+    <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank"
+      >Antares</a>翻译!</p>
+    <ul>
+<li><a class="reference internal" href="#">2.8. 概率密度估计(Density Estimation)</a><ul>
+<li><a class="reference internal" href="#id2">2.8.1. 密度估计: 直方图法</a></li>
+<li><a class="reference internal" href="#kernel-density">2.8.2. 核密度估计</a></li>
+</ul>
+</li>
+</ul>
+
+    <br/>
+    <p>
+        <a href="http://www.studyai.com" target="_blank">
+          <img src="../static/img/xxx.png" alt="座右铭"/>
+        </a>
+    </p>
+    <br/>
+    <p class="doc-version">
+      注意!本网站的网址是以 <em>https://</em> 开头的，而不是以 <em>http://</em> 开头的!!!
+    </p>
+    <!-- <br/>
+    <p>
+      <a href="http://www.studyai.com" target="_blank">
+        <img src="../static/img/yyy.png" alt="座右铭"/>
+      </a>      
+    </p> -->
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="density-estimation">
+<span id="id1"></span><h1>2.8. 概率密度估计(Density Estimation)<a class="headerlink" href="#density-estimation" title="Permalink to this headline">¶</a></h1>
+<p>密度估计介于无监督学习、特征工程和数据建模之间。一些最流行和最有用的密度估计技术是混合模型，
+比如高斯混合(<a class="reference internal" href="generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture" title="sklearn.mixture.GaussianMixture"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.mixture.GaussianMixture</span></code></a>), 和 基于neighbors的方法，
+比如 核密度估计(<a class="reference internal" href="generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity" title="sklearn.neighbors.KernelDensity"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.neighbors.KernelDensity</span></code></a>)。
+高斯混合在 <a class="reference internal" href="clustering.html#clustering"><span class="std std-ref">clustering</span></a> 中已经充分讨论过啦，因为该技术作为一个无监督聚类机制也非常有用。</p>
+<p>密度估计是一个非常简单的概念，大多数人已经熟悉了一种常用的密度估计技术：直方图(the histogram)。</p>
+<div class="section" id="id2">
+<h2>2.8.1. 密度估计: 直方图法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>直方图是数据的简单可视化，其中定义了累计箱(bins)，并对每个bin内的数据点数进行了统计。
+直方图的一个例子可以在下图的左上角看到：</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="hist_to_kde" src="../images/sphx_glr_plot_kde_1d_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>然而，直方图的一个主要问题是，选择 binning 可能会对由此产生的可视化带来不成比例的影响。
+考虑上图的右上面板.它显示了同一数据的直方图，只是bins向右移动了。
+这两种可视化的结果看起来完全不同，并可能导致对数据的不同解释。</p>
+<p>直观地说，还可以将直方图看作是块的堆栈(a stack of blocks)，每个点一个块(one block per point)。
+通过在合适的网格空间中叠加块，我们就可以恢复直方图。
+但是，如果我们不把这些块堆在一个规则的网格上，而是把每个块集中在它所代表的点上，然后把每个位置的总高度相加，那又将如何呢？
+这个想法催生了左下角的可视化。它可能没有直方图那么清晰，但是由数据驱动块位置这一事实意味着它是底层数据的更好的表示。</p>
+<p>这个可视化是一个核密度估计(<em>kernel density estimation</em>)的例子，在本例中是带顶帽核的(i.e. a square block at each point)。</p>
+<p>我们可以通过使用更平滑的内核来恢复更平滑的分布。右下角图显示了一个高斯核密度估计，其中每个点都贡献了一个高斯曲线。
+所得结果是由数据导出的光滑密度估计，作为数据点的分布的强大的非参数模型。</p>
+</div>
+<div class="section" id="kernel-density">
+<span id="id3"></span><h2>2.8.2. 核密度估计<a class="headerlink" href="#kernel-density" title="Permalink to this headline">¶</a></h2>
+<p>scikit-learn 中 核密度估计(Kernel density estimation) 是在 <a class="reference internal" href="generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity" title="sklearn.neighbors.KernelDensity"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.neighbors.KernelDensity</span></code></a>
+estimator 中实现的，该实现使用了 Ball Tree 或 KD Tree 以获得高效的查询(请查看 <a class="reference internal" href="neighbors.html#neighbors"><span class="std std-ref">最近邻方法（Nearest Neighbors）</span></a> 里面的关于加速查询搜索的讨论)。
+虽然上面的例子使用一维数据集来简化说明，但是核密度估计可以在任意数量的维度上进行，尽管在实践中，维数灾难会导致其在高维下的性能下降。</p>
+<p>在下图中，从双峰分布(bimodal distribution)中抽取了100个点，并显示了选择三种不同的内核进行的核密度估计产生的结果：</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="kde_1d_distribution" src="../images/sphx_glr_plot_kde_1d_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>在这个例子中，内核形状(kernel shape)如何影响由其产生的分布的平滑性已经很明显了。scikit-Learn 提供的 核密度估计器 的用法如下:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors.kde</span> <span class="k">import</span> <span class="n">KernelDensity</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kde</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([-0.41075698, -0.41075698, -0.41076071, -0.41075698, -0.41075698,</span>
+<span class="go">       -0.41076071])</span>
+</pre></div>
+</div>
+<p>这里，我们使用 <code class="docutils literal notranslate"><span class="pre">kernel='gaussian'</span></code>, 正如你上面看到的那样。
+数学上, 核(kernel) 是一个被带宽(bandwidth)参数 <span class="math notranslate nohighlight">\(h\)</span> 控制的正定函数(positive function) <span class="math notranslate nohighlight">\(K(x;h)\)</span> 。
+给定了核的形式，一组点 <span class="math notranslate nohighlight">\(x_i; i=1\cdots N\)</span> 中的 某个点 <span class="math notranslate nohighlight">\(y\)</span> 处的 密度估计 由下面的公式给出:</p>
+<div class="math notranslate nohighlight">
+\[\rho_K(y) = \sum_{i=1}^{N} K((y - x_i) / h)\]</div>
+<p>带宽(bandwidth)在这里扮演了一个平滑参数的角色, 控制着密度估计结果中的偏差和方差的折中(tradeoff between bias and variance)。
+一个大的 bandwidth 会导致一个非常平滑(i.e. high-bias)的密度分布。一个小的bandwidth导致一个不平滑(i.e. high-variance)的密度分布。</p>
+<p><a class="reference internal" href="generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity" title="sklearn.neighbors.KernelDensity"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.neighbors.KernelDensity</span></code></a> 类实现了若干个常见的 kernel, 已经为你展示在下图中啦 :</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="kde_kernels" src="../images/sphx_glr_plot_kde_1d_0021.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>The form of these kernels is as follows:</p>
+<ul>
+<li><p class="first">Gaussian kernel (<code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'gaussian'</span></code>)</p>
+<p><span class="math notranslate nohighlight">\(K(x; h) \propto \exp(- \frac{x^2}{2h^2} )\)</span></p>
+</li>
+<li><p class="first">Tophat kernel (<code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'tophat'</span></code>)</p>
+<p><span class="math notranslate nohighlight">\(K(x; h) \propto 1\)</span> if <span class="math notranslate nohighlight">\(x &lt; h\)</span></p>
+</li>
+<li><p class="first">Epanechnikov kernel (<code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'epanechnikov'</span></code>)</p>
+<p><span class="math notranslate nohighlight">\(K(x; h) \propto 1 - \frac{x^2}{h^2}\)</span></p>
+</li>
+<li><p class="first">Exponential kernel (<code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'exponential'</span></code>)</p>
+<p><span class="math notranslate nohighlight">\(K(x; h) \propto \exp(-x/h)\)</span></p>
+</li>
+<li><p class="first">Linear kernel (<code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'linear'</span></code>)</p>
+<p><span class="math notranslate nohighlight">\(K(x; h) \propto 1 - x/h\)</span> if <span class="math notranslate nohighlight">\(x &lt; h\)</span></p>
+</li>
+<li><p class="first">Cosine kernel (<code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'cosine'</span></code>)</p>
+<p><span class="math notranslate nohighlight">\(K(x; h) \propto \cos(\frac{\pi x}{2h})\)</span> if <span class="math notranslate nohighlight">\(x &lt; h\)</span></p>
+</li>
+</ul>
+<p>核密度估计器可以与任何有效距离度量(distance metric)一起使用，(请看 <a class="reference internal" href="generated/sklearn.neighbors.DistanceMetric.html#sklearn.neighbors.DistanceMetric" title="sklearn.neighbors.DistanceMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.neighbors.DistanceMetric</span></code></a> 里面的可用的距离度量),
+虽然这些结果仅对欧氏度量进行了适当的归一化。
+一个特别有用的 metric 是 <a class="reference external" href="https://en.wikipedia.org/wiki/Haversine_formula">Haversine distance</a> ，
+它度量球上各点之间的角距离(angular distance)。
+下面是一个使用核密度估计来可视化地理空间数据的例子，在这个案例中，是南美洲大陆上两种不同物种的观测分布情况:</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_species_kde.html"><img alt="species_kde" src="../images/sphx_glr_plot_species_kde_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>核密度估计的另一个有用的应用是学习数据集的非参数生成模型，以便有效地从该生成模型中提取新的样本。
+下面是一个使用此过程创建一组新的手写数字的示例，使用从PCA投影中学到的高斯核：</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_digits_kde_sampling.html"><img alt="digits_kde" src="../images/sphx_glr_plot_digits_kde_sampling_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>“新”的数据是输入数据的线性组合，而组合所用的权重是从给定的KDE模型中依概率抽取的。</p>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/neighbors/plot_kde_1d.html#sphx-glr-auto-examples-neighbors-plot-kde-1d-py"><span class="std std-ref">Simple 1D Kernel Density Estimation</span></a>: computation of simple kernel
+density estimates in one dimension.</li>
+<li><a class="reference internal" href="../auto_examples/neighbors/plot_digits_kde_sampling.html#sphx-glr-auto-examples-neighbors-plot-digits-kde-sampling-py"><span class="std std-ref">Kernel Density Estimation</span></a>: an example of using
+Kernel Density estimation to learn a generative model of the hand-written
+digits data, and drawing new samples from this model.</li>
+<li><a class="reference internal" href="../auto_examples/neighbors/plot_species_kde.html#sphx-glr-auto-examples-neighbors-plot-species-kde-py"><span class="std std-ref">Kernel Density Estimate of Species Distributions</span></a>: an example of Kernel Density
+estimation using the Haversine distance metric to visualize geospatial data</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2007 - 2018, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/density.rst.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="outlier_detection.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="neural_networks_unsupervised.html">Next
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-22606712-2', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function() {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>
