@@ -208,19 +208,19 @@
 <li><a class="reference internal" href="#adjusted-rand-index">2.3.9.1. Adjusted Rand index</a><ul>
 <li><a class="reference internal" href="#id20">2.3.9.1.1. 优点</a></li>
 <li><a class="reference internal" href="#id21">2.3.9.1.2. 缺点</a></li>
-<li><a class="reference internal" href="#id22">2.3.9.1.3. 数学表达形式</a></li>
+<li><a class="reference internal" href="#id22">2.3.9.1.3. 数学表达式</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#mutual-info-score">2.3.9.2. 基于互信息的得分</a><ul>
 <li><a class="reference internal" href="#id24">2.3.9.2.1. 优点</a></li>
 <li><a class="reference internal" href="#id25">2.3.9.2.2. 缺点</a></li>
-<li><a class="reference internal" href="#id26">2.3.9.2.3. 数学表达形式</a></li>
+<li><a class="reference internal" href="#id26">2.3.9.2.3. 数学表达式</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#homogeneity-completeness-and-v-measure">2.3.9.3. Homogeneity, completeness and V-measure</a><ul>
+<li><a class="reference internal" href="#v">2.3.9.3. 同质性, 完备性 与 V-测度</a><ul>
 <li><a class="reference internal" href="#id31">2.3.9.3.1. 优点</a></li>
 <li><a class="reference internal" href="#id32">2.3.9.3.2. 缺点</a></li>
-<li><a class="reference internal" href="#id33">2.3.9.3.3. 数学表达形式</a></li>
+<li><a class="reference internal" href="#id33">2.3.9.3.3. 数学表达式</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#fowlkes-mallows-scores">2.3.9.4. Fowlkes-Mallows scores</a><ul>
@@ -932,7 +932,7 @@ classes according to some similarity metric.
 </div>
 </div>
 <div class="section" id="id22">
-<h4>2.3.9.1.3. 数学表达形式<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<h4>2.3.9.1.3. 数学表达式<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
 <p>如果 C 是 ground truth class assignment 以及 K 是聚类算法给出的class assignment, 让我们定义 <span class="math notranslate nohighlight">\(a\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 如下:</p>
 <ul class="simple">
 <li><span class="math notranslate nohighlight">\(a\)</span>, 在C中相同集合和在K中相同集合的元素对的数量(the number of pairs of elements that are in the same set
@@ -1036,7 +1036,7 @@ NMI 在文献中可以经常看到, 而 AMI 最近才被提出 and is <strong>no
 </div>
 </div>
 <div class="section" id="id26">
-<h4>2.3.9.2.3. 数学表达形式<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
+<h4>2.3.9.2.3. 数学表达式<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
 <p>假定我们有两个标签分配集合(of the same N objects), <span class="math notranslate nohighlight">\(U\)</span> 和 <span class="math notranslate nohighlight">\(V\)</span>.
 它们的熵(entropy)是划分集(partition set)的不确定性量(the amount of uncertainty), 定义如下:</p>
 <div class="math notranslate nohighlight">
@@ -1099,21 +1099,16 @@ detection algorithms on artificial networks”. Scientific Reports 6: 30750.
 </div>
 </div>
 </div>
-<div class="section" id="homogeneity-completeness-and-v-measure">
-<span id="homogeneity-completeness"></span><h3>2.3.9.3. Homogeneity, completeness and V-measure<a class="headerlink" href="#homogeneity-completeness-and-v-measure" title="Permalink to this headline">¶</a></h3>
-<p>Given the knowledge of the ground truth class assignments of the samples,
-it is possible to define some intuitive metric using conditional entropy
-analysis.</p>
-<p>In particular Rosenberg and Hirschberg (2007) define the following two
-desirable objectives for any cluster assignment:</p>
+<div class="section" id="v">
+<span id="homogeneity-completeness"></span><h3>2.3.9.3. 同质性, 完备性 与 V-测度<a class="headerlink" href="#v" title="Permalink to this headline">¶</a></h3>
+<p>(译者注：同质性(Homogeneity)、完备性(completeness)与 V-测度(V-measure))</p>
+<p>给定样本的真实类分配(ground truth class assignments)的相关知识, 则使用条件熵分析(conditional entropy analysis)来定义某个直观的指标(metric)是可能的。</p>
+<p>特别是，Rosenberg和Hirschberg(2007)为任意聚类分配定义了以下两个理想的目标(desirable objectives):</p>
 <ul class="simple">
-<li><strong>homogeneity</strong>: each cluster contains only members of a single class.</li>
-<li><strong>completeness</strong>: all members of a given class are assigned to the same
-cluster.</li>
+<li><strong>同质性(Homogeneity)</strong>: 每个聚类(簇)里面只包含单个类的样本。</li>
+<li><strong>完备性(completeness)</strong>: 一个给定类的所有样本都被分到了同一个聚类(簇)中。</li>
 </ul>
-<p>We can turn those concept as scores <a class="reference internal" href="generated/sklearn.metrics.homogeneity_score.html#sklearn.metrics.homogeneity_score" title="sklearn.metrics.homogeneity_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">homogeneity_score</span></code></a> and
-<a class="reference internal" href="generated/sklearn.metrics.completeness_score.html#sklearn.metrics.completeness_score" title="sklearn.metrics.completeness_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">completeness_score</span></code></a>. Both are bounded below by 0.0 and above by
-1.0 (higher is better):</p>
+<p>我们将上述概念转变为函数 <a class="reference internal" href="generated/sklearn.metrics.homogeneity_score.html#sklearn.metrics.homogeneity_score" title="sklearn.metrics.homogeneity_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">homogeneity_score</span></code></a> 和 <a class="reference internal" href="generated/sklearn.metrics.completeness_score.html#sklearn.metrics.completeness_score" title="sklearn.metrics.completeness_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">completeness_score</span></code></a> 。 这两个函数的返回值都是介于0到1之间，(返回值越大越好):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
@@ -1125,23 +1120,19 @@ cluster.</li>
 <span class="go">0.42...</span>
 </pre></div>
 </div>
-<p>Their harmonic mean called <strong>V-measure</strong> is computed by
-<a class="reference internal" href="generated/sklearn.metrics.v_measure_score.html#sklearn.metrics.v_measure_score" title="sklearn.metrics.v_measure_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">v_measure_score</span></code></a>:</p>
+<p>它们的调和均值被称之为 <strong>V-measure</strong> ，通过函数 <a class="reference internal" href="generated/sklearn.metrics.v_measure_score.html#sklearn.metrics.v_measure_score" title="sklearn.metrics.v_measure_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">v_measure_score</span></code></a> 来计算:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">v_measure_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>    
 <span class="go">0.51...</span>
 </pre></div>
 </div>
-<p>The V-measure is actually equivalent to the mutual information (NMI)
-discussed above, with the aggregation function being the arithmetic mean <a class="reference internal" href="#b2011" id="id30">[B2011]</a>.</p>
-<p>Homogeneity, completeness and V-measure can be computed at once using
-<a class="reference internal" href="generated/sklearn.metrics.homogeneity_completeness_v_measure.html#sklearn.metrics.homogeneity_completeness_v_measure" title="sklearn.metrics.homogeneity_completeness_v_measure"><code class="xref py py-func docutils literal notranslate"><span class="pre">homogeneity_completeness_v_measure</span></code></a> as follows:</p>
+<p>如果使用的聚合函数(aggregation function)是 算术平均值 <a class="reference internal" href="#b2011" id="id30">[B2011]</a> ， V-measure 实际上等价于前面讨论的互信息(NMI)。</p>
+<p>Homogeneity, completeness 和 V-measure 可以通过 <a class="reference internal" href="generated/sklearn.metrics.homogeneity_completeness_v_measure.html#sklearn.metrics.homogeneity_completeness_v_measure" title="sklearn.metrics.homogeneity_completeness_v_measure"><code class="xref py py-func docutils literal notranslate"><span class="pre">homogeneity_completeness_v_measure</span></code></a> 函数一次性的计算出来</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">homogeneity_completeness_v_measure</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>
 <span class="gp">... </span>                                                     
 <span class="go">(0.66..., 0.42..., 0.51...)</span>
 </pre></div>
 </div>
-<p>The following clustering assignment is slightly better, since it is
-homogeneous but not complete:</p>
+<p>下面的聚类分配稍微好点儿，因为它是同质的但却不是完备的:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">homogeneity_completeness_v_measure</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>
 <span class="gp">... </span>                                                     
@@ -1150,10 +1141,9 @@ homogeneous but not complete:</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p><a class="reference internal" href="generated/sklearn.metrics.v_measure_score.html#sklearn.metrics.v_measure_score" title="sklearn.metrics.v_measure_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">v_measure_score</span></code></a> is <strong>symmetric</strong>: it can be used to evaluate
-the <strong>agreement</strong> of two independent assignments on the same dataset.</p>
-<p>This is not the case for <a class="reference internal" href="generated/sklearn.metrics.completeness_score.html#sklearn.metrics.completeness_score" title="sklearn.metrics.completeness_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">completeness_score</span></code></a> and
-<a class="reference internal" href="generated/sklearn.metrics.homogeneity_score.html#sklearn.metrics.homogeneity_score" title="sklearn.metrics.homogeneity_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">homogeneity_score</span></code></a>: both are bound by the relationship:</p>
+<p><a class="reference internal" href="generated/sklearn.metrics.v_measure_score.html#sklearn.metrics.v_measure_score" title="sklearn.metrics.v_measure_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">v_measure_score</span></code></a> 是 <strong>对称的(symmetric)</strong>: 它可被用于在同一个数据集上评估两个independent assignments的**一致性(agreement)**。</p>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.completeness_score.html#sklearn.metrics.completeness_score" title="sklearn.metrics.completeness_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">completeness_score</span></code></a> 和
+<a class="reference internal" href="generated/sklearn.metrics.homogeneity_score.html#sklearn.metrics.homogeneity_score" title="sklearn.metrics.homogeneity_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">homogeneity_score</span></code></a> 不是这样的: both are bound by the relationship:</p>
 <div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">homogeneity_score</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">completeness_score</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1161,75 +1151,60 @@ the <strong>agreement</strong> of two independent assignments on the same datase
 <div class="section" id="id31">
 <h4>2.3.9.3.1. 优点<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><strong>Bounded scores</strong>: 0.0 is as bad as it can be, 1.0 is a perfect score.</li>
-<li>Intuitive interpretation: clustering with bad V-measure can be
-<strong>qualitatively analyzed in terms of homogeneity and completeness</strong>
-to better feel what ‘kind’ of mistakes is done by the assignment.</li>
-<li><strong>No assumption is made on the cluster structure</strong>: can be used
-to compare clustering algorithms such as k-means which assumes isotropic
-blob shapes with results of spectral clustering algorithms which can
-find cluster with “folded” shapes.</li>
+<li><strong>有界的得分</strong>: 0.0 代表最坏的情况, 1.0 是最完美的得分。</li>
+<li>直观可解释性: 具有坏的 V-measure 值的聚类可以**从同质性和完备性角度进行定性分析(qualitatively analyzed in terms of homogeneity and completeness)**
+来更好的感受到聚类算法预测标签分配的时候犯了哪种错误。</li>
+<li><strong>对聚类结构没有做任何假定</strong>: 可以用于比较聚类算法，比如 假定了各向同性的blob shapes的k-means方法的结果 和 寻找具有
+“folded”形状的谱聚类方法的结果进行比较。</li>
 </ul>
 </div>
 <div class="section" id="id32">
 <h4>2.3.9.3.2. 缺点<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">The previously introduced metrics are <strong>not normalized with regards to
-random labeling</strong>: this means that depending on the number of samples,
-clusters and ground truth classes, a completely random labeling will
-not always yield the same values for homogeneity, completeness and
-hence v-measure. In particular <strong>random labeling won’t yield zero
-scores especially when the number of clusters is large</strong>.</p>
-<p>This problem can safely be ignored when the number of samples is more
-than a thousand and the number of clusters is less than 10. <strong>For
-smaller sample sizes or larger number of clusters it is safer to use
-an adjusted index such as the Adjusted Rand Index (ARI)</strong>.</p>
+<li><p class="first">以前引入的度量指标 <strong>并没有对随机标记(random labeling)进行标准化</strong> ：这意味着，依赖于样本数量、簇的数量和真实类的数量，
+一个完全的随机标记对于同质性、完备性和v测度来说并不总是产生相同的值。
+<strong>特别是，随机标记不会产生零得分，尤其是当簇数很大时</strong>。</p>
+<p>当样本数大于1000个，簇数小于10个时，可以安全地忽略这个问题。
+<strong>对于较小的样本大小或较多的簇数，使用调整后的索引比如the Adjusted Rand Index (ARI) 更安全。</strong></p>
 </li>
 </ul>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/cluster/plot_adjusted_for_chance_measures.html"><img alt="../images/sphx_glr_plot_adjusted_for_chance_measures_0011.png" src="../images/sphx_glr_plot_adjusted_for_chance_measures_0011.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
 <ul class="simple">
-<li>These metrics <strong>require the knowledge of the ground truth classes</strong> while
-almost never available in practice or requires manual assignment by
-human annotators (as in the supervised learning setting).</li>
+<li>这些度量指标 <strong>需要 ground truth classes 的相关知识</strong>
+而在实践中几乎不可得到，或者需要人工标注者手动分配（如在监督学习环境中）。</li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_adjusted_for_chance_measures.html#sphx-glr-auto-examples-cluster-plot-adjusted-for-chance-measures-py"><span class="std std-ref">Adjustment for chance in clustering performance evaluation</span></a>: Analysis of
-the impact of the dataset size on the value of clustering measures
-for random assignments.</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_adjusted_for_chance_measures.html#sphx-glr-auto-examples-cluster-plot-adjusted-for-chance-measures-py"><span class="std std-ref">Adjustment for chance in clustering performance evaluation</span></a>:
+分析数据集大小对随机分配标签(random assignments)的聚类度量值的影响。</li>
 </ul>
 </div>
 </div>
 <div class="section" id="id33">
-<h4>2.3.9.3.3. 数学表达形式<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
-<p>Homogeneity and completeness scores are formally given by:</p>
+<h4>2.3.9.3.3. 数学表达式<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
+<p>同质性(Homogeneity) 和 完备性(completeness) 得分正式定义如下:</p>
 <div class="math notranslate nohighlight">
 \[h = 1 - \frac{H(C|K)}{H(C)}\]</div>
 <div class="math notranslate nohighlight">
 \[c = 1 - \frac{H(K|C)}{H(K)}\]</div>
-<p>where <span class="math notranslate nohighlight">\(H(C|K)\)</span> is the <strong>conditional entropy of the classes given
-the cluster assignments</strong> and is given by:</p>
+<p>其中 <span class="math notranslate nohighlight">\(H(C|K)\)</span> 是 <strong>给定聚类标签分配以后各个类的条件熵(conditional entropy of the classes given the cluster assignments)</strong> 并且由下式给出:</p>
 <div class="math notranslate nohighlight">
 \[H(C|K) = - \sum_{c=1}^{|C|} \sum_{k=1}^{|K|} \frac{n_{c,k}}{n}
 \cdot \log\left(\frac{n_{c,k}}{n_k}\right)\]</div>
-<p>and <span class="math notranslate nohighlight">\(H(C)\)</span> is the <strong>entropy of the classes</strong> and is given by:</p>
+<p>并且 <span class="math notranslate nohighlight">\(H(C)\)</span> 是 <strong>各个类的熵(entropy of the classes)</strong> 并且由下式给出:</p>
 <div class="math notranslate nohighlight">
 \[H(C) = - \sum_{c=1}^{|C|} \frac{n_c}{n} \cdot \log\left(\frac{n_c}{n}\right)\]</div>
-<p>with <span class="math notranslate nohighlight">\(n\)</span> the total number of samples, <span class="math notranslate nohighlight">\(n_c\)</span> and <span class="math notranslate nohighlight">\(n_k\)</span>
-the number of samples respectively belonging to class <span class="math notranslate nohighlight">\(c\)</span> and
-cluster <span class="math notranslate nohighlight">\(k\)</span>, and finally <span class="math notranslate nohighlight">\(n_{c,k}\)</span> the number of samples
-from class <span class="math notranslate nohighlight">\(c\)</span> assigned to cluster <span class="math notranslate nohighlight">\(k\)</span>.</p>
-<p>The <strong>conditional entropy of clusters given class</strong> <span class="math notranslate nohighlight">\(H(K|C)\)</span> and the
-<strong>entropy of clusters</strong> <span class="math notranslate nohighlight">\(H(K)\)</span> are defined in a symmetric manner.</p>
-<p>Rosenberg and Hirschberg further define <strong>V-measure</strong> as the <strong>harmonic
-mean of homogeneity and completeness</strong>:</p>
+<p>公式中 <span class="math notranslate nohighlight">\(n\)</span> 是样本总量, <span class="math notranslate nohighlight">\(n_c\)</span> 和 <span class="math notranslate nohighlight">\(n_k\)</span> 分别是属于 class <span class="math notranslate nohighlight">\(c\)</span> 和 cluster <span class="math notranslate nohighlight">\(k\)</span> 的样本的数量，最后
+<span class="math notranslate nohighlight">\(n_{c,k}\)</span> 是从 class <span class="math notranslate nohighlight">\(c\)</span> 被分配到 cluster <span class="math notranslate nohighlight">\(k\)</span> 的样本数量。</p>
+<p><strong>给定某个类以后簇的条件熵</strong> <span class="math notranslate nohighlight">\(H(K|C)\)</span> 和 <strong>各个簇的熵(entropy of clusters)</strong> <span class="math notranslate nohighlight">\(H(K)\)</span> 以对称方式定义。</p>
+<p>Rosenberg 和 Hirschberg 进一步定义了 <strong>V-measure</strong> 作为 <strong>同质性和完备性的调和均值(harmonic mean of homogeneity and completeness)</strong>:</p>
 <div class="math notranslate nohighlight">
 \[v = 2 \cdot \frac{h \cdot c}{h + c}\]</div>
 <div class="topic">
-<p class="topic-title first">References</p>
+<p class="topic-title first">参考文献</p>
 <ul class="simple">
 <li><a class="reference external" href="http://aclweb.org/anthology/D/D07/D07-1043.pdf">V-Measure: A conditional entropy-based external cluster evaluation
 measure</a>
@@ -1247,21 +1222,14 @@ Becker, PhD Thesis.</td></tr>
 </div>
 <div class="section" id="fowlkes-mallows-scores">
 <span id="id34"></span><h3>2.3.9.4. Fowlkes-Mallows scores<a class="headerlink" href="#fowlkes-mallows-scores" title="Permalink to this headline">¶</a></h3>
-<p>The Fowlkes-Mallows index (<a class="reference internal" href="generated/sklearn.metrics.fowlkes_mallows_score.html#sklearn.metrics.fowlkes_mallows_score" title="sklearn.metrics.fowlkes_mallows_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.fowlkes_mallows_score</span></code></a>) can be
-used when the ground truth class assignments of the samples is known. The
-Fowlkes-Mallows score FMI is defined as the geometric mean of the
-pairwise precision and recall:</p>
+<p>当已知样本的真实类分配时，可以使用 Fowlkes-Mallows index (<a class="reference internal" href="generated/sklearn.metrics.fowlkes_mallows_score.html#sklearn.metrics.fowlkes_mallows_score" title="sklearn.metrics.fowlkes_mallows_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.fowlkes_mallows_score</span></code></a>)。
+Fowlkes-Mlets得分 FMI 被定义为成对精度(pairwise precision)和成对召回率(pairwise recall)的几何均值(geometric mean):</p>
 <div class="math notranslate nohighlight">
 \[\text{FMI} = \frac{\text{TP}}{\sqrt{(\text{TP} + \text{FP}) (\text{TP} + \text{FN})}}\]</div>
-<p>Where <code class="docutils literal notranslate"><span class="pre">TP</span></code> is the number of <strong>True Positive</strong> (i.e. the number of pair
-of points that belong to the same clusters in both the true labels and the
-predicted labels), <code class="docutils literal notranslate"><span class="pre">FP</span></code> is the number of <strong>False Positive</strong> (i.e. the number
-of pair of points that belong to the same clusters in the true labels and not
-in the predicted labels) and <code class="docutils literal notranslate"><span class="pre">FN</span></code> is the number of <strong>False Negative</strong> (i.e the
-number of pair of points that belongs in the same clusters in the predicted
-labels and not in the true labels).</p>
-<p>The score ranges from 0 to 1. A high value indicates a good similarity
-between two clusters.</p>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">TP</span></code> 是 <strong>True Positive</strong> 的数量 (i.e. 在 真实标签集中 和 预测标签集中 属于相同簇的点对的数量),
+<code class="docutils literal notranslate"><span class="pre">FP</span></code> 是 <strong>False Positive</strong> 的数量(i.e. 在 真实标签集中 但不在 预测标签集中 属于相同簇的点对的数量),
+<code class="docutils literal notranslate"><span class="pre">FN</span></code> 是 <strong>False Negative</strong> 的数量(i.e 不在 真实标签集中 但在 预测标签集中 属于相同簇的点对的数量)。</p>
+<p>FMI 得分取值范围在0到1之间。取值越高表明两个簇之间的相似性越好。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
@@ -1271,21 +1239,20 @@ between two clusters.</p>
 <span class="go">0.47140...</span>
 </pre></div>
 </div>
-<p>One can permute 0 and 1 in the predicted labels, rename 2 to 3 and get
-the same score:</p>
+<p>可以在预测出的标签(predicted labels)中排列 0 和 1, 重命名为 2 到 3， 并得到相同的得分</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">fowlkes_mallows_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
 <span class="go">0.47140...</span>
 </pre></div>
 </div>
-<p>Perfect labeling is scored 1.0:</p>
+<p>完美标记(Perfect labeling)的得分是 1.0:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="n">labels_true</span><span class="p">[:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">fowlkes_mallows_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
 <span class="go">1.0</span>
 </pre></div>
 </div>
-<p>Bad (e.g. independent labelings) have zero scores:</p>
+<p>坏的标记 (e.g. independent labelings) 的得分是 0</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">labels_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">fowlkes_mallows_score</span><span class="p">(</span><span class="n">labels_true</span><span class="p">,</span> <span class="n">labels_pred</span><span class="p">)</span>  
@@ -1295,30 +1262,23 @@ the same score:</p>
 <div class="section" id="id35">
 <h4>2.3.9.4.1. 优点<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><strong>Random (uniform) label assignments have a FMI score close to 0.0</strong>
-for any value of <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> (which is not the
-case for raw Mutual Information or the V-measure for instance).</li>
-<li><strong>Upper-bounded at 1</strong>:  Values close to zero indicate two label
-assignments that are largely independent, while values close to one
-indicate significant agreement. Further, values of exactly 0 indicate
-<strong>purely</strong> independent label assignments and a FMI of exactly 1 indicates
-that the two label assignments are equal (with or without permutation).</li>
-<li><strong>No assumption is made on the cluster structure</strong>: can be used
-to compare clustering algorithms such as k-means which assumes isotropic
-blob shapes with results of spectral clustering algorithms which can
-find cluster with “folded” shapes.</li>
+<li><strong>随机(均匀)标签分配有一个接近于0的 FMI 得分。</strong>
+对于 <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> 和 <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> 的任何值（这不是 raw Mutual Information 或者 V-measure 的情况）。</li>
+<li><strong>上界为 1</strong> :  得分值接近于 0 表明两个标签分配集合很大程度上是独立的(largely independent), 而得分值接近于 1 表明两个标签分配集合
+具有很大的一致性(significant agreement)。 更进一步, 正好是 0 的FMI表示两个标签分配纯粹独立(<strong>purely</strong> independent),
+正好是 1 的FMI表示两个标签分配相等。 (with or without permutation).</li>
+<li><strong>对聚类结构没有做任何限制</strong>: 可以用于比较聚类算法，比如 假定了各向同性的blob shapes的k-means方法的结果 和 寻找具有
+“folded”形状的谱聚类方法的结果进行比较。</li>
 </ul>
 </div>
 <div class="section" id="id36">
 <h4>2.3.9.4.2. 缺点<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Contrary to inertia, <strong>FMI-based measures require the knowledge
-of the ground truth classes</strong> while almost never available in practice or
-requires manual assignment by human annotators (as in the supervised learning
-setting).</li>
+<li>与惯性(inertia)方法不同, <strong>FMI-based measures 需要 ground truth classes 的相关知识</strong>
+而在实践中几乎不可得到，或者需要人工标注者手动分配（如在监督学习环境中）。</li>
 </ul>
 <div class="topic">
-<p class="topic-title first">References</p>
+<p class="topic-title first">参考文献</p>
 <ul class="simple">
 <li>E. B. Fowkles and C. L. Mallows, 1983. “A method for comparing two
 hierarchical clusterings”. Journal of the American Statistical Association.
@@ -1330,24 +1290,18 @@ hierarchical clusterings”. Journal of the American Statistical Association.
 </div>
 <div class="section" id="silhouette-coefficient">
 <span id="id37"></span><h3>2.3.9.5. Silhouette Coefficient<a class="headerlink" href="#silhouette-coefficient" title="Permalink to this headline">¶</a></h3>
-<p>If the ground truth labels are not known, evaluation must be performed using
-the model itself. The Silhouette Coefficient
-(<a class="reference internal" href="generated/sklearn.metrics.silhouette_score.html#sklearn.metrics.silhouette_score" title="sklearn.metrics.silhouette_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.silhouette_score</span></code></a>)
-is an example of such an evaluation, where a
-higher Silhouette Coefficient score relates to a model with better defined
-clusters. The Silhouette Coefficient is defined for each sample and is composed
-of two scores:</p>
+<p>如果不知道ground truth labels，则必须使用模型本身进行评估。
+Silhouette Coefficient (<a class="reference internal" href="generated/sklearn.metrics.silhouette_score.html#sklearn.metrics.silhouette_score" title="sklearn.metrics.silhouette_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.silhouette_score</span></code></a>) 就是这样一种评估的例子，
+其中Silhouette Coefficient的得分越高对应于具有更好的聚类能力的模型。
+The Silhouette Coefficient 定义在每个样本上 并且由两个得分组成:</p>
 <ul class="simple">
-<li><strong>a</strong>: The mean distance between a sample and all other points in the same
-class.</li>
-<li><strong>b</strong>: The mean distance between a sample and all other points in the <em>next
-nearest cluster</em>.</li>
+<li><strong>a</strong>: 在同一个类中一个样本到所有其他样本的平均距离。</li>
+<li><strong>b</strong>: 在 <em>next nearest cluster</em> 中，一个样本到所有其他样本点的平均距离。</li>
 </ul>
-<p>The Silhouette Coefficient <em>s</em> for a single sample is then given as:</p>
+<p>那么，对一个单个样本来说，Silhouette Coefficient <em>s</em> 由下式给出:</p>
 <div class="math notranslate nohighlight">
 \[s = \frac{b - a}{max(a, b)}\]</div>
-<p>The Silhouette Coefficient for a set of samples is given as the mean of the
-Silhouette Coefficient for each sample.</p>
+<p>对于一个样本集合，Silhouette Coefficient 是集合中每个样本的Silhouette Coefficient的均值。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">pairwise_distances</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -1356,8 +1310,7 @@ Silhouette Coefficient for each sample.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">target</span>
 </pre></div>
 </div>
-<p>In normal usage, the Silhouette Coefficient is applied to the results of a
-cluster analysis.</p>
+<p>在正常的使用中, Silhouette Coefficient 会被运用到一个聚类簇的结果的分析中。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -1368,7 +1321,7 @@ cluster analysis.</p>
 </pre></div>
 </div>
 <div class="topic">
-<p class="topic-title first">References</p>
+<p class="topic-title first">参考文献</p>
 <ul class="simple">
 <li>Peter J. Rousseeuw (1987). “Silhouettes: a Graphical Aid to the
 Interpretation and Validation of Cluster Analysis”. Computational
@@ -1379,49 +1332,40 @@ and Applied Mathematics 20: 53–65.
 <div class="section" id="id38">
 <h4>2.3.9.5.1. 优点<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The score is bounded between -1 for incorrect clustering and +1 for highly
-dense clustering. Scores around zero indicate overlapping clusters.</li>
-<li>The score is higher when clusters are dense and well separated, which relates
-to a standard concept of a cluster.</li>
+<li>对于高度稠密的聚类，得分被限制在 -1 (for incorrect clustering) 和 +1 (for highly dense clustering)之间。
+得分在 0 附近表明是有重叠的聚类(overlapping clusters)。</li>
+<li>当簇(cluster)密集且分离良好时，得分较高，这与cluster的标准概念有关。</li>
 </ul>
 </div>
 <div class="section" id="id39">
 <h4>2.3.9.5.2. 缺点<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The Silhouette Coefficient is generally higher for convex clusters than other
-concepts of clusters, such as density based clusters like those obtained
-through DBSCAN.</li>
+<li>The Silhouette Coefficient 在convex clusters上比在其他一些clusters上一般具有较高的得分，比如 通过DBSCAN获得的基于密度的clusters。</li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Examples:</p>
+<p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/cluster/plot_kmeans_silhouette_analysis.html#sphx-glr-auto-examples-cluster-plot-kmeans-silhouette-analysis-py"><span class="std std-ref">Selecting the number of clusters with silhouette analysis on KMeans clustering</span></a> : In this example
-the silhouette analysis is used to choose an optimal value for n_clusters.</li>
+<li><a class="reference internal" href="../auto_examples/cluster/plot_kmeans_silhouette_analysis.html#sphx-glr-auto-examples-cluster-plot-kmeans-silhouette-analysis-py"><span class="std std-ref">Selecting the number of clusters with silhouette analysis on KMeans clustering</span></a> : 在这个例子中，使用剪影分析(silhouette analysis)来选择n_clusters的最优值。</li>
 </ul>
 </div>
 </div>
 </div>
 <div class="section" id="calinski-harabaz-index">
 <span id="id40"></span><h3>2.3.9.6. Calinski-Harabaz Index<a class="headerlink" href="#calinski-harabaz-index" title="Permalink to this headline">¶</a></h3>
-<p>If the ground truth labels are not known, the Calinski-Harabaz index
-(<a class="reference internal" href="generated/sklearn.metrics.calinski_harabaz_score.html#sklearn.metrics.calinski_harabaz_score" title="sklearn.metrics.calinski_harabaz_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.calinski_harabaz_score</span></code></a>) - also known as the Variance
-Ratio Criterion - can be used to evaluate the model, where a higher
-Calinski-Harabaz score relates to a model with better defined clusters.</p>
-<p>For <span class="math notranslate nohighlight">\(k\)</span> clusters, the Calinski-Harabaz score <span class="math notranslate nohighlight">\(s\)</span> is given as the
-ratio of the between-clusters dispersion mean and the within-cluster
-dispersion:</p>
+<p>如果 ground truth labels 是未知的, the Calinski-Harabaz index (<a class="reference internal" href="generated/sklearn.metrics.calinski_harabaz_score.html#sklearn.metrics.calinski_harabaz_score" title="sklearn.metrics.calinski_harabaz_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.calinski_harabaz_score</span></code></a>) -
+也被称之为 方差比率准则(Variance Ratio Criterion) - 可被用于评估模型,
+其中，Calinski-Harabaz 得分越高，与之关联的模型就有更好的聚类。</p>
+<p>对于 <span class="math notranslate nohighlight">\(k\)</span> 个簇，给出了Calinski-Harabaz分数 <span class="math notranslate nohighlight">\(s\)</span> 作为 簇间分散均值(between-clusters dispersion mean) 和
+簇内分散(within-cluster dispersion)的比值：</p>
 <div class="math notranslate nohighlight">
 \[s(k) = \frac{\mathrm{Tr}(B_k)}{\mathrm{Tr}(W_k)} \times \frac{N - k}{k - 1}\]</div>
-<p>where <span class="math notranslate nohighlight">\(B_K\)</span> is the between group dispersion matrix and <span class="math notranslate nohighlight">\(W_K\)</span>
-is the within-cluster dispersion matrix defined by:</p>
+<p>其中 <span class="math notranslate nohighlight">\(B_K\)</span> 是簇间分散矩阵 ， <span class="math notranslate nohighlight">\(W_K\)</span> 是簇内分散矩阵，定义如下:</p>
 <div class="math notranslate nohighlight">
 \[W_k = \sum_{q=1}^k \sum_{x \in C_q} (x - c_q) (x - c_q)^T\]</div>
 <div class="math notranslate nohighlight">
 \[B_k = \sum_q n_q (c_q - c) (c_q - c)^T\]</div>
-<p>with <span class="math notranslate nohighlight">\(N\)</span> be the number of points in our data, <span class="math notranslate nohighlight">\(C_q\)</span> be the set of
-points in cluster <span class="math notranslate nohighlight">\(q\)</span>, <span class="math notranslate nohighlight">\(c_q\)</span> be the center of cluster
-<span class="math notranslate nohighlight">\(q\)</span>, <span class="math notranslate nohighlight">\(c\)</span> be the center of <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(n_q\)</span> be the number of
-points in cluster <span class="math notranslate nohighlight">\(q\)</span>.</p>
+<p>这里， <span class="math notranslate nohighlight">\(N\)</span> 是我们数据点的数量, <span class="math notranslate nohighlight">\(C_q\)</span> 是在簇 <span class="math notranslate nohighlight">\(q\)</span> 中的点的集合, <span class="math notranslate nohighlight">\(c_q\)</span> 是簇 <span class="math notranslate nohighlight">\(q\)</span> 的中心,
+<span class="math notranslate nohighlight">\(c\)</span> 是 <span class="math notranslate nohighlight">\(E\)</span> 的中心, <span class="math notranslate nohighlight">\(n_q\)</span> 是簇 <span class="math notranslate nohighlight">\(q\)</span> 中点的数量:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">pairwise_distances</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -1430,8 +1374,7 @@ points in cluster <span class="math notranslate nohighlight">\(q\)</span>.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">target</span>
 </pre></div>
 </div>
-<p>In normal usage, the Calinski-Harabaz index is applied to the results of a
-cluster analysis.</p>
+<p>在正常的使用中, Calinski-Harabaz index 会被运用到一个聚类簇的结果的分析中。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans_model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -1443,20 +1386,17 @@ cluster analysis.</p>
 <div class="section" id="id41">
 <h4>2.3.9.6.1. 优点<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The score is higher when clusters are dense and well separated, which relates
-to a standard concept of a cluster.</li>
-<li>The score is fast to compute</li>
+<li>当簇(cluster)密集且分离良好时，得分较高，这与cluster的标准概念有关。</li>
+<li>此得分的计算很快</li>
 </ul>
 </div>
 <div class="section" id="id42">
 <h4>2.3.9.6.2. 缺点<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The Calinski-Harabaz index is generally higher for convex clusters than other
-concepts of clusters, such as density based clusters like those obtained
-through DBSCAN.</li>
+<li>The Calinski-Harabaz index 在convex clusters上比在其他一些clusters上一般具有较高的得分，比如 通过DBSCAN获得的基于密度的clusters。</li>
 </ul>
 <div class="topic">
-<p class="topic-title first">References</p>
+<p class="topic-title first">参考文献</p>
 <ul class="simple">
 <li>Caliński, T., &amp; Harabasz, J. (1974). “A dendrite method for cluster
 analysis”. Communications in Statistics-theory and Methods 3: 1-27.
@@ -1467,29 +1407,22 @@ analysis”. Communications in Statistics-theory and Methods 3: 1-27.
 </div>
 <div class="section" id="davies-bouldin-index">
 <span id="id43"></span><h3>2.3.9.7. Davies-Bouldin Index<a class="headerlink" href="#davies-bouldin-index" title="Permalink to this headline">¶</a></h3>
-<p>If the ground truth labels are not known, the Davies-Bouldin index
-(<a class="reference internal" href="generated/sklearn.metrics.davies_bouldin_score.html#sklearn.metrics.davies_bouldin_score" title="sklearn.metrics.davies_bouldin_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.davies_bouldin_score</span></code></a>) can be used to evaluate the
-model, where a lower Davies-Bouldin index relates to a model with better
-separation between the clusters.</p>
-<p>The index is defined as the average similarity between each cluster <span class="math notranslate nohighlight">\(C_i\)</span>
-for <span class="math notranslate nohighlight">\(i=1, ..., k\)</span> and its most similar one <span class="math notranslate nohighlight">\(C_j\)</span>. In the context of
-this index, similarity is defined as a measure <span class="math notranslate nohighlight">\(R_{ij}\)</span> that trades off:</p>
+<p>如果 ground truth labels 是未知的, the Davies-Bouldin index (<a class="reference internal" href="generated/sklearn.metrics.davies_bouldin_score.html#sklearn.metrics.davies_bouldin_score" title="sklearn.metrics.davies_bouldin_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.davies_bouldin_score</span></code></a>) 可被用于评估模型,
+其中，较低的Davies-Bouldin指数与团簇间分离程度较高的模型有关。</p>
+<p>Davies-Bouldin 指数 被定义为每个团簇 <span class="math notranslate nohighlight">\(C_i\)</span> (<span class="math notranslate nohighlight">\(i=1, ..., k\)</span>)和它的最相似的一个
+<span class="math notranslate nohighlight">\(C_j\)</span> 之间的平均相似度(average similarity)。 在该指数的上下文中，相似度被定义为一个度量 <span class="math notranslate nohighlight">\(R_{ij}\)</span>,在下面两个中做折中:</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(s_i\)</span>, the average distance between each point of cluster <span class="math notranslate nohighlight">\(i\)</span> and
-the centroid of that cluster – also know as cluster diameter.</li>
-<li><span class="math notranslate nohighlight">\(d_{ij}\)</span>, the distance between cluster centroids <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>.</li>
+<li><span class="math notranslate nohighlight">\(s_i\)</span>, 团簇 <span class="math notranslate nohighlight">\(i\)</span> 中的每个点与该cluster的质心之间的平均距离– 也被称为 团簇直径(cluster diameter)。</li>
+<li><span class="math notranslate nohighlight">\(d_{ij}\)</span>, 团簇质心 <span class="math notranslate nohighlight">\(i\)</span> 和 团簇质心 <span class="math notranslate nohighlight">\(j\)</span> 之间的距离。</li>
 </ul>
-<p>A simple choice to construct <span class="math notranslate nohighlight">\(R_ij\)</span> so that it is nonnegative and
-symmetric is:</p>
+<p>使 <span class="math notranslate nohighlight">\(R_ij\)</span>  非负和对称的 构建 <span class="math notranslate nohighlight">\(R_ij\)</span> 的一个简单选择就是:</p>
 <div class="math notranslate nohighlight">
 \[R_{ij} = \frac{s_i + s_j}{d_{ij}}\]</div>
-<p>Then the Davies-Bouldin index is defined as:</p>
+<p>那么 Davies-Bouldin index 定义如下:</p>
 <div class="math notranslate nohighlight">
 \[DB = \frac{1}{k} \sum_{i=1}^k \max_{i \neq j} R_{ij}\]</div>
-<p>Zero is the lowest possible score. Values closer to zero indicate a better
-partition.</p>
-<p>In normal usage, the Davies-Bouldin index is applied to the results of a
-cluster analysis as follows:</p>
+<p>零分可能是最低的得分。接近于零的值表示更好的划分。</p>
+<p>在正常的使用中, Davies-Bouldin index 会被运用到一个聚类簇的结果的分析中,如下所示:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
@@ -1504,21 +1437,19 @@ cluster analysis as follows:</p>
 <div class="section" id="id44">
 <h4>2.3.9.7.1. 优点<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The computation of Davies-Bouldin is simpler than that of Silhouette scores.</li>
-<li>The index is computed only quantities and features inherent to the dataset.</li>
+<li>Davies-Bouldin 的计算比Silhouette 得分的计算更简单。</li>
+<li>Davies-Bouldin index 只计算数据集固有的数量和特性。</li>
 </ul>
 </div>
 <div class="section" id="id45">
 <h4>2.3.9.7.2. 缺点<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The Davies-Boulding index is generally higher for convex clusters than other
-concepts of clusters, such as density based clusters like those obtained from
-DBSCAN.</li>
-<li>The usage of centroid distance limits the distance metric to Euclidean space.</li>
-<li>A good value reported by this method does not imply the best information retrieval.</li>
+<li>The Davies-Boulding index 在convex clusters上比在其他一些clusters上一般具有较高的得分，比如 通过DBSCAN获得的基于密度的clusters。</li>
+<li>质心距离的使用被限制在欧式空间。</li>
+<li>此方法所报告的好的值不意味着最佳的信息检索(best information retrieval)。</li>
 </ul>
 <div class="topic">
-<p class="topic-title first">References</p>
+<p class="topic-title first">参考文献</p>
 <ul class="simple">
 <li>Davies, David L.; Bouldin, Donald W. (1979).
 “A Cluster Separation Measure”
@@ -1536,12 +1467,10 @@ Journal of Intelligent Information Systems, 17(2-3), 107-145.
 </div>
 <div class="section" id="contingency-matrix">
 <span id="id46"></span><h3>2.3.9.8. Contingency Matrix<a class="headerlink" href="#contingency-matrix" title="Permalink to this headline">¶</a></h3>
-<p>Contingency matrix (<a class="reference internal" href="generated/sklearn.metrics.cluster.contingency_matrix.html#sklearn.metrics.cluster.contingency_matrix" title="sklearn.metrics.cluster.contingency_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.cluster.contingency_matrix</span></code></a>)
-reports the intersection cardinality for every true/predicted cluster pair.
-The contingency matrix provides sufficient statistics for all clustering
-metrics where the samples are independent and identically distributed and
-one doesn’t need to account for some instances not being clustered.</p>
-<p>Here is an example:</p>
+<p>Contingency matrix (<a class="reference internal" href="generated/sklearn.metrics.cluster.contingency_matrix.html#sklearn.metrics.cluster.contingency_matrix" title="sklearn.metrics.cluster.contingency_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.cluster.contingency_matrix</span></code></a>) 报告每个 真实/预测团簇对(true/predicted cluster pair)
+的交集的基数(intersection cardinality)。
+The contingency matrix 为所有聚类度量提供了足够的统计信息，其中样本是独立同分布的，并且不需要考虑某些不能被聚类的实例。</p>
+<p>这里有个例子:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="k">import</span> <span class="n">contingency_matrix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
@@ -1550,34 +1479,25 @@ one doesn’t need to account for some instances not being clustered.</p>
 <span class="go">       [0, 1, 2]])</span>
 </pre></div>
 </div>
-<p>The first row of output array indicates that there are three samples whose
-true cluster is “a”. Of them, two are in predicted cluster 0, one is in 1,
-and none is in 2. And the second row indicates that there are three samples
-whose true cluster is “b”. Of them, none is in predicted cluster 0, one is in
-1 and two are in 2.</p>
-<p>A <a class="reference internal" href="model_evaluation.html#confusion-matrix"><span class="std std-ref">confusion matrix</span></a> for classification is a square
-contingency matrix where the order of rows and columns correspond to a list
-of classes.</p>
+<p>输出数组的第一行表示有三个样本真正的类标签是“a”。 在它们中间, 有两个在预测出的 cluster 0 里, 有一个在 cluster 1 里面,
+没有在cluster 2里的样本点。 第二行表示有三个样本真正的聚类为“b”。
+在它们中间，没有样本被预测到cluster 0中的, 有一个在cluster 1,还有一个在cluster 2里。</p>
+<p>分类的混淆矩阵(<a class="reference internal" href="model_evaluation.html#confusion-matrix"><span class="std std-ref">confusion matrix</span></a>)是一个方阵，其中行和列的顺序对应于类的列表。</p>
 <div class="section" id="id47">
 <h4>2.3.9.8.1. 优点<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Allows to examine the spread of each true cluster across predicted
-clusters and vice versa.</li>
-<li>The contingency table calculated is typically utilized in the calculation
-of a similarity statistic (like the others listed in this document) between
-the two clusterings.</li>
+<li>允许检查每个true cluster在predicted clusters之间的传播，反之亦然。</li>
+<li>计算出的contingency table通常用于计算两个聚类之间的相似统计量(就像本文档中列出的其他统计指标一样)。</li>
 </ul>
 </div>
 <div class="section" id="id48">
 <h4>2.3.9.8.2. 缺点<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Contingency matrix is easy to interpret for a small number of clusters, but
-becomes very hard to interpret for a large number of clusters.</li>
-<li>It doesn’t give a single metric to use as an objective for clustering
-optimisation.</li>
+<li>Contingency matrix 对于少量的聚类来说很容易解释，但是对于大量的聚类则变得非常难以解释。</li>
+<li>它没有给出一个单独的度量来作为聚类优化的目标</li>
 </ul>
 <div class="topic">
-<p class="topic-title first">References</p>
+<p class="topic-title first">参考文献</p>
 <ul class="simple">
 <li><a class="reference external" href="https://en.wikipedia.org/wiki/Contingency_table">Wikipedia entry for contingency matrix</a></li>
 </ul>
