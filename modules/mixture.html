@@ -11,20 +11,20 @@
     <title>2.1. 高斯混合模型(Gaussian mixture models) &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
-<link rel="stylesheet" href="../_static/css/bootstrap-responsive.css" />
+<link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../static/css/bootstrap-responsive.css" />
 
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../static/js/extra.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.2. 流形学习(Manifold learning)" href="manifold.html" />
@@ -32,7 +32,7 @@
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
   VERSION_SUBDIR = (function (groups) {
     return groups ? groups[1] : null;
@@ -76,7 +76,7 @@
 <div class="header-wrapper">
   <div class="header">
     <p class="logo"><a href="../index.html">
-        <img src="../_static/scikit-learn-logo-small.png" alt="Logo" />
+        <img src="../static/scikit-learn-logo-small.png" alt="Logo" />
       </a>
     </p><div class="navbar" id="scikit-navbar">
       <ul>
@@ -103,7 +103,7 @@
               <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
               <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
               <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
-              <li><a href="../_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              <li><a href="../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
             </ul>
           </div>
         </li>
@@ -125,7 +125,7 @@
 
 <!-- GitHub "fork me" ribbon -->
 <a href="https://github.com/scikit-learn/scikit-learn">
-  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../_static/img/forkme.png"
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../static/img/forkme.png"
     alt="Fork me on GitHub" />
 </a>
 
@@ -214,7 +214,7 @@
         <br />
         <p>
           <a href="http://www.studyai.com" target="_blank">
-            <img src="../_static/img/xxx.png" alt="座右铭" />
+            <img src="../static/img/xxx.png" alt="座右铭" />
           </a>
         </p>
         <br />
@@ -243,7 +243,7 @@
 它还提供了对混合分布进行抽样，以及从数据估计混合模型的功能。它还提供了一些工具帮助我们确定分量的合适数量。</p>
 <blockquote>
 <div><div class="figure align-center" id="id8">
-<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_pdf.html"><img alt="../_images/sphx_glr_plot_gmm_pdf_0011.png" src="../_images/sphx_glr_plot_gmm_pdf_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_pdf.html"><img alt="../images/sphx_glr_plot_gmm_pdf_0011.png" src="../images/sphx_glr_plot_gmm_pdf_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 <p class="caption"><span class="caption-text"><strong>二元高斯混合模型(Two-component Gaussian mixture model):</strong> <em>数据点，以及模型的等概率平面(equi-probability surfaces)。</em></span></p>
 </div>
 </div></blockquote>
@@ -258,7 +258,7 @@
 给定测试数据，可以用 <a class="reference internal" href="generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture.predict" title="sklearn.mixture.GaussianMixture.predict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GaussianMixture.predict</span></code></a> 方法给每个样本分配它可能属于的高斯分布。</p>
 <p><a class="reference internal" href="generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture" title="sklearn.mixture.GaussianMixture"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianMixture</span></code></a> 有不同的选项来约束估计出的不同类的协方差：球面(spherical)、对角线（diagonal）、平移(tied)或完全协方差(full covariance)。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_covariances.html"><img alt="../_images/sphx_glr_plot_gmm_covariances_0011.png" src="../_images/sphx_glr_plot_gmm_covariances_0011.png" style="width: 450.0px; height: 450.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_covariances.html"><img alt="../images/sphx_glr_plot_gmm_covariances_0011.png" src="../images/sphx_glr_plot_gmm_covariances_0011.png" style="width: 450.0px; height: 450.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>
@@ -307,7 +307,7 @@ density estimation.</li>
 并且假设这些数据实际上是一个混合高斯模型独立同分布生成的）。
 注意：使用 <a class="reference internal" href="#bgmm"><span class="std std-ref">Variational Bayesian Gaussian mixture</span></a> 可以避免高斯混合模型中分量数的选择。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_selection.html"><img alt="../_images/sphx_glr_plot_gmm_selection_0011.png" src="../_images/sphx_glr_plot_gmm_selection_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_selection.html"><img alt="../images/sphx_glr_plot_gmm_selection_0011.png" src="../images/sphx_glr_plot_gmm_selection_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>
@@ -353,20 +353,20 @@ density estimation.</li>
 我们也能注意到当先验是 ‘dirichlet_distribution’ 类型时，
 大的浓度权重先验会导致更均匀的权重，然而 ‘dirichlet_process’ 类型（默认类型）却不是这样。</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/mixture/plot_concentration_prior.html"><img alt="plot_bgmm" src="../_images/sphx_glr_plot_concentration_prior_0011.png" style="width: 676.8px; height: 384.0px;" /></a> <a class="reference external" href="../auto_examples/mixture/plot_concentration_prior.html"><img alt="plot_dpgmm" src="../_images/sphx_glr_plot_concentration_prior_0021.png" style="width: 676.8px; height: 384.0px;" /></a></strong></p><p>下面的例子将 分量数目固定的高斯混合模型 与 带有狄利克雷过程先验(Dirichlet process prior)的变分高斯混合模型 进行比较。
+<strong><a class="reference external" href="../auto_examples/mixture/plot_concentration_prior.html"><img alt="plot_bgmm" src="../images/sphx_glr_plot_concentration_prior_0011.png" style="width: 676.8px; height: 384.0px;" /></a> <a class="reference external" href="../auto_examples/mixture/plot_concentration_prior.html"><img alt="plot_dpgmm" src="../images/sphx_glr_plot_concentration_prior_0021.png" style="width: 676.8px; height: 384.0px;" /></a></strong></p><p>下面的例子将 分量数目固定的高斯混合模型 与 带有狄利克雷过程先验(Dirichlet process prior)的变分高斯混合模型 进行比较。
 这里，使用5个分量的典型高斯混合模型在由2个聚类组成的数据集上进行拟合。
 我们可以看到，具有狄利克雷过程先验的变分高斯混合模型可以将自身限制在 2 个分量，
 而高斯混合必须按照用户事先设置的固定数量的分量来拟合数据。
 在例子中，用户选择了 <code class="docutils literal notranslate"><span class="pre">n_components=5</span></code> ，这不符合该数据集的真正的生成分布(generative distribution)。
 注意到 只有非常少量的观测，带有狄利克雷过程先验的变分高斯混合模型可以采取保守的立场，并且只拟合一个分量。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm.html"><img alt="../_images/sphx_glr_plot_gmm_0011.png" src="../_images/sphx_glr_plot_gmm_0011.png" style="width: 448.0px; height: 336.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm.html"><img alt="../images/sphx_glr_plot_gmm_0011.png" src="../images/sphx_glr_plot_gmm_0011.png" style="width: 448.0px; height: 336.0px;" /></a>
 </div>
 <p>在下图中，我们将拟合一个并不能被高斯混合模型很好描述的数据集。 调整 <code class="docutils literal notranslate"><span class="pre">weight_concentration_prior</span></code> ，
 <a class="reference internal" href="generated/sklearn.mixture.BayesianGaussianMixture.html#sklearn.mixture.BayesianGaussianMixture" title="sklearn.mixture.BayesianGaussianMixture"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianGaussianMixture</span></code></a> 类的参数控制着用来拟合数据的分量的数目。
 我们在最后两个图上展示了从两个混合模型产生的随机抽样。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_sin.html"><img alt="../_images/sphx_glr_plot_gmm_sin_0011.png" src="../_images/sphx_glr_plot_gmm_sin_0011.png" style="width: 650.0px; height: 650.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_sin.html"><img alt="../images/sphx_glr_plot_gmm_sin_0011.png" src="../images/sphx_glr_plot_gmm_sin_0011.png" style="width: 650.0px; height: 650.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>

@@ -11,20 +11,20 @@
     <title>监督学习: 从高维观测中预测输出变量 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
-<link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../../static/css/bootstrap-responsive.css" />
 
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
-    <script type="text/javascript" src="../../_static/js/extra.js"></script>
+    <link rel="stylesheet" href="../../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <script type="text/javascript" src="../../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../static/js/extra.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="模型选择: 选择合适的估计器及其参数" href="model_selection.html" />
@@ -32,7 +32,7 @@
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../static/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
   VERSION_SUBDIR = (function (groups) {
     return groups ? groups[1] : null;
@@ -76,7 +76,7 @@
 <div class="header-wrapper">
   <div class="header">
     <p class="logo"><a href="../../index.html">
-        <img src="../../_static/scikit-learn-logo-small.png" alt="Logo" />
+        <img src="../../static/scikit-learn-logo-small.png" alt="Logo" />
       </a>
     </p><div class="navbar" id="scikit-navbar">
       <ul>
@@ -103,7 +103,7 @@
               <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
               <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
               <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
-              <li><a href="../../_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              <li><a href="../../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
             </ul>
           </div>
         </li>
@@ -125,7 +125,7 @@
 
 <!-- GitHub "fork me" ribbon -->
 <a href="https://github.com/scikit-learn/scikit-learn">
-  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../../_static/img/forkme.png"
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../../static/img/forkme.png"
     alt="Fork me on GitHub" />
 </a>
 
@@ -211,7 +211,7 @@
         <br />
         <p>
           <a href="http://www.studyai.com" target="_blank">
-            <img src="../../_static/img/xxx.png" alt="座右铭" />
+            <img src="../../static/img/xxx.png" alt="座右铭" />
           </a>
         </p>
         <br />
@@ -259,7 +259,7 @@ Tutorial</span></a> 快速浏览scikit-learn中使用的基本机器学习词汇
 <h2>最近邻算法与维数灾难<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="topic">
 <p class="topic-title first">分类鸢尾花 (irises):</p>
-<a class="reference external image-reference" href="../../auto_examples/datasets/plot_iris_dataset.html"><img alt="../../_images/sphx_glr_plot_iris_dataset_001.png" class="align-right" src="../../_images/sphx_glr_plot_iris_dataset_001.png" style="width: 520.0px; height: 390.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/datasets/plot_iris_dataset.html"><img alt="../../images/sphx_glr_plot_iris_dataset_001.png" class="align-right" src="../../images/sphx_glr_plot_iris_dataset_001.png" style="width: 520.0px; height: 390.0px;" /></a>
 <p>鸢尾花数据集(iris dataset)是一个分类任务，要根据花瓣(petal)和花萼(sepal)的长度与宽度辨别3种不同品种的鸢尾花</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -283,7 +283,7 @@ Tutorial</span></a> 快速浏览scikit-learn中使用的基本机器学习词汇
 这样的测试结果才会真实可靠。</p>
 </div>
 <p><strong>KNN (k nearest neighbors) classification example</strong>:</p>
-<a class="reference external image-reference" href="../../auto_examples/neighbors/plot_classification.html"><img alt="../../_images/sphx_glr_plot_classification_001.png" class="align-center" src="../../_images/sphx_glr_plot_classification_001.png" style="width: 448.0px; height: 336.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/neighbors/plot_classification.html"><img alt="../../images/sphx_glr_plot_classification_001.png" class="align-center" src="../../images/sphx_glr_plot_classification_001.png" style="width: 448.0px; height: 336.0px;" /></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Split iris data in train and test data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># A random permutation, to split the data randomly</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -340,7 +340,7 @@ Tutorial</span></a> 快速浏览scikit-learn中使用的基本机器学习词汇
 <h3>线性回归<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>线性回归( <a class="reference internal" href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="sklearn.linear_model.LinearRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearRegression</span></code></a> )，以其最简单的形式，通过调整一组参数将线性模型拟合到给定的数据集，
 以使模型的平方残差之和(the sum of the squared residuals)尽可能小。</p>
-<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols.html"><img alt="../../_images/sphx_glr_plot_ols_001.png" class="align-right" src="../../_images/sphx_glr_plot_ols_001.png" style="width: 256.0px; height: 192.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols.html"><img alt="../../images/sphx_glr_plot_ols_001.png" class="align-right" src="../../images/sphx_glr_plot_ols_001.png" style="width: 256.0px; height: 192.0px;" /></a>
 <p>线性模型: <span class="math notranslate nohighlight">\(y = X\beta + \epsilon\)</span></p>
 <blockquote>
 <div><ul class="simple">
@@ -376,7 +376,7 @@ Tutorial</span></a> 快速浏览scikit-learn中使用的基本机器学习词汇
 <div class="section" id="shrinkage">
 <span id="id9"></span><h3>缩减(Shrinkage)<a class="headerlink" href="#shrinkage" title="Permalink to this headline">¶</a></h3>
 <p>如果每个维度的数据点很少，则观测中的噪声将会引起高方差:</p>
-<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols_ridge_variance.html"><img alt="../../_images/sphx_glr_plot_ols_ridge_variance_001.png" class="align-right" src="../../_images/sphx_glr_plot_ols_ridge_variance_001.png" style="width: 280.0px; height: 210.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols_ridge_variance.html"><img alt="../../images/sphx_glr_plot_ols_ridge_variance_001.png" class="align-right" src="../../images/sphx_glr_plot_ols_ridge_variance_001.png" style="width: 280.0px; height: 210.0px;" /></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
@@ -395,7 +395,7 @@ Tutorial</span></a> 快速浏览scikit-learn中使用的基本机器学习词汇
 </div>
 <p>高维统计学习的一个解决方案是将回归系数缩减(<em>shrink</em>)到零：任意两个随机选择的观测集很可能不相关。这被称之为岭回归
 (<a class="reference internal" href="../../modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code></a> regression):</p>
-<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols_ridge_variance.html"><img alt="../../_images/sphx_glr_plot_ols_ridge_variance_002.png" class="align-right" src="../../_images/sphx_glr_plot_ols_ridge_variance_002.png" style="width: 280.0px; height: 210.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_ols_ridge_variance.html"><img alt="../../images/sphx_glr_plot_ols_ridge_variance_002.png" class="align-right" src="../../images/sphx_glr_plot_ols_ridge_variance_002.png" style="width: 280.0px; height: 210.0px;" /></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=.</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span> 
@@ -435,7 +435,7 @@ by the ridge regression is called a
 <span id="id10"></span><h3>稀疏性(Sparsity)<a class="headerlink" href="#sparsity" title="Permalink to this headline">¶</a></h3>
 <p class="centered"><strong>Fitting only features 1 and 2</strong></p>
 <p class="centered">
-<strong><a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_1" src="../../_images/sphx_glr_plot_ols_3d_001.png" style="width: 260.0px; height: 195.0px;" /></a> <a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_3" src="../../_images/sphx_glr_plot_ols_3d_003.png" style="width: 260.0px; height: 195.0px;" /></a> <a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_2" src="../../_images/sphx_glr_plot_ols_3d_002.png" style="width: 260.0px; height: 195.0px;" /></a></strong></p><div class="admonition note">
+<strong><a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_1" src="../../images/sphx_glr_plot_ols_3d_001.png" style="width: 260.0px; height: 195.0px;" /></a> <a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_3" src="../../images/sphx_glr_plot_ols_3d_003.png" style="width: 260.0px; height: 195.0px;" /></a> <a class="reference external" href="../../auto_examples/linear_model/plot_ols_3d.html"><img alt="diabetes_ols_2" src="../../images/sphx_glr_plot_ols_3d_002.png" style="width: 260.0px; height: 195.0px;" /></a></strong></p><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">完整的糖尿病数据集的表示将涉及11个维度（10个特征维度和1个目标变量）。很难对这种高维表示形成直官感受，
 但是认识到它是一个相当空的空间(a fairly <em>empty</em> space)可能是有用的。</p>
@@ -471,7 +471,7 @@ by the ridge regression is called a
 </div>
 <div class="section" id="clf-tut">
 <span id="id11"></span><h3>分类<a class="headerlink" href="#clf-tut" title="Permalink to this headline">¶</a></h3>
-<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_logistic.html"><img alt="../../_images/sphx_glr_plot_logistic_001.png" class="align-right" src="../../_images/sphx_glr_plot_logistic_001.png" style="width: 260.0px; height: 195.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_logistic.html"><img alt="../../images/sphx_glr_plot_logistic_001.png" class="align-right" src="../../images/sphx_glr_plot_logistic_001.png" style="width: 260.0px; height: 195.0px;" /></a>
 <p>对于分类，如在鸢尾花( <a class="reference external" href="https://en.wikipedia.org/wiki/Iris_flower_data_set">iris</a> )分类任务中，
 线性回归并不是正确的方法，因为它会给远离决策前沿的数据赋予太多的权重。
 这时，一个可用的线性方法是去拟合一个 <strong>sigmoid</strong> function 或者 <strong>logistic</strong> function:</p>
@@ -488,7 +488,7 @@ by the ridge regression is called a
 </pre></div>
 </div>
 <p>上述方法就是广为人知的 <a class="reference internal" href="../../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a>.</p>
-<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_iris_logistic.html"><img alt="../../_images/sphx_glr_plot_iris_logistic_001.png" src="../../_images/sphx_glr_plot_iris_logistic_001.png" style="width: 332.0px; height: 249.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/linear_model/plot_iris_logistic.html"><img alt="../../images/sphx_glr_plot_iris_logistic_001.png" src="../../images/sphx_glr_plot_iris_logistic_001.png" style="width: 332.0px; height: 249.0px;" /></a>
 <div class="topic">
 <p class="topic-title first">多类别分类任务</p>
 <p>如果你有多个类需要预测，那么一个可选的方法是训练多个一对多分类器(one-versus-all classifiers),然后在预测阶段使用
@@ -511,7 +511,7 @@ by the ridge regression is called a
 <span class="n">y_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
 </pre></div>
 </div>
-<p>练习题答案: <a class="reference download internal" download="" href="../../_downloads/b3b70869550edd40c0a1c91b13246899/plot_digits_classification_exercise.py"><code class="xref download docutils literal notranslate"><span class="pre">../../auto_examples/exercises/plot_digits_classification_exercise.py</span></code></a></p>
+<p>练习题答案: <a class="reference download internal" download="" href="../../downloads/b3b70869550edd40c0a1c91b13246899/plot_digits_classification_exercise.py"><code class="xref download docutils literal notranslate"><span class="pre">../../auto_examples/exercises/plot_digits_classification_exercise.py</span></code></a></p>
 </div>
 </div>
 </div>
@@ -535,8 +535,8 @@ by the ridge regression is called a
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_margin.html"><img alt="svm_margin_unreg" src="../../_images/sphx_glr_plot_svm_margin_001.png" style="width: 280.0px; height: 210.0px;" /></a></td>
-<td><a class="reference external" href="../../auto_examples/svm/plot_svm_margin.html"><img alt="svm_margin_reg" src="../../_images/sphx_glr_plot_svm_margin_002.png" style="width: 280.0px; height: 210.0px;" /></a></td>
+<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_margin.html"><img alt="svm_margin_unreg" src="../../images/sphx_glr_plot_svm_margin_001.png" style="width: 280.0px; height: 210.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/svm/plot_svm_margin.html"><img alt="svm_margin_reg" src="../../images/sphx_glr_plot_svm_margin_002.png" style="width: 280.0px; height: 210.0px;" /></a></td>
 </tr>
 </tbody>
 </table>
@@ -575,8 +575,8 @@ by the ridge regression is called a
 <tr class="row-odd"><td><strong>Linear kernel</strong></td>
 <td><strong>Polynomial kernel</strong></td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_linear" src="../../_images/sphx_glr_plot_svm_kernels_001.png" style="width: 260.0px; height: 195.0px;" /></a></td>
-<td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_poly" src="../../_images/sphx_glr_plot_svm_kernels_002.png" style="width: 260.0px; height: 195.0px;" /></a></td>
+<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_linear" src="../../images/sphx_glr_plot_svm_kernels_001.png" style="width: 260.0px; height: 195.0px;" /></a></td>
+<td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_poly" src="../../images/sphx_glr_plot_svm_kernels_002.png" style="width: 260.0px; height: 195.0px;" /></a></td>
 </tr>
 <tr class="row-odd"><td><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
 </pre></div>
@@ -598,7 +598,7 @@ by the ridge regression is called a
 <tbody valign="top">
 <tr class="row-odd"><td><strong>RBF kernel (Radial Basis Function)</strong></td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_rbf" src="../../_images/sphx_glr_plot_svm_kernels_003.png" style="width: 260.0px; height: 195.0px;" /></a></td>
+<tr class="row-even"><td><a class="reference external" href="../../auto_examples/svm/plot_svm_kernels.html"><img alt="svm_kernel_rbf" src="../../images/sphx_glr_plot_svm_kernels_003.png" style="width: 260.0px; height: 195.0px;" /></a></td>
 </tr>
 <tr class="row-odd"><td><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># gamma: inverse of size of</span>
@@ -614,7 +614,7 @@ by the ridge regression is called a
 <p>参考链接 <a class="reference internal" href="../../auto_examples/applications/svm_gui.html#sphx-glr-auto-examples-applications-svm-gui-py"><span class="std std-ref">SVM GUI</span></a> 去下载
 <code class="docutils literal notranslate"><span class="pre">svm_gui.py</span></code>; 用鼠标左键与右键点击添加两个类的样本点创建两个类，然后在数据上拟合SVM模型,并改变参数和数据。</p>
 </div>
-<a class="reference external image-reference" href="../../auto_examples/datasets/plot_iris_dataset.html"><img alt="../../_images/sphx_glr_plot_iris_dataset_001.png" class="align-right" src="../../_images/sphx_glr_plot_iris_dataset_001.png" style="width: 560.0px; height: 420.0px;" /></a>
+<a class="reference external image-reference" href="../../auto_examples/datasets/plot_iris_dataset.html"><img alt="../../images/sphx_glr_plot_iris_dataset_001.png" class="align-right" src="../../images/sphx_glr_plot_iris_dataset_001.png" style="width: 560.0px; height: 420.0px;" /></a>
 <div class="green topic">
 <p class="topic-title first"><strong>练习</strong>:</p>
 <p>尝试使用SVMs对鸢尾花数据集(iris dataset)中的第1类和第2类进行分类,只使用前两个特征。
@@ -630,7 +630,7 @@ you would be testing on only one class.</p>
 <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>练习题答案: <a class="reference download internal" download="" href="../../_downloads/86c85b4e4d7a71280aef29a4af8cadf0/plot_iris_exercise.py"><code class="xref download docutils literal notranslate"><span class="pre">../../auto_examples/exercises/plot_iris_exercise.py</span></code></a></p>
+<p>练习题答案: <a class="reference download internal" download="" href="../../downloads/86c85b4e4d7a71280aef29a4af8cadf0/plot_iris_exercise.py"><code class="xref download docutils literal notranslate"><span class="pre">../../auto_examples/exercises/plot_iris_exercise.py</span></code></a></p>
 </div>
 </div>
 </div>

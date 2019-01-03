@@ -11,20 +11,20 @@
     <title>1.16. 概率校准(Probability calibration) &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
-<link rel="stylesheet" href="../_static/css/bootstrap-responsive.css" />
+<link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../static/css/bootstrap-responsive.css" />
 
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../static/js/extra.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1.17. 监督神经网络模型(Supervised Neural network models)" href="neural_networks_supervised.html" />
@@ -32,7 +32,7 @@
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
   VERSION_SUBDIR = (function (groups) {
     return groups ? groups[1] : null;
@@ -76,7 +76,7 @@
 <div class="header-wrapper">
   <div class="header">
     <p class="logo"><a href="../index.html">
-        <img src="../_static/scikit-learn-logo-small.png" alt="Logo" />
+        <img src="../static/scikit-learn-logo-small.png" alt="Logo" />
       </a>
     </p><div class="navbar" id="scikit-navbar">
       <ul>
@@ -103,7 +103,7 @@
               <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
               <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
               <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
-              <li><a href="../_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              <li><a href="../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
             </ul>
           </div>
         </li>
@@ -125,7 +125,7 @@
 
 <!-- GitHub "fork me" ribbon -->
 <a href="https://github.com/scikit-learn/scikit-learn">
-  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../_static/img/forkme.png"
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../static/img/forkme.png"
     alt="Fork me on GitHub" />
 </a>
 
@@ -192,7 +192,7 @@
         <br />
         <p>
           <a href="http://www.studyai.com" target="_blank">
-            <img src="../_static/img/xxx.png" alt="座右铭" />
+            <img src="../static/img/xxx.png" alt="座右铭" />
           </a>
         </p>
         <br />
@@ -223,7 +223,7 @@
 例如，经过良好校准的(二元)分类器应该对样本进行分类，以便在它给出的 predict_proba 值接近0.8的样本中，大约80%实际上属于正类。
 下面的图比较了不同分类器的概率预测(probabilistic predictions)的校准效果:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_compare_calibration.html"><img alt="../_images/sphx_glr_plot_compare_calibration_0011.png" src="../_images/sphx_glr_plot_compare_calibration_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_compare_calibration.html"><img alt="../images/sphx_glr_plot_compare_calibration_0011.png" src="../images/sphx_glr_plot_compare_calibration_0011.png" /></a>
 </div>
 <p><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a> 在默认情况下返回经过良好校准的预测，因为它直接优化对数损失(log-loss)。相反，其他方法返回有偏概率(biased probabilities)；
 每种方法有不同的偏差:</p>
@@ -253,13 +253,13 @@ Niculescu-Mizil和Caruana对此作了解释 <a class="footnote-reference" href="
 <p>以下图像展示了概率校准的好处。 第一个图像显示一个具有2个类和3个数据块的数据集.
 中间的数据块包含每个类的随机样本. 此数据块中样本的概率应为 0.5.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../_images/sphx_glr_plot_calibration_0011.png" src="../_images/sphx_glr_plot_calibration_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../images/sphx_glr_plot_calibration_0011.png" src="../images/sphx_glr_plot_calibration_0011.png" /></a>
 </div>
 <p>以下图像使用没有校准的高斯朴素贝叶斯分类器,
 使用 sigmoid 校准和非参数的isotonic校准来显示上述估计概率的数据.
 可以观察到, 非参数模型为中间样本提供最准确的概率估计, 即 0.5。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../_images/sphx_glr_plot_calibration_0021.png" src="../_images/sphx_glr_plot_calibration_0021.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration.html"><img alt="../images/sphx_glr_plot_calibration_0021.png" src="../images/sphx_glr_plot_calibration_0021.png" /></a>
 </div>
 <p>在具有20个特征的100,000个样本（其中1,000个用于模型拟合）进行二元分类的人造数据集上进行以下实验.
 在这20个特征中，只有2个是informative的, 10个是冗余的。
@@ -269,7 +269,7 @@ Niculescu-Mizil和Caruana对此作了解释 <a class="footnote-reference" href="
 请看下面的图例（越小越好）。 校正损失(Calibration loss)定义为从ROC段斜率导出的经验概率的均方偏差。
 细化损失（Refinement loss）可以定义为在最优代价曲线下用面积测量的期望最优损失。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../_images/sphx_glr_plot_calibration_curve_0021.png" src="../_images/sphx_glr_plot_calibration_curve_0021.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../images/sphx_glr_plot_calibration_curve_0021.png" src="../images/sphx_glr_plot_calibration_curve_0021.png" /></a>
 </div>
 <p>在这儿你可以看到logistic regression被很好的校准了因为它的曲线是近似对角线的。
 Linear SVC 的校准曲线或可靠性图是一个sigmoid曲线，代表这是一个典型的欠信任的分类器。
@@ -277,7 +277,7 @@ Linear SVC 的校准曲线或可靠性图是一个sigmoid曲线，代表这是�
 与决策边界很近的难分样本(hard samples)上。这两种校准方法(isotonic和sigmoid)都可以解决这个问题，
 并得到几乎相同的结果。下面的图片展示了在同样的数据上高斯朴素贝叶斯的校准曲线(包括 无校准，isotonic校准，sigmoid校准)。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../_images/sphx_glr_plot_calibration_curve_0011.png" src="../_images/sphx_glr_plot_calibration_curve_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_curve.html"><img alt="../images/sphx_glr_plot_calibration_curve_0011.png" src="../images/sphx_glr_plot_calibration_curve_0011.png" /></a>
 </div>
 <p>我们可以看到，高斯朴素贝叶斯的性能非常差，但却以不同于线性SVC的方式进行：线性SVC显示出一条Sigmoid校准曲线，
 而高斯朴素贝叶斯的校准曲线具有transposed-sigmoid形状。这是典型的过度自信(over-confident)的分类器。
@@ -297,14 +297,14 @@ isotonic校准更可取。</p>
 箭头指向由未标定的分类器预测的概率向量到同一分类器在预留验证集上进行sigmoid校准后预测的概率向量。
 颜色代表了每个点的真实类别：(red: class 1, green: class 2, blue: class 3).</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_multiclass.html"><img alt="../_images/sphx_glr_plot_calibration_multiclass_0001.png" src="../_images/sphx_glr_plot_calibration_multiclass_0001.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_multiclass.html"><img alt="../images/sphx_glr_plot_calibration_multiclass_0001.png" src="../images/sphx_glr_plot_calibration_multiclass_0001.png" /></a>
 </div>
 <p>本例中使用的基本分类器是由25棵树构成的随机森林分类器。 如果该分类器在所有800个训练数据点上进行训练，
 则 它的预测会过度自信，因此导致了比较大的对数损失(log-loss)。对一个同样的分类器(还是25棵树的随机森林)，
 但是这个分类器这次只在600个数据点上训练，另外200个数据点用于method=’sigmoid’的校准，最后得到的分类器的预测置信度被降低了，
 也就是 把概率向量从simplex的边上移到了中间:</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_multiclass.html"><img alt="../_images/sphx_glr_plot_calibration_multiclass_0011.png" src="../_images/sphx_glr_plot_calibration_multiclass_0011.png" /></a>
+<a class="reference external image-reference" href="../auto_examples/calibration/plot_calibration_multiclass.html"><img alt="../images/sphx_glr_plot_calibration_multiclass_0011.png" src="../images/sphx_glr_plot_calibration_multiclass_0011.png" /></a>
 </div>
 <p>经过校准以后的结果有比较低的对数损失(log-loss)。注意另一种可选方案是增加森林中base estimators的数量也会带来类似的对数损失的降低。</p>
 <div class="topic">

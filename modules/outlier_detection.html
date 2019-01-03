@@ -11,20 +11,20 @@
     <title>2.7. 新奇点和孤立点检测(Novelty and Outlier Detection) &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
-<link rel="stylesheet" href="../_static/css/bootstrap-responsive.css" />
+<link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../static/css/bootstrap-responsive.css" />
 
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../static/js/extra.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.8. 概率密度估计(Density Estimation)" href="density.html" />
@@ -32,7 +32,7 @@
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
   VERSION_SUBDIR = (function (groups) {
     return groups ? groups[1] : null;
@@ -76,7 +76,7 @@
 <div class="header-wrapper">
   <div class="header">
     <p class="logo"><a href="../index.html">
-        <img src="../_static/scikit-learn-logo-small.png" alt="Logo" />
+        <img src="../static/scikit-learn-logo-small.png" alt="Logo" />
       </a>
     </p><div class="navbar" id="scikit-navbar">
       <ul>
@@ -103,7 +103,7 @@
               <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
               <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
               <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
-              <li><a href="../_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              <li><a href="../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
             </ul>
           </div>
         </li>
@@ -125,7 +125,7 @@
 
 <!-- GitHub "fork me" ribbon -->
 <a href="https://github.com/scikit-learn/scikit-learn">
-  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../_static/img/forkme.png"
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../static/img/forkme.png"
     alt="Fork me on GitHub" />
 </a>
 
@@ -203,7 +203,7 @@
         <br />
         <p>
           <a href="http://www.studyai.com" target="_blank">
-            <img src="../_static/img/xxx.png" alt="座右铭" />
+            <img src="../static/img/xxx.png" alt="座右铭" />
           </a>
         </p>
         <br />
@@ -318,7 +318,7 @@ i.e. 对新的未见过的样本 预测其标签或计算其异常性得分, 你
 局部异常因子(LOF) 没有在图的背景上画出决策边界，因为在孤立点检测中使用LOF时
 它没有 predict 方法可以用在新数据上（见上面表格）。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/plot_anomaly_comparison.html"><img alt="../_images/sphx_glr_plot_anomaly_comparison_0011.png" src="../_images/sphx_glr_plot_anomaly_comparison_0011.png" style="width: 550.0px; height: 625.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/plot_anomaly_comparison.html"><img alt="../images/sphx_glr_plot_anomaly_comparison_0011.png" src="../images/sphx_glr_plot_anomaly_comparison_0011.png" style="width: 550.0px; height: 625.0px;" /></a>
 </div>
 <p><a class="reference internal" href="generated/sklearn.ensemble.IsolationForest.html#sklearn.ensemble.IsolationForest" title="sklearn.ensemble.IsolationForest"><code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.IsolationForest</span></code></a> 和 <a class="reference internal" href="generated/sklearn.neighbors.LocalOutlierFactor.html#sklearn.neighbors.LocalOutlierFactor" title="sklearn.neighbors.LocalOutlierFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.LocalOutlierFactor</span></code></a>
 在这里所用的数据集上表现得相当好。 <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal notranslate"><span class="pre">svm.OneClassSVM</span></code></a> 类对outliers本来就很敏感，
@@ -366,7 +366,7 @@ Bernhard, et al. Neural computation 13.7 (2001): 1443-1471.</li>
 </ul>
 </div>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/svm/plot_oneclass.html"><img alt="../_images/sphx_glr_plot_oneclass_0011.png" src="../_images/sphx_glr_plot_oneclass_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/svm/plot_oneclass.html"><img alt="../images/sphx_glr_plot_oneclass_0011.png" src="../images/sphx_glr_plot_oneclass_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 </div>
 <div class="section" id="id2">
@@ -386,7 +386,7 @@ Bernhard, et al. Neural computation 13.7 (2001): 1443-1471.</li>
 衡量外围程度的度量(a measure of outlyingness)。
 下面的图和实例说明了这一策略。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/covariance/plot_mahalanobis_distances.html"><img alt="../_images/sphx_glr_plot_mahalanobis_distances_0011.png" src="../_images/sphx_glr_plot_mahalanobis_distances_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/covariance/plot_mahalanobis_distances.html"><img alt="../images/sphx_glr_plot_mahalanobis_distances_0011.png" src="../images/sphx_glr_plot_mahalanobis_distances_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>
@@ -414,7 +414,7 @@ covariance determinant estimator” Technometrics 41(3), 212 (1999)</li>
 <p>随机划分为异常数据(anomalies)产生明显较短的路径。因此，当随机树木的森林集体地对特定样本产生较短的路径长度时，这些特定样本很可能是异常样本。</p>
 <p>该策略已在下面的例子中进行了说明。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/ensemble/plot_isolation_forest.html"><img alt="../_images/sphx_glr_plot_isolation_forest_0011.png" src="../_images/sphx_glr_plot_isolation_forest_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/ensemble/plot_isolation_forest.html"><img alt="../images/sphx_glr_plot_isolation_forest_0011.png" src="../images/sphx_glr_plot_isolation_forest_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>
@@ -459,7 +459,7 @@ Data Mining, 2008. ICDM‘08. Eighth IEEE International Conference on.</li>
 <code class="docutils literal notranslate"><span class="pre">score_samples</span></code> 函数可被用于新的未见过的观测数据。请查看 <a class="reference internal" href="#novelty-with-lof"><span class="std std-ref">使用LOF进行新奇点检测</span></a> 小节的说明。</p>
 <p>该策略已在下面的例子中进行了说明。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/neighbors/plot_lof_outlier_detection.html"><img alt="../_images/sphx_glr_plot_lof_outlier_detection_0011.png" src="../_images/sphx_glr_plot_lof_outlier_detection_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/neighbors/plot_lof_outlier_detection.html"><img alt="../images/sphx_glr_plot_lof_outlier_detection_0011.png" src="../images/sphx_glr_plot_lof_outlier_detection_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>
@@ -504,7 +504,7 @@ i.e. 对新的未见过的样本 预测其标签或计算其异常性得分, 你
 <p>使用 局部异常因子(LOF)进行新奇点检测 的示例见下图。</p>
 <blockquote>
 <div><div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/neighbors/plot_lof_novelty_detection.html"><img alt="../_images/sphx_glr_plot_lof_novelty_detection_0011.png" src="../_images/sphx_glr_plot_lof_novelty_detection_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/neighbors/plot_lof_novelty_detection.html"><img alt="../images/sphx_glr_plot_lof_novelty_detection_0011.png" src="../images/sphx_glr_plot_lof_novelty_detection_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 </div></blockquote>
 </div>

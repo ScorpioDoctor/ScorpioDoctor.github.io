@@ -30,7 +30,7 @@ scikit-learn |version| 的中文文档
                         <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
                         <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_black">开发版</a></li>')</script>
                         <li><a href="http://scikit-learn.org/dev/versions.html" target="_black">所有其他版本</a></li>
-                        <li><a href="_downloads/scikit-learn-docs.pdf">PDF离线文档</a></li>
+                        <li><a href="downloads/scikit-learn-docs.pdf">PDF离线文档</a></li>
                     </ul>
 
                 </div>

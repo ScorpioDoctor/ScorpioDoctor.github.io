@@ -11,20 +11,20 @@
     <title>6. 使用 scikit-learn 时的计算问题 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
-<link rel="stylesheet" href="../_static/css/bootstrap-responsive.css" />
+<link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../static/css/bootstrap-responsive.css" />
 
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
-    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../static/js/extra.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="通用术语和API要素" href="../glossary.html" />
@@ -32,7 +32,7 @@
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
   VERSION_SUBDIR = (function (groups) {
     return groups ? groups[1] : null;
@@ -76,7 +76,7 @@
 <div class="header-wrapper">
   <div class="header">
     <p class="logo"><a href="../index.html">
-        <img src="../_static/scikit-learn-logo-small.png" alt="Logo" />
+        <img src="../static/scikit-learn-logo-small.png" alt="Logo" />
       </a>
     </p><div class="navbar" id="scikit-navbar">
       <ul>
@@ -103,7 +103,7 @@
               <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
               <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
               <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
-              <li><a href="../_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              <li><a href="../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
             </ul>
           </div>
         </li>
@@ -125,7 +125,7 @@
 
 <!-- GitHub "fork me" ribbon -->
 <a href="https://github.com/scikit-learn/scikit-learn">
-  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../_static/img/forkme.png"
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../static/img/forkme.png"
     alt="Fork me on GitHub" />
 </a>
 
@@ -235,7 +235,7 @@
         <br />
         <p>
           <a href="http://www.studyai.com" target="_blank">
-            <img src="../_static/img/xxx.png" alt="座右铭" />
+            <img src="../static/img/xxx.png" alt="座右铭" />
           </a>
         </p>
         <br />
@@ -388,13 +388,13 @@ systems and demonstrates most of the notions discussed above.</p>
 <p>Furthermore, it also shows the evolution of the performance of different
 algorithms with the number of processed examples.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="../_images/sphx_glr_plot_out_of_core_classification_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="accuracy_over_time" src="../images/sphx_glr_plot_out_of_core_classification_0011.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>Now looking at the computation time of the different parts, we see that the
 vectorization is much more expensive than learning itself. From the different
 algorithms, <code class="docutils literal notranslate"><span class="pre">MultinomialNB</span></code> is the most expensive, but its overhead can be
 mitigated by increasing the size of the mini-batches (exercise: change
 <code class="docutils literal notranslate"><span class="pre">minibatch_size</span></code> to 100 and 10000 in the program and compare).</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="../_images/sphx_glr_plot_out_of_core_classification_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p></div>
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="computation_time" src="../images/sphx_glr_plot_out_of_core_classification_0031.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p></div>
 <div class="section" id="id8">
 <h4>6.1.1.5. 笔记<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
 <table class="docutils footnote" frame="void" id="id9" rules="none">
@@ -454,8 +454,8 @@ linear algebra libraries optimizations etc.). Here we see on a setting
 with few features that independently of estimator choice the bulk mode is
 always faster, and for some of them by 1 to 2 orders of magnitude:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="atomic_prediction_latency" src="../_images/sphx_glr_plot_prediction_latency_0011.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="bulk_prediction_latency" src="../_images/sphx_glr_plot_prediction_latency_0021.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>To benchmark different estimators for your case you can simply change the
+<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="atomic_prediction_latency" src="../images/sphx_glr_plot_prediction_latency_0011.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p class="centered">
+<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="bulk_prediction_latency" src="../images/sphx_glr_plot_prediction_latency_0021.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>To benchmark different estimators for your case you can simply change the
 <code class="docutils literal notranslate"><span class="pre">n_features</span></code> parameter in this example:
 <a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#sphx-glr-auto-examples-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a>. This should give
 you an estimate of the order of magnitude of the prediction latency.</p>
@@ -489,7 +489,7 @@ From a computing perspective it also means that the number of basic operations
 too. Here is a graph of the evolution of the prediction latency with the
 number of features:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="influence_of_n_features_on_latency" src="../_images/sphx_glr_plot_prediction_latency_0031.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>Overall you can expect the prediction time to increase at least linearly with
+<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="influence_of_n_features_on_latency" src="../images/sphx_glr_plot_prediction_latency_0031.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>Overall you can expect the prediction time to increase at least linearly with
 the number of features (non-linear cases can happen depending on the global
 memory footprint and estimator).</p>
 </div>
@@ -546,7 +546,7 @@ describe it fully. Of course sparsity influences in turn the prediction time
 as the sparse dot-product takes time roughly proportional to the number of
 non-zero coefficients.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="en_model_complexity" src="../_images/sphx_glr_plot_model_complexity_influence_0011.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>For the <a class="reference internal" href="classes.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a> family of algorithms with a non-linear kernel,
+<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="en_model_complexity" src="../images/sphx_glr_plot_model_complexity_influence_0011.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>For the <a class="reference internal" href="classes.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a> family of algorithms with a non-linear kernel,
 the latency is tied to the number of support vectors (the fewer the faster).
 Latency and throughput should (asymptotically) grow linearly with the number
 of support vectors in a SVC or SVR model. The kernel will also influence the
@@ -555,13 +555,13 @@ support vector. In the following graph the <code class="docutils literal notrans
 <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm.classes.NuSVR</span></code> was used to influence the number of
 support vectors.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="nusvr_model_complexity" src="../_images/sphx_glr_plot_model_complexity_influence_0021.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>For <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a> of trees (e.g. RandomForest, GBT,
+<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="nusvr_model_complexity" src="../images/sphx_glr_plot_model_complexity_influence_0021.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>For <a class="reference internal" href="classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a> of trees (e.g. RandomForest, GBT,
 ExtraTrees etc) the number of trees and their depth play the most
 important role. Latency and throughput should scale linearly with the number
 of trees. In this case we used directly the <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> parameter of
 <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.gradient_boosting.GradientBoostingRegressor</span></code>.</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="gbt_model_complexity" src="../_images/sphx_glr_plot_model_complexity_influence_0031.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>In any case be warned that decreasing model complexity can hurt accuracy as
+<strong><a class="reference external" href="../auto_examples/applications/plot_model_complexity_influence.html"><img alt="gbt_model_complexity" src="../images/sphx_glr_plot_model_complexity_influence_0031.png" style="width: 960.0px; height: 480.0px;" /></a></strong></p><p>In any case be warned that decreasing model complexity can hurt accuracy as
 mentioned above. For instance a non-linearly separable problem can be handled
 with a speedy linear model but prediction power will very likely suffer in
 the process.</p>
@@ -580,7 +580,7 @@ the chosen model.</p>
 <blockquote>
 <div></div></blockquote>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="prediction_time" src="../_images/sphx_glr_plot_out_of_core_classification_0041.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>In many cases it is thus recommended to carefully time and profile your
+<strong><a class="reference external" href="../auto_examples/applications/plot_out_of_core_classification.html"><img alt="prediction_time" src="../images/sphx_glr_plot_out_of_core_classification_0041.png" style="width: 512.0px; height: 384.0px;" /></a></strong></p><p>In many cases it is thus recommended to carefully time and profile your
 feature extraction code as it may be a good place to start optimizing when
 your overall latency is too slow for your application.</p>
 </div>
@@ -593,7 +593,7 @@ time. Here is a benchmark from the
 <a class="reference internal" href="../auto_examples/applications/plot_prediction_latency.html#sphx-glr-auto-examples-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a> example that measures
 this quantity for a number of estimators on synthetic data:</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="throughput_benchmark" src="../_images/sphx_glr_plot_prediction_latency_0041.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>These throughputs are achieved on a single process. An obvious way to
+<strong><a class="reference external" href="../auto_examples/applications/plot_prediction_latency.html"><img alt="throughput_benchmark" src="../images/sphx_glr_plot_prediction_latency_0041.png" style="width: 800.0px; height: 480.0px;" /></a></strong></p><p>These throughputs are achieved on a single process. An obvious way to
 increase the throughput of your application is to spawn additional instances
 (usually processes in Python because of the
 <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">GIL</a>) that share the
