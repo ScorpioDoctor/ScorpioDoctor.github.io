@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>1.7. 高斯过程(Gaussian Processes) &#8212; scikit-learn 0.20.2 documentation</title>
+<!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../_static/css/bootstrap-responsive.css" />
+
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.8. 交叉分解(Cross decomposition)" href="cross_decomposition.html" />
+    <link rel="prev" title="1.6. 最近邻方法(Nearest Neighbors)" href="neighbors.html" />
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+  VERSION_SUBDIR = (function (groups) {
+    return groups ? groups[1] : null;
+  })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+</script>
+<link rel="canonical" href="http://scikit-learn.org/stable/modules/gaussian_process.html" />
+
+<script type="text/javascript">
+  $("div.buttonNext, div.buttonPrevious").hover(
+    function () {
+      $(this).css('background-color', '#FF9C34');
+    },
+    function () {
+      $(this).css('background-color', '#A7D6E2');
+    }
+  );
+  function showMenu() {
+    var topNav = document.getElementById("scikit-navbar");
+    if (topNav.className === "navbar") {
+      topNav.className += " responsive";
+    } else {
+      topNav.className = "navbar";
+    }
+  };
+</script>
+
+<!-- 百度站长统计代码 -->
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+  <div class="header">
+    <p class="logo"><a href="../index.html">
+        <img src="../_static/scikit-learn-logo-small.png" alt="Logo" />
+      </a>
+    </p><div class="navbar" id="scikit-navbar">
+      <ul>
+        <li><a href="../index.html">首页</a></li>
+        <li><a href="../install.html">安装</a></li>
+        <li class="btn-li">
+          <div class="btn-group">
+            <a href="../documentation.html">文档</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="link-title">Scikit-learn
+                <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script>
+              </li>
+              <li><a href="../tutorial/index.html">教程</a></li>
+              <li><a href="../user_guide.html">用户指南</a></li>
+              <li><a href="classes.html">API</a></li>
+              <li><a href="../glossary.html">词汇表</a></li>
+              <li><a href="../faq.html">FAQ</a></li>
+              <li><a href="../developers/contributing.html">贡献</a></li>
+              <li><a href="../roadmap.html">路线图</a></li>
+              <li class="divider"></li>
+              <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
+              <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
+              <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+              <li><a href="../_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="../auto_examples/index.html">案例</a></li>
+      </ul>
+      <a href="javascript:void(0);" onclick="showMenu()">
+        <div class="nav-icon">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </div>
+      </a>
+      <div class="search_form">
+        <div class="gcse-search" id="cse" style="width: 100%;"></div>
+      </div>
+    </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../_static/img/forkme.png"
+    alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+  <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+      <div class="rel">
+        
+          <div class="rellink">
+            <a href="neighbors.html" accesskey="P">Previous
+              <br />
+              <span class="smallrellink">
+                1.6. 最近邻方法(Ne...
+              </span>
+              <span class="hiddenrellink">
+                1.6. 最近邻方法(Nearest Neighbors)
+              </span>
+            </a>
+          </div>
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="cross_decomposition.html" accesskey="N">Next
+              <br />
+              <span class="smallrellink">
+                1.8. 交叉分解(Cro...
+              </span>
+              <span class="hiddenrellink">
+                1.8. 交叉分解(Cross decomposition)
+              </span>
+            </a>
+          </div>
+
+          <!-- Ad a link to the 'up' page -->
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="../supervised_learning.html">
+              Up
+              <br />
+              <span class="smallrellink">
+                1. 监督学习(super...
+              </span>
+                <span class="hiddenrellink">
+                  1. 监督学习(supervised learning)
+                </span>
+                
+            </a>
+          </div>
+        </div>
+        
+        <p class="doc-version"><b>scikit-learn v0.20.2</b><br />
+          <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+        <!-- <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite
+              us </a></b>if you use the software.</p> -->
+        <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
+        </p>
+        <ul>
+<li><a class="reference internal" href="#">1.7. 高斯过程(Gaussian Processes)</a><ul>
+<li><a class="reference internal" href="#gpr">1.7.1. 高斯过程回归器 (GPR)</a></li>
+<li><a class="reference internal" href="#id3">1.7.2. GPR 案例</a><ul>
+<li><a class="reference internal" href="#id4">1.7.2.1. 带有噪声水平估计的GPR</a></li>
+<li><a class="reference internal" href="#gprkrr">1.7.2.2. GPR和KRR的比较</a></li>
+<li><a class="reference internal" href="#gpr-mauna-loa-co2">1.7.2.3. GPR 算法在 Mauna Loa CO2 数据上的分析</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gpc">1.7.3. 高斯过程分类器 (GPC)</a></li>
+<li><a class="reference internal" href="#id9">1.7.4. GPC 案列</a><ul>
+<li><a class="reference internal" href="#id10">1.7.4.1. 使用 GPC 进行 概率化预测</a></li>
+<li><a class="reference internal" href="#id11">1.7.4.2. GPC分类器在异或问题上的应用</a></li>
+<li><a class="reference internal" href="#gpciris">1.7.4.3. GPC分类器在iris数据集上的应用</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gp-kernels">1.7.5. 用于高斯过程的核函数</a><ul>
+<li><a class="reference internal" href="#api">1.7.5.1. 高斯过程核函数 API</a></li>
+<li><a class="reference internal" href="#id14">1.7.5.2. 基本核函数</a></li>
+<li><a class="reference internal" href="#kernel-operators">1.7.5.3. 核算子(Kernel operators)</a></li>
+<li><a class="reference internal" href="#rbf">1.7.5.4. 径向基函数 (RBF)</a></li>
+<li><a class="reference internal" href="#matern">1.7.5.5. Matérn 核</a></li>
+<li><a class="reference internal" href="#rational-quadratic-kernel">1.7.5.6. 有理二次内核(Rational quadratic kernel)</a></li>
+<li><a class="reference internal" href="#exp-sine-squared-kernel">1.7.5.7. 指数正弦平方核(Exp-Sine-Squared kernel)</a></li>
+<li><a class="reference internal" href="#dot-product-kernel">1.7.5.8. 点乘核(Dot-Product kernel)</a></li>
+<li><a class="reference internal" href="#id16">1.7.5.9. 参考文献</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <br />
+        <p>
+          <a href="http://www.studyai.com" target="_blank">
+            <img src="../_static/img/xxx.png" alt="座右铭" />
+          </a>
+        </p>
+        <br />
+        <p class="doc-version" style="font-size:10%">
+          注意!本网站的网址是以 <em>https://</em> 开头的，而不是以 <em>http://</em> 开头的!!!
+        </p>
+      </div>
+    </div>
+    
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+    <label for="nav-trigger"></label>
+    
+    
+
+
+    <div class="content">
+      
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gaussian-processes">
+<span id="gaussian-process"></span><h1>1.7. 高斯过程(Gaussian Processes)<a class="headerlink" href="#gaussian-processes" title="Permalink to this headline">¶</a></h1>
+<p>高斯过程(<strong>Gaussian Processes (GP)</strong>)是一种通用的监督学习方法，旨在解决*regression*和*probabilistic classification*问题。</p>
+<p>高斯过程 的优点包括:</p>
+<blockquote>
+<div><ul class="simple">
+<li>预测值对观测值进行插值(至少对于regular kernels)。</li>
+<li>预测结果是概率形式的(Gaussian)。这样的话，可以计算得到经验置信区间(empirical confidence intervals )并且
+据此来判断是否需要修改（在线拟合，自适应拟合）一些感兴趣区域上的预测值。</li>
+<li>通用性(Versatile): 可以指定不同的 <a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernels</span></a> 。 常见的 kernels 都可以使用，还可以自定义kernels.</li>
+</ul>
+</div></blockquote>
+<p>高斯过程 的缺点包括：</p>
+<blockquote>
+<div><ul class="simple">
+<li>它们不是稀疏的，即它们使用整个样本/特征信息来执行预测。They are not sparse, i.e., they use the whole samples/features information to
+perform the prediction.</li>
+<li>高维空间模型会失效，高维也就是指特征的数量超过几十个(a few dozens)。</li>
+</ul>
+</div></blockquote>
+<div class="section" id="gpr">
+<span id="id1"></span><h2>1.7.1. 高斯过程回归器 (GPR)<a class="headerlink" href="#gpr" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor" title="sklearn.gaussian_process.GaussianProcessRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianProcessRegressor</span></code></a> 类实现了用于回归问题的高斯过程(GP)模型。
+为此，需要指定GP的先验(prior)。先验均值假定为常数或者零(当参数 <code class="docutils literal notranslate"><span class="pre">normalize_y=False</span></code> 时);
+当 <code class="docutils literal notranslate"><span class="pre">normalize_y=True</span></code> 时，先验均值通常为训练数据的均值。而先验的方差通过传递 内核(<a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernel</span></a>) 对象来指定。
+通过由参数 <code class="docutils literal notranslate"><span class="pre">optimizer</span></code> 指定的优化器 最大化对数边缘似然估计(LML)，内核的超参数可以在 GaussianProcessRegressor 的拟合过程中被优化。
+优化器第一次运行的时候总是从一组初始的内核超参数上启动；后续的优化过程从被允许的合理取值范围内随机选择一组超参数开始优化。
+如果需要保持初始的超参值固定不变， 那么需要把优化器设置为 <cite>None</cite> 。</p>
+<p>目标变量中的噪声级别通过参数 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> 来传递并指定，要么全局都是一个常量要么是每个数据点对应一个噪声点。
+请注意，适度的噪声水平也可以有助于处理拟合期间的数值计算问题，
+因为它被有效地实现为吉洪诺夫正则化(Tikhonov regularization)， 即通过将其添加到核矩阵(kernel matrix)的对角线。
+除了明确指定噪声水平，另外的替代方法是将 WhiteKernel component 包含在内核中， 这样可以从数据中估计全局噪声水平（见下面的示例）。</p>
+<p>算法实现是基于 <a class="reference internal" href="#rw2006" id="id2">[RW2006]</a> 中的算法 2.1 。除了具有标准scikit-learn估计器的 API 之外， GaussianProcessRegressor ：</p>
+<ul class="simple">
+<li>允许预测，无需事先拟合（基于GP先验）</li>
+<li>提供了一个额外的方法  <code class="docutils literal notranslate"><span class="pre">sample_y(X)</span></code>, 评估 在给定输入处 从GPR(先验或后验)中抽取的样本</li>
+<li>暴露了一个方法 <code class="docutils literal notranslate"><span class="pre">log_marginal_likelihood(theta)</span></code>, 可以在外部使用其他方式选择超参数，例如通过马尔科夫链链蒙特卡罗(Markov chain Monte Carlo)。</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>1.7.2. GPR 案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>1.7.2.1. 带有噪声水平估计的GPR<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>该示例说明带有sum-kernel(包括WhiteKernel)的 GPR 可以估计数据的噪声水平。
+对数边缘似然（LML）的景观图示表明存在 LML 的两个局部最大值。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_noisy.html"><img alt="../_images/sphx_glr_plot_gpr_noisy_0001.png" src="../_images/sphx_glr_plot_gpr_noisy_0001.png" /></a>
+</div>
+<p>第一个对应于具有高噪声水平和大长度尺度的模型，这种情况是 由噪声解释了数据中的所有变化。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_noisy.html"><img alt="../_images/sphx_glr_plot_gpr_noisy_0011.png" src="../_images/sphx_glr_plot_gpr_noisy_0011.png" /></a>
+</div>
+<p>第二个模型具有较小的噪声水平和较短的长度尺度，这种情况是 由无噪声的函数关系解释了大部分的变化。
+第二种模型有较高的似然性(likelihood); 然而，根据超参数的初始值，基于梯度的优化也可能会收敛到高噪声解。
+因此，对于不同的初始化，重复优化多次是很重要的。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_noisy.html"><img alt="../_images/sphx_glr_plot_gpr_noisy_0021.png" src="../_images/sphx_glr_plot_gpr_noisy_0021.png" /></a>
+</div>
+</div>
+<div class="section" id="gprkrr">
+<h3>1.7.2.2. GPR和KRR的比较<a class="headerlink" href="#gprkrr" title="Permalink to this headline">¶</a></h3>
+<p>KRR(kernel ridge regression,核岭回归)和 GPR 通过内部使用 “kernel trick(核技巧)” 来学习目标函数。
+KRR学习由相应内核诱导产生的空间中的线性函数，该函数对应于原始空间中的非线性函数。
+核诱导空间中的线性函数是基于带有岭正则化项的均方误差进行选择的。
+GPR使用内核来定义目标函数的先验分布的协方差，并使用观察到的训练数据来定义似然函数。
+基于贝叶斯定理，目标函数上的（高斯）后验分布就可以推导出来了，那么其平均值则用于预测。</p>
+<p>一个主要区别是，GPR 可以基于边际似然函数上的梯度上升选择内核的超参数，
+而KRR需要在交叉验证的损失函数（均方误差损失）上执行网格搜索。
+另一个区别是，GPR 学习目标函数的生成概率模型，
+因此可以提供有意义的置信区间和后验样本以及预测值， 而KRR仅提供预测。</p>
+<p>下图展示了KRR和GPR这两种方法在人造数据集上的表现，数据由正弦目标函数和强噪声构成。
+该图比较了在此数据上学习到的 基于ExpSineSquared内核的 KRR 和 GPR 模型，
+ExpSineSquared内核适用于学习周期函数，内核的超参数控制内核的平滑度(length_scale)和周期性(periodicity)。
+此外，GPR 通过内核中附带的 WhiteKernel component 显式的学习数据的噪声水平；而 KRR 通过正则化参数 alpha 显式的学习数据的噪声水平。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_compare_gpr_krr.html"><img alt="../_images/sphx_glr_plot_compare_gpr_krr_0011.png" src="../_images/sphx_glr_plot_compare_gpr_krr_0011.png" /></a>
+</div>
+<p>该图显示，两种方法都可以学习到合理的目标函数模型。 GPR将函数的周期正确地识别为 <span class="math notranslate nohighlight">\(2*\pi\)</span> (6.28)，而 KRR 选择倍增的周期为 <span class="math notranslate nohighlight">\(4*\pi\)</span> 。
+此外，GPR为预测提供了合理的置信区间，而KRR不能为预测提供置信区间。 两种方法之间的主要区别是拟合和预测所需的时间： 原则上KRR的拟合速度较快，
+但是超参数优化的网格搜索与超参数的数量（ “curse of dimensionality(维数灾难)” ）呈指数级关系。 GPR中的参数基于梯度进行优化不受此指数级增长的影响，
+因此在具有三维超参数空间的该示例上相当快。 预测的时间是相似的; 然而，生成 GPR 预测分布的方差需要的时间比仅预测其平均值要长。</p>
+</div>
+<div class="section" id="gpr-mauna-loa-co2">
+<h3>1.7.2.3. GPR 算法在 Mauna Loa CO2 数据上的分析<a class="headerlink" href="#gpr-mauna-loa-co2" title="Permalink to this headline">¶</a></h3>
+<p>该示例基于书(<a class="reference internal" href="#rw2006" id="id5">[RW2006]</a>) 的第 5.4.3 节。 它演示了使用梯度上升的对数边缘似然性的复杂内核工程和超参数优化的示例。
+数据包括在 1958 年至 1997 年间夏威夷 Mauna Loa 天文台收集的每月平均大气二氧 化碳浓度（以百万分之几（ppmv）计）。
+目的是将二氧化碳浓度建模为时间t的函数。</p>
+<p>内核由若干项(several terms)组成，负责说明信号的不同属性：</p>
+<ul class="simple">
+<li>一个长期平滑的上升趋势是由一个 RBF 内核来解释的。 具有较大长度尺寸的RBF内核将使该分量平滑;
+没有强制这种趋势正在上升，这给 GP 带来了可选择性。 具体的长度尺度(length-scale)和振幅(amplitude)是自由的超参数。</li>
+<li>季节性因素，由周期性的 ExpSineSquared 内核来解释，固定周期为1年。 该周期性分量的长度尺度(length-scale)
+控制其平滑度，是一个自由参数。
+为了使其具备准确周期性的衰减，将 ExpSineSquared kernel 与 RBF kernel 取乘积(product)。 该RBF component的长度尺度(length-scale)控制衰减时间，
+并且是另一个自由参数。</li>
+<li>较小的中期不规则性将由 RationalQuadratic kernel component 来解释， RationalQuadratic kernel component 的长度尺度(length-scale)和alpha
+参数，决定着长度尺度的扩散性，是将要被确定的参数。 根据 <a class="reference internal" href="#rw2006" id="id6">[RW2006]</a> ，这些不规则性可以更好地由有理二次内核(RationalQuadratic kernel) 来解释，
+而不是 RBF kernel component，这可能是因为它可以容纳若干个长度尺度(length-scale)。</li>
+<li>噪声项，由一个 RBF kernel 组成，它将解释相关的噪声分量，如局部天气现象以及 WhiteKernel 对白噪声的贡献。 在这里，
+相对幅度(relative amplitudes)和RBF的length scale 又是自由参数。</li>
+</ul>
+<p>减去目标平均值后 最大化 对数边际似然(log-marginal-likelihood)产生下列内核，其中LML为-83.214:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">34.4</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">41.8</span><span class="p">)</span>
+<span class="o">+</span> <span class="mf">3.27</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span> <span class="o">*</span> <span class="n">ExpSineSquared</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">1.44</span><span class="p">,</span>
+                                                   <span class="n">periodicity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">+</span> <span class="mf">0.446</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RationalQuadratic</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">17.7</span><span class="p">,</span> <span class="n">length_scale</span><span class="o">=</span><span class="mf">0.957</span><span class="p">)</span>
+<span class="o">+</span> <span class="mf">0.197</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">0.138</span><span class="p">)</span> <span class="o">+</span> <span class="n">WhiteKernel</span><span class="p">(</span><span class="n">noise_level</span><span class="o">=</span><span class="mf">0.0336</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>因此，大多数目标信号（34.4ppm）由长期上升趋势（长度即length-scale为41.8年）解释。 周期分量的振幅为3.27ppm，衰减时间为180年，长度为(length-scale)为1.44。
+长时间的衰变时间表明我们有一个局部非常接近周期性的季节性成分。 相关噪声的幅度为0.197ppm，长度为0.138年，白噪声贡献为0.197ppm。
+因此，整体噪声水平非常小，表明该模型可以很好地解释数据。 该图还显示，该模型直到2015年左右才能做出置信度比较高的预测。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_co2.html"><img alt="../_images/sphx_glr_plot_gpr_co2_0011.png" src="../_images/sphx_glr_plot_gpr_co2_0011.png" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="gpc">
+<span id="id7"></span><h2>1.7.3. 高斯过程分类器 (GPC)<a class="headerlink" href="#gpc" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier" title="sklearn.gaussian_process.GaussianProcessClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianProcessClassifier</span></code></a> 类将高斯过程(GP)用于分类，更具体地说是用于概率分类，即 采用类概率的形式进行预测。
+GaussianProcessClassifier 把一个GP prior放在隐函数(latent function) <span class="math notranslate nohighlight">\(f\)</span> 上, 然后通过一个链接函数(link function) 把其压缩来获得
+概率性分类(probabilistic classification)。 隐函数 <span class="math notranslate nohighlight">\(f\)</span> 被称之为 滋扰函数(nuisance function), 其 取值不可被观测，相互之间不相干。
+该函数的目的是为了模型的方便的形式，而且 <span class="math notranslate nohighlight">\(f\)</span> 在预测阶段就被去除了。
+GaussianProcessClassifier 实现了 logistic 链接函数，其积分不能被解析的计算但是在二元分类的情况下很容易逼近。</p>
+<p>与GP在回归问题中的设置相对比, 隐函数 <span class="math notranslate nohighlight">\(f\)</span> 的后验概率分布不是高斯分布，甚至对 GP prior 也不是，因为高斯似然函数(Gaussian likelihood)用于离散的类标签
+是不合适的。 所以, 一个与logistic链接函数对应的non-Gaussian likelihood 被用作隐函数 <span class="math notranslate nohighlight">\(f\)</span> 的后验概率分布。
+GaussianProcessClassifier使用基于Laplace近似的高斯分布去逼近非高斯后验(non-Gaussian posterior)。 更多详情，请看 <a class="reference internal" href="#rw2006" id="id8">[RW2006]</a> 的第三章吧！</p>
+<p>GP先验的平均值假定为零。先验的协方差是通过传递 内核(<a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernel</span></a>) 对象来指定的。
+通过由参数 <code class="docutils literal notranslate"><span class="pre">optimizer</span></code> 指定的优化器 最大化 对数边缘似然估计(LML)，内核的超参数可以在 GaussianProcessClassifier 的拟合过程中被优化。
+由于LML可能具有多个局部最优值， 所以优化器可以通过指定 <code class="docutils literal notranslate"><span class="pre">n_restarts_optimizer</span></code> 而重复启动。
+优化器第一次运行的时候总是从一组初始的内核超参数上启动；后续的优化过程从被允许的合理取值范围内随机选择一组超参数开始优化。
+如果需要保持初始的超参值固定不变， 那么需要把优化器设置为 <cite>None</cite> 。</p>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier" title="sklearn.gaussian_process.GaussianProcessClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianProcessClassifier</span></code></a> 类通过执行基于OvR(one-versus-rest)或 OvO(one-versus-one)策略的训练和预测来支持多类分类。
+在OvR策略中，每个类都配有一个二元高斯过程分类器，其被训练为将该类与其余类分开。
+在OVO策略中，对每两个类拟合一个二元高斯过程分类器，其被训练为将这两个类分开。
+最后，这些二元分类器的预测被组合成多类预测。更多详细信息，请参阅 <a class="reference internal" href="multiclass.html#multiclass"><span class="std std-ref">multi-class classification</span></a> 。</p>
+<p>在高斯过程分类的使用中，”one_vs_one” 策略可能在计算上更廉价， 因为它必须解决涉及整个训练集的每一个子集的许多问题，
+而不是整个数据集的较少的问题。由于高斯过程分类随着数据集的大小以立方形式缩放(scales cubically)，所以这可能要快得多。
+但是，请注意，”one_vs_one” 不支持预测概率估计，而只是简单的预测。
+此外，请注意， <a class="reference internal" href="generated/sklearn.gaussian_process.GaussianProcessClassifier.html#sklearn.gaussian_process.GaussianProcessClassifier" title="sklearn.gaussian_process.GaussianProcessClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianProcessClassifier</span></code></a> 在内部还没有实现真正的多类 Laplace 近似，
+但如上所述，在解决内部二元分类任务的基础上，它们使用 OvR或 OvO 的组合方法。</p>
+</div>
+<div class="section" id="id9">
+<h2>1.7.4. GPC 案列<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h3>1.7.4.1. 使用 GPC 进行 概率化预测<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>这个例子展示了具有不同超参数选项的RBF内核的GPC预测概率。
+第一幅图显示 具有 任意选择的超参数 的GPC的预测概率 以及 具有 与最大LML对应的超参数 的GPC的预测概率。</p>
+<p>虽然通过优化LML选择的超参数具有相当大的LML，但是依据测试数据上的对数损失，它们的表现更差。 该图显示，
+这是因为它们在类边界表现出类概率的急剧变化(这是好的表现)， 但在远离类边界的地方 其预测概率却接近0.5（这是坏的表现）
+这种不良影响是由于GPC内部使用了拉普拉斯近似(Laplace approximation)。</p>
+<p>第二幅图显示了 针对内核超参数的不同选择所对应的LML（对数边缘似然），突出了在第一幅图中使用的通过黑点（训练集）选择的两个超参数。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc.html"><img alt="../_images/sphx_glr_plot_gpc_0001.png" src="../_images/sphx_glr_plot_gpc_0001.png" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc.html"><img alt="../_images/sphx_glr_plot_gpc_0011.png" src="../_images/sphx_glr_plot_gpc_0011.png" /></a>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>1.7.4.2. GPC分类器在异或问题上的应用<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>此示例展示了将GPC用于XOR数据。参与比较试验的是 平稳的各向同性的核(<a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBF</span></code></a>)和非平稳的核(<a class="reference internal" href="generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct" title="sklearn.gaussian_process.kernels.DotProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">DotProduct</span></code></a>)。
+在这个特定的数据集上， <cite>DotProduct</cite> kernel 获得了更好的结果，
+因为类边界是线性的，并且与坐标轴重合。 然而，实际上，平稳的核 诸如 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBF</span></code></a> 经常获得更好结果。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc_xor.html"><img alt="../_images/sphx_glr_plot_gpc_xor_0011.png" src="../_images/sphx_glr_plot_gpc_xor_0011.png" /></a>
+</div>
+</div>
+<div class="section" id="gpciris">
+<h3>1.7.4.3. GPC分类器在iris数据集上的应用<a class="headerlink" href="#gpciris" title="Permalink to this headline">¶</a></h3>
+<p>该示例展示了 在iris数据集的二维版本上 各向同性和各向异性RBF核的GPC的预测概率。
+这说明了GPC对多类分类的适用性。
+各向异性RBF内核通过为两个特征维度分配不同的长度尺度(length-scales)来获得稍高的LML(log-marginal-likelihood)。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc_iris.html"><img alt="../_images/sphx_glr_plot_gpc_iris_0011.png" src="../_images/sphx_glr_plot_gpc_iris_0011.png" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="gp-kernels">
+<span id="id12"></span><h2>1.7.5. 用于高斯过程的核函数<a class="headerlink" href="#gp-kernels" title="Permalink to this headline">¶</a></h2>
+<p>Kernels(在GPs的上下文语境中也可以叫做 ”协方差函数”) 是决定 GP的先验形状和后验形状(the shape of prior and posterior of the GP)的关键组成部分。
+它们通过定义两个数据点的“相似性”，并结合相似的数据点应该具有相似的目标值的假设，对所学习的函数进行编码。
+内核可以分为两类：平稳内核(stationary kernels)，只取决于两个数据点的距离，不依赖于它们的绝对值 <span class="math notranslate nohighlight">\(k(x_i, x_j)= k(d(x_i, x_j))\)</span> ，
+因此它们对输入空间中的平移是不变的；非平稳内核(non-stationary kernels)，取决于数据点的具体值。
+平稳内核可以进一步细分为各向同性(isotropic)和各向异性(anisotropic)内核，
+其中各向同性内核对输入空间中的旋转具有不变性。想要了解更多细节，请参看 <a class="reference internal" href="#rw2006" id="id13">[RW2006]</a> 的第四章。</p>
+<div class="section" id="api">
+<h3>1.7.5.1. 高斯过程核函数 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Kernel.html#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Kernel</span></code></a> 类主要用来计算数据点之间的高斯过程的协方差。 为此，内核中 <code class="docutils literal notranslate"><span class="pre">__call__</span></code> 方法会被调用。
+该方法即可以用于计算 2d数组X中所有数据点对的“自协方差(auto-covariance)”，
+也可以计算 2d数组X中的数据点与2d数组Y中的数据点的所有组合的“互协方差(cross-covariance)”。
+以下等式对于 所有内核 k（除了 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel" title="sklearn.gaussian_process.kernels.WhiteKernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">WhiteKernel</span></code></a> ）都是成立的：<code class="docutils literal notranslate"><span class="pre">k(X)</span> <span class="pre">==</span> <span class="pre">K(X,</span> <span class="pre">Y=X)</span></code> 。</p>
+<p>如果仅仅是自协方差的对角线元素被使用，那么内核的方法 <code class="docutils literal notranslate"><span class="pre">diag()</span></code> 将会被调用，
+该方法比等价的调用 <code class="docutils literal notranslate"><span class="pre">__call__</span></code> : <code class="docutils literal notranslate"><span class="pre">np.diag(k(X,</span> <span class="pre">X))</span> <span class="pre">==</span> <span class="pre">k.diag(X)</span></code> 具有更高的计算效率。</p>
+<p>内核通过超参数向量 <span class="math notranslate nohighlight">\(\theta\)</span> 进行参数化。这些超参数可以控制例如内核的长度尺度(length-scales)或周期性(periodicity)（见下文）。
+通过设置 <code class="docutils literal notranslate"><span class="pre">__call__</span></code> 方法的参数 <code class="docutils literal notranslate"><span class="pre">eval_gradient=True</span></code> ，所有的内核都支持计算 内核自协方差 对于 <span class="math notranslate nohighlight">\(\theta\)</span> 的解析梯度。
+该梯度被用来在(回归型和分类型的)高斯过程中计算LML(对数边缘似然)函数的梯度，进而被用来通过梯度上升的方法极大化LML(对数边缘似然)函数，
+从而确定 <span class="math notranslate nohighlight">\(\theta\)</span> 的值。
+对于每个超参数，当创建内核的实例时，初始值和边界值需要被指定。 <span class="math notranslate nohighlight">\(\theta\)</span> 的当前值可以通过内核对象属性 <code class="docutils literal notranslate"><span class="pre">theta</span></code> 被获取或者设置。
+更重要的是， 超参的边界值可以被内核属性 <code class="docutils literal notranslate"><span class="pre">bounds</span></code> 获取。需要注意的是，
+以上两种属性值(theta和bounds)都会返回内部使用值的对数转换值(log-transformed values)，这是因为这两种属性值通常更适合基于梯度的优化。
+每个超参数的规格(specification)以 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Hyperparameter.html#sklearn.gaussian_process.kernels.Hyperparameter" title="sklearn.gaussian_process.kernels.Hyperparameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Hyperparameter</span></code></a> 类的实例的形式被存储在相应内核中。
+请注意使用了以”x”命名的超参的内核必然具有 self.x 和 self.x_bounds 这两种属性。</p>
+<p>所有内核的抽象基类为 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Kernel.html#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Kernel</span></code></a> 。Kernel 基类实现了与 <code class="xref py py-class docutils literal notranslate"><span class="pre">Estimator</span></code> 基类相似的接口，
+提供了方法 <code class="docutils literal notranslate"><span class="pre">get_params()</span></code> , <code class="docutils literal notranslate"><span class="pre">set_params()</span></code> 以及 <code class="docutils literal notranslate"><span class="pre">clone()</span></code> 。这样的实现方法也允许通过 meta-estimators 诸如
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">GridSearch</span></code> 来设置内核的values。
+需要注意的是，由于内核的嵌套结构（通过应用内核算子(kernel operators)，如下所见）， 内核参数的名称可能会变得相对复杂些。
+通常来说，对于二元内核算子，左运算元的参数以 <code class="docutils literal notranslate"><span class="pre">k1__</span></code> 为前缀，而右运算元以 <code class="docutils literal notranslate"><span class="pre">k2__</span></code> 为前缀。
+另一个便利方法是 <code class="docutils literal notranslate"><span class="pre">clone_with_theta(theta)</span></code> ， 该方法返回克隆版本的内核，但是设置超参数为 <code class="docutils literal notranslate"><span class="pre">theta</span></code> 。
+示例如下:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="k">import</span> <span class="n">ConstantKernel</span><span class="p">,</span> <span class="n">RBF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">ConstantKernel</span><span class="p">(</span><span class="n">constant_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">constant_value_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">length_scale_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span> <span class="o">+</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">length_scale_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">hyperparameter</span> <span class="ow">in</span> <span class="n">kernel</span><span class="o">.</span><span class="n">hyperparameters</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">hyperparameter</span><span class="p">)</span>
+<span class="go">Hyperparameter(name=&#39;k1__k1__constant_value&#39;, value_type=&#39;numeric&#39;, bounds=array([[ 0., 10.]]), n_elements=1, fixed=False)</span>
+<span class="go">Hyperparameter(name=&#39;k1__k2__length_scale&#39;, value_type=&#39;numeric&#39;, bounds=array([[ 0., 10.]]), n_elements=1, fixed=False)</span>
+<span class="go">Hyperparameter(name=&#39;k2__length_scale&#39;, value_type=&#39;numeric&#39;, bounds=array([[ 0., 10.]]), n_elements=1, fixed=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+<span class="go">k1 : 1**2 * RBF(length_scale=0.5)</span>
+<span class="go">k1__k1 : 1**2</span>
+<span class="go">k1__k1__constant_value : 1.0</span>
+<span class="go">k1__k1__constant_value_bounds : (0.0, 10.0)</span>
+<span class="go">k1__k2 : RBF(length_scale=0.5)</span>
+<span class="go">k1__k2__length_scale : 0.5</span>
+<span class="go">k1__k2__length_scale_bounds : (0.0, 10.0)</span>
+<span class="go">k2 : RBF(length_scale=2)</span>
+<span class="go">k2__length_scale : 2.0</span>
+<span class="go">k2__length_scale_bounds : (0.0, 10.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>  <span class="c1"># Note: log-transformed</span>
+<span class="go">[ 0.         -0.69314718  0.69314718]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>  <span class="c1"># Note: log-transformed</span>
+<span class="go">[[      -inf 2.30258509]</span>
+<span class="go"> [      -inf 2.30258509]</span>
+<span class="go"> [      -inf 2.30258509]]</span>
+</pre></div>
+</div>
+<p>所有的 GP kernels 都可以与 <a class="reference internal" href="classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics.pairwise</span></code></a> 进行互操作，反之亦然：
+类 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Kernel.html#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Kernel</span></code></a> 的子类实例可以通过 <code class="docutils literal notranslate"><span class="pre">metric</span></code> 参数传给 <a class="reference internal" href="classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics.pairwise</span></code></a> 中的 <code class="docutils literal notranslate"><span class="pre">pairwise_kernels</span></code> 。
+更进一步，来自 pairwise 的核函数可以通过封装类 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.PairwiseKernel.html#sklearn.gaussian_process.kernels.PairwiseKernel" title="sklearn.gaussian_process.kernels.PairwiseKernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PairwiseKernel</span></code></a> 被用作 GP kernels。
+唯一警告是，超参数的梯度不是解析的(analytic)，而是数值的(numeric)，并且所有这些内核只支持各向同性距离(isotropic distances)。
+该参数 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 被认为是一个超参数，可以进行优化。其他内核参数在初始化时直接设置，并保持固定。</p>
+</div>
+<div class="section" id="id14">
+<h3>1.7.5.2. 基本核函数<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.ConstantKernel.html#sklearn.gaussian_process.kernels.ConstantKernel" title="sklearn.gaussian_process.kernels.ConstantKernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConstantKernel</span></code></a> 内核类 既可以被用作 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Product.html#sklearn.gaussian_process.kernels.Product" title="sklearn.gaussian_process.kernels.Product"><code class="xref py py-class docutils literal notranslate"><span class="pre">Product</span></code></a> 内核类的一部分，在其中，
+它可以缩放其他因子（内核）的量级 ； 也可以作为 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Sum.html#sklearn.gaussian_process.kernels.Sum" title="sklearn.gaussian_process.kernels.Sum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sum</span></code></a> 类的一部分，在其中，它修改高斯过程的均值。
+这取决于参数 <span class="math notranslate nohighlight">\(constant\_value\)</span> 的设置。该方法定义为:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = constant\_value \;\forall\; x_1, x_2\]</div>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel" title="sklearn.gaussian_process.kernels.WhiteKernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">WhiteKernel</span></code></a> 核的主要使用情景是作为 sum-kernel 的一部分，它在其中解释信号的噪声成分(noise-component)。
+调节它的参数 <span class="math notranslate nohighlight">\(noise\_level\)</span> 对应于估计噪声水平。它被定义如下：</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = noise\_level \text{ if } x_i == x_j \text{ else } 0\]</div>
+</div>
+<div class="section" id="kernel-operators">
+<h3>1.7.5.3. 核算子(Kernel operators)<a class="headerlink" href="#kernel-operators" title="Permalink to this headline">¶</a></h3>
+<p>内核算子(Kernel operators)接受一到两个基本内核并将它们组合起来变成一个新核。
+内核类 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Sum.html#sklearn.gaussian_process.kernels.Sum" title="sklearn.gaussian_process.kernels.Sum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sum</span></code></a> 接受两个内核 <span class="math notranslate nohighlight">\(k1\)</span> 和 <span class="math notranslate nohighlight">\(k2\)</span> 并且通过  <span class="math notranslate nohighlight">\(k_{sum}(X, Y) = k1(X, Y) + k2(X, Y)\)</span>
+把它们组合起来。 内核类 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Product.html#sklearn.gaussian_process.kernels.Product" title="sklearn.gaussian_process.kernels.Product"><code class="xref py py-class docutils literal notranslate"><span class="pre">Product</span></code></a> 接受两个内核 <span class="math notranslate nohighlight">\(k1\)</span> 和 <span class="math notranslate nohighlight">\(k2\)</span> 并且通过 <span class="math notranslate nohighlight">\(k_{product}(X, Y) = k1(X, Y) * k2(X, Y)\)</span>
+把它们组合起来。 内核类 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Exponentiation.html#sklearn.gaussian_process.kernels.Exponentiation" title="sklearn.gaussian_process.kernels.Exponentiation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exponentiation</span></code></a> 接受一个基本核和一个标量参数 <span class="math notranslate nohighlight">\(exponent\)</span> 并通过
+<span class="math notranslate nohighlight">\(k_{exp}(X, Y) = k(X, Y)^\text{exponent}\)</span>
+把它们组合起来。</p>
+</div>
+<div class="section" id="rbf">
+<h3>1.7.5.4. 径向基函数 (RBF)<a class="headerlink" href="#rbf" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBF</span></code></a> 核 是一个平稳核(stationary kernel)。 它也被称为 “squared exponential” 核。
+它可以通过长度尺度(length-scale)参数 <span class="math notranslate nohighlight">\(l&gt;0\)</span> 被参数化。该参数既可以是标量(内核的各向同性变体)
+或者是 与输入 <span class="math notranslate nohighlight">\(x\)</span> 具有相同维数的向量(内核的各向异性变体) 。该内核可以被定义为:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \text{exp}\left(-\frac{1}{2} d(x_i / l, x_j / l)^2\right)\]</div>
+<p>这个内核是无限可微分的, 这暗含着带有此核的GPs作为协方差函数具有所有阶的平均平方导数(mean square derivatives of all orders)，
+并且因此非常平滑。由RBF核产生的GP的先验与后验(prior and posterior)在下图中展示:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_0001.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_0001.png" /></a>
+</div>
+</div>
+<div class="section" id="matern">
+<h3>1.7.5.5. Matérn 核<a class="headerlink" href="#matern" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.Matern.html#sklearn.gaussian_process.kernels.Matern" title="sklearn.gaussian_process.kernels.Matern"><code class="xref py py-class docutils literal notranslate"><span class="pre">Matern</span></code></a> 内核是一个平稳内核(stationary kernel)，是 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBF</span></code></a> 内核的泛化。它有一个附加的参数 <span class="math notranslate nohighlight">\(\nu\)</span>，
+该参数控制结果函数的平滑程度。它由长度尺度参数(length-scale) <span class="math notranslate nohighlight">\(l&gt;0\)</span> 来实现参数化。
+该参数既可以是标量(内核的各向同性变体) 或者是 与输入 <span class="math notranslate nohighlight">\(x\)</span> 具有相同维数的向量(内核的各向异性变体) 。
+该内核可以被定义为:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \sigma^2\frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(\gamma\sqrt{2\nu} d(x_i / l, x_j / l)\Bigg)^\nu K_\nu\Bigg(\gamma\sqrt{2\nu} d(x_i / l, x_j / l)\Bigg),\]</div>
+<p>由于 <span class="math notranslate nohighlight">\(\nu\rightarrow\infty\)</span>, Matérn kernel 收敛到 RBF kernel。
+当 <span class="math notranslate nohighlight">\(\nu = 1/2\)</span> 时, Matérn kernel 变得与绝对指数核(absolute exponential kernel)一模一样啦, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \sigma^2 \exp \Bigg(-\gamma d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{1}{2}\]</div>
+<p>特别的, <span class="math notranslate nohighlight">\(\nu = 3/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \sigma^2 \Bigg(1 + \gamma \sqrt{3} d(x_i / l, x_j / l)\Bigg) \exp \Bigg(-\gamma \sqrt{3}d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{3}{2}\]</div>
+<p>和 <span class="math notranslate nohighlight">\(\nu = 5/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \sigma^2 \Bigg(1 + \gamma \sqrt{5}d(x_i / l, x_j / l) +\frac{5}{3} \gamma^2d(x_i / l, x_j / l)^2 \Bigg) \exp \Bigg(-\gamma \sqrt{5}d(x_i / l, x_j / l) \Bigg) \quad \quad \nu= \tfrac{5}{2}\]</div>
+<p>是不无限可微的(由RBF kernel假定)但至少一阶可微(<span class="math notranslate nohighlight">\(\nu = 3/2\)</span>)或二阶可微(<span class="math notranslate nohighlight">\(\nu = 5/2\)</span>)的学习函数的常用选择。</p>
+<p>通过 <span class="math notranslate nohighlight">\(\nu\)</span> 灵活控制学习函数的平滑性可以更加适应真正的底层函数的关联属性。 通过 Matérn 内核产生的GP的先验和后验如下图所示:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_0041.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_0041.png" /></a>
+</div>
+<p>请看 <a class="reference internal" href="#rw2006" id="id15">[RW2006]</a>, pp84 查找更多关于Matérn核的不同变体的详情。</p>
+</div>
+<div class="section" id="rational-quadratic-kernel">
+<h3>1.7.5.6. 有理二次内核(Rational quadratic kernel)<a class="headerlink" href="#rational-quadratic-kernel" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RationalQuadratic.html#sklearn.gaussian_process.kernels.RationalQuadratic" title="sklearn.gaussian_process.kernels.RationalQuadratic"><code class="xref py py-class docutils literal notranslate"><span class="pre">RationalQuadratic</span></code></a> 内核可以被看做不同特征尺度下的 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBF</span></code></a> 内核的规模混合(一个无穷和)
+它通过长度尺度(length-scales)参数 <span class="math notranslate nohighlight">\(l&gt;0\)</span> 和比例混合参数 <span class="math notranslate nohighlight">\(\alpha&gt;0\)</span> 进行参数化。
+当前仅支持各向同性变体(其中 <span class="math notranslate nohighlight">\(l\)</span> 是标量)。内核公式如下：</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \left(1 + \frac{d(x_i, x_j)^2}{2\alpha l^2}\right)^{-\alpha}\]</div>
+<p>由 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.RationalQuadratic.html#sklearn.gaussian_process.kernels.RationalQuadratic" title="sklearn.gaussian_process.kernels.RationalQuadratic"><code class="xref py py-class docutils literal notranslate"><span class="pre">RationalQuadratic</span></code></a> 核产生的GP的先验和后验在下图中展示:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_0011.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_0011.png" /></a>
+</div>
+</div>
+<div class="section" id="exp-sine-squared-kernel">
+<h3>1.7.5.7. 指数正弦平方核(Exp-Sine-Squared kernel)<a class="headerlink" href="#exp-sine-squared-kernel" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared" title="sklearn.gaussian_process.kernels.ExpSineSquared"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExpSineSquared</span></code></a> 内核类可以用来对周期性函数(periodic functions)进行建模。
+它通过长度尺度(length-scale)参数 <span class="math notranslate nohighlight">\(l&gt;0\)</span> 和 周期性(periodicity)参数 <span class="math notranslate nohighlight">\(p&gt;0\)</span> 进行参数化。
+当前仅支持各向同性变体(其中 <span class="math notranslate nohighlight">\(l\)</span> 是标量)。内核公式如下：</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \text{exp}\left(-2 \left(\text{sin}(\pi / p * d(x_i, x_j)) / l\right)^2\right)\]</div>
+<p>由 <a class="reference internal" href="generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared" title="sklearn.gaussian_process.kernels.ExpSineSquared"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExpSineSquared</span></code></a> 核产生的GP的先验和后验在下图中展示:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_0021.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_0021.png" /></a>
+</div>
+</div>
+<div class="section" id="dot-product-kernel">
+<h3>1.7.5.8. 点乘核(Dot-Product kernel)<a class="headerlink" href="#dot-product-kernel" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct" title="sklearn.gaussian_process.kernels.DotProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">DotProduct</span></code></a> 内核类 是一个非平稳核(non-stationary kernel) 。
+该内核可以从线性回归中得到，而这个线性回归又是通过把 <span class="math notranslate nohighlight">\(N(0, 1)\)</span> 先验放在 <span class="math notranslate nohighlight">\(x_d (d = 1, . . . , D)\)</span> 的系数上
+以及把 <span class="math notranslate nohighlight">\(N(0, \sigma_0^2)\)</span> 先验放在偏置上得到的。
+<a class="reference internal" href="generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct" title="sklearn.gaussian_process.kernels.DotProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">DotProduct</span></code></a> 核对关于原点的坐标旋转是具有不变性的，但是它没有平移不变性。
+它通过参数 <span class="math notranslate nohighlight">\(\sigma_0^2\)</span> 进行参数化。 对于 <span class="math notranslate nohighlight">\(\sigma_0^2 = 0\)</span>, 该内核又叫做 齐次线性核(homogeneous linear kernel),
+否则它就是非齐次的(inhomogeneous)。 该内核的定义如下：</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \sigma_0 ^ 2 + x_i \cdot x_j\]</div>
+<p><a class="reference internal" href="generated/sklearn.gaussian_process.kernels.DotProduct.html#sklearn.gaussian_process.kernels.DotProduct" title="sklearn.gaussian_process.kernels.DotProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">DotProduct</span></code></a> 核通常与指数(exponentiation)相结合。下面是指数取2的一个例子:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_0031.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_0031.png" /></a>
+</div>
+</div>
+<div class="section" id="id16">
+<h3>1.7.5.9. 参考文献<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<table class="docutils citation" frame="void" id="rw2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[RW2006]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id6">3</a>, <a class="fn-backref" href="#id8">4</a>, <a class="fn-backref" href="#id13">5</a>, <a class="fn-backref" href="#id15">6</a>)</em> Carl Eduard Rasmussen and Christopher K.I. Williams, “Gaussian Processes for Machine Learning”, MIT Press 2006, Link to an official complete PDF version of the book <a class="reference external" href="http://www.gaussianprocess.org/gpml/chapters/RW.pdf">here</a> .</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    &copy; 2007 - 2018, scikit-learn developers (BSD License).
+    <!--
+    <a href="../_sources/modules/gaussian_process.rst.txt" rel="nofollow">Show this page source</a> -->
+  </div>
+  <div class="rel">
+    
+      <div class="buttonPrevious">
+        <a href="neighbors.html">Previous
+        </a>
+      </div>
+      <div class="buttonNext">
+        <a href="cross_decomposition.html">Next
+        </a>
+      </div>
+      
+    </div>
+
+    
+    <script>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+      ga('create', 'UA-22606712-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function () {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>

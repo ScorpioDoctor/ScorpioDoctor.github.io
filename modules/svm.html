@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>1.4. 支持向量机(Support Vector Machines) &#8212; scikit-learn 0.20.2 documentation</title>
+<!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../_static/css/bootstrap-responsive.css" />
+
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../_static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.5. 随机梯度下降(Stochastic Gradient Descent)" href="sgd.html" />
+    <link rel="prev" title="1.3. 核岭回归(Kernel ridge regression)" href="kernel_ridge.html" />
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+  VERSION_SUBDIR = (function (groups) {
+    return groups ? groups[1] : null;
+  })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+</script>
+<link rel="canonical" href="http://scikit-learn.org/stable/modules/svm.html" />
+
+<script type="text/javascript">
+  $("div.buttonNext, div.buttonPrevious").hover(
+    function () {
+      $(this).css('background-color', '#FF9C34');
+    },
+    function () {
+      $(this).css('background-color', '#A7D6E2');
+    }
+  );
+  function showMenu() {
+    var topNav = document.getElementById("scikit-navbar");
+    if (topNav.className === "navbar") {
+      topNav.className += " responsive";
+    } else {
+      topNav.className = "navbar";
+    }
+  };
+</script>
+
+<!-- 百度站长统计代码 -->
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+  <div class="header">
+    <p class="logo"><a href="../index.html">
+        <img src="../_static/scikit-learn-logo-small.png" alt="Logo" />
+      </a>
+    </p><div class="navbar" id="scikit-navbar">
+      <ul>
+        <li><a href="../index.html">首页</a></li>
+        <li><a href="../install.html">安装</a></li>
+        <li class="btn-li">
+          <div class="btn-group">
+            <a href="../documentation.html">文档</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="link-title">Scikit-learn
+                <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script>
+              </li>
+              <li><a href="../tutorial/index.html">教程</a></li>
+              <li><a href="../user_guide.html">用户指南</a></li>
+              <li><a href="classes.html">API</a></li>
+              <li><a href="../glossary.html">词汇表</a></li>
+              <li><a href="../faq.html">FAQ</a></li>
+              <li><a href="../developers/contributing.html">贡献</a></li>
+              <li><a href="../roadmap.html">路线图</a></li>
+              <li class="divider"></li>
+              <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
+              <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
+              <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+              <li><a href="../_downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="../auto_examples/index.html">案例</a></li>
+      </ul>
+      <a href="javascript:void(0);" onclick="showMenu()">
+        <div class="nav-icon">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </div>
+      </a>
+      <div class="search_form">
+        <div class="gcse-search" id="cse" style="width: 100%;"></div>
+      </div>
+    </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../_static/img/forkme.png"
+    alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+  <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+      <div class="rel">
+        
+          <div class="rellink">
+            <a href="kernel_ridge.html" accesskey="P">Previous
+              <br />
+              <span class="smallrellink">
+                1.3. 核岭回归(Ker...
+              </span>
+              <span class="hiddenrellink">
+                1.3. 核岭回归(Kernel ridge regression)
+              </span>
+            </a>
+          </div>
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="sgd.html" accesskey="N">Next
+              <br />
+              <span class="smallrellink">
+                1.5. 随机梯度下降(S...
+              </span>
+              <span class="hiddenrellink">
+                1.5. 随机梯度下降(Stochastic Gradient Descent)
+              </span>
+            </a>
+          </div>
+
+          <!-- Ad a link to the 'up' page -->
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="../supervised_learning.html">
+              Up
+              <br />
+              <span class="smallrellink">
+                1. 监督学习(super...
+              </span>
+                <span class="hiddenrellink">
+                  1. 监督学习(supervised learning)
+                </span>
+                
+            </a>
+          </div>
+        </div>
+        
+        <p class="doc-version"><b>scikit-learn v0.20.2</b><br />
+          <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+        <!-- <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite
+              us </a></b>if you use the software.</p> -->
+        <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
+        </p>
+        <ul>
+<li><a class="reference internal" href="#">1.4. 支持向量机(Support Vector Machines)</a><ul>
+<li><a class="reference internal" href="#svm-classification">1.4.1. 分类</a><ul>
+<li><a class="reference internal" href="#svm-multi-class">1.4.1.1. 多类别分类</a></li>
+<li><a class="reference internal" href="#scores-probabilities">1.4.1.2. 得分与概率</a></li>
+<li><a class="reference internal" href="#id4">1.4.1.3. 不均衡问题</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#svm-regression">1.4.2. 回归</a></li>
+<li><a class="reference internal" href="#svm-outlier-detection">1.4.3. 密度估计, 奇异值检测</a></li>
+<li><a class="reference internal" href="#id7">1.4.4. 复杂度</a></li>
+<li><a class="reference internal" href="#id8">1.4.5. 实用小建议</a></li>
+<li><a class="reference internal" href="#svm-kernels">1.4.6. 核函数</a><ul>
+<li><a class="reference internal" href="#id10">1.4.6.1. 自定义核函数</a><ul>
+<li><a class="reference internal" href="#python">1.4.6.1.1. 使用Python函数作为核</a></li>
+<li><a class="reference internal" href="#gram-matrix">1.4.6.1.2. 使用 Gram matrix</a></li>
+<li><a class="reference internal" href="#rbf">1.4.6.1.3. RBF核函数的参数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#svm-mathematical-formulation">1.4.7. 数学表达式</a><ul>
+<li><a class="reference internal" href="#svc">1.4.7.1. SVC</a></li>
+<li><a class="reference internal" href="#nusvc">1.4.7.2. NuSVC</a></li>
+<li><a class="reference internal" href="#svr">1.4.7.3. SVR</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#svm-implementation-details">1.4.8. 算法实现细节</a></li>
+</ul>
+</li>
+</ul>
+
+        <br />
+        <p>
+          <a href="http://www.studyai.com" target="_blank">
+            <img src="../_static/img/xxx.png" alt="座右铭" />
+          </a>
+        </p>
+        <br />
+        <p class="doc-version" style="font-size:10%">
+          注意!本网站的网址是以 <em>https://</em> 开头的，而不是以 <em>http://</em> 开头的!!!
+        </p>
+      </div>
+    </div>
+    
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+    <label for="nav-trigger"></label>
+    
+    
+
+
+    <div class="content">
+      
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="support-vector-machines">
+<span id="svm"></span><h1>1.4. 支持向量机(Support Vector Machines)<a class="headerlink" href="#support-vector-machines" title="Permalink to this headline">¶</a></h1>
+<p><strong>Support vector machines (SVMs)</strong> 是一类监督学习算法，常被用于：<a class="reference internal" href="#svm-classification"><span class="std std-ref">classification</span></a>,
+<a class="reference internal" href="#svm-regression"><span class="std std-ref">regression</span></a> 和 <a class="reference internal" href="#svm-outlier-detection"><span class="std std-ref">outliers detection</span></a>.</p>
+<p>支持向量机的优点:</p>
+<blockquote>
+<div><ul class="simple">
+<li>在高维空间中非常高效。</li>
+<li>即使在数据维度比样本数量大的情况下仍然有效。</li>
+<li>在决策函数（称为支持向量）中使用训练集的子集,因此它也是高效利用内存的.</li>
+<li>通用性: 不同的核函数与特定的决策函数一一对应.常见的 kernel 已经提供,也可以指定定制的内核.</li>
+</ul>
+</div></blockquote>
+<p>支持向量机的缺点:</p>
+<blockquote>
+<div><ul class="simple">
+<li>如果特征数量比样本数量大得多, 选择核函数 <a class="reference internal" href="#svm-kernels"><span class="std std-ref">核函数</span></a> 和 正则化项以避免过拟合是很关键的。</li>
+<li>支持向量机不直接提供概率估计,这些都是使用昂贵的五次交叉验算计算的。 (详情见 <a class="reference internal" href="#scores-probabilities"><span class="std std-ref">Scores and probabilities</span></a>, 在下文中)</li>
+</ul>
+</div></blockquote>
+<p>在 scikit-learn 中,支持向量机 支持 稠密样本向量 ( <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> ,可以通过 <code class="docutils literal notranslate"><span class="pre">numpy.asarray</span></code> 进行转换) 和
+稀疏样本向量 (任何 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> ) 作为输入。 然而,要使用支持向量机来对稀疏数据作预测,它必须已经在这样的数据上拟合过了。
+为了优化性能，使用了 C-ordered <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> (稠密输入) 或者带有 <code class="docutils literal notranslate"><span class="pre">dtype=float64</span></code> 的 <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code> (稀疏输入) 。</p>
+<div class="section" id="svm-classification">
+<span id="id1"></span><h2>1.4.1. 分类<a class="headerlink" href="#svm-classification" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 能够在指定的数据集上进行多类分类任务的类。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/svm/plot_iris.html"><img alt="../_images/sphx_glr_plot_iris_0012.png" src="../_images/sphx_glr_plot_iris_0012.png" /></a>
+</div>
+<p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 是相似的方法, 但是它们接受的参数集合稍微不同并且数学形式也有所区别
+(see section <a class="reference internal" href="#svm-mathematical-formulation"><span class="std std-ref">数学表达式</span></a>)。另一方面， <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 是支持向量机的另一种实现方式，主要用于线性核函数的情况。
+注意到 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 不接受关键参数 <code class="docutils literal notranslate"><span class="pre">kernel</span></code>, 因为 核函数 已经被假定为线性核啦。它也缺少 <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 才有的
+一些类成员属性, 比如 <code class="docutils literal notranslate"><span class="pre">support_</span></code>。</p>
+<p>和其他分类器一样, <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 将两个数组作为输入: shape为 <code class="docutils literal notranslate"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code> 的数组 X 作为训练样本,
+shape为 <code class="docutils literal notranslate"><span class="pre">[n_samples]</span></code> 的数组 y 作为类别标签(字符串或者整数):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;scale&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">    decision_function_shape=&#39;ovr&#39;, degree=3, gamma=&#39;scale&#39;, kernel=&#39;rbf&#39;,</span>
+<span class="go">    max_iter=-1, probability=False, random_state=None, shrinking=True,</span>
+<span class="go">    tol=0.001, verbose=False)</span>
+</pre></div>
+</div>
+<p>在模型拟合好后, 就可以用来预测新的值:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+<p>SVMs的决策函数依赖于训练数据的某些子集，称之为支持向量(support vectors)。这些支持向量的一部分属性可以在成员
+<code class="docutils literal notranslate"><span class="pre">support_vectors_</span></code>, <code class="docutils literal notranslate"><span class="pre">support_</span></code> 和 <code class="docutils literal notranslate"><span class="pre">n_support</span></code> 中找到</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># get support vectors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">support_vectors_</span>
+<span class="go">array([[0., 0.],</span>
+<span class="go">       [1., 1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># get indices of support vectors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">support_</span> 
+<span class="go">array([0, 1]...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># get number of support vectors for each class</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">n_support_</span> 
+<span class="go">array([1, 1]...)</span>
+</pre></div>
+</div>
+<div class="section" id="svm-multi-class">
+<span id="id2"></span><h3>1.4.1.1. 多类别分类<a class="headerlink" href="#svm-multi-class" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 实现了 “one-against-one” 方法 (Knerr et al., 1990) 用于解决多类别分类问题。
+如果 <code class="docutils literal notranslate"><span class="pre">n_class</span></code> 是类的数量，那么总共需要构建 <code class="docutils literal notranslate"><span class="pre">n_class</span> <span class="pre">*</span> <span class="pre">(n_class</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2</span></code> 个分类器，其中每一个分类器都是在数据上训练得到的两类分类器。
+为了和其他分类器的接口保持一致，<code class="docutils literal notranslate"><span class="pre">decision_function_shape</span></code> 选项允许把多个”one-against-one”分类器的结果聚集到一个
+shape为 <code class="docutils literal notranslate"><span class="pre">(n_samples,n_classes)</span></code> 决策函数里边</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="n">decision_function_shape</span><span class="o">=</span><span class="s1">&#39;ovo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span> 
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">    decision_function_shape=&#39;ovo&#39;, degree=3, gamma=&#39;scale&#39;, kernel=&#39;rbf&#39;,</span>
+<span class="go">    max_iter=-1, probability=False, random_state=None, shrinking=True,</span>
+<span class="go">    tol=0.001, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 4 classes: 4*3/2 = 6</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">decision_function_shape</span> <span class="o">=</span> <span class="s2">&quot;ovr&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 4 classes</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>另一方面, <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 实现了 “one-vs-the-rest” 多类分类策略, 因此会训练出 n_class 个 模型。
+如果只有两个类，那么就只训练一个模型</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin_clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lin_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span> 
+<span class="go">LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,</span>
+<span class="go">     intercept_scaling=1, loss=&#39;squared_hinge&#39;, max_iter=1000,</span>
+<span class="go">     multi_class=&#39;ovr&#39;, penalty=&#39;l2&#39;, random_state=None, tol=0.0001,</span>
+<span class="go">     verbose=0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span> <span class="o">=</span> <span class="n">lin_clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>请参考 <a class="reference internal" href="#svm-mathematical-formulation"><span class="std std-ref">数学表达式</span></a> 小节关于决策函数(decision function)的完整描述。</p>
+<p>需要注意的是 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 也实现了另外一种替代的多类分类策略，称之为 multi-class SVM(由Crammer和Singer提出),
+通过指定参数选项  <code class="docutils literal notranslate"><span class="pre">multi_class='crammer_singer'</span></code> 来使用这种策略。
+‘crammer_singer’多类分类策略的结果具有一致性，而 ‘one-vs-rest’ 多类分类策略的结果却不具有一致性。
+但是在实践中，我们通常比较偏爱使用 ‘one-vs-rest’ 策略，因为这两种策略的结果总是非常相似的但是
+‘one-vs-rest’ 策略的执行时间显著少于’crammer_singer’策略。</p>
+<p>对于采用 “one-vs-rest” 分类策略的 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> , 属性 <code class="docutils literal notranslate"><span class="pre">coef_</span></code> 和 <code class="docutils literal notranslate"><span class="pre">intercept_</span></code>
+的shape分别为 <code class="docutils literal notranslate"><span class="pre">[n_class,</span> <span class="pre">n_features]</span></code> 和 <code class="docutils literal notranslate"><span class="pre">[n_class]</span></code> 。
+系数(coefficients)的每一行对应于 <code class="docutils literal notranslate"><span class="pre">n_class</span></code> 个 “one-vs-rest” 诸多分类器中的一个。截距(intercepts)的对应规则也是一样的。</p>
+<p>对于采用 “one-vs-one” 分类策略的 <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a>, 属性的布局(the layout of the attributes)更复杂一些。
+如果采用了线性内核, 属性 <code class="docutils literal notranslate"><span class="pre">coef_</span></code> 和 <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> 的shape分别为 <code class="docutils literal notranslate"><span class="pre">[n_class</span> <span class="pre">*</span> <span class="pre">(n_class</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2,</span> <span class="pre">n_features]</span></code>
+和 <code class="docutils literal notranslate"><span class="pre">[n_class</span> <span class="pre">*</span> <span class="pre">(n_class</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2]</span></code> 。 这与上面描述的 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 类的布局结构有些相似之处：每一行对应于一个二分类器(binary classifier)。
+另一方面， 从 第0类 到 第n类 的顺序为 “0 vs 1”, “0 vs 2” , … “0 vs n”, “1 vs 2”, “1 vs 3”, “1 vs n”, … “n-1 vs n”。</p>
+<p>这段内容说了对偶系数(<code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code>)的shape以及它的含义，这个布局结构有点难以掌握。 <code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code> 的shape是 <code class="docutils literal notranslate"><span class="pre">[n_class-1,</span> <span class="pre">n_SV]</span></code> 。
+The columns correspond to the support vectors involved in any
+of the <code class="docutils literal notranslate"><span class="pre">n_class</span> <span class="pre">*</span> <span class="pre">(n_class</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2</span></code> “one-vs-one” classifiers.
+Each of the support vectors is used in <code class="docutils literal notranslate"><span class="pre">n_class</span> <span class="pre">-</span> <span class="pre">1</span></code> classifiers.
+The <code class="docutils literal notranslate"><span class="pre">n_class</span> <span class="pre">-</span> <span class="pre">1</span></code> entries in each row correspond to the dual coefficients
+for these classifiers.</p>
+<p>我们可以通过一个例子说清楚上面的问题:</p>
+<p>Consider a three class problem with class 0 having three support vectors
+<span class="math notranslate nohighlight">\(v^{0}_0, v^{1}_0, v^{2}_0\)</span> and class 1 and 2 having two support vectors
+<span class="math notranslate nohighlight">\(v^{0}_1, v^{1}_1\)</span> and <span class="math notranslate nohighlight">\(v^{0}_2, v^{1}_2\)</span> respectively.  For each
+support vector <span class="math notranslate nohighlight">\(v^{j}_i\)</span>, there are two dual coefficients.  Let’s call
+the coefficient of support vector <span class="math notranslate nohighlight">\(v^{j}_i\)</span> in the classifier between
+classes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(k\)</span> <span class="math notranslate nohighlight">\(\alpha^{j}_{i,k}\)</span>.
+Then <code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code> looks like this:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="36%" />
+<col width="27%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\alpha^{0}_{0,1}\)</span></td>
+<td><span class="math notranslate nohighlight">\(\alpha^{0}_{0,2}\)</span></td>
+<td rowspan="3">Coefficients
+for SVs of class 0</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\alpha^{1}_{0,1}\)</span></td>
+<td><span class="math notranslate nohighlight">\(\alpha^{1}_{0,2}\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\alpha^{2}_{0,1}\)</span></td>
+<td><span class="math notranslate nohighlight">\(\alpha^{2}_{0,2}\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\alpha^{0}_{1,0}\)</span></td>
+<td><span class="math notranslate nohighlight">\(\alpha^{0}_{1,2}\)</span></td>
+<td rowspan="2">Coefficients
+for SVs of class 1</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\alpha^{1}_{1,0}\)</span></td>
+<td><span class="math notranslate nohighlight">\(\alpha^{1}_{1,2}\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\alpha^{0}_{2,0}\)</span></td>
+<td><span class="math notranslate nohighlight">\(\alpha^{0}_{2,1}\)</span></td>
+<td rowspan="2">Coefficients
+for SVs of class 2</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\alpha^{1}_{2,0}\)</span></td>
+<td><span class="math notranslate nohighlight">\(\alpha^{1}_{2,1}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="scores-probabilities">
+<span id="id3"></span><h3>1.4.1.2. 得分与概率<a class="headerlink" href="#scores-probabilities" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 的 <code class="docutils literal notranslate"><span class="pre">decision_function</span></code> 方法给出了每个样本属于每个类的得分(在二分类问题中每个样本只有一个得分)。
+当构造函数选项 <code class="docutils literal notranslate"><span class="pre">probability</span></code> 被设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>, 类成员概率(class membership probability)估计就被开启了,估计方法 <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code>
+和 <code class="docutils literal notranslate"><span class="pre">predict_log_proba</span></code> 就会被调用。在二分类问题中，概率以”Platt scaling”的方法被校准(calibrated): logistic regression on the SVM’s scores,
+fit by an additional cross-validation on the training data.
+在多分类情况下, Wu et al. (2004) 对上述方法做出了扩展.</p>
+<p>都不用说, 对于大数据集，Platt scaling 方法中使用交叉验证是一个昂贵操作。而且，使用SVM的得分进行概率估计得到的结果是不一致的(inconsistent),
+从这个意义上说，得分的最大化并不等价于概率的最大化(the “argmax” of the scores may not be the argmax of the probabilities)。
+(比如说, 在二分类问题中, 一个样本可能会被 <code class="docutils literal notranslate"><span class="pre">predict</span></code> 标记为属于其中一个根据 <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> 估计出的概率&lt;½的类(a sample may be labeled
+by <code class="docutils literal notranslate"><span class="pre">predict</span></code> as belonging to a class that has probability &lt;½ according to <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code>.)。
+Platt的方法还被认为存在一些理论问题。
+如果我们需要信任得分(confidence scores), 但是这些信任得分不一定是概率性得分，那么建议设置 <code class="docutils literal notranslate"><span class="pre">probability=False</span></code> 并使用 <code class="docutils literal notranslate"><span class="pre">decision_function</span></code>
+而不是 <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code>。</p>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<ul class="simple">
+<li>Wu, Lin and Weng,
+<a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/papers/svmprob/svmprob.pdf">“Probability estimates for multi-class classification by pairwise coupling”</a>,
+JMLR 5:975-1005, 2004.</li>
+<li>Platt
+<a class="reference external" href="https://www.cs.colorado.edu/~mozer/Teaching/syllabi/6622/papers/Platt1999.pdf">“Probabilistic outputs for SVMs and comparisons to regularized likelihood methods”</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>1.4.1.3. 不均衡问题<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>在某些问题中，我们需要给某些类或个别样本更大的重要性，这时候就要使用关键参数 <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> 。</p>
+<p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> (but not <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a>) 在 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法中实现了关键字参数 <code class="docutils literal notranslate"><span class="pre">class_weight</span></code>，是一个形式为 <code class="docutils literal notranslate"><span class="pre">{class_label</span> <span class="pre">:</span> <span class="pre">value}</span></code> 的字典,
+其中 value 是一个大于0的浮点数，把 <code class="docutils literal notranslate"><span class="pre">class_label</span></code> 对应的类的参数 <code class="docutils literal notranslate"><span class="pre">C</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">*</span> <span class="pre">value</span></code>.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html"><img alt="../_images/sphx_glr_plot_separating_hyperplane_unbalanced_0011.png" src="../_images/sphx_glr_plot_separating_hyperplane_unbalanced_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+</div>
+<p><a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code></a> 在 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法中
+通过关键字参数 <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> 实现了对个别样本进行加权的功能。与关键字参数 <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> 类似，<code class="docutils literal notranslate"><span class="pre">sample_weight</span></code>
+将会为第i个样本把参数 <code class="docutils literal notranslate"><span class="pre">C</span></code> 设置成 <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">*</span> <span class="pre">sample_weight[i]</span></code> 。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/svm/plot_weighted_samples.html"><img alt="../_images/sphx_glr_plot_weighted_samples_0011.png" src="../_images/sphx_glr_plot_weighted_samples_0011.png" style="width: 1050.0px; height: 450.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/svm/plot_iris.html#sphx-glr-auto-examples-svm-plot-iris-py"><span class="std std-ref">Plot different SVM classifiers in the iris dataset</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane.html#sphx-glr-auto-examples-svm-plot-separating-hyperplane-py"><span class="std std-ref">SVM: Maximum margin separating hyperplane</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html#sphx-glr-auto-examples-svm-plot-separating-hyperplane-unbalanced-py"><span class="std std-ref">SVM: Separating hyperplane for unbalanced classes</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_svm_anova.html#sphx-glr-auto-examples-svm-plot-svm-anova-py"><span class="std std-ref">SVM-Anova: SVM with univariate feature selection</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_svm_nonlinear.html#sphx-glr-auto-examples-svm-plot-svm-nonlinear-py"><span class="std std-ref">Non-linear SVM</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_weighted_samples.html#sphx-glr-auto-examples-svm-plot-weighted-samples-py"><span class="std std-ref">SVM: Weighted samples</span></a>,</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="svm-regression">
+<span id="id5"></span><h2>1.4.2. 回归<a class="headerlink" href="#svm-regression" title="Permalink to this headline">¶</a></h2>
+<p>支持向量分类方法(The method of Support Vector Classification)可以推广到解决回归问题。
+这种方法称为支持向量回归(Support Vector Regression)。</p>
+<p>支持向量分类(如上所述)生成的模型仅依赖于训练数据的子集，因为建立模型的代价函数(cost function)不关心超出边际的训练点。
+类似地，支持向量回归生成的模型只依赖于训练数据的一个子集，因为用于建立模型的代价函数忽略了任何接近模型预测的训练数据。</p>
+<p>Support Vector Regression有三种不同的实现: <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.LinearSVR.html#sklearn.svm.LinearSVR" title="sklearn.svm.LinearSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVR</span></code></a>。
+<a class="reference internal" href="generated/sklearn.svm.LinearSVR.html#sklearn.svm.LinearSVR" title="sklearn.svm.LinearSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVR</span></code></a> 提供了比 <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code></a> 更快的实现但是只能使用 线性核 , 而 <a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code></a> 则实现了一个与
+<a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.LinearSVR.html#sklearn.svm.LinearSVR" title="sklearn.svm.LinearSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVR</span></code></a> 的数学形式稍微不一样的版本， 关于数学形式，请参考 <a class="reference internal" href="#svm-implementation-details"><span class="std std-ref">算法实现细节</span></a> 。</p>
+<p>与支持向量分类器一样, 在回归问题中，<code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法也接受向量 X, y 作为参数, 只是这时候 y 是浮点数而不是整数值</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> 
+<span class="go">SVR(C=1.0, cache_size=200, coef0=0.0, degree=3, epsilon=0.1,</span>
+<span class="go">    gamma=&#39;auto_deprecated&#39;, kernel=&#39;rbf&#39;, max_iter=-1, shrinking=True,</span>
+<span class="go">    tol=0.001, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([1.5])</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">案列:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/svm/plot_svm_regression.html#sphx-glr-auto-examples-svm-plot-svm-regression-py"><span class="std std-ref">Support Vector Regression (SVR) using linear and non-linear kernels</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="svm-outlier-detection">
+<span id="id6"></span><h2>1.4.3. 密度估计, 奇异值检测<a class="headerlink" href="#svm-outlier-detection" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code></a> 类实现了一个 One-Class SVM ，它被用来进行离群点检测(outlier detection)。</p>
+<p>请参考 <a class="reference internal" href="outlier_detection.html#outlier-detection"><span class="std std-ref">新奇点和孤立点检测(Novelty and Outlier Detection)</span></a> 获得 OneClassSVM 的详细用法。</p>
+</div>
+<div class="section" id="id7">
+<h2>1.4.4. 复杂度<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>支持向量机是一种强大的工具，但是它们的计算和存储需求随着训练向量的增加而迅速增加。
+支持向量机的核心是二次规划问题（quadratic programming problem (QP)）：从训练数据点中剥离出支撑向量(support vectors)。
+基于 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">libsvm</a> 实现的 QP 求解器 在
+<span class="math notranslate nohighlight">\(O(n_{features} \times n_{samples}^2)\)</span> 和
+<span class="math notranslate nohighlight">\(O(n_{features} \times n_{samples}^3)\)</span> 之间变动，这依赖于在实际计算中如何高效利用 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">libsvm</a> 缓存(这是与数据集无关的)。
+如果数据非常稀疏， <span class="math notranslate nohighlight">\(n_{features}\)</span> 应该用样本向量中非零特征的平均数量替换。</p>
+<p>值得注意的是，在线性情况下，<a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 使用的算法是由 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/liblinear/">liblinear</a> 实现的，它比基于 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">libsvm</a> 实现的对应的线性 <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> 效率更高，而且
+其伸缩性在百万级样本和特征下几乎是线性的。</p>
+</div>
+<div class="section" id="id8">
+<h2>1.4.5. 实用小建议<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>避免数据拷贝</strong>: 对 <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 和
+<a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code></a>, 如果传递到这些类中的数据不是 C-ordered contiguous 的, 并且是双精度的,
+这些数据将会在调用SVM的C语言实现之前被复制。你可以通过检查它的 <code class="docutils literal notranslate"><span class="pre">flags</span></code> 属性判断一个给定的numpy数组是否是 C-contiguous的。</p>
+<p>对于 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> (还有 <a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a>)，
+任何以numpy array形式传入的数据都会被拷贝并且转换成 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/liblinear/">liblinear</a> 内部的稀疏数据表达形式(double precision floats and int32 indices of non-zero
+components)。 如果你想训练一个大规模线性分类器而不愿意拷贝稠密的numpy C-contiguous 类型的双精度数组，我们建议使用
+<a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">SGDClassifier</span></code></a> 类作为替代方案， 并且SGD分类器中使用的目标函数可以配置的和 <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a>
+模型几乎一样。</p>
+</li>
+<li><p class="first"><strong>核缓存大小(Kernel cache size)</strong>: 对于 <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code></a>, <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code></a> 类来说,
+核缓存的大小对规模比较大的问题的运行时间有很大的影响。  如果你有足够的RAM可用，建议将 <code class="docutils literal notranslate"><span class="pre">cache_size</span></code>
+设定为一个比默认值(200MB)较高的值,比如500MB或1000MB。</p>
+</li>
+<li><p class="first"><strong>Setting C</strong>: 默认情况下 <code class="docutils literal notranslate"><span class="pre">C</span></code> 等于 <code class="docutils literal notranslate"><span class="pre">1</span></code> 而且这是一个合理的默认值。如果你的观测数据带有很大噪声，应该减小 <code class="docutils literal notranslate"><span class="pre">C</span></code> 的值，这对应于正则化比估计值更大(
+译者注：数据噪声比较大时，源于数据的模型估计就不那么令人信服了，所以对模型的正则化程度就更强一点以避免模型的拟合被有问题的数据带偏)。</p>
+<p>当 <code class="docutils literal notranslate"><span class="pre">C</span></code> 的值变大以后, <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.LinearSVR.html#sklearn.svm.LinearSVR" title="sklearn.svm.LinearSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVR</span></code></a> 对其取值就不敏感了。
+并且超过某个阈值以后，预测结果就不会再有改进了。 同时，越大的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 值需要的训练时间会越多,
+有些时候甚至会多出10倍, 就像 Fan et al. (2008) 所展示的那样。</p>
+</li>
+<li><p class="first">SVM 算法都不具备 尺度不变性(scale invariant), 所以 <strong>强烈建议缩放数据</strong>。
+比如，把输入向量 X 中每个特征分量的值缩放到[0,1] or [-1,+1], 或者将其标准化(standardize)成具有零均值单位方差的数据。
+请注意对测试数据也要使用**相同的缩放操作**进行变换以获得有意义的结果。关于数据缩放和归一化请查看 <a class="reference internal" href="preprocessing.html#preprocessing"><span class="std std-ref">预处理数据(Preprocessing data)</span></a> 。</p>
+</li>
+<li><p class="first"><a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a>/<a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code></a>/<a class="reference internal" href="generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code></a> 类中的参数 <code class="docutils literal notranslate"><span class="pre">nu</span></code> 近似了训练误差和支持向量的比值
+(approximates the fraction of training errors and support vectors)。</p>
+</li>
+<li><p class="first">在 <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> 类中, 如果用于分类的数据是不均衡的(unbalanced) (比如 很多的正样本但是负样本很少), 请设置 <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>
+and/or 尝试不同的惩罚参数(正则化) <code class="docutils literal notranslate"><span class="pre">C</span></code> 。</p>
+</li>
+<li><p class="first"><strong>底层实现的随机性</strong>:  <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 类的底层实现仅仅在随机打乱数据和概率估计(<code class="docutils literal notranslate"><span class="pre">probability</span></code> 被设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>)
+的时候用到了随机数发生器。这种随机性可以由参数 <code class="docutils literal notranslate"><span class="pre">random_state</span></code> 进行控制。如果 <code class="docutils literal notranslate"><span class="pre">probability</span></code> 被设置为 <code class="docutils literal notranslate"><span class="pre">False</span></code>，那么这两个estimators
+就不是随机的，参数 <code class="docutils literal notranslate"><span class="pre">random_state</span></code> 对结果没有影响。 <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code></a> 类的底层实现与 <a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code></a> 和 <a class="reference internal" href="generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code></a> 是类似的。
+由于 <a class="reference internal" href="generated/sklearn.svm.OneClassSVM.html#sklearn.svm.OneClassSVM" title="sklearn.svm.OneClassSVM"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code></a> 类压根儿没提供概率估计, 所以它不是随机的。</p>
+<p><a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 的底层实现： 当使用对偶坐标下降法(dual coordinate descent)拟合模型的时候(<code class="docutils literal notranslate"><span class="pre">dual</span></code> 被设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>)，
+该类的底层实现使用了一个随机数发生器进行特征选择。这时候对相同的输入数据可能会产生稍微不同的结果。如果这种情况确实发生了，请使用一个较小的
+tol 参数。 此处的随机性也可以用参数 <code class="docutils literal notranslate"><span class="pre">random_state</span></code> 进行控制。当参数 <code class="docutils literal notranslate"><span class="pre">dual</span></code> 被设置为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 的时候， <a class="reference internal" href="generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> 类的底层实现不是随机的
+因此参数 <code class="docutils literal notranslate"><span class="pre">random_state</span></code> 对最终的结果也就没啥影响啦。</p>
+</li>
+<li><p class="first">使用由 <code class="docutils literal notranslate"><span class="pre">LinearSVC(loss='l2',</span> <span class="pre">penalty='l1',</span> <span class="pre">dual=False)</span></code> 提供的L1惩罚项会产生稀疏解，
+也就是说 全部特征的只有一个特征子集的权重不等于0并对决策函数有贡献(only a subset of feature weights is different from zero
+and contribute to the decision function)。增加 <code class="docutils literal notranslate"><span class="pre">C</span></code> 的值会产生一个更加复杂的模型 (有更多的特征被用于决策函数)。
+用于产生空模型 (“null” model: 所有权重等于0) 的``C`` 的值 可以使用 <a class="reference internal" href="generated/sklearn.svm.l1_min_c.html#sklearn.svm.l1_min_c" title="sklearn.svm.l1_min_c"><code class="xref py py-func docutils literal notranslate"><span class="pre">l1_min_c</span></code></a> 计算得到。</p>
+</li>
+</ul>
+</div></blockquote>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<ul class="simple">
+<li>Fan, Rong-En, et al.,
+<a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/papers/liblinear.pdf">“LIBLINEAR: A library for large linear classification.”</a>,
+Journal of machine learning research 9.Aug (2008): 1871-1874.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="svm-kernels">
+<span id="id9"></span><h2>1.4.6. 核函数<a class="headerlink" href="#svm-kernels" title="Permalink to this headline">¶</a></h2>
+<p>SVMs中可用的核函数(<em>kernel function</em>)如下所示：</p>
+<blockquote>
+<div><ul class="simple">
+<li>线性核(linear): <span class="math notranslate nohighlight">\(\langle x, x'\rangle\)</span>.</li>
+<li>多项式核(polynomial): <span class="math notranslate nohighlight">\((\gamma \langle x, x'\rangle + r)^d\)</span>.
+<span class="math notranslate nohighlight">\(d\)</span> is specified by keyword <code class="docutils literal notranslate"><span class="pre">degree</span></code>, <span class="math notranslate nohighlight">\(r\)</span> by <code class="docutils literal notranslate"><span class="pre">coef0</span></code>.</li>
+<li>径向基核(rbf): <span class="math notranslate nohighlight">\(\exp(-\gamma \|x-x'\|^2)\)</span>. <span class="math notranslate nohighlight">\(\gamma\)</span> is
+specified by keyword <code class="docutils literal notranslate"><span class="pre">gamma</span></code>, must be greater than 0.</li>
+<li>sigmoid (<span class="math notranslate nohighlight">\(\tanh(\gamma \langle x,x'\rangle + r)\)</span>),
+where <span class="math notranslate nohighlight">\(r\)</span> is specified by <code class="docutils literal notranslate"><span class="pre">coef0</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>在估计器被初始化的时候，可以通过关键字参数 <code class="docutils literal notranslate"><span class="pre">kernel</span></code> 指定你想使用的核函数</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">linear_svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linear_svc</span><span class="o">.</span><span class="n">kernel</span>
+<span class="go">&#39;linear&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbf_svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbf_svc</span><span class="o">.</span><span class="n">kernel</span>
+<span class="go">&#39;rbf&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="id10">
+<h3>1.4.6.1. 自定义核函数<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>你可以用两种方式定义自己的核函数：一是以某个Python函数作为核函数，二是预先计算出 Gram 矩阵。</p>
+<p>带有自定义核函数的SVM分类器与其他分类器的行为是一样的，除了以下几点：</p>
+<blockquote>
+<div><ul class="simple">
+<li>属性域 <code class="docutils literal notranslate"><span class="pre">support_vectors_</span></code> 现在是空的, 只有 support vectors 的索引被存储在 <code class="docutils literal notranslate"><span class="pre">support_</span></code> 中。</li>
+<li><code class="docutils literal notranslate"><span class="pre">fit()</span></code> 方法的第一个参数的引用(not a copy)将会被保存下来方便后续使用。如果那个数组在使用 <code class="docutils literal notranslate"><span class="pre">fit()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">predict()</span></code>
+之间被修改了，那么你会得到无法预料的结果。</li>
+</ul>
+</div></blockquote>
+<div class="section" id="python">
+<h4>1.4.6.1.1. 使用Python函数作为核<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h4>
+<p>你可以在构造器中传入一个python函数给关键字参数 <code class="docutils literal notranslate"><span class="pre">kernel</span></code> 来使用自己的核函数。</p>
+<p>你的核函数必须接受两个shape为 <code class="docutils literal notranslate"><span class="pre">(n_samples_1,</span> <span class="pre">n_features)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">(n_samples_2,</span> <span class="pre">n_features)</span></code> 的矩阵作为参数，
+然后返回一个shape为 <code class="docutils literal notranslate"><span class="pre">(n_samples_1,</span> <span class="pre">n_samples_2)</span></code> 的核矩阵。</p>
+<p>下面的代码定义了一个线性核函数，然后创建了一个分类器实例并使用了自定义的线性核函数:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_kernel</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">my_kernel</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/svm/plot_custom_kernel.html#sphx-glr-auto-examples-svm-plot-custom-kernel-py"><span class="std std-ref">SVM with custom kernel</span></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="gram-matrix">
+<h4>1.4.6.1.2. 使用 Gram matrix<a class="headerlink" href="#gram-matrix" title="Permalink to this headline">¶</a></h4>
+<p>设置 <code class="docutils literal notranslate"><span class="pre">kernel='precomputed'</span></code> 并且把 Gram 矩阵而不是 X 传递到 fit 方法中。目前，在所有训练向量和测试向量之间的核函数取值都必须提供。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># linear kernel computation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gram</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">gram</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="go">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</span>
+<span class="go">    decision_function_shape=&#39;ovr&#39;, degree=3, gamma=&#39;auto_deprecated&#39;,</span>
+<span class="go">    kernel=&#39;precomputed&#39;, max_iter=-1, probability=False,</span>
+<span class="go">    random_state=None, shrinking=True, tol=0.001, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># predict on training examples</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">gram</span><span class="p">)</span>
+<span class="go">array([0, 1])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rbf">
+<h4>1.4.6.1.3. RBF核函数的参数<a class="headerlink" href="#rbf" title="Permalink to this headline">¶</a></h4>
+<p>当使用径向基核函数(<em>Radial Basis Function</em> (RBF))训练SVM的时候，有两个参数必须被考虑： <code class="docutils literal notranslate"><span class="pre">C</span></code> 和 <code class="docutils literal notranslate"><span class="pre">gamma</span></code>。
+参数 <code class="docutils literal notranslate"><span class="pre">C</span></code>, 与其他所有SVM核函数一样，都是为了在训练样例的误分类和决策面的简单性之间做折中(trades off)的一个量。
+小的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 值能够使决策面(decision surface)变得光滑, 而 大的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 值的目标是把所有的训练样例都正确分类。
+<code class="docutils literal notranslate"><span class="pre">gamma</span></code> 定义了单个训练样本的影响有多大。<code class="docutils literal notranslate"><span class="pre">gamma</span></code> 的取值越大, the closer other examples must be to be affected.</p>
+<p>合理选择 <code class="docutils literal notranslate"><span class="pre">C</span></code> 和 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 的值对 SVM 的性能至关重要。建议使用 <a class="reference internal" href="generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV" title="sklearn.model_selection.GridSearchCV"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.GridSearchCV</span></code></a>
+对参数 <code class="docutils literal notranslate"><span class="pre">C</span></code> 和 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 的指数距离间隔上搜索以选择比较好的值。</p>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/svm/plot_rbf_parameters.html#sphx-glr-auto-examples-svm-plot-rbf-parameters-py"><span class="std std-ref">RBF SVM parameters</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="svm-mathematical-formulation">
+<span id="id11"></span><h2>1.4.7. 数学表达式<a class="headerlink" href="#svm-mathematical-formulation" title="Permalink to this headline">¶</a></h2>
+<p>支持向量机在高维或无限维空间中构造超平面或超平面集，然后用它们进行分类，回归，或其他学习任务。
+直观地说，使得超平面与任意一类的最近的训练数据点(所谓的函数边缘)的距离最大就可以得到一个很好的分离，因为一般来说，边缘间隔越大，分类器的泛化误差就越小。</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/sphx_glr_plot_separating_hyperplane_0011.png"><img alt="../_images/sphx_glr_plot_separating_hyperplane_0011.png" src="../_images/sphx_glr_plot_separating_hyperplane_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+</div>
+<div class="section" id="svc">
+<h3>1.4.7.1. SVC<a class="headerlink" href="#svc" title="Permalink to this headline">¶</a></h3>
+<p>给定两个类的训练向量集 <span class="math notranslate nohighlight">\(x_i \in \mathbb{R}^p\)</span>, i=1,…, n, 和一个向量 <span class="math notranslate nohighlight">\(y \in \{1, -1\}^n\)</span>,
+SVC 要 求解 的是下面这样一个原问题(primal problem)</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i\\\begin{split}\textrm {subject to } &amp; y_i (w^T \phi (x_i) + b) \geq 1 - \zeta_i,\\
+&amp; \zeta_i \geq 0, i=1, ..., n\end{split}\end{aligned}\end{align} \]</div>
+<p>它的对偶问题(dual problem)是:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\min_{\alpha} \frac{1}{2} \alpha^T Q \alpha - e^T \alpha\\\begin{split}
+\textrm {subject to } &amp; y^T \alpha = 0\\
+&amp; 0 \leq \alpha_i \leq C, i=1, ..., n\end{split}\end{aligned}\end{align} \]</div>
+<p>其中 <span class="math notranslate nohighlight">\(e\)</span> 是全1的向量， <span class="math notranslate nohighlight">\(C &gt; 0\)</span> 是上界, <span class="math notranslate nohighlight">\(Q\)</span> 是 <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n\)</span> 的半正定矩阵(positive semidefinite matrix),
+<span class="math notranslate nohighlight">\(Q_{ij} \equiv y_i y_j K(x_i, x_j)\)</span>, 其中 <span class="math notranslate nohighlight">\(K(x_i, x_j) = \phi (x_i)^T \phi (x_j)\)</span> 是核函数。在这里，训练向量通过函数 <span class="math notranslate nohighlight">\(\phi\)</span>
+被隐式映射到一个更高(也许是无限)维空间中。</p>
+<p>决策函数(decision function)是:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{sgn}(\sum_{i=1}^n y_i \alpha_i K(x_i, x) + \rho)\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">从 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">libsvm</a> 和 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/liblinear/">liblinear</a> 导出的SVM模型都采用 <code class="docutils literal notranslate"><span class="pre">C</span></code> 作为正则化参数，而其他估计器则大多采用 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> 作为正则化参数。
+两个模型的正则化量之间的精确等价取决于模型所优化的精确目标函数。比如，这个 <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.Ridge</span></code> 估计器被使用的话,
+那么它的正则化参数 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> 与 SVM 的 正则化参数 <code class="docutils literal notranslate"><span class="pre">C</span></code> 的关系是这样的：<span class="math notranslate nohighlight">\(C = \frac{1}{alpha}\)</span>.</p>
+</div>
+<p>上面决策函数表达式的计算可以通过获取成员变量的取值得到： <code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code> 保存着乘积 <span class="math notranslate nohighlight">\(y_i \alpha_i\)</span>,
+<code class="docutils literal notranslate"><span class="pre">support_vectors_</span></code> 保存着 support vectors, 以及 <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> 保存着独立项 <span class="math notranslate nohighlight">\(\rho\)</span> :</p>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.17.7215">“Automatic Capacity Tuning of Very Large VC-dimension Classifiers”</a>,
+I. Guyon, B. Boser, V. Vapnik - Advances in neural information
+processing 1993.</li>
+<li><a class="reference external" href="https://link.springer.com/article/10.1007%2FBF00994018">“Support-vector networks”</a>,
+C. Cortes, V. Vapnik - Machine Learning, 20, 273-297 (1995).</li>
+</ul>
+</div>
+</div>
+<div class="section" id="nusvc">
+<h3>1.4.7.2. NuSVC<a class="headerlink" href="#nusvc" title="Permalink to this headline">¶</a></h3>
+<p>我们引入一个新的参数 <span class="math notranslate nohighlight">\(\nu\)</span> 用来控制支持向量的数量和训练错误。参数 <span class="math notranslate nohighlight">\(\nu \in (0, 1]\)</span>
+is an upper bound on the fraction of training errors and a lower bound of the fraction of support vectors.</p>
+<p>It can be shown that the <span class="math notranslate nohighlight">\(\nu\)</span>-SVC formulation is a reparameterization of the <span class="math notranslate nohighlight">\(C\)</span>-SVC and therefore mathematically equivalent.</p>
+</div>
+<div class="section" id="svr">
+<h3>1.4.7.3. SVR<a class="headerlink" href="#svr" title="Permalink to this headline">¶</a></h3>
+<p>给定训练样本向量 <span class="math notranslate nohighlight">\(x_i \in \mathbb{R}^p\)</span>, i=1,…, n, 和 向量 <span class="math notranslate nohighlight">\(y \in \mathbb{R}^n\)</span>
+<span class="math notranslate nohighlight">\(\varepsilon\)</span>-SVR 求解下面的原问题(primal problem):</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\min_ {w, b, \zeta, \zeta^*} \frac{1}{2} w^T w + C \sum_{i=1}^{n} (\zeta_i + \zeta_i^*)\\\begin{split}\textrm {subject to } &amp; y_i - w^T \phi (x_i) - b \leq \varepsilon + \zeta_i,\\
+                      &amp; w^T \phi (x_i) + b - y_i \leq \varepsilon + \zeta_i^*,\\
+                      &amp; \zeta_i, \zeta_i^* \geq 0, i=1, ..., n\end{split}\end{aligned}\end{align} \]</div>
+<p>它的对偶如下：</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\min_{\alpha, \alpha^*} \frac{1}{2} (\alpha - \alpha^*)^T Q (\alpha - \alpha^*) + \varepsilon e^T (\alpha + \alpha^*) - y^T (\alpha - \alpha^*)\\\begin{split}
+\textrm {subject to } &amp; e^T (\alpha - \alpha^*) = 0\\
+&amp; 0 \leq \alpha_i, \alpha_i^* \leq C, i=1, ..., n\end{split}\end{aligned}\end{align} \]</div>
+<p>其中 <span class="math notranslate nohighlight">\(e\)</span> 是全1的向量， <span class="math notranslate nohighlight">\(C &gt; 0\)</span> 是上界, <span class="math notranslate nohighlight">\(Q\)</span> 是 <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n\)</span> 的半正定矩阵(positive semidefinite matrix),
+<span class="math notranslate nohighlight">\(Q_{ij} \equiv y_i y_j K(x_i, x_j)\)</span>, 其中 <span class="math notranslate nohighlight">\(K(x_i, x_j) = \phi (x_i)^T \phi (x_j)\)</span> 是核函数。在这里，训练向量通过函数 <span class="math notranslate nohighlight">\(\phi\)</span>
+被隐式映射到一个更高(也许是无限)维空间中。</p>
+<p>决策函数是:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n (\alpha_i - \alpha_i^*) K(x_i, x) + \rho\]</div>
+<p>上面决策函数表达式的计算可以通过获取成员变量的取值得到： <code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code> 保存着差值 <span class="math notranslate nohighlight">\(\alpha_i - \alpha_i^*\)</span>,
+<code class="docutils literal notranslate"><span class="pre">support_vectors_</span></code> 保存着 support vectors, 以及 <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> 保存着独立项 <span class="math notranslate nohighlight">\(\rho\)</span> :</p>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.114.4288">“A Tutorial on Support Vector Regression”</a>,
+Alex J. Smola, Bernhard Schölkopf - Statistics and Computing archive
+Volume 14 Issue 3, August 2004, p. 199-222.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="svm-implementation-details">
+<span id="id12"></span><h2>1.4.8. 算法实现细节<a class="headerlink" href="#svm-implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>在内部, 我们使用 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">libsvm</a> 和 <a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/liblinear/">liblinear</a> 来处理所有的计算问题。这些库使用C和Cython封装的。</p>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<p>关于SVM算法的实现请参考下面的介绍：</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">LIBSVM: A Library for Support Vector Machines</a>.</li>
+<li><a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR – A Library for Large Linear Classification</a>.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    &copy; 2007 - 2018, scikit-learn developers (BSD License).
+    <!--
+    <a href="../_sources/modules/svm.rst.txt" rel="nofollow">Show this page source</a> -->
+  </div>
+  <div class="rel">
+    
+      <div class="buttonPrevious">
+        <a href="kernel_ridge.html">Previous
+        </a>
+      </div>
+      <div class="buttonNext">
+        <a href="sgd.html">Next
+        </a>
+      </div>
+      
+    </div>
+
+    
+    <script>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+      ga('create', 'UA-22606712-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function () {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>
