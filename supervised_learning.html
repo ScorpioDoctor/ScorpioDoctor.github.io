@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>1. 监督学习(supervised learning) &#8212; scikit-learn 0.20.2 documentation</title>
+<!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="static/css/bootstrap-responsive.css" />
+
+    <link rel="stylesheet" href="static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="static/js/copybutton.js"></script>
+    <script type="text/javascript" src="static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1.1. 广义线性模型(Generalized Linear Models)" href="modules/linear_model.html" />
+    <link rel="prev" title="用户指南" href="user_guide.html" />
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="static/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+  VERSION_SUBDIR = (function (groups) {
+    return groups ? groups[1] : null;
+  })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+</script>
+<link rel="canonical" href="http://scikit-learn.org/stable/supervised_learning.html" />
+
+<script type="text/javascript">
+  $("div.buttonNext, div.buttonPrevious").hover(
+    function () {
+      $(this).css('background-color', '#FF9C34');
+    },
+    function () {
+      $(this).css('background-color', '#A7D6E2');
+    }
+  );
+  function showMenu() {
+    var topNav = document.getElementById("scikit-navbar");
+    if (topNav.className === "navbar") {
+      topNav.className += " responsive";
+    } else {
+      topNav.className = "navbar";
+    }
+  };
+</script>
+
+<!-- 百度站长统计代码 -->
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+  <div class="header">
+    <p class="logo"><a href="index.html">
+        <img src="static/scikit-learn-logo-small.png" alt="Logo" />
+      </a>
+    </p><div class="navbar" id="scikit-navbar">
+      <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="install.html">安装</a></li>
+        <li class="btn-li">
+          <div class="btn-group">
+            <a href="documentation.html">文档</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="link-title">Scikit-learn
+                <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script>
+              </li>
+              <li><a href="tutorial/index.html">教程</a></li>
+              <li><a href="user_guide.html">用户指南</a></li>
+              <li><a href="modules/classes.html">API</a></li>
+              <li><a href="glossary.html">词汇表</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="developers/contributing.html">贡献</a></li>
+              <li><a href="roadmap.html">路线图</a></li>
+              <li class="divider"></li>
+              <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
+              <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
+              <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+              <li><a href="downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="auto_examples/index.html">案例</a></li>
+      </ul>
+      <a href="javascript:void(0);" onclick="showMenu()">
+        <div class="nav-icon">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </div>
+      </a>
+      <div class="search_form">
+        <div class="gcse-search" id="cse" style="width: 100%;"></div>
+      </div>
+    </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="static/img/forkme.png"
+    alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+  <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+      <div class="rel">
+        
+          <div class="rellink">
+            <a href="user_guide.html" accesskey="P">Previous
+              <br />
+              <span class="smallrellink">
+                用户指南
+              </span>
+              <span class="hiddenrellink">
+                用户指南
+              </span>
+            </a>
+          </div>
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="modules/linear_model.html" accesskey="N">Next
+              <br />
+              <span class="smallrellink">
+                1.1. 广义线性模型(G...
+              </span>
+              <span class="hiddenrellink">
+                1.1. 广义线性模型(Generalized Linear Models)
+              </span>
+            </a>
+          </div>
+
+          <!-- Ad a link to the 'up' page -->
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="user_guide.html">
+              Up
+              <br />
+              <span class="smallrellink">
+                用户指南
+              </span>
+                <span class="hiddenrellink">
+                  用户指南
+                </span>
+                
+            </a>
+          </div>
+        </div>
+        
+        <p class="doc-version"><b>scikit-learn v0.20.2</b><br />
+          <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+        <!-- <p class="citing">Please <b><a href="about.html#citing-scikit-learn" style="font-size: 110%;">cite
+              us </a></b>if you use the software.</p> -->
+        <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
+        </p>
+        <ul>
+<li><a class="reference internal" href="#">1. 监督学习(supervised learning)</a></li>
+</ul>
+
+        <br />
+        <p>
+          <a href="http://www.studyai.com" target="_blank">
+            <img src="static/img/xxx.png" alt="座右铭" />
+          </a>
+        </p>
+        <br />
+        <p class="doc-version" style="font-size:10%">
+          注意!本网站的网址是以 <em>https://</em> 开头的，而不是以 <em>http://</em> 开头的!!!
+        </p>
+      </div>
+    </div>
+    
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+    <label for="nav-trigger"></label>
+    
+    
+
+
+    <div class="content">
+      
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <style type="text/css">
+  div.bodywrapper blockquote {
+      margin: 0 ;
+  }
+
+  div.toctree-wrapper ul {
+      margin-top: 0 ;
+      margin-bottom: 0 ;
+      padding-left: 10px ;
+  }
+
+  li.toctree-l1 {
+      padding: 0 0 0.5em 0 ;
+      list-style-type: none;
+      font-size: 150% ;
+      font-weight: bold;
+      }
+
+  li.toctree-l1 ul {
+      padding-left: 40px ;
+  }
+
+  li.toctree-l2 {
+      font-size: 70% ;
+      list-style-type: square;
+      font-weight: normal;
+      }
+
+  li.toctree-l3 {
+      font-size: 85% ;
+      list-style-type: circle;
+      font-weight: normal;
+      }
+
+</style><div class="section" id="supervised-learning">
+<span id="id1"></span><h1>1. 监督学习(supervised learning)<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/linear_model.html">1.1. 广义线性模型(Generalized Linear Models)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#ordinary-least-squares">1.1.1. 普通最小二乘法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#id2">1.1.1.1. 普通最小二乘法的复杂度</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#ridge-regression">1.1.2. 岭回归(Ridge Regression)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#id4">1.1.2.1. 岭回归的复杂度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#id5">1.1.2.2. 设置正则化参数: 广义交叉验证</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#lasso">1.1.3. Lasso</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#id8">1.1.3.1. 设置正则化参数</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#id9">1.1.3.1.1. 使用交叉验证</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#id10">1.1.3.1.2. 基于信息标准的模型选择</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#svm">1.1.3.1.3. 与 SVM 的正则化参数的比较</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#multi-task-lasso">1.1.4. 多任务 Lasso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#elastic-net">1.1.5. 弹性网(Elastic Net)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#multi-task-elastic-net">1.1.6. 多任务弹性网</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#least-angle-regression">1.1.7. 最小角回归</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#lars-lasso">1.1.8. LARS Lasso</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#id17">1.1.8.1. 数学化表达式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#omp">1.1.9. 正交匹配追踪法 (OMP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#bayesian-regression">1.1.10. 贝叶斯回归</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#bayesian-ridge-regression">1.1.10.1. 贝叶斯岭回归</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#ard">1.1.10.2. 主动相关决策理论 - ARD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#logistic">1.1.11. Logistic 回归</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#sgd">1.1.12. 随机梯度下降 - SGD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#perceptron">1.1.13. 感知器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#passive-aggressive-algorithms">1.1.14. 被动攻击算法(Passive Aggressive Algorithms)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#outliers">1.1.15. 鲁棒回归:处理离群点（outliers）和模型错误</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#id37">1.1.15.1. 各种使用场景与相关概念</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#ransac">1.1.15.2. RANSAC:随机抽样一致性算法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#id38">1.1.15.2.1. 算法细节</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#theil-sen">1.1.15.3. Theil-Sen 估计器: 广义中值估计器</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/linear_model.html#id39">1.1.15.3.1. 理论方面的思考</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#huber">1.1.15.4. Huber 回归</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/linear_model.html#id42">1.1.15.5. 注意</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/linear_model.html#polynomial-regression">1.1.16. 多项式回归:用基函数展开线性模型</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/lda_qda.html">1.2. 线性判别分析和二次判别分析(Linear and Quadratic Discriminant Analysis)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/lda_qda.html#id1">1.2.1. 使用线性判别分析进行维数约减</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/lda_qda.html#id2">1.2.2. LDA 和 QDA 分类器的数学化形式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/lda_qda.html#lda">1.2.3. LDA 维数约减的数学化形式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/lda_qda.html#shrinkage">1.2.4. 收缩(Shrinkage)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/lda_qda.html#id6">1.2.5. 估计算法</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/kernel_ridge.html">1.3. 核岭回归(Kernel ridge regression)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/svm.html">1.4. 支持向量机(Support Vector Machines)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/svm.html#svm-classification">1.4.1. 分类</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/svm.html#svm-multi-class">1.4.1.1. 多类别分类</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/svm.html#scores-probabilities">1.4.1.2. 得分与概率</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/svm.html#id4">1.4.1.3. 不均衡问题</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/svm.html#svm-regression">1.4.2. 回归</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/svm.html#svm-outlier-detection">1.4.3. 密度估计, 奇异值检测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/svm.html#id7">1.4.4. 复杂度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/svm.html#id8">1.4.5. 实用小建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/svm.html#svm-kernels">1.4.6. 核函数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/svm.html#id10">1.4.6.1. 自定义核函数</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/svm.html#python">1.4.6.1.1. 使用Python函数作为核</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/svm.html#gram-matrix">1.4.6.1.2. 使用 Gram matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/svm.html#rbf">1.4.6.1.3. RBF核函数的参数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/svm.html#svm-mathematical-formulation">1.4.7. 数学表达式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/svm.html#svc">1.4.7.1. SVC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/svm.html#nusvc">1.4.7.2. NuSVC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/svm.html#svr">1.4.7.3. SVR</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/svm.html#svm-implementation-details">1.4.8. 算法实现细节</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/sgd.html">1.5. 随机梯度下降(Stochastic Gradient Descent)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/sgd.html#id2">1.5.1. 分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/sgd.html#id3">1.5.2. 回归</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/sgd.html#id4">1.5.3. 用于稀疏数据的SGD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/sgd.html#id5">1.5.4. 复杂度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/sgd.html#id6">1.5.5. 停止准则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/sgd.html#id7">1.5.6. 实用小建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/sgd.html#sgd-mathematical-formulation">1.5.7. 数学表达式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/sgd.html#id9">1.5.7.1. SGD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/sgd.html#id10">1.5.8. 实现细节</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/neighbors.html">1.6. 最近邻方法(Nearest Neighbors)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/neighbors.html#unsupervised-neighbors">1.6.1. 无监督最近邻</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/neighbors.html#id2">1.6.1.1. 寻找最近的邻居</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/neighbors.html#kdtree-balltree">1.6.1.2. KDTree类 和 BallTree类</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neighbors.html#classification">1.6.2. 最近邻分类器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neighbors.html#regression">1.6.3. 最近邻回归器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neighbors.html#id5">1.6.4. 最近邻算法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/neighbors.html#brute-force">1.6.4.1. Brute Force</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/neighbors.html#k-d-tree">1.6.4.2. K-D Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/neighbors.html#ball-tree">1.6.4.3. Ball Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/neighbors.html#id10">1.6.4.4. 最近邻算法的选择</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/neighbors.html#leaf-size">1.6.4.5. <code class="docutils literal notranslate"><span class="pre">leaf_size</span></code> 的效果</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neighbors.html#nearest-centroid-classifier">1.6.5. 最近质心分类器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/neighbors.html#nearest-shrunken-centroid">1.6.5.1. Nearest Shrunken Centroid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/gaussian_process.html">1.7. 高斯过程(Gaussian Processes)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/gaussian_process.html#gpr">1.7.1. 高斯过程回归器 (GPR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/gaussian_process.html#id3">1.7.2. GPR 案例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#id4">1.7.2.1. 带有噪声水平估计的GPR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#gprkrr">1.7.2.2. GPR和KRR的比较</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#gpr-mauna-loa-co2">1.7.2.3. GPR 算法在 Mauna Loa CO2 数据上的分析</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/gaussian_process.html#gpc">1.7.3. 高斯过程分类器 (GPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/gaussian_process.html#id9">1.7.4. GPC 案列</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#id10">1.7.4.1. 使用 GPC 进行 概率化预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#id11">1.7.4.2. GPC分类器在异或问题上的应用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#gpciris">1.7.4.3. GPC分类器在iris数据集上的应用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/gaussian_process.html#gp-kernels">1.7.5. 用于高斯过程的核函数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#api">1.7.5.1. 高斯过程核函数 API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#id14">1.7.5.2. 基本核函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#kernel-operators">1.7.5.3. 核算子(Kernel operators)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#rbf">1.7.5.4. 径向基函数 (RBF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#matern">1.7.5.5. Matérn 核</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#rational-quadratic-kernel">1.7.5.6. 有理二次内核(Rational quadratic kernel)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#exp-sine-squared-kernel">1.7.5.7. 指数正弦平方核(Exp-Sine-Squared kernel)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#dot-product-kernel">1.7.5.8. 点乘核(Dot-Product kernel)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/gaussian_process.html#id16">1.7.5.9. 参考文献</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/cross_decomposition.html">1.8. 交叉分解(Cross decomposition)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/naive_bayes.html">1.9. 朴素贝叶斯(Naive Bayes)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/naive_bayes.html#gaussian-naive-bayes">1.9.1. 高斯朴素贝叶斯</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/naive_bayes.html#multinomial-naive-bayes">1.9.2. 多项分布朴素贝叶斯</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/naive_bayes.html#complement-naive-bayes">1.9.3. Complement Naive Bayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/naive_bayes.html#bernoulli-naive-bayes">1.9.4. 伯努利朴素贝叶斯</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/naive_bayes.html#id6">1.9.5. 堆外朴素贝叶斯模型拟合</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/tree.html">1.10. 决策树(Decision Trees)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/tree.html#tree-classification">1.10.1. 分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/tree.html#tree-regression">1.10.2. 回归</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/tree.html#tree-multioutput">1.10.3. 多输出问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/tree.html#tree-complexity">1.10.4. 复杂度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/tree.html#id5">1.10.5. 实用小建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/tree.html#tree-algorithms">1.10.6. 树算法: ID3, C4.5, C5.0 和 CART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/tree.html#tree-mathematical-formulation">1.10.7. 数学表达式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/tree.html#id8">1.10.7.1. 分类准则</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/tree.html#id9">1.10.7.2. 回归准则</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/ensemble.html">1.11. 集成学习方法(Ensemble methods)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/ensemble.html#bagging-meta-estimator">1.11.1. Bagging meta-estimator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/ensemble.html#forest">1.11.2. 由随机树组成的森林</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id7">1.11.2.1. 随机森林</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id9">1.11.2.2. 极大随机树</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id10">1.11.2.3. 参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id11">1.11.2.4. 并行化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#random-forest-feature-importance">1.11.2.5. 特征重要性评估</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id14">1.11.2.6. 完全随机树嵌入</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/ensemble.html#adaboost">1.11.3. 自适应推举算法(AdaBoost)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id19">1.11.3.1. 用法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/ensemble.html#gradient-tree-boosting">1.11.4. Gradient Tree Boosting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id21">1.11.4.1. 分类</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id22">1.11.4.2. 回归</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#gradient-boosting-warm-start">1.11.4.3. 拟合附加的弱学习器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#treesize">1.11.4.4. 控制Tree的size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id25">1.11.4.5. 数学表达式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/ensemble.html#gradient-boosting-loss">1.11.4.5.1. 损失函数</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id28">1.11.4.6. 正则化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/ensemble.html#shrinkage">1.11.4.6.1. Shrinkage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/ensemble.html#subsampling">1.11.4.6.2. Subsampling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id33">1.11.4.7. 对结果的解释</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/ensemble.html#id34">1.11.4.7.1. 特征重要性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules/ensemble.html#partial-dependence">1.11.4.7.2. 部分依赖性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/ensemble.html#voting-classifier">1.11.5. 投票分类器(Voting Classifier)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#majority-voting">1.11.5.1. 多数/硬投票(majority voting)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/ensemble.html#id41">1.11.5.1.1. 用法</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id42">1.11.5.2. 加权平均概率(软投票)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/ensemble.html#id43">1.11.5.3. 投票分类器在网格搜索中应用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules/ensemble.html#id44">1.11.5.3.1. 用法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/multiclass.html">1.12. 多类和多标签算法(Multiclass and multilabel algorithms)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/multiclass.html#id1">1.12.1. 多标签分类问题的形式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/multiclass.html#one-vs-the-rest">1.12.2. 一对剩余(One-Vs-The-Rest)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/multiclass.html#id2">1.12.2.1. 多类别学习</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/multiclass.html#id3">1.12.2.2. 多标签学习</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/multiclass.html#one-vs-one">1.12.3. 一对一(One-Vs-One)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/multiclass.html#id4">1.12.3.1. 多类别学习</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/multiclass.html#error-correcting-output-codes">1.12.4. Error-Correcting Output-Codes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/multiclass.html#id6">1.12.4.1. 多类别学习</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/multiclass.html#id8">1.12.5. 多输出回归</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/multiclass.html#id9">1.12.6. 多输出分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/multiclass.html#classifier-chain">1.12.7. Classifier Chain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/multiclass.html#regressor-chain">1.12.8. Regressor Chain</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/feature_selection.html">1.13. 特征选择(Feature selection)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_selection.html#variance-threshold">1.13.1. 去除方差比较低的特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_selection.html#univariate-feature-selection">1.13.2. 单变量特征选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_selection.html#rfe">1.13.3. 递归式特征消除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_selection.html#selectfrommodel">1.13.4. 使用 SelectFromModel 选取特征</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_selection.html#l1">1.13.4.1. 基于 L1 的特征选取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_selection.html#id7">1.13.4.2. 基于树的特征选择</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_selection.html#id8">1.13.5. 把特征选择作为管道流的一部分</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/label_propagation.html">1.14. 半监督学习(Semi-Supervised)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/label_propagation.html#label-propagation">1.14.1. 标签传播(Label Propagation)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/isotonic.html">1.15. 保序回归(Isotonic regression)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/calibration.html">1.16. 概率校准(Probability calibration)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/neural_networks_supervised.html">1.17. 监督神经网络模型(Supervised Neural network models)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#multilayer-perceptron">1.17.1. 多层感知器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#id2">1.17.2. 分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#id3">1.17.3. 回归</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#id4">1.17.4. 正则化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#id5">1.17.5. 算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#id6">1.17.6. 复杂度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#id7">1.17.7. 数学表达式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#mlp-tips">1.17.8. 实用小建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_supervised.html#warm-start">1.17.9. 使用warm_start进行更多控制</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    &copy; 2007 - 2018, scikit-learn developers (BSD License).
+    <!--
+    <a href="_sources/supervised_learning.rst.txt" rel="nofollow">Show this page source</a> -->
+  </div>
+  <div class="rel">
+    
+      <div class="buttonPrevious">
+        <a href="user_guide.html">Previous
+        </a>
+      </div>
+      <div class="buttonNext">
+        <a href="modules/linear_model.html">Next
+        </a>
+      </div>
+      
+    </div>
+
+    
+    <script>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+      ga('create', 'UA-22606712-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function () {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>

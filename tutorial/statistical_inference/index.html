@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>用于科学数据处理的统计学习教程 &#8212; scikit-learn 0.20.2 documentation</title>
+<!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../../static/css/bootstrap-responsive.css" />
+
+    <link rel="stylesheet" href="../../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <script type="text/javascript" src="../../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="统计学习: 问题设置以及scikit-learn中的估计器对象" href="settings.html" />
+    <link rel="prev" title="使用 scikit-learn 介绍机器学习" href="../basic/tutorial.html" />
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../../static/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+  VERSION_SUBDIR = (function (groups) {
+    return groups ? groups[1] : null;
+  })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+</script>
+<link rel="canonical" href="http://scikit-learn.org/stable/tutorial/statistical_inference/index.html" />
+
+<script type="text/javascript">
+  $("div.buttonNext, div.buttonPrevious").hover(
+    function () {
+      $(this).css('background-color', '#FF9C34');
+    },
+    function () {
+      $(this).css('background-color', '#A7D6E2');
+    }
+  );
+  function showMenu() {
+    var topNav = document.getElementById("scikit-navbar");
+    if (topNav.className === "navbar") {
+      topNav.className += " responsive";
+    } else {
+      topNav.className = "navbar";
+    }
+  };
+</script>
+
+<!-- 百度站长统计代码 -->
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+  <div class="header">
+    <p class="logo"><a href="../../index.html">
+        <img src="../../static/scikit-learn-logo-small.png" alt="Logo" />
+      </a>
+    </p><div class="navbar" id="scikit-navbar">
+      <ul>
+        <li><a href="../../index.html">首页</a></li>
+        <li><a href="../../install.html">安装</a></li>
+        <li class="btn-li">
+          <div class="btn-group">
+            <a href="../../documentation.html">文档</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="link-title">Scikit-learn
+                <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script>
+              </li>
+              <li><a href="../index.html">教程</a></li>
+              <li><a href="../../user_guide.html">用户指南</a></li>
+              <li><a href="../../modules/classes.html">API</a></li>
+              <li><a href="../../glossary.html">词汇表</a></li>
+              <li><a href="../../faq.html">FAQ</a></li>
+              <li><a href="../../developers/contributing.html">贡献</a></li>
+              <li><a href="../../roadmap.html">路线图</a></li>
+              <li class="divider"></li>
+              <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
+              <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
+              <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+              <li><a href="../../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="../../auto_examples/index.html">案例</a></li>
+      </ul>
+      <a href="javascript:void(0);" onclick="showMenu()">
+        <div class="nav-icon">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </div>
+      </a>
+      <div class="search_form">
+        <div class="gcse-search" id="cse" style="width: 100%;"></div>
+      </div>
+    </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../../static/img/forkme.png"
+    alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+  <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+      <div class="rel">
+        
+          <div class="rellink">
+            <a href="../basic/tutorial.html" accesskey="P">Previous
+              <br />
+              <span class="smallrellink">
+                使用 scikit-lea...
+              </span>
+              <span class="hiddenrellink">
+                使用 scikit-learn 介绍机器学习
+              </span>
+            </a>
+          </div>
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="settings.html" accesskey="N">Next
+              <br />
+              <span class="smallrellink">
+                统计学习: 问题设置以及s...
+              </span>
+              <span class="hiddenrellink">
+                统计学习: 问题设置以及scikit-learn中的估计器对象
+              </span>
+            </a>
+          </div>
+
+          <!-- Ad a link to the 'up' page -->
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="../index.html">
+              Up
+              <br />
+              <span class="smallrellink">
+                scikit-learn 教程
+              </span>
+                <span class="hiddenrellink">
+                  scikit-learn 教程
+                </span>
+                
+            </a>
+          </div>
+        </div>
+        
+        <p class="doc-version"><b>scikit-learn v0.20.2</b><br />
+          <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+        <!-- <p class="citing">Please <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">cite
+              us </a></b>if you use the software.</p> -->
+        <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
+        </p>
+        <ul>
+<li><a class="reference internal" href="#">用于科学数据处理的统计学习教程</a></li>
+</ul>
+
+        <br />
+        <p>
+          <a href="http://www.studyai.com" target="_blank">
+            <img src="../../static/img/xxx.png" alt="座右铭" />
+          </a>
+        </p>
+        <br />
+        <p class="doc-version" style="font-size:10%">
+          注意!本网站的网址是以 <em>https://</em> 开头的，而不是以 <em>http://</em> 开头的!!!
+        </p>
+      </div>
+    </div>
+    
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+    <label for="nav-trigger"></label>
+    
+    
+
+
+    <div class="content">
+      
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="stat-learn-tut-index">
+<span id="id1"></span><h1>用于科学数据处理的统计学习教程<a class="headerlink" href="#stat-learn-tut-index" title="Permalink to this headline">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">统计学习(Statistical learning)</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Machine_learning">机器学习</a> 正在成为一种
+越来越重要的技术(technique), 随着数据集规模的不断扩大，实验科学面临的挑战也在迅速增长。
+它解决的问题包括建立一个连接不同观测的预测函数，对观测进行分类，或者在未标记的数据集中学习结构。</p>
+<p>本教程将会带你探索 统计学习(<em>statistical learning</em>), 使用机器学习技术进行统计推断(<a class="reference external" href="https://en.wikipedia.org/wiki/Statistical_inference">statistical inference</a>): 利用手头的数据得出结论。</p>
+<p>Scikit-learn 是一个集成了经典机器学习算法的 Python module ，它构建在 (<a class="reference external" href="https://www.numpy.org/">NumPy</a>, <a class="reference external" href="https://scipy.org/">SciPy</a>, <a class="reference external" href="https://matplotlib.org/">matplotlib</a>) 的基础上。</p>
+</div>
+<style type="text/css">
+  div.bodywrapper blockquote {
+      margin: 0 ;
+  }
+
+  div.toctree-wrapper ul {
+      margin-top: 0 ;
+      margin-bottom: 0 ;
+      padding-left: 10px ;
+  }
+
+  li.toctree-l1 {
+      padding: 0 0 0.5em 0 ;
+      list-style-type: none;
+      font-size: 150% ;
+      font-weight: bold;
+      }
+
+  li.toctree-l1 ul {
+      padding-left: 40px ;
+  }
+
+  li.toctree-l2 {
+      font-size: 70% ;
+      list-style-type: square;
+      font-weight: normal;
+      }
+
+  li.toctree-l3 {
+      font-size: 85% ;
+      list-style-type: circle;
+      font-weight: normal;
+      }
+
+</style><div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">统计学习: 问题设置以及scikit-learn中的估计器对象</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#id1">数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#id2">估计器对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#scikit-learnapi">scikit-learn的统一API调用接口</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">监督学习: 从高维观测中预测输出变量</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="supervised_learning.html#id4">最近邻算法与维数灾难</a></li>
+<li class="toctree-l2"><a class="reference internal" href="supervised_learning.html#id7">线性模型：从回归到稀疏</a></li>
+<li class="toctree-l2"><a class="reference internal" href="supervised_learning.html#svms">支持向量机 (SVMs)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_selection.html">模型选择: 选择合适的估计器及其参数</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_selection.html#score-cross-validated-scores">Score, 和 cross-validated scores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_selection.html#cv-generators-tut">交叉验证生成器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_selection.html#id3">网格搜索与交叉验证估计器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unsupervised_learning.html">无监督学习: 探索寻找数据的表现方式(representations)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unsupervised_learning.html#id2">聚类: 把观测数据分组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unsupervised_learning.html#id7">分解: 从整个信号到其各个分量与负载</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="putting_together.html">将所有东西放在一起</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="putting_together.html#pipelining">管道流(Pipelining)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="putting_together.html#id2">用特征脸进行人脸识别</a></li>
+<li class="toctree-l2"><a class="reference internal" href="putting_together.html#id3">开放式问题: 股票市场结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="putting_together.html#id4">学习器的设计</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finding_help.html">寻求帮助</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finding_help.html#id2">项目邮件列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finding_help.html#id3">问答社区：机器学习爱好者</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    &copy; 2007 - 2018, scikit-learn developers (BSD License).
+    <!--
+    <a href="../../_sources/tutorial/statistical_inference/index.rst.txt" rel="nofollow">Show this page source</a> -->
+  </div>
+  <div class="rel">
+    
+      <div class="buttonPrevious">
+        <a href="../basic/tutorial.html">Previous
+        </a>
+      </div>
+      <div class="buttonNext">
+        <a href="settings.html">Next
+        </a>
+      </div>
+      
+    </div>
+
+    
+    <script>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+      ga('create', 'UA-22606712-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function () {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>1.10. 决策树(Decision Trees) &#8212; scikit-learn 0.20.2 documentation</title>
+<!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../static/css/bootstrap-responsive.css" />
+
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.11. 集成学习方法(Ensemble methods)" href="ensemble.html" />
+    <link rel="prev" title="1.9. 朴素贝叶斯(Naive Bayes)" href="naive_bayes.html" />
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+  VERSION_SUBDIR = (function (groups) {
+    return groups ? groups[1] : null;
+  })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+</script>
+<link rel="canonical" href="http://scikit-learn.org/stable/modules/tree.html" />
+
+<script type="text/javascript">
+  $("div.buttonNext, div.buttonPrevious").hover(
+    function () {
+      $(this).css('background-color', '#FF9C34');
+    },
+    function () {
+      $(this).css('background-color', '#A7D6E2');
+    }
+  );
+  function showMenu() {
+    var topNav = document.getElementById("scikit-navbar");
+    if (topNav.className === "navbar") {
+      topNav.className += " responsive";
+    } else {
+      topNav.className = "navbar";
+    }
+  };
+</script>
+
+<!-- 百度站长统计代码 -->
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+  <div class="header">
+    <p class="logo"><a href="../index.html">
+        <img src="../static/scikit-learn-logo-small.png" alt="Logo" />
+      </a>
+    </p><div class="navbar" id="scikit-navbar">
+      <ul>
+        <li><a href="../index.html">首页</a></li>
+        <li><a href="../install.html">安装</a></li>
+        <li class="btn-li">
+          <div class="btn-group">
+            <a href="../documentation.html">文档</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="link-title">Scikit-learn
+                <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script>
+              </li>
+              <li><a href="../tutorial/index.html">教程</a></li>
+              <li><a href="../user_guide.html">用户指南</a></li>
+              <li><a href="classes.html">API</a></li>
+              <li><a href="../glossary.html">词汇表</a></li>
+              <li><a href="../faq.html">FAQ</a></li>
+              <li><a href="../developers/contributing.html">贡献</a></li>
+              <li><a href="../roadmap.html">路线图</a></li>
+              <li class="divider"></li>
+              <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
+              <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
+              <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+              <li><a href="../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="../auto_examples/index.html">案例</a></li>
+      </ul>
+      <a href="javascript:void(0);" onclick="showMenu()">
+        <div class="nav-icon">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </div>
+      </a>
+      <div class="search_form">
+        <div class="gcse-search" id="cse" style="width: 100%;"></div>
+      </div>
+    </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../static/img/forkme.png"
+    alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+  <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+      <div class="rel">
+        
+          <div class="rellink">
+            <a href="naive_bayes.html" accesskey="P">Previous
+              <br />
+              <span class="smallrellink">
+                1.9. 朴素贝叶斯(Na...
+              </span>
+              <span class="hiddenrellink">
+                1.9. 朴素贝叶斯(Naive Bayes)
+              </span>
+            </a>
+          </div>
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="ensemble.html" accesskey="N">Next
+              <br />
+              <span class="smallrellink">
+                1.11. 集成学习方法(...
+              </span>
+              <span class="hiddenrellink">
+                1.11. 集成学习方法(Ensemble methods)
+              </span>
+            </a>
+          </div>
+
+          <!-- Ad a link to the 'up' page -->
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="../supervised_learning.html">
+              Up
+              <br />
+              <span class="smallrellink">
+                1. 监督学习(super...
+              </span>
+                <span class="hiddenrellink">
+                  1. 监督学习(supervised learning)
+                </span>
+                
+            </a>
+          </div>
+        </div>
+        
+        <p class="doc-version"><b>scikit-learn v0.20.2</b><br />
+          <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+        <!-- <p class="citing">Please <b><a href="../about.html#citing-scikit-learn" style="font-size: 110%;">cite
+              us </a></b>if you use the software.</p> -->
+        <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
+        </p>
+        <ul>
+<li><a class="reference internal" href="#">1.10. 决策树(Decision Trees)</a><ul>
+<li><a class="reference internal" href="#tree-classification">1.10.1. 分类</a></li>
+<li><a class="reference internal" href="#tree-regression">1.10.2. 回归</a></li>
+<li><a class="reference internal" href="#tree-multioutput">1.10.3. 多输出问题</a></li>
+<li><a class="reference internal" href="#tree-complexity">1.10.4. 复杂度</a></li>
+<li><a class="reference internal" href="#id5">1.10.5. 实用小建议</a></li>
+<li><a class="reference internal" href="#tree-algorithms">1.10.6. 树算法: ID3, C4.5, C5.0 和 CART</a></li>
+<li><a class="reference internal" href="#tree-mathematical-formulation">1.10.7. 数学表达式</a><ul>
+<li><a class="reference internal" href="#id8">1.10.7.1. 分类准则</a></li>
+<li><a class="reference internal" href="#id9">1.10.7.2. 回归准则</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <br />
+        <p>
+          <a href="http://www.studyai.com" target="_blank">
+            <img src="../static/img/xxx.png" alt="座右铭" />
+          </a>
+        </p>
+        <br />
+        <p class="doc-version" style="font-size:10%">
+          注意!本网站的网址是以 <em>https://</em> 开头的，而不是以 <em>http://</em> 开头的!!!
+        </p>
+      </div>
+    </div>
+    
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+    <label for="nav-trigger"></label>
+    
+    
+
+
+    <div class="content">
+      
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="decision-trees">
+<span id="tree"></span><h1>1.10. 决策树(Decision Trees)<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h1>
+<p><strong>Decision Trees (DTs)</strong> 是一种用来 <a class="reference internal" href="#tree-classification"><span class="std std-ref">classification</span></a> 和 <a class="reference internal" href="#tree-regression"><span class="std std-ref">regression</span></a> 的无参数监督学习方法。
+其目的是创建一种模型从数据特征中学习简单的决策规则来预测一个目标变量的值。</p>
+<p>例如，在下面的图片中，决策树通过if-then-else的决策规则来学习数据从而估测数一个正弦图像。决策树越深入，
+决策规则就越复杂并且模型对数据的拟合越好。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_tree_regression.html"><img alt="../images/sphx_glr_plot_tree_regression_0011.png" src="../images/sphx_glr_plot_tree_regression_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+</div>
+<p>决策树的优势:</p>
+<blockquote>
+<div><ul class="simple">
+<li>便于理解和解释。树的结构可以可视化。</li>
+<li>需要很少的数据预备工作。而其他机器学习模型通常需要数据规范化，比如构建虚拟变量和移除缺失值。不过请注意，这种决策树模型不支持缺失值。</li>
+<li>训练树模型的时间复杂度是参与训练数据点的对数值。</li>
+<li>能够处理数值型数据和标称型数据。其他的技术通常只能用来专门分析某一种变量类型的数据集。详情请参阅 <a class="reference internal" href="#tree-algorithms"><span class="std std-ref">algorithms</span></a> 。</li>
+<li>能够处理多路输出的问题。</li>
+<li>使用白盒模型。如果某种给定的情况在该模型中是可观的，那么就可以轻易的通过布尔逻辑来解释这种情况。
+相比之下，在黑盒模型(比如神经网络)中的结果就是很难说明清楚地。</li>
+<li>可以通过数值统计测试来验证该模型。这对解释验证该模型的可靠性成为可能。</li>
+<li>即使该模型假设的结果与真实模型所提供的数据有些违反，其表现依旧良好。</li>
+</ul>
+</div></blockquote>
+<p>决策树的缺点包括:</p>
+<blockquote>
+<div><ul class="simple">
+<li>决策树模型容易产生一个过于复杂的模型,这样的模型对数据的泛化性能会很差。这就是所谓的过拟合。
+一些策略像剪枝、设置叶节点所需的最小样本数或设置数的最大深度是避免出现 该问题最为有效地方法。</li>
+<li>决策树可能是不稳定的，因为数据中的微小变化可能会导致生成完全不同的树。这个问题可以通过决策树的集成来得到缓解。</li>
+<li>在多方面性能最优和简单化概念的要求下，学习一棵最优决策树通常是一个NP难问题。因此，实际的决策树学习算法是基于启发式算法，
+例如在每个节点进行局部最优决策的贪心算法。这样的算法不能保证返回全局最优决策树。
+这个问题可以通过集成学习来训练多棵决策树来缓解,这多棵决策树一般通过对特征和样本有放回的随机采样来生成。</li>
+<li>有些概念很难被决策树学习到,因为决策树很难清楚的表述这些概念。例如XOR，奇偶或者复用器的问题。</li>
+<li>如果某些类在问题中占主导地位会使得创建的决策树有偏差。因此，我们建议在拟合前先对数据集进行平衡。</li>
+</ul>
+</div></blockquote>
+<div class="section" id="tree-classification">
+<span id="id1"></span><h2>1.10.1. 分类<a class="headerlink" href="#tree-classification" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></a> 是能够在数据集上执行多分类的类。</p>
+<p>与其他分类器一样，<a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></a> 需要输入两个数组：数组X，或稀疏或稠密，shape为 <code class="docutils literal notranslate"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code> ，用来存放训练样本。
+整数值数组 Y，shape为 <code class="docutils literal notranslate"><span class="pre">[n_samples]</span></code> 用来保存训练样本的类标签:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>当模型拟合好以后，就可以拿来预测未知样本的类标签啦：:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+<p>另外, 每个类的概率也可以预测出来, 它是在一个叶子中相同类的训练样本所占比例(the fraction of training samples of the same class in a leaf):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([[0., 1.]])</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></a> 既能用于二分类（其中标签为 [-1,1] ）也能用于多分类（其中标签为 [0, …, K-1] ）。</p>
+<p>使用Lris数据集，我们可以构造一个决策树，如下所示</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>一旦训练好后，我们可以使用 <a class="reference internal" href="generated/sklearn.tree.export_graphviz.html#sklearn.tree.export_graphviz" title="sklearn.tree.export_graphviz"><code class="xref py py-func docutils literal notranslate"><span class="pre">export_graphviz</span></code></a> 导出器以 <a class="reference external" href="http://www.graphviz.org/">Graphviz</a> 格式导出决策树.
+如果你是用 <a class="reference external" href="http://conda.io">conda</a> 来管理包，那么安装 graphviz 二进制文件和 python 包可以用以下指令安装</p>
+<blockquote>
+<div>conda install python-graphviz</div></blockquote>
+<p>或者，可以从 graphviz 项目主页下载 graphviz 的二进制文件，并从 pypi 安装 Python 包装器，并安装 <cite>pip install graphviz</cite> 。</p>
+<p>以下是在整个 iris 数据集上训练的上述树的 graphviz 导出示例; 其结果被保存在 ·iris.pdf· 中:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">graphviz</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p><a class="reference internal" href="generated/sklearn.tree.export_graphviz.html#sklearn.tree.export_graphviz" title="sklearn.tree.export_graphviz"><code class="xref py py-func docutils literal notranslate"><span class="pre">export_graphviz</span></code></a> exporter 支持各种美化，包括通过他们的类着色节点（或回归值），如果需要，使用显式变量和类名。
+Jupyter notebook也可以自动内联式渲染这些绘制节点:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+<span class="gp">... </span>                     <span class="n">feature_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>  
+<span class="gp">... </span>                     <span class="n">class_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">,</span>  
+<span class="gp">... </span>                     <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
+<span class="gp">... </span>                     <span class="n">special_characters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> 
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../images/iris.svg" src="../images/iris.svg" /></div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_iris.html"><img alt="../images/sphx_glr_plot_iris_0013.png" src="../images/sphx_glr_plot_iris_0013.png" style="width: 480.0px; height: 360.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/tree/plot_iris.html#sphx-glr-auto-examples-tree-plot-iris-py"><span class="std std-ref">Plot the decision surface of a decision tree on the iris dataset</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="tree-regression">
+<span id="id2"></span><h2>1.10.2. 回归<a class="headerlink" href="#tree-regression" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_tree_regression.html"><img alt="../images/sphx_glr_plot_tree_regression_0011.png" src="../images/sphx_glr_plot_tree_regression_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+</div>
+<p>决策树也可用于解决回归问题, 使用 <a class="reference internal" href="generated/sklearn.tree.DecisionTreeRegressor.html#sklearn.tree.DecisionTreeRegressor" title="sklearn.tree.DecisionTreeRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code></a> 类。</p>
+<p>与在分类中的设置是一样的, fit 方法依然接受数组 X 和 y 作为参数, 但是在回归中，目标变量 y 是浮点数而不是整型数值</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([0.5])</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/tree/plot_tree_regression.html#sphx-glr-auto-examples-tree-plot-tree-regression-py"><span class="std std-ref">Decision Tree Regression</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="tree-multioutput">
+<span id="id3"></span><h2>1.10.3. 多输出问题<a class="headerlink" href="#tree-multioutput" title="Permalink to this headline">¶</a></h2>
+<p>一个多值输出问题(multi-output problem)是一个类似当 Y 是大小为 <code class="docutils literal notranslate"><span class="pre">[n_samples,</span> <span class="pre">n_outputs]</span></code> 的2d数组时，有多个输出值需要预测的监督学习问题。</p>
+<p>当输出值之间没有关联时，一个很简单的处理该类型的方法是建立n个独立模型，即每个模型对应一个输出，然后使用这些模型来独立地预测n个输出中的每一个。
+然而，由于可能与相同输入相关的输出值本身是相关的，所以通常更好的方法是构建能够同时预测所有n个输出的单个模型。
+首先，因为仅仅是建立了一个模型所以训练时间会更短。第二，最终模型的泛化性能也会有所提升。</p>
+<p>对于决策树，这一策略可以很容易地用于支持多输出问题。这需要以下更改：</p>
+<blockquote>
+<div><ul class="simple">
+<li>在叶子中存储n个输出值，而不是一个;</li>
+<li>通过计算所有n个输出的平均减少量来作为分裂标准。</li>
+</ul>
+</div></blockquote>
+<p>该模块通过在 <a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></a> 和 <a class="reference internal" href="generated/sklearn.tree.DecisionTreeRegressor.html#sklearn.tree.DecisionTreeRegressor" title="sklearn.tree.DecisionTreeRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code></a> 中实现该策略来支持多输出问题。
+如果决策树在shape为 <code class="docutils literal notranslate"><span class="pre">[n_samples,</span> <span class="pre">n_outputs]</span></code> 的输出数组 Y 上拟合，则得到的估计器将:</p>
+<blockquote>
+<div><ul class="simple">
+<li>在 <code class="docutils literal notranslate"><span class="pre">predict</span></code> 中 输出 n_outputs 个值 ;</li>
+<li>在 <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> 上输出 n_outputs 个数组的列表。</li>
+</ul>
+</div></blockquote>
+<p>用多输出决策树进行回归分析的例子 <a class="reference internal" href="../auto_examples/tree/plot_tree_regression_multioutput.html#sphx-glr-auto-examples-tree-plot-tree-regression-multioutput-py"><span class="std std-ref">Multi-output Decision Tree Regression</span></a> 。
+在该示例中，输入X是单个实数值，输出 Y 是 X 的正弦值和余弦值。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_tree_regression_multioutput.html"><img alt="../images/sphx_glr_plot_tree_regression_multioutput_0011.png" src="../images/sphx_glr_plot_tree_regression_multioutput_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+</div>
+<p>使用多输出树进行分类，在 <a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#sphx-glr-auto-examples-plot-multioutput-face-completion-py"><span class="std std-ref">Face completion with a multi-output estimators</span></a> 例子中进行了演示。
+在该示例中，输入 X 是人脸的上半部分的像素，并且输出 Y 是这些脸的下半部分的像素。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/plot_multioutput_face_completion.html"><img alt="../images/sphx_glr_plot_multioutput_face_completion_0011.png" src="../images/sphx_glr_plot_multioutput_face_completion_0011.png" style="width: 750.0px; height: 847.5px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">案例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/tree/plot_tree_regression_multioutput.html#sphx-glr-auto-examples-tree-plot-tree-regression-multioutput-py"><span class="std std-ref">Multi-output Decision Tree Regression</span></a></li>
+<li><a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#sphx-glr-auto-examples-plot-multioutput-face-completion-py"><span class="std std-ref">Face completion with a multi-output estimators</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<ul class="simple">
+<li>M. Dumont et al,  <a class="reference external" href="http://www.montefiore.ulg.ac.be/services/stochastic/pubs/2009/DMWG09/dumont-visapp09-shortpaper.pdf">Fast multi-class image annotation with random subwindows
+and multiple output randomized trees</a>, International Conference on
+Computer Vision Theory and Applications 2009</li>
+</ul>
+</div>
+</div>
+<div class="section" id="tree-complexity">
+<span id="id4"></span><h2>1.10.4. 复杂度<a class="headerlink" href="#tree-complexity" title="Permalink to this headline">¶</a></h2>
+<p>总体来说，用来构建平衡二叉树的运行时间为 <span class="math notranslate nohighlight">\(O(n_{samples}n_{features}\log(n_{samples}))\)</span> ，查询时间为 <span class="math notranslate nohighlight">\(O(\log(n_{samples}))\)</span> 。
+尽管树的构造算法尝试生成平衡树，但它们并不总能保持平衡。假设子树能大概保持平衡，每个节点的成本包括通过 <span class="math notranslate nohighlight">\(O(n_{features})\)</span>
+时间复杂度来搜索找到提供熵减小最大的特征。每个节点的花费为 <span class="math notranslate nohighlight">\(O(n_{features}n_{samples}\log(n_{samples}))\)</span> ，
+从而使得整个决策树的构造成本为 <span class="math notranslate nohighlight">\(O(n_{features}n_{samples}^{2}\log(n_{samples}))\)</span> 。</p>
+<p>Scikit-learn提供了更多有效的方法来创建决策树。初始实现（如上所述）将重新计算沿着给定特征的
+每个新分割点的类标签直方图（用于分类）或平均值（用于回归）。与分类所有的样本特征，
+然后再次训练时运行标签计数，可将每个节点的复杂度降低为 <span class="math notranslate nohighlight">\(O(n_{features}\log(n_{samples}))\)</span> ，
+则总的成本花费为 <span class="math notranslate nohighlight">\(O(n_{features}n_{samples}\log(n_{samples}))\)</span> 。这是一种对所有基于树的算法的改进选项。
+默认情况下，对于梯度提升模型该算法是打开的，一般来说它会让训练速度更快。但对于所有其他算法默认是关闭的，
+当训练深度很深的树时往往会减慢训练速度。</p>
+</div>
+<div class="section" id="id5">
+<h2>1.10.5. 实用小建议<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>在拥有大量特征的数据上拟合模型的时候，决策树会倾向于出现过拟合的现象。
+获得一个合适的样本比例和特征数量十分重要，因为在高维空间中只有少量的样本上训练出的树是十分容易过拟合的。</li>
+<li>考虑事先对数据进行降维( <a class="reference internal" href="decomposition.html#pca"><span class="std std-ref">PCA</span></a>, <a class="reference internal" href="decomposition.html#ica"><span class="std std-ref">ICA</span></a>) ，使您的树能更好地找到具有分辨性的特征。</li>
+<li>当训练树的时候，通过 <code class="docutils literal notranslate"><span class="pre">export</span></code> 功能可以可视化您的决策树。使用 <code class="docutils literal notranslate"><span class="pre">max_depth=3</span></code> 作为初始树深度，
+让决策树知道如何适应您的数据，然后再增加树的深度。</li>
+<li>请记住，填充树的样本数量会增加树的每个附加级别。使用 <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> 来控制树的大小防止过拟合。</li>
+<li>通过使用 <code class="docutils literal notranslate"><span class="pre">min_samples_split</span></code> 或 <code class="docutils literal notranslate"><span class="pre">min_samples_leaf</span></code> 来保证多个样本通知树中的每个决策，通过控制这两个参数决定执行什么划分。
+当这个值很小时意味着生成的决策树将会过拟合，然而当这个值很大时将会不利于决策树对样本的学习。所以尝试 <code class="docutils literal notranslate"><span class="pre">min_samples_leaf=5</span></code> 作为初始值。
+如果样本量的变化很大，可以使用浮点数作为百分比传给这两个参数。 <code class="docutils literal notranslate"><span class="pre">min_samples_split</span></code> 可以创建任意小的叶子， <code class="docutils literal notranslate"><span class="pre">min_samples_leaf</span></code>
+保证了每个叶结点中的最小样本量，在回归问题中可以避免低方差过拟合的叶节点。对于只有少量类的分类问题，<code class="docutils literal notranslate"><span class="pre">min_samples_leaf=1</span></code> 通常是最好的选择。</li>
+<li>在训练之前平衡数据集，以防止决策树偏向于主导类。可以通过从每个类中抽取相等数量的样本来进行类平衡，或者优选地通过将每个类的样本权重 (<code class="docutils literal notranslate"><span class="pre">sample_weight</span></code>)
+之和归一化为相同的值。还要注意的是，基于权重的预修剪标准(比如 <code class="docutils literal notranslate"><span class="pre">min_weight_fraction_leaf</span></code>) 对于主导类别的偏倚比不使用样本权重的标准更少，
+如 <code class="docutils literal notranslate"><span class="pre">min_samples_leaf</span></code> 。</li>
+<li>如果样本被加权的话, 使用基于权重的预修剪标准(比如 <code class="docutils literal notranslate"><span class="pre">min_weight_fraction_leaf</span></code>) 能够更轻易的优化树结构。
+<code class="docutils literal notranslate"><span class="pre">min_weight_fraction_leaf</span></code> 保证了叶节点至少包含样本权重的总和的一部分。</li>
+<li>所有决策树内部使用 <code class="docutils literal notranslate"><span class="pre">np.float32</span></code> 数组。如果训练数据不是这种格式，将会发生数据集的拷贝。</li>
+<li>如果输入矩阵 X 非常稀疏， 在调用 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 和 <code class="docutils literal notranslate"><span class="pre">predict</span></code> 之前建议将其转成格式为 <code class="docutils literal notranslate"><span class="pre">csc_matrix</span></code> 的稀疏矩阵。
+当大多数样本的特征向量有很多0值的时候，相比用稠密矩阵，用稀疏矩阵作为输入，可以是训练时间快好几倍。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="tree-algorithms">
+<span id="id3-c4-5-c5-0-cart"></span><h2>1.10.6. 树算法: ID3, C4.5, C5.0 和 CART<a class="headerlink" href="#tree-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>决策树算法有哪些以及它们之间的区别？scikit-learn 中实现何种算法呢？</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/ID3_algorithm">ID3</a> (Iterative Dichotomiser 3) 由 Ross Quinlan 在1986年提出。该算法创建一个多路树(multiway tree)，
+为每个节点（以贪心的方式）找到一个能够产生分类目标的最大信息增益的分类特征(categorical feature)。决策树增长到其最大尺寸，
+然后通常利用剪枝来提高树对未知数据的泛化能力。</p>
+<p>C4.5 是 ID3 的后继者，它去除了特征必须是标称型(categorical)特征的限制条件，动态的定义了一个(基于数值型的)离散属性,
+这个属性可以把连续属性值划分成离散的区间集合。 C4.5 可以把训练好的树(ID3 算法的输出)转换成if-then规则的集合。
+然后每个规则的准确率会被评估来决定这些规则被使用的顺序。 剪枝操作通过移除一个规则的前提条件来完成。
+如果去掉某个前提条件后这个规则的准确率得到了提升那么这个前提条件就会被剪掉。</p>
+<p>C5.0 是 Quinlan 最近发布的新版本(带有知识产权的喔)。 它相比 C4.5 使用更少的内存并且构建更小的规则集,而且准确率更高。</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Predictive_analytics#Classification_and_regression_trees_.28CART.29">CART</a> (Classification and Regression Trees) 与 C4.5 非常相似, 不同之处是它支持数值型目标变量(所以可用于回归)
+并且不计算规则集合。 CART 在每个节点使用能够产生最大信息增益的特征和阈值来构建二叉树(binary trees)。</p>
+<p>scikit-learn 使用 CART 算法的优化版本; 然而, scikit-learn 的实现现在还不支持标称型变量(categorical variables) 。</p>
+</div>
+<div class="section" id="tree-mathematical-formulation">
+<span id="id7"></span><h2>1.10.7. 数学表达式<a class="headerlink" href="#tree-mathematical-formulation" title="Permalink to this headline">¶</a></h2>
+<p>给定训练向量 <span class="math notranslate nohighlight">\(x_i \in R^n\)</span>, i=1,…, l 和 标签向量 <span class="math notranslate nohighlight">\(y \in R^l\)</span>, 一个决策树通过递归(recursively)的划分空间
+使得具有相同标签的样本被划分到同一个组中。</p>
+<p>我们把在节点 <span class="math notranslate nohighlight">\(m\)</span> 的数据表示为 <span class="math notranslate nohighlight">\(Q\)</span> 。 对每一个由特征 <span class="math notranslate nohighlight">\(j\)</span> 和阈值 <span class="math notranslate nohighlight">\(t_m\)</span> 构成的候选划分，把数据划分成两个子集：
+<span class="math notranslate nohighlight">\(Q_{left}(\theta)\)</span> 和 <span class="math notranslate nohighlight">\(Q_{right}(\theta)\)</span> ，</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}Q_{left}(\theta) = {(x, y) | x_j &lt;= t_m}\\Q_{right}(\theta) = Q \setminus Q_{left}(\theta)\end{aligned}\end{align} \]</div>
+<p>那么，节点 <span class="math notranslate nohighlight">\(m\)</span> 处的不纯度(impurity) 就可以使用不纯度函数 <span class="math notranslate nohighlight">\(H()\)</span> 来计算,
+到底选择哪个不纯度准则依赖于要解决的问题(classification or regression)</p>
+<div class="math notranslate nohighlight">
+\[G(Q, \theta) = \frac{n_{left}}{N_m} H(Q_{left}(\theta))
++ \frac{n_{right}}{N_m} H(Q_{right}(\theta))\]</div>
+<p>选择能够最小化不纯度(impurity)的参数:</p>
+<div class="math notranslate nohighlight">
+\[\theta^* = \operatorname{argmin}_\theta  G(Q, \theta)\]</div>
+<p>在 <span class="math notranslate nohighlight">\(Q_{left}(\theta^*)\)</span> 和 <span class="math notranslate nohighlight">\(Q_{right}(\theta^*)\)</span> 子集上递归直到达到最大允许深度，<span class="math notranslate nohighlight">\(N_m &lt; \min_{samples}\)</span> 或 <span class="math notranslate nohighlight">\(N_m = 1\)</span>.</p>
+<div class="section" id="id8">
+<h3>1.10.7.1. 分类准则<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>如果目标是取值为 0,1,…,K-1 的分类输出，对节点 <span class="math notranslate nohighlight">\(m\)</span> ，表示一个带有 <span class="math notranslate nohighlight">\(N_m\)</span> 个观测值的区域 <span class="math notranslate nohighlight">\(R_m\)</span>，
+让</p>
+<div class="math notranslate nohighlight">
+\[p_{mk} = 1/ N_m \sum_{x_i \in R_m} I(y_i = k)\]</div>
+<p>成为在节点 <span class="math notranslate nohighlight">\(m\)</span> 上类k的观测值的比例。</p>
+<p>不纯度(impurity)的常用度量是 Gini</p>
+<div class="math notranslate nohighlight">
+\[H(X_m) = \sum_k p_{mk} (1 - p_{mk})\]</div>
+<p>熵(Entropy)</p>
+<div class="math notranslate nohighlight">
+\[H(X_m) = - \sum_k p_{mk} \log(p_{mk})\]</div>
+<p>误分类(Misclassification)</p>
+<div class="math notranslate nohighlight">
+\[H(X_m) = 1 - \max(p_{mk})\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(X_m\)</span> 是 节点 <span class="math notranslate nohighlight">\(m\)</span> 上的训练数据。</p>
+</div>
+<div class="section" id="id9">
+<h3>1.10.7.2. 回归准则<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>如果目标是连续值，那么，对 节点 <span class="math notranslate nohighlight">\(m\)</span> ，表示一个有 <span class="math notranslate nohighlight">\(N_m\)</span> 个观测值的区域 <span class="math notranslate nohighlight">\(R_m\)</span> ，
+用于决定未来划分的位置的常用最小化准则是：Mean Squared Error 和 Mean Absolute Error； 其中，
+Mean Squared Error 使用 终结点的平均值 最小化 L2 误差；
+Mean Absolute Error 使用 终结点的中值 最小化 L1 误差。</p>
+<p>Mean Squared Error:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\bar{y}_m = \frac{1}{N_m} \sum_{i \in N_m} y_i\\H(X_m) = \frac{1}{N_m} \sum_{i \in N_m} (y_i - \bar{y}_m)^2\end{aligned}\end{align} \]</div>
+<p>Mean Absolute Error:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\bar{y}_m = \frac{1}{N_m} \sum_{i \in N_m} y_i\\H(X_m) = \frac{1}{N_m} \sum_{i \in N_m} |y_i - \bar{y}_m|\end{aligned}\end{align} \]</div>
+<p>其中 <span class="math notranslate nohighlight">\(X_m\)</span> 是 节点 <span class="math notranslate nohighlight">\(m\)</span> 上的训练数据。</p>
+<div class="topic">
+<p class="topic-title first">参考文献:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Decision_tree_learning">https://en.wikipedia.org/wiki/Decision_tree_learning</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Predictive_analytics">https://en.wikipedia.org/wiki/Predictive_analytics</a></li>
+<li>L. Breiman, J. Friedman, R. Olshen, and C. Stone. Classification and
+Regression Trees. Wadsworth, Belmont, CA, 1984.</li>
+<li>J.R. Quinlan. C4. 5: programs for machine learning. Morgan Kaufmann, 1993.</li>
+<li>T. Hastie, R. Tibshirani and J. Friedman.
+Elements of Statistical Learning, Springer, 2009.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    &copy; 2007 - 2018, scikit-learn developers (BSD License).
+    <!--
+    <a href="../_sources/modules/tree.rst.txt" rel="nofollow">Show this page source</a> -->
+  </div>
+  <div class="rel">
+    
+      <div class="buttonPrevious">
+        <a href="naive_bayes.html">Previous
+        </a>
+      </div>
+      <div class="buttonNext">
+        <a href="ensemble.html">Next
+        </a>
+      </div>
+      
+    </div>
+
+    
+    <script>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+      ga('create', 'UA-22606712-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function () {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>

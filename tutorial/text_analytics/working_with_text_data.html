@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>Scikit-Learn 处理文本数据 &#8212; scikit-learn 0.20.2 documentation</title>
+<!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" href="../../static/css/bootstrap-responsive.css" />
+
+    <link rel="stylesheet" href="../../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <script type="text/javascript" src="../../static/js/copybutton.js"></script>
+    <script type="text/javascript" src="../../static/js/extra.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_SVG"></script>
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="选择合适的估计器" href="../machine_learning_map/index.html" />
+    <link rel="prev" title="寻求帮助" href="../statistical_inference/finding_help.html" />
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="../../static/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+  VERSION_SUBDIR = (function (groups) {
+    return groups ? groups[1] : null;
+  })(location.href.match(/^https?:\/\/scikit-learn.org\/([^\/]+)/));
+</script>
+<link rel="canonical" href="http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html" />
+
+<script type="text/javascript">
+  $("div.buttonNext, div.buttonPrevious").hover(
+    function () {
+      $(this).css('background-color', '#FF9C34');
+    },
+    function () {
+      $(this).css('background-color', '#A7D6E2');
+    }
+  );
+  function showMenu() {
+    var topNav = document.getElementById("scikit-navbar");
+    if (topNav.className === "navbar") {
+      topNav.className += " responsive";
+    } else {
+      topNav.className = "navbar";
+    }
+  };
+</script>
+
+<!-- 百度站长统计代码 -->
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e7836e37a4cb7584127a787e9b44e3f1";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+  </head><body>
+
+<div class="header-wrapper">
+  <div class="header">
+    <p class="logo"><a href="../../index.html">
+        <img src="../../static/scikit-learn-logo-small.png" alt="Logo" />
+      </a>
+    </p><div class="navbar" id="scikit-navbar">
+      <ul>
+        <li><a href="../../index.html">首页</a></li>
+        <li><a href="../../install.html">安装</a></li>
+        <li class="btn-li">
+          <div class="btn-group">
+            <a href="../../documentation.html">文档</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="link-title">Scikit-learn
+                <script>document.write(DOCUMENTATION_OPTIONS.VERSION + (VERSION_SUBDIR ? " (" + VERSION_SUBDIR + ")" : ""));</script>
+              </li>
+              <li><a href="../index.html">教程</a></li>
+              <li><a href="../../user_guide.html">用户指南</a></li>
+              <li><a href="../../modules/classes.html">API</a></li>
+              <li><a href="../../glossary.html">词汇表</a></li>
+              <li><a href="../../faq.html">FAQ</a></li>
+              <li><a href="../../developers/contributing.html">贡献</a></li>
+              <li><a href="../../roadmap.html">路线图</a></li>
+              <li class="divider"></li>
+              <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
+              <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
+              <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
+              <li><a href="../../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="../../auto_examples/index.html">案例</a></li>
+      </ul>
+      <a href="javascript:void(0);" onclick="showMenu()">
+        <div class="nav-icon">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </div>
+      </a>
+      <div class="search_form">
+        <div class="gcse-search" id="cse" style="width: 100%;"></div>
+      </div>
+    </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- GitHub "fork me" ribbon -->
+<a href="https://github.com/scikit-learn/scikit-learn">
+  <img class="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="../../static/img/forkme.png"
+    alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+  <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+      <div class="rel">
+        
+          <div class="rellink">
+            <a href="../statistical_inference/finding_help.html" accesskey="P">Previous
+              <br />
+              <span class="smallrellink">
+                寻求帮助
+              </span>
+              <span class="hiddenrellink">
+                寻求帮助
+              </span>
+            </a>
+          </div>
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="../machine_learning_map/index.html" accesskey="N">Next
+              <br />
+              <span class="smallrellink">
+                选择合适的估计器
+              </span>
+              <span class="hiddenrellink">
+                选择合适的估计器
+              </span>
+            </a>
+          </div>
+
+          <!-- Ad a link to the 'up' page -->
+          <div class="spacer">
+            &nbsp;
+          </div>
+          <div class="rellink">
+            <a href="../index.html">
+              Up
+              <br />
+              <span class="smallrellink">
+                scikit-learn 教程
+              </span>
+                <span class="hiddenrellink">
+                  scikit-learn 教程
+                </span>
+                
+            </a>
+          </div>
+        </div>
+        
+        <p class="doc-version"><b>scikit-learn v0.20.2</b><br />
+          <a href="http://scikit-learn.org/dev/versions.html">其他版本</a></p>
+        <!-- <p class="citing">Please <b><a href="../../about.html#citing-scikit-learn" style="font-size: 110%;">cite
+              us </a></b>if you use the software.</p> -->
+        <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
+        </p>
+        <ul>
+<li><a class="reference internal" href="#">Scikit-Learn 处理文本数据</a><ul>
+<li><a class="reference internal" href="#id1">学习教程的配置项</a></li>
+<li><a class="reference internal" href="#newsgroups">加载 20 newsgroups 数据集</a></li>
+<li><a class="reference internal" href="#id3">从文本文件中抽取特征</a><ul>
+<li><a class="reference internal" href="#bags-of-words">词袋(Bags of words)</a></li>
+<li><a class="reference internal" href="#scikit-learn-tokenize">使用``scikit-learn``对文本分词(tokenize)</a></li>
+<li><a class="reference internal" href="#id8">从出现次数到出现频率</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">训练一个分类器</a></li>
+<li><a class="reference internal" href="#id10">构建一个管道流</a></li>
+<li><a class="reference internal" href="#id11">在测试集上评估性能</a></li>
+<li><a class="reference internal" href="#id12">使用网格搜索进行参数调节</a><ul>
+<li><a class="reference internal" href="#id13">练习</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">练习 1: 语言辨识</a></li>
+<li><a class="reference internal" href="#id15">练习 2: 电影评论的情感分析</a></li>
+<li><a class="reference internal" href="#cli">练习 3: CLI 文本分类工具集</a></li>
+<li><a class="reference internal" href="#id16">进一步的深入学习</a></li>
+</ul>
+</li>
+</ul>
+
+        <br />
+        <p>
+          <a href="http://www.studyai.com" target="_blank">
+            <img src="../../static/img/xxx.png" alt="座右铭" />
+          </a>
+        </p>
+        <br />
+        <p class="doc-version" style="font-size:10%">
+          注意!本网站的网址是以 <em>https://</em> 开头的，而不是以 <em>http://</em> 开头的!!!
+        </p>
+      </div>
+    </div>
+    
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+    <label for="nav-trigger"></label>
+    
+    
+
+
+    <div class="content">
+      
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="scikit-learn">
+<span id="text-data-tutorial"></span><h1>Scikit-Learn 处理文本数据<a class="headerlink" href="#scikit-learn" title="Permalink to this headline">¶</a></h1>
+<p>本指南旨在一个单独实际任务中探索一些主要的 <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> 工具:
+分析关于 20 个不同主题的一个文件集合（新闻组帖子）。</p>
+<p>在本节中，我们将会学习如何:</p>
+<blockquote>
+<div><ul class="simple">
+<li>读取文件内容以及所属的类别</li>
+<li>提取合适于机器学习的特征向量</li>
+<li>训练一个线性模型来进行分类</li>
+<li>使用网格搜索策略找到特征提取组件和分类器的最佳配置</li>
+</ul>
+</div></blockquote>
+<div class="section" id="id1">
+<h2>学习教程的配置项<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>开始这篇教程之前，你必须首先安装 <em>scikit-learn</em> 以及所有其要求的库。</p>
+<p>更多信息和系统安装指导请参考 <a class="reference internal" href="../../install.html#installation-instructions"><span class="std std-ref">installation instructions</span></a> 。</p>
+<p>这篇入门教程的源代码可以在你的 scikit-learn 文件夹下面找到:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span><span class="n">tutorial</span><span class="o">/</span><span class="n">text_analytics</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>这篇入门教程的源代码可以在 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/tree/master/doc/tutorial/text_analytics">on Github</a>.</p>
+<p>这个入门教程包含以下的子文件夹:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">*.rst</span> <span class="pre">files</span></code> - 用 sphinx 编写的该教程的源代码</li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code> - 用来存放在该教程中用到的数据集的文件夹</li>
+<li><code class="docutils literal notranslate"><span class="pre">skeletons</span></code> - 用来练习的未完成的示例脚本</li>
+<li><code class="docutils literal notranslate"><span class="pre">solutions</span></code> -  练习的答案</li>
+</ul>
+</div></blockquote>
+<p>你也可以将这个文件结构拷贝到您的电脑的硬盘里名为 <code class="docutils literal notranslate"><span class="pre">sklearn_tut_workspace</span></code> 的
+文件夹中来编辑你自己的文件完成练习，同时保持原有文件结构不变:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">skeletons</span> <span class="n">work_directory</span><span class="o">/</span><span class="n">sklearn_tut_workspace</span>
+</pre></div>
+</div>
+<p>机器学习算法需要数据。 进入每一个 <code class="docutils literal notranslate"><span class="pre">$TUTORIAL_HOME/data</span></code> 子文件夹，然后运行 <code class="docutils literal notranslate"><span class="pre">fetch_data.py</span></code> 脚本（需要您先读取这些文件）。</p>
+<p>比如:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>% cd $TUTORIAL_HOME/data/languages
+% less fetch_data.py
+% python fetch_data.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="newsgroups">
+<h2>加载 20 newsgroups 数据集<a class="headerlink" href="#newsgroups" title="Permalink to this headline">¶</a></h2>
+<p>该数据集名为 “Twenty Newsgroups” 。 下面是这个数据集的官方介绍, 引自 <a class="reference external" href="http://people.csail.mit.edu/jrennie/20Newsgroups/">网站</a> :</p>
+<blockquote>
+<div>Twenty Newsgroups 数据集是一个包括近 20,000 个新闻组文档的集合，（几乎）平均分成了 20 个不同新闻组。
+据我们所知，这最初是由 Ken Lang 收集的 ，很可能是为了他的论文 “Newsweeder: Learning to filter netnews,”
+尽管他没有明确提及这个集合。 这 20 个新闻组集合已成为一个流行的数据集，用于机器学习中的文本应用的试验中，如文本分类和文本聚类。</div></blockquote>
+<p>接下来我们会使用 scikit-learn 中的这个内置数据集加载器来加载这 20 个新闻组。 或者，您也可以手动从网站上下载数据集，
+使用 <a class="reference internal" href="../../modules/generated/sklearn.datasets.load_files.html#sklearn.datasets.load_files" title="sklearn.datasets.load_files"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.datasets.load_files</span></code></a> 功能，并将其指向未压缩文件夹下的 <code class="docutils literal notranslate"><span class="pre">20news-bydate-train</span></code> 子文件夹。</p>
+<p>在第一个示例中，为了节约时间，我们将使用部分数据：从 20 个类别的数据集中选出 4 个来进行训练:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;alt.atheism&#39;</span><span class="p">,</span> <span class="s1">&#39;soc.religion.christian&#39;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s1">&#39;comp.graphics&#39;</span><span class="p">,</span> <span class="s1">&#39;sci.med&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>如下所示，我们现在能够加载对应这些类别的文件列表:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">fetch_20newsgroups</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_train</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>返回的数据集是一个 <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> “bunch”: 一个简单的包含多个 “field” 的存储对象，可以方便的使用 python 中的 <code class="docutils literal notranslate"><span class="pre">dict</span></code> keys
+或 <code class="docutils literal notranslate"><span class="pre">object</span></code> 属性来读取, 比如 <code class="docutils literal notranslate"><span class="pre">target_names</span></code> 包含了所请求的类别名称:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span>
+<span class="go">[&#39;alt.atheism&#39;, &#39;comp.graphics&#39;, &#39;sci.med&#39;, &#39;soc.religion.christian&#39;]</span>
+</pre></div>
+</div>
+<p>这些文件本身被读进内存中字典”bunch”的 <code class="docutils literal notranslate"><span class="pre">data</span></code> 属性中。 另外，这些文件名称也可以容易获取到:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="go">2257</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">filenames</span><span class="p">)</span>
+<span class="go">2257</span>
+</pre></div>
+</div>
+<p>让我们打印出所加载的第一个文件的前几行:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]))</span>
+<span class="go">From: sd345@city.ac.uk (Michael Collier)</span>
+<span class="go">Subject: Converting images to HP LaserJet III?</span>
+<span class="go">Nntp-Posting-Host: hampton</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="go">comp.graphics</span>
+</pre></div>
+</div>
+<p>监督学习需要让训练集中的每个文档对应一个类别标签。 在这个例子中，类别是每个新闻组的名称，也刚好是每个储存文本文件的文件夹的名称。</p>
+<p>由于速度和空间上效率的原因， <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> 把目标属性加载为一个整型数列，
+它与 <code class="docutils literal notranslate"><span class="pre">target_names</span></code> 列表中类别名称的 index（索引）相对应。 每个样本的类别的整数型 id
+存放在 <code class="docutils literal notranslate"><span class="pre">target</span></code> 属性中:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="go">array([1, 1, 3, 3, 3, 3, 3, 2, 2, 2])</span>
+</pre></div>
+</div>
+<p>也可以通过如下方式取得类别名称:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="go">comp.graphics</span>
+<span class="go">comp.graphics</span>
+<span class="go">soc.religion.christian</span>
+<span class="go">soc.religion.christian</span>
+<span class="go">soc.religion.christian</span>
+<span class="go">soc.religion.christian</span>
+<span class="go">soc.religion.christian</span>
+<span class="go">sci.med</span>
+<span class="go">sci.med</span>
+<span class="go">sci.med</span>
+</pre></div>
+</div>
+<p>你可以发现当我们调用函数 <code class="docutils literal notranslate"><span class="pre">fetch_20newsgroups(...,</span> <span class="pre">shuffle=True,</span> <span class="pre">random_state=42)</span></code> 时，
+所有的样本都被随机打乱（使用了修正的 RNG 种子）:
+当你在重新训练整个数据集之前，这样可以帮助你只选取前几个样本来快速训练一个模型以及获得初步结果。</p>
+</div>
+<div class="section" id="id3">
+<h2>从文本文件中抽取特征<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>为了在文本文件中执行机器学习算法, 我们首先要做的是将文本内容转化成数值形式的特征向量。</p>
+<div class="section" id="bags-of-words">
+<h3>词袋(Bags of words)<a class="headerlink" href="#bags-of-words" title="Permalink to this headline">¶</a></h3>
+<p>最直观的方法就是用词袋来表示:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>给训练集中每一个出现在任意文档中的单词分配一个特定的整数 id（比如，通过建立一个从单词到整数索引的字典）。</li>
+<li>对于每个文档 <code class="docutils literal notranslate"><span class="pre">#i</span></code>，计算每个单词 <code class="docutils literal notranslate"><span class="pre">w</span></code> 的出现次数并将其存储在 <code class="docutils literal notranslate"><span class="pre">X[i,</span> <span class="pre">j]</span></code> 中作为特征 <code class="docutils literal notranslate"><span class="pre">#j</span></code> 的值，其中 <code class="docutils literal notranslate"><span class="pre">j</span></code> 是在字典中词 <code class="docutils literal notranslate"><span class="pre">w</span></code> 的索引。</li>
+</ol>
+</div></blockquote>
+<p>在这种词袋表示法中 <code class="docutils literal notranslate"><span class="pre">n_features</span></code> 是在整个文集（文章集合的缩写，下同）中不同单词的数量: 这个值一般来说超过 100,000 。</p>
+<p>如果 <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">==</span> <span class="pre">10000</span></code>， 存储 X 为 “float32” 型的 numpy 数组将会需要 10000 x 100000 x 4 bytes = <a href="#id4"><span class="problematic" id="id5">**</span></a>4GB**内存 ，
+在当前的计算机中非常不好管理的。</p>
+<p>幸运的是, <strong>X 数组中大多数的值为 0</strong> ，是因为特定的文档中使用的单词数量远远少于总体的词袋单词个数。
+因此我们可以称词袋模型是典型的 <a href="#id6"><span class="problematic" id="id7">**</span></a>high-dimensional sparse datasets**（高维稀疏数据集）。
+我们可以通过只在内存中保存特征向量中非 0 的部分以节省大量内存。</p>
+<p><code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> 矩阵正是能完成上述操作的数据结构，同时 <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> 有对这样的数据结构的内置支持。</p>
+</div>
+<div class="section" id="scikit-learn-tokenize">
+<h3>使用``scikit-learn``对文本分词(tokenize)<a class="headerlink" href="#scikit-learn-tokenize" title="Permalink to this headline">¶</a></h3>
+<p>文本的预处理, 分词以及过滤停用词都被包含在一个可以构建特征字典和将文档转换成特征向量的高级组件 <a class="reference internal" href="../../modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 中:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count_vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_counts</span> <span class="o">=</span> <span class="n">count_vect</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_counts</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2257, 35788)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 支持单词或者连续字符的 N-gram 模型的计数。 一旦拟合，
+向量化程序(vectorizer)就会构建一个包含特征索引的字典:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">count_vect</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;algorithm&#39;</span><span class="p">)</span>
+<span class="go">4690</span>
+</pre></div>
+</div>
+<p>在词汇表中一个单词的索引值对应的是该单词在整个训练的文集中出现的频率。</p>
+</div>
+<div class="section" id="id8">
+<h3>从出现次数到出现频率<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>出现次数的统计是非常好的开始，但是有个问题：长的文本相对于短的文本有更高的单词平均出现次数，
+尽管他们可能在描述同一个主题。</p>
+<p>为了避免这些潜在的差异，只需将各文档中每个单词的出现次数除以该文档中所有单词的总数：
+这些新的特征称之为词频 <code class="docutils literal notranslate"><span class="pre">tf</span></code> (Term Frequencies)。</p>
+<p>另一个在词频的基础上改良是，降低在该训练文集中的很多文档中均出现的单词的权重，
+从而突出那些仅在该训练文集中在一小部分文档中出现的单词的信息量。</p>
+<p>这种方法称为 <a class="reference external" href="https://en.wikipedia.org/wiki/Tf-idf">tf–idf</a> ，全称为 “Term Frequency times Inverse Document Frequency”。</p>
+<p><strong>tf</strong> 和 <strong>tf–idf</strong> 都可以按照下面的方式计算 <a class="reference internal" href="../../modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfTransformer</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">TfidfTransformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_transformer</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_counts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_tf</span> <span class="o">=</span> <span class="n">tf_transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_counts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_tf</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2257, 35788)</span>
+</pre></div>
+</div>
+<p>在上面的样例代码中，我们首先使用了 <code class="docutils literal notranslate"><span class="pre">fit(..)</span></code> 方法来拟合对数据的 estimator（估算器），接着使用 <code class="docutils literal notranslate"><span class="pre">transform(..)</span></code> 方法
+来把我们的计数矩阵(count-matrix)转换成 <code class="docutils literal notranslate"><span class="pre">tf-idf</span></code> 型。 通过跳过冗余处理，这两步可以结合起来，来更快地得到同样的结果。
+这种操作可以使用上节提到过的 <code class="docutils literal notranslate"><span class="pre">fit_transform(..)</span></code> 方法来完成，如下:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tfidf_transformer</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_tfidf</span> <span class="o">=</span> <span class="n">tfidf_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train_counts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_tfidf</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2257, 35788)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>训练一个分类器<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p>现在我们有了特征，我们可以训练一个分类器来预测一个帖子所属的类别。 让我们从 <a class="reference internal" href="../../modules/naive_bayes.html#naive-bayes"><span class="std std-ref">naïve Bayes</span></a> 分类器开始.
+该分类器为该任务提供了一个好的基准（baseline）。<code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> 包含了该分类器的若干变种；最适用在该问题上的变种是多项式(multinomial)分类器</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <span class="n">MultinomialNB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>为了尝试预测新文档所属的类别，我们需要使用和之前同样的步骤来抽取特征。 不同之处在于，我们在transformer调用 <code class="docutils literal notranslate"><span class="pre">transform</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">fit_transform</span></code> ，
+因为这些特征已经在训练集上进行拟合了:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">docs_new</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;God is love&#39;</span><span class="p">,</span> <span class="s1">&#39;OpenGL on the GPU is fast&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new_counts</span> <span class="o">=</span> <span class="n">count_vect</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs_new</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new_tfidf</span> <span class="o">=</span> <span class="n">tfidf_transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_new_counts</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predicted</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new_tfidf</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">doc</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">docs_new</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> =&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">category</span><span class="p">]))</span>
+<span class="gp">...</span>
+<span class="go">&#39;God is love&#39; =&gt; soc.religion.christian</span>
+<span class="go">&#39;OpenGL on the GPU is fast&#39; =&gt; comp.graphics</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>构建一个管道流<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>为了使得 向量化（vectorizer） =&gt; 转换器（transformer） =&gt; 分类器（classifier） 过程更加简单,
+<code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> 提供了一个 <a class="reference internal" href="../../modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="sklearn.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a> 类，操作起来像一个复合分类器:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text_clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;vect&#39;</span><span class="p">,</span> <span class="n">CountVectorizer</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <span class="n">TfidfTransformer</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">MultinomialNB</span><span class="p">()),</span>
+<span class="gp">... </span><span class="p">])</span>
+</pre></div>
+</div>
+<p>名称 <code class="docutils literal notranslate"><span class="pre">vect</span></code>, <code class="docutils literal notranslate"><span class="pre">tfidf</span></code> 和 <code class="docutils literal notranslate"><span class="pre">clf</span></code> （分类器）都是任意的。 我们将会在下面的网格搜索（grid search）小节中看到它们的用法。
+现在我们可以使用下面的一行命令来训练模型:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>  
+<span class="go">Pipeline(...)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>在测试集上评估性能<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p>评估模型的预测准确度同样简单:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_test</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">docs_test</span> <span class="o">=</span> <span class="n">twenty_test</span><span class="o">.</span><span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predicted</span> <span class="o">=</span> <span class="n">text_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">docs_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">twenty_test</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>            
+<span class="go">0.8348...</span>
+</pre></div>
+</div>
+<p>那就是, 我们模型的准确度为 83.4%. 我们使用 linear <a class="reference internal" href="../../modules/svm.html#svm"><span class="std std-ref">support vector machine (SVM)</span></a> ，
+是公认的最好的文本分类算法之一（尽管训练速度比朴素贝叶斯慢一点）。
+仅需要在 Pipeline（管道）中插接入不同的分类器对象，就可以改变我们的学习器:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">SGDClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text_clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;vect&#39;</span><span class="p">,</span> <span class="n">CountVectorizer</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <span class="n">TfidfTransformer</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;hinge&#39;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">max_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="kc">None</span><span class="p">)),</span>
+<span class="gp">... </span><span class="p">])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>  
+<span class="go">Pipeline(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predicted</span> <span class="o">=</span> <span class="n">text_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">docs_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted</span> <span class="o">==</span> <span class="n">twenty_test</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>            
+<span class="go">0.9127...</span>
+</pre></div>
+</div>
+<p>使用SVM分类器，我们获得了 91.3% 的准确率。 此外， <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> 提供了更加细致的模型性能评估工具:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">twenty_test</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">predicted</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">target_names</span><span class="o">=</span><span class="n">twenty_test</span><span class="o">.</span><span class="n">target_names</span><span class="p">))</span>
+<span class="gp">... </span>                                        
+<span class="go">                        precision    recall  f1-score   support</span>
+
+<span class="go">           alt.atheism       0.95      0.81      0.87       319</span>
+<span class="go">         comp.graphics       0.88      0.97      0.92       389</span>
+<span class="go">               sci.med       0.94      0.90      0.92       396</span>
+<span class="go">soc.religion.christian       0.90      0.95      0.93       398</span>
+
+<span class="go">             micro avg       0.91      0.91      0.91      1502</span>
+<span class="go">             macro avg       0.92      0.91      0.91      1502</span>
+<span class="go">          weighted avg       0.92      0.91      0.91      1502</span>
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">twenty_test</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span>
+<span class="go">array([[258,  11,  15,  35],</span>
+<span class="go">       [  4, 379,   3,   3],</span>
+<span class="go">       [  5,  33, 355,   3],</span>
+<span class="go">       [  5,  10,   4, 379]])</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>正如所期望的， confusion matrix（混淆矩阵）表明 atheism 和 christian 两个类别的新闻帖子会比它们中任一类与</dt>
+<dd>computer graphics 类别的新闻贴子更容易彼此混淆。</dd>
+</dl>
+</div>
+<div class="section" id="id12">
+<h2>使用网格搜索进行参数调节<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>我们已经接触了类似于 <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code> 中 <code class="docutils literal notranslate"><span class="pre">use_idf</span></code> 这样的参数 ，分类器也有许多参数；
+比如， <code class="docutils literal notranslate"><span class="pre">MultinomialNB</span></code> 包含了平滑参数 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> 以及 <code class="docutils literal notranslate"><span class="pre">SGDClassifier</span></code> 有惩罚参数 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> 和
+目标函数中的可设置的损失以及惩罚因子（请翻阅该模块说明，或者更多信息请使用 python 的 <code class="docutils literal notranslate"><span class="pre">help</span></code> 文档）。</p>
+<p>不是调整 chain（链）的各种组件的参数，相反，通过构建巨大的可能值的网格从而对最佳参数的穷尽搜索是可能的。
+我们尝试所有情况的分类器：使用词袋或者二元模型，使用或者不使用 idf ，在linear SVM 上设置 0.01 或者 0.001 的惩罚参数:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;vect__ngram_range&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="s1">&#39;tfidf__use_idf&#39;</span><span class="p">:</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s1">&#39;clf__alpha&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>很明显, 如此地穷举是非常耗时的。 如果我们有多个 CPU，通过设置 n_jobs 参数可以进行并行处理。
+如果我们将该参数设置为 -1 ， 该方法会使用机器的所有 CPU 核心:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gs_clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">text_clf</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">iid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>网格搜索的操作跟 <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> 中常见的模型的操作是类似的。 让我们来选择训练集中的一小部分进行搜索来加速计算:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gs_clf</span> <span class="o">=</span> <span class="n">gs_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">400</span><span class="p">],</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="mi">400</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>在 <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> 对象上调用 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 的结果就是我们得到了用来 <code class="docutils literal notranslate"><span class="pre">predict</span></code> 的分类器:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">gs_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;God is love&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">&#39;soc.religion.christian&#39;</span>
+</pre></div>
+</div>
+<p>该对象的 <code class="docutils literal notranslate"><span class="pre">best_score_</span></code> 和 <code class="docutils literal notranslate"><span class="pre">best_params_</span></code> 属性存放了最佳的平均分以及其所对应的参数配置:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gs_clf</span><span class="o">.</span><span class="n">best_score_</span>                                  
+<span class="go">0.9...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">param_name</span><span class="p">,</span> <span class="n">gs_clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="n">param_name</span><span class="p">]))</span>
+<span class="gp">...</span>
+<span class="go">clf__alpha: 0.001</span>
+<span class="go">tfidf__use_idf: True</span>
+<span class="go">vect__ngram_range: (1, 2)</span>
+</pre></div>
+</div>
+<p>更详细的搜索总结可以在 <code class="docutils literal notranslate"><span class="pre">gs_clf.cv_results_</span></code> 中得到。</p>
+<p><code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> 参数能够轻易地以 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 格式被导入到 pandas 中，以供以后观察。</p>
+<div class="section" id="id13">
+<h3>练习<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>为了做这个练习，请拷贝 ‘skeletons’ 文件夹到新的文件夹，并将其命名为 ‘workspace’</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">skeletons</span> <span class="n">workspace</span>
+</pre></div>
+</div>
+<p>这时候可以任意更改练习的代码而不会破坏原来的练习指导。</p>
+<p>然后启动 ipython 交互环境，并运行以下 python 脚本:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span><span class="n">run</span> <span class="n">workspace</span><span class="o">/</span><span class="n">exercise_XX_script</span><span class="o">.</span><span class="n">py</span> <span class="n">arg1</span> <span class="n">arg2</span> <span class="n">arg3</span>
+</pre></div>
+</div>
+<p>如果出现错误, 请使用 <code class="docutils literal notranslate"><span class="pre">%debug</span></code> 来启动 ipdb 调试环境。</p>
+<p>迭代更改答案直到练习完成。</p>
+<p><strong>在每个练习中, skeleton 文件提供了所有必需的import语句，加载数据的模板代码以及评估模型准确度的样例代码.</strong></p>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>练习 1: 语言辨识<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>请使用以维基百科中的文章作为训练集的自定义的预处理器和 <code class="docutils literal notranslate"><span class="pre">CharNGramAnalyzer</span></code> ， 来编写一个文本分类的 Pipeline（管道）。</li>
+<li>评估某些测试集的性能.</li>
+</ul>
+<p>ipython command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="n">workspace</span><span class="o">/</span><span class="n">exercise_01_language_train_model</span><span class="o">.</span><span class="n">py</span> <span class="n">data</span><span class="o">/</span><span class="n">languages</span><span class="o">/</span><span class="n">paragraphs</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h2>练习 2: 电影评论的情感分析<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>编写一个文本分类 Pipeline（管道）来将电影评论分类为积极的（positive）还是消极的（negative）。</li>
+<li>使用网格搜索来找到好的参数配置。</li>
+<li>使用测试集进行性能评估。</li>
+</ul>
+<p>ipython command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="n">workspace</span><span class="o">/</span><span class="n">exercise_02_sentiment</span><span class="o">.</span><span class="n">py</span> <span class="n">data</span><span class="o">/</span><span class="n">movie_reviews</span><span class="o">/</span><span class="n">txt_sentoken</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli">
+<h2>练习 3: CLI 文本分类工具集<a class="headerlink" href="#cli" title="Permalink to this headline">¶</a></h2>
+<p>使用前面的练习结果以及标准库的 <code class="docutils literal notranslate"><span class="pre">cPickle``模块，编写一个命令行工具来检测由</span> <span class="pre">``stdin</span></code> 输入的文本语言。
+如果输入的文本是英文的话，请评估该文本的极性（积极的还是消极的）。</p>
+<p>加分项：该工具对其预测给出置信水平。</p>
+</div>
+<div class="section" id="id16">
+<h2>进一步的深入学习<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<p>当你完成这个章节时，下面是几个建议来帮助你对 scikit-learn 有进一步的理解:</p>
+<ul class="simple">
+<li>尝试使用 <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code> 类下的 <code class="docutils literal notranslate"><span class="pre">analyzer</span></code> 以及 <code class="docutils literal notranslate"><span class="pre">token</span> <span class="pre">normalisation</span></code> 。</li>
+<li>如果你没有标签，尝试使用 聚类 <a class="reference internal" href="../../auto_examples/text/plot_document_clustering.html#sphx-glr-auto-examples-text-plot-document-clustering-py"><span class="std std-ref">Clustering</span></a> 来解决你的问题。</li>
+<li>如果每篇文章有多个标签，请参考 多类别和多标签部分 <a class="reference internal" href="../../modules/multiclass.html#multiclass"><span class="std std-ref">Multiclass and multilabel section</span></a>.</li>
+<li>尝试使用 <a class="reference internal" href="../../modules/decomposition.html#lsa"><span class="std std-ref">Truncated SVD</span></a>  解决 隐语义分析 <a class="reference external" href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">latent semantic analysis</a>.</li>
+<li>使用 <a class="reference internal" href="../../auto_examples/applications/plot_out_of_core_classification.html#sphx-glr-auto-examples-applications-plot-out-of-core-classification-py"><span class="std std-ref">Out-of-core Classification</span></a> 来学习不会存入计算机的主存储器的数据。</li>
+<li>使用 <a class="reference internal" href="../../modules/feature_extraction.html#hashing-vectorizer"><span class="std std-ref">Hashing Vectorizer</span></a> 来节省内存，以代替 <a class="reference internal" href="../../modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> 。</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    &copy; 2007 - 2018, scikit-learn developers (BSD License).
+    <!--
+    <a href="../../_sources/tutorial/text_analytics/working_with_text_data.rst.txt" rel="nofollow">Show this page source</a> -->
+  </div>
+  <div class="rel">
+    
+      <div class="buttonPrevious">
+        <a href="../statistical_inference/finding_help.html">Previous
+        </a>
+      </div>
+      <div class="buttonNext">
+        <a href="../machine_learning_map/index.html">Next
+        </a>
+      </div>
+      
+    </div>
+
+    
+    <script>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+      ga('create', 'UA-22606712-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+    <script>
+      (function () {
+        var cx = '016639176250731907682:tjtqbvtvij0';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+  </body>
+</html>
