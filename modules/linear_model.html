@@ -216,7 +216,7 @@
 <li><a class="reference internal" href="#omp">1.1.9. 正交匹配追踪法 (OMP)</a></li>
 <li><a class="reference internal" href="#bayesian-regression">1.1.10. 贝叶斯回归</a><ul>
 <li><a class="reference internal" href="#bayesian-ridge-regression">1.1.10.1. 贝叶斯岭回归</a></li>
-<li><a class="reference internal" href="#ard">1.1.10.2. 主动相关决策理论 - ARD</a></li>
+<li><a class="reference internal" href="#ard">1.1.10.2. 自动关联确定理论 - ARD</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#logistic">1.1.11. Logistic 回归</a></li>
@@ -302,7 +302,7 @@ variables)。 用数学语言来描述是这样的： 假设 <span class="math n
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_ols.html#sphx-glr-auto-examples-linear-model-plot-ols-py"><span class="std std-ref">Linear Regression Example</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_ols.html#sphx-glr-auto-examples-linear-model-plot-ols-py"><span class="std std-ref">线性回归案例</span></a></li>
 </ul>
 </div>
 <div class="section" id="id2">
@@ -319,7 +319,7 @@ variables)。 用数学语言来描述是这样的： 假设 <span class="math n
 <p>其中, <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span> 是一个控制缩减量(amount of shrinkage)的复杂度参数:
 <span class="math notranslate nohighlight">\(\alpha\)</span> 的值越大, 缩减量就越大，故而线性模型的系数对共线性(collinearity)就越鲁棒.</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ridge_path.html"><img alt="../images/sphx_glr_plot_ridge_path_0011.png" src="../images/sphx_glr_plot_ridge_path_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ridge_path.html"><img alt="../images/sphx_glr_plot_ridge_path_001.png" src="../images/sphx_glr_plot_ridge_path_001.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p>与其他线性模型一样, <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code></a> 会调用 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 方法来拟合数组 X， y，并且将线性模型的系数 <span class="math notranslate nohighlight">\(w\)</span> 存储在其成员变量 <code class="docutils literal notranslate"><span class="pre">coef_</span></code> 中:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
@@ -336,7 +336,7 @@ variables)。 用数学语言来描述是这样的： 假设 <span class="math n
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_ridge_path.html#sphx-glr-auto-examples-linear-model-plot-ridge-path-py"><span class="std std-ref">Plot Ridge coefficients as a function of the regularization</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_ridge_path.html#sphx-glr-auto-examples-linear-model-plot-ridge-path-py"><span class="std std-ref">绘制 岭系数作为正则化量的函数的曲线图</span></a></li>
 <li><a class="reference internal" href="../auto_examples/text/plot_document_classification_20newsgroups.html#sphx-glr-auto-examples-text-plot-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></li>
 </ul>
 </div>
@@ -371,7 +371,7 @@ variables)。 用数学语言来描述是这样的： 假设 <span class="math n
 <p><a class="reference internal" href="generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code></a> 是一个线性模型，它给出的模型具有稀疏的系数(sparse coefficients)。
 它在一些场景中是狠有用的，因为它倾向于使用具有较少参数值的情况，能够有效地减少给定解决方案所依赖变量的数量。
 因此，Lasso 及其变体是压缩感知(compressed sensing)领域的基础。在某些特定条件下, 它能够恢复非零权重的精确解。
-(请参见 <a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#sphx-glr-auto-examples-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">Compressive sensing: tomography reconstruction with L1 prior (Lasso)</span></a>).</p>
+(请参见 <a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#sphx-glr-auto-examples-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">压缩感知: 使用 L1 prior (Lasso) 进行层析重建</span></a>).</p>
 <p>在数学公式表达上，它由一个带有 <span class="math notranslate nohighlight">\(\ell_1\)</span> 先验的正则项的线性模型组成。 其最小化的目标函数是:</p>
 <div class="math notranslate nohighlight">
 \[\min_{w} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}\]</div>
@@ -392,8 +392,8 @@ variables)。 用数学语言来描述是这样的： 假设 <span class="math n
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#sphx-glr-auto-examples-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">Lasso and Elastic Net for Sparse Signals</span></a></li>
-<li><a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#sphx-glr-auto-examples-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">Compressive sensing: tomography reconstruction with L1 prior (Lasso)</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#sphx-glr-auto-examples-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">用于稀疏信号的 Lasso 和 Elastic-Net</span></a></li>
+<li><a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#sphx-glr-auto-examples-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">压缩感知: 使用 L1 prior (Lasso) 进行层析重建</span></a></li>
 </ul>
 </div>
 <div class="admonition note">
@@ -424,20 +424,20 @@ in IEEE Journal of Selected Topics in Signal Processing, 2007
 然而，<a class="reference internal" href="generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV" title="sklearn.linear_model.LassoLarsCV"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsCV</span></code></a> 在寻找更有相关性的 <cite>alpha</cite> 参数值上更具有优势，
 而且如果样本数量与特征数量相比非常小时，通常 <a class="reference internal" href="generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV" title="sklearn.linear_model.LassoLarsCV"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsCV</span></code></a> 比 <a class="reference internal" href="generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV" title="sklearn.linear_model.LassoCV"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoCV</span></code></a> 要快。</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_1" src="../images/sphx_glr_plot_lasso_model_selection_0021.png" style="width: 307.2px; height: 230.39999999999998px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_2" src="../images/sphx_glr_plot_lasso_model_selection_0031.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p></div>
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_1" src="../images/sphx_glr_plot_lasso_model_selection_002.png" style="width: 307.2px; height: 230.39999999999998px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_2" src="../images/sphx_glr_plot_lasso_model_selection_003.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p></div>
 <div class="section" id="id10">
 <h4>1.1.3.1.2. 基于信息标准的模型选择<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
-<p>有多种选择时，估计器 <a class="reference internal" href="generated/sklearn.linear_model.LassoLarsIC.html#sklearn.linear_model.LassoLarsIC" title="sklearn.linear_model.LassoLarsIC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsIC</span></code></a> 建议使用 Akaike information criterion （Akaike 信息准则）（AIC）
-和 Bayes Information criterion （贝叶斯信息准则）（BIC）。 当使用 k-fold 交叉验证时，正则化路径只计算一次而不是 k + 1 次，
-所以找到 alpha 的最优值是一种计算上更便宜的替代方法。 然而，这样的标准需要对解决方案的自由度进行适当的估计，对于大样本（渐近结果）导出，
-并假设模型是正确的，即数据实际上是由该模型生成的。 当问题严重受限（比样本更多的特征）时，他们也倾向于打破。</p>
+<p>另外作为替代方案，估计器 <a class="reference internal" href="generated/sklearn.linear_model.LassoLarsIC.html#sklearn.linear_model.LassoLarsIC" title="sklearn.linear_model.LassoLarsIC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsIC</span></code></a> 建议使用Akaike信息准则(AIC)和Bayes信息准则(BIC)。使用基于信息准则的方法寻找
+alpha 的最优值是一种计算成本较低的方法，因为这种方法中正则化路径只计算一次而不是使用k-fold交叉验证时的k+1次。
+然而，这类准则需要对解的自由度进行适当的估计，是为大样本(渐近结果)导出的，并假定模型是正确的(即数据实际上是由该模型生成的)。
+当问题条件数不好(特征多于样本)时，它们可能会崩溃。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="../images/sphx_glr_plot_lasso_model_selection_0011.png" src="../images/sphx_glr_plot_lasso_model_selection_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="../images/sphx_glr_plot_lasso_model_selection_001.png" src="../images/sphx_glr_plot_lasso_model_selection_001.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_model_selection.html#sphx-glr-auto-examples-linear-model-plot-lasso-model-selection-py"><span class="std std-ref">Lasso model selection: Cross-Validation / AIC / BIC</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_model_selection.html#sphx-glr-auto-examples-linear-model-plot-lasso-model-selection-py"><span class="std std-ref">Lasso 模型选择: 交叉验证 / AIC准则 / BIC准则</span></a></li>
 </ul>
 </div>
 </div>
@@ -450,16 +450,16 @@ in IEEE Journal of Selected Topics in Signal Processing, 2007
 </div>
 <div class="section" id="multi-task-lasso">
 <span id="id11"></span><h2>1.1.4. 多任务 Lasso<a class="headerlink" href="#multi-task-lasso" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.linear_model.MultiTaskLasso.html#sklearn.linear_model.MultiTaskLasso" title="sklearn.linear_model.MultiTaskLasso"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiTaskLasso</span></code></a> 是一个估计多元回归稀疏系数的线性模型： <code class="docutils literal notranslate"><span class="pre">y</span></code> 是一个 <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_tasks)</span></code> 的2D array，
-其约束条件和其他回归问题（也称为任务）是一样的，都是所选的特征值。</p>
+<p><a class="reference internal" href="generated/sklearn.linear_model.MultiTaskLasso.html#sklearn.linear_model.MultiTaskLasso" title="sklearn.linear_model.MultiTaskLasso"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiTaskLasso</span></code></a> 是一个线性模型，它联合估计多元回归问题的稀疏系数： <code class="docutils literal notranslate"><span class="pre">y</span></code> 是一个 <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_tasks)</span></code> 的2D array，
+其约束条件和其他回归问题（也称为任务）是一样的，都是所选的特征。</p>
 <p>下图比较了通过使用简单的 Lasso 或 MultiTaskLasso 得到的 W 中非零的位置。
 Lasso 估计产生分散的非零值，而 MultiTaskLasso 的一整列都是非零的。</p>
 <p class="centered">
-<strong><a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_1" src="../images/sphx_glr_plot_multi_task_lasso_support_0011.png" style="width: 384.0px; height: 240.0px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_2" src="../images/sphx_glr_plot_multi_task_lasso_support_0021.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p><p class="centered">
-<strong>Fitting a time-series model, imposing that any active feature be active at all times.</strong></p><div class="topic">
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_1" src="../images/sphx_glr_plot_multi_task_lasso_support_001.png" style="width: 384.0px; height: 240.0px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_2" src="../images/sphx_glr_plot_multi_task_lasso_support_002.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p><p class="centered">
+<strong>拟合时间序列模型，强制让任何激活特征在任何时候都是激活的.</strong></p><div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html#sphx-glr-auto-examples-linear-model-plot-multi-task-lasso-support-py"><span class="std std-ref">Joint feature selection with multi-task Lasso</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html#sphx-glr-auto-examples-linear-model-plot-multi-task-lasso-support-py"><span class="std std-ref">使用 multi-task Lasso 的联合特征选择</span></a></li>
 </ul>
 </div>
 <p>在数学上，它由一个线性模型组成，以混合的 <span class="math notranslate nohighlight">\(\ell_1\)</span> <span class="math notranslate nohighlight">\(\ell_2\)</span> 先验 作为正则化器进行训练。最小化的目标函数是：</p>
@@ -475,10 +475,11 @@ Lasso 估计产生分散的非零值，而 MultiTaskLasso 的一整列都是非�
 </div>
 <div class="section" id="elastic-net">
 <span id="id12"></span><h2>1.1.5. 弹性网(Elastic Net)<a class="headerlink" href="#elastic-net" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="sklearn.linear_model.ElasticNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElasticNet</span></code></a> 是一种使用 L1 和 L2 范数作为先验正则项训练的线性回归模型。
-这种正则化项的组合允许学习到一个只有少量参数是非零稀疏的模型，就像 <a class="reference internal" href="generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code></a> 一样，但是它仍然保持一些像 <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code></a> 的正则性质。
+<p><a class="reference internal" href="generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="sklearn.linear_model.ElasticNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ElasticNet</span></code></a> 是一种使用 L1 和 L2 先验作为正则项训练的线性回归模型。
+这种正则化项的组合允许学习到一个稀疏的模型, 其中只有少量参数是非零的，就像 <a class="reference internal" href="generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code></a> 一样，
+但是它仍然保持一些像 <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code></a> 的正则性质。
 我们可以利用 <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code> 参数控制 L1 和 L2 的凸组合。</p>
-<p>弹性网络在很多特征互相联系的情况下是非常有用的。Lasso 很可能只随机考虑这些特征中的一个，而弹性网络更倾向于选择两个。</p>
+<p>弹性网络在很多特征相互关联的情况下是非常有用的。Lasso 很可能只随机考虑这些特征中的一个，而弹性网络更倾向于选择两个。</p>
 <p>在实践中，Lasso 和 Ridge 之间权衡的一个优势是它允许Elastic-Net在循环过程（Under rotate）中继承 Ridge 的稳定性。</p>
 <p>最小化的目标函数如下所示：</p>
 <div class="math notranslate nohighlight">
@@ -491,8 +492,8 @@ Lasso 估计产生分散的非零值，而 MultiTaskLasso 的一整列都是非�
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#sphx-glr-auto-examples-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">Lasso and Elastic Net for Sparse Signals</span></a></li>
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html#sphx-glr-auto-examples-linear-model-plot-lasso-coordinate-descent-path-py"><span class="std std-ref">Lasso and Elastic Net</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#sphx-glr-auto-examples-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">用于稀疏信号的 Lasso 和 Elastic-Net</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html#sphx-glr-auto-examples-linear-model-plot-lasso-coordinate-descent-path-py"><span class="std std-ref">Lasso 和 Elastic-Net</span></a></li>
 </ul>
 </div>
 <p>下面的两篇参考文章解释了scikit-learn 的坐标下降求解器(coordinate descent solver)的迭代过程，以及用于控制收敛的对偶间隙(duality gap)的计算。</p>
@@ -531,15 +532,15 @@ regression)很像。在每一步，它寻找与响应最有关联的 预测。�
 <div><ul class="simple">
 <li>当 p &gt;&gt; n，该算法数值运算上非常有效。(例如当维度的数目远超点的个数)</li>
 <li>它在计算上和前向选择一样快，和普通最小二乘法有相同的运算复杂度。</li>
-<li>它产生了一个完整的分段线性的解决路径，在交叉验证或者其他相似的微调模型的方法上非常有用。</li>
-<li>如果两个变量对响应几乎有相等的联系，则它们的系数应该有相似的增长率。因此这个算法和我们直觉上的判断一样，而且还更加稳定。</li>
+<li>它产生了一个完整的分段线性的解路径，在交叉验证或者其他相似的微调模型的方法上非常有用。</li>
+<li>如果两个变量对响应几乎有相等的关联关系，则它们的系数应该有相似的增长率。因此这个算法和我们直觉上的判断一样，而且还更加稳定。</li>
 <li>它很容易修改并为其他估算器生成解，比如Lasso。</li>
 </ul>
 </div></blockquote>
 <p>LARS 的缺点如下 :</p>
 <blockquote>
 <div><ul class="simple">
-<li>因为 LARS 是建立在循环拟合剩余变量上的，所以它对噪声非常敏感。这个问题，在 2004 年统计年鉴的文章由 Weisberg 详细讨论。</li>
+<li>因为 LARS 是建立在基于对残差的迭代重拟合上，所以它对噪声非常敏感。这个问题，在 2004 年统计年鉴的文章由 Weisberg 详细讨论。</li>
 </ul>
 </div></blockquote>
 <p>LARS 模型可以在 <a class="reference internal" href="generated/sklearn.linear_model.Lars.html#sklearn.linear_model.Lars" title="sklearn.linear_model.Lars"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lars</span></code></a> ，或者它的底层实现 <a class="reference internal" href="generated/sklearn.linear_model.lars_path.html#sklearn.linear_model.lars_path" title="sklearn.linear_model.lars_path"><code class="xref py py-func docutils literal notranslate"><span class="pre">lars_path</span></code></a> 中被使用。</p>
@@ -547,7 +548,7 @@ regression)很像。在每一步，它寻找与响应最有关联的 预测。�
 <div class="section" id="lars-lasso">
 <h2>1.1.8. LARS Lasso<a class="headerlink" href="#lars-lasso" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="generated/sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLars</span></code></a> 是一个使用 LARS 算法的 lasso 模型，不同于基于坐标下降法的实现，
-它可以得到一个精确解，也就是一个关于自身参数标准化后的一个分段线性解。</p>
+它可以得到一个精确解。这个解作为其系数的范数的函数是分段线性函数。</p>
 <div class="figure align-center">
 <a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_lars.html"><img alt="../images/sphx_glr_plot_lasso_lars_0011.png" src="../images/sphx_glr_plot_lasso_lars_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
@@ -564,7 +565,7 @@ regression)很像。在每一步，它寻找与响应最有关联的 预测。�
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_lars.html#sphx-glr-auto-examples-linear-model-plot-lasso-lars-py"><span class="std std-ref">Lasso path using LARS</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_lars.html#sphx-glr-auto-examples-linear-model-plot-lasso-lars-py"><span class="std std-ref">使用最小角回归(LARS)求解的Lasso算法的正则化路径</span></a></li>
 </ul>
 </div>
 <p>Lars 算法提供了一个几乎无代价的沿着正则化参数的系数的完整路径，因此常利用函数 <a class="reference internal" href="generated/sklearn.linear_model.lars_path.html#sklearn.linear_model.lars_path" title="sklearn.linear_model.lars_path"><code class="xref py py-func docutils literal notranslate"><span class="pre">lars_path</span></code></a> 来取回路径。</p>
@@ -620,10 +621,11 @@ S. G. Mallat, Z. Zhang,</li>
 </div>
 <div class="section" id="bayesian-regression">
 <span id="id20"></span><h2>1.1.10. 贝叶斯回归<a class="headerlink" href="#bayesian-regression" title="Permalink to this headline">¶</a></h2>
-<p>贝叶斯回归可以用于在估计阶段的参数正则化: 正则化参数的选择不是通过人为选择进行设置，而是根据手头的数据来调节的。</p>
-<p>上述过程可以通过引入 无信息先验(<a class="reference external" href="https://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors">uninformative priors</a>)
-于模型中的超参数来完成。 在 <a href="#id46"><span class="problematic" id="id47">`Ridge Regression`_</span></a>  中使用的 <span class="math notranslate nohighlight">\(\ell_{2}\)</span> 正则项相当于在 <span class="math notranslate nohighlight">\(w\)</span> 为高斯先验条件下，
-且此先验的精确度为 <span class="math notranslate nohighlight">\(\lambda^{-1}\)</span> 求最大后验估计。在这里，我们没有手工调参数 <cite>lambda</cite> ，而是让他作为一个变量，通过数据中估计得到。</p>
+<p>贝叶斯回归技术可用于在估计过程中包含正则化参数: 正则化参数的选择不是通过人为选择进行设置，而是根据手头的数据来调节的。</p>
+<p>上述过程可以通过在模型中的超参数上引入
+无信息先验(<a class="reference external" href="https://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors">uninformative priors</a>)
+来完成。 在岭回归(<a href="#id46"><span class="problematic" id="id47">`Ridge Regression`_</span></a>)中使用的 <span class="math notranslate nohighlight">\(\ell_{2}\)</span> 正则化项 等价于 在 <span class="math notranslate nohighlight">\(w\)</span> 是精确度为 <span class="math notranslate nohighlight">\(\lambda^{-1}\)</span> 的高斯先验条件下，
+求最大后验估计。在这里，我们没有手工调参数 <cite>lambda</cite> ，而是让它作为一个变量，通过数据中估计得到。</p>
 <p>为了得到一个全概率模型，输出 <span class="math notranslate nohighlight">\(y\)</span> 也被认为是关于 <span class="math notranslate nohighlight">\(X w\)</span> 的高斯分布:</p>
 <div class="math notranslate nohighlight">
 \[p(y|X,w,\alpha) = \mathcal{N}(y|X w,\alpha)\]</div>
@@ -657,7 +659,8 @@ networks by Radford M. Neal</li>
 <div class="math notranslate nohighlight">
 \[p(w|\lambda) =
 \mathcal{N}(w|0,\lambda^{-1}\mathbf{I}_{p})\]</div>
-<p><span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\lambda\)</span> 的先验分布选择为 <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma distributions</a>,
+<p><span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\lambda\)</span> 的先验分布选择为
+<a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma distributions</a>,
 这个分布与高斯成共轭先验关系。</p>
 <p>得到的模型一般称为 贝叶斯岭回归(<em>Bayesian Ridge Regression</em>)， 并且这个与传统的 <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code></a> 非常相似。
 参数 <span class="math notranslate nohighlight">\(w\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\lambda\)</span> 是在模型拟合的时候一起被估算出来的。
@@ -694,7 +697,7 @@ log likelihood</em>)。</p>
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_bayesian_ridge.html#sphx-glr-auto-examples-linear-model-plot-bayesian-ridge-py"><span class="std std-ref">Bayesian Ridge Regression</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_bayesian_ridge.html#sphx-glr-auto-examples-linear-model-plot-bayesian-ridge-py"><span class="std std-ref">贝叶斯岭回归</span></a></li>
 </ul>
 </div>
 <div class="topic">
@@ -706,26 +709,28 @@ by MacKay, David J. C.</li>
 </div>
 </div>
 <div class="section" id="ard">
-<h3>1.1.10.2. 主动相关决策理论 - ARD<a class="headerlink" href="#ard" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="sklearn.linear_model.ARDRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">ARDRegression</span></code></a> 类 与  <a href="#id48"><span class="problematic" id="id49">`Bayesian Ridge Regression`_</span></a> 非常相似,
+<span id="automatic-correlation-determination"></span><h3>1.1.10.2. 自动关联确定理论 - ARD<a class="headerlink" href="#ard" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="sklearn.linear_model.ARDRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">ARDRegression</span></code></a> 与贝叶斯岭回归非常相似,
 但是可以学习到更稀疏的模型权重参数(sparser weights) <span class="math notranslate nohighlight">\(w\)</span> <a class="footnote-reference" href="#id26" id="id22">[1]</a> <a class="footnote-reference" href="#id27" id="id23">[2]</a>。
 <a class="reference internal" href="generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="sklearn.linear_model.ARDRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">ARDRegression</span></code></a> 通过放弃球形高斯分布的假设(assumption of the Gaussian being spherical)
 在 <span class="math notranslate nohighlight">\(w\)</span> 上强加了一个不同的先验分布。</p>
-<p>与贝叶斯岭回归不同的是, <span class="math notranslate nohighlight">\(w\)</span> 上的分布被假定为是一个与坐标轴平行的(axis-parallel),椭圆形高斯分布。</p>
+<p>与贝叶斯岭回归不同的是, <span class="math notranslate nohighlight">\(w\)</span> 上的分布被假定为是一个与坐标轴平行的(axis-parallel)椭圆形高斯分布。</p>
 <p>这意味着 每一个权重 <span class="math notranslate nohighlight">\(w_{i}\)</span> 是从一个高斯分布抽取的，此高斯分布以0位中心并且有一个精度 <span class="math notranslate nohighlight">\(\lambda_{i}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[p(w|\lambda) = \mathcal{N}(w|0,A^{-1})\]</div>
 <p>with <span class="math notranslate nohighlight">\(diag \; (A) = \lambda = \{\lambda_{1},...,\lambda_{p}\}\)</span>.</p>
-<p>与 <a href="#id50"><span class="problematic" id="id51">`Bayesian Ridge Regression`_</span></a> 相比, <span class="math notranslate nohighlight">\(w_{i}\)</span> 的每一个坐标都有自己的标准差 <span class="math notranslate nohighlight">\(\lambda_i\)</span>。 在所有
-<span class="math notranslate nohighlight">\(\lambda_i\)</span> 上的先验分布被选择为由超参数 <span class="math notranslate nohighlight">\(\lambda_1\)</span> 和 <span class="math notranslate nohighlight">\(\lambda_2\)</span> 给出的相同的伽马分布(gamma distribution) 。</p>
+<p>与贝叶斯岭回归相比, <span class="math notranslate nohighlight">\(w_{i}\)</span> 的每一个坐标都有自己的标准差 <span class="math notranslate nohighlight">\(\lambda_i\)</span>。 在所有
+<span class="math notranslate nohighlight">\(\lambda_i\)</span> 上的先验分布被选择为由超参数 <span class="math notranslate nohighlight">\(\lambda_1\)</span> 和 <span class="math notranslate nohighlight">\(\lambda_2\)</span>
+给出的相同的伽马分布(gamma distribution) 。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ard.html"><img alt="../images/sphx_glr_plot_ard_0011.png" src="../images/sphx_glr_plot_ard_0011.png" style="width: 300.0px; height: 250.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ard.html"><img alt="../images/sphx_glr_plot_ard_001.png" src="../images/sphx_glr_plot_ard_001.png" style="width: 300.0px; height: 250.0px;" /></a>
 </div>
-<p>ARD 在文献中也被称之为 <em>Sparse Bayesian Learning</em> 和 <em>Relevance Vector Machine</em> <a class="footnote-reference" href="#id28" id="id24">[3]</a> <a class="footnote-reference" href="#id29" id="id25">[4]</a>.</p>
+<p>ARD 在文献中也被称之为 稀疏贝叶斯学习（<em>Sparse Bayesian Learning</em>）
+和 关联向量机（<em>Relevance Vector Machine</em>） <a class="footnote-reference" href="#id28" id="id24">[3]</a> <a class="footnote-reference" href="#id29" id="id25">[4]</a>　。</p>
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_ard.html#sphx-glr-auto-examples-linear-model-plot-ard-py"><span class="std std-ref">Automatic Relevance Determination Regression (ARD)</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_ard.html#sphx-glr-auto-examples-linear-model-plot-ard-py"><span class="std std-ref">自动关联确定 回归 (ARD)</span></a></li>
 </ul>
 </div>
 <div class="topic">

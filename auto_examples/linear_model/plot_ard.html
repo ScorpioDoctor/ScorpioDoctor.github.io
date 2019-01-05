@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Automatic Relevance Determination Regression (ARD) &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>自动关联确定 回归 (ARD) &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Bayesian Ridge Regression" href="plot_bayesian_ridge.html" />
-    <link rel="prev" title="Lasso and Elastic Net" href="plot_lasso_coordinate_descent_path.html" />
+    <link rel="next" title="Lasso 模型选择: 交叉验证 / AIC准则 / BIC准则" href="plot_lasso_model_selection.html" />
+    <link rel="prev" title="贝叶斯岭回归" href="plot_bayesian_ridge.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,13 +135,13 @@
       <div class="rel">
         
           <div class="rellink">
-            <a href="plot_lasso_coordinate_descent_path.html" accesskey="P">Previous
+            <a href="plot_bayesian_ridge.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                Lasso and Elastic Net
+                贝叶斯岭回归
               </span>
               <span class="hiddenrellink">
-                Lasso and Elastic Net
+                贝叶斯岭回归
               </span>
             </a>
           </div>
@@ -149,13 +149,13 @@
             &nbsp;
           </div>
           <div class="rellink">
-            <a href="plot_bayesian_ridge.html" accesskey="N">Next
+            <a href="plot_lasso_model_selection.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Bayesian Ridg...
+                Lasso 模型选择: 交...
               </span>
               <span class="hiddenrellink">
-                Bayesian Ridge Regression
+                Lasso 模型选择: 交叉验证 / AIC准则 / BIC准则
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Automatic Relevance Determination Regression (ARD)</a></li>
+<li><a class="reference internal" href="#">自动关联确定 回归 (ARD)</a></li>
 </ul>
 
         <br />
@@ -218,23 +218,18 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-linear-model-plot-ard-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="automatic-relevance-determination-regression-ard">
-<span id="sphx-glr-auto-examples-linear-model-plot-ard-py"></span><h1>Automatic Relevance Determination Regression (ARD)<a class="headerlink" href="#automatic-relevance-determination-regression-ard" title="Permalink to this headline">¶</a></h1>
-<p>Fit regression model with Bayesian Ridge Regression.</p>
-<p>See <a class="reference internal" href="../../modules/linear_model.html#bayesian-ridge-regression"><span class="std std-ref">贝叶斯岭回归</span></a> for more information on the regressor.</p>
-<p>Compared to the OLS (ordinary least squares) estimator, the coefficient
-weights are slightly shifted toward zeros, which stabilises them.</p>
-<p>The histogram of the estimated weights is very peaked, as a sparsity-inducing
-prior is implied on the weights.</p>
-<p>The estimation of the model is done by iteratively maximizing the
-marginal log-likelihood of the observations.</p>
-<p>We also plot predictions and uncertainties for ARD
-for one dimensional regression using polynomial feature expansion.
-Note the uncertainty starts going up on the right side of the plot.
-This is because these test samples are outside of the range of the training
-samples.</p>
+<div class="sphx-glr-example-title section" id="ard">
+<span id="sphx-glr-auto-examples-linear-model-plot-ard-py"></span><h1>自动关联确定 回归 (ARD)<a class="headerlink" href="#ard" title="Permalink to this headline">¶</a></h1>
+<p>使用自动关联确定理论拟合回归模型。</p>
+<p>请看 自动关联确定(<a class="reference internal" href="../../modules/linear_model.html#automatic-correlation-determination"><span class="std std-ref">自动关联确定理论 - ARD</span></a>) 用于回归的更多内容。</p>
+<p>与OLS(普通最小二乘)估计器相比，系数权值略向零漂移，从而使其稳定。</p>
+<p>估计出的权重的直方图是非常尖峰的(very peaked)，因为在权重上隐含了从稀疏诱导的先验(sparsity-inducing prior)。</p>
+<p>模型的估计是通过 迭代地最大化 观测值的边际对数似然(marginal log-likelihood of the observations)来实现的。</p>
+<p>我们还用多项式特征展开(polynomial feature expansion)绘制了一维回归情形下的ARD的预测和不确定性图。
+注意到，不确定性值在图的右边开始上升。这是因为这些测试样本超出了训练样本的范围。</p>
+<p>翻译者：studyai.com的Antares博士</p>
 <ul class="sphx-glr-horizontal">
-<li><img alt="../../images/sphx_glr_plot_ard_001.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_ard_001.png" />
+<li><img alt="../../images/sphx_glr_plot_ard_0011.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_ard_0011.png" />
 </li>
 <li><img alt="../../images/sphx_glr_plot_ard_002.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_ard_002.png" />
 </li>
@@ -252,31 +247,31 @@ samples.</p>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="View documentation for sklearn.linear_model.ARDRegression"><span class="n">ARDRegression</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="View documentation for sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a>
 
 <span class="c1"># #############################################################################</span>
-<span class="c1"># Generating simulated data with Gaussian weights</span>
+<span class="c1"># 用高斯权值(Gaussian weights)生成模拟数据</span>
 
-<span class="c1"># Parameters of the example</span>
+<span class="c1"># 样本集的参数(样本数量，特征数量)</span>
 <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
-<span class="c1"># Create Gaussian data</span>
+<span class="c1"># 产生服从高斯分布的数据</span>
 <span class="n">X</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.randn.html#numpy.random.randn" title="View documentation for numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
 <span class="c1"># Create weights with a precision lambda_ of 4.</span>
 <span class="n">lambda_</span> <span class="o">=</span> <span class="mf">4.</span>
 <span class="n">w</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html#numpy.zeros" title="View documentation for numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="n">n_features</span><span class="p">)</span>
-<span class="c1"># Only keep 10 weights of interest</span>
+<span class="c1"># 只保留 10 个感兴趣的权重</span>
 <span class="n">relevant_features</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.randint.html#numpy.random.randint" title="View documentation for numpy.random.randint"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">relevant_features</span><span class="p">:</span>
     <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span> <span class="o">/</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sqrt.html#numpy.sqrt" title="View documentation for numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="n">lambda_</span><span class="p">))</span>
 <span class="c1"># Create noise with a precision alpha of 50.</span>
 <span class="n">alpha_</span> <span class="o">=</span> <span class="mf">50.</span>
 <span class="n">noise</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span> <span class="o">/</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sqrt.html#numpy.sqrt" title="View documentation for numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="n">alpha_</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">)</span>
-<span class="c1"># Create the target</span>
+<span class="c1"># 产生 目标值(target)</span>
 <span class="n">y</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html#numpy.dot" title="View documentation for numpy.dot"><span class="n">np</span><span class="o">.</span><span class="n">dot</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span>
 
 <span class="c1"># #############################################################################</span>
-<span class="c1"># Fit the ARD Regression</span>
+<span class="c1"># 拟合 ARD Regression 模型</span>
 <span class="n">clf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="View documentation for sklearn.linear_model.ARDRegression"><span class="n">ARDRegression</span></a><span class="p">(</span><span class="n">compute_score</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
+<span class="c1"># 拟合 OLS Regression 模型</span>
 <span class="n">ols</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="View documentation for sklearn.linear_model.LinearRegression"><span class="n">LinearRegression</span></a><span class="p">()</span>
 <span class="n">ols</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
@@ -337,7 +332,7 @@ samples.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.252 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.250 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-linear-model-plot-ard-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/bb5cdaea2965fdbbfe0c0a48fb0fe842/plot_ard.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_ard.py</span></code></a></div>
@@ -363,11 +358,11 @@ samples.</p>
   <div class="rel">
     
       <div class="buttonPrevious">
-        <a href="plot_lasso_coordinate_descent_path.html">Previous
+        <a href="plot_bayesian_ridge.html">Previous
         </a>
       </div>
       <div class="buttonNext">
-        <a href="plot_bayesian_ridge.html">Next
+        <a href="plot_lasso_model_selection.html">Next
         </a>
       </div>
       

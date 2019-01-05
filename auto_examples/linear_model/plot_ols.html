@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Linear Regression Example &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>线性回归案例 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Robust linear model estimation using RANSAC" href="plot_ransac.html" />
-    <link rel="prev" title="Logistic Regression 3-class Classifier" href="plot_iris_logistic.html" />
+    <link rel="next" title="Regularization path of L1- Logistic Regression" href="plot_logistic_path.html" />
+    <link rel="prev" title="SGD: Penalties" href="plot_sgd_penalties.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,13 +135,13 @@
       <div class="rel">
         
           <div class="rellink">
-            <a href="plot_iris_logistic.html" accesskey="P">Previous
+            <a href="plot_sgd_penalties.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                Logistic Regr...
+                SGD: Penalties
               </span>
               <span class="hiddenrellink">
-                Logistic Regression 3-class Classifier
+                SGD: Penalties
               </span>
             </a>
           </div>
@@ -149,13 +149,13 @@
             &nbsp;
           </div>
           <div class="rellink">
-            <a href="plot_ransac.html" accesskey="N">Next
+            <a href="plot_logistic_path.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Robust linear...
+                Regularizatio...
               </span>
               <span class="hiddenrellink">
-                Robust linear model estimation using RANSAC
+                Regularization path of L1- Logistic Regression
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Linear Regression Example</a></li>
+<li><a class="reference internal" href="#">线性回归案例</a></li>
 </ul>
 
         <br />
@@ -218,16 +218,13 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-linear-model-plot-ols-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="linear-regression-example">
-<span id="sphx-glr-auto-examples-linear-model-plot-ols-py"></span><h1>Linear Regression Example<a class="headerlink" href="#linear-regression-example" title="Permalink to this headline">¶</a></h1>
-<p>This example uses the only the first feature of the <cite>diabetes</cite> dataset, in
-order to illustrate a two-dimensional plot of this regression technique. The
-straight line can be seen in the plot, showing how linear regression attempts
-to draw a straight line that will best minimize the residual sum of squares
-between the observed responses in the dataset, and the responses predicted by
-the linear approximation.</p>
-<p>The coefficients, the residual sum of squares and the variance score are also
-calculated.</p>
+<div class="sphx-glr-example-title section" id="sphx-glr-auto-examples-linear-model-plot-ols-py">
+<span id="id1"></span><h1>线性回归案例<a class="headerlink" href="#sphx-glr-auto-examples-linear-model-plot-ols-py" title="Permalink to this headline">¶</a></h1>
+<p>此示例仅使用糖尿病(<cite>diabetes</cite>)数据集的第一个特征，以说明此回归技术的二维绘图。
+在图中可以看到直线，显示了线性回归如何试图绘制一条直线，
+使数据集中观察到的响应与线性近似预测的响应之间的残差平方和最小化。</p>
+<p>系数(The coefficients), 残差平方和(the residual sum of squares) 和 方差得分(the variance score)
+也被计算出来了。</p>
 <img alt="../../images/sphx_glr_plot_ols_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_ols_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Coefficients:
@@ -243,6 +240,7 @@ Variance score: 0.47
 
 
 <span class="c1"># Code source: Jaques Grobler</span>
+<span class="c1"># 翻译者: Antares 博士</span>
 <span class="c1"># License: BSD 3 clause</span>
 
 
@@ -251,39 +249,39 @@ Variance score: 0.47
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="View documentation for sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a><span class="p">,</span> <a href="../../modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score" title="View documentation for sklearn.metrics.r2_score"><span class="n">r2_score</span></a>
 
-<span class="c1"># Load the diabetes dataset</span>
+<span class="c1"># 加载 diabetes 数据集</span>
 <span class="n">diabetes</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_diabetes.html#sklearn.datasets.load_diabetes" title="View documentation for sklearn.datasets.load_diabetes"><span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span></a><span class="p">()</span>
 
 
-<span class="c1"># Use only one feature</span>
+<span class="c1"># 仅使用第一个特征</span>
 <span class="n">diabetes_X</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <a href="https://docs.scipy.org/doc/numpy/reference/constants.html#numpy.newaxis" title="View documentation for numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 
-<span class="c1"># Split the data into training/testing sets</span>
+<span class="c1"># 把数据划分成训练集和测试集</span>
 <span class="n">diabetes_X_train</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
 <span class="n">diabetes_X_test</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
 
-<span class="c1"># Split the targets into training/testing sets</span>
+<span class="c1"># 把目标值划分成对应的训练集和测试集</span>
 <span class="n">diabetes_y_train</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
 <span class="n">diabetes_y_test</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
 
-<span class="c1"># Create linear regression object</span>
+<span class="c1"># 实例化一个 线性回归 类的对象</span>
 <span class="n">regr</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="View documentation for sklearn.linear_model.LinearRegression"><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span></a><span class="p">()</span>
 
-<span class="c1"># Train the model using the training sets</span>
+<span class="c1"># 在训练集上训练模型</span>
 <span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">diabetes_X_train</span><span class="p">,</span> <span class="n">diabetes_y_train</span><span class="p">)</span>
 
-<span class="c1"># Make predictions using the testing set</span>
+<span class="c1"># 在测试集上进行预测</span>
 <span class="n">diabetes_y_pred</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">)</span>
 
-<span class="c1"># The coefficients</span>
+<span class="c1"># 线性模型的系数</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Coefficients: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="c1"># The mean squared error</span>
+<span class="c1"># 均方误差</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean squared error: </span><span class="si">%.2f</span><span class="s2">&quot;</span>
       <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error" title="View documentation for sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a><span class="p">(</span><span class="n">diabetes_y_test</span><span class="p">,</span> <span class="n">diabetes_y_pred</span><span class="p">))</span>
-<span class="c1"># Explained variance score: 1 is perfect prediction</span>
+<span class="c1"># 解释方差: 1 代表完美预测</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Variance score: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <a href="../../modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score" title="View documentation for sklearn.metrics.r2_score"><span class="n">r2_score</span></a><span class="p">(</span><span class="n">diabetes_y_test</span><span class="p">,</span> <span class="n">diabetes_y_pred</span><span class="p">))</span>
 
-<span class="c1"># Plot outputs</span>
+<span class="c1"># 绘制输出结果</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="View documentation for matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">,</span> <span class="n">diabetes_y_test</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">,</span> <span class="n">diabetes_y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
@@ -293,7 +291,7 @@ Variance score: 0.47
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.043 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.048 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-linear-model-plot-ols-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/8cd7b832938aefc18ef89d77e8c877b6/plot_ols.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_ols.py</span></code></a></div>
@@ -319,11 +317,11 @@ Variance score: 0.47
   <div class="rel">
     
       <div class="buttonPrevious">
-        <a href="plot_iris_logistic.html">Previous
+        <a href="plot_sgd_penalties.html">Previous
         </a>
       </div>
       <div class="buttonNext">
-        <a href="plot_ransac.html">Next
+        <a href="plot_logistic_path.html">Next
         </a>
       </div>
       
