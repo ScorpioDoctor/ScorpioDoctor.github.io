@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Regularization path of L1- Logistic Regression &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>L1- Logistic 回归的正则化路径 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Polynomial interpolation" href="plot_polynomial_interpolation.html" />
-    <link rel="prev" title="SGD: Penalties" href="plot_sgd_penalties.html" />
+    <link rel="next" title="Logistic function" href="plot_logistic.html" />
+    <link rel="prev" title="Polynomial interpolation" href="plot_polynomial_interpolation.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,13 +135,13 @@
       <div class="rel">
         
           <div class="rellink">
-            <a href="plot_sgd_penalties.html" accesskey="P">Previous
+            <a href="plot_polynomial_interpolation.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                SGD: Penalties
+                Polynomial in...
               </span>
               <span class="hiddenrellink">
-                SGD: Penalties
+                Polynomial interpolation
               </span>
             </a>
           </div>
@@ -149,13 +149,13 @@
             &nbsp;
           </div>
           <div class="rellink">
-            <a href="plot_polynomial_interpolation.html" accesskey="N">Next
+            <a href="plot_logistic.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Polynomial in...
+                Logistic function
               </span>
               <span class="hiddenrellink">
-                Polynomial interpolation
+                Logistic function
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Regularization path of L1- Logistic Regression</a></li>
+<li><a class="reference internal" href="#">L1- Logistic 回归的正则化路径</a></li>
 </ul>
 
         <br />
@@ -218,26 +218,19 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-linear-model-plot-logistic-path-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="regularization-path-of-l1-logistic-regression">
-<span id="sphx-glr-auto-examples-linear-model-plot-logistic-path-py"></span><h1>Regularization path of L1- Logistic Regression<a class="headerlink" href="#regularization-path-of-l1-logistic-regression" title="Permalink to this headline">¶</a></h1>
-<p>Train l1-penalized logistic regression models on a binary classification
-problem derived from the Iris dataset.</p>
-<p>The models are ordered from strongest regularized to least regularized. The 4
-coefficients of the models are collected and plotted as a “regularization
-path”: on the left-hand side of the figure (strong regularizers), all the
-coefficients are exactly 0. When regularization gets progressively looser,
-coefficients can get non-zero values one after the other.</p>
-<p>Here we choose the SAGA solver because it can efficiently optimize for the
-Logistic Regression loss with a non-smooth, sparsity inducing l1 penalty.</p>
-<p>Also note that we set a low value for the tolerance to make sure that the model
-has converged before collecting the coefficients.</p>
-<p>We also use warm_start=True which means that the coefficients of the models are
-reused to initialize the next model fit to speed-up the computation of the
-full-path.</p>
+<div class="sphx-glr-example-title section" id="l1-logistic">
+<span id="sphx-glr-auto-examples-linear-model-plot-logistic-path-py"></span><h1>L1- Logistic 回归的正则化路径<a class="headerlink" href="#l1-logistic" title="Permalink to this headline">¶</a></h1>
+<p>在一个来自于Iris数据集的二分类问题上 训练带有L1惩罚的logistic回归模型。</p>
+<p>模型按照从最强的正则化到最弱的正则化进行排序。模型的4个系数被收集起来并作为正则化路径
+(regularization path)绘制出来:在图像的左边(强正则化)，所有的系数都是0。当正则化
+逐渐变得松弛时，模型的系数就能够一个接一个的获得非零值。</p>
+<p>这里我们选择了 SAGA 求解器，因为它可以高效的优化带有非平滑，稀疏诱导的L1惩罚项的Logistic回归损失 。</p>
+<p>另外需要注意的是 我们为 tolerance(tol) 设置一个较低的值来确保在收集系数之前模型已经收敛。</p>
+<p>我们也使用了 warm_start=True , 这意味着 模型的系数被重复使用来初始化下一个模型从而加速全路径(full-path)的计算。</p>
 <img alt="../../images/sphx_glr_plot_logistic_path_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_logistic_path_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Computing regularization path ...
-This took 4.641s
+This took 5.439s
 </pre></div>
 </div>
 <div class="line-block">
@@ -247,6 +240,7 @@ This took 4.641s
 
 <span class="c1"># Author: Alexandre Gramfort &lt;alexandre.gramfort@inria.fr&gt;</span>
 <span class="c1"># License: BSD 3 clause</span>
+<span class="c1"># 翻译者 ： Antares@studyai.com</span>
 
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -260,10 +254,12 @@ This took 4.641s
 <span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
 
+<span class="c1"># 鸢尾花数据集总共有3个类，这里只保留前两个类y=0，1</span>
+<span class="c1"># 剔除第三个类的样本和类标签</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">]</span>
 
-<span class="n">X</span> <span class="o">/=</span> <span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c1"># Normalize X to speed-up convergence</span>
+<span class="n">X</span> <span class="o">/=</span> <span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c1"># 归一化 X 来加速收敛</span>
 
 <span class="c1"># #############################################################################</span>
 <span class="c1"># Demo path functions</span>
@@ -293,7 +289,7 @@ This took 4.641s
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  4.671 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  5.471 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-linear-model-plot-logistic-path-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/31f79ede7d26c4503a1762d43539d5bc/plot_logistic_path.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_logistic_path.py</span></code></a></div>
@@ -319,11 +315,11 @@ This took 4.641s
   <div class="rel">
     
       <div class="buttonPrevious">
-        <a href="plot_sgd_penalties.html">Previous
+        <a href="plot_polynomial_interpolation.html">Previous
         </a>
       </div>
       <div class="buttonNext">
-        <a href="plot_polynomial_interpolation.html">Next
+        <a href="plot_logistic.html">Next
         </a>
       </div>
       
