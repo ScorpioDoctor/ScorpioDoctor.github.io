@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body style="height: 100%; margin: 0">
+    <div id="container" style="height: 100%"></div>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        myChart.showLoading();
+
+        var data1 = {
+            "name": "autonomous vision",
+            "children": [
+                {
+                    "name": "Datasets",
+                    "children": [
+                        {
+                            "name": "converters",
+                            "children": [
+                                { "name": "Converters", "value": 721 },
+                                { "name": "DelimitedTextConverter", "value": 4294 }
+                            ]
+                        },
+                        {
+                            "name": "DataUtil",
+                            "value": 3322
+                        }
+                    ]
+                },
+                {
+                    "name": "Cameras Models",
+                    "children": [
+                        { "name": "DirtySprite", "value": 8833 },
+                        { "name": "LineSprite", "value": 1732 },
+                        { "name": "RectSprite", "value": 3623 }
+                    ]
+                },
+                {
+                    "name": "Representations",
+                    "children": [
+                        { "name": "FlareVis", "value": 4116 }
+                    ]
+                },
+                {
+                    "name": "Object Detection",
+                    "children": [
+                        { "name": "AggregateExpression", "value": 1616 },
+                        { "name": "And", "value": 1027 },
+                        { "name": "Arithmetic", "value": 3891 },
+                        { "name": "Average", "value": 891 },
+                        { "name": "BinaryExpression", "value": 2893 },
+                        { "name": "Comparison", "value": 5103 },
+                        { "name": "CompositeExpression", "value": 3677 },
+                        { "name": "Count", "value": 781 },
+                        { "name": "DateUtil", "value": 4141 },
+                        { "name": "Distinct", "value": 933 },
+                        { "name": "Expression", "value": 5130 },
+                        { "name": "ExpressionIterator", "value": 3617 },
+                        { "name": "Fn", "value": 3240 },
+                        { "name": "If", "value": 2732 },
+                        { "name": "IsA", "value": 2039 },
+                        { "name": "Literal", "value": 1214 },
+                        { "name": "Match", "value": 3748 },
+                        { "name": "Maximum", "value": 843 },
+                        {
+                            "name": "methods",
+                            "children": [
+                                { "name": "add", "value": 593 },
+                                { "name": "and", "value": 330 },
+                                { "name": "average", "value": 287 },
+                                { "name": "count", "value": 277 },
+                                { "name": "distinct", "value": 292 },
+                                { "name": "div", "value": 595 },
+                                { "name": "eq", "value": 594 },
+                                { "name": "fn", "value": 460 },
+                                { "name": "gt", "value": 603 },
+                                { "name": "gte", "value": 625 },
+                                { "name": "iff", "value": 748 },
+                                { "name": "isa", "value": 461 },
+                                { "name": "lt", "value": 597 },
+                                { "name": "lte", "value": 619 },
+                                { "name": "max", "value": 283 },
+                                { "name": "min", "value": 283 },
+                                { "name": "mod", "value": 591 },
+                                { "name": "mul", "value": 603 },
+                                { "name": "neq", "value": 599 },
+                                { "name": "not", "value": 386 },
+                                { "name": "or", "value": 323 },
+                                { "name": "orderby", "value": 307 },
+                                { "name": "range", "value": 772 },
+                                { "name": "select", "value": 296 },
+                                { "name": "stddev", "value": 363 },
+                                { "name": "sub", "value": 600 },
+                                { "name": "sum", "value": 280 },
+                                { "name": "update", "value": 307 },
+                                { "name": "variance", "value": 335 },
+                                { "name": "where", "value": 299 },
+                                { "name": "xor", "value": 354 },
+                                { "name": "_", "value": 264 }
+                            ]
+                        },
+                        { "name": "Minimum", "value": 843 },
+                        { "name": "Not", "value": 1554 },
+                        { "name": "Or", "value": 970 },
+                        { "name": "Query", "value": 13896 },
+                        { "name": "Range", "value": 1594 },
+                        { "name": "StringUtil", "value": 4130 },
+                        { "name": "Sum", "value": 791 },
+                        { "name": "Variable", "value": 1124 },
+                        { "name": "Variance", "value": 1876 },
+                        { "name": "Xor", "value": 1101 }
+                    ]
+                },
+                {
+                    "name": "Sematic Segmentation",
+                    "children": [
+                        { "name": "IScaleMap", "value": 2105 },
+                        { "name": "LinearScale", "value": 1316 },
+                        { "name": "LogScale", "value": 3151 },
+                        { "name": "OrdinalScale", "value": 3770 },
+                        { "name": "QuantileScale", "value": 2435 },
+                        { "name": "QuantitativeScale", "value": 4839 },
+                        { "name": "RootScale", "value": 1756 },
+                        { "name": "Scale", "value": 4268 },
+                        { "name": "ScaleType", "value": 1821 },
+                        { "name": "TimeScale", "value": 5833 }
+                    ]
+                },
+                {
+                    "name": "Reconstruction",
+                },
+                {
+                    "name": "Motion",
+                },
+                {
+                    "name": "Tracking",
+                },
+                {
+                    "name": "Scene Understanding",
+                },
+                {
+                    "name": "Sensorimotor Control",
+                }
+            ]
+        };
+
+        var data2 = {
+            "name": "autonomous vision",
+            "children": [
+                {
+                    "name": "Datasets",
+                    "children": [
+                        {
+                            "name": "A Database and Evaluation Methodology for Optical Flow",
+                        },
+                        {
+                            "name": "A naturalistic open source movie for optical flow evaluation",
+                        },
+                        {
+                            "name": "The Cityscapes Dataset for Semantic Urban Scene Understanding",
+                        },
+                        {
+                            "name": "The Pascal Visual Object Classes (VOC) Challenge",
+                        },
+                        {
+                            "name": "Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite",
+                        },
+                        {
+                            "name": "The HCI Benchmark Suite: Stereo and Flow Ground Truth With Uncertainties for Urban Autonomous Driving",
+                        },
+                        {
+                            "name": "A taxonomy and evaluation of dense two-frame stereo correspondence algorithms",
+                        },
+                        {
+                            "name": "A Multi-View Stereo Benchmark with High-Resolution Images and Multi-Camera Videos",
+                        },
+                        {
+                            "name": "Real World Dataset",
+                        },
+                        {
+                            "name": "Synthetic Dataset",
+                        },
+                    ]
+                },
+                {
+                    "name": "Cameras Models",
+                    "children": [
+                        { "name": "Calibration" },
+                        { "name": "Omnidirectional cameras" },
+                        { "name": "Event cameras" },
+                    ]
+                },
+                {
+                    "name": "Representations",
+                    "children": [
+                        { "name": "Continuous Markov Random Fields for Robust Stereo Estimation" },
+                        { "name": "Multiple view semantic segmentation for street view images" },
+                        { "name": "3D scene flow estimation with a piecewise rigid scene model" },
+                        { "name": "Calibrating and Centering Quasi-Central Catadioptric Cameras" },
+                        { "name": "Semantic Stixels: Depth is not enough" },
+                        { "name": "Learning a Classification Model for Segmentation" },
+                        { "name": "Efficient representation of traffic scenes by means of dynamic stixels" },
+                        { "name": "Towards a Global Optimal Multi-Layer Stixel Representation of Dense 3D Data" },
+                    ]
+                },
+                {
+                    "name": "Object Detection",
+                    "children": [
+                        {"name":"Human Pose Estimation"},
+                        {"name":"Person Detection"},
+                        {"name":"3D Object Detection from 3D clouds"},
+                        {"name":"2D Object Detection"},
+                    ]
+                },
+                {
+                    "name": "Semantic Segmentation",
+                    "children": [
+                        {"name":"Road Segmentation"},
+                        {"name":"Semantic Segmentation of Aerial Images"},
+                        {"name":"Semantic Segmentation of Street Side Views"},
+                        {"name":"Semantic Segmentation of 3D Data"},
+                        {"name":"Semantic Segmentation with Multiple Frames"},
+                        {"name":"Label Propagation"},
+                        {"name":"Semantic Instance Segmentation"},
+                        {"name":"Others"},
+                    ]
+                },
+                {
+                    "name": "Reconstruction",
+                    "children": [
+                        {"name":"Reconstruction and Recognition"},
+                        {"name":"Multi-view 3D Reconstruction"},
+                        {"name":"Stereo"},
+                        {"name":"Others"},
+                    ]
+                },
+                {
+                    "name": "Motion",
+                    "children": [
+                        {"name":"Localization"},
+                        {"name":"SLAM"},
+                        {"name":"Ego-Motion Estimation"},
+                        {"name":"3D-Motion Estimation--Scene Flow"},
+                        {"name":"2D-Motion Estimation--Optical Flow"},
+                        {"name":"Others"},
+                    ]
+                },
+                {
+                    "name": "Tracking",
+                    "children": [
+                        {"name":"state-of-the-art"},
+                        {"name":"Pedestrain Tracking"},
+                        {"name":"Tracking with stereo"},
+                        {"name":"Others"},
+                    ]
+                },
+                {
+                    "name": "Scene Understanding",
+                },
+                {
+                    "name": "Sensorimotor Control",
+                    "children": [
+                        {"name":"Autonomous Driving Projects"},
+                        {"name":"Autonomous Driving Competitions"},
+                        {"name":"Others"},
+                    ]
+                }
+            ]
+        };
+
+        myChart.hideLoading();
+
+        myChart.setOption(option = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove'
+            },
+            legend: {
+                top: '2%',
+                left: '3%',
+                orient: 'vertical',
+                data: [{
+                    name: 'tree1',
+                    icon: 'rectangle'
+                },
+                {
+                    name: 'tree2',
+                    icon: 'rectangle'
+                }],
+                borderColor: '#c23531'
+            },
+            series: [
+                {
+                    type: 'tree',
+                    name: 'tree2',
+                    data: [data2],
+
+                    top: '5%',
+                    left: '7%',
+                    bottom: '2%',
+                    right: '60%',
+
+                    symbolSize: 7,
+
+                    label: {
+                        normal: {
+                            position: 'left',
+                            verticalAlign: 'middle',
+                            align: 'right'
+                        }
+                    },
+
+                    leaves: {
+                        label: {
+                            normal: {
+                                position: 'right',
+                                verticalAlign: 'middle',
+                                align: 'left'
+                            }
+                        }
+                    },
+
+                    expandAndCollapse: true,
+
+                    animationDuration: 550,
+                    animationDurationUpdate: 750
+                }
+            ]
+        });
+
+        ;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+</body>
+
+</html>
