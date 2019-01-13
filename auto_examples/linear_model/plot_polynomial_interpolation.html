@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Polynomial interpolation &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>多项式插值 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Logistic function" href="plot_logistic.html" />
-    <link rel="prev" title="Regularization path of L1- Logistic Regression" href="plot_logistic_path.html" />
+    <link rel="next" title="L1- Logistic 回归的正则化路径" href="plot_logistic_path.html" />
+    <link rel="prev" title="线性回归案例" href="plot_ols.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,13 +135,13 @@
       <div class="rel">
         
           <div class="rellink">
-            <a href="plot_logistic_path.html" accesskey="P">Previous
+            <a href="plot_ols.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                Regularizatio...
+                线性回归案例
               </span>
               <span class="hiddenrellink">
-                Regularization path of L1- Logistic Regression
+                线性回归案例
               </span>
             </a>
           </div>
@@ -149,13 +149,13 @@
             &nbsp;
           </div>
           <div class="rellink">
-            <a href="plot_logistic.html" accesskey="N">Next
+            <a href="plot_logistic_path.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Logistic function
+                L1- Logistic 回归的正则化路径
               </span>
               <span class="hiddenrellink">
-                Logistic function
+                L1- Logistic 回归的正则化路径
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Polynomial interpolation</a></li>
+<li><a class="reference internal" href="#">多项式插值</a></li>
 </ul>
 
         <br />
@@ -218,29 +218,26 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-linear-model-plot-polynomial-interpolation-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="polynomial-interpolation">
-<span id="sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py"></span><h1>Polynomial interpolation<a class="headerlink" href="#polynomial-interpolation" title="Permalink to this headline">¶</a></h1>
-<p>This example demonstrates how to approximate a function with a polynomial of
-degree n_degree by using ridge regression. Concretely, from n_samples 1d
-points, it suffices to build the Vandermonde matrix, which is n_samples x
-n_degree+1 and has the following form:</p>
+<div class="sphx-glr-example-title section" id="sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py">
+<span id="id1"></span><h1>多项式插值<a class="headerlink" href="#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py" title="Permalink to this headline">¶</a></h1>
+<p>这个例子演示了如何用岭回归用n_degree次多项式逼近函数。具体而言，从 n_samples 个1d点出发，
+建立范德蒙矩阵(Vandermonde matrix)就足够了，它的shape是 n_samples x n_degree+1，其形式如下:</p>
 <dl class="docutils">
 <dt>[[1, x_1, x_1 ** 2, x_1 ** 3, …],</dt>
 <dd>[1, x_2, x_2 ** 2, x_2 ** 3, …],
 …]</dd>
 </dl>
-<p>Intuitively, this matrix can be interpreted as a matrix of pseudo features (the
-points raised to some power). The matrix is akin to (but different from) the
-matrix induced by a polynomial kernel.</p>
-<p>This example shows that you can do non-linear regression with a linear model,
-using a pipeline to add non-linear features. Kernel methods extend this idea
-and can induce very high (even infinite) dimensional feature spaces.</p>
+<p>直观地说，这个矩阵可以解释为伪特征矩阵(数据点被提高到某个次幂)。
+该矩阵类似于(但不同于)由多项式核诱导出的矩阵。</p>
+<p>此示例显示，您可以使用线性模型进行非线性回归，使用管道添加非线性特征。
+核方法扩展了这一思想，可以诱导出很高(甚至无限)维数的特征空间。</p>
 <img alt="../../images/sphx_glr_plot_polynomial_interpolation_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_polynomial_interpolation_001.png" />
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Author: Mathieu Blondel</span>
 <span class="c1">#         Jake Vanderplas</span>
 <span class="c1"># License: BSD 3 clause</span>
+<span class="c1"># 翻译者： www.studyai.com/antares</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -251,21 +248,22 @@ and can induce very high (even infinite) dimensional feature spaces.</p>
 
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; function to approximate by polynomial interpolation&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; 要通过多项式插值逼近的函数&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sin.html#numpy.sin" title="View documentation for numpy.sin"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 
-<span class="c1"># generate points used to plot</span>
+<span class="c1"># 产生 x 轴上的坐标点用于绘图</span>
 <span class="n">x_plot</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html#numpy.linspace" title="View documentation for numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-<span class="c1"># generate points and keep a subset of them</span>
+<span class="c1"># 产生数据点并保留一个子集</span>
 <span class="n">x</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html#numpy.linspace" title="View documentation for numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">rng</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.html#numpy.random.RandomState" title="View documentation for numpy.random.RandomState"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">rng</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># 在[0,10]的区间内随机挑选20个点</span>
 <span class="n">x</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sort.html#numpy.sort" title="View documentation for numpy.sort"><span class="n">np</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="c1"># create matrix versions of these arrays</span>
+<span class="c1"># 创建这些数组的矩阵版本</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <a href="https://docs.scipy.org/doc/numpy/reference/constants.html#numpy.newaxis" title="View documentation for numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">]</span>
 <span class="n">X_plot</span> <span class="o">=</span> <span class="n">x_plot</span><span class="p">[:,</span> <a href="https://docs.scipy.org/doc/numpy/reference/constants.html#numpy.newaxis" title="View documentation for numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">]</span>
 
@@ -287,7 +285,7 @@ and can induce very high (even infinite) dimensional feature spaces.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.034 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.040 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-linear-model-plot-polynomial-interpolation-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/41ffcc45d720cba2a48cc8d77ee4a3b4/plot_polynomial_interpolation.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_polynomial_interpolation.py</span></code></a></div>
@@ -313,11 +311,11 @@ and can induce very high (even infinite) dimensional feature spaces.</p>
   <div class="rel">
     
       <div class="buttonPrevious">
-        <a href="plot_logistic_path.html">Previous
+        <a href="plot_ols.html">Previous
         </a>
       </div>
       <div class="buttonNext">
-        <a href="plot_logistic.html">Next
+        <a href="plot_logistic_path.html">Next
         </a>
       </div>
       

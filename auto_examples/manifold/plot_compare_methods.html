@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Comparison of Manifold Learning methods &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>流形学习方法的比较 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Manifold Learning methods on a severed sphere" href="plot_manifold_sphere.html" />
-    <link rel="prev" title="t-SNE: The effect of various perplexity values on the shape" href="plot_t_sne_perplexity.html" />
+    <link rel="next" title="在切断球体上的流行学习方法" href="plot_manifold_sphere.html" />
+    <link rel="prev" title="t-SNE: 不同困惑值对形状的影响" href="plot_t_sne_perplexity.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -138,10 +138,10 @@
             <a href="plot_t_sne_perplexity.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                t-SNE: The ef...
+                t-SNE: 不同困惑值对形状的影响
               </span>
               <span class="hiddenrellink">
-                t-SNE: The effect of various perplexity values on the shape
+                t-SNE: 不同困惑值对形状的影响
               </span>
             </a>
           </div>
@@ -152,10 +152,10 @@
             <a href="plot_manifold_sphere.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Manifold Lear...
+                在切断球体上的流行学习方法
               </span>
               <span class="hiddenrellink">
-                Manifold Learning methods on a severed sphere
+                在切断球体上的流行学习方法
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Comparison of Manifold Learning methods</a></li>
+<li><a class="reference internal" href="#">流形学习方法的比较</a></li>
 </ul>
 
         <br />
@@ -218,29 +218,25 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-manifold-plot-compare-methods-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="comparison-of-manifold-learning-methods">
-<span id="sphx-glr-auto-examples-manifold-plot-compare-methods-py"></span><h1>Comparison of Manifold Learning methods<a class="headerlink" href="#comparison-of-manifold-learning-methods" title="Permalink to this headline">¶</a></h1>
-<p>An illustration of dimensionality reduction on the S-curve dataset
-with various manifold learning methods.</p>
-<p>For a discussion and comparison of these algorithms, see the
-<a class="reference internal" href="../../modules/manifold.html#manifold"><span class="std std-ref">manifold module page</span></a></p>
-<p>For a similar example, where the methods are applied to a
-sphere dataset, see <a class="reference internal" href="plot_manifold_sphere.html#sphx-glr-auto-examples-manifold-plot-manifold-sphere-py"><span class="std std-ref">Manifold Learning methods on a severed sphere</span></a></p>
-<p>Note that the purpose of the MDS is to find a low-dimensional
-representation of the data (here 2D) in which the distances respect well
-the distances in the original high-dimensional space, unlike other
-manifold-learning algorithms, it does not seeks an isotropic
-representation of the data in the low-dimensional space.</p>
+<div class="sphx-glr-example-title section" id="sphx-glr-auto-examples-manifold-plot-compare-methods-py">
+<span id="id1"></span><h1>流形学习方法的比较<a class="headerlink" href="#sphx-glr-auto-examples-manifold-plot-compare-methods-py" title="Permalink to this headline">¶</a></h1>
+<p>在 S-curve 数据集上使用不同的流行学习算法进行维数约减的比较展示</p>
+<p>关于这些方法的讨论与比较，请看 <a class="reference internal" href="../../modules/manifold.html#manifold"><span class="std std-ref">manifold module 页</span></a></p>
+<p>还有一个类似的将本例中的流行学习算法应用到稀疏数据集上的例子,
+请看 <a class="reference internal" href="plot_manifold_sphere.html#sphx-glr-auto-examples-manifold-plot-manifold-sphere-py"><span class="std std-ref">在切断球体上的流行学习方法</span></a></p>
+<p>请注意 MDS 的目的是发现数据的一个低维表示(这里是2d表示)，在这个低维表示下数据点之间的距离
+很好地尊重数据点在原始空间中的距离，这不同于其他流形学习算法，它不会在低维空间中寻找数据的
+各向同性表示(isotropic representation)。</p>
 <img alt="../../images/sphx_glr_plot_compare_methods_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_compare_methods_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>standard: 0.14 sec
-ltsa: 0.25 sec
-hessian: 0.34 sec
-modified: 0.28 sec
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>standard: 0.21 sec
+ltsa: 0.26 sec
+hessian: 0.39 sec
+modified: 0.31 sec
 Isomap: 0.39 sec
-MDS: 3.3 sec
-SpectralEmbedding: 0.078 sec
-t-SNE: 7.2 sec
+MDS: 2.5 sec
+SpectralEmbedding: 0.13 sec
+t-SNE: 7.8 sec
 </pre></div>
 </div>
 <div class="line-block">
@@ -346,7 +342,7 @@ t-SNE: 7.2 sec
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  12.238 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  12.226 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-manifold-plot-compare-methods-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/72a1744dc070eac88f4c165a5f9b7117/plot_compare_methods.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_methods.py</span></code></a></div>

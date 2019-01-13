@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Plot multinomial and One-vs-Rest Logistic Regression" href="plot_logistic_multinomial.html" />
-    <link rel="prev" title="L1 Penalty and Sparsity in Logistic Regression" href="plot_logistic_l1_l2_sparsity.html" />
+    <link rel="next" title="鲁棒线性估计器拟合对比试验" href="plot_robust_fit.html" />
+    <link rel="prev" title="绘制 多项式(multinomial)和 One-vs-Rest Logistic 回归" href="plot_logistic_multinomial.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,13 +135,13 @@
       <div class="rel">
         
           <div class="rellink">
-            <a href="plot_logistic_l1_l2_sparsity.html" accesskey="P">Previous
+            <a href="plot_logistic_multinomial.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                L1 Penalty an...
+                绘制 多项式(multin...
               </span>
               <span class="hiddenrellink">
-                L1 Penalty and Sparsity in Logistic Regression
+                绘制 多项式(multinomial)和 One-vs-Rest Logistic 回归
               </span>
             </a>
           </div>
@@ -149,13 +149,13 @@
             &nbsp;
           </div>
           <div class="rellink">
-            <a href="plot_logistic_multinomial.html" accesskey="N">Next
+            <a href="plot_robust_fit.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Plot multinom...
+                鲁棒线性估计器拟合对比试验
               </span>
               <span class="hiddenrellink">
-                Plot multinomial and One-vs-Rest Logistic Regression
+                鲁棒线性估计器拟合对比试验
               </span>
             </a>
           </div>
@@ -220,32 +220,22 @@
 </div>
 <div class="sphx-glr-example-title section" id="theil-sen-regression">
 <span id="sphx-glr-auto-examples-linear-model-plot-theilsen-py"></span><h1>Theil-Sen Regression<a class="headerlink" href="#theil-sen-regression" title="Permalink to this headline">¶</a></h1>
-<p>Computes a Theil-Sen Regression on a synthetic dataset.</p>
-<p>See <a class="reference internal" href="../../modules/linear_model.html#theil-sen-regression"><span class="std std-ref">Theil-Sen 估计器: 广义中值估计器</span></a> for more information on the regressor.</p>
-<p>Compared to the OLS (ordinary least squares) estimator, the Theil-Sen
-estimator is robust against outliers. It has a breakdown point of about 29.3%
-in case of a simple linear regression which means that it can tolerate
-arbitrary corrupted data (outliers) of up to 29.3% in the two-dimensional
-case.</p>
-<p>The estimation of the model is done by calculating the slopes and intercepts
-of a subpopulation of all possible combinations of p subsample points. If an
-intercept is fitted, p must be greater than or equal to n_features + 1. The
-final slope and intercept is then defined as the spatial median of these
-slopes and intercepts.</p>
-<p>In certain cases Theil-Sen performs better than <a class="reference internal" href="../../modules/linear_model.html#ransac-regression"><span class="std std-ref">RANSAC</span></a> which is also a robust method. This is illustrated in the
-second example below where outliers with respect to the x-axis perturb RANSAC.
-Tuning the <code class="docutils literal notranslate"><span class="pre">residual_threshold</span></code> parameter of RANSAC remedies this but in
-general a priori knowledge about the data and the nature of the outliers is
-needed.
-Due to the computational complexity of Theil-Sen it is recommended to use it
-only for small problems in terms of number of samples and features. For larger
-problems the <code class="docutils literal notranslate"><span class="pre">max_subpopulation</span></code> parameter restricts the magnitude of all
-possible combinations of p subsample points to a randomly chosen subset and
-therefore also limits the runtime. Therefore, Theil-Sen is applicable to larger
-problems with the drawback of losing some of its mathematical properties since
-it then works on a random subset.</p>
+<p>在人工合成的数据集上计算 Theil-Sen 回归。</p>
+<p>请看 <a class="reference internal" href="../../modules/linear_model.html#theil-sen-regression"><span class="std std-ref">Theil-Sen 估计器: 广义中值估计器</span></a> 获得关于回归器的更多信息。</p>
+<p>与 OLS (最小二乘) 估计器相比, Theil-Sen 估计器是对离群孤立点比较鲁棒的估计器。
+在一个简单2D线性回归问题中，它有大约29.3%的崩溃点(breakdown point)， 这就意味着它可以忍受任意的
+损坏数据(outliers)的占比可以达到29.3%。</p>
+<p>模型的估计是通过计算 p 个子样本点的所有可能组合的子种群的斜率和截取来完成的。
+如果截距(intercept)也被拟合了，则 p 必须大于或等于 n_features + 1。
+最终的斜率和截距被定义为这些斜率和截取的空间中值。</p>
+<p>在某些情形下 Theil-Sen 比另一个鲁棒算法 <a class="reference internal" href="../../modules/linear_model.html#ransac-regression"><span class="std std-ref">RANSAC</span></a> 表现的更好。
+这一点在下面的第二个案例中进行了说明，其中相对于x轴的离群点使 RANSAC 不鲁棒。
+调整RANSAC的 <code class="docutils literal notranslate"><span class="pre">residual_threshold</span></code> 参数可以弥补这一点，但是一般来说，需要对数据和异常值的性质有一个先验的认识。
+至于Theil-Sen算法的计算复杂性，建议只能使用在样本数量和特征数量比较小的问题上。
+对于大问题，参数 <code class="docutils literal notranslate"><span class="pre">max_subpopulation</span></code> 限制p子采样点的所有可能的组合到一个随机选择的子集，并因此会限制运行时间。
+因此，Theil-Sen 方法是可以用于更大的问题的，但会损失一些它的数学性质，因为在大问题上它是在随机子集上工作的。</p>
 <ul class="sphx-glr-horizontal">
-<li><img alt="../../images/sphx_glr_plot_theilsen_001.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_theilsen_001.png" />
+<li><img alt="../../images/sphx_glr_plot_theilsen_0011.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_theilsen_0011.png" />
 </li>
 <li><img alt="../../images/sphx_glr_plot_theilsen_002.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_theilsen_002.png" />
 </li>
@@ -268,11 +258,11 @@ it then works on a random subset.</p>
 <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="c1"># #############################################################################</span>
-<span class="c1"># Outliers only in the y direction</span>
+<span class="c1"># 只有 y 方向有离群点</span>
 
 <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="c1"># Linear model y = 3*x + N(2, 0.1**2)</span>
+<span class="c1"># 线性模型 y = 3*x + N(2, 0.1**2)</span>
 <span class="n">x</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.randn.html#numpy.random.randn" title="View documentation for numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="n">w</span> <span class="o">=</span> <span class="mf">3.</span>
 <span class="n">c</span> <span class="o">=</span> <span class="mf">2.</span>
@@ -297,10 +287,10 @@ it then works on a random subset.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Corrupt y&quot;</span><span class="p">)</span>
 
 <span class="c1"># #############################################################################</span>
-<span class="c1"># Outliers in the X direction</span>
+<span class="c1"># X 方向上有离群点</span>
 
 <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="c1"># Linear model y = 3*x + N(2, 0.1**2)</span>
+<span class="c1"># 线性模型 y = 3*x + N(2, 0.1**2)</span>
 <span class="n">x</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.randn.html#numpy.random.randn" title="View documentation for numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="n">noise</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.randn.html#numpy.random.randn" title="View documentation for numpy.random.randn"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">noise</span>
@@ -327,7 +317,7 @@ it then works on a random subset.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  1.084 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  1.114 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-linear-model-plot-theilsen-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/cc6d2d9cf960367ea76333c53e76916e/plot_theilsen.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_theilsen.py</span></code></a></div>
@@ -353,11 +343,11 @@ it then works on a random subset.</p>
   <div class="rel">
     
       <div class="buttonPrevious">
-        <a href="plot_logistic_l1_l2_sparsity.html">Previous
+        <a href="plot_logistic_multinomial.html">Previous
         </a>
       </div>
       <div class="buttonNext">
-        <a href="plot_logistic_multinomial.html">Next
+        <a href="plot_robust_fit.html">Next
         </a>
       </div>
       

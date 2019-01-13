@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Robust linear model estimation using RANSAC &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>使用 RANSAC 进行鲁棒线性模型估计 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -28,7 +28,7 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Sparsity Example: Fitting only features 1 and 2" href="plot_ols_3d.html" />
-    <link rel="prev" title="Linear Regression Example" href="plot_ols.html" />
+    <link rel="prev" title="Logistic Regression 3-class Classifier" href="plot_iris_logistic.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,13 +135,13 @@
       <div class="rel">
         
           <div class="rellink">
-            <a href="plot_ols.html" accesskey="P">Previous
+            <a href="plot_iris_logistic.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                Linear Regres...
+                Logistic Regr...
               </span>
               <span class="hiddenrellink">
-                Linear Regression Example
+                Logistic Regression 3-class Classifier
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Robust linear model estimation using RANSAC</a></li>
+<li><a class="reference internal" href="#">使用 RANSAC 进行鲁棒线性模型估计</a></li>
 </ul>
 
         <br />
@@ -218,13 +218,14 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-linear-model-plot-ransac-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="robust-linear-model-estimation-using-ransac">
-<span id="sphx-glr-auto-examples-linear-model-plot-ransac-py"></span><h1>Robust linear model estimation using RANSAC<a class="headerlink" href="#robust-linear-model-estimation-using-ransac" title="Permalink to this headline">¶</a></h1>
-<p>In this example we see how to robustly fit a linear model to faulty data using
-the RANSAC algorithm.</p>
+<div class="sphx-glr-example-title section" id="ransac">
+<span id="sphx-glr-auto-examples-linear-model-plot-ransac-py"></span><h1>使用 RANSAC 进行鲁棒线性模型估计<a class="headerlink" href="#ransac" title="Permalink to this headline">¶</a></h1>
+<p>在这个例子中，我们将看到如何使用RANSAC算法在错误数据(faulty data)上鲁棒地拟合线性模型。</p>
+<p>翻译者：www.studyai.com/antares</p>
 <img alt="../../images/sphx_glr_plot_ransac_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_ransac_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Estimated coefficients (true, linear regression, RANSAC):
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(8, 1) (8,) (8,)
+Estimated coefficients (true, linear regression, RANSAC):
 82.1903908407869 [54.17236387] [82.08533159]
 </pre></div>
 </div>
@@ -245,27 +246,28 @@ the RANSAC algorithm.</p>
                                       <span class="n">n_informative</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                                       <span class="n">coef</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="c1"># Add outlier data</span>
+<span class="c1"># 添加 outliers 数据点</span>
 <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.seed.html#numpy.random.seed" title="View documentation for numpy.random.seed"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">X</span><span class="p">[:</span><span class="n">n_outliers</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.normal.html#numpy.random.normal" title="View documentation for numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_outliers</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">y</span><span class="p">[:</span><span class="n">n_outliers</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.normal.html#numpy.random.normal" title="View documentation for numpy.random.normal"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span></a><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_outliers</span><span class="p">)</span>
 
-<span class="c1"># Fit line using all data</span>
+<span class="c1"># 使用所有数据拟合线性模型</span>
 <span class="n">lr</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="View documentation for sklearn.linear_model.LinearRegression"><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span></a><span class="p">()</span>
 <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="c1"># Robustly fit linear model with RANSAC algorithm</span>
+<span class="c1"># 使用 RANSAC 算法鲁棒滴拟合线性模型</span>
 <span class="n">ransac</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.linear_model.RANSACRegressor.html#sklearn.linear_model.RANSACRegressor" title="View documentation for sklearn.linear_model.RANSACRegressor"><span class="n">linear_model</span><span class="o">.</span><span class="n">RANSACRegressor</span></a><span class="p">()</span>
 <span class="n">ransac</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">inlier_mask</span> <span class="o">=</span> <span class="n">ransac</span><span class="o">.</span><span class="n">inlier_mask_</span>
 <span class="n">outlier_mask</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.logical_not.html#numpy.logical_not" title="View documentation for numpy.logical_not"><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span></a><span class="p">(</span><span class="n">inlier_mask</span><span class="p">)</span>
 
-<span class="c1"># Predict data of estimated models</span>
+<span class="c1"># 使用估计得到的模型拟合数据</span>
 <span class="n">line_X</span> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">())[:,</span> <a href="https://docs.scipy.org/doc/numpy/reference/constants.html#numpy.newaxis" title="View documentation for numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">]</span>
 <span class="n">line_y</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">line_X</span><span class="p">)</span>
 <span class="n">line_y_ransac</span> <span class="o">=</span> <span class="n">ransac</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">line_X</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">line_y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">line_y_ransac</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="c1"># Compare estimated coefficients</span>
+<span class="c1"># 比较估计出的 coefficients</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Estimated coefficients (true, linear regression, RANSAC):&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">ransac</span><span class="o">.</span><span class="n">estimator_</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
 
@@ -283,7 +285,7 @@ the RANSAC algorithm.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.040 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.038 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-linear-model-plot-ransac-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/103062d21cddb5821b1217dd80c80b1e/plot_ransac.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_ransac.py</span></code></a></div>
@@ -309,7 +311,7 @@ the RANSAC algorithm.</p>
   <div class="rel">
     
       <div class="buttonPrevious">
-        <a href="plot_ols.html">Previous
+        <a href="plot_iris_logistic.html">Previous
         </a>
       </div>
       <div class="buttonNext">

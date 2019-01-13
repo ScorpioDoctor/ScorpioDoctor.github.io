@@ -962,13 +962,13 @@ K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR 7 (2006)</l
 <h2>1.1.15. 鲁棒回归:处理离群点（outliers）和模型错误<a class="headerlink" href="#outliers" title="Permalink to this headline">¶</a></h2>
 <p>Robust regression 特别适用于回归模型包含损坏数据（corrupt data）的情况，如离群点或模型中的错误。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../images/sphx_glr_plot_theilsen_0011.png" src="../images/sphx_glr_plot_theilsen_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../images/sphx_glr_plot_theilsen_001.png" src="../images/sphx_glr_plot_theilsen_001.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <div class="section" id="id37">
 <h3>1.1.15.1. 各种使用场景与相关概念<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
 <p>处理包含离群点的数据时牢记以下几点:</p>
 <ul>
-<li><p class="first">**  异常值在 X 中 还是在 y 中  ** ?</p>
+<li><p class="first"><strong>离群点在 X 中 还是在 y 中</strong> ?</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="50%" />
@@ -986,7 +986,7 @@ K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR 7 (2006)</l
 </tbody>
 </table>
 </li>
-<li><p class="first">**  异常值的比例 versus 误差幅度  **</p>
+<li><p class="first"><strong>离群点的比例 versus 误差幅度</strong></p>
 <p>外围点(outlying points)的数目很重要，但其中有多少是离群点(The number of outlying points matters, but also how much they are
 outliers.)。</p>
 <table border="1" class="docutils">
@@ -1064,8 +1064,8 @@ fitting the model and thus leading to better computational performance.)</p>
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_ransac.html#sphx-glr-auto-examples-linear-model-plot-ransac-py"><span class="std std-ref">Robust linear model estimation using RANSAC</span></a></li>
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_robust_fit.html#sphx-glr-auto-examples-linear-model-plot-robust-fit-py"><span class="std std-ref">Robust linear estimator fitting</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_ransac.html#sphx-glr-auto-examples-linear-model-plot-ransac-py"><span class="std std-ref">使用 RANSAC 进行鲁棒线性模型估计</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_robust_fit.html#sphx-glr-auto-examples-linear-model-plot-robust-fit-py"><span class="std std-ref">鲁棒线性估计器拟合对比试验</span></a></li>
 </ul>
 </div>
 <div class="topic">
@@ -1090,7 +1090,7 @@ Sunglok Choi, Taemin Kim and Wonpil Yu - BMVC (2009)</li>
 <p class="topic-title first">案例:</p>
 <ul class="simple">
 <li><a class="reference internal" href="../auto_examples/linear_model/plot_theilsen.html#sphx-glr-auto-examples-linear-model-plot-theilsen-py"><span class="std std-ref">Theil-Sen Regression</span></a></li>
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_robust_fit.html#sphx-glr-auto-examples-linear-model-plot-robust-fit-py"><span class="std std-ref">Robust linear estimator fitting</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_robust_fit.html#sphx-glr-auto-examples-linear-model-plot-robust-fit-py"><span class="std std-ref">鲁棒线性估计器拟合对比试验</span></a></li>
 </ul>
 </div>
 <div class="topic">
@@ -1107,7 +1107,7 @@ Sunglok Choi, Taemin Kim and Wonpil Yu - BMVC (2009)</li>
 在单变量(univariate)设置下，在简单线性回归任务上，Theil-Sen 算法有一个大概29.3%的崩溃点(breakdown point of about 29.3%)，
 这意味着它可以容忍的任意损坏数据的占比可以达到29.3%。</p>
 <div class="figure align-center">
-<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../images/sphx_glr_plot_theilsen_0011.png" src="../images/sphx_glr_plot_theilsen_0011.png" style="width: 320.0px; height: 240.0px;" /></a>
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../images/sphx_glr_plot_theilsen_001.png" src="../images/sphx_glr_plot_theilsen_001.png" style="width: 320.0px; height: 240.0px;" /></a>
 </div>
 <p>scikit-learn 的 <a class="reference internal" href="generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor" title="sklearn.linear_model.TheilSenRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TheilSenRegressor</span></code></a> 类用 空间中位数(spatial median: 把一维中位数推广到多维空间 <a class="footnote-reference" href="#f2" id="id40">[9]</a>)
 实现了对多变量线性回归模型的推广 <a class="footnote-reference" href="#f1" id="id41">[8]</a>。</p>
@@ -1173,7 +1173,7 @@ Sunglok Choi, Taemin Kim and Wonpil Yu - BMVC (2009)</li>
 <div class="topic">
 <p class="topic-title first">案例:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../auto_examples/linear_model/plot_huber_vs_ridge.html#sphx-glr-auto-examples-linear-model-plot-huber-vs-ridge-py"><span class="std std-ref">HuberRegressor vs Ridge on dataset with strong outliers</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_huber_vs_ridge.html#sphx-glr-auto-examples-linear-model-plot-huber-vs-ridge-py"><span class="std std-ref">在具有强离群点的数据集上的对比：HuberRegressor vs Ridge</span></a></li>
 </ul>
 </div>
 <div class="topic">
