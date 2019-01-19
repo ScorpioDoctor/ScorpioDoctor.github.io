@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Linear and Quadratic Discriminant Analysis with covariance ellipsoid &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>协方差椭球化情形下LDA和QDA的比较 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -103,7 +103,7 @@
               <script>if (VERSION_SUBDIR != "stable") document.write('<li><a href="https://www.studyai.cn">稳定版</a></li>')</script>
               <script>if (VERSION_SUBDIR != "dev") document.write('<li><a href="http://scikit-learn.org/dev/documentation.html" target="_blank">开发版</a></li>')</script>
               <li><a href="http://scikit-learn.org/dev/versions.html">所有可用版本</a></li>
-              <li><a href="../../downloads/scikit-learn-docs.pdf">PDF 文档</a></li>
+              <li><a href="../../download/scikit-learn-docs.pdf">PDF 文档</a></li>
             </ul>
           </div>
         </li>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Linear and Quadratic Discriminant Analysis with covariance ellipsoid</a></li>
+<li><a class="reference internal" href="#">协方差椭球化情形下LDA和QDA的比较</a></li>
 </ul>
 
         <br />
@@ -218,13 +218,12 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-classification-plot-lda-qda-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="linear-and-quadratic-discriminant-analysis-with-covariance-ellipsoid">
-<span id="sphx-glr-auto-examples-classification-plot-lda-qda-py"></span><h1>Linear and Quadratic Discriminant Analysis with covariance ellipsoid<a class="headerlink" href="#linear-and-quadratic-discriminant-analysis-with-covariance-ellipsoid" title="Permalink to this headline">¶</a></h1>
-<p>This example plots the covariance ellipsoids of each class and
-decision boundary learned by LDA and QDA. The ellipsoids display
-the double standard deviation for each class. With LDA, the
-standard deviation is the same for all the classes, while each
-class has its own standard deviation with QDA.</p>
+<div class="sphx-glr-example-title section" id="ldaqda">
+<span id="sphx-glr-auto-examples-classification-plot-lda-qda-py"></span><h1>协方差椭球化情形下LDA和QDA的比较<a class="headerlink" href="#ldaqda" title="Permalink to this headline">¶</a></h1>
+<p>这个例子描绘了每个类的协方差椭球面，以及LDA和QDA学习的决策边界。
+椭球体显示每个类的双标准差。
+对于LDA，所有类的标准差是相同的，而对于QDA, 每个类都有自己的标准差。</p>
+<p>翻译者：<a class="reference external" href="http://www.studyai.com/antares">http://www.studyai.com/antares</a></p>
 <img alt="../../images/sphx_glr_plot_lda_qda_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_lda_qda_001.png" />
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
@@ -369,12 +368,12 @@ class has its own standard deviation with QDA.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.172 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.249 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-classification-plot-lda-qda-py">
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../../downloads/c2090c8593bba5126de2a6fdf4109d94/plot_lda_qda.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_lda_qda.py</span></code></a></div>
+<a class="reference download internal" download="" href="../../download/c2090c8593bba5126de2a6fdf4109d94/plot_lda_qda.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_lda_qda.py</span></code></a></div>
 <div class="sphx-glr-download docutils container">
-<a class="reference download internal" download="" href="../../downloads/dbe6a913dbaf463ec7a2c2045d7429d4/plot_lda_qda.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_lda_qda.ipynb</span></code></a></div>
+<a class="reference download internal" download="" href="../../download/dbe6a913dbaf463ec7a2c2045d7429d4/plot_lda_qda.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_lda_qda.ipynb</span></code></a></div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>

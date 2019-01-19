@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>RBF SVM parameters &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>RBF SVM 参数选择 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">RBF SVM parameters</a></li>
+<li><a class="reference internal" href="#">RBF SVM 参数选择</a></li>
 </ul>
 
         <br />
@@ -218,62 +218,37 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-svm-plot-rbf-parameters-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="rbf-svm-parameters">
-<span id="sphx-glr-auto-examples-svm-plot-rbf-parameters-py"></span><h1>RBF SVM parameters<a class="headerlink" href="#rbf-svm-parameters" title="Permalink to this headline">¶</a></h1>
-<p>This example illustrates the effect of the parameters <code class="docutils literal notranslate"><span class="pre">gamma</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code> of
-the Radial Basis Function (RBF) kernel SVM.</p>
-<p>Intuitively, the <code class="docutils literal notranslate"><span class="pre">gamma</span></code> parameter defines how far the influence of a single
-training example reaches, with low values meaning ‘far’ and high values meaning
-‘close’. The <code class="docutils literal notranslate"><span class="pre">gamma</span></code> parameters can be seen as the inverse of the radius of
-influence of samples selected by the model as support vectors.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">C</span></code> parameter trades off correct classification of training examples
-against maximization of the decision function’s margin. For larger values of
-<code class="docutils literal notranslate"><span class="pre">C</span></code>, a smaller margin will be accepted if the decision function is better at
-classifying all training points correctly. A lower <code class="docutils literal notranslate"><span class="pre">C</span></code> will encourage a
-larger margin, therefore a simpler decision function, at the cost of training
-accuracy. In other words``C`` behaves as a regularization parameter in the
-SVM.</p>
-<p>The first plot is a visualization of the decision function for a variety of
-parameter values on a simplified classification problem involving only 2 input
-features and 2 possible target classes (binary classification). Note that this
-kind of plot is not possible to do for problems with more features or target
-classes.</p>
-<p>The second plot is a heatmap of the classifier’s cross-validation accuracy as a
-function of <code class="docutils literal notranslate"><span class="pre">C</span></code> and <code class="docutils literal notranslate"><span class="pre">gamma</span></code>. For this example we explore a relatively large
-grid for illustration purposes. In practice, a logarithmic grid from
-<span class="math notranslate nohighlight">\(10^{-3}\)</span> to <span class="math notranslate nohighlight">\(10^3\)</span> is usually sufficient. If the best parameters
-lie on the boundaries of the grid, it can be extended in that direction in a
-subsequent search.</p>
-<p>Note that the heat map plot has a special colorbar with a midpoint value close
-to the score values of the best performing models so as to make it easy to tell
-them apart in the blink of an eye.</p>
-<p>The behavior of the model is very sensitive to the <code class="docutils literal notranslate"><span class="pre">gamma</span></code> parameter. If
-<code class="docutils literal notranslate"><span class="pre">gamma</span></code> is too large, the radius of the area of influence of the support
-vectors only includes the support vector itself and no amount of
-regularization with <code class="docutils literal notranslate"><span class="pre">C</span></code> will be able to prevent overfitting.</p>
-<p>When <code class="docutils literal notranslate"><span class="pre">gamma</span></code> is very small, the model is too constrained and cannot capture
-the complexity or “shape” of the data. The region of influence of any selected
-support vector would include the whole training set. The resulting model will
-behave similarly to a linear model with a set of hyperplanes that separate the
-centers of high density of any pair of two classes.</p>
-<p>For intermediate values, we can see on the second plot that good models can
-be found on a diagonal of <code class="docutils literal notranslate"><span class="pre">C</span></code> and <code class="docutils literal notranslate"><span class="pre">gamma</span></code>. Smooth models (lower <code class="docutils literal notranslate"><span class="pre">gamma</span></code>
-values) can be made more complex by increasing the importance of classifying
-each point correctly (larger <code class="docutils literal notranslate"><span class="pre">C</span></code> values) hence the diagonal of good
-performing models.</p>
-<p>Finally one can also observe that for some intermediate values of <code class="docutils literal notranslate"><span class="pre">gamma</span></code> we
-get equally performing models when <code class="docutils literal notranslate"><span class="pre">C</span></code> becomes very large: it is not
-necessary to regularize by enforcing a larger margin. The radius of the RBF
-kernel alone acts as a good structural regularizer. In practice though it
-might still be interesting to simplify the decision function with a lower
-value of <code class="docutils literal notranslate"><span class="pre">C</span></code> so as to favor models that use less memory and that are faster
-to predict.</p>
-<p>We should also note that small differences in scores results from the random
-splits of the cross-validation procedure. Those spurious variations can be
-smoothed out by increasing the number of CV iterations <code class="docutils literal notranslate"><span class="pre">n_splits</span></code> at the
-expense of compute time. Increasing the value number of <code class="docutils literal notranslate"><span class="pre">C_range</span></code> and
-<code class="docutils literal notranslate"><span class="pre">gamma_range</span></code> steps will increase the resolution of the hyper-parameter heat
-map.</p>
+<div class="sphx-glr-example-title section" id="rbf-svm">
+<span id="sphx-glr-auto-examples-svm-plot-rbf-parameters-py"></span><h1>RBF SVM 参数选择<a class="headerlink" href="#rbf-svm" title="Permalink to this headline">¶</a></h1>
+<p>这个例子展示了径向基函数(RBF)核支持向量机的参数 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 和 <code class="docutils literal notranslate"><span class="pre">C</span></code> 的影响。</p>
+<p>直观地，<code class="docutils literal notranslate"><span class="pre">gamma</span></code> 参数定义了单个训练样本的影响达到多远，低值意味着“远”，高值意味着“近”。
+<code class="docutils literal notranslate"><span class="pre">gamma</span></code>  参数可以看作是模型选取作为支持向量的样本的影响半径的反比。</p>
+<p><code class="docutils literal notranslate"><span class="pre">C</span></code> 参数在 把尽可能多的训练样本正确分类 与 使决策函数的裕度(margin)最大化 这两个矛盾之间做折中。
+对于较大的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 值， 如果决策函数能更好地对所有训练点进行正确的分类，则一个较小的裕度将会被接受。
+一个较低的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 值将鼓励更大的裕度(margin)，因此模型将以牺牲训练的准确性接受一个更简单的决策函数。
+换句话说，<code class="docutils literal notranslate"><span class="pre">C</span></code> 在支持向量机中充当正则化参数： <code class="docutils literal notranslate"><span class="pre">C</span></code> 值 越小，正则化程度越强，产生的决策面更简单。</p>
+<p>第一个图是对一个简化的分类问题的各种参数值的决策函数的可视化，该分类问题只涉及两个输入特征和两个可能的目标类(二类分类)。
+请注意，对于具有更多特征或目标类的问题，这种绘图是不可能的。</p>
+<p>第二幅图是分类器的交叉验证准确率作为 <code class="docutils literal notranslate"><span class="pre">C</span></code> 和 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 的函数随这两个参数变化的热力图。
+在本例中，我们将探索一个相对较大的网格，以进行说明。
+在实践中，从 <span class="math notranslate nohighlight">\(10^{-3}\)</span> 到 <span class="math notranslate nohighlight">\(10^3\)</span> 的对数网格通常是足够的。
+如果最佳参数位于网格的边界上，则可以在随后的搜索中向该方向扩展。</p>
+<p>请注意，热力图有一个特别的色度条，其中每个点的颜色值接近不同参数下模型的得分值，
+以便在眨眼之间很容易将它们区分开来，哪些表现好，哪些表现不好。</p>
+<p>模型的行为对 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 参数非常敏感。如果 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 太大，支持向量的影响范围半径仅包括支持向量本身，
+再加上 <code class="docutils literal notranslate"><span class="pre">C</span></code> 的正则化也无法防止过拟合。</p>
+<p>当 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 非常小时，模型太受约束，无法捕捉数据的复杂性或“形状”。任何选定的支持向量的影响区域将包括整个训练集。
+得到的模型将类似于具有一组超平面的线性模型，这些超平面将任意一对两类的高密度中心分离开来。</p>
+<p>对于 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 的中等大小的值，我们可以在第二幅图上看到，在 <code class="docutils literal notranslate"><span class="pre">C</span></code> 和 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 的对角线上可以找到好的模型。
+平滑的模型(对应于较低的 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 值)可以通过增加正确分类每个点的重要性(较大的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 值)而变得更加复杂，
+从而使性能良好的模型的对角线变得更加复杂。</p>
+<p>最后，我们还可以观察到，当 <code class="docutils literal notranslate"><span class="pre">C</span></code> 变得非常大时，对于 <code class="docutils literal notranslate"><span class="pre">gamma</span></code> 的一些中等大小的值，我们得到了具有相同性能表现的模型：
+没有必要通过执行较大的余量(margin)来进行正则化。
+RBF核的半径本身就是一个很好的结构化正则化器。然而，在实践中，用较低的 <code class="docutils literal notranslate"><span class="pre">C</span></code> 值简化决策函数可能仍然很有趣，
+以便更好地支持内存更少、预测速度更快的模型。</p>
+<p>我们还应该注意到，分类得分的微小差异是由于交叉验证过程的随机分裂造成的。这些杂散变化可以通过增加CV迭代次数 <code class="docutils literal notranslate"><span class="pre">n_splits</span></code> 来平滑，
+而牺牲计算时间。增加 <code class="docutils literal notranslate"><span class="pre">C_range</span></code> 和 <code class="docutils literal notranslate"><span class="pre">gamma_range</span></code> 步长的数值数将提高超参数热力图的分辨率。</p>
+<p>翻译者：<a class="reference external" href="http://www.studyai.com/antares">http://www.studyai.com/antares</a></p>
 <ul class="sphx-glr-horizontal">
 <li><img alt="../../images/sphx_glr_plot_rbf_parameters_001.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_rbf_parameters_001.png" />
 </li>
@@ -419,7 +394,7 @@ map.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  4.212 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  4.310 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-svm-plot-rbf-parameters-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/ce17ced4c11ae33ef80d08842a200487/plot_rbf_parameters.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_rbf_parameters.py</span></code></a></div>
