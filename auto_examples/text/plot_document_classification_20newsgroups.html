@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Classification of text documents using sparse features &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>基于稀疏特征的文本文档分类 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Classification of text documents using sparse features</a></li>
+<li><a class="reference internal" href="#">基于稀疏特征的文本文档分类</a></li>
 </ul>
 
         <br />
@@ -218,16 +218,13 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-text-plot-document-classification-20newsgroups-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="classification-of-text-documents-using-sparse-features">
-<span id="sphx-glr-auto-examples-text-plot-document-classification-20newsgroups-py"></span><h1>Classification of text documents using sparse features<a class="headerlink" href="#classification-of-text-documents-using-sparse-features" title="Permalink to this headline">¶</a></h1>
-<p>This is an example showing how scikit-learn can be used to classify documents
-by topics using a bag-of-words approach. This example uses a scipy.sparse
-matrix to store the features and demonstrates various classifiers that can
-efficiently handle sparse matrices.</p>
-<p>The dataset used in this example is the 20 newsgroups dataset. It will be
-automatically downloaded, then cached.</p>
-<p>The bar plot indicates the accuracy, training time (normalized) and test time
-(normalized) of each classifier.</p>
+<div class="sphx-glr-example-title section" id="sphx-glr-auto-examples-text-plot-document-classification-20newsgroups-py">
+<span id="id1"></span><h1>基于稀疏特征的文本文档分类<a class="headerlink" href="#sphx-glr-auto-examples-text-plot-document-classification-20newsgroups-py" title="Permalink to this headline">¶</a></h1>
+<p>这是一个例子，展示了如何在scikit-learn中使用词袋方法按主题对文档进行分类。
+此示例使用一个 scipy.sparse 矩阵来存储这些特征，并演示了能够有效处理稀疏矩阵的各种分类器。</p>
+<p>此示例中使用的数据集是20个新闻组数据集。它将被自动下载，然后缓存。</p>
+<p>条形图表示每个分类器的准确率、归一化训练时间 和 归一化测试时间。</p>
+<p>翻译者：<a class="reference external" href="http://www.studyai.com/antares">http://www.studyai.com/antares</a></p>
 <img alt="../../images/sphx_glr_plot_document_classification_20newsgroups_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_document_classification_20newsgroups_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Usage: plot_document_classification_20newsgroups.py [options]
@@ -256,11 +253,11 @@ data loaded
 4 categories
 
 Extracting features from the training data using a sparse vectorizer
-done in 0.476027s at 8.360MB/s
+done in 0.521030s at 7.638MB/s
 n_samples: 2034, n_features: 33809
 
 Extracting features from the test data using the same vectorizer
-done in 0.299017s at 9.590MB/s
+done in 0.322019s at 8.905MB/s
 n_samples: 1353, n_features: 33809
 
 ================================================================================
@@ -270,9 +267,9 @@ Training:
 RidgeClassifier(alpha=1.0, class_weight=None, copy_X=True, fit_intercept=True,
         max_iter=None, normalize=False, random_state=None, solver=&#39;sag&#39;,
         tol=0.01)
-train time: 0.201s
+train time: 0.204s
 test time:  0.001s
-accuracy:   0.896
+accuracy:   0.897
 dimensionality: 33809
 density: 1.000000
 
@@ -285,8 +282,8 @@ Perceptron(alpha=0.0001, class_weight=None, early_stopping=False, eta0=1.0,
       fit_intercept=True, max_iter=50, n_iter=None, n_iter_no_change=5,
       n_jobs=None, penalty=None, random_state=0, shuffle=True, tol=0.001,
       validation_fraction=0.1, verbose=0, warm_start=False)
-train time: 0.015s
-test time:  0.001s
+train time: 0.014s
+test time:  0.002s
 accuracy:   0.888
 dimensionality: 33809
 density: 0.240114
@@ -301,11 +298,11 @@ PassiveAggressiveClassifier(C=1.0, average=False, class_weight=None,
               max_iter=50, n_iter=None, n_iter_no_change=5, n_jobs=None,
               random_state=None, shuffle=True, tol=0.001,
               validation_fraction=0.1, verbose=0, warm_start=False)
-train time: 0.025s
-test time:  0.002s
+train time: 0.028s
+test time:  0.001s
 accuracy:   0.900
 dimensionality: 33809
-density: 0.702069
+density: 0.705552
 
 
 ================================================================================
@@ -316,7 +313,7 @@ KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkows
            metric_params=None, n_jobs=None, n_neighbors=10, p=2,
            weights=&#39;uniform&#39;)
 train time: 0.001s
-test time:  0.150s
+test time:  0.146s
 accuracy:   0.858
 
 ================================================================================
@@ -330,9 +327,9 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion=&#39;gini&#3
             min_weight_fraction_leaf=0.0, n_estimators=100, n_jobs=None,
             oob_score=False, random_state=None, verbose=0,
             warm_start=False)
-train time: 1.291s
-test time:  0.083s
-accuracy:   0.845
+train time: 1.380s
+test time:  0.087s
+accuracy:   0.841
 
 ================================================================================
 L2 penalty
@@ -342,7 +339,7 @@ LinearSVC(C=1.0, class_weight=None, dual=False, fit_intercept=True,
      intercept_scaling=1, loss=&#39;squared_hinge&#39;, max_iter=1000,
      multi_class=&#39;ovr&#39;, penalty=&#39;l2&#39;, random_state=None, tol=0.001,
      verbose=0)
-train time: 0.075s
+train time: 0.094s
 test time:  0.002s
 accuracy:   0.900
 dimensionality: 33809
@@ -357,11 +354,11 @@ SGDClassifier(alpha=0.0001, average=False, class_weight=None,
        n_iter=None, n_iter_no_change=5, n_jobs=None, penalty=&#39;l2&#39;,
        power_t=0.5, random_state=None, shuffle=True, tol=None,
        validation_fraction=0.1, verbose=0, warm_start=False)
-train time: 0.094s
+train time: 0.116s
 test time:  0.002s
 accuracy:   0.902
 dimensionality: 33809
-density: 0.666213
+density: 0.668417
 
 
 ================================================================================
@@ -372,11 +369,11 @@ LinearSVC(C=1.0, class_weight=None, dual=False, fit_intercept=True,
      intercept_scaling=1, loss=&#39;squared_hinge&#39;, max_iter=1000,
      multi_class=&#39;ovr&#39;, penalty=&#39;l1&#39;, random_state=None, tol=0.001,
      verbose=0)
-train time: 0.186s
+train time: 0.217s
 test time:  0.001s
-accuracy:   0.873
+accuracy:   0.874
 dimensionality: 33809
-density: 0.005568
+density: 0.005575
 
 
 ________________________________________________________________________________
@@ -387,11 +384,11 @@ SGDClassifier(alpha=0.0001, average=False, class_weight=None,
        n_iter=None, n_iter_no_change=5, n_jobs=None, penalty=&#39;l1&#39;,
        power_t=0.5, random_state=None, shuffle=True, tol=None,
        validation_fraction=0.1, verbose=0, warm_start=False)
-train time: 0.328s
-test time:  0.002s
+train time: 0.397s
+test time:  0.003s
 accuracy:   0.888
 dimensionality: 33809
-density: 0.020128
+density: 0.019928
 
 
 ================================================================================
@@ -404,11 +401,11 @@ SGDClassifier(alpha=0.0001, average=False, class_weight=None,
        n_iter=None, n_iter_no_change=5, n_jobs=None, penalty=&#39;elasticnet&#39;,
        power_t=0.5, random_state=None, shuffle=True, tol=None,
        validation_fraction=0.1, verbose=0, warm_start=False)
-train time: 0.483s
-test time:  0.002s
-accuracy:   0.901
+train time: 0.560s
+test time:  0.003s
+accuracy:   0.900
 dimensionality: 33809
-density: 0.186615
+density: 0.186748
 
 
 ================================================================================
@@ -416,7 +413,7 @@ NearestCentroid (aka Rocchio classifier)
 ________________________________________________________________________________
 Training:
 NearestCentroid(metric=&#39;euclidean&#39;, shrink_threshold=None)
-train time: 0.006s
+train time: 0.009s
 test time:  0.002s
 accuracy:   0.855
 
@@ -425,7 +422,7 @@ Naive Bayes
 ________________________________________________________________________________
 Training:
 MultinomialNB(alpha=0.01, class_prior=None, fit_prior=True)
-train time: 0.005s
+train time: 0.006s
 test time:  0.002s
 accuracy:   0.899
 dimensionality: 33809
@@ -436,7 +433,7 @@ ________________________________________________________________________________
 Training:
 BernoulliNB(alpha=0.01, binarize=0.0, class_prior=None, fit_prior=True)
 train time: 0.007s
-test time:  0.006s
+test time:  0.007s
 accuracy:   0.884
 dimensionality: 33809
 density: 1.000000
@@ -464,9 +461,9 @@ Pipeline(memory=None,
         max_features=None, no...ax_iter=1000,
      multi_class=&#39;ovr&#39;, penalty=&#39;l2&#39;, random_state=None, tol=0.0001,
      verbose=0))])
-train time: 0.194s
+train time: 0.245s
 test time:  0.003s
-accuracy:   0.879
+accuracy:   0.880
 </pre></div>
 </div>
 <div class="line-block">
@@ -781,7 +778,7 @@ accuracy:   0.879
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  4.493 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  4.955 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-text-plot-document-classification-20newsgroups-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/b6e2f94bc7888805875f59b0497e69ca/plot_document_classification_20newsgroups.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_document_classification_20newsgroups.py</span></code></a></div>

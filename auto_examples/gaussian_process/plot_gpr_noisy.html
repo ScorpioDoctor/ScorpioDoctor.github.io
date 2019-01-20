@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Gaussian process regression (GPR) with noise-level estimation &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>带有噪声水平估计的高斯过程回归(GPR) &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Gaussian process regression (GPR) with noise-level estimation</a></li>
+<li><a class="reference internal" href="#">带有噪声水平估计的高斯过程回归(GPR)</a></li>
 </ul>
 
         <br />
@@ -218,19 +218,14 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-gaussian-process-plot-gpr-noisy-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="gaussian-process-regression-gpr-with-noise-level-estimation">
-<span id="sphx-glr-auto-examples-gaussian-process-plot-gpr-noisy-py"></span><h1>Gaussian process regression (GPR) with noise-level estimation<a class="headerlink" href="#gaussian-process-regression-gpr-with-noise-level-estimation" title="Permalink to this headline">¶</a></h1>
-<p>This example illustrates that GPR with a sum-kernel including a WhiteKernel can
-estimate the noise level of data. An illustration of the
-log-marginal-likelihood (LML) landscape shows that there exist two local
-maxima of LML. The first corresponds to a model with a high noise level and a
-large length scale, which explains all variations in the data by noise. The
-second one has a smaller noise level and shorter length scale, which explains
-most of the variation by the noise-free functional relationship. The second
-model has a higher likelihood; however, depending on the initial value for the
-hyperparameters, the gradient-based optimization might also converge to the
-high-noise solution. It is thus important to repeat the optimization several
-times for different initializations.</p>
+<div class="sphx-glr-example-title section" id="gpr">
+<span id="sphx-glr-auto-examples-gaussian-process-plot-gpr-noisy-py"></span><h1>带有噪声水平估计的高斯过程回归(GPR)<a class="headerlink" href="#gpr" title="Permalink to this headline">¶</a></h1>
+<p>这个例子展示了带有sum-kernel的GPR(包括WhiteKernel)可以估计数据的噪声水平。
+对数边缘似然(LML)景观图表明：LML存在两个局部极大值.
+第一个图对应于一个高噪声水平和大长度尺度的模型，它解释了噪声带给数据的所有变化。
+第二个图对应于噪声水平较小，长度尺度较短的模型，主要解释了与噪声无关的函数关系带给数据的大多数变化。
+第二个模型具有较高的likelihood，但是，根据超参数的初始值，基于梯度的优化也可能收敛到高噪声的解。
+因此，以不同的初始化状态进行多次重复优化是很重要的。</p>
 <ul class="sphx-glr-horizontal">
 <li><img alt="../../images/sphx_glr_plot_gpr_noisy_000.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_gpr_noisy_000.png" />
 </li>
@@ -242,7 +237,7 @@ times for different initializations.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="c1"># Authors: Jan Hendrik Metzen &lt;jhm@informatik.uni-bremen.de&gt;</span>
-<span class="c1">#</span>
+<span class="c1"># 翻译者：http://www.studyai.com/antares</span>
 <span class="c1"># License: BSD 3 clause</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -321,7 +316,7 @@ times for different initializations.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  3.170 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  3.504 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-gaussian-process-plot-gpr-noisy-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/37908fc16796d8eae9578f29d88a912a/plot_gpr_noisy.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_gpr_noisy.py</span></code></a></div>
