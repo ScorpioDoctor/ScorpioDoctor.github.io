@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Gaussian Processes regression: basic introductory example &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>高斯过程回归: 基本的介绍性案例 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Gaussian process regression (GPR) on Mauna Loa CO2 data." href="plot_gpr_co2.html" />
-    <link rel="prev" title="Gaussian process regression (GPR) with noise-level estimation" href="plot_gpr_noisy.html" />
+    <link rel="next" title="高斯过程回归 (GPR) 在 Mauna Loa 二氧化碳数据上的应用" href="plot_gpr_co2.html" />
+    <link rel="prev" title="带有噪声水平估计的高斯过程回归(GPR)" href="plot_gpr_noisy.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -138,10 +138,10 @@
             <a href="plot_gpr_noisy.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                Gaussian proc...
+                带有噪声水平估计的高斯过程回归(GPR)
               </span>
               <span class="hiddenrellink">
-                Gaussian process regression (GPR) with noise-level estimation
+                带有噪声水平估计的高斯过程回归(GPR)
               </span>
             </a>
           </div>
@@ -152,10 +152,10 @@
             <a href="plot_gpr_co2.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Gaussian proc...
+                高斯过程回归 (GPR) ...
               </span>
               <span class="hiddenrellink">
-                Gaussian process regression (GPR) on Mauna Loa CO2 data.
+                高斯过程回归 (GPR) 在 Mauna Loa 二氧化碳数据上的应用
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Gaussian Processes regression: basic introductory example</a></li>
+<li><a class="reference internal" href="#">高斯过程回归: 基本的介绍性案例</a></li>
 </ul>
 
         <br />
@@ -218,20 +218,19 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-gaussian-process-plot-gpr-noisy-targets-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="gaussian-processes-regression-basic-introductory-example">
-<span id="sphx-glr-auto-examples-gaussian-process-plot-gpr-noisy-targets-py"></span><h1>Gaussian Processes regression: basic introductory example<a class="headerlink" href="#gaussian-processes-regression-basic-introductory-example" title="Permalink to this headline">¶</a></h1>
-<p>A simple one-dimensional regression example computed in two different ways:</p>
+<div class="sphx-glr-example-title section" id="sphx-glr-auto-examples-gaussian-process-plot-gpr-noisy-targets-py">
+<span id="id1"></span><h1>高斯过程回归: 基本的介绍性案例<a class="headerlink" href="#sphx-glr-auto-examples-gaussian-process-plot-gpr-noisy-targets-py" title="Permalink to this headline">¶</a></h1>
+<p>一个简单的一维回归例子，以两种不同的方式计算：</p>
 <ol class="arabic simple">
-<li>A noise-free case</li>
-<li>A noisy case with known noise-level per datapoint</li>
+<li>没有噪声的情况</li>
+<li>每个数据点的噪声水平已知的有噪声情况</li>
 </ol>
-<p>In both cases, the kernel’s parameters are estimated using the maximum
-likelihood principle.</p>
-<p>The figures illustrate the interpolating property of the Gaussian Process
-model as well as its probabilistic nature in the form of a pointwise 95%
-confidence interval.</p>
+<p>在上述两种情况下, 内核参数可以使用最大似然原则被估计出来。</p>
+<p>实验图像展示了高斯过程模型的内插特性(interpolating property)以及
+它的概率性本质：为每个点的预测结果给出95%的置信区间。</p>
 <p>Note that the parameter <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is applied as a Tikhonov
-regularization of the assumed covariance between the training points.</p>
+regularization of the assumed covariance between the training points.
+注意，参数 <code class="docutils literal notranslate"><span class="pre">alpha</span></code> 被用做训练点之间假设协方差的Tikhonov正则化。</p>
 <ul class="sphx-glr-horizontal">
 <li><img alt="../../images/sphx_glr_plot_gpr_noisy_targets_001.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_gpr_noisy_targets_001.png" />
 </li>
@@ -243,6 +242,7 @@ regularization of the assumed covariance between the training points.</p>
 <span class="c1"># Author: Vincent Dubourg &lt;vincent.dubourg@gmail.com&gt;</span>
 <span class="c1">#         Jake Vanderplas &lt;vanderplas@astro.washington.edu&gt;</span>
 <span class="c1">#         Jan Hendrik Metzen &lt;jhm@informatik.uni-bremen.de&gt;s</span>
+<span class="c1"># 翻译者：www.studyai.com/antares</span>
 <span class="c1"># License: BSD 3 clause</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -333,7 +333,7 @@ regularization of the assumed covariance between the training points.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.410 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.470 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-gaussian-process-plot-gpr-noisy-targets-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/6781ed227c6360744477ad9995c5fc73/plot_gpr_noisy_targets.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_gpr_noisy_targets.py</span></code></a></div>

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Gaussian process regression (GPR) on Mauna Loa CO2 data. &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>高斯过程回归 (GPR) 在 Mauna Loa 二氧化碳数据上的应用 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lasso path using LARS" href="../linear_model/plot_lasso_lars.html" />
-    <link rel="prev" title="Gaussian Processes regression: basic introductory example" href="plot_gpr_noisy_targets.html" />
+    <link rel="next" title="使用最小角回归(LARS)求解的Lasso算法的正则化路径" href="../linear_model/plot_lasso_lars.html" />
+    <link rel="prev" title="高斯过程回归: 基本的介绍性案例" href="plot_gpr_noisy_targets.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -138,10 +138,10 @@
             <a href="plot_gpr_noisy_targets.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                Gaussian Proc...
+                高斯过程回归: 基本的介绍性案例
               </span>
               <span class="hiddenrellink">
-                Gaussian Processes regression: basic introductory example
+                高斯过程回归: 基本的介绍性案例
               </span>
             </a>
           </div>
@@ -152,10 +152,10 @@
             <a href="../linear_model/plot_lasso_lars.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Lasso path using LARS
+                使用最小角回归(LARS)...
               </span>
               <span class="hiddenrellink">
-                Lasso path using LARS
+                使用最小角回归(LARS)求解的Lasso算法的正则化路径
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Gaussian process regression (GPR) on Mauna Loa CO2 data.</a></li>
+<li><a class="reference internal" href="#">高斯过程回归 (GPR) 在 Mauna Loa 二氧化碳数据上的应用</a></li>
 </ul>
 
         <br />
@@ -218,57 +218,41 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-gaussian-process-plot-gpr-co2-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="gaussian-process-regression-gpr-on-mauna-loa-co2-data">
-<span id="sphx-glr-auto-examples-gaussian-process-plot-gpr-co2-py"></span><h1>Gaussian process regression (GPR) on Mauna Loa CO2 data.<a class="headerlink" href="#gaussian-process-regression-gpr-on-mauna-loa-co2-data" title="Permalink to this headline">¶</a></h1>
-<p>This example is based on Section 5.4.3 of “Gaussian Processes for Machine
-Learning” [RW2006]. It illustrates an example of complex kernel engineering and
-hyperparameter optimization using gradient ascent on the
-log-marginal-likelihood. The data consists of the monthly average atmospheric
-CO2 concentrations (in parts per million by volume (ppmv)) collected at the
-Mauna Loa Observatory in Hawaii, between 1958 and 2001. The objective is to
-model the CO2 concentration as a function of the time t.</p>
-<p>The kernel is composed of several terms that are responsible for explaining
-different properties of the signal:</p>
+<div class="sphx-glr-example-title section" id="gpr-mauna-loa">
+<span id="sphx-glr-auto-examples-gaussian-process-plot-gpr-co2-py"></span><h1>高斯过程回归 (GPR) 在 Mauna Loa 二氧化碳数据上的应用<a class="headerlink" href="#gpr-mauna-loa" title="Permalink to this headline">¶</a></h1>
+<p>该示例基于书([RW2006]) 的第 5.4.3 节。 它演示了使用梯度上升的对数边缘似然性的复杂内核工程和超参数优化的示例。
+数据包括在 1958 年至 1997 年间夏威夷 Mauna Loa 天文台收集的每月平均大气二氧 化碳浓度（以百万分之几（ppmv）计）。
+目的是将二氧化碳浓度建模为时间 t 的函数。</p>
+<p>内核由若干项组成，负责解释信号的不同属性：</p>
 <ul class="simple">
-<li>a long term, smooth rising trend is to be explained by an RBF kernel. The
-RBF kernel with a large length-scale enforces this component to be smooth;
-it is not enforced that the trend is rising which leaves this choice to the
-GP. The specific length-scale and the amplitude are free hyperparameters.</li>
-<li>a seasonal component, which is to be explained by the periodic
-ExpSineSquared kernel with a fixed periodicity of 1 year. The length-scale
-of this periodic component, controlling its smoothness, is a free parameter.
-In order to allow decaying away from exact periodicity, the product with an
-RBF kernel is taken. The length-scale of this RBF component controls the
-decay time and is a further free parameter.</li>
-<li>smaller, medium term irregularities are to be explained by a
-RationalQuadratic kernel component, whose length-scale and alpha parameter,
-which determines the diffuseness of the length-scales, are to be determined.
-According to [RW2006], these irregularities can better be explained by
-a RationalQuadratic than an RBF kernel component, probably because it can
-accommodate several length-scales.</li>
-<li>a “noise” term, consisting of an RBF kernel contribution, which shall
-explain the correlated noise components such as local weather phenomena,
-and a WhiteKernel contribution for the white noise. The relative amplitudes
-and the RBF’s length scale are further free parameters.</li>
+<li>一个长期平滑的上升趋势是由一个 RBF 内核来解释的。 具有较大长度尺寸的RBF内核将使该分量平滑; 没有强制这种趋势正在上升，
+这给 GP 带来了可选择性。 具体的长度尺度(length-scale)和振幅(amplitude)是自由的超参数。</li>
+<li>季节性因素，由周期性的 ExpSineSquared 内核来解释，固定周期为1年。 该周期性分量的长度尺度控制其平滑度，是一个自由参数。
+为了使其具备准确周期性的衰减，将 ExpSineSquared kernel 与 RBF kernel 取乘积。
+该RBF component的长度尺度(length-scale)控制衰减时间， 并且是另一个自由参数。</li>
+<li>较小的中期不规则性将由有理二次(RationalQuadratic)核分量来解释， 有理二次核分量的长度尺度和alpha 参数，
+决定着长度尺度的扩散性，是将要被确定的参数。 根据 [RW2006] ，这些不规则性可以更好地由有理二次内核来解释，
+而不是 RBF 核分量，这可能是因为它可以容纳若干个长度尺度(length-scale)。</li>
+<li>噪声项，由一个 RBF 核组成，它将解释相关的噪声分量，如局部天气现象以及 WhiteKernel 对白噪声的贡献。
+在这里，相对幅度(relative amplitudes)和RBF的长度尺度又是自由参数。</li>
 </ul>
-<p>Maximizing the log-marginal-likelihood after subtracting the target’s mean
-yields the following kernel with an LML of -83.214:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">34.4</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="View documentation for sklearn.gaussian_process.kernels.RBF"><span class="n">RBF</span></a><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">41.8</span><span class="p">)</span>
-<span class="o">+</span> <span class="mf">3.27</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="View documentation for sklearn.gaussian_process.kernels.RBF"><span class="n">RBF</span></a><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.ExpSineSquared.html#sklearn.gaussian_process.kernels.ExpSineSquared" title="View documentation for sklearn.gaussian_process.kernels.ExpSineSquared"><span class="n">ExpSineSquared</span></a><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">1.44</span><span class="p">,</span>
-                                                   <span class="n">periodicity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="o">+</span> <span class="mf">0.446</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.RationalQuadratic.html#sklearn.gaussian_process.kernels.RationalQuadratic" title="View documentation for sklearn.gaussian_process.kernels.RationalQuadratic"><span class="n">RationalQuadratic</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">17.7</span><span class="p">,</span> <span class="n">length_scale</span><span class="o">=</span><span class="mf">0.957</span><span class="p">)</span>
-<span class="o">+</span> <span class="mf">0.197</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.RBF.html#sklearn.gaussian_process.kernels.RBF" title="View documentation for sklearn.gaussian_process.kernels.RBF"><span class="n">RBF</span></a><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">0.138</span><span class="p">)</span> <span class="o">+</span> <a href="../../modules/generated/sklearn.gaussian_process.kernels.WhiteKernel.html#sklearn.gaussian_process.kernels.WhiteKernel" title="View documentation for sklearn.gaussian_process.kernels.WhiteKernel"><span class="n">WhiteKernel</span></a><span class="p">(</span><span class="n">noise_level</span><span class="o">=</span><span class="mf">0.0336</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Thus, most of the target signal (34.4ppm) is explained by a long-term rising
-trend (length-scale 41.8 years). The periodic component has an amplitude of
-3.27ppm, a decay time of 180 years and a length-scale of 1.44. The long decay
-time indicates that we have a locally very close to periodic seasonal
-component. The correlated noise has an amplitude of 0.197ppm with a length
-scale of 0.138 years and a white-noise contribution of 0.197ppm. Thus, the
-overall noise level is very small, indicating that the data can be very well
-explained by the model. The figure shows also that the model makes very
-confident predictions until around 2015.</p>
+<p>减去目标平均值后 最大化 对数边际似然(log-marginal-likelihood)产生下列内核，其中LML为-83.214:</p>
+<blockquote>
+<div><p>34.4**2 * RBF(length_scale=41.8)
++ 3.27**2 * RBF(length_scale=180) * ExpSineSquared(length_scale=1.44,</p>
+<blockquote>
+<div>periodicity=1)</div></blockquote>
+<ul class="simple">
+<li>0.446**2 * RationalQuadratic(alpha=17.7, length_scale=0.957)</li>
+<li>0.197**2 * RBF(length_scale=0.138) + WhiteKernel(noise_level=0.0336)</li>
+</ul>
+</div></blockquote>
+<p>因此，大多数目标信号（34.4ppm）由长期上升趋势（长度尺度即length-scale为41.8年）解释。
+周期分量的振幅为3.27ppm，衰减时间为180年，长度尺度为1.44。
+长时间的衰变时间表明我们有一个局部非常接近周期性的季节性成分。
+相关噪声的幅度为0.197ppm，长度为0.138年，白噪声贡献为0.197ppm。
+因此，整体噪声水平非常小，表明该模型可以很好地解释数据。
+该图还显示，该模型直到2015年左右才能做出置信度比较高的预测。</p>
 <img alt="../../images/sphx_glr_plot_gpr_co2_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_gpr_co2_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>GPML kernel: 66**2 * RBF(length_scale=67) + 2.4**2 * RBF(length_scale=90) * ExpSineSquared(length_scale=1.3, periodicity=1) + 0.66**2 * RationalQuadratic(alpha=0.78, length_scale=1.2) + 0.18**2 * RBF(length_scale=0.134) + WhiteKernel(noise_level=0.0361)
@@ -282,7 +266,7 @@ Log-marginal-likelihood: -115.050
 <div class="line"><br /></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Authors: Jan Hendrik Metzen &lt;jhm@informatik.uni-bremen.de&gt;</span>
-<span class="c1">#</span>
+<span class="c1">#翻译者：http://www.studyai.com/antares</span>
 <span class="c1"># License: BSD 3 clause</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
@@ -381,7 +365,7 @@ Log-marginal-likelihood: -115.050
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  9.199 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  7.901 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-gaussian-process-plot-gpr-co2-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/0f3bbdaf0af5117dab1451868e99afdb/plot_gpr_co2.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_gpr_co2.py</span></code></a></div>

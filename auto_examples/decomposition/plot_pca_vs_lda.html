@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Comparison of LDA and PCA 2D projection of Iris dataset &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>LDA与PCA在鸢尾花数据集上的二维投影的比较 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Comparison of LDA and PCA 2D projection of Iris dataset</a></li>
+<li><a class="reference internal" href="#">LDA与PCA在鸢尾花数据集上的二维投影的比较</a></li>
 </ul>
 
         <br />
@@ -218,18 +218,15 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-decomposition-plot-pca-vs-lda-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="comparison-of-lda-and-pca-2d-projection-of-iris-dataset">
-<span id="sphx-glr-auto-examples-decomposition-plot-pca-vs-lda-py"></span><h1>Comparison of LDA and PCA 2D projection of Iris dataset<a class="headerlink" href="#comparison-of-lda-and-pca-2d-projection-of-iris-dataset" title="Permalink to this headline">¶</a></h1>
-<p>The Iris dataset represents 3 kind of Iris flowers (Setosa, Versicolour
-and Virginica) with 4 attributes: sepal length, sepal width, petal length
-and petal width.</p>
-<p>Principal Component Analysis (PCA) applied to this data identifies the
-combination of attributes (principal components, or directions in the
-feature space) that account for the most variance in the data. Here we
-plot the different samples on the 2 first principal components.</p>
-<p>Linear Discriminant Analysis (LDA) tries to identify attributes that
-account for the most variance <em>between classes</em>. In particular,
-LDA, in contrast to PCA, is a supervised method, using known class labels.</p>
+<div class="sphx-glr-example-title section" id="ldapca">
+<span id="sphx-glr-auto-examples-decomposition-plot-pca-vs-lda-py"></span><h1>LDA与PCA在鸢尾花数据集上的二维投影的比较<a class="headerlink" href="#ldapca" title="Permalink to this headline">¶</a></h1>
+<p>鸢尾花(Iris)数据集代表了3种鸢尾花(Setosa、Versicolour和Virica)的4个属性：
+萼片(sepal)长度、萼片宽度、花瓣(petal)长度和花瓣宽度。</p>
+<p>应用于该数据的主成分分析(PCA)确定了属性(主成分，或特征空间中的方向)的组合，
+这些属性在数据中的方差最大。在这里，我们以前两个主成分绘制了不同的样本。</p>
+<p>线性判别分析(LDA)试图识别 <strong>类间差异最大</strong> 的属性。
+特别是，与PCA相比，LDA是一种监督方法，使用已知的类标签。</p>
+<p>翻译者：<a class="reference external" href="http://www.studyai.com/antares">http://www.studyai.com/antares</a></p>
 <ul class="sphx-glr-horizontal">
 <li><img alt="../../images/sphx_glr_plot_pca_vs_lda_001.png" class="sphx-glr-multi-img first" src="../../images/sphx_glr_plot_pca_vs_lda_001.png" />
 </li>
@@ -287,7 +284,7 @@ LDA, in contrast to PCA, is a supervised method, using known class labels.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.078 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.096 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-decomposition-plot-pca-vs-lda-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/3f4acde974e5a79b0eba60197fa4c4ab/plot_pca_vs_lda.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pca_vs_lda.py</span></code></a></div>

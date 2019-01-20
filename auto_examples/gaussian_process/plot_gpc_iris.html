@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Gaussian process classification (GPC) on iris dataset &#8212; scikit-learn 0.20.2 documentation</title>
+    <title>高斯过程分类器(GPC)在鸢尾花数据集上的应用 &#8212; scikit-learn 0.20.2 documentation</title>
 <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css" media="screen" />
@@ -27,8 +27,8 @@
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Comparison of kernel ridge and Gaussian process regression" href="plot_compare_gpr_krr.html" />
-    <link rel="prev" title="Illustration of Gaussian process classification (GPC) on the XOR dataset" href="plot_gpc_xor.html" />
+    <link rel="next" title="高斯过程回归与核岭回归的比较" href="plot_compare_gpr_krr.html" />
+    <link rel="prev" title="高斯过程分类器(GPC)在 XOR 数据集上的应用" href="plot_gpc_xor.html" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -138,10 +138,10 @@
             <a href="plot_gpc_xor.html" accesskey="P">Previous
               <br />
               <span class="smallrellink">
-                Illustration ...
+                高斯过程分类器(GPC)在...
               </span>
               <span class="hiddenrellink">
-                Illustration of Gaussian process classification (GPC) on the XOR dataset
+                高斯过程分类器(GPC)在 XOR 数据集上的应用
               </span>
             </a>
           </div>
@@ -152,10 +152,10 @@
             <a href="plot_compare_gpr_krr.html" accesskey="N">Next
               <br />
               <span class="smallrellink">
-                Comparison of...
+                高斯过程回归与核岭回归的比较
               </span>
               <span class="hiddenrellink">
-                Comparison of kernel ridge and Gaussian process regression
+                高斯过程回归与核岭回归的比较
               </span>
             </a>
           </div>
@@ -186,7 +186,7 @@
         <p class="citing">该中文文档由人工智能社区的<a href="http://www.studyai.com/antares" target="_blank">Antares</a>翻译!
         </p>
         <ul>
-<li><a class="reference internal" href="#">Gaussian process classification (GPC) on iris dataset</a></li>
+<li><a class="reference internal" href="#">高斯过程分类器(GPC)在鸢尾花数据集上的应用</a></li>
 </ul>
 
         <br />
@@ -218,12 +218,11 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-gaussian-process-plot-gpc-iris-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="gaussian-process-classification-gpc-on-iris-dataset">
-<span id="sphx-glr-auto-examples-gaussian-process-plot-gpc-iris-py"></span><h1>Gaussian process classification (GPC) on iris dataset<a class="headerlink" href="#gaussian-process-classification-gpc-on-iris-dataset" title="Permalink to this headline">¶</a></h1>
-<p>This example illustrates the predicted probability of GPC for an isotropic
-and anisotropic RBF kernel on a two-dimensional version for the iris-dataset.
-The anisotropic RBF kernel obtains slightly higher log-marginal-likelihood by
-assigning different length-scales to the two feature dimensions.</p>
+<div class="sphx-glr-example-title section" id="gpc">
+<span id="sphx-glr-auto-examples-gaussian-process-plot-gpc-iris-py"></span><h1>高斯过程分类器(GPC)在鸢尾花数据集上的应用<a class="headerlink" href="#gpc" title="Permalink to this headline">¶</a></h1>
+<p>该示例展示了在iris数据集的二维版本上 各向同性和各向异性RBF核的GPC的预测概率。 这说明了GPC对多类分类的适用性。
+各向异性RBF内核通过为两个特征维度分配不同的长度尺度(length-scales)来获得稍高的LML(log-marginal-likelihood)。</p>
+<p>翻译者：<a class="reference external" href="http://www.studyai.com/antares">http://www.studyai.com/antares</a></p>
 <img alt="../../images/sphx_glr_plot_gpc_iris_001.png" class="sphx-glr-single-img" src="../../images/sphx_glr_plot_gpc_iris_001.png" />
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
@@ -280,7 +279,7 @@ assigning different length-scales to the two feature dimensions.</p>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  3.764 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  3.965 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-gaussian-process-plot-gpc-iris-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../../downloads/0b2eb29a7079d6ac813b1eed12fd802c/plot_gpc_iris.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_gpc_iris.py</span></code></a></div>
